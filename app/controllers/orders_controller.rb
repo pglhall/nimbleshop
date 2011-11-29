@@ -4,7 +4,10 @@ class OrdersController < ApplicationController
   theme :theme_resolver, only: [:edit, :update]
 
   def edit
-    current_order.build_shipping_address unless current_order.shipping_address
+    unless current_order.shipping_address
+      current_order.build_shipping_address
+      current_order.shipping_address.use_for_billing = true
+    end
     current_order.build_billing_address unless current_order.billing_address
   end
 
