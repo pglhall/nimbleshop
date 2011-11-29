@@ -7,14 +7,15 @@ class CreditcardPaymentsController < ApplicationController
   end
 
   def create
+    order = current_order
     @creditcard = Creditcard.new(params[:creditcard])
 
     render action: 'new' and return unless @creditcard.valid?
 
-    @gp = GatewayProcessor.new(creditcard: @creditcard, order: current_order)
-    if @gp.authorize(current_order.price, @creditcard, current_order)
+    @gp = GatewayProcessor.new(creditcard: @creditcard, order: order)
+    if @gp.authorize(current_order.price, @creditcard, order)
       reset_order
-      redirect_to feedback_path(order_id: current_order.id)
+      redirect_to feedback_path(order_id: order.id)
     else
       @creditcard.errors.add(:base, 'Credit card was declined. Please try again with another credit card.')
       render action: "new"
