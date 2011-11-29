@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
 
   def update
     @current_order.validate_email = true
-    unless @current_order.update_attributes(params[:order])
+    @current_order.email = params[:order][:email]
+    unless @current_order.save
       render 'edit' and return if @current_order.errors.any?
     end
 
