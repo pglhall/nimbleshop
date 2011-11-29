@@ -15,14 +15,10 @@ class PaymentNotificationsController < ApplicationController
   end
 
   #
-  # curl -d "invoice=923204115&payment_status=paid" http://localhost:3000/payment_notifications/splitable
+  # curl -d "api_secret=xxxx&invoice=923204115&payment_status=paid" http://localhost:3000/payment_notifications/splitable
   #
   def splitable
-    PaymentNotification.create!(params: params,
-                                payment_provider: 'splitable',
-                                order_number: params[:invoice],
-                                status: params[:payment_status],
-                                transaction_id: params[:txn_id])
+    Rails.logger.info params.inspect
     render :nothing => true
   end
 
