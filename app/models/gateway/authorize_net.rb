@@ -2,7 +2,7 @@ class Gateway::AuthorizeNet < Gateway
 
   # Indicates if the required credential information is provided.
   def self.credentials?
-    Settings.gateway_authorize_net_login_id && Settings.gateway_authorize_net_transaction_key
+    self.credentials.values.compact.size == 2
   end
 
   def self.instance
@@ -16,8 +16,9 @@ class Gateway::AuthorizeNet < Gateway
   private
 
   def self.credentials
-    { login:    Settings.gateway_authorize_net_login_id ,
-      password: Settings.gateway_authorize_net_transaction_key }
+    login = ENV['GATEWAY_AUTHORIZE_NET_LOGIN_ID'] || Settings.gateway_authorize_net_login_id
+    transaction_key =  ENV['GATEWAY_AUTHORIZE_NET_TRANSACTION_KEY'] || Settings.gateway_authorize_net_transaction_key
+    { login: login , password: transaction_key }
   end
 
   def self.gateway_klass
