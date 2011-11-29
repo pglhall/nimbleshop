@@ -1,0 +1,73 @@
+<div class='page-header'>
+  <h1>
+    Payment Gateway
+    <small>
+      is needed for shop to accept credit cards and other forms of payment
+    </small>
+  </h1>
+</div>
+
+<table class='bordered-table'>
+  <tbody>
+
+    <tr>
+      <td>
+         <input type="radio" name="payment_gateway" value="authorize_dot_net" />
+      </td>
+      <td>
+        <h3>Authorize.net</h3>
+      </td>
+      <td>
+
+        <% if Gateway::AuthorizeNet.credentials? %>
+          <div class='alert-message block-message success'>
+            <p>
+              <strong>
+                You are all set.
+              </strong>
+              Gateway credentials was detected.
+              <%= link_to 'Click here for more info', '' %> about configuring gateway.
+            </p>
+          </div>
+        <% else %>
+          <div class='alert-message block-message error'>
+            <p>
+              <strong>Setup needed</strong>
+            </p>
+          </div>
+        <% end %>
+
+        <p>
+          Authorize.Net is a payment gateway service provider allowing merchants to accept
+          credit card and electronic checks paymentsn. Authorize.Net claims a user base of
+          over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.
+        </p>
+
+        <p>
+          It also provides an instant test account which you can use while your
+          application is being processed.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <input type="radio" name="payment_gateway" value="paypal_website_payments_standard" />
+      </td>
+      <td width='20%'>
+        <h3>Paypal website payments standard</h3>
+      </td>
+      <td>
+        <p>
+          Paypal website payments standard is a payment solution provided by paypal which allows merchant to accept
+          credit card and paypal payments. There is no monthly fee and no setup fee by paypal for this account.
+        </p>
+        <p>
+          <%= link_to 'more information', 'https://merchant.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=merchant/wp_standard&nav=2.1.0' %>
+        </p>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+

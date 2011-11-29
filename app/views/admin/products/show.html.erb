@@ -1,0 +1,50 @@
+<div class="span12">
+  <h2>
+    <%= @product.name %>
+    <%= number_to_currency @product.price %>
+  </h2>
+
+  <%= simple_format(@product.description) %>
+
+  <p>
+    <%= image_tag(@product.picture.picture_url(:medium), alt: @product.title) %>
+  </p>
+
+  <p>
+    <% @product.pictures.each do |picture| %>
+      <%= image_tag(picture.picture_url(:thumb), alt: @product.title) %>
+    <% end %>
+  </p>
+
+  <div class='page-header'>
+    <h3>Product groups</h3>
+  </div>
+
+  <% if @product_groups.any? %>
+    <div>
+      <p>
+        This product belongs to following product groups:
+      </p>
+      <ul>
+        <% @product_groups.each do |pg| %>
+          <li>
+            <h3>
+              <%= pg.name %>
+              <small>
+                <%= pg.condition_in_english %>
+              </small>
+            </h3>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br />
+
+  <p>
+    <%= link_to 'Edit', edit_admin_product_path(@product), class: 'btn small primary' %>
+    <%= link_to 'Delete', [:admin, @product], class: 'btn small', confirm: 'Are you sure?', method: 'delete' %>
+  </p>
+
+</div>

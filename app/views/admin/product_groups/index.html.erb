@@ -1,0 +1,24 @@
+<div>
+  <h1>Product groups</h1>
+</div>
+
+<%= link_to(new_admin_product_group_path) do %>
+  <button class="btn info">+ Add new product group</button>
+<% end %>
+
+<br />
+<br />
+
+<table class="zebra-striped">
+  <tbody>
+    <% @product_groups.each do |product_group| %>
+      <tr>
+        <td><%= product_group.name %></td>
+        <td><%= product_group.condition_in_english %></td>
+        <td><%= link_to 'edit', edit_admin_product_group_path(product_group) %></td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

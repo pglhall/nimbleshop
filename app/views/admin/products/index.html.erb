@@ -1,0 +1,27 @@
+<div>
+  <h1>Products</h1>
+</div>
+
+<%= link_to(new_admin_product_path) do %>
+  <button class="btn info">+ Add new product</button>
+<% end %>
+
+<br />
+<br />
+
+<table class="zebra-striped">
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td>
+          <% if product.picture %>
+            <%= image_tag(product.picture.picture_url(:thumb)) %>
+          <% end %>
+        </td>
+        <td><%= product.name %></td>
+        <td><%= link_to 'Show', admin_product_path(product) %></td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

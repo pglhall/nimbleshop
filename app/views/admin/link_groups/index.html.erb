@@ -1,0 +1,28 @@
+<div>
+  <h1>Link groups</h1>
+</div>
+
+<%= link_to(new_admin_link_group_path) do %>
+  <button class="btn info">+ Add new link group</button>
+<% end %>
+
+<br />
+<br />
+
+<table class="zebra-striped">
+  <tbody>
+    <% @link_groups.each do |link_group| %>
+      <tr>
+        <td><%= link_group.name %></td>
+        <td>
+          <% link_group.navigations.each do |nav| %>
+            <%= link_to(nav.navigeable.name, '') %>
+            <br />
+          <% end %>
+        </td>
+        <td><%= link_to 'Edit', '' %></td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,31 @@
+<div id="overview" class="clear">
+  <div id="image">
+    <%= link_to(image_tag(@product.picture.picture_url(:large)), @product.picture.picture_url(:grande), target: '_blank') %>
+  </div>
+  <br />
+  <p>
+    <% @product.pictures.each do |picture| %>
+      <% img = image_tag(picture.picture_url(:thumb), {class: 'thumb',
+                                                       'data-large-picture' => picture.picture_url(:large),
+                                                       'data-grande-picture' => picture.picture_url(:grande)}) %>
+      <%= link_to(img, '#') %>
+    <% end %>
+  </p>
+  <h1 id="title"><%= @product.title %></h1>
+  <h2 id="price"><span><%= number_to_currency(@product.price) %></span></h2>
+
+  <%= @product.description %>
+
+	<!-- START OPTIONS -->
+	<div id="options">
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="permalink" value="<%= @product.permalink %>" />
+			<div id="buy" class="clear">
+				<input type="submit" value="Add to Cart" id="add" />
+			</div>
+      <p id="continue">
+        <a href="/">Continue shopping...</a>
+      </p>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>
+    <%= @shop.name %> &mdash;
+    <%= @page_title %>
+  </title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="copyright" content="{{ shop.name | escape }}" />
+  <%= stylesheet_link_tag 'spotless' %>
+  <%= javascript_include_tag 'spotless/spotless' %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+  <div class="container">
+		<!-- END HEADER -->
+
+
+		<!-- START CONTENT -->
+		<div id="content" class="clear">
+			<div id="main">
+        <%= yield %>
+			</div>
+			<div id="sidebar">
+				<div id="collections" class="section">
+					<div class="title">
+						<h4>Order summary</h4>
+            <h4>
+              <%= number_to_currency(current_order.amount) %>
+            </h4>
+					</div>
+
+          <table>
+          <% current_order.line_items.each do |line_item| %>
+            <tr>
+              <td>
+                <%= image_tag(line_item.product.picture.picture_url(:pico)) %>
+              </td>
+              <td>
+                <%= line_item.product.title %>
+              </td>
+              <td>
+                <%= line_item.quantity %>x
+                <%= number_to_currency(line_item.product.price) %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+
+        </div>
+			</div>
+		</div>
+		<div id="footer" class="clear">
+      Copyright &copy; <%= Time.now.strftime('%Y') %> to <%= @shop.name %>
+    | <%= @shop.theme %>
+      <br />
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<%= form_for([:admin, @product_group]) do |f| %>
+
+  <% if @product_group.errors.any? %>
+    <div class="alert-message block-message error">
+      <p> Error ! </p>
+      <ul>
+        <% @product_group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input">
+        <%= f.text_field :name, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <h4>
+      Define Conditions
+      <small>
+        You can use as many custom fields as you desire to build your condition.
+      </small>
+    </h4>
+
+    <div class="clearfix">
+    </div><!-- /clearfix -->
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit('Submit', class: 'btn primary') %>
+    &nbsp;
+    <%= link_to 'Cancel', admin_custom_fields_path, class: 'btn' %>
+  </div>
+
+<% end %>

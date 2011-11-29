@@ -1,0 +1,19 @@
+paypal
+
+neeraj_sandbox_paypal@bigbinary.com
+12345678
+
+
+Seller info
+seller_1320329862_biz@bigbinary.com
+12345678
+
+Visa	   4569705008207929
+Exp Date:  11/2016
+
+
+
+buyer_1320121965_per@bigbinary.com
+12345678
+
+

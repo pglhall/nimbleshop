@@ -1,0 +1,43 @@
+<%= form_for([:admin, @custom_field]) do |f| %>
+
+  <% if @custom_field.errors.any? %>
+    <div class="alert-message block-message error">
+      <p> Error ! </p>
+      <ul>
+        <% @custom_field.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input">
+        <%= f.text_field :name, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= f.label :field_type %>
+      <div class="input">
+        <% if @custom_field.new_record? %>
+          <%= f.text_field :field_type, class: 'xlarge', size: 30 %>
+          <span class="help-block">
+            Valid values are text, number or date .
+          </span>
+        <% else %>
+          <%= f.text_field :field_type, class: 'xlarge disabled', size: 30, disabled: 'disabled' %>
+        <% end %>
+      </div>
+    </div><!-- /clearfix -->
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit('Submit', class: 'btn primary') %>
+    &nbsp;
+    <%= link_to 'Cancel', admin_custom_fields_path, class: 'btn' %>
+  </div>
+
+<% end %>

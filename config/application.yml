@@ -1,0 +1,52 @@
+# Usage
+#
+# Settings.s3_access_key_id
+#
+common:
+  splitable_support_bare: support@nimbleshop.com
+  host_for_email: nimbleshop.com
+  reach_out_email_in_outgoing_emails: hello@nimbleshop.com
+  host_url_with_http: http://localhost:3000
+
+  s3_access_key_id:
+  s3_secret_access_key:
+
+  gateway_authorize_net_login_id: 56yBAar72
+  gateway_authorize_net_transaction_key: 9r3pbH5bnKH29f7d
+
+  send_grid_user_name: <%=ENV['SEND_GRID_USERNAME']%>
+  send_grid_password: <%=ENV['SEND_GRID_PASSWORD']%>
+
+  paypal_merchant_email_address: seller_1320329862_biz@bigbinary.com
+  paypal_return_url: http://localhost:3000/paypal_return
+  paypal_notify_url: http://localhost:3000/paypal_payment_notifications
+  paypal_request_submission_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
+
+development:
+  bare_url_with_port: localhost:3000
+  using_heroku: false
+  s3_bucket: nibmbleship-development
+  host_for_email_with_www: www.localhost:3000
+  send_grid_user_name: neerajdotname
+  send_grid_password: blackmarlin21
+
+test:
+  bare_url_with_port: localhost:3000
+  using_heroku: false
+  cookie_domain: example.com
+  s3_bucket: nimbleshop-test
+  host_for_email_with_www: www.localhost:3000
+
+staging:
+  mail_safe_redirected_email: hello.nimbleshop@gmail.com
+  s3_access_key_id: <%=ENV['S3_ACCESS_KEY_ID']%>
+  s3_secret_access_key: <%=ENV['S3_SECRET_ACCESS_KEY']%>
+  host_url_with_http: http://nimbleshop-staging.heroku.com
+
+  paypal_return_url: http://nimbleshop-staging.heroku.com/paypal_return
+  paypal_notify_url: http://nimbleshop-staging.heroku.com/paypal_payment_notifications
+
+production:
+  host_url_with_http: http://nimbleshop.com
+  gateway_authorize_net_login_id: <%= ENV['GATEWAY_AUTHORIZE_NET_LOGIN_ID'] %>
+  gateway_authorize_net_transaction_key: <%= ENV['GATEWAY_AUTHORIZE_NET_TRANSACTION_KEY'] %>

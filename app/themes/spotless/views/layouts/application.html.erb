@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>
+    <%= @shop.name %> &mdash;
+    <%= @page_title %>
+  </title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="copyright" content="{{ shop.name | escape }}" />
+  <%= stylesheet_link_tag 'spotless' %>
+  <%= javascript_include_tag 'spotless/spotless' %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+	<!-- START CONTAINER -->
+  <% div_id = 'index' %>
+  <% div_id = 'cart' if params[:controller] == 'carts' %>
+  <div id="<%=div_id%>" class="container">
+		<!-- START HEADER -->
+		<div id="header" class="clear">
+			<!-- START NAVIGATE -->
+			<div id="navigate">
+        <h3><a href="/"><%= @shop.name %></a></h3>
+				<!-- START NAV -->
+        <div id="nav">
+        </div>
+			</div>
+
+			<div id="items">
+        <h2><%= @cart.item_count %></h2>
+        <p>
+          <%= (@cart.item_count == 0) ? 'Item' : 'Items' %>
+          in <a href="/cart">your cart</a> &rarr;
+        </p>
+			</div>
+			<!-- END ITEMS -->
+		</div>
+		<!-- END HEADER -->
+		<!-- START CONTENT -->
+		<div id="content" class="clear">
+			<div id="main">
+        <%= yield %>
+			</div>
+			<div id="sidebar">
+
+        <% unless params[:controller] == 'carts' %>
+          <div id="collections" class="section">
+            <div class="title">
+              <h4><%= @shop_by_category_link_group.name %></h4>
+            </div>
+            <ul>
+              <% @shop_by_category_link_group.navigations.each do |nav| %>
+                <li>
+                  <%= link_to nav.navigeable.name, nav.navigeable.url %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div id="collections" class="section">
+            <div class="title">
+              <h4><%= @shop_by_price_link_group.name %></h4>
+            </div>
+            <ul>
+              <% @shop_by_price_link_group.navigations.each do |nav| %>
+                <li>
+                  <%= link_to nav.navigeable.name, nav.navigeable.url %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+			</div>
+		</div>
+		<div id="footer" class="clear">
+      Copyright &copy; <%= Time.now.strftime('%Y') %> to <%= @shop.name %>
+    | <%= @shop.theme %>
+      <br />
+		</div>
+	</div>
+
+</body>
+</html>

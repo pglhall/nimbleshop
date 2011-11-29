@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>nimbleshop admin</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <%= stylesheet_link_tag 'admin' %>
+    <%= javascript_include_tag 'admin' %>
+    <style type="text/css">
+      body { padding-top: 60px; }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/"><%=@shop.name%></a>
+          <ul class="nav">
+            <li class="active"><a href="/admin">Admin</a></li>
+            <li><a href="#about">Documentation</a></li>
+            <li><a href="#contact">Forum</a></li>
+            <li><a href="#contact">Issues</a></li>
+          </ul>
+          <p class="pull-right">Logged in as <a href="#">username</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h5>Manage Product, groups</h5>
+          <ul>
+            <li><%= link_to 'Products', admin_products_path %></li>
+            <li><%= link_to 'Custom fields', admin_custom_fields_path %></li>
+            <li><%= link_to 'Product groups', admin_product_groups_path %></li>
+            <li><%= link_to 'Link groups', admin_link_groups_path %></li>
+          </ul>
+          <h5>Configuration</h5>
+          <ul>
+            <li><%= link_to 'Payment Gateway', admin_payment_gateway_path %></li>
+            <li><%= link_to 'Shop', admin_shop_path %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <% if flash[:notice] %><div class='alert-message success'><%= flash[:notice] %></div><% end %>
+
+        <p>
+          <%= yield %>
+        </p>
+
+      </div>
+    </div>
+
+  </body>
+</html>
