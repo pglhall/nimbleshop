@@ -1,4 +1,5 @@
-Credit card was charged $20.99 .
+Credit card was charged <%= number_to_currency(@order.amount) %> .
+
 In the credit card statement name of the company would appear as "nimbleSHOP".
 
-Invoice is also being emailed to xxxx.
+Invoice is being emailed to <%= @order.email %>.
