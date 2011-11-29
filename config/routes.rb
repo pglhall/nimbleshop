@@ -21,7 +21,11 @@ Nimbleshop::Application.routes.draw do
   resources :pages,     only: [:show]
   resource  :order,     only: [:edit, :update]
   resource  :checkout, :controller => 'checkout',  :only => [:show]
-  resource  :feedback,  only: [:show]
+  resource  :feedback,  only: [:show] do
+    collection do
+      get 'splitable'
+    end
+  end
 
   resource :cart do
     member do

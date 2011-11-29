@@ -6,4 +6,8 @@ class FeedbacksController < ApplicationController
     @order  = Order.find(params[:order_id])
   end
 
+  def splitable
+    render
+  end
+
 end
