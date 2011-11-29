@@ -6,7 +6,7 @@ class Splitable
     data.merge!(title: 'The Black Eyed Peas: 20 Person Suite (End Zone)')
     data.merge!(item_type: 'fixed')
     data.merge!(total_amount: 20000)
-    data.merge!(subdomain: 'sunlifestadium')
+    data.merge!(subdomain: 'southbeachseaplanes')
     data.merge!(order_id: order.id)
     data.merge!(number_of_participants: 20)
     data.merge!(notify_url: 'http://localhost:3010/payment_notifications/splitable')
