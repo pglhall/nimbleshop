@@ -5,5 +5,5 @@
 // the compiled file.
 //
 //= require jquery
-//= require spotless/shipping_address_same_as_billing_address
-//= require spotless/thumbnail
+//= require shipping_address_same_as_billing_address
+//= require thumbnail

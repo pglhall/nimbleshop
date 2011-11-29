@@ -45,11 +45,6 @@ module Nimbleshop
     config.assets.precompile += ['admin.css', 'admin.js']
     config.assets.precompile += ['admin_data.css', 'admin_data.js']
 
-    config.assets.paths << "#{Rails.root}/app/themes/woodland/assets/stylesheets"
-    config.assets.paths << "#{Rails.root}/app/themes/woodland/assets/javascripts"
-    config.assets.paths << "#{Rails.root}/app/themes/woodland/assets/images"
-    config.assets.precompile += ['woodland.css', 'woodland_ie7.css', 'woodland.js']
-
     config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/stylesheets"
     config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/javascripts"
     config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/images"
