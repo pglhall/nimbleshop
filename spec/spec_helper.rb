@@ -5,10 +5,10 @@ require 'minitest/capybara'
 
 require 'database_cleaner'
 
-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 
+# Do not change to :transaction since :truncation is much faster.
 DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
