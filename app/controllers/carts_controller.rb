@@ -10,9 +10,11 @@ class CartsController < ApplicationController
   end
 
   def create
-    checkout_with = params[:checkout].keys.first
-    session[:checkout_with] = checkout_with
-    redirect_to edit_order_url and return if params[:checkout]
+    if params[:checkout]
+      checkout_with = params[:checkout].keys.first
+      session[:checkout_with] = checkout_with
+      redirect_to edit_order_url and return
+    end
 
     params[:updates].each do |permalink, quantity|
       product = Product.find_by_permalink!(permalink)

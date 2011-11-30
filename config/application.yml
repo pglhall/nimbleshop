@@ -8,11 +8,11 @@ common:
   reach_out_email_in_outgoing_emails: hello@nimbleshop.com
   host_url_with_http: http://localhost:3000
 
-  s3_access_key_id:
-  s3_secret_access_key:
+  s3_access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
+  s3_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
 
-  gateway_authorize_net_login_id: 56yBAar72
-  gateway_authorize_net_transaction_key: 9r3pbH5bnKH29f7d
+  gateway_authorize_net_login_id: <%= ENV['GATEWAY_AUTHORIZE_NET_LOGIN_ID']  || '56yBAar72' %>
+  gateway_authorize_net_transaction_key: <%= ENV['GATEWAY_AUTHORIZE_NET_TRANSACTION_KEY'] ||  '9r3pbH5bnKH29f7d' %>
 
   send_grid_user_name: <%=ENV['SEND_GRID_USERNAME']%>
   send_grid_password: <%=ENV['SEND_GRID_PASSWORD']%>
@@ -39,8 +39,6 @@ test:
 
 staging:
   mail_safe_redirected_email: hello.nimbleshop@gmail.com
-  s3_access_key_id: <%=ENV['S3_ACCESS_KEY_ID']%>
-  s3_secret_access_key: <%=ENV['S3_SECRET_ACCESS_KEY']%>
   host_url_with_http: http://nimbleshop-staging.heroku.com
 
   paypal_return_url: http://nimbleshop-staging.heroku.com/paypal_return
@@ -48,5 +46,3 @@ staging:
 
 production:
   host_url_with_http: http://nimbleshop.com
-  gateway_authorize_net_login_id: <%= ENV['GATEWAY_AUTHORIZE_NET_LOGIN_ID'] %>
-  gateway_authorize_net_transaction_key: <%= ENV['GATEWAY_AUTHORIZE_NET_TRANSACTION_KEY'] %>
