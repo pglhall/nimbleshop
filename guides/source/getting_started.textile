@@ -1,0 +1,36 @@
+h2. Getting Started with nimbleSHOP
+
+endprologue.
+
+
+h3. What is nimbleSHOP?
+
+nimbleSHOP is an open source e-commerce application. It works with Ruby on Rails.
+
+nimbleSHOP works only with ruby 1.9.2 and above.
+
+nimbleSHOP uses PostgreSQL. No code is written specifically for PostgreSQL so MySQL and other databases should work. However all tests are run against PostgreSQL.
+
+nimbleSHOP is not a gem yet. It should become a gem soon.
+
+h3. Getting started
+
+<shell>
+$ git clone xxxxx
+</shell>
+
+<shell>
+$ cp config/database.yml.example config/database.yml
+</shell>
+
+Enter the credetials of your PostgreSQL database in <tt>database.yml</tt>.
+
+<shell>
+bundle install
+bundle exec rake db:create
+bundle exec rake db:bootstrap
+rails server
+</shell>
+
+Now if you visit <tt>http://localhost:3000</tt> you should see your store.
+

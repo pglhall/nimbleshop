@@ -1,0 +1,29 @@
+<% content_for :page_title do %>
+  nimbleSHOP Guides
+<% end %>
+
+<dl>
+<%= guide('Getting Started with nimbleSHOP', 'getting_started.html') do %>
+  <p>Everything you need to know to install nimbleSHOP and create your online shop.</p>
+<% end %>
+</dl>
+
+<dl>
+<%= guide("Payments", 'payments.html') do %>
+  <p>This guide covers how you can use Active Record migrations to alter your database in a structured and organized manner.</p>
+<% end %>
+
+<%= guide("Deployment at heroku", 'heroku.html') do %>
+  <p>This guide covers how you can use Active Record validations and callbacks.</p>
+<% end %>
+
+<%= guide("Setting up ssl", 'ssl.html') do %>
+  <p>This guide covers all the associations provided by Active Record.</p>
+<% end %>
+
+<dl>
+  <%= guide("Contributing to nimbleSHOP", 'contributing_to_ruby_on_rails.html') do %>
+    <p>Rails is not &quot;somebody else's framework.&quot; This guide covers a variety of ways that you can get involved in the ongoing development of Rails.</p>
+  <% end %>
+</dl>
+
