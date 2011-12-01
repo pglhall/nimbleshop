@@ -1,9 +1,9 @@
 <div>
-  <h1>Custom fields</h1>
+  <h1><%= t(:custom_fields) %></h1>
 </div>
 
 <%= link_to(new_admin_custom_field_path) do %>
-  <button class="btn info">+ Add new custom field</button>
+  <button class="btn info">+ <%= t(:add_new_custom_field) %></button>
 <% end %>
 
 <br />
@@ -15,7 +15,7 @@
       <tr>
         <td><%= custom_field.name %></td>
         <td><%= custom_field.field_type %></td>
-        <td><%= link_to 'edit', edit_admin_custom_field_path(custom_field) %></td>
+        <td><%= link_to t(:edit), edit_admin_custom_field_path(custom_field) %></td>
         </td>
       </tr>
     <% end %>

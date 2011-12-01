@@ -1,9 +1,9 @@
 <div>
-  <h1>Link groups</h1>
+  <h1><%= t(:link_groups) %></h1>
 </div>
 
 <%= link_to(new_admin_link_group_path) do %>
-  <button class="btn info">+ Add new link group</button>
+  <button class="btn info">+ <%= t(:add_new_link_group) %></button>
 <% end %>
 
 <br />
@@ -20,7 +20,7 @@
             <br />
           <% end %>
         </td>
-        <td><%= link_to 'Edit', '' %></td>
+        <td><%= link_to t(:edit), '' %></td>
         </td>
       </tr>
     <% end %>

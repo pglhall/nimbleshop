@@ -4,7 +4,7 @@
 
     <% if @product.errors.any? %>
       <div class="alert-message block-message error">
-        <p> Error ! </p>
+        <p> <%= t(:error_bang) %> </p>
         <ul>
           <% @product.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -63,7 +63,7 @@
       <div class="actions">
         <%= f.submit('Submit', class: 'btn primary') %>
         &nbsp;
-        <%= link_to 'Cancel', admin_products_path, class: 'btn' %>
+        <%= link_to t(:cancel), admin_products_path, class: 'btn' %>
       </div>
 
     </fieldset>

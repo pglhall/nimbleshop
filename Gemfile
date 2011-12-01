@@ -60,3 +60,5 @@ gem 'themes_for_rails', git: 'git://github.com/neerajdotname/themes_for_rails.gi
 #gem 'themes_for_rails', path: '/Users/nsingh/dev/personal/themes_for_rails'
 
 gem 'email_validator', :git => "git://github.com/bigbinary/email_validator.git"
+
+gem 'rails-i18n'

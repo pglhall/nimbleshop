@@ -2,4 +2,28 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  error_bang: 'Error!'
+  cancel: 'Cancel'
+  edit: 'edit'
+  welcome_admin: 'Welcome admin'
+
+  products: 'Products'
+  edit_product: 'Edit product'
+  add_new_product: 'Add new product'
+
+  edit_custom_field: 'Edit custom field'
+  custom_fields: 'Custom fields'
+  add_new_custom_field: 'Add new custom field'
+
+  link_groups: 'Link groups'
+  add_new_custom_field: 'Add new link group'
+
+  edit_product_group: 'Edit product group'
+  product_groups: 'Product groups'
+
+  helpers:
+    label:
+      product:
+        name: name
+        description: description
+
