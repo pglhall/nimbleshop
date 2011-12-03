@@ -1,12 +1,12 @@
 Nimbleshop::Application.routes.draw do
 
   namespace :admin do
-    resource :payment_gateway
+    resources :payment_methods
     resources :products
     resources :product_groups
     resources :custom_fields
     resources :link_groups
-    resource :shop, only: [:show, :update, :edit]
+    resource  :shop, only: [:show, :update, :edit]
   end
 
   resources :creditcard_payments

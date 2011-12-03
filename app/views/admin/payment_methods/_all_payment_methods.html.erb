@@ -1,0 +1,19 @@
+<table class='bordered-table'>
+  <tbody>
+    <% @payment_methods.each do |payment_method| %>
+      <tr>
+        <td>
+          <h3>
+            <%= check_box_tag(payment_method.name, '1', payment_method.enabled) %>
+          </h3>
+        </td>
+        <td>
+          <h3><%= payment_method.name %></h3>
+        </td>
+        <td>
+          <%= raw payment_method.description %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -7,6 +7,7 @@ namespace :db do
 
     Rake::Task["db:bootstrap"].invoke
 
+    puts "running db:sample_data ..."
     Shop.delete_all
     LinkGroup.delete_all
     ProductGroup.delete_all
@@ -77,6 +78,8 @@ namespace :db do
     Navigation.create!(link_group: link_group, navigeable: pg_lt_50)
     Navigation.create!(link_group: link_group, navigeable: pg_between_50_100)
     Navigation.create!(link_group: link_group, navigeable: pg_gt_100)
+
+    PaymentMethod.update_all(enabled: true)
 
   end
 

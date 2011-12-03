@@ -18,7 +18,7 @@ namespace :db do
     Rake::Task["db:data:load"].invoke
     Rake::Task["db:seed"].invoke
 
-    puts "running db:test:prepare ..."
+    #puts "running db:test:prepare ..."
     #Rake::Task["db:test:prepare"].invoke
   end
 
