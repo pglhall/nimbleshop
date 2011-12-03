@@ -42,6 +42,9 @@ module Nimbleshop
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # do not compress the assets for the time being
+    config.assets.compress = false
+
     config.assets.precompile += ['admin.css', 'admin.js']
     config.assets.precompile += ['admin_data.css', 'admin_data.js']
 
