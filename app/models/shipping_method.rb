@@ -2,8 +2,7 @@ class ShippingMethod < ActiveRecord::Base
 
   belongs_to :shipping_zone
 
-  def condition_in_english
-    'tbd'
-  end
+  validates :lower_price_limit, presence: true
+  validates :shipping_price,    presence: true
 
 end
