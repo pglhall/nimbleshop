@@ -180,6 +180,29 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
 
+  create_table "shipping_countries", :force => true do |t|
+    t.integer  "shipping_zone_id", :null => false
+    t.integer  "country_code",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shipping_methods", :force => true do |t|
+    t.integer  "shipping_zone_id",                                :null => false
+    t.string   "name",                                            :null => false
+    t.decimal  "lower_price_limit", :precision => 8, :scale => 2
+    t.integer  "upper_price_limit"
+    t.integer  "shipping_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shipping_zones", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shops", :force => true do |t|
     t.string   "name",           :null => false
     t.string   "theme"

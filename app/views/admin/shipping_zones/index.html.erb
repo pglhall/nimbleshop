@@ -1,0 +1,26 @@
+<div>
+  <h1>Shipping</h1>
+</div>
+
+<%= link_to(new_admin_product_path) do %>
+  <button class="btn info">+ Add new shipping zone</button>
+<% end %>
+
+<br />
+<br />
+
+<% @shipping_zones.each do |shipping_zone| %>
+  <table class="zebra-striped">
+    <tbody>
+      <tr>
+        <td><%= shipping_zone.name %></td>
+      </tr>
+      <% shipping_zone.shipping_methods.each do |shipping_method| %>
+        <tr>
+          <td> <%= shipping_method.name %> </td>
+          <td> <%= shipping_method.condition_in_english %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

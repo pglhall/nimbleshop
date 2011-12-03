@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CreditCardHandler do
+describe GatewayProcessor do
 
   describe 'payment stuff' do
     before do
