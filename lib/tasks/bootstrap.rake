@@ -2,7 +2,7 @@ namespace :db do
 
   desc "rebuilds the database and adds seed data"
   task :bootstrap => :environment do
-    raise "this task should not be run in production" if Rails.env.production?
+    #raise "this task should not be run in production" if Rails.env.production?
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
 
     puts "dropping the database ..."
