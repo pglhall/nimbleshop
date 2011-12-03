@@ -7,7 +7,7 @@ describe GatewayProcessor do
       shop = Factory(:shop)
       @creditcard = Factory.build(:creditcard)
       @order = Factory(:order)
-      @credit_card_handler = CreditCardHandler.new
+      @credit_card_handler = GatewayProcessor.new
     end
 
     describe '#authorize' do
@@ -49,3 +49,5 @@ describe GatewayProcessor do
   end
 
 end
+
+

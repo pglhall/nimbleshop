@@ -4,7 +4,7 @@ class Transaction < ActiveRecord::Base
 
   def capture(_amount = nil)
     _amount ||= self.amount
-    CreditCardHandler.new.capture(_amount, self)
+    GatewayProcessor.new.capture(_amount, self)
   end
 
 end
