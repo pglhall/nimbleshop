@@ -43,8 +43,8 @@ ERROR
   exit 1
 end
 
-require "rails_guides/textile_extensions"
+require "nimbleshop_guides/textile_extensions"
 RedCloth.send(:include, RailsGuides::TextileExtensions)
 
-require "rails_guides/generator"
+require "nimbleshop_guides/generator"
 RailsGuides::Generator.new.generate

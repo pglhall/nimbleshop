@@ -57,9 +57,9 @@ require 'active_support/core_ext/object/blank'
 require 'action_controller'
 require 'action_view'
 
-require 'rails_guides/indexer'
-require 'rails_guides/helpers'
-require 'rails_guides/levenshtein'
+require 'nimbleshop_guides/indexer'
+require 'nimbleshop_guides/helpers'
+require 'nimbleshop_guides/levenshtein'
 
 module RailsGuides
   class Generator
