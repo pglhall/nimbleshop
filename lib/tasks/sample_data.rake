@@ -17,6 +17,7 @@ namespace :db do
     CustomFieldAnswer.delete_all
 
     Shop.create!(name: 'nimbleshop',
+                 theme: 'spotless',
                  phone_number: '800-456-7890',
                  contact_email: 'neeraj@nimbleshop.com',
                  twitter_handle: '@nimbleshop',

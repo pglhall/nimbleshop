@@ -1,0 +1,42 @@
+<div>
+  <h1>Shop configuration</h1>
+</div>
+
+<%= form_for([:admin, @shop]) do |f| %>
+
+  <% if @shop.errors.any? %>
+    <div class="alert-message block-message error">
+      <p> <%= t(:error_bang) %> </p>
+      <ul>
+        <% @shop.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input">
+        <%= f.text_field :name, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= f.label :theme %>
+      <div class="input">
+        <%= f.text_field :theme, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit('Submit', class: 'btn primary') %>
+    &nbsp;
+    <%= link_to 'Cancel', edit_admin_shop_path, class: 'btn' %>
+  </div>
+
+<% end %>
+

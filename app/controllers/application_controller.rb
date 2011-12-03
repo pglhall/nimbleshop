@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def theme_resolver
-    @shop.theme || 'spotless' || 'woodland'
+    @shop.theme || 'spotless'
   end
 
   def current_order

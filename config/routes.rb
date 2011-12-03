@@ -6,7 +6,7 @@ Nimbleshop::Application.routes.draw do
     resources :product_groups
     resources :custom_fields
     resources :link_groups
-    resource  :shop, only: [:show, :update, :edit]
+    resource  :shop, only: [:update, :edit]
   end
 
   resources :creditcard_payments

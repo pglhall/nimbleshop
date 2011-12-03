@@ -37,10 +37,5 @@ visit http://localhost:3000/admin
 
 # change theme
 
-    localhost:3000/admin/shop/change_theme?theme=spotless
-    localhost:3000/admin/shop/change_theme?theme=woodland
-
-# later
-
-curl -d "txn_id=3XC103945N720211C&invoice=17372687&payment_status=Completed" http://localhost:3000/paypal_payment_notifications
-
+To change theme go to 'admin' page by visiting http://localhost:3000/admin and then click on 'Shop configuration'.
+There type in the name of your new 'theme'.
