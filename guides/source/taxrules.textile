@@ -1,0 +1,25 @@
+h2.  e-commerce tax rules in USA
+
+endprologue.
+
+h3. Brick and mortar shop
+
+Let's say that there is a store called 'B&M sporting goods' in Miami. As of this writing Miami has a sales tax rate of <tt>7%</tt> . It means if John Smith buys an item worth $100 then the total sale price would be $107.00 . $7.00 would be earned by the state of Florida.
+
+h3. e-commerce store
+
+Mary started a new online store called 'Mary sporting goods' in Miami. Since the store has a presence in 'Miami' if a buyer resides in the state of Flordia then Mary should charge a sales tax.
+
+If a buyer is not from Florida then the case gets complicated. In 1992, the United States Supreme Court ruled in "Quill Corp v. North Dakota case":http://www.law.cornell.edu/supct/html/91-0194.ZO.html  that a state can only require a company to collect its sales tax if the company has a substantial physical presence in the state. The legal term for this physical presence is <tt>nexus</tt>. In its rule Supreme court left the interpretation of <tt>nexus</tt> to states and this is causing quite a bit of confusion since each state has a different interpretation of <tt>nexus</tt>.
+
+There are five U.S. states that do not have any sales tax.  These are Alaska, Delaware, Montana, New Hampshire and Oregon. So if the buyer resides in any of these states then there is no need to aply and sales tax.
+
+Some of the states would assert that a business has a nexus if
+
+* an employee resides in that state
+* store has substantial advertisements in that state
+* a store has a warehouse in that state
+
+Complying with different sales tax rules get further complicated because some states would qualify <tt>marshmallow</tt> as <tt>food</tt> and some states would qualify as <tt>candy</tt> .
+
+"Here":http://www.ecommercetimes.com/story/70878.html is a case where mere having a server in Texas would make the store owner pay sales taxes to Texas.
