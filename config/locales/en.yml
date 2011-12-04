@@ -5,6 +5,7 @@ en:
   error_bang: 'Error!'
   cancel: 'Cancel'
   edit: 'Edit'
+  delete: 'Delete'
   welcome_admin: 'Welcome admin'
 
   products: 'Products'

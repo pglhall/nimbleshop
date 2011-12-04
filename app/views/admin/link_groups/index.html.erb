@@ -20,7 +20,10 @@
             <br />
           <% end %>
         </td>
-        <td><%= link_to t(:edit), '' %></td>
+        <td>
+          <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
+          |
+          <%= link_to t(:delete), [:admin, link_group], confirm: 'Are you sure?', method: 'delete' %>
         </td>
       </tr>
     <% end %>

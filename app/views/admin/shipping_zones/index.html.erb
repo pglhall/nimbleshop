@@ -2,7 +2,7 @@
   <h1>Shipping</h1>
 </div>
 
-<%= link_to(new_admin_product_path) do %>
+<%= link_to(new_admin_shipping_zone_path) do %>
   <button class="btn info">+ Add new shipping zone</button>
 <% end %>
 
@@ -20,7 +20,9 @@
           <td> <%= shipping_method.name %> </td>
           <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
           <td>
-            <%= link_to 'Edit', edit_admin_shipping_method_path(shipping_method) %>
+            <%= link_to t(:edit), edit_admin_link_group_path(shipping_method) %>
+            |
+            <%= link_to t(:delete), [:admin, shipping_method], confirm: 'Are you sure?', method: 'delete' %>
           </td>
         </tr>
       <% end %>

@@ -15,7 +15,11 @@
       <tr>
         <td><%= product_group.name %></td>
         <td><%= product_group.condition_in_english %></td>
-        <td><%= link_to 'edit', edit_admin_product_group_path(product_group) %></td>
+        <td>
+          <%= link_to t(:edit), edit_admin_product_group_path(product_group) %>
+          |
+          <%= link_to t(:delete), [:admin, product_group], confirm: 'Are you sure?', method: 'delete' %>
+        </td>
         </td>
       </tr>
     <% end %>
