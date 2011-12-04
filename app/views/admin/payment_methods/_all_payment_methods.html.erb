@@ -4,7 +4,9 @@
       <tr>
         <td>
           <h3>
-            <%= check_box_tag(payment_method.name, '1', payment_method.enabled) %>
+            <%= form_for [:admin,payment_method] do |f| %>
+              <%= f.check_box 'enabled', class: 'submittable' %>
+            <% end %>
           </h3>
         </td>
         <td>
