@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
     t.boolean  "enabled",     :default => false
     t.string   "name"
     t.text     "description"
+    t.text     "credentials"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -20,7 +20,7 @@ production:
   adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: nimbleshop_development
+  database: nimbleshop_production
   pool: 5
   username: nsingh
   password: postgres
