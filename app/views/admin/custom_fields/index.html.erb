@@ -17,6 +17,7 @@
         <td><%= custom_field.field_type %></td>
         <td>
           <%= link_to t(:edit), edit_admin_custom_field_path(custom_field) %>
+          |
           <%= link_to 'Delete', [:admin, custom_field], confirm: 'Are you sure?', method: 'delete' %>
         </td>
         </td>

@@ -2,7 +2,7 @@
 
   <% if @custom_field.errors.any? %>
     <div class="alert-message block-message error">
-      <p> <%= t(:error_bang) </p>
+      <p> <%= t(:error_bang) %></p>
       <ul>
         <% @custom_field.errors.full_messages.each do |message| %>
           <li><%= message %></li>
