@@ -15,40 +15,59 @@
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name %>
   </div>
+  <br />
+
   <div class="field">
-    <%= f.label :number %><br />
+    <%= f.label :number, 'Credit card number' %><br />
     <%= f.text_field :number %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :cvv %><br />
     <%= f.text_field :cvv %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :address1 %><br />
     <%= f.text_field :address1 %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :address2 %><br />
     <%= f.text_field :address2 %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :state %><br />
     <%= f.text_field :state %>
   </div>
+  <br />
+
   <div class="field">
     <%= f.label :zipcode %><br />
     <%= f.text_field :zipcode %>
   </div>
+  <br />
+
   <div class="field">
-    <%= f.label :expires_on %><br />
+    <%= f.label :expires_on, 'Expiration date' %>
+    <br />
     <%= select_month nil, {add_month_numbers: true}, {name: 'creditcard[month]', id: "card_month"} %>
     <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: 'creditcard[year]', id: "card_year"} %>
   </div>
@@ -56,6 +75,6 @@
   <br />
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit' %>
   </div>
 <% end %>

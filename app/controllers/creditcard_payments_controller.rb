@@ -3,6 +3,7 @@ class CreditcardPaymentsController < ApplicationController
   theme :theme_resolver, only: [:new, :create]
 
   def new
+    @page_title = 'payment using credit card'
     @creditcard = Creditcard.new
   end
 

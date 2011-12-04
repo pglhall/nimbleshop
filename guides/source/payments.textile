@@ -8,6 +8,32 @@ h3. Merchant account
 
 In order to accept credit cards online, store owners need to have a merchant account. "Here is a good read":http://ebooks.bigbinary.com/docs/credit-cards/index.html on how credit card works and what exactly is a merchant account.
 
+h3. paypal web payment standard
+
+nimbleSHOP support Paypal's <tt>Website Payments Standard</tt> out of the box. It also comes up with a valid credentials for sandbox. Follow the instruction mentioned below to pay using paypal.
+
+Before you start testing you need to login at developer account with following credentials at "developer url":https://developer.paypal.com .
+
+<shell>
+url:      https://developer.paypal.com
+email:    neeraj_sandbox_paypal@gmail.com
+password: 12345678
+</shell>
+
+Now visit your shop and try to purchase something. In the checkout page click on "Pay with pal".
+
+Once you are taken to the paypal login page , login with following credentials.
+
+<shell>
+email:    buyer_1323036620_per@bigbinary.com
+password: 12345678
+</shell>
+
+<shell>
+email:    seller_1323037155_biz@bigbinary.com
+password: 123456
+</shell>
+
 h3. Authorize.net
 
 Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.
