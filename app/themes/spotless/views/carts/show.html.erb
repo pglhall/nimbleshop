@@ -71,17 +71,18 @@
     <div id="complete" class="clear">
 		  <!-- START CHECKOUT -->
 		  <div>
-        <input type="submit" value="Update" name="update" class="update" />
+        <%= submit_tag "Update", :disable_with => "updating ...", :class => "udpate" %>
         <br />
         <br />
         <p class='button'>
-          <input type="submit" value="Checkout using Authorize.net" name="checkout[with_authorize_net]" class="checkout" />
-        </p>
-        <p  class='button'>
-          <input type="submit" value="Checkout with splitable" name="checkout[with_splitable]" class="checkout" />
+          <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'checkout' %>
         </p>
         <p class='button'>
-          <input type="image" src="http://images.paypal.com/images/x-click-but1.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+          <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
+        </p>
+        <p class='button'>
+          <%= image_submit_tag 'http://images.paypal.com/images/x-click-but1.gif', name: "checkout[with_paypal]", class: 'checkout', alt: "Make payments with PayPal - it's fast, free and secure!"
+        %>
         </p>
 
 		  </div>

@@ -26,21 +26,15 @@ class OrdersController < ApplicationController
       render 'edit' and return if current_order.billing_address.errors.any?
     end
 
-    checkout_with = session[:checkout_with]
-
-    if checkout_with == 'with_splitable'
+    case session[:checkout_with]
+    when 'with_splitable'
       redirect_to Splitable.url(current_order) and return
+    when 'with_paypal'
+      redirect_to current_order.paypal_url
+    when 'with_authorize_net'
+      redirect_to  new_creditcard_payment_path
     end
 
-    if current_shop.gateway.blank?
-      render text: "Payment gateway is not configured. Please visit '/admin/payment_gateway' and setup the payment gateway."
-    elsif current_shop.gateway == 'website_payments_standard'
-      redirect_to current_order.paypal_url
-    elsif current_shop.gateway == 'AuthorizeNet'
-      redirect_to  new_creditcard_payment_path
-    else
-      render text: "shop has payment_gateway value as '#{current_shop.payment_gateway}'. That seems to be an invalid value."
-    end
   end
 
   private
