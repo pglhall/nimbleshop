@@ -554,4 +554,6 @@ background-color: #11234e;
  *
 */
 
-
+#complete p.button {
+  margin: 10px 0 10px 0;
+}

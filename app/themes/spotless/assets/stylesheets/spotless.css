@@ -9,3 +9,6 @@
  *= require_self
 */
 
+#complete p.button {
+  margin: 10px 0 10px 0;
+}
