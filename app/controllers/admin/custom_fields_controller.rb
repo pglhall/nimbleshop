@@ -34,5 +34,13 @@ class Admin::CustomFieldsController < AdminController
     end
   end
 
+  def destroy
+    @custom_field = CustomField.find(params[:id])
+    if @custom_field.destroy
+      redirect_to admin_custom_fields_path, notice: 'Custom field was deleted'
+    else
+      redirect_to admin_custom_fields_path, error: 'Custom field could not be deleted'
+    end
+  end
 
 end
