@@ -13,14 +13,15 @@
   <table class="zebra-striped">
     <tbody>
       <tr>
-        <td colspan='3'><%= shipping_zone.name %></td>
+        <td colspan='4'><%= shipping_zone.name %></td>
       </tr>
       <% shipping_zone.shipping_methods.each do |shipping_method| %>
         <tr>
           <td> <%= shipping_method.name %> </td>
           <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
+          <td> <%= number_to_currency(shipping_method.shipping_price) %> </td>
           <td>
-            <%= link_to t(:edit), edit_admin_link_group_path(shipping_method) %>
+            <%= link_to t(:edit), edit_admin_shipping_method_path(shipping_method) %>
             |
             <%= link_to t(:delete), [:admin, shipping_method], confirm: 'Are you sure?', method: 'delete' %>
           </td>
