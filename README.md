@@ -39,3 +39,8 @@ visit http://localhost:3000/admin
 
 To change theme go to 'admin' page by visiting http://localhost:3000/admin and then click on 'Shop configuration'.
 There type in the name of your new 'theme'.
+
+# TODO
+
+* fix shipping
+* fix status for order: shipping_address_provided, authorized, paid,

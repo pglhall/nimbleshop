@@ -15,6 +15,7 @@ class CreditcardPaymentsController < ApplicationController
 
     @gp = GatewayProcessor.new(creditcard: @creditcard, order: order)
     if @gp.authorize(current_order.price, @creditcard, order)
+      current_order.update_attributes(status: 'authorized')
       reset_order
       redirect_to feedback_path(order_id: order.id)
     else

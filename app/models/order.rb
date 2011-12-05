@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
 
   validates :email, :email => true, :if => lambda {|record| record.validate_email }
 
-  before_save :set_order_number
+  before_save :set_order_number, :set_status
 
   def paypal_url
     values = {
@@ -24,6 +24,7 @@ class Order < ActiveRecord::Base
       :upload => 1,
       :return => Settings.paypal_return_url,
       :invoice => self.number,
+      :secret  => 'xxxxxxx',
       :notify_url => Settings.paypal_notify_url
     }
     line_items.each_with_index do |item, index|
@@ -78,6 +79,12 @@ class Order < ActiveRecord::Base
 
   def set_order_number
     self.number = Random.new.rand(11111111...99999999).to_s
+  end
+
+  def set_status
+    if self.status == 'added_to_cart' && self.email_changed?
+      self.status = 'shipping_provided'
+    end
   end
 
 end
