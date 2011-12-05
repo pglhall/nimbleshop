@@ -48,3 +48,5 @@ staging:
 
 production:
   host_url_with_http: http://nimbleshop.com
+  paypal_return_url: http://nimbleshop.heroku.com/paypal_return
+  paypal_notify_url: http://nimbleshop.heroku.com/paypal_payment_notifications
