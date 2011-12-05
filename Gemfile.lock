@@ -116,7 +116,6 @@ GEM
     json_pure (1.6.1)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
-    liquid (2.3.0)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -214,7 +213,6 @@ DEPENDENCIES
   guard
   guard-minitest
   jquery-rails
-  liquid
   mini_magick
   minitest-capybara (~> 0.0.1)!
   minitest-rails

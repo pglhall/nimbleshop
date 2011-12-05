@@ -21,8 +21,6 @@ class Product < ActiveRecord::Base
 
   before_create :set_permalink
 
-  liquid_methods :name, :url, :price, :picture_file_name, :id, :description, :permalink, :category
-
   def picture
     pictures.first
   end

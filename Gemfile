@@ -11,9 +11,6 @@ gem 'activemerchant'
 gem 'binary_merchant', git: 'git://github.com/bigbinary/binary_merchant.git'
 #gem 'binary_merchant', path: '/Users/nsingh/dev/personal/binary_merchant'
 
-# themes should be in liquid to avoid any security issue
-gem 'liquid'
-
 # for uploading images
 gem 'carrierwave'
 

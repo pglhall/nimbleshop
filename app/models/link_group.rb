@@ -2,8 +2,6 @@ class LinkGroup < ActiveRecord::Base
 
   has_many :navigations
 
-  liquid_methods :name, :navigations
-
   before_create :set_permalink
 
   private

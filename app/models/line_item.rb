@@ -7,8 +7,6 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :product_id
   validates_numericality_of :quantity, :minimum => 1
 
-  liquid_methods :product, :quantity, :price, :line_price
-
   def line_price
     self.product.price * self.quantity
   end

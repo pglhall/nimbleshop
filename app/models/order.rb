@@ -17,8 +17,6 @@ class Order < ActiveRecord::Base
 
   before_save :set_order_number
 
-  liquid_methods :price, :item_count, :items, :total_price, :line_items, :paypal_url
-
   def paypal_url
     values = {
       :business => Settings.paypal_merchant_email_address,

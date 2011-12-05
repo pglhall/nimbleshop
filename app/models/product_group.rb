@@ -6,8 +6,6 @@ class ProductGroup < ActiveRecord::Base
 
   before_create :set_permalink
 
-  liquid_methods :name
-
   # determines if the given product exists in the product group
   def exists?(product)
     products.include?(product)

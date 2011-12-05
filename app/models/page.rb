@@ -1,7 +1,5 @@
 class Page < ActiveRecord::Base
 
-  liquid_methods :url, :permalink, :name, :content
-
   before_create :set_permalink
 
   def url
