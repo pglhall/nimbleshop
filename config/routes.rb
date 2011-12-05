@@ -1,6 +1,7 @@
 Nimbleshop::Application.routes.draw do
 
   namespace :admin do
+    resources :orders
     resources :payment_methods
     resources :shipping_zones
     resources :shipping_methods
