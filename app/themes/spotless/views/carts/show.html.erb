@@ -74,14 +74,17 @@
         <%= submit_tag "Update", :disable_with => "updating ...", :class => "udpate" %>
         <br />
         <br />
-        <p class='button'>
-          <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'checkout' %>
-        </p>
+        <% if paypal_website_payments_standard_enabled? %>
+          <p class='button'>
+            <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'checkout' %>
+          </p>
+        <% end %>
+
         <p class='button'>
           <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
         </p>
 
-        <% if is_paypal_website_payments_standard_enabled? %>
+        <% if paypal_website_payments_standard_enabled? %>
           <p class='button'>
             <%= image_submit_tag Settings.paypal_image_on_checkout_page, name: "checkout[with_paypal]", class: 'checkout', alt: t(:paypal_image_alt) %>
           </p>

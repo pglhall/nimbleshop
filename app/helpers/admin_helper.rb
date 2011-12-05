@@ -1,8 +1,13 @@
 module AdminHelper
 
-  def is_paypal_website_payments_standard_enabled?
+  def paypal_website_payments_standard_enabled?
     PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled
   end
+
+  def authorize_net_enabled?
+    PaymentMethod.find_by_permalink('authorize-net').enabled
+  end
+
 
   def build_payment_method_tabs
     result = []
