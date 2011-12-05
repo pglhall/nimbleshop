@@ -80,9 +80,11 @@
           </p>
         <% end %>
 
-        <p class='button'>
-          <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
-        </p>
+        <% if splitable_enabled? %>
+          <p class='button'>
+            <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
+          </p>
+        <% end %>
 
         <% if paypal_website_payments_standard_enabled? %>
           <p class='button'>

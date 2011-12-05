@@ -29,3 +29,17 @@ description = %Q{
 }
 
 PaymentMethod.create!(name: 'Paypal website payments standard', description: description)
+
+description = %Q{
+<p>
+  Splitable helps split the cost of product with friends and family.
+</p>
+
+<p>
+  <a href='http://splitable.com'>
+   more information
+  </a>
+</p>
+}
+
+PaymentMethod.create!(name: 'Splitable', description: description)

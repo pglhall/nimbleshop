@@ -8,6 +8,9 @@ module AdminHelper
     PaymentMethod.find_by_permalink('authorize-net').enabled
   end
 
+  def splitable_enabled?
+    PaymentMethod.find_by_permalink('splitable').enabled
+  end
 
   def build_payment_method_tabs
     result = []
