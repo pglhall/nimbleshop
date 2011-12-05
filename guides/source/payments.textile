@@ -63,3 +63,4 @@ gateway_authorize_net_transaction_key: <%= ENV['GATEWAY_AUTHORIZE_NET_TRANSACTIO
 As you can see the application already has credentials of a test account. You can use that account for testing but before you go 'live' you should enter your own merchant account credentials.
 
 If you do not want to put your Authorize.net credentials in <tt>application.yml</tt> then you can provide that information using <tt>ENV</tt>. Look at "deployment with heroku" guide for more information about how to pass environment variable to the application.
+

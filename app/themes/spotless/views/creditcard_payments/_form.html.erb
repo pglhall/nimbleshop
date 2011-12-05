@@ -68,8 +68,9 @@
   <div class="field">
     <%= f.label :expires_on, 'Expiration date' %>
     <br />
-    <%= select_month nil, {add_month_numbers: true}, {name: 'creditcard[month]', id: "card_month"} %>
-    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: 'creditcard[year]', id: "card_year"} %>
+    <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
+    <%#= select_month nil, {add_month_numbers: true}, {name: 'creditcard[month]', id: "card_month"} %>
+    <%#= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: 'creditcard[year]', id: "card_year"} %>
   </div>
 
   <br />
