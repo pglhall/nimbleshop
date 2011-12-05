@@ -9,12 +9,12 @@
 	<h1>Your Cart</h1>
 	<h2>
     <span>
-      <%= pluralize(@cart.item_count, 'Item') %>
+      <%= pluralize(items_count_in_cart, 'Item') %>
     </span>
   </h2>
 </div>
 
-<% if @cart.item_count == 0 %>
+<% if items_count_in_cart == 0 %>
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
   <form action="/cart" method="post" name="cartform" id='cartform'>

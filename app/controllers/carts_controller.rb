@@ -4,9 +4,7 @@ class CartsController < ApplicationController
 
   def show
     @page_title = 'cart'
-    @line_items = current_order.line_items(:include => :product).order('id')
-    @cart = current_order
-    #puts @cart.paypal_url
+    @line_items = current_order.blank? ? [] : current_order.line_items(:include => :product).order('id')
   end
 
   def create
@@ -25,6 +23,7 @@ class CartsController < ApplicationController
 
   def add
     product = Product.find_by_permalink!(params[:permalink])
+    session[:order_id] = Order.create!.id unless current_order
     current_order.add(product)
     redirect_to cart_url
   end

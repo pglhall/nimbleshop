@@ -12,16 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    # bad order_id in session
-    session[:order_id] = nil unless Order.find_by_id(session[:order_id])
-
-    if session[:order_id]
-      @current_order ||= Order.find_by_id(session[:order_id])
-    else session[:order_id].nil?
-      @current_order = Order.create!
-      session[:order_id] = @current_order.id
-    end
-    @current_order
+    @current_order ||= Order.find_by_id(session[:order_id])
   end
 
   def reset_order
