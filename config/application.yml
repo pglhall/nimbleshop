@@ -21,7 +21,7 @@ common:
 
   paypal_merchant_email_address: seller_1323037155_biz@bigbinary.com
   paypal_return_url: http://localhost:3000/paypal_return
-  paypal_notify_url: http://localhost:3000/paypal_payment_notifications
+  paypal_notify_url: http://localhost:3000/payment_notifications/paypal
   paypal_request_submission_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
 
 development:
@@ -49,4 +49,4 @@ staging:
 production:
   host_url_with_http: http://nimbleshop.com
   paypal_return_url: http://nimbleshop.heroku.com/paypal_return
-  paypal_notify_url: http://nimbleshop.heroku.com/paypal_payment_notifications
+  paypal_notify_url: http://nimbleshop.heroku.com/payment_notifications/paypal
