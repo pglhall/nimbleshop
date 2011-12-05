@@ -44,4 +44,3 @@ There type in the name of your new 'theme'.
 
 * fix shipping
 * fix status for order: shipping_address_provided, authorized, paid,
-* while entering credit card info if card validation fails then expiration month and year is lost
