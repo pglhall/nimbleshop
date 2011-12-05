@@ -78,12 +78,13 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
 
   create_table "link_groups", :force => true do |t|
     t.string   "name",       :null => false
-    t.string   "permalink"
+    t.string   "permalink",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "link_groups", ["name"], :name => "index_link_groups_on_name", :unique => true
+  add_index "link_groups", ["permalink"], :name => "index_link_groups_on_permalink", :unique => true
 
   create_table "links", :force => true do |t|
     t.string   "name"
@@ -123,9 +124,12 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
     t.string   "name"
     t.text     "description"
     t.text     "credentials"
+    t.string   "permalink",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "payment_methods", ["permalink"], :name => "index_payment_methods_on_permalink", :unique => true
 
   create_table "paypal_payment_notifications", :force => true do |t|
     t.text     "params"

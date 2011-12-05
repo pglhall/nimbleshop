@@ -31,7 +31,7 @@
             <div id="subCol">
         <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
         <ol class="chapters">
-<li><a href="#merchant-account">Merchant account</a></li><li><a href="#paypal-web-payment-standard">paypal web payment standard</a></li><li><a href="#authorize-net">Authorize.net</a></li></ol></div>
+<li><a href="#merchant-account">Merchant account</a></li><li><a href="#paypal-web-payment-standard">paypal web payment standard</a><ul><li><a href="#logging-into-sandbox-paypal-account">Logging into sandbox paypal account</a></li> <li><a href="#purchasing-using-paypal">Purchasing using paypal</a></li> <li><a href="#purchase-history-in-paypal">Purchase history in paypal</a></li></ul></li><li><a href="#authorize-net">Authorize.net</a></li></ol></div>
     </div>
   </div>
 
@@ -42,18 +42,20 @@
 <p>In order to accept credit cards online, store owners need to have a merchant account. <a href="http://ebooks.bigbinary.com/docs/credit-cards/index.html">Here is a good read</a> on how credit card works and what exactly is a merchant account.</p>
 <h3 id="paypal-web-payment-standard">2 paypal web payment standard</h3>
 <p>nimbleSHOP support Paypal&#8217;s <tt>Website Payments Standard</tt> out of the box. It also comes up with a valid credentials for sandbox. Follow the instruction mentioned below to pay using paypal.</p>
+<h4 id="logging-into-sandbox-paypal-account">2.1 Logging into sandbox paypal account</h4>
 <p>Before you start testing you need to login at developer account with following credentials at <a href="https://developer.paypal.com">developer url</a> .</p>
 <notextile>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 url:      https://developer.paypal.com
-email:    neeraj_sandbox_paypal@gmail.com
+email:    neeraj_sandbox_paypal@bigbinary.com
 password: 12345678
 </pre>
 </div>
 </notextile>
 
-<p>Now visit <tt>http://localhost:3000</tt> and try to purchase something. In the checkout page click on &#8220;Pay with pal&#8221;.</p>
+<h4 id="purchasing-using-paypal">2.2 Purchasing using paypal</h4>
+<p>Now visit your shop and try to purchase something. In the checkout page click on &#8220;Pay with pal&#8221;.</p>
 <p>Once you are taken to the paypal login page , login with following credentials.</p>
 <notextile>
 <div class="code_container">
@@ -64,6 +66,14 @@ password: 12345678
 </div>
 </notextile>
 
+<h4 id="purchase-history-in-paypal">2.3 Purchase history in paypal</h4>
+<ul>
+	<li>To view purchase history in paypal first login to sandbox paypal site as mentioned above.</li>
+	<li>click on &#8216;Test Accounts&#8217;</li>
+	<li>Select &#8216;seller_1323037155_biz@bigbinary.com&#8217; in the radio button.</li>
+	<li>Click on &#8216;Enter Sandbox Test Site&#8217;</li>
+</ul>
+<p>Just for record here is the credentials to login as seller.</p>
 <notextile>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">

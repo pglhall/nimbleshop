@@ -80,10 +80,12 @@
         <p class='button'>
           <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
         </p>
-        <p class='button'>
-          <%= image_submit_tag 'http://images.paypal.com/images/x-click-but1.gif', name: "checkout[with_paypal]", class: 'checkout', alt: "Make payments with PayPal - it's fast, free and secure!"
-        %>
-        </p>
+
+        <% if is_paypal_website_payments_standard_enabled? %>
+          <p class='button'>
+            <%= image_submit_tag Settings.paypal_image_on_checkout_page, name: "checkout[with_paypal]", class: 'checkout', alt: t(:paypal_image_alt) %>
+          </p>
+        <% end %>
 
 		  </div>
 	  </div>

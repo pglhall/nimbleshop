@@ -5,8 +5,10 @@ class CreatePaymentMethods < ActiveRecord::Migration
       t.string  :name
       t.text    :description
       t.text    :credentials
+      t.string :permalink, null: false
 
       t.timestamps
     end
+    add_index(:payment_methods, :permalink, unique: true)
   end
 end

@@ -6,6 +6,8 @@ class LinkGroup < ActiveRecord::Base
 
   before_create :set_permalink
 
+  private
+
   def set_permalink
     permalink = self.name.parameterize
     counter = 2

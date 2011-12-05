@@ -17,6 +17,8 @@ common:
   send_grid_user_name: <%=ENV['SEND_GRID_USERNAME']%>
   send_grid_password: <%=ENV['SEND_GRID_PASSWORD']%>
 
+  paypal_image_on_checkout_page: http://images.paypal.com/images/x-click-but1.gif
+
   paypal_merchant_email_address: seller_1323037155_biz@bigbinary.com
   paypal_return_url: http://localhost:3000/paypal_return
   paypal_notify_url: http://localhost:3000/paypal_payment_notifications
