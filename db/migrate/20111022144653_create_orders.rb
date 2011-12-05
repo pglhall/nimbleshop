@@ -1,9 +1,10 @@
 class CreateOrders < ActiveRecord::Migration
   def up
     create_table :orders do |t|
-      t.string :number, null: false
-      t.datetime :purchased_at
-      t.string :email, null: true
+      t.string    :number,      null: false
+      t.datetime  :purchased_at
+      t.string    :email,       null: true
+      t.string    :status,      default: 'added_to_cart'
 
       t.timestamps
     end
