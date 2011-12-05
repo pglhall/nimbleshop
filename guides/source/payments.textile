@@ -12,13 +12,17 @@ h3. paypal web payment standard
 
 nimbleSHOP support Paypal's <tt>Website Payments Standard</tt> out of the box. It also comes up with a valid credentials for sandbox. Follow the instruction mentioned below to pay using paypal.
 
+h4. Logging into sandbox paypal account
+
 Before you start testing you need to login at developer account with following credentials at "developer url":https://developer.paypal.com .
 
 <shell>
 url:      https://developer.paypal.com
-email:    neeraj_sandbox_paypal@gmail.com
+email:    neeraj_sandbox_paypal@bigbinary.com
 password: 12345678
 </shell>
+
+h4. Purchasing using paypal
 
 Now visit your shop and try to purchase something. In the checkout page click on "Pay with pal".
 
@@ -28,6 +32,15 @@ Once you are taken to the paypal login page , login with following credentials.
 email:    buyer_1323036620_per@bigbinary.com
 password: 12345678
 </shell>
+
+h4. Purchase history in paypal
+
+* To view purchase history in paypal first login to sandbox paypal site as mentioned above.
+* click on 'Test Accounts'
+* Select 'seller_1323037155_biz@bigbinary.com' in the radio button.
+* Click on 'Enter Sandbox Test Site'
+
+Just for record here is the credentials to login as seller.
 
 <shell>
 email:    seller_1323037155_biz@bigbinary.com
