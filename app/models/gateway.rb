@@ -7,7 +7,8 @@ class Gateway
   end
 
   def self.set_mode
-    ActiveMerchant::Billing::Base.mode = Rails.env.production? ? :production : :test
+    #ActiveMerchant::Billing::Base.mode = Rails.env.production? ? :production : :test
+    ActiveMerchant::Billing::Base.mode = :test
   end
 
 end
