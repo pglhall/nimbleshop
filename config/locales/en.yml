@@ -9,6 +9,12 @@ en:
   welcome_admin: 'Welcome admin'
   paypal_image_alt: 'Make payments with PayPal'
 
+  delete_confirmation_for_shipping_zone: 'Do you really want to delete the shipping zone ? Deleting a shipping zone will also delete all the associated shipping methods'
+  delete_confirmation_for_custom_field: 'Do you really want to delete the custom field ?'
+  delete_confirmation_for_link_group: 'Do you really want to delete the link group ?'
+  delete_confirmation_for_product_group: 'Do you really want to delete the product group ?'
+  delete_confirmation_for_shipping_method: 'Do you really want to delete the shipping method ?'
+
   orders: 'Orders'
 
   products: 'Products'
@@ -18,6 +24,8 @@ en:
   edit_custom_field: 'Edit custom field'
   custom_fields: 'Custom fields'
   add_new_custom_field: 'Add new custom field'
+
+  add_new_shipping_zone: 'Add new shipping zone'
 
   link_groups: 'Link groups'
   add_new_link_group: 'Add new link group'

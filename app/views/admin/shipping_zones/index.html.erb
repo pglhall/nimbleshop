@@ -13,7 +13,12 @@
   <table class="zebra-striped">
     <tbody>
       <tr>
-        <td colspan='4'><%= shipping_zone.name %></td>
+        <td colspan='3'><%= shipping_zone.name %></td>
+        <td>
+          <%= link_to t(:edit), edit_admin_shipping_zone_path(shipping_zone) %>
+          |
+          <%= link_to t(:delete), [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete' %>
+        </td>
       </tr>
       <% shipping_zone.shipping_methods.each do |shipping_method| %>
         <tr>
@@ -23,7 +28,7 @@
           <td>
             <%= link_to t(:edit), edit_admin_shipping_method_path(shipping_method) %>
             |
-            <%= link_to t(:delete), [:admin, shipping_method], confirm: 'Are you sure?', method: 'delete' %>
+            <%= link_to t(:delete), [:admin, shipping_method], confirm: t(:delete_confirmation_for_shipping_method), method: 'delete' %>
           </td>
         </tr>
       <% end %>

@@ -4,4 +4,8 @@ class Admin::ShippingZonesController < AdminController
     @shipping_zones = ShippingZone.all
   end
 
+  def new
+    @shipping_zone = ShippingZone.new
+  end
+
 end

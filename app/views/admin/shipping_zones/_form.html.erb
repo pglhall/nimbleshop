@@ -1,0 +1,29 @@
+<%= form_for([:admin, @shipping_zone]) do |f| %>
+
+  <% if @shipping_zone.errors.any? %>
+    <div class="alert-message block-message error">
+      <p> <%= t(:error_bang) %> </p>
+      <ul>
+        <% @shipping_zone.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input">
+        <%= f.text_field :name, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit('Submit', class: 'btn primary') %>
+    &nbsp;
+    <%= link_to 'Cancel', admin_shipping_zones_path, class: 'btn' %>
+  </div>
+
+<% end %>

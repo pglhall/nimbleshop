@@ -23,7 +23,7 @@
         <td>
           <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
           |
-          <%= link_to t(:delete), [:admin, link_group], confirm: 'Are you sure?', method: 'delete' %>
+          <%= link_to t(:delete), [:admin, link_group], confirm: t(:delete_confirmation_for_link_group), method: 'delete' %>
         </td>
       </tr>
     <% end %>
