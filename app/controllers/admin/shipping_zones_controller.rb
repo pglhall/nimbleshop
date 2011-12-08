@@ -8,4 +8,8 @@ class Admin::ShippingZonesController < AdminController
     @shipping_zone = ShippingZone.new
   end
 
+  def edit
+    @shipping_zone = ShippingZone.find(params[:id])
+  end
+
 end

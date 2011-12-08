@@ -25,7 +25,9 @@ en:
   custom_fields: 'Custom fields'
   add_new_custom_field: 'Add new custom field'
 
+  shipping_zones: 'Shipping zones'
   add_new_shipping_zone: 'Add new shipping zone'
+  edit_shipping_zone: 'Edit shipping zone'
 
   link_groups: 'Link groups'
   add_new_link_group: 'Add new link group'
