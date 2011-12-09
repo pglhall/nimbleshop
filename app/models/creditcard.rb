@@ -28,14 +28,16 @@ class Creditcard < ActiveRecord::Base
   def validation_by_active_merchant
     self.month = self.expires_on.strftime('%m').to_i
     self.year = self.expires_on.strftime('%Y').to_i
+
     self.amcard = ActiveMerchant::Billing::CreditCard.new(
-      :type               => card_type,
-      :number             => number,
-      :verification_value => verification_value,
-      :month              => month,
-      :year               => year,
-      :first_name         => first_name,
-      :last_name          => last_name)
+      type:               card_type,
+      number:             number,
+      verification_value: verification_value,
+      month:              month,
+      year:               year,
+      first_name:         first_name,
+      last_name:          last_name)
+
     unless self.amcard.valid?
       self.amcard.errors.full_messages.each { |message| self.errors.add(:base, message) }
     end
