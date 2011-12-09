@@ -15,6 +15,8 @@ class Order < ActiveRecord::Base
 
   validates :email, :email => true, :if => lambda {|record| record.validate_email }
 
+  validates_inclusion_of :status, :in => %W( added_to_cart billing_info_provided )
+
   before_save :set_order_number, :set_status
 
   def paypal_url
@@ -83,7 +85,7 @@ class Order < ActiveRecord::Base
 
   def set_status
     if self.status == 'added_to_cart' && self.email_changed?
-      self.status = 'shipping_provided'
+      self.status = 'billing_info_provided'
     end
   end
 
