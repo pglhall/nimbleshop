@@ -19,6 +19,10 @@ class Order < ActiveRecord::Base
 
   before_save :set_order_number, :set_status
 
+  def available_shipping_methods
+    ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
+  end
+
   def paypal_url
     values = {
       :business => Settings.paypal_merchant_email_address,
