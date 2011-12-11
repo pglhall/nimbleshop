@@ -1,0 +1,28 @@
+<h2>Order summary</h2>
+
+<table>
+  <% current_order.line_items.each do |line_item| %>
+    <tr>
+      <td>
+        <%= image_tag(line_item.product.picture.picture_url(:pico)) %>
+      </td>
+      <td>
+        <%= line_item.product.title %>
+      </td>
+      <td>
+        <%= line_item.quantity %> for
+        <%= number_to_currency(line_item.product.price) %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan='2'>
+      <h4>Total</h4>
+    </td>
+    <td>
+      <h4>
+        <%= number_to_currency(current_order.amount) %>
+      </h4>
+    </td>
+  </tr>
+</table>

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  layout 'slim'
+  layout 'thin'
   theme :theme_resolver, only: [:edit, :update]
 
   def edit
