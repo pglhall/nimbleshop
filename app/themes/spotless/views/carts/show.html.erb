@@ -5,95 +5,84 @@
   }
 </script>
 
-<div id="title" class="clear">
-	<h1>Your Cart</h1>
-	<h2>
-    <span>
-      <%= pluralize(items_count_in_cart, 'Item') %>
-    </span>
-  </h2>
-</div>
+<% @page_sub_title = pluralize(items_count_in_cart, 'Item') %>
+
 
 <% if items_count_in_cart == 0 %>
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
   <form action="/cart" method="post" name="cartform" id='cartform'>
-	  <table cellpadding="0" cellspacing="0">
-      <tr>
-        <th colspan="2" class="start">Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Delete</th>
-        <th>Total</th>
-      </tr>
-      <% @cart.line_items.each do |line_item| %>
-		    <tr class="<%= cycle("odd", "even") -%>">
-			    <td class="pic">
-				    <div>
-              <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product.url) %>
-            </div>
-			    </td>
-			    <td>
-				    <h3><%= link_to(line_item.product.title, line_item.product.url) %></h3>
-				    <p>
-              <%= truncate(sanitize(line_item.product.description), length: 180) %>
-            </p>
-			    </td>
-			    <td><%= number_to_currency(line_item.product.price) %></td>
+	  <table>
+      <thead>
+        <tr>
+          <th colspan="2" class="start">Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Delete</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.line_items.each do |line_item| %>
+		      <tr>
+			      <td class="pic">
+                <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product.url) %>
+			      </td>
+			      <td>
+              <strong><%= link_to(line_item.product.title, line_item.product.url) %></strong>
+				      <p>
+                <%= truncate(sanitize(line_item.product.description), length: 90) %>
+              </p>
+			      </td>
+			      <td><%= number_to_currency(line_item.product.price) %></td>
+            <td>
+              <input type="text" size="2" name="updates[<%=line_item.product.permalink%>]" id="updates_<%=line_item.product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>" onfocus="this.select();"/>
+          </td>
+            <td class="remove">
+              <a href="#" onclick="remove_item('<%=line_item.product.permalink%>'); return false;" >Remove</a>
+            </td>
+			      <td><strong><%= number_to_currency(line_item.line_price) %></strong></td>
+		      </tr>
+        <% end %>
+        <tr>
+          <td colspan='3'>
+			      <p>Not ready to checkout? <a href="/">Continue shopping...</a></p>
+          </td>
+          <th>
+            <%= submit_tag 'Update', class: 'btn primary' %>
+          </th>
+          <th>
+            Total:
+          </th>
           <td>
-            <input type="text" size="4" name="updates[<%=line_item.product.permalink%>]" id="updates_<%=line_item.product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>" onfocus="this.select();"/>
+            <%= number_to_currency(@cart.total_price) %>
           </td>
-          <td class="remove">
-            <a href="#" onclick="remove_item('<%=line_item.product.permalink%>'); return false;" >Remove</a>
+        </tr>
+        <tr>
+          <td colspan='4'>&nbsp;</td>
+          <td>
+            <% if paypal_website_payments_standard_enabled? %>
+              <p class='button'>
+                <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'btn primary' %>
+              </p>
+            <% end %>
+
+            <% if splitable_enabled? %>
+              <p class='button'>
+                <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'btn primary' %>
+              </p>
+            <% end %>
+
+            <% if paypal_website_payments_standard_enabled? %>
+              <p class='button'>
+                <%= submit_tag 'Checkout with Paypal', name: "checkout[with_paypal]", class: 'btn primary', alt: t(:paypal_image_alt) %>
+              </p>
+            <% end %>
+
           </td>
-			    <td><strong><%= number_to_currency(line_item.line_price) %></strong></td>
-		    </tr>
-      <% end %>
-	  </table>
-	  <!-- END TABLE -->
-	  <!-- START TOTAL -->
-	  <div id="total" class="clear">
-		  <!-- START CONTINUE -->
-		  <div id="continue">
-			  <p>Not ready to checkout? <a href="/">Continue shopping...</a></p>
-		  </div>
-		  <!-- END CONTINUE -->
+        </tr>
+      </tbody>
+    </table>
 
-      <!-- START PRICE -->
-		  <div id="price">
-			  <h3>Total: <span><%= number_to_currency(@cart.total_price) %></span></h3>
-		  </div>
-		  <!-- END PRICE -->
-	  </div>
-	  <!-- END TOTAL -->
-
-    <!-- START COMPLETE -->
-    <div id="complete" class="clear">
-		  <!-- START CHECKOUT -->
-		  <div>
-        <%= submit_tag "Update", :disable_with => "updating ...", :class => "udpate" %>
-        <br />
-        <br />
-        <% if paypal_website_payments_standard_enabled? %>
-          <p class='button'>
-            <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'checkout' %>
-          </p>
-        <% end %>
-
-        <% if splitable_enabled? %>
-          <p class='button'>
-            <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'checkout' %>
-          </p>
-        <% end %>
-
-        <% if paypal_website_payments_standard_enabled? %>
-          <p class='button'>
-            <%= image_submit_tag Settings.paypal_image_on_checkout_page, name: "checkout[with_paypal]", class: 'checkout', alt: t(:paypal_image_alt) %>
-          </p>
-        <% end %>
-
-		  </div>
-	  </div>
-	  <!-- END COMPLETE -->
   </form>
 <% end %>

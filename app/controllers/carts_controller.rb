@@ -1,9 +1,10 @@
 class CartsController < ApplicationController
 
+  layout 'thin'
   theme :theme_resolver, only: [:show]
 
   def show
-    @page_title = 'cart'
+    @page_title = 'Your cart'
     @line_items = current_order.blank? ? [] : current_order.line_items(:include => :product).order('id')
   end
 
@@ -18,7 +19,7 @@ class CartsController < ApplicationController
       product = Product.find_by_permalink!(permalink)
       current_order.set_quantity(product, quantity.to_i)
     end
-    redirect_to carts_url
+    redirect_to cart_url
   end
 
   def add
