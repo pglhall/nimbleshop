@@ -1,20 +1,25 @@
-<ul id="products" class="clear">
-  <% @products.each_with_index do |product, index| %>
-    <% k = (index % 3 == 0) ? "class='end'" : '' %>
-    <li <%=k%> >
-		  <div class="image">
-			  <div class="overflow">
-				  <div class="align">
-            <h6><%= number_to_currency(product.price) %></h6>
-            <div>
-              <%= link_to(image_tag(product.picture.picture_url(:medium)),product.url) %>
-            </div>
-				  </div>
-			  </div>
-		  </div>
-      <p>
-        <%= link_to(truncate(product.name, length: 30), product.url, title: product.name) %>
-      </p>
-	  </li>
-  <% end %>
-</ul>
+<div class='row'>
+  <div class='span9'>
+    <table>
+      <% @products.in_groups_of(3) do |group| %>
+        <tr>
+          <% group.each do |product| %>
+            <td>
+              <% if product.blank? %>
+                &nbsp;
+              <% else %>
+                <ul class="media-grid">
+                  <li>
+                    <%= link_to(image_tag(product.picture.picture_url(:medium)),product.url) %>
+                  </li>
+                </ul>
+                    <%= number_to_currency(product.price) %>
+                    <%= link_to(truncate(product.name, length: 30), product.url, title: product.name) %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

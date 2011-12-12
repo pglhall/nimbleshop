@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
 
+  layout 'thin'
   theme :theme_resolver, only: [:index, :show]
 
   respond_to :html
 
   def index
-    @page_title = 'catalog'
+    @page_title = 'Catalog'
     @products = Product.order(:name).all
     @product_groups = ProductGroup.all
     respond_with @products
