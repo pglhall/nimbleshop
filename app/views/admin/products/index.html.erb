@@ -19,7 +19,11 @@
           <% end %>
         </td>
         <td><%= product.name %></td>
-        <td><%= link_to 'Show', admin_product_path(product) %></td>
+        <td>
+          <%= link_to 'Show', admin_product_path(product) %>
+          |
+          <%= link_to 'Edit', edit_admin_product_path(product) %>
+        </td>
         </td>
       </tr>
     <% end %>
