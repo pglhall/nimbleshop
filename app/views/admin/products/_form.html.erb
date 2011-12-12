@@ -15,14 +15,14 @@
 
     <fieldset>
       <div class="clearfix">
-        <%= f.label :name %>
+        <%= f.label :name, 'Name' %>
         <div class="input">
           <%= f.text_field :name, class: 'xlarge', size: 30 %>
         </div>
       </div><!-- /clearfix -->
 
       <div class="clearfix">
-        <%= f.label :description %>
+        <%= f.label :description, 'Description' %>
         <div class="input">
           <%= f.text_area :description, class: 'xxlarge', rows: 5 %>
           <span class="help-block">
@@ -32,7 +32,7 @@
       </div><!-- /clearfix -->
 
       <div class="clearfix">
-        <%= f.label :price %>
+        <%= f.label :price, 'Price' %>
         <div class="input">
           $
           <%= f.text_field :price, class: 'large', size: 30 %>
