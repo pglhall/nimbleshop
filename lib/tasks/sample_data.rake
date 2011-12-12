@@ -11,8 +11,6 @@ namespace :db do
     #raise "this task should not be run in production" if Rails.env.production?
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
 
-    Rake::Task["db:bootstrap"].invoke
-
     puts "running db:sample_data ..."
     Shop.delete_all
     LinkGroup.delete_all
