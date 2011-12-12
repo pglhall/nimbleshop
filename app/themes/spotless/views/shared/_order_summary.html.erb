@@ -1,4 +1,9 @@
-<h3>Order summary</h3>
+<h3>
+  Order summary
+  <small>
+    <%= link_to 'Edit', cart_path %>
+  </small>
+</h3>
 
 <table>
   <% current_order.line_items.each do |line_item| %>
@@ -27,10 +32,15 @@
   </tr>
 </table>
 
-<% if current_order.email %>
+<% if params[:controller] == 'creditcard_payments' %>
   <div class='row'>
     <div class='span4'>
-      <h3>Shipping address</h3>
+      <h3>
+        Shipping address
+        <small>
+          <%= link_to 'Edit', edit_order_path(current_order) %>
+        </small>
+      </h3>
       <address>
         <%= current_order.shipping_address.full_address_array.join('<br />').html_safe %>
       </address>

@@ -115,11 +115,18 @@
         </div>
       </div>
 
-      <!--
       <footer>
-        <p>&copy; Company 2011</p>
+      <p>
+        <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
+          <%= image_tag('we_accept_paypal.png') %>
+        <% end %>
+
+        <!--
+        &copy; Company 2011
+        -->
+
+        </p>
       </footer>
-      -->
 
     </div> <!-- /container -->
 

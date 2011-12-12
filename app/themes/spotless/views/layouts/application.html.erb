@@ -28,7 +28,9 @@
         <h2><%= items_count_in_cart %></h2>
         <p>
           <%= (items_count_in_cart == 0) ? 'Item' : 'Items' %>
-          in <a href="/cart">your cart</a> &rarr;
+          in
+            <%= link_to 'your cart', cart_path %>
+          &rarr;
         </p>
 			</div>
 			<!-- END ITEMS -->
