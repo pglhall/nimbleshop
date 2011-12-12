@@ -1,4 +1,4 @@
-<h2>Order summary</h2>
+<h3>Order summary</h3>
 
 <table>
   <% current_order.line_items.each do |line_item| %>
@@ -26,3 +26,18 @@
     </td>
   </tr>
 </table>
+
+<% if current_order.email %>
+  <div class='row'>
+    <div class='span4'>
+      <h3>Shipping address</h3>
+      <address>
+        <%= current_order.shipping_address.full_address_array.join('<br />').html_safe %>
+      </address>
+      <h3>Contact email</h3>
+      <address>
+        <%= current_order.email %>
+      </address>
+    </div>
+  </div>
+<% end %>

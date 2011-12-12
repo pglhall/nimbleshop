@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   theme :theme_resolver, only: [:edit, :update]
 
   def edit
+    @page_title = 'Shipping information'
     unless current_order.shipping_address
       current_order.build_shipping_address
       current_order.shipping_address.use_for_billing = true

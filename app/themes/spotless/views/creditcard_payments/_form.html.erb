@@ -1,81 +1,143 @@
-<%= form_for @creditcard, url: '/creditcard_payments' do |f| %>
-  <% if @creditcard.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@creditcard.errors.count, "error") %> prohibited this creditcard_payment from being saved:</h2>
-
+<% unless Rails.env.production? %>
+    <div class='alert-message block-message info'>
+      <p> Here are the rules. </p>
       <ul>
-      <% @creditcard.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <li> Expiration date must set to present day or later. </li>
+        <li> Security code for American express must be 4 digits. For all others use 3 digits. </li>
       </ul>
+
+      <br />
+      <p>Here are the valid credit card numbers as prescribed by Authorize.net .</p>
+      <ul>
+        <li> Visa: 4007000000027 </li>
+        <li> Second Visa card: 4012888818888 </li>
+        <li> American Express: 370000000000002 </li>
+        <li> Discover: 6011000000000012 </li>
+        <li> JCB: 3088000000000017 </li>
+        <li> Diners Club/ Carte Blanche: 38000000000006 </li>
+      </ul>
+
+      <br />
+      <p>
+        <%= link_to 'More information', '' %> .
+        <small>
+          <strong>
+          This message never appears in production environment .
+          </strong>
+        </small>
+      </p>
+    </div>
+<% end %>
+
+<div class='well'>
+  <%= form_for @creditcard, url: '/creditcard_payments' do |f| %>
+    <% if @creditcard.errors.any? %>
+      <div class="alert-message block-message error">
+        <ul>
+          <% @creditcard.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :first_name %>
+        <div class='input'>
+          <%= f.text_field :first_name %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :last_name %>
+        <div class='input'>
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :number, 'Credit card number' %>
+        <div class='input'>
+          <%= f.text_field :number %>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :cvv %>
+        <div class='input'>
+          <%= f.text_field :cvv %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :address1 %>
+        <div class='input'>
+          <%= f.text_field :address1 %>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :address2 %>
+        <div class='input'>
+          <%= f.text_field :address2 %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :city %>
+        <div class='input'>
+          <%= f.text_field :city %>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :state %>
+        <div class='input'>
+          <%= f.text_field :state %>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :zipcode %>
+        <div class='input'>
+          <%= f.text_field :zipcode %>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <div class='clearfix'>
+        <%= f.label :expires_on, 'Expiration date' %>
+        <div class='input'>
+          <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <div class="actions">
+      <%= f.submit 'Submit', class: 'btn primary' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :number, 'Credit card number' %><br />
-    <%= f.text_field :number %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :cvv %><br />
-    <%= f.text_field :cvv %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :address1 %><br />
-    <%= f.text_field :address1 %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :address2 %><br />
-    <%= f.text_field :address2 %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :zipcode %><br />
-    <%= f.text_field :zipcode %>
-  </div>
-  <br />
-
-  <div class="field">
-    <%= f.label :expires_on, 'Expiration date' %>
-    <br />
-    <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
-    <%#= select_month nil, {add_month_numbers: true}, {name: 'creditcard[month]', id: "card_month"} %>
-    <%#= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: 'creditcard[year]', id: "card_year"} %>
-  </div>
-
-  <br />
-
-  <div class="actions">
-    <%= f.submit 'Submit' %>
-  </div>
-<% end %>
+</div>

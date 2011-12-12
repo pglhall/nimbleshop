@@ -1,9 +1,11 @@
 class CreditcardPaymentsController < ApplicationController
 
+  layout 'thin'
   theme :theme_resolver, only: [:new, :create]
 
   def new
-    @page_title = 'payment using credit card'
+    @page_title = 'Make payment using credit card'
+    @page_sub_title = 'All payments are secure and encrypted. We never store your credit card information.'
     @creditcard = Creditcard.new
   end
 

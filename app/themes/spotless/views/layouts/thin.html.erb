@@ -95,10 +95,11 @@
 
       <div class="content">
         <div class="page-header">
-          <h1>Shipping information
-            <!--
-            <small>Supporting text or tagline</small>
-            -->
+          <h1>
+            <%= @page_title %>
+            <% if @page_sub_title %>
+              <small> <%= @page_sub_title %> </small>
+            <% end %>
           </h1>
         </div>
         <div class="row">
