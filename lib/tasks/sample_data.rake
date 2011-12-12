@@ -1,7 +1,13 @@
+desc "setsup local development environment"
+task :setup_development => :environment do
+  Rake::Task["db:bootstrap"].invoke
+  Rake::Task["db:reset_sample_data"].invoke
+end
+
 namespace :db do
 
-  desc "rebuilds the database and prepares sample data"
-  task :sample_data => :environment do
+  desc "resets the sample data sample data"
+  task :reset_sample_data => :environment do
     #raise "this task should not be run in production" if Rails.env.production?
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
 

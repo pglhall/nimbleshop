@@ -15,8 +15,7 @@ nimbleShop uses postgresql. All code is written and tested in postgresql. To the
 
     cp config/database.yml.example config/database.yml
     bundle install
-    bundle exec rake db:create
-    bundle exec rake db:sample_data
+    bundle exec rake setup_development
 
 # Tests
 
