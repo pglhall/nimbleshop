@@ -23,7 +23,11 @@ Nimbleshop::Application.routes.draw do
   resources :product_groups
   resources :products,  only: [:index, :show]
   resources :pages,     only: [:show]
-  resource  :order,     only: [:edit, :update]
+  resources :orders,    only: [:edit, :update] do
+    member do
+      get 'paid_using_cc'
+    end
+  end
   resource  :checkout, :controller => 'checkout',  :only => [:show]
   resource  :feedback,  only: [:show] do
     collection do

@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
 
   layout 'thin'
-  theme :theme_resolver, only: [:edit, :update]
+  theme :theme_resolver#, only: [:edit, :update]
+
+  def paid_using_cc
+    @order = Order.find(params[:id])
+    @page_title = 'Purchase is complete'
+  end
 
   def edit
     @page_title = 'Shipping information'

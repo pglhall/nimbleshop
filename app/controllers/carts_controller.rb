@@ -11,14 +11,14 @@ class CartsController < ApplicationController
     if params[:checkout]
       checkout_with = params[:checkout].keys.first
       session[:checkout_with] = checkout_with
-      redirect_to edit_order_url and return
+      redirect_to edit_order_url(current_order) and return
     end
 
     params[:updates].each do |permalink, quantity|
       product = Product.find_by_permalink!(permalink)
       current_order.set_quantity(product, quantity.to_i)
     end
-    redirect_to cart_url
+    redirect_to carts_url
   end
 
   def add

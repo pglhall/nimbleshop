@@ -107,7 +107,10 @@
             <%= yield %>
           </div>
           <div class="span4">
-            <%= render 'shared/order_summary' %>
+            <% if (params[:controller] == 'feedbacks') || (params[:action] == 'paid_using_cc') %>
+            <% else %>
+              <%= render 'shared/order_summary' %>
+            <% end %>
           </div>
         </div>
       </div>
