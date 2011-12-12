@@ -6,8 +6,8 @@ $('img.thumb').live('click', function(){
       srcLarge = $this.data('large-picture'),
       srcGrande = $this.data('grande-picture');
 
-  $('#image img').attr('src', srcLarge);
-  $('#image a').attr('href', srcGrande);
+  $('#main-image img').attr('src', srcLarge);
+  $('#main-image a').attr('href', srcGrande);
 
   return false;
 });

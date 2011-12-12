@@ -5,23 +5,25 @@
   </small>
 </h3>
 
-<table>
+<table class='zebra-striped'>
   <% current_order.line_items.each do |line_item| %>
     <tr>
       <td>
+        <%= truncate(line_item.product.title, length: 75) %>
+      </td>
+      <td>
         <%= image_tag(line_item.product.picture.picture_url(:pico)) %>
-      </td>
-      <td>
-        <%= line_item.product.title %>
-      </td>
-      <td>
+        <br />
         <%= line_item.quantity %> for
-        <%= number_to_currency(line_item.product.price) %>
+        <br />
+        <strong>
+          <%= number_to_currency(line_item.product.price) %>
+        </strong>
       </td>
     </tr>
   <% end %>
   <tr>
-    <td colspan='2'>
+    <td>
       <h4>Total</h4>
     </td>
     <td>
