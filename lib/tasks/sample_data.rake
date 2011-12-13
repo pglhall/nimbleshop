@@ -13,6 +13,7 @@ namespace :db do
 
     puts "running db:sample_data ..."
     Shop.delete_all
+    Link.delete_all
     LinkGroup.delete_all
     ProductGroup.delete_all
     Page.delete_all
@@ -98,7 +99,6 @@ namespace :db do
                            lower_price_limit: 10, upper_price_limit: 20)
     ShippingMethod.create!(name: 'express shipping', shipping_price: 25, shipping_zone_id: sz.id,
                            lower_price_limit: 20, upper_price_limit: 300)
-
 
   end
 
