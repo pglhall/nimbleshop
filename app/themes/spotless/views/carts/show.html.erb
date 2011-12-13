@@ -61,7 +61,7 @@
         <tr>
           <td colspan='4'>&nbsp;</td>
           <td>
-            <% if paypal_website_payments_standard_enabled? %>
+            <% if authorize_net_enabled? %>
               <p class='button'>
                 <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'btn primary' %>
               </p>
