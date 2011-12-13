@@ -19,6 +19,8 @@ namespace :db do
     CustomField.delete_all
     Order.delete_all
     CustomFieldAnswer.delete_all
+    ShippingMethod.delete_all
+    ShippingZone.delete_all
 
     Shop.create!(name: 'nimbleshop',
                  theme: 'spotless',
