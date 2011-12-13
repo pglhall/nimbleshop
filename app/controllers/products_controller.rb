@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
 
-  layout 'thin'
   theme :theme_resolver, only: [:index, :show]
 
   respond_to :html

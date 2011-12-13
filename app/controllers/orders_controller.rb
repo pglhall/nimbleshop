@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 
-  layout 'thin'
   theme :theme_resolver#, only: [:edit, :update]
 
   def paid_using_cc

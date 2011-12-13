@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
 
-  layout 'thin'
   theme :theme_resolver, only: [:show]
 
   def show

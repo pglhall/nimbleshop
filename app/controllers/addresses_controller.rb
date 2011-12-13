@@ -1,7 +1,5 @@
 class AddressesController < ApplicationController
 
-  layout 'slim'
-
   theme :theme_resolver, only: [:index, :new]
 
   def index

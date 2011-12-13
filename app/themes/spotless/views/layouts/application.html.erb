@@ -1,84 +1,173 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @shop.name %> &mdash; <%= @page_title %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<head>
-  <title><%= @shop.name %> &mdash; <%= @page_title %></title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <%= stylesheet_link_tag 'spotless' %>
-  <%= javascript_include_tag 'spotless' %>
-  <%= csrf_meta_tag %>
-</head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-<body>
-	<!-- START CONTAINER -->
-  <% div_id = 'index' %>
-  <% div_id = 'cart' if params[:controller] == 'carts' %>
-  <div id="<%=div_id%>" class="container">
-		<!-- START HEADER -->
-		<div id="header" class="clear">
-			<!-- START NAVIGATE -->
-			<div id="navigate">
-        <h3><a href="/"><%= @shop.name %></a></h3>
-				<!-- START NAV -->
-        <div id="nav">
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .container > .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    <%= javascript_include_tag 'spotless' %>
+    <%= csrf_meta_tag %>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <%= link_to @shop.name, root_path, class: 'brand' %>
+          <ul class="nav">
+            <li class="active"><%= link_to 'Home', root_path %></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+          <ul class="nav secondary-nav">
+            <li><a href="/cart">View cart ( <%= items_count_in_cart %> )</a></li>
+          </ul>
         </div>
-			</div>
+      </div>
+    </div>
 
-			<div id="items">
-        <h2><%= items_count_in_cart %></h2>
-        <p>
-          <%= (items_count_in_cart == 0) ? 'Item' : 'Items' %>
-          in
-            <%= link_to 'your cart', cart_path %>
-          &rarr;
-        </p>
-			</div>
-			<!-- END ITEMS -->
-		</div>
-		<!-- END HEADER -->
-		<!-- START CONTENT -->
-		<div id="content" class="clear">
-			<div id="main">
-        <%= yield %>
-			</div>
-			<div id="sidebar">
+    <div class="container">
 
-        <% unless params[:controller] == 'carts' %>
-          <div id="collections" class="section">
-            <div class="title">
-              <h4><%= @shop_by_category_link_group.name %></h4>
+      <div class="content">
+          <% if params[:controller] == 'products' && params[:action] == 'index' %>
+            <div class='row'>
+              <div class='span3'>
+                &nbsp;
+              </div>
+
+              <div class='span5'>
+                <h4><%= @shop_by_category_link_group.name %></h4>
+                <ul>
+                  <% @shop_by_category_link_group.navigations.each do |nav| %>
+                    <li>
+                      <%= link_to nav.navigeable.name, nav.navigeable.url %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+
+              <div class='span5'>
+                <h4><%= @shop_by_price_link_group.name %></h4>
+                <ul>
+                  <% @shop_by_price_link_group.navigations.each do |nav| %>
+                    <li>
+                      <%= link_to nav.navigeable.name, nav.navigeable.url %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+
+
             </div>
-            <ul>
-              <% @shop_by_category_link_group.navigations.each do |nav| %>
-                <li>
-                  <%= link_to nav.navigeable.name, nav.navigeable.url %>
-                </li>
+          <% else %>
+            <h1>
+              <%= @page_title %>
+              <% if @page_sub_title %>
+                <small> <%= @page_sub_title %> </small>
               <% end %>
-            </ul>
-          </div>
-
-          <div id="collections" class="section">
-            <div class="title">
-              <h4><%= @shop_by_price_link_group.name %></h4>
+            </h1>
+          <% end %>
+        <div class="row">
+          <% if %w(carts products product_groups).include? params[:controller] %>
+            <div class="span14">
+              <%= yield %>
             </div>
-            <ul>
-              <% @shop_by_price_link_group.navigations.each do |nav| %>
-                <li>
-                  <%= link_to nav.navigeable.name, nav.navigeable.url %>
-                </li>
+          <% else %>
+            <div class="span10">
+              <%= yield %>
+            </div>
+            <div class="span4">
+              <% if (%w(feedbacks carts).include? params[:controller]) || (params[:action] == 'paid_using_cc') %>
+              <% else %>
+                <%= render 'shared/order_summary' %>
               <% end %>
-            </ul>
-          </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <footer>
+      <p>
+        <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
+          <%= image_tag('we_accept_paypal.png') %>
         <% end %>
 
-			</div>
-		</div>
-		<div id="footer" class="clear">
-      Copyright &copy; <%= Time.now.strftime('%Y') %> to <%= @shop.name %>
-    | <%= @shop.theme %>
-      <br />
-		</div>
-	</div>
+        <!--
+        &copy; Company 2011
+        -->
 
-</body>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>
+

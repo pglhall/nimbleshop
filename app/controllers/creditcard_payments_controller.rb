@@ -1,6 +1,5 @@
 class CreditcardPaymentsController < ApplicationController
 
-  layout 'thin'
   theme :theme_resolver, only: [:new, :create]
 
   def new
