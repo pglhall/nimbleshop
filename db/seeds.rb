@@ -1,3 +1,5 @@
+PaymentMethod.delete_all
+
 description = %Q{
 <p>
   Authorize.Net is a payment gateway service provider allowing merchants
