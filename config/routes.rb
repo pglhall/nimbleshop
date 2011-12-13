@@ -27,6 +27,7 @@ Nimbleshop::Application.routes.draw do
     member do
       get 'paid_using_cc'
     end
+    resource :shipping_method
   end
   resource  :checkout, :controller => 'checkout',  :only => [:show]
   resource  :feedback,  only: [:show] do

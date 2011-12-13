@@ -34,7 +34,7 @@
   </tr>
 </table>
 
-<% if params[:controller] == 'creditcard_payments' %>
+<% if %W(creditcard_payments shipping_methods).include? params[:controller] %>
   <div class='row'>
     <div class='span4'>
       <h3>

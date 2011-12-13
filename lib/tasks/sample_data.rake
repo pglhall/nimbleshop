@@ -99,7 +99,6 @@ namespace :db do
                            lower_price_limit: 10, upper_price_limit: 20)
     ShippingMethod.create!(name: 'express shipping', shipping_price: 25, shipping_zone_id: sz.id,
                            lower_price_limit: 20, upper_price_limit: 300)
-
   end
 
 end

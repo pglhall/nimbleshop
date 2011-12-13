@@ -31,6 +31,8 @@ class OrdersController < ApplicationController
       render 'edit' and return if current_order.billing_address.errors.any?
     end
 
+    redirect_to new_order_shipping_method_path(current_order) and return
+
     case session[:checkout_with]
     when 'with_splitable'
       redirect_to Splitable.url(current_order) and return

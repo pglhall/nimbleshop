@@ -102,10 +102,11 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
   end
 
   create_table "orders", :force => true do |t|
-    t.string   "number",                                    :null => false
+    t.string   "number",                                          :null => false
+    t.integer  "shipping_method_id"
     t.datetime "purchased_at"
     t.string   "email"
-    t.string   "status",       :default => "added_to_cart"
+    t.string   "status",             :default => "added_to_cart"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

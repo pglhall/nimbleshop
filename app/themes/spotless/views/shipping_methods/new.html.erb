@@ -1,0 +1,18 @@
+<%= form_for(@current_order) do |f| %>
+  <div class='clearfix'>
+    <div class='input'>
+      <div class='inputs-list'>
+
+  <% @shipping_methods.each do |shipping_method| %>
+    <li>
+      <label>
+      <%= f.radio_button :shipping_method_id, shipping_method.id %>
+      <%= f.label :shipping_method_id, shipping_method.name + ' -- ' + number_to_currency(shipping_method.shipping_price.to_s) %>
+      </label>
+    </li>
+  <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
