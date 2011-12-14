@@ -6,6 +6,8 @@ class ShippingMethod < ActiveRecord::Base
   validates :shipping_price,    presence: true
   validates :name,              presence: true
 
+  alias_attribute :shipping_cost, :shipping_price
+
   # indicates if the shipping method is available for the given order
   def available_for(order)
     if upper_price_limit

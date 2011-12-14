@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   attr_protected :order_number
   attr_accessor :validate_email
 
+  belongs_to  :shipping_method
   has_many :line_items
   has_many :products, :through => :line_items
   belongs_to :user
@@ -76,6 +77,20 @@ class Order < ActiveRecord::Base
   end
   alias :total_price :price
   alias :amount :price
+
+  def price_with_shipping
+    shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost
+  end
+
+
+  # This methods returns true if the shipping cost is zero and usre has no choice. This
+  # case could arise
+  # * if shop has not configured shipping cost
+  # * if shop has configured shipping cost . However for this order the shipping cost is zero
+  #   and no other shipping rule applies. So user must select the only option available
+  def shipping_cost_zero_with_no_choice?
+    shipping_method.blank? || (shipping_method.shipping_cost == 0)
+  end
 
   private
 

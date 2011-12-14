@@ -1,4 +1,12 @@
-<%= form_for([@current_order, @shipping_method]) do |f| %>
+<%= form_for(current_order , :as => :order, :url => update_shipping_method_order_path(current_order), :method => :put) do |f| %>
+
+  <% if current_order.errors.any? %>
+    <div class="alert-message block-message error">
+      <ul>
+        <li> <%= current_order.errors.full_messages.first %></li>
+      </ul>
+    </div>
+  <% end %>
 
   <div class='clearfix'>
     <div class='input'>
@@ -18,4 +26,5 @@
   <div class="actions">
     <%= f.submit 'Submit', class: 'btn primary' %>
   </div>
+
 <% end %>

@@ -22,13 +22,16 @@
       </td>
     </tr>
   <% end %>
+  <% if current_order.shipping_method %>
+    <tr> <td>Shipping</td> <td> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </td></tr>
+  <% end %>
   <tr>
     <td>
       <h4>Total</h4>
     </td>
     <td>
       <h4>
-        <%= number_to_currency(current_order.amount) %>
+        <%= number_to_currency(current_order.price_with_shipping) %>
       </h4>
     </td>
   </tr>
@@ -36,7 +39,7 @@
 
 <% if %W(creditcard_payments shipping_methods).include? params[:controller] %>
   <div class='row'>
-    <div class='span4'>
+    <div class='span4' style='min-height:150px;'>
       <h3>
         Shipping address
         <small>
@@ -49,6 +52,23 @@
       <h3>Contact email</h3>
       <address>
         <%= current_order.email %>
+      </address>
+    </div>
+  </div>
+<% end %>
+
+<% if current_order.shipping_method %>
+  <div class='row'>
+    <div class='span4'>
+      <h3>
+        Shipping method
+        <small>
+          <%= link_to 'Edit', edit_shipping_method_order_path(current_order) %>
+        </small>
+      </h3>
+      <address>
+        <%= current_order.shipping_method.name %> <br />
+        <%= number_to_currency(current_order.shipping_method.shipping_price) %>
       </address>
     </div>
   </div>

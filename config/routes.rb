@@ -26,8 +26,9 @@ Nimbleshop::Application.routes.draw do
   resources :orders,    only: [:edit, :update] do
     member do
       get 'paid_using_cc'
+      get 'edit_shipping_method'
+      put 'update_shipping_method'
     end
-    resource :shipping_method
   end
   resource  :checkout, :controller => 'checkout',  :only => [:show]
   resource  :feedback,  only: [:show] do

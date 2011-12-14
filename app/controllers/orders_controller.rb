@@ -1,10 +1,34 @@
 class OrdersController < ApplicationController
 
-  theme :theme_resolver#, only: [:edit, :update]
+  before_filter :set_instance_variables_for_shipping_method, only: [:edit_shipping_method, :update_shipping_method]
+
+  theme :theme_resolver
+
+  def edit_shipping_method
+    render
+  end
+
+  def update_shipping_method
+    if params[:order].present? && params[:order].keys.include?('shipping_method_id')
+      current_order.update_attributes(params[:order])
+
+      case session[:checkout_with]
+      when 'with_splitable'
+        redirect_to Splitable.url(current_order) and return
+      when 'with_paypal'
+        redirect_to current_order.paypal_url
+      when 'with_authorize_net'
+        redirect_to  new_creditcard_payment_path
+      end
+    else
+      current_order.errors.add(:base, 'Please select a shipping method')
+      render 'edit_shipping_method'
+    end
+  end
 
   def paid_using_cc
-    @order = Order.find(params[:id])
     @page_title = 'Purchase is complete'
+    @order = Order.find(params[:id])
   end
 
   def edit
@@ -31,17 +55,7 @@ class OrdersController < ApplicationController
       render 'edit' and return if current_order.billing_address.errors.any?
     end
 
-    redirect_to new_order_shipping_method_path(current_order) and return
-
-    case session[:checkout_with]
-    when 'with_splitable'
-      redirect_to Splitable.url(current_order) and return
-    when 'with_paypal'
-      redirect_to current_order.paypal_url
-    when 'with_authorize_net'
-      redirect_to  new_creditcard_payment_path
-    end
-
+    redirect_to edit_shipping_method_order_path(current_order)
   end
 
   private
@@ -63,5 +77,13 @@ class OrdersController < ApplicationController
       current_order.create_billing_address(_attributes)
     end
   end
+
+  private
+
+  def set_instance_variables_for_shipping_method
+    @page_title = 'Pick shipping method'
+    @shipping_methods = ShippingMethod.order('shipping_price asc')
+  end
+
 
 end
