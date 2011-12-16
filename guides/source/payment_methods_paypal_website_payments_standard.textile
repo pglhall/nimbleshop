@@ -1,0 +1,44 @@
+h2. Payment method - paypal website payments standard
+
+nimbleSHOP has built in support for paypl website payments standard.
+
+endprologue.
+
+h3. Using pre-configured sandbox account
+
+nimbleSHOP comes pre-configured with a paypal sandbox account. You can use this account to test the <tt>Checkout with paypal</tt> functionaly. Be sure to change the credentials before you go live.
+
+h4. Logging into sandbox paypal account
+
+Before you start testing you need to login at "paypal sandbox developer account":https://developer.paypal.com with following credentials:
+
+<shell>
+url:      https://developer.paypal.com
+email:    neeraj_sandbox_paypal@bigbinary.com
+password: 12345678
+</shell>
+
+h4. Purchasing using paypal
+
+Now visit your shop and try to purchase something. In the checkout page click on "Checkout with paypal".
+
+Once you are taken to the paypal login page , login with following credentials.
+
+<shell>
+email:    buyer_1323036620_per@bigbinary.com
+password: 12345678
+</shell>
+
+h4. Purchase history in paypal
+
+* To view purchase history in paypal first login to paypal sandbox developer account site as mentioned above.
+* click on 'Test Accounts'
+* Select 'seller_1323037155_biz@bigbinary.com' in the radio button.
+* Click on 'Enter Sandbox Test Site'
+
+Just for record here is the credentials to login as seller.
+
+<shell>
+email:    seller_1323037155_biz@bigbinary.com
+password: 123456
+</shell>

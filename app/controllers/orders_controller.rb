@@ -12,12 +12,12 @@ class OrdersController < ApplicationController
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
       current_order.update_attributes(params[:order])
 
-      case session[:checkout_with]
-      when 'with_splitable'
-        redirect_to Splitable.url(current_order) and return
-      when 'with_paypal'
+      case session[:payment_method_permalink]
+      when 'splitable'
+        redirect_to PaymentMethod::Splitable.first.url(current_order)
+      when 'paypal-website-payments-standard'
         redirect_to current_order.paypal_url
-      when 'with_authorize_net'
+      when 'authorize-net'
         redirect_to  new_creditcard_payment_path
       end
     else
@@ -82,8 +82,7 @@ class OrdersController < ApplicationController
 
   def set_instance_variables_for_shipping_method
     @page_title = 'Pick shipping method'
-    @shipping_methods = ShippingMethod.order('shipping_price asc')
+    @shipping_methods = current_order.available_shipping_methods
   end
-
 
 end

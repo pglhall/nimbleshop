@@ -4,8 +4,9 @@ class CreatePaymentMethods < ActiveRecord::Migration
       t.boolean :enabled, default: false
       t.string  :name
       t.text    :description
-      t.text    :credentials
-      t.string :permalink, null: false
+      t.text    :data
+      t.string  :type
+      t.string  :permalink, null: false
 
       t.timestamps
     end

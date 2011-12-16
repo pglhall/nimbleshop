@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Ruby on Rails Guides: Getting Started with nimbleSHOP</title>
+<title>Ruby on Rails Guides: Payments</title>
 
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
@@ -25,52 +25,21 @@
 
   <div id="feature">
     <div class="wrapper">
-      <h2>Getting Started with nimbleSHOP</h2>
+      <h2>Payments</h2>
+<p>This guide covers how nimbleSHOP handles payment processing.</p>
 
             <div id="subCol">
         <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
         <ol class="chapters">
-<li><a href="#what-is-nimbleshop">What is nimbleSHOP?</a></li><li><a href="#getting-started">Getting started</a></li></ol></div>
+<li><a href="#merchant-account">Merchant account</a></li></ol></div>
     </div>
   </div>
 
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        <h3 id="what-is-nimbleshop">1 What is nimbleSHOP?</h3>
-<p>nimbleSHOP is an open source e-commerce application. It works with Ruby on Rails.</p>
-<p>nimbleSHOP works only with ruby 1.9.2 and above.</p>
-<p>nimbleSHOP uses PostgreSQL. No code is written specifically for PostgreSQL so MySQL and other databases should work. However all tests are run against PostgreSQL.</p>
-<p>nimbleSHOP is not a gem yet. It should become a gem soon.</p>
-<h3 id="getting-started">2 Getting started</h3>
-<notextile>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ git clone xxxxx
-</pre>
-</div>
-</notextile>
-
-<notextile>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ cp config/database.yml.example config/database.yml
-</pre>
-</div>
-</notextile>
-
-<p>Enter the credetials of your PostgreSQL database in <tt>database.yml</tt>.</p>
-<notextile>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-bundle install
-bundle exec rake setup_development
-rails server
-</pre>
-</div>
-</notextile>
-
-<p>Now if you visit <tt>http://localhost:3000</tt> you should see your shop.</p>
+        <h3 id="merchant-account">1 Merchant account</h3>
+<p>In order to accept credit cards online, store owners need to have a merchant account. <a href="http://ebooks.bigbinary.com/docs/credit-cards/index.html">Here is a good read</a> on how credit card works and what exactly is a merchant account.</p>
 
         <h3>Feedback</h3>
         <p>

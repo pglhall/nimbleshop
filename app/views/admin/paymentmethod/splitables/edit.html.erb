@@ -1,0 +1,23 @@
+<%= render '/admin/payment_methods/tabs' %>
+
+<%= form_tag('/admin/paymentmethod/splitable', :method => :put) do %>
+
+  <fieldset>
+
+    <div class="clearfix">
+      <%= label_tag 'api_key', 'api_key' %>
+      <div class="input">
+        <%= text_field_tag 'api_ke', @payment_method.api_key, 'class' => 'xlarge focus' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="actions">
+      <%= submit_tag('Submit', class: 'btn primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), admin_paymentmethod_splitable_path, class: 'btn' %>
+    </div>
+
+  </fieldset>
+
+<% end %>
+

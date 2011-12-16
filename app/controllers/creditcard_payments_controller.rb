@@ -14,11 +14,11 @@ class CreditcardPaymentsController < ApplicationController
 
     render action: 'new' and return unless @creditcard.valid?
 
-    @gp = GatewayProcessor.new(creditcard: @creditcard, order: order)
+    @gp = GatewayProcessor.new(payment_method_permalink: session[:payment_method_permalink])
     if @gp.authorize(current_order.price, @creditcard, order)
       current_order.update_attributes(status: 'authorized')
       reset_order
-      redirect_to feedback_path(order_id: order.id)
+      render text: 'you paid'
     else
       @creditcard.errors.add(:base, 'Credit card was declined. Please try again with another credit card.')
       render action: "new"

@@ -1,0 +1,51 @@
+<%= render '/admin/payment_methods/tabs' %>
+
+<%= form_tag('/admin/paymentmethod/paypalwebsite_payments_standard', :method => :put) do %>
+
+  <fieldset>
+
+    <div class="clearfix">
+      <%= label_tag 'image_on_checkout_page', 'image_on_checkout_page' %>
+      <div class="input">
+        <%= text_field_tag 'image_on_checkout_page', @payment_method.image_on_checkout_page, 'class' => 'xlarge focus' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= label_tag 'merchant_email_address', 'merchant_email_address' %>
+      <div class="input">
+        <%= text_field_tag 'merchant_email_address', @payment_method.merchant_email_address, 'class' => 'xlarge' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= label_tag 'return_url', 'return_url' %>
+      <div class="input">
+        <%= text_field_tag 'return_url', @payment_method.return_url, 'class' => 'xlarge' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= label_tag 'notify_url', 'notify_url' %>
+      <div class="input">
+        <%= text_field_tag 'notify_url', @payment_method.notify_url, 'class' => 'xlarge' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= label_tag 'request_submission_url', 'request_submission_url' %>
+      <div class="input">
+        <%= text_field_tag 'request_submission_url', @payment_method.request_submission_url, 'class' => 'xlarge' %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="actions">
+      <%= submit_tag('Submit', class: 'btn primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), admin_paymentmethod_paypalwebsite_payments_standard_path, class: 'btn' %>
+    </div>
+
+  </fieldset>
+
+<% end %>
+

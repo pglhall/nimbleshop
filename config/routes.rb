@@ -1,8 +1,14 @@
 Nimbleshop::Application.routes.draw do
 
   namespace :admin do
-    resources :orders
+    namespace :paymentmethod do
+      resource :authorizedotnet
+      resource :paypalwebsite_payments_standard
+      resource :splitable
+    end
     resources :payment_methods
+
+    resources :orders
     resources :shipping_zones
     resources :shipping_methods
     resource  :payment_gateway
@@ -14,12 +20,7 @@ Nimbleshop::Application.routes.draw do
   end
 
   resources :creditcard_payments
-  resources :payment_notifications do
-    collection do
-      post 'paypal'
-      post 'splitable'
-    end
-  end
+  resources :payment_notifications
   resources :product_groups
   resources :products,  only: [:index, :show]
   resources :pages,     only: [:show]

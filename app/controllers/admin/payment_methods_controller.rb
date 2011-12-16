@@ -11,14 +11,18 @@ class Admin::PaymentMethodsController < AdminController
   end
 
   def update
-    puts params.inspect
     @payment_method = PaymentMethod.find(params[:id])
-    enabled = params[:payment_method][:enabled] == '0' ? false : true
-    @payment_method.enabled = enabled
-    @payment_method.save
+    enabled = params[:enabled]  ? true : false
     @payment_method.update_attributes(enabled: enabled)
     if enabled
-      redirect_to admin_payment_method_path(@payment_method)
+      case @payment_method.permalink
+      when 'splitable'
+        redirect_to admin_paymentmethod_splitable_path
+      when 'authorize-net'
+        redirect_to admin_paymentmethod_authorizedotnet_path
+      when 'paypal-website-payments-standard'
+        redirect_to admin_paymentmethod_paypalwebsite_payments_standard_path
+      end
     else
       redirect_to admin_payment_methods_path
     end

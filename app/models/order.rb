@@ -25,14 +25,15 @@ class Order < ActiveRecord::Base
   end
 
   def paypal_url
+    payment_method = PaymentMethod::PaypalWebsitePaymentsStandard.first
     values = {
-      :business => Settings.paypal_merchant_email_address,
+      :business => payment_method.merchant_email_address,
       :cmd => '_cart',
       :upload => 1,
-      :return => Settings.paypal_return_url,
+      :return => payment_method.return_url,
       :invoice => self.number,
       :secret  => 'xxxxxxx',
-      :notify_url => Settings.paypal_notify_url
+      :notify_url => payment_method.notify_url
     }
     line_items.each_with_index do |item, index|
       values.merge!({
@@ -42,7 +43,7 @@ class Order < ActiveRecord::Base
         "quantity_#{index+1}" => item.quantity
       })
     end
-    Settings.paypal_request_submission_url + values.to_query
+    payment_method.request_submission_url + values.to_query
   end
 
   def item_count

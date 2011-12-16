@@ -1,0 +1,9 @@
+h2. Payments
+
+This guide covers how nimbleSHOP handles payment processing.
+
+endprologue.
+
+h3. Merchant account
+
+In order to accept credit cards online, store owners need to have a merchant account. "Here is a good read":http://ebooks.bigbinary.com/docs/credit-cards/index.html on how credit card works and what exactly is a merchant account.

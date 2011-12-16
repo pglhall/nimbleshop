@@ -9,9 +9,14 @@
 </dl>
 
 <dl>
-<%= guide("Payment methods including paypal", 'payments.html') do %>
-  <p>This guide covers how you can configure payment gateways and paypal.</p>
-<% end %>
+  <%= guide("Payment methods", 'payment_methods.html') do%>
+  <% end %>
+
+  <%= guide("Payment methods - Authorize.net ", 'payment_methods_authorize_net.html') do %>
+  <% end %>
+
+  <%= guide("Payment methods - paypal", 'payment_methods_paypal_website_payments_standard.html') do %>
+  <% end %>
 
 <%= guide("Deployment at heroku", 'heroku.html') do %>
   <p>This guide covers how to deploy nimbleSHOP application to heroku.</p>

@@ -17,7 +17,7 @@
       <div class="clearfix">
         <%= f.label :name, 'Name' %>
         <div class="input">
-          <%= f.text_field :name, class: 'xlarge', size: 30 %>
+          <%= f.text_field :name, class: 'xlarge focus', size: 30 %>
         </div>
       </div><!-- /clearfix -->
 
@@ -41,15 +41,21 @@
 
       <div class="clearfix">
         <% unless @product.new_record? %>
-          <ul class="media-grid">
-            <% @product.pictures.each do |picture| %>
-              <li>
-                <a href="#">
-                  <%= image_tag picture.picture_url(:small) %>
-                </a>
-              </li>
-            <% end %>
-          </ul>
+          <div class='row'>
+            <div class='span3'>Images</div>
+            <div class='span7'>
+              <ul class="media-grid">
+                <% @product.pictures.each do |picture| %>
+                  <li>
+                    <a href="#">
+                      <%= image_tag picture.picture_url(:small) %>
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+
+            </div>
+          </div>
         <% end %>
       </div><!-- /clearfix -->
 

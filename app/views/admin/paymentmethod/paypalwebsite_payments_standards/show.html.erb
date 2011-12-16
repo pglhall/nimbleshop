@@ -1,0 +1,50 @@
+<%= render '/admin/payment_methods/tabs' %>
+
+<h3>
+  Configuration info
+  <small>
+    <%= link_to 'Edit', edit_admin_paymentmethod_paypalwebsite_payments_standard_path %>
+  </small>
+</h3>
+
+<br />
+
+<table class="zebra-striped bordered-table">
+  <tr>
+    <th> image_on_checkout_page: </th>
+    <td> <%= @payment_method.data[:image_on_checkout_page] %> </td>
+  </tr>
+  <tr>
+    <th>
+      merchant_email_address:
+    </th>
+    <td>
+      <%= @payment_method.data[:merchant_email_address] %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      return_url:
+    </th>
+    <td>
+      <%= @payment_method.data[:return_url] %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      notify_url:
+    </th>
+    <td>
+      <%= @payment_method.data[:notify_url] %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      request_submission_url:
+    </th>
+    <td>
+      <%= @payment_method.data[:request_submission_url] %>
+    </td>
+  </tr>
+
+</table>

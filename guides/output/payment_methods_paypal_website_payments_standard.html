@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Ruby on Rails Guides: Getting Started with nimbleSHOP</title>
+<title>Ruby on Rails Guides: Payment method - paypal website payments standard</title>
 
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
@@ -25,52 +25,62 @@
 
   <div id="feature">
     <div class="wrapper">
-      <h2>Getting Started with nimbleSHOP</h2>
+      <h2>Payment method &#8211; paypal website payments standard</h2>
+<p>nimbleSHOP has built in support for paypl website payments standard.</p>
 
             <div id="subCol">
         <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
         <ol class="chapters">
-<li><a href="#what-is-nimbleshop">What is nimbleSHOP?</a></li><li><a href="#getting-started">Getting started</a></li></ol></div>
+<li><a href="#using-pre-configured-sandbox-account">Using pre-configured sandbox account</a><ul><li><a href="#logging-into-sandbox-paypal-account">Logging into sandbox paypal account</a></li> <li><a href="#purchasing-using-paypal">Purchasing using paypal</a></li> <li><a href="#purchase-history-in-paypal">Purchase history in paypal</a></li></ul></li></ol></div>
     </div>
   </div>
 
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        <h3 id="what-is-nimbleshop">1 What is nimbleSHOP?</h3>
-<p>nimbleSHOP is an open source e-commerce application. It works with Ruby on Rails.</p>
-<p>nimbleSHOP works only with ruby 1.9.2 and above.</p>
-<p>nimbleSHOP uses PostgreSQL. No code is written specifically for PostgreSQL so MySQL and other databases should work. However all tests are run against PostgreSQL.</p>
-<p>nimbleSHOP is not a gem yet. It should become a gem soon.</p>
-<h3 id="getting-started">2 Getting started</h3>
+        <h3 id="using-pre-configured-sandbox-account">1 Using pre-configured sandbox account</h3>
+<p>nimbleSHOP comes pre-configured with a paypal sandbox account. You can use this account to test the <tt>Checkout with paypal</tt> functionaly. Be sure to change the credentials before you go live.</p>
+<h4 id="logging-into-sandbox-paypal-account">1.1 Logging into sandbox paypal account</h4>
+<p>Before you start testing you need to login at <a href="https://developer.paypal.com">paypal sandbox developer account</a> with following credentials:</p>
 <notextile>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-$ git clone xxxxx
+url:      https://developer.paypal.com
+email:    neeraj_sandbox_paypal@bigbinary.com
+password: 12345678
 </pre>
 </div>
 </notextile>
 
+<h4 id="purchasing-using-paypal">1.2 Purchasing using paypal</h4>
+<p>Now visit your shop and try to purchase something. In the checkout page click on &#8220;Checkout with paypal&#8221;.</p>
+<p>Once you are taken to the paypal login page , login with following credentials.</p>
 <notextile>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-$ cp config/database.yml.example config/database.yml
+email:    buyer_1323036620_per@bigbinary.com
+password: 12345678
 </pre>
 </div>
 </notextile>
 
-<p>Enter the credetials of your PostgreSQL database in <tt>database.yml</tt>.</p>
+<h4 id="purchase-history-in-paypal">1.3 Purchase history in paypal</h4>
+<ul>
+	<li>To view purchase history in paypal first login to paypal sandbox developer account site as mentioned above.</li>
+	<li>click on &#8216;Test Accounts&#8217;</li>
+	<li>Select &#8216;seller_1323037155_biz@bigbinary.com&#8217; in the radio button.</li>
+	<li>Click on &#8216;Enter Sandbox Test Site&#8217;</li>
+</ul>
+<p>Just for record here is the credentials to login as seller.</p>
 <notextile>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-bundle install
-bundle exec rake setup_development
-rails server
+email:    seller_1323037155_biz@bigbinary.com
+password: 123456
 </pre>
 </div>
 </notextile>
 
-<p>Now if you visit <tt>http://localhost:3000</tt> you should see your shop.</p>
 
         <h3>Feedback</h3>
         <p>

@@ -8,9 +8,8 @@ class CartsController < ApplicationController
   end
 
   def create
-    if params[:checkout]
-      checkout_with = params[:checkout].keys.first
-      session[:checkout_with] = checkout_with
+    if params[:payment_method_permalink]
+      session[:payment_method_permalink] = params[:payment_method_permalink].keys.first
       redirect_to edit_order_url(current_order) and return
     end
 

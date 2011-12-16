@@ -11,18 +11,9 @@ common:
   s3_access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
   s3_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
 
-  gateway_authorize_net_login_id: <%= ENV['GATEWAY_AUTHORIZE_NET_LOGIN_ID']  || '56yBAar72' %>
-  gateway_authorize_net_transaction_key: <%= ENV['GATEWAY_AUTHORIZE_NET_TRANSACTION_KEY'] ||  '9r3pbH5bnKH29f7d' %>
-
   send_grid_user_name: <%=ENV['SEND_GRID_USERNAME']%>
   send_grid_password: <%=ENV['SEND_GRID_PASSWORD']%>
 
-  paypal_image_on_checkout_page: http://images.paypal.com/images/x-click-but1.gif
-
-  paypal_merchant_email_address: seller_1323037155_biz@bigbinary.com
-  paypal_return_url: http://localhost:3000/paypal_return
-  paypal_notify_url: http://localhost:3000/payment_notifications/paypal
-  paypal_request_submission_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
 
 development:
   bare_url_with_port: localhost:3000

@@ -11,6 +11,23 @@ namespace :db do
     #raise "this task should not be run in production" if Rails.env.production?
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
 
+    payment_method = PaymentMethod.find_by_permalink('splitable')
+    payment_method.api_key = 'cfjpolmh5dh9ogs'
+    payment_method.save!
+
+    payment_method = PaymentMethod.find_by_permalink('authorize-net')
+    payment_method.login_id = '56yBAar72'
+    payment_method.transaction_key = '9r3pbH5bnKH29f7d'
+    payment_method.save!
+
+    payment_method = PaymentMethod.find_by_permalink('paypal-website-payments-standard')
+    payment_method.image_on_checkout_page = 'http://images.paypal.com/images/x-click-but1.gif'
+    payment_method.merchant_email_address = 'seller_1323037155_biz@bigbinary.com'
+    payment_method.return_url = 'http://localhost:3000/paypal_return'
+    payment_method.notify_url = 'http://localhost:3000/payment_notifications/paypal'
+    payment_method.request_submission_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
+    payment_method.save!
+
     puts "running db:sample_data ..."
     Shop.delete_all
     Link.delete_all

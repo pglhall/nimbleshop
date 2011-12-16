@@ -9,4 +9,5 @@
 //= require highlight_error_field
 //= require nested_form
 //= require enable_payment_method
+//= require focus
 

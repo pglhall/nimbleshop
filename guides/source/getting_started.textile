@@ -27,10 +27,9 @@ Enter the credetials of your PostgreSQL database in <tt>database.yml</tt>.
 
 <shell>
 bundle install
-bundle exec rake db:create
-bundle exec rake db:bootstrap
+bundle exec rake setup_development
 rails server
 </shell>
 
-Now if you visit <tt>http://localhost:3000</tt> you should see your store.
+Now if you visit <tt>http://localhost:3000</tt> you should see your shop.
 

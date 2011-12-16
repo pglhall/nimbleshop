@@ -1,0 +1,19 @@
+<%= render '/admin/payment_methods/tabs' %>
+
+<h3>
+  Configuration info
+  <small><%= link_to 'Edit', edit_admin_paymentmethod_splitable_path %></small>
+</h3>
+
+<br />
+
+<table class="zebra-striped bordered-table">
+  <tr>
+    <th>
+      api_key:
+    </th>
+    <td>
+      <%= @payment_method.data[:api_key] %>
+    </td>
+  </tr>
+</table>

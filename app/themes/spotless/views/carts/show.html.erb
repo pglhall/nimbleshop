@@ -63,19 +63,19 @@
           <td>
             <% if authorize_net_enabled? %>
               <p class='button'>
-                <%= submit_tag 'Checkout with Authorize.net', name: "checkout[with_authorize_net]", class: 'btn primary' %>
+                <%= submit_tag 'Checkout with Authorize.net', name: "payment_method_permalink[authorize-net]", class: 'btn primary' %>
               </p>
             <% end %>
 
             <% if splitable_enabled? %>
               <p class='button'>
-                <%= submit_tag 'Checkout with splitable', name: "checkout[with_splitable]", class: 'btn primary' %>
+                <%= submit_tag 'Checkout with splitable', name: "payment_method_permalink[splitable]", class: 'btn primary' %>
               </p>
             <% end %>
 
             <% if paypal_website_payments_standard_enabled? %>
               <p class='button'>
-                <%= submit_tag 'Checkout with Paypal', name: "checkout[with_paypal]", class: 'btn primary', alt: t(:paypal_image_alt) %>
+                <%= submit_tag 'Checkout with Paypal', name: "payment_method_permalink[paypal-website-payments-standard]", class: 'btn primary', alt: t(:paypal_image_alt) %>
               </p>
             <% end %>
 

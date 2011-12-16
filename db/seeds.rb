@@ -14,7 +14,7 @@ description = %Q{
 </p>
 }
 
-PaymentMethod.create!(name: 'Authorize.net', description: description)
+PaymentMethod::AuthorizeNet.create!(name: 'Authorize.net', description: description)
 
 description = %Q{
 <p>
@@ -30,7 +30,8 @@ description = %Q{
 </p>
 }
 
-PaymentMethod.create!(name: 'Paypal website payments standard', description: description)
+PaymentMethod::PaypalWebsitePaymentsStandard.create!(name: 'Paypal website payments standard', description: description)
+
 
 description = %Q{
 <p>
@@ -44,4 +45,4 @@ description = %Q{
 </p>
 }
 
-PaymentMethod.create!(name: 'Splitable', description: description)
+PaymentMethod::Splitable.create!(name: 'Splitable', description: description)

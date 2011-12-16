@@ -1,2 +1,23 @@
-<%= render 'top' %>
-<%= render 'all_payment_methods' %>
+<%= render 'tabs' %>
+
+<table class='bordered-table'>
+  <tbody>
+    <% @payment_methods.each do |payment_method| %>
+      <tr>
+        <td>
+          <h3>
+            <%= form_tag("/admin/payment_methods/#{payment_method.id}", :method => :put) do %>
+              <%= check_box_tag 'enabled', '1', payment_method.enabled ,class: 'submittable' %>
+            <% end %>
+          </h3>
+        </td>
+        <td>
+          <h3><%= payment_method.name %></h3>
+        </td>
+        <td>
+          <%= raw payment_method.description %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
