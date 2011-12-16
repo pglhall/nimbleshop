@@ -4,18 +4,19 @@ class PaymentMethod::Splitable < PaymentMethod
 
   def url(order)
     submission_url = 'http://localhost:3000/split_payments/split?'
+    submission_url = 'http://lvh.me:3000/split_payments/split?'
     data = {}
 
     data.merge!(api_key: self.api_key)
-    data.merge!(title: 'The Black Eyed Peas: 20 Person Suite (End Zone)')
-    data.merge!(total_amount: 20000)
+    data.merge!(title: 'iPad')
+    data.merge!(total_amount: 50000)
     data.merge!(invoice: order.id)
-    data.merge!(number_of_participants: 20)
+    data.merge!(number_of_participants: 10)
     data.merge!(api_secret: 'sdfs9smdsddf')
-    data.merge!(details_url: 'https://www.splitable.com/sunlife_stadium')
+    data.merge!(details_url: 'http://www.apple.com/pr/products/ipad/ipad.html')
 
-    data.merge!(logo_url: 'https://s3.amazonaws.com/splitable-production1/app/public/system/logos/39/regular/sunlifestadium.gif')
-    data.merge!(item_image_url: 'https://s3.amazonaws.com/splitable-production1/app/public/system/images/126/regular/black-eyed-peas.jpg')
+    data.merge!(logo_url: 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
+    data.merge!(product_picture_url: 'http://cdn.tipb.com/images/stories/2010/01/ipad.png')
     data.merge!(expires_in: 24)
 
     submission_url + data.to_query

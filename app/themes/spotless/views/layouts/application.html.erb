@@ -156,7 +156,11 @@
       <footer>
       <p>
         <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
-          <%= image_tag('we_accept_paypal.png') %>
+          <%= image_tag('paypal.png') %>
+          <%= image_tag('visa.png') %>
+          <%= image_tag('mastercard.png') %>
+          <%= image_tag('amex.png') %>
+          <%= image_tag('discover.png') %>
         <% end %>
 
         <!--
