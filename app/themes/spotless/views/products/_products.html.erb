@@ -14,7 +14,7 @@
                   </li>
                 </ul>
                     <%= number_to_currency(product.price) %>
-                    <%= link_to(truncate(product.name, length: 30), product.url, title: product.name) %>
+                    <%= link_to(truncate(product.name, length: 30), product, title: product.name) %>
               <% end %>
             </td>
           <% end %>

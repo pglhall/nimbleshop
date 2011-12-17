@@ -4,10 +4,6 @@ class Product < ActiveRecord::Base
 
   include Product::Scopes
 
-  validates_presence_of :name, :description, :price
-
-  validates_numericality_of :price
-
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true
 
@@ -21,6 +17,9 @@ class Product < ActiveRecord::Base
 
   before_create :set_permalink
 
+  validates_presence_of :name, :description, :price
+  validates_numericality_of :price
+
   def picture
     pictures.first
   end
@@ -29,6 +28,7 @@ class Product < ActiveRecord::Base
     includes(:pictures)
   end
 
+  # TODO this method should not exist. All such custom fields should be generated dynamically
   def category
     custom_field_value_for('category')
   end
@@ -49,6 +49,10 @@ class Product < ActiveRecord::Base
     end
     relation = relation.joins(:custom_field_answers)
     relation.to_a
+  end
+
+  def to_param
+    self.permalink
   end
 
   private
