@@ -37,10 +37,6 @@ class Product < ActiveRecord::Base
     self.custom_field_answers.for(custom_field_name).value
   end
 
-  def url
-    "/products/#{self.id}"
-  end
-
   def self.search(params = {})
     conditions = CustomFieldAnswer.to_arel_conditions(params)
     relation = self.scoped

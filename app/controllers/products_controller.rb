@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find_by_permalink!(params[:id])
     @page_title = @product.name
     @product_groups = ProductGroup.all
     respond_with @product

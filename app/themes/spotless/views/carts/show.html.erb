@@ -1,8 +1,15 @@
 <script type="text/javascript">
-  function remove_item(id) {
-    document.getElementById('updates_'+id).value = 0;
-    document.getElementById('cartform').submit();
-  }
+  $(function(){
+    $('a.remove-item').bind('click', function(){
+      var $this = $(this);
+      var permalink = $this.data('permalink');
+      $('#updates_'+permalink).val(0);
+      console.log('#updates_'+permalink);
+      //alert(permalink);
+      $('#cartform').submit();
+      return false;
+    });
+  })
 </script>
 
 <% @page_sub_title = pluralize(items_count_in_cart, 'Item') %>
@@ -26,20 +33,21 @@
         <% @cart.line_items.each do |line_item| %>
 		      <tr>
 			      <td class="pic">
-                <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product.url) %>
+                <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product) %>
 			      </td>
 			      <td>
-              <strong><%= link_to(line_item.product.title, line_item.product.url) %></strong>
+              <strong><%= link_to(line_item.product.title, line_item.product) %></strong>
 				      <p>
                 <%= truncate(sanitize(line_item.product.description), length: 90) %>
               </p>
 			      </td>
 			      <td><%= number_to_currency(line_item.product.price) %></td>
             <td>
-              <input type="text" size="2" name="updates[<%=line_item.product.permalink%>]" id="updates_<%=line_item.product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>" onfocus="this.select();"/>
+              <input type="text" size="2" name="updates[<%=line_item.product.permalink%>]" id="updates_<%=line_item.product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>"/>
           </td>
             <td class="remove">
-              <a href="#" onclick="remove_item('<%=line_item.product.permalink%>'); return false;" >Remove</a>
+              <a class='remove-item' href="#" data-permalink="<%=line_item.product.permalink%>">Remove</a>
+
             </td>
 			      <td><strong><%= number_to_currency(line_item.line_price) %></strong></td>
 		      </tr>

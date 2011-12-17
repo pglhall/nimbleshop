@@ -10,7 +10,7 @@
               <% else %>
                 <ul class="media-grid">
                   <li>
-                    <%= link_to(image_tag(product.picture.picture_url(:medium)),product.url) %>
+                    <%= link_to(image_tag(product.picture.picture_url(:medium)), product) %>
                   </li>
                 </ul>
                     <%= number_to_currency(product.price) %>
