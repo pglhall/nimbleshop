@@ -1,0 +1,17 @@
+<div class='row'>
+  <div class='span1'>&nbsp;</div>
+  <div class='span13'>
+    <h4><%= link_to '← Back to shop', @product %></h4>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='span1'>&nbsp;</div>
+  <div class='span11'>
+    <ul class="media-grid">
+      <% @product.pictures.each do |picture| %>
+        <li> <%= image_tag(picture.picture_url(:grande)) %> </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -22,7 +22,11 @@ Nimbleshop::Application.routes.draw do
   resources :creditcard_payments
   resources :payment_notifications
   resources :product_groups
-  resources :products,  only: [:index, :show]
+  resources :products,  only: [:index, :show] do
+    member do
+      get 'all_pictures'
+    end
+  end
   resources :pages,     only: [:show]
   resources :orders,    only: [:edit, :update] do
     member do

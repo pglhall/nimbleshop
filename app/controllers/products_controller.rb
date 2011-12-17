@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  theme :theme_resolver, only: [:index, :show]
+  theme :theme_resolver, only: [:index, :show, :all_pictures]
 
   respond_to :html
 
@@ -15,6 +15,12 @@ class ProductsController < ApplicationController
     @product = Product.find_by_permalink!(params[:id])
     @page_title = @product.name
     @product_groups = ProductGroup.all
+    respond_with @product
+  end
+
+  def all_pictures
+    @product = Product.find_by_permalink!(params[:id])
+    @page_title = "all pictures for #{@product.name}"
     respond_with @product
   end
 
