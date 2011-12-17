@@ -51,7 +51,9 @@ class OrdersController < ApplicationController
     unless current_order.shipping_address.use_for_billing
       handle_billing_address
     end
-    if current_order.errors.any? || current_order.shipping_address.errors.any?  || current_order.billing_address.errors.any?
+    if  current_order.errors.any? ||
+        current_order.shipping_address.errors.any?  ||
+        (current_order.billing_address && current_order.billing_address.errors.any?)
       render 'edit'
     else
       redirect_to edit_shipping_method_order_path(current_order)

@@ -154,18 +154,26 @@
       </div>
 
       <footer>
-      <p>
-        <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
-          <%= image_tag('paypal.png') %>
-          <%= image_tag('visa.png') %>
-          <%= image_tag('mastercard.png') %>
-          <%= image_tag('amex.png') %>
-          <%= image_tag('discover.png') %>
-        <% end %>
+        <div class='row'>
+          <div class='span6'>
+            <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
+              <%= image_tag('paypal.png') %>
+              <%= image_tag('visa.png') %>
+              <%= image_tag('mastercard.png') %>
+              <%= image_tag('amex.png') %>
+              <%= image_tag('discover.png') %>
+            <% end %>
+          </div>
+          <div class='span6'>
+            &copy; Your company name @2011
+          </div>
+          <div class='span2'>
+            <%= link_to image_tag('twitter.png'), '' %>
+            <%= link_to image_tag('facebook.png'), '' %>
+            <%= link_to image_tag('mail.png'), '' %>
+          </div>
+        </div>
 
-        <!--
-        &copy; Company 2011
-        -->
 
         </p>
       </footer>
