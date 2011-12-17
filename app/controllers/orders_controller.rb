@@ -43,19 +43,19 @@ class OrdersController < ApplicationController
   def update
     @current_order.validate_email = true
     @current_order.email = params[:order][:email]
-    unless @current_order.save
-      render 'edit' and return if @current_order.errors.any?
-    end
+
+    # ensure email is entered and is valid
+    current_order.valid?
 
     handle_shipping_address
-    render 'edit' and return if current_order.shipping_address.errors.any?
-
     unless current_order.shipping_address.use_for_billing
       handle_billing_address
-      render 'edit' and return if current_order.billing_address.errors.any?
     end
-
-    redirect_to edit_shipping_method_order_path(current_order)
+    if current_order.errors.any? || current_order.shipping_address.errors.any?  || current_order.billing_address.errors.any?
+      render 'edit'
+    else
+      redirect_to edit_shipping_method_order_path(current_order)
+    end
   end
 
   private
