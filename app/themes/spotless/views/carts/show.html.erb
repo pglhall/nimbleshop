@@ -1,11 +1,9 @@
 <script type="text/javascript">
   $(function(){
     $('a.remove-item').bind('click', function(){
-      var $this = $(this);
-      var permalink = $this.data('permalink');
+      var $this = $(this),
+          permalink = $this.data('permalink');
       $('#updates_'+permalink).val(0);
-      console.log('#updates_'+permalink);
-      //alert(permalink);
       $('#cartform').submit();
       return false;
     });
