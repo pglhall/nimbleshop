@@ -11,6 +11,7 @@ class Admin::ProductGroupsController < AdminController
 
   def edit
     @product_group = ProductGroup.find(params[:id])
+    @custom_fields = CustomField.order('name asc').all
   end
 
 end

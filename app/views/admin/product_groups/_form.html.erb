@@ -12,6 +12,7 @@
   <% end %>
 
   <fieldset>
+
     <div class="clearfix">
       <%= f.label :name %>
       <div class="input">
@@ -19,12 +20,13 @@
       </div>
     </div><!-- /clearfix -->
 
-    <h4>
-      Define Conditions
-      <small>
-        You can use as many custom fields as you desire to build your condition.
-      </small>
-    </h4>
+    <div class="clearfix">
+      <%= f.label :condition, 'Condition' %>
+      <div class="input">
+        <%= @custom_fields.map(&:name).inspect %>
+      </div>
+    </div><!-- /clearfix -->
+
 
     <div class="clearfix">
     </div><!-- /clearfix -->
