@@ -1,17 +1,4 @@
-<script type="text/javascript">
-  $(function(){
-    $('a.remove-item').bind('click', function(){
-      var $this = $(this),
-          permalink = $this.data('permalink');
-      $('#updates_'+permalink).val(0);
-      $('#cartform').submit();
-      return false;
-    });
-  })
-</script>
-
 <% @page_sub_title = pluralize(items_count_in_cart, 'Item') %>
-
 
 <% if items_count_in_cart == 0 %>
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>

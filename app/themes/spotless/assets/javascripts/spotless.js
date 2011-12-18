@@ -9,3 +9,4 @@
 //= require thumbnail
 //= require highlight_error_field
 //= require bootstrap_alert
+//= require remove_item_from_cart
