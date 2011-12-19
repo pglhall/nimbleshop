@@ -168,9 +168,15 @@
             &copy; Your company name @2011
           </div>
           <div class='span2'>
-            <%= link_to image_tag('twitter.png'), '' %>
-            <%= link_to image_tag('facebook.png'), '' %>
-            <%= link_to image_tag('mail.png'), '' %>
+            <% if @shop.twitter_handle.present? %>
+              <%= link_to image_tag('twitter.png'), @shop.twitter_url %>
+            <% end %>
+            <% if @shop.facebook_url.present? %>
+              <%= link_to image_tag('facebook.png'), '' %>
+            <% end %>
+            <% if @shop.contact_email.present? %>
+              <%= link_to image_tag('mail.png'), "mailto:#{@shop.contact_email}" %>
+            <% end %>
           </div>
         </div>
 
