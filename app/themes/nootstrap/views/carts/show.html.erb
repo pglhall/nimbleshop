@@ -3,7 +3,7 @@
 <% if items_count_in_cart == 0 %>
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
-    <%= form_tag('/cart', method: 'put', name: 'cartform', id: 'cartform') do %>
+  <%= form_tag('/cart', method: 'put', name: 'cartform', id: 'cartform') do %>
 	  <table class='zebra-striped'>
       <thead>
         <tr>
@@ -76,6 +76,5 @@
         </tr>
       </tbody>
     </table>
-
-<% end %>
+  <% end %>
 <% end %>
