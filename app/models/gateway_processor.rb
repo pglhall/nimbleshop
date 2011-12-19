@@ -3,7 +3,7 @@ class GatewayProcessor
   attr_reader :gateway
 
   def initialize(options = {})
-    payment_method = PaymentMethod.find_by_permalink(options[:payment_method_permalink])
+    payment_method = PaymentMethod.find_by_permalink!(options.fetch(:payment_method_permalink))
     @gateway =  payment_method.gateway
   end
 
