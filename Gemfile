@@ -58,4 +58,5 @@ gem 'themes_for_rails', git: 'git://github.com/neerajdotname/themes_for_rails.gi
 
 gem 'email_validator', :git => "git://github.com/bigbinary/email_validator.git"
 
-gem 'rails-i18n'
+# to support i18n
+#gem 'rails-i18n'

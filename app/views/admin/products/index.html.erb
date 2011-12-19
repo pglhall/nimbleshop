@@ -23,6 +23,8 @@
           <%= link_to 'Show', admin_product_path(product) %>
           |
           <%= link_to 'Edit', edit_admin_product_path(product) %>
+          |
+          <%= link_to t(:delete), [:admin, product], confirm: t(:delete_confirmation_for_product), method: 'delete' %>
         </td>
         </td>
       </tr>

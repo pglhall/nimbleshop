@@ -1,0 +1,15 @@
+.clearfix a.help {
+  float: left;
+  padding-top: 6px;
+  padding-left: 6px;
+  color: #969696;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/*
+ * Adding a bit of padding because having a help symbol make the things seem closer
+ */
+form .input {
+  padding-left: 8px;
+}

@@ -1,5 +1,7 @@
 class Admin::ProductsController < AdminController
 
+  before_filter :load_product, only: [:show, :edit, :create, :update, :destroy ]
+
   respond_to :html
 
   def index
@@ -12,7 +14,6 @@ class Admin::ProductsController < AdminController
   end
 
   def show
-    @product = Product.find(params[:id])
     @product_groups = ProductGroup.contains_product(@product)
     respond_with @product
   end
@@ -23,9 +24,8 @@ class Admin::ProductsController < AdminController
   end
 
   def edit
-    @product = Product.find_by_id!(params[:id])
+    render
   end
-
 
   def create
     @product  = Product.new(params[:product])
@@ -37,7 +37,6 @@ class Admin::ProductsController < AdminController
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
       redirect_to admin_products_path, notice: "Successfully updated"
     else
@@ -46,9 +45,14 @@ class Admin::ProductsController < AdminController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to admin_products_url, notice: 'Successfully deleted'
+  end
+
+  private
+
+  def load_product
+    @product = Product.find_by_permalink!(params[:id])
   end
 
 end

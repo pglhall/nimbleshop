@@ -180,10 +180,10 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
     t.integer  "price",                          :null => false
     t.boolean  "new",         :default => false, :null => false
     t.boolean  "active",      :default => true
+    t.string   "picture"
     t.string   "permalink",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "picture"
   end
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
