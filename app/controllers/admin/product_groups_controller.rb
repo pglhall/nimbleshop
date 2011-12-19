@@ -14,4 +14,14 @@ class Admin::ProductGroupsController < AdminController
     @custom_fields = CustomField.order('name asc').all
   end
 
+  def update
+    @product_group = ProductGroup.find(params[:id])
+    if @product_group.update_attributes(params[:product_group])
+      redirect_to admin_product_groups_path, notice: 'successfully updated'
+    else
+      render 'edit'
+    end
+
+  end
+
 end

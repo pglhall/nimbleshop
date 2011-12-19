@@ -23,7 +23,10 @@
     <div class="clearfix">
       <%= f.label :condition, 'Condition' %>
       <div class="input">
-        <%= @custom_fields.map(&:name).inspect %>
+        <%= collection_select(:product_group, :custom_field_id, @custom_fields, :id, :name) %>
+        <%= f.text_field :custom_field_operator, class: 'xlarge focus', size: 30 %>
+        <%= f.text_field :custom_field_value, class: 'xlarge focus', size: 30 %>
+
       </div>
     </div><!-- /clearfix -->
 
