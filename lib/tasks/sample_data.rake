@@ -47,8 +47,10 @@ namespace :db do
                  twitter_handle: '@nimbleshop',
                  facebook_url: 'www.facebook.com')
     @shop = Shop.first
-    @shop.update_attributes(gateway: 'website_payments_standard')
-    @shop.update_attributes(gateway: 'AuthorizeNet')
+    @shop.update_attributes(gateway:  'website_payments_standard')
+    @shop.update_attributes(gateway:  'AuthorizeNet')
+    @shop.update_attributes(facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
+    @shop.update_attributes(twitter_handle:  'nimbleshop')
 
     link_group = LinkGroup.create!(name: 'Main-nav')
     link_home = Link.create!(name: 'Home', url: '/')
