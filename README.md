@@ -7,9 +7,9 @@ nimbleSHOP is a highly opinionated open source eCommerce platform.
 * Out of the box it can be deployed on heroku. See documentation for more information.
 * Out of the box it supports paypal and Authorize.Net. See documentation for more information.
 
-# postgresql database
+# Documentation
 
-nimbleShop uses postgresql. All code is written and tested in postgresql. To the extent I know there is no sql writtent specifically for postgresql so the application should work for mysql and other databases.
+Documentation is available at "http://nimbleshop-guides.heroku.com":http://nimbleshop-guides.heroku.com .
 
 # setup
 
@@ -29,17 +29,6 @@ If you want to run tests for one single file then that can be done like this.
 
     bundle exec ruby -Ispec spec/models/product_spec.rb
 
-
 # Admin
 
-visit http://localhost:3000/admin
-
-# change theme
-
-To change theme go to 'admin' page by visiting http://localhost:3000/admin and then click on 'Shop configuration'.
-There type in the name of your new 'theme'.
-
-# TODO
-
-* fix shipping
-* fix status for order: shipping_address_provided, authorized, paid,
+To perform admin functionalities "visit":http://localhost:3000/admin
