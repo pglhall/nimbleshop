@@ -1,5 +1,7 @@
 class ProductGroup < ActiveRecord::Base
 
+  include BuildPermalink
+
   serialize :condition
 
   validates :name, presence: true
@@ -67,21 +69,6 @@ class ProductGroup < ActiveRecord::Base
     v = value.values_at(:v).first
     result << ((custom_field_object.field_type == 'number') ? v : "'#{v}'")
     result.join(' ')
-  end
-
-  private
-
-  # TODO move this to a separate gem
-  def set_permalink
-    permalink = self.name.parameterize
-    counter = 2
-
-    while self.class.exists?(permalink: permalink) do
-      permalink = "#{permalink}-#{counter}"
-      counter = counter + 1
-    end
-
-    self.permalink ||= permalink
   end
 
 end

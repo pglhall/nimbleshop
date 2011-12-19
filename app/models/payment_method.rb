@@ -1,4 +1,7 @@
 class PaymentMethod < ActiveRecord::Base
+
+  include BuildPermalink
+
   before_create :set_permalink
   before_save :set_data
 
@@ -12,18 +15,6 @@ class PaymentMethod < ActiveRecord::Base
   after_initialize :set_data_instance_variables
 
   private
-
-  def set_permalink
-    permalink = self.name.parameterize
-    counter = 2
-
-    while self.class.exists?(permalink: permalink) do
-      permalink = "#{permalink}-#{counter}"
-      counter = counter + 1
-    end
-
-    self.permalink ||= permalink
-  end
 
   def set_data
     self.data = { }
