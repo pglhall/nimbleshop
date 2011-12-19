@@ -41,7 +41,7 @@ namespace :db do
     ShippingZone.delete_all
 
     Shop.create!(name: 'nimbleshop',
-                 theme: 'spotless',
+                 theme: 'bootstrap',
                  phone_number: '800-456-7890',
                  contact_email: 'neeraj@nimbleshop.com',
                  twitter_handle: '@nimbleshop',
