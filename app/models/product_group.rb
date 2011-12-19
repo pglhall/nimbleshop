@@ -16,9 +16,8 @@ class ProductGroup < ActiveRecord::Base
     products.include?(product)
   end
 
-  def url
-    raise 'boom do not use'
-    "/product_groups/#{self.permalink}"
+  def to_param
+    self.permalink
   end
 
   def products
