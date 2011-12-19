@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  #FIXME
-  #protect_from_forgery
+  protect_from_forgery
 
   before_filter :set_shop
   helper_method :current_order, :current_shop
