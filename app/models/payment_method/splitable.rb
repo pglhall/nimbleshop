@@ -11,9 +11,9 @@ class PaymentMethod::Splitable < PaymentMethod
     data.merge!(title: 'iPad')
     data.merge!(total_amount: 50000)
     data.merge!(invoice: order.id)
-    data.merge!(number_of_participants: 10)
     data.merge!(api_secret: 'sdfs9smdsddf')
     data.merge!(details_url: 'http://www.apple.com/pr/products/ipad/ipad.html')
+    data.merge!(api_notify_url: ' http://localhost:3010/payment_notifications/splitable')
 
     data.merge!(logo_url: 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
     data.merge!(product_picture_url: 'http://cdn.tipb.com/images/stories/2010/01/ipad.png')

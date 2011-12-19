@@ -1,6 +1,6 @@
 class PaymentNotificationsController < ApplicationController
 
-  protect_from_forgery :except => [:create]
+  protect_from_forgery :except => [:paypal, :splitable]
 
   #
   #curl -d "txn_id=3XC103945N720211C&invoice=923204115&payment_status=Completed" http://localhost:3000/payment_notifications/paypal

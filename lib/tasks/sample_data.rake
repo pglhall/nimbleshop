@@ -12,7 +12,7 @@ namespace :db do
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
 
     payment_method = PaymentMethod.find_by_permalink('splitable')
-    payment_method.api_key = 'cfjpolmh5dh9ogs'
+    payment_method.api_key = '42398cc9ac420bf4'
     payment_method.save!
 
     payment_method = PaymentMethod.find_by_permalink('authorize-net')

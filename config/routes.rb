@@ -20,7 +20,12 @@ Nimbleshop::Application.routes.draw do
   end
 
   resources :creditcard_payments
-  resources :payment_notifications
+  resources :payment_notifications do
+    collection do
+      post 'paypal'
+      post 'splitable'
+    end
+  end
   resources :product_groups
   resources :products,  only: [:index, :show] do
     member do
