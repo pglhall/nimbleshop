@@ -3,6 +3,23 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
 */
+
+
+.clearfix a.help {
+  float: left;
+  padding-top: 6px;
+  padding-left: 6px;
+  color: #969696;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/*
+ * Adding a bit of padding because having a help symbol make the things seem closer
+ */
+form .input {
+  padding-left: 8px;
+}
 /*!
  * Bootstrap v1.4.0
  *
