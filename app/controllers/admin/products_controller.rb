@@ -1,6 +1,6 @@
 class Admin::ProductsController < AdminController
 
-  before_filter :load_product, only: [:show, :edit, :create, :update, :destroy ]
+  before_filter :load_product, only: [:show, :edit, :update, :destroy ]
 
   respond_to :html
 
