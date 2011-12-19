@@ -48,10 +48,11 @@ module Nimbleshop
     config.assets.precompile += ['admin.css', 'admin.js']
     config.assets.precompile += ['admin_data.css', 'admin_data.js']
 
-    config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/stylesheets"
-    config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/javascripts"
-    config.assets.paths << "#{Rails.root}/app/themes/spotless/assets/images"
-    config.assets.precompile += ['spotless.css', 'spotless.js']
+    # TODO fix so that we do not need to hardcode theme name
+    config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/stylesheets"
+    config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/javascripts"
+    config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/images"
+    config.assets.precompile += ['nootstrap.css', 'nootstrap.js']
 
 
     # Version of your assets, change this if you want to expire all your assets
