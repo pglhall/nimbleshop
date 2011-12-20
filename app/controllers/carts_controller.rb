@@ -15,6 +15,7 @@ class CartsController < ApplicationController
     product = Product.find_by_permalink!(params[:permalink])
     session[:order_id] = Order.create!.id unless current_order
     current_order.add(product)
+    current_order.update_attributes(status: 'added_to_cart')
     redirect_to cart_url
   end
 

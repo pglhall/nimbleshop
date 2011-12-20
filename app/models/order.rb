@@ -16,9 +16,9 @@ class Order < ActiveRecord::Base
 
   validates :email, :email => true, :if => lambda {|record| record.validate_email }
 
-  validates_inclusion_of :status, :in => %W( added_to_cart billing_info_provided authorized paid)
+  validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info)
 
-  before_save :set_order_number, :set_status
+  before_save :set_order_number
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
@@ -101,12 +101,6 @@ class Order < ActiveRecord::Base
 
   def set_order_number
     self.number = Random.new.rand(11111111...99999999).to_s
-  end
-
-  def set_status
-    if self.status == 'added_to_cart' && self.email_changed?
-      self.status = 'billing_info_provided'
-    end
   end
 
 end

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   def update_shipping_method
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
-      current_order.update_attributes(params[:order])
+      current_order.update_attributes(params[:order].merge(status: 'added_shipping_method'))
 
       case session[:payment_method_permalink]
       when 'splitable'
@@ -48,14 +48,14 @@ class OrdersController < ApplicationController
     current_order.valid?
 
     handle_shipping_address
-    unless current_order.shipping_address.use_for_billing
-      handle_billing_address
-    end
+    handle_billing_address unless current_order.shipping_address.use_for_billing
+
     if  current_order.errors.any? ||
         current_order.shipping_address.errors.any?  ||
         (current_order.billing_address && current_order.billing_address.errors.any?)
       render 'edit'
     else
+      current_order.update_attributes!(status: 'added_shipping_info')
       redirect_to edit_shipping_method_order_path(current_order)
     end
   end
