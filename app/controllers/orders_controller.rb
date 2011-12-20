@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
       case session[:payment_method_permalink]
       when 'splitable'
-        redirect_to PaymentMethod::Splitable.first.url(current_order)
+        redirect_to PaymentMethod::Splitable.first.url(current_order, request)
       when 'paypal-website-payments-standard'
         redirect_to current_order.paypal_url
       when 'authorize-net'
