@@ -22,6 +22,8 @@ class PaymentNotificationsController < ApplicationController
   #
   def splitable
     Rails.logger.info params.inspect
+    order = Order.find_by_number(params[:invoice])
+    order.update_attribute('status', params[:payment_status])
     render :nothing => true
   end
 
