@@ -15,7 +15,6 @@ class PaymentMethod::Splitable < PaymentMethod
     data.merge!(api_secret: 'sdfs9smdsddf')
     data.merge!(details_url: 'http://www.apple.com/pr/products/ipad/ipad.html')
 
-
     t = request.protocol + request.host_with_port + '/payment_notifications/splitable'
     Rails.logger.info t
     data.merge!(api_notify_url: t)
