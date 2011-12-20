@@ -7,8 +7,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td> <%= order.number %> </td>
-        <td> <%= number_to_currency(order.amount) %> </td>
-        <td><%= order.number %></td>
+        <td> <%= number_to_currency(order.grand_total) %> </td>
         <td><%= order.status %></td>
         <td><%= order.updated_at %></td>
       </tr>

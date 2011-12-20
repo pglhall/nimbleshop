@@ -1,3 +1,4 @@
+# TODO why is this needed
 Address
 
 class Order < ActiveRecord::Base
@@ -76,12 +77,14 @@ class Order < ActiveRecord::Base
   def price
     self.line_items.inject(0) { |sum, item| sum += item.line_price }
   end
-  alias :total_price :price
   alias :amount :price
 
   def price_with_shipping
     shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost
   end
+  alias :total_amount :price_with_shipping
+  alias :total_price :price_with_shipping
+  alias :grand_total :price_with_shipping
 
 
   # This methods returns true if the shipping cost is zero and usre has no choice. This
