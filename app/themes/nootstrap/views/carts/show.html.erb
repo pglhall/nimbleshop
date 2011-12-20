@@ -3,7 +3,7 @@
 <% if items_count_in_cart == 0 %>
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
-  <form action="/cart" method="post" name="cartform" id='cartform'>
+  <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
 	  <table class='zebra-striped'>
       <thead>
         <tr>
@@ -15,41 +15,14 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart.line_items.each do |line_item| %>
-		      <tr>
-			      <td class="pic">
-                <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product) %>
-			      </td>
-			      <td>
-              <strong><%= link_to(line_item.product.title, line_item.product) %></strong>
-				      <p>
-                <%= truncate(sanitize(line_item.product.description), length: 90) %>
-              </p>
-			      </td>
-			      <td><%= number_to_currency(line_item.product.price) %></td>
-            <td>
-              <input type="text" size="2" name="updates[<%=line_item.product.permalink%>]" id="updates_<%=line_item.product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>"/>
-          </td>
-            <td class="remove">
-              <a class='remove-item' href="#" data-permalink="<%=line_item.product.permalink%>">Remove</a>
-
-            </td>
-			      <td><strong><%= number_to_currency(line_item.line_price) %></strong></td>
-		      </tr>
+        <% @line_items.each do |line_item| %>
+          <%= render 'line_item', line_item: line_item %>
         <% end %>
         <tr>
-          <td colspan='3'>
-			      <p>Not ready to checkout? <a href="/">Continue shopping...</a></p>
-          </td>
-          <th>
-            <%= submit_tag 'Update', class: 'btn primary' %>
-          </th>
-          <th>
-            Total:
-          </th>
-          <td>
-            <%= number_to_currency(@cart.total_price) %>
-          </td>
+          <td colspan='3'> <p>Not ready to checkout? <a href="/">Continue shopping...</a></p> </td>
+          <th> <%= submit_tag 'Update', class: 'btn primary' %> </th>
+          <th> Total: </th>
+          <td> <%= number_to_currency(@cart.total_price) %> </td>
         </tr>
         <tr>
           <td colspan='4'>&nbsp;</td>
@@ -76,6 +49,5 @@
         </tr>
       </tbody>
     </table>
-
-  </form>
+  <% end %>
 <% end %>

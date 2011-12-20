@@ -8,16 +8,7 @@ class CartsController < ApplicationController
   end
 
   def create
-    if params[:payment_method_permalink]
-      session[:payment_method_permalink] = params[:payment_method_permalink].keys.first
-      redirect_to edit_order_url(current_order) and return
-    end
-
-    params[:updates].each do |permalink, quantity|
-      product = Product.find_by_permalink!(permalink)
-      current_order.set_quantity(product, quantity.to_i)
-    end
-    redirect_to cart_url
+    raise 'boom think it is not needed'
   end
 
   def add
@@ -28,12 +19,16 @@ class CartsController < ApplicationController
   end
 
   def update
-    product = current_order.products.find(params[:product_id])
-    current_order.set_quantity(product, params[:quantity].to_i)
-    respond_to do |format|
-      format.html { redirect_to cart_url }
-      format.js
+    if params[:payment_method_permalink]
+      session[:payment_method_permalink] = params[:payment_method_permalink].keys.first
+      redirect_to edit_order_url(current_order) and return
     end
+
+    params[:updates].each do |permalink, quantity|
+      product = Product.find_by_permalink!(permalink)
+      current_order.set_quantity(product, quantity.to_i)
+    end
+    redirect_to cart_url
   end
 
   def destroy

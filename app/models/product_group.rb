@@ -1,8 +1,13 @@
 class ProductGroup < ActiveRecord::Base
 
+  attr_accessor :custom_field_id, :custom_field_operator, :custom_field_value
+
+  include BuildPermalink
+
   serialize :condition
 
   validates :name, presence: true
+  validates :custom_field_id, presence: true, :if => lambda { |record| record.condition.blank? }
 
   before_create :set_permalink
 
@@ -11,8 +16,8 @@ class ProductGroup < ActiveRecord::Base
     products.include?(product)
   end
 
-  def url
-    "/product_groups/#{self.permalink}"
+  def to_param
+    self.permalink
   end
 
   def products
@@ -67,21 +72,6 @@ class ProductGroup < ActiveRecord::Base
     v = value.values_at(:v).first
     result << ((custom_field_object.field_type == 'number') ? v : "'#{v}'")
     result.join(' ')
-  end
-
-  private
-
-  # TODO move this to a separate gem
-  def set_permalink
-    permalink = self.name.parameterize
-    counter = 2
-
-    while self.class.exists?(permalink: permalink) do
-      permalink = "#{permalink}-#{counter}"
-      counter = counter + 1
-    end
-
-    self.permalink ||= permalink
   end
 
 end

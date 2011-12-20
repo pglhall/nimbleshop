@@ -3,41 +3,25 @@
 # Settings.s3_access_key_id
 #
 common:
-  splitable_support_bare: support@nimbleshop.com
-  host_for_email: nimbleshop.com
-  reach_out_email_in_outgoing_emails: hello@nimbleshop.com
-  host_url_with_http: http://localhost:3000
-
+  # TODO move it to shop configuration and add a show link
   s3_access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
   s3_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
 
-  send_grid_user_name: <%=ENV['SEND_GRID_USERNAME']%>
-  send_grid_password: <%=ENV['SEND_GRID_PASSWORD']%>
-
-
 development:
-  bare_url_with_port: localhost:3000
   using_heroku: false
+  # TODO move it to shop configuration and add a show link
   s3_bucket: nibmbleship-development
-  host_for_email_with_www: www.localhost:3000
-  send_grid_user_name: neerajdotname
-  send_grid_password: blackmarlin21
 
 test:
-  bare_url_with_port: localhost:3000
   using_heroku: false
   cookie_domain: example.com
   s3_bucket: nimbleshop-test
-  host_for_email_with_www: www.localhost:3000
 
 staging:
-  mail_safe_redirected_email: hello.nimbleshop@gmail.com
-  host_url_with_http: http://nimbleshop-staging.heroku.com
-
+  # TODO move it to shop configuration
   paypal_return_url: http://nimbleshop-staging.heroku.com/paypal_return
   paypal_notify_url: http://nimbleshop-staging.heroku.com/paypal_payment_notifications
 
 production:
-  host_url_with_http: http://nimbleshop.com
   paypal_return_url: http://nimbleshop.heroku.com/paypal_return
   paypal_notify_url: http://nimbleshop.heroku.com/payment_notifications/paypal

@@ -32,7 +32,7 @@ class Order < ActiveRecord::Base
       :upload => 1,
       :return => payment_method.return_url,
       :invoice => self.number,
-      :secret  => 'xxxxxxx',
+      :secret  => 'xxxxxxx', #TODO this should be stored and verified later
       :notify_url => payment_method.notify_url
     }
     line_items.each_with_index do |item, index|

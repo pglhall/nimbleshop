@@ -1,3 +1,2 @@
 class ShippingAddress < Address
-
 end

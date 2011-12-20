@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   alias_attribute :title, :name
 
   include Product::Scopes
+  include BuildPermalink
 
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true
@@ -51,19 +52,4 @@ class Product < ActiveRecord::Base
     self.permalink
   end
 
-  private
-
-  # TODO move this to a separate gem
-  def set_permalink
-    permalink = self.name.parameterize
-    counter = 2
-
-    while self.class.exists?(permalink: permalink) do
-      permalink = "#{permalink}-#{counter}"
-      counter = counter + 1
-    end
-
-    self.permalink ||= permalink
-  end
 end
-

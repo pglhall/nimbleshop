@@ -48,7 +48,7 @@ module Nimbleshop
     config.assets.precompile += ['admin.css', 'admin.js']
     config.assets.precompile += ['admin_data.css', 'admin_data.js']
 
-    # TODO fix so that we do not need to hardcode theme name
+    # TODO we should do not need to hardcode theme name
     config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/stylesheets"
     config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/javascripts"
     config.assets.paths << "#{Rails.root}/app/themes/nootstrap/assets/images"

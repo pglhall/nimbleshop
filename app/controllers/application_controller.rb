@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  #FIXME
-  #protect_from_forgery
+  protect_from_forgery
 
   before_filter :set_shop
   helper_method :current_order, :current_shop
@@ -12,7 +11,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    @current_order ||= Order.find_by_id(session[:order_id])
+    @current_order ||= begin
+      Order.find_by_id!(session[:order_id]) if session[:order_id]
+    end
   end
 
   def reset_order
