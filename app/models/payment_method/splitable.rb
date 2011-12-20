@@ -10,7 +10,7 @@ class PaymentMethod::Splitable < PaymentMethod
     data.merge!(api_key: self.api_key)
     data.merge!(title: 'iPad')
     data.merge!(total_amount: 50000)
-    data.merge!(invoice: order.id)
+    data.merge!(invoice: order.number)
     data.merge!(api_secret: 'sdfs9smdsddf')
     data.merge!(details_url: 'http://www.apple.com/pr/products/ipad/ipad.html')
     data.merge!(api_notify_url: ' http://localhost:3010/payment_notifications/splitable')
