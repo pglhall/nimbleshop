@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>  nimbleSHOP Guides
-</title>
+<title>Ruby on Rails Guides: heroku</title>
 
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
@@ -26,68 +25,25 @@
 
   <div id="feature">
     <div class="wrapper">
-      
+      <h2>heroku</h2>
+<p>This guide covers how you can use heroku to deploy your shop.</p>
 
-      
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#pingdom">Pingdom</a></li></ol></div>
     </div>
   </div>
 
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        
-<p>
-  <h3>Getting started</h3>
-  <ul>
-    <li>
-      <a href="getting_started.html">Getting Started with nimbleSHOP</a>
-    </li>
-    <li>
-      <a href="why_postgresql.html">Why postgresql</a>
-    </li>
-  </ul>
-</p>
+        <h3 id="pingdom">1 Pingdom</h3>
+<p>For good or the bad nimbleSHOP has totally embraced heroku. Since heroku has buitin support for postgresql, nimbleSHOP decided to use postgresql. So far no code is written specifically for postgresql so nimbleSHOP should work fine with MySQL and other databases. However note that all the tests are run only for postgresql.
+pingdom has a free account which can allow you to ping a site every 5 minutes or every 1 minute. This pinging will not let you dyno go down if you are using the basic free plan from heroku.</p>
 
-<p>
-  <h3>Payment methods</h3>
-  <ul>
-    <li>
-      <a href="payment_methods.html">Basics</a>
-    </li>
-    <li>
-      <a href="payment_methods_authorize_net.html">Authorize.net</a>
-    </li>
-    <li>
-      <a href="payment_methods_paypal_website_payments_standard.html">Paypal</a>
-    </li>
-  </ul>
-</p>
-
-<p>
-  <h3>Deployment</h3>
-  <ul>
-    <li> <a href="heroku.html">Heroku</a> </li>
-    <li> <a href="ssl.html">Setting up SSL</a> </li>
-    <li> <a href="tools.html">Tools</a> </li>
-  </ul>
-</p>
-
-<p>
-  <h3>Misc</h3>
-  <ul>
-    <li> <a href="18n.html"> Internationalization and Localization </a> </li>
-    <li> <a href="taxrules.html">e-commerce tax rules</a> </li>
-  </ul>
-</p>
-
-<style>
-  #mainCol dd, #subCol dd {
-    border-bottom: 0;
-  }
-</style>
-
-
-        <p class='feedback'>
+        <h3>Feedback</h3>
+        <p>
           You're encouraged to help improve the quality of this guide.
           If you see any typos or factual errors you are confident to
           patch, please <a href="">submit a pull request</a>
