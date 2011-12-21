@@ -28,12 +28,12 @@
   <div class='span5'>
     <h3><%= number_to_currency(@product.price) %></h3>
 
-    <form method="post" action="/cart/add">
+    <%= form_tag('/cart/add', method: 'post') do %>
       <input type="hidden" name="permalink" value="<%= @product.permalink %>" />
 			<div id="buy" class="clear">
 				<input type="submit" value="Add to Cart" class='btn primary' />
 			</div>
-		</form>
+    <% end %>
 
     <h4>Description</h4>
     <%= simple_format(@product.description) %>
