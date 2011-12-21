@@ -18,14 +18,17 @@ class PaymentNotificationsController < ApplicationController
   end
 
   #
-  # curl -d "api_secret=xxxx&invoice=923204115&payment_status=paid" http://localhost:3000/payment_notifications/splitable
-  # curl -d "api_secret=b99c291d97579c24&invoice=62115901&payment_status=captured" http://localhost:3000/payment_notifications/splitable
+  # curl -d "api_secret=dsdfdsfswvf3dsdf&invoice=923204115&payment_status=paid" http://localhost:3000/payment_notifications/splitable
   #
   def splitable
-    Rails.logger.info params.inspect
     order = Order.find_by_number(params[:invoice])
-    order.update_attributes!(status: params[:payment_status])
-    render :nothing => true
+    if order.preferred_api_secret == params[:api_secret]
+      order.update_attributes!(status: params[:payment_status])
+      render :nothing => true
+    else
+      # TODO do not return 200
+      render :nothing => true
+    end
   end
 
 end

@@ -13,7 +13,12 @@ class PaymentMethod::Splitable < PaymentMethod
     data.merge!(title: product.name)
     data.merge!(total_amount: (order.grand_total*100).to_i)
     data.merge!(invoice: order.number)
-    data.merge!(api_secret: 'sdfs9smdsddf')
+
+    api_secret = ActiveSupport::SecureRandom.hex(10)
+    order.write_preference(:api_secret, api_secret)
+    order.save
+
+    data.merge!(api_secret: api_secret)
     data.merge!(details_url: request.protocol + request.host_with_port + "/products/#{product.permalink}")
 
     t = request.protocol + request.host_with_port + '/payment_notifications/splitable'

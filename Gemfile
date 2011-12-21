@@ -11,15 +11,17 @@ gem 'activemerchant'
 gem 'binary_merchant', git: 'git://github.com/bigbinary/binary_merchant.git'
 #gem 'binary_merchant', path: '/Users/nsingh/dev/personal/binary_merchant'
 
+
 # for uploading images
 gem 'carrierwave'
 
+# for having nested items. order has billing_address and shipping_address nested
 gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
 
 # for creating thumbnails for images
 gem 'mini_magick'
 
-# to load sample data
+# to load sample data. It should be gone soon
 gem 'yaml_db'
 
 group :development, :test do
@@ -56,7 +58,11 @@ gem 'admin_data', '= 1.1.16'
 gem 'themes_for_rails', git: 'git://github.com/neerajdotname/themes_for_rails.git'
 #gem 'themes_for_rails', path: '/Users/nsingh/dev/personal/themes_for_rails'
 
-gem 'email_validator', :git => "git://github.com/bigbinary/email_validator.git"
+# for validating email
+gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 
-# to support i18n
+# for storing preferences for individual models
+#gem 'preferences', git: 'git://github.com/neerajdotname/preferences.git'
+
+# to support i18n . Uncomment it if you are using any other language
 #gem 'rails-i18n'

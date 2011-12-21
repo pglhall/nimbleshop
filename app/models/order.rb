@@ -6,6 +6,8 @@ class Order < ActiveRecord::Base
   attr_protected :order_number
   attr_accessor :validate_email
 
+  preference :api_secret, :string
+
   belongs_to  :shipping_method
   has_many :line_items
   has_many :products, :through => :line_items

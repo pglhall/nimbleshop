@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111203034020) do
+ActiveRecord::Schema.define(:version => 20111221190000) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -153,6 +153,19 @@ ActiveRecord::Schema.define(:version => 20111203034020) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "preferences", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "owner_id",   :null => false
+    t.string   "owner_type", :null => false
+    t.integer  "group_id"
+    t.string   "group_type"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "preferences", ["owner_id", "owner_type", "name", "group_id", "group_type"], :name => "index_preferences_on_owner_and_name_and_preference", :unique => true
 
   create_table "product_group_conditions", :force => true do |t|
     t.integer  "product_group_id"
