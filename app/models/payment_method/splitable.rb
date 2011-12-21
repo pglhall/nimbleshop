@@ -1,3 +1,7 @@
+Order.class_eval do
+  preference :api_secret, :string
+end
+
 class PaymentMethod::Splitable < PaymentMethod
 
   attr_accessor :api_key
@@ -5,7 +9,6 @@ class PaymentMethod::Splitable < PaymentMethod
   def url(order, request)
     product = order.line_items.first.product
 
-    submission_url = 'http://localhost:3000/split_payments/split?'
     submission_url = 'http://lvh.me:3000/split_payments/split?'
     data = {}
 

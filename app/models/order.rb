@@ -3,10 +3,8 @@ Address
 
 class Order < ActiveRecord::Base
 
-  attr_protected :order_number
+  attr_protected :number
   attr_accessor :validate_email
-
-  preference :api_secret, :string
 
   belongs_to  :shipping_method
   has_many :line_items
@@ -21,7 +19,7 @@ class Order < ActiveRecord::Base
 
   validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info)
 
-  before_save :set_order_number
+  before_create :set_order_number
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
