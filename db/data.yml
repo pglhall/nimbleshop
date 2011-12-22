@@ -1,7 +1,189 @@
 
----
-products:
-  columns:
+--- 
+navigations: 
+  columns: 
+  - id
+  - link_group_id
+  - navigeable_id
+  - navigeable_type
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - "1"
+    - "1"
+    - Link
+    - 2011-12-22 02:08:19.712112
+    - 2011-12-22 02:08:19.712112
+  - - "2"
+    - "2"
+    - "1"
+    - ProductGroup
+    - 2011-12-22 02:08:20.123188
+    - 2011-12-22 02:08:20.123188
+  - - "3"
+    - "2"
+    - "2"
+    - ProductGroup
+    - 2011-12-22 02:08:20.125512
+    - 2011-12-22 02:08:20.125512
+  - - "4"
+    - "2"
+    - "3"
+    - ProductGroup
+    - 2011-12-22 02:08:20.127244
+    - 2011-12-22 02:08:20.127244
+  - - "5"
+    - "3"
+    - "4"
+    - ProductGroup
+    - 2011-12-22 02:08:20.181796
+    - 2011-12-22 02:08:20.181796
+  - - "6"
+    - "3"
+    - "5"
+    - ProductGroup
+    - 2011-12-22 02:08:20.183933
+    - 2011-12-22 02:08:20.183933
+  - - "7"
+    - "3"
+    - "6"
+    - ProductGroup
+    - 2011-12-22 02:08:20.185535
+    - 2011-12-22 02:08:20.185535
+
+--- 
+product_groups: 
+  columns: 
+  - id
+  - name
+  - permalink
+  - condition
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - bracelets
+    - bracelets
+    - |
+      --- 
+      q1: 
+        :op: eq
+        :v: bracelet
+
+    - 2011-12-22 02:08:20.082573
+    - 2011-12-22 02:08:20.082573
+  - - "2"
+    - earrings
+    - earrings
+    - |
+      --- 
+      q1: 
+        :op: eq
+        :v: earring
+
+    - 2011-12-22 02:08:20.104963
+    - 2011-12-22 02:08:20.104963
+  - - "3"
+    - necklaces
+    - necklaces
+    - |
+      --- 
+      q1: 
+        :op: eq
+        :v: necklace
+
+    - 2011-12-22 02:08:20.112221
+    - 2011-12-22 02:08:20.112221
+  - - "4"
+    - < $50
+    - "50"
+    - |
+      --- 
+      q2: 
+        :op: lt
+        :v: 50
+
+    - 2011-12-22 02:08:20.170678
+    - 2011-12-22 02:08:20.170678
+  - - "5"
+    - $50 - $100
+    - 50-100
+    - |
+      --- 
+      q2: 
+      - :op: gteq
+        :v: 50
+      - :op: lteq
+        :v: 100
+
+    - 2011-12-22 02:08:20.174552
+    - 2011-12-22 02:08:20.174552
+  - - "6"
+    - "> $100"
+    - "100"
+    - |
+      --- 
+      q2: 
+        :op: gt
+        :v: 100
+
+    - 2011-12-22 02:08:20.177286
+    - 2011-12-22 02:08:20.177286
+
+--- 
+shops: 
+  columns: 
+  - id
+  - name
+  - theme
+  - gateway
+  - phone_number
+  - twitter_handle
+  - contact_email
+  - facebook_url
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - nimbleshop
+    - nootstrap
+    - AuthorizeNet
+    - 800-456-7890
+    - nimbleshop
+    - neeraj@nimbleshop.com
+    - http://www.facebook.com/pages/NimbleSHOP/119319381517845
+    - 2011-12-22 02:08:19.609949
+    - 2011-12-22 02:08:19.61826
+
+--- 
+link_groups: 
+  columns: 
+  - id
+  - name
+  - permalink
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - Main-nav
+    - main-nav
+    - 2011-12-22 02:08:19.629174
+    - 2011-12-22 02:08:19.629174
+  - - "2"
+    - Shop by category
+    - shop-by-category
+    - 2011-12-22 02:08:20.119493
+    - 2011-12-22 02:08:20.119493
+  - - "3"
+    - Shop by price
+    - shop-by-price
+    - 2011-12-22 02:08:20.179827
+    - 2011-12-22 02:08:20.179827
+
+--- 
+products: 
+  columns: 
   - id
   - name
   - description
@@ -12,17 +194,17 @@ products:
   - permalink
   - created_at
   - updated_at
-  records:
+  records: 
   - - "4"
     - Howlite and Crystal Flower Bracelet
     - |-
       This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!
-
+      
       A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
     - "10"
     - false
     - true
-    -
+    - 
     - howlite-and-crystal-flower-bracelet
     - 2011-11-26 19:27:45.313309
     - 2011-12-12 20:49:43.150387
@@ -30,12 +212,12 @@ products:
     - Candy Colours Bracelet Set
     - |-
       4 acrylic stretch beaded bracelets with peace sign, butterfly and heart charms.
-
+      
       A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
     - "47"
     - false
     - true
-    -
+    - 
     - candy-colours-bracelet-set
     - 2011-11-26 19:33:40.065037
     - 2011-12-12 17:47:44.053169
@@ -47,7 +229,7 @@ products:
     - "78"
     - false
     - true
-    -
+    - 
     - gemstone-cross-necklaces
     - 2011-11-26 19:35:50.65876
     - 2011-12-12 20:49:15.132777
@@ -55,14 +237,14 @@ products:
     - Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered
     - |-
       These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
-
+      
       The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
-
+      
       All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
     - "81"
     - false
     - true
-    -
+    - 
     - large-sterling-silver-hoop-earrings-aqua-freshwater-pearls-moonstone-hammered
     - 2011-11-26 19:43:13.217399
     - 2011-12-12 20:50:08.58488
@@ -74,7 +256,7 @@ products:
     - "107"
     - false
     - true
-    -
+    - 
     - red-black-silver-glass-bracelet
     - 2011-11-26 19:47:01.610002
     - 2011-12-12 20:50:33.970455
@@ -86,7 +268,7 @@ products:
     - "137"
     - false
     - true
-    -
+    - 
     - layered-coral-necklace
     - 2011-11-26 19:49:22.902551
     - 2011-12-12 20:50:22.670768
@@ -94,12 +276,12 @@ products:
     - Claddagh Earrings
     - |-
       These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
-
+      
       The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
     - "141"
     - false
     - true
-    -
+    - 
     - claddagh-earrings
     - 2011-11-26 19:51:39.583358
     - 2011-12-12 20:47:15.73745
@@ -113,14 +295,352 @@ products:
     - "101"
     - false
     - true
-    -
+    - 
     - om-necklace
     - 2011-12-22 02:02:35.163305
     - 2011-12-22 02:02:35.163305
+  - - "12"
+    - Men bracelet
+    - Dude you got a bracelet.
+    - "32"
+    - false
+    - true
+    - 
+    - men-bracelet
+    - 2011-12-22 02:56:57.30991
+    - 2011-12-22 02:56:57.30991
 
----
-pictures:
-  columns:
+--- 
+links: 
+  columns: 
+  - id
+  - name
+  - url
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - Home
+    - /
+    - 2011-12-22 02:08:19.639183
+    - 2011-12-22 02:08:19.639183
+
+--- 
+custom_fields: 
+  columns: 
+  - id
+  - name
+  - field_type
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - category
+    - text
+    - 2011-12-22 02:08:19.723898
+    - 2011-12-22 02:08:19.723898
+  - - "2"
+    - price
+    - number
+    - 2011-12-22 02:08:20.128957
+    - 2011-12-22 02:08:20.128957
+
+--- 
+custom_field_answers: 
+  columns: 
+  - id
+  - product_id
+  - custom_field_id
+  - value
+  - text_value
+  - number_value
+  - datetime_value
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - "5"
+    - "1"
+    - bracelet
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.843499
+    - 2011-12-22 02:08:19.843499
+  - - "2"
+    - "4"
+    - "1"
+    - bracelet
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.851877
+    - 2011-12-22 02:08:19.851877
+  - - "3"
+    - "8"
+    - "1"
+    - bracelet
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.85828
+    - 2011-12-22 02:08:19.85828
+  - - "4"
+    - "10"
+    - "1"
+    - earring
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.864402
+    - 2011-12-22 02:08:19.864402
+  - - "5"
+    - "7"
+    - "1"
+    - earring
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.870433
+    - 2011-12-22 02:08:19.870433
+  - - "6"
+    - "6"
+    - "1"
+    - necklace
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.883086
+    - 2011-12-22 02:08:19.883086
+  - - "7"
+    - "9"
+    - "1"
+    - necklace
+    - 
+    - 
+    - 
+    - 2011-12-22 02:08:19.892925
+    - 2011-12-22 02:08:19.892925
+  - - "8"
+    - "4"
+    - "2"
+    - "10"
+    - 
+    - "10"
+    - 
+    - 2011-12-22 02:08:20.134517
+    - 2011-12-22 02:08:20.134517
+  - - "9"
+    - "5"
+    - "2"
+    - "47"
+    - 
+    - "47"
+    - 
+    - 2011-12-22 02:08:20.140039
+    - 2011-12-22 02:08:20.140039
+  - - "10"
+    - "6"
+    - "2"
+    - "78"
+    - 
+    - "78"
+    - 
+    - 2011-12-22 02:08:20.144901
+    - 2011-12-22 02:08:20.144901
+  - - "11"
+    - "7"
+    - "2"
+    - "81"
+    - 
+    - "81"
+    - 
+    - 2011-12-22 02:08:20.150505
+    - 2011-12-22 02:08:20.150505
+  - - "12"
+    - "8"
+    - "2"
+    - "107"
+    - 
+    - "107"
+    - 
+    - 2011-12-22 02:08:20.156192
+    - 2011-12-22 02:08:20.156192
+  - - "13"
+    - "9"
+    - "2"
+    - "137"
+    - 
+    - "137"
+    - 
+    - 2011-12-22 02:08:20.161626
+    - 2011-12-22 02:08:20.161626
+  - - "14"
+    - "10"
+    - "2"
+    - "141"
+    - 
+    - "141"
+    - 
+    - 2011-12-22 02:08:20.167168
+    - 2011-12-22 02:08:20.167168
+
+--- 
+shipping_methods: 
+  columns: 
+  - id
+  - shipping_zone_id
+  - name
+  - lower_price_limit
+  - upper_price_limit
+  - shipping_price
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - "1"
+    - ground shipping
+    - "10.00"
+    - "20"
+    - "10"
+    - 2011-12-22 02:08:20.220421
+    - 2011-12-22 02:08:20.220421
+  - - "2"
+    - "1"
+    - ground shipping
+    - "20.00"
+    - "300"
+    - "20"
+    - 2011-12-22 02:08:20.224065
+    - 2011-12-22 02:08:20.224065
+  - - "3"
+    - "1"
+    - express shipping
+    - "10.00"
+    - "20"
+    - "15"
+    - 2011-12-22 02:08:20.225834
+    - 2011-12-22 02:08:20.225834
+  - - "4"
+    - "1"
+    - express shipping
+    - "20.00"
+    - "300"
+    - "25"
+    - 2011-12-22 02:08:20.227623
+    - 2011-12-22 02:08:20.227623
+
+--- 
+shipping_zones: 
+  columns: 
+  - id
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - USA
+    - 2011-12-22 02:08:20.194373
+    - 2011-12-22 02:08:20.194373
+
+--- 
+shipping_countries: 
+  columns: 
+  - id
+  - shipping_zone_id
+  - country_code
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - "1"
+    - "0"
+    - 2011-12-22 02:08:20.207754
+    - 2011-12-22 02:08:20.207754
+
+--- 
+payment_methods: 
+  columns: 
+  - id
+  - enabled
+  - name
+  - description
+  - data
+  - type
+  - permalink
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - true
+    - Authorize.net
+    - |-
+      <p>
+        Authorize.Net is a payment gateway service provider allowing merchants
+        to accept credit card and electronic checks paymentsn. Authorize.Net
+        claims a user base of over 305,000 merchants, which would make them
+        the Internet's largest payment gateway service provider.
+      </p>
+      
+      <p>
+        It also provides an instant test account which you can use while
+        your application is being processed.
+      </p>
+    - "--- \n\
+      :login_id: 56yBAar72\n\
+      :transaction_key: 9r3pbH5bnKH29f7d\n"
+    - PaymentMethod::AuthorizeNet
+    - authorize-net
+    - 2011-12-22 02:08:19.35752
+    - 2011-12-22 02:08:19.488652
+  - - "2"
+    - true
+    - Paypal website payments standard
+    - |-
+      <p>
+        Paypal website payments standard is a payment solution provided by
+        paypal which allows merchant to accept credit card and paypal payments.
+        There is no monthly fee and no setup fee by paypal for this account.
+      </p>
+      
+      <p>
+        <a href='https://merchant.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=merchant/wp_standard&nav=2.1.0'>
+         more information
+        </a>
+      </p>
+    - "--- \n\
+      :image_on_checkout_page: http://images.paypal.com/images/x-click-but1.gif\n\
+      :merchant_email_address: seller_1323037155_biz@bigbinary.com\n\
+      :return_url: http://localhost:3000/paypal_return\n\
+      :notify_url: http://localhost:3000/payment_notifications/paypal\n\
+      :request_submission_url: https://www.sandbox.paypal.com/cgi-bin/webscr?\n"
+    - PaymentMethod::PaypalWebsitePaymentsStandard
+    - paypal-website-payments-standard
+    - 2011-12-22 02:08:19.434258
+    - 2011-12-22 02:08:19.491815
+  - - "3"
+    - true
+    - Splitable
+    - |-
+      <p>
+        Splitable helps split the cost of product with friends and family.
+      </p>
+      
+      <p>
+        <a href='http://splitable.com'>
+         more information
+        </a>
+      </p>
+    - "--- \n\
+      :api_key: 42398cc9ac420bf4\n"
+    - PaymentMethod::Splitable
+    - splitable
+    - 2011-12-22 02:08:19.479363
+    - 2011-12-22 02:08:19.484967
+
+--- 
+pictures: 
+  columns: 
   - id
   - product_id
   - picture
@@ -130,193 +650,202 @@ pictures:
   - picture_updated_at
   - created_at
   - updated_at
-  records:
+  records: 
   - - "1"
     - "4"
     - pic1.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:27:45.320208
     - 2011-11-26 19:27:45.320208
   - - "2"
     - "4"
     - pic2.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:27:45.333428
     - 2011-11-26 19:27:45.333428
   - - "3"
     - "4"
     - pic3.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:27:45.344597
     - 2011-11-26 19:27:45.344597
   - - "4"
     - "5"
     - pic4.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:33:40.068187
     - 2011-11-26 19:33:40.068187
   - - "5"
     - "5"
     - pic5.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:33:40.080242
     - 2011-11-26 19:33:40.080242
   - - "6"
     - "6"
     - pic6.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:35:50.661635
     - 2011-11-26 19:35:50.661635
   - - "7"
     - "6"
     - pic7.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:35:50.6744
     - 2011-11-26 19:35:50.6744
   - - "8"
     - "6"
     - pic8.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:35:50.689538
     - 2011-11-26 19:35:50.689538
   - - "9"
     - "7"
     - pic9.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:43:13.219967
     - 2011-11-26 19:43:13.219967
   - - "10"
     - "7"
     - pic10.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:43:13.230177
     - 2011-11-26 19:43:13.230177
   - - "11"
     - "7"
     - pic11.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:43:13.244986
     - 2011-11-26 19:43:13.244986
   - - "12"
     - "8"
     - pic12.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:47:01.612748
     - 2011-11-26 19:47:01.612748
   - - "13"
     - "8"
     - pic13.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:47:01.625687
     - 2011-11-26 19:47:01.625687
   - - "14"
     - "8"
     - pic14.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:47:01.638939
     - 2011-11-26 19:47:01.638939
   - - "15"
     - "9"
     - pic15.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:49:22.904952
     - 2011-11-26 19:49:22.904952
   - - "16"
     - "9"
     - pic16.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:49:22.916088
     - 2011-11-26 19:49:22.916088
   - - "17"
     - "9"
     - pic17.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:49:22.929773
     - 2011-11-26 19:49:22.929773
   - - "18"
     - "10"
     - pic18.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:51:39.585709
     - 2011-11-26 19:51:39.585709
   - - "19"
     - "10"
     - pic19.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:51:39.674801
     - 2011-11-26 19:51:39.674801
   - - "20"
     - "10"
     - pic20.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-11-26 19:51:39.686259
     - 2011-11-26 19:51:39.686259
   - - "21"
     - "11"
     - om.jpg
-    -
-    -
-    -
-    -
+    - 
+    - 
+    - 
+    - 
     - 2011-12-22 02:02:35.199519
     - 2011-12-22 02:02:35.199519
+  - - "22"
+    - "12"
+    - men_bracelet.jpg
+    - 
+    - 
+    - 
+    - 
+    - 2011-12-22 02:56:57.348594
+    - 2011-12-22 02:56:57.348594
