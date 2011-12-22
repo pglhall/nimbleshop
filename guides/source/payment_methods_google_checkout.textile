@@ -1,0 +1,42 @@
+h2. Payment method - google checkout
+
+nimbleSHOP has built in support for google checkout.
+
+endprologue.
+
+h3. google checkout
+
+
+Transaction processing rates are determined by your sales volume during the prior calendar month minus any refunds and are reset on the 5th of every month.
+
+You can verify your current transaction processing rate on the Payouts tab of your Google Checkout account. Learn more about reconciliation. The transaction fee for a particular order appears on the Order Details page and is deducted from your payout for that order.
+
+Monthly sales under $3,000	2.9% + $0.30 per transaction
+$3,000 - $9,999.99	2.5% + $0.30
+$10,000 - $99,999.99	2.2% + $0.30
+$100,000 or more	1.9% + $0.30
+Orders from buyers whose billing address is outside the country of your Google Checkout account will be assessed an additional 1% processing fee. Cross-border orders are noted within your account on the Order Details page. Note: the cross-border fee does not apply to Chrome Webstore and Android Market transactions.
+
+
+
+An additional 1% fee will be assessed on transactions where the merchant's country is different from the buyer's billing country. With 10 days notice, we may also charge higher transaction processing fees to merchants that incur excessive chargebacks or otherwise pose financial risk to Checkout.
+
+authorization and confirmation
+
+Google Checkout offers you the ability to partially capture funds and explicitly reauthorize an order if the initial 7-day authorization window expires. You will be charged $0.30 each time you charge an order.
+
+https://checkout.google.com/seller/fees.html
+
+https://support.google.com/checkout/sell/bin/answer.py?hl=en&answer=25397
+
+
+
+
+References:
+
+https://support.google.com/checkout/sell/bin/answer.py?hl=en&answer=89800
+
+https://checkout.google.com/seller/fees.html
+
+
+
