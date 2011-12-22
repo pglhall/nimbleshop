@@ -1,5 +1,124 @@
 
 ---
+products:
+  columns:
+  - id
+  - name
+  - description
+  - price
+  - new
+  - active
+  - picture
+  - permalink
+  - created_at
+  - updated_at
+  records:
+  - - "4"
+    - Howlite and Crystal Flower Bracelet
+    - |-
+      This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!
+
+      A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
+    - "10"
+    - false
+    - true
+    -
+    - howlite-and-crystal-flower-bracelet
+    - 2011-11-26 19:27:45.313309
+    - 2011-12-12 20:49:43.150387
+  - - "5"
+    - Candy Colours Bracelet Set
+    - |-
+      4 acrylic stretch beaded bracelets with peace sign, butterfly and heart charms.
+
+      A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
+    - "47"
+    - false
+    - true
+    -
+    - candy-colours-bracelet-set
+    - 2011-11-26 19:33:40.065037
+    - 2011-12-12 17:47:44.053169
+  - - "6"
+    - Gemstone Cross Necklaces
+    - "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.\r\n\
+      \r\n\
+      Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
+    - "78"
+    - false
+    - true
+    -
+    - gemstone-cross-necklaces
+    - 2011-11-26 19:35:50.65876
+    - 2011-12-12 20:49:15.132777
+  - - "7"
+    - Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered
+    - |-
+      These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
+
+      The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
+
+      All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
+    - "81"
+    - false
+    - true
+    -
+    - large-sterling-silver-hoop-earrings-aqua-freshwater-pearls-moonstone-hammered
+    - 2011-11-26 19:43:13.217399
+    - 2011-12-12 20:50:08.58488
+  - - "8"
+    - Red, Black & Silver Glass Bracelet
+    - "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads \r\n\
+      \r\n\
+      This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
+    - "107"
+    - false
+    - true
+    -
+    - red-black-silver-glass-bracelet
+    - 2011-11-26 19:47:01.610002
+    - 2011-12-12 20:50:33.970455
+  - - "9"
+    - Layered Coral Necklace
+    - "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
+      \r\n\
+      This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
+    - "137"
+    - false
+    - true
+    -
+    - layered-coral-necklace
+    - 2011-11-26 19:49:22.902551
+    - 2011-12-12 20:50:22.670768
+  - - "10"
+    - Claddagh Earrings
+    - |-
+      These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
+
+      The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
+    - "141"
+    - false
+    - true
+    -
+    - claddagh-earrings
+    - 2011-11-26 19:51:39.583358
+    - 2011-12-12 20:47:15.73745
+  - - "11"
+    - Om necklace
+    - "Om necklace for men .\r\n\
+      \r\n\
+      The syllable om is first described as all-encompassing mystical entity in the Upanishads. Today, in all Hindu art and all over India and Nepal, 'om' can be seen virtually everywhere, a common sign for Hinduism and its philosophy and theology. Hindus believe that as creation began, the divine, all-encompassing consciousness took the form of the first and original vibration manifesting as sound \"OM\".\r\n\
+      \r\n Before creation began it was \"Shuny\xC4\x81k\xC4\x81sha\", the emptiness or the void. Shuny\xC4\x81k\xC4\x81sha, meaning literally \"no sky\", is more than nothingness, because everything then existed in a latent state of potentiality. The vibration of \"OM\" symbolizes the manifestation of God in form (\"s\xC4\x81guna brahman\"). \"OM\" is the reflection of the absolute reality, it is said to be \"Adi Anadi\", without beginning or the end and embracing all that exists.\r\n\
+      \r\n The mantra \"OM\" is the name of God, the vibration of the Supreme. When taken letter by letter, A-U-M represents the divine energy (Shakti) united in its three elementary aspects: Bhrahma Shakti (creation), Vishnu Shakti (preservation) and Shiva Shakti (liberation, and/or destruction)."
+    - "101"
+    - false
+    - true
+    -
+    - om-necklace
+    - 2011-12-22 02:02:35.163305
+    - 2011-12-22 02:02:35.163305
+
+---
 pictures:
   columns:
   - id
@@ -192,109 +311,12 @@ pictures:
     -
     - 2011-11-26 19:51:39.686259
     - 2011-11-26 19:51:39.686259
-
----
-products:
-  columns:
-  - id
-  - name
-  - description
-  - price
-  - new
-  - active
-  - permalink
-  - created_at
-  - updated_at
-  - picture
-  records:
-  - - "4"
-    - Howlite and Crystal Flower Bracelet
-    - |-
-      This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!
-
-      A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
-    - "10"
-    - false
-    - true
-    - howlite-and-crystal-flower-bracelet
-    - 2011-11-26 19:27:45.313309
-    - 2011-12-12 20:49:43.150387
+  - - "21"
+    - "11"
+    - om.jpg
     -
-  - - "5"
-    - Candy Colours Bracelet Set
-    - |-
-      4 acrylic stretch beaded bracelets with peace sign, butterfly and heart charms.
-
-      A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
-    - "47"
-    - false
-    - true
-    - candy-colours-bracelet-set
-    - 2011-11-26 19:33:40.065037
-    - 2011-12-12 17:47:44.053169
     -
-  - - "6"
-    - Gemstone Cross Necklaces
-    - "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.\r\n\
-      \r\n\
-      Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
-    - "78"
-    - false
-    - true
-    - gemstone-cross-necklaces
-    - 2011-11-26 19:35:50.65876
-    - 2011-12-12 20:49:15.132777
     -
-  - - "7"
-    - Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered
-    - |-
-      These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
-
-      The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
-
-      All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
-    - "81"
-    - false
-    - true
-    - large-sterling-silver-hoop-earrings-aqua-freshwater-pearls-moonstone-hammered
-    - 2011-11-26 19:43:13.217399
-    - 2011-12-12 20:50:08.58488
     -
-  - - "8"
-    - Red, Black & Silver Glass Bracelet
-    - "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads \r\n\
-      \r\n\
-      This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
-    - "107"
-    - false
-    - true
-    - red-black-silver-glass-bracelet
-    - 2011-11-26 19:47:01.610002
-    - 2011-12-12 20:50:33.970455
-    -
-  - - "9"
-    - Layered Coral Necklace
-    - "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
-      \r\n\
-      This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
-    - "137"
-    - false
-    - true
-    - layered-coral-necklace
-    - 2011-11-26 19:49:22.902551
-    - 2011-12-12 20:50:22.670768
-    -
-  - - "10"
-    - Claddagh Earrings
-    - |-
-      These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
-
-      The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
-    - "141"
-    - false
-    - true
-    - claddagh-earrings
-    - 2011-11-26 19:51:39.583358
-    - 2011-12-12 20:47:15.73745
-    -
-
+    - 2011-12-22 02:02:35.199519
+    - 2011-12-22 02:02:35.199519
