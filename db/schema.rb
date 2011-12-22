@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
 
   create_table "shipping_zones", :force => true do |t|
     t.string   "name",       :null => false
+    t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
