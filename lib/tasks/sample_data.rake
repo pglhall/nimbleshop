@@ -1,15 +1,44 @@
 desc "setsup local development environment"
 task :setup_development => :environment do
   Rake::Task["db:bootstrap"].invoke
-  Rake::Task["db:reset_sample_data"].invoke
+  Rake::Task["db:sample_data"].invoke
 end
 
 namespace :db do
 
-  desc "resets the sample data sample data"
-  task :reset_sample_data => :environment do
+  desc "rebuilds the database and adds seed data"
+  task :bootstrap => :environment do
     #raise "this task should not be run in production" if Rails.env.production?
     #heroku pg:reset SHARED_DATABASE --remote staging --confirm nimbleshop-staging
+
+    puts "dropping the database ..."
+    Rake::Task["db:drop"].invoke
+
+    puts "creating the database .."
+    Rake::Task["db:create"].invoke
+
+    puts "running db:migrate ..."
+    Rake::Task["db:migrate"].invoke
+
+    puts "running db:seed ..."
+    Rake::Task["db:data:load"].invoke
+    Rake::Task["db:seed"].invoke
+  end
+
+  desc "adds the sample data"
+  task :sample_data => :environment do
+
+    puts "running db:sample_data ..."
+    Shop.delete_all
+    Link.delete_all
+    LinkGroup.delete_all
+    ProductGroup.delete_all
+    Page.delete_all
+    CustomField.delete_all
+    Order.delete_all
+    CustomFieldAnswer.delete_all
+    ShippingMethod.delete_all
+    ShippingZone.delete_all
 
     payment_method = PaymentMethod.find_by_permalink('splitable')
     payment_method.api_key = '42398cc9ac420bf4'
@@ -28,17 +57,6 @@ namespace :db do
     payment_method.request_submission_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
     payment_method.save!
 
-    puts "running db:sample_data ..."
-    Shop.delete_all
-    Link.delete_all
-    LinkGroup.delete_all
-    ProductGroup.delete_all
-    Page.delete_all
-    CustomField.delete_all
-    Order.delete_all
-    CustomFieldAnswer.delete_all
-    ShippingMethod.delete_all
-    ShippingZone.delete_all
 
     Shop.create!(name: 'nimbleshop',
                  theme: 'nootstrap',
@@ -46,11 +64,11 @@ namespace :db do
                  contact_email: 'neeraj@nimbleshop.com',
                  twitter_handle: '@nimbleshop',
                  facebook_url: 'www.facebook.com')
-    @shop = Shop.first
-    @shop.update_attributes(gateway:  'website_payments_standard')
-    @shop.update_attributes(gateway:  'AuthorizeNet')
-    @shop.update_attributes(facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
-    @shop.update_attributes(twitter_handle:  'nimbleshop')
+    shop = Shop.first
+    shop.update_attributes(gateway:  'website_payments_standard')
+    shop.update_attributes(gateway:  'AuthorizeNet')
+    shop.update_attributes(facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
+    shop.update_attributes(twitter_handle:  'nimbleshop')
 
     link_group = LinkGroup.create!(name: 'Main-nav')
     link_home = Link.create!(name: 'Home', url: '/')
