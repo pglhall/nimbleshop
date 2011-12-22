@@ -4,6 +4,4 @@ class LinkGroup < ActiveRecord::Base
 
   has_many :navigations
 
-  before_create :set_permalink
-
 end

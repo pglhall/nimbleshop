@@ -3,7 +3,6 @@ class Product < ActiveRecord::Base
   alias_attribute :title, :name
 
   include Product::Scopes
-  include BuildPermalink
 
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true

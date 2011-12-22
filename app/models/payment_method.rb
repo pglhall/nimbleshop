@@ -2,7 +2,6 @@ class PaymentMethod < ActiveRecord::Base
 
   include BuildPermalink
 
-  before_create :set_permalink
   before_save :set_data
 
   serialize :data

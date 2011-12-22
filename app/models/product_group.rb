@@ -9,8 +9,6 @@ class ProductGroup < ActiveRecord::Base
   validates :name, presence: true
   validates :custom_field_id, presence: true, :if => lambda { |record| record.condition.blank? }
 
-  before_create :set_permalink
-
   # determines if the given product exists in the product group
   def exists?(product)
     products.include?(product)

@@ -9,6 +9,12 @@
 #
 module BuildPermalink
 
+  def self.included(base)
+    base.class_eval do
+      before_create :set_permalink
+    end
+  end
+
   def set_permalink
     permalink = self.name.parameterize
     counter = 2
