@@ -219,8 +219,9 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   create_table "shipping_zones", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "permalink",  :null => false
+    t.string   "name",                         :null => false
+    t.string   "permalink",                    :null => false
+    t.boolean  "active",     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

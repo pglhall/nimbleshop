@@ -38,7 +38,7 @@ task :setup_development => :environment do
                        contact_email: 'neeraj@nimbleshop.com',
                        twitter_handle: '@nimbleshop',
                        facebook_url: 'www.facebook.com')
-  shop.update_attributes!( gateway:  'AuthorizeNet'
+  shop.update_attributes!( gateway:  'AuthorizeNet',
                            facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845',
                            twitter_handle:  'nimbleshop')
 
