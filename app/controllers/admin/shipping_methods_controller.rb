@@ -15,10 +15,10 @@ class Admin::ShippingMethodsController < AdminController
 
   def destroy
     @shipping_method = ShippingMethod.find(params[:id])
-    if @shipping_method.destroy
-      redirect_to admin_shipping_zones_path, notice: 'Record was deleted'
+    if @shipping_method.update_attributes(active: false)
+      redirect_to admin_shipping_zones_path, notice: 'Successfully deleted'
     else
-      redirect_to admin_shipping_zones_path, error: 'Record could not be deleted'
+      redirect_to admin_shipping_zones_path, error: 'Could not be delete'
     end
 
   end

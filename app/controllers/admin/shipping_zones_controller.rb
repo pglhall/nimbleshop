@@ -11,7 +11,15 @@ class Admin::ShippingZonesController < AdminController
   end
 
   def edit
-    @shipping_zone = ShippingZone.find(params[:id])
+    render
+  end
+
+  def update
+    if @shipping_zone.save
+      redirect_to admin_shipping_zones_path, notice: 'successfully updates'
+    else
+      render 'edit'
+    end
   end
 
   def create

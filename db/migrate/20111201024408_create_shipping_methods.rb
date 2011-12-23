@@ -6,6 +6,7 @@ class CreateShippingMethods < ActiveRecord::Migration
       t.decimal :lower_price_limit, precision: 8, scale: 2
       t.integer :upper_price_limit, precision: 8, scale: 2
       t.integer :shipping_price,    precision: 8, scale: 2
+      t.boolean :active,            default: true
 
       t.timestamps
     end
