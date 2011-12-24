@@ -10,11 +10,11 @@
 <br />
 
 <% @shipping_zones.each do |shipping_zone| %>
-  <table class="zebra-striped">
+  <table class="zebra-striped bordered-table">
     <tbody>
       <tr>
-        <td colspan='3'><%= shipping_zone.name %></td>
-        <td>
+        <td colspan='4'>
+          <strong><%= shipping_zone.name %></strong>
           <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
           |
           <%= link_to t(:edit), edit_admin_shipping_zone_path(shipping_zone) %>
@@ -34,4 +34,5 @@
       <% end %>
     </tbody>
   </table>
+  <br />
 <% end %>
