@@ -1,4 +1,4 @@
-<%= @order.number %>
+<h3> Order #<%= @order.number %> </h3>
 
 
 <table class='zebra-striped'>
@@ -19,10 +19,36 @@
 
 
 <% if @order.shipping_method %>
+  <h3> Shipping details </h3>
   <p>
-    <span>Shipping cost :</span> <%= number_to_currency(@order.shipping_method.shipping_cost) %>
+    Shipping method : <%= @order.shipping_method.name %>
   </p>
   <p>
-    Total: <%= number_to_currency(@order.price_with_shipping) %>
+    Shipping cost : <%= number_to_currency(@order.shipping_method.shipping_cost) %>
   </p>
 <% end %>
+
+<p>
+  Total: <%= number_to_currency(@order.price_with_shipping) %>
+</p>
+
+<% if @order.shipping_address.present? %>
+  <h3>Shipping address</h3>
+  <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
+
+  <% unless @order.shipping_address.use_for_billing %>
+    <h3> Billing address </h3>
+    <address>
+      <%= @order.billing_address.full_address_array.join('<br />').html_safe %>
+    </address>
+  <% end %>
+
+  <h3>Contact email</h3>
+  <address>
+    <%= @order.email %>
+  </address>
+<% end %>
+
+
+<h3>Payment details </h3>
+
