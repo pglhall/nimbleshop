@@ -16,3 +16,8 @@ As per "shopify founder":https://twitter.com/#!/tobi/status/148842020352425984 1
 
 Similarly "iphone4simulator.com":http://iphone4simulator.com allows you to test your application in iPhone 4.
 
+h3. jQuery plugins
+
+http://www.flowslider.com/
+
+
