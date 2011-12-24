@@ -1,21 +1,22 @@
 class Admin::CustomFieldsController < AdminController
 
+  before_filter :load_custom_filed, only: [:show, :edit, :update, :destroy]
+
   def index
     @custom_fields = CustomField.all
   end
 
   def show
-    @custom_field = CustomField.find(params[:id])
+    render
   end
 
   def edit
-    @custom_field = CustomField.find(params[:id])
+    render
   end
 
   def update
-    @custom_field = CustomField.find(params[:id])
     if @custom_field.update_attributes(params[:custom_field])
-      redirect_to admin_custom_fields_path, notice: "Successfully updated"
+      redirect_to admin_custom_fields_path, notice: t(:successfully_updated)
     else
       render :action => 'edit'
     end
@@ -28,19 +29,24 @@ class Admin::CustomFieldsController < AdminController
   def create
     @custom_field  = CustomField.new(params[:custom_field])
     if @custom_field.save
-      redirect_to admin_custom_fields_url, notice: 'Successfully added'
+      redirect_to admin_custom_fields_url, notice: t(:successfully_added)
     else
       render action: :new
     end
   end
 
   def destroy
-    @custom_field = CustomField.find(params[:id])
     if @custom_field.destroy
-      redirect_to admin_custom_fields_path, notice: 'Custom field was deleted'
+      redirect_to admin_custom_fields_path, notice: t(:successfully_deleted)
     else
-      redirect_to admin_custom_fields_path, error: 'Custom field could not be deleted'
+      redirect_to admin_custom_fields_path, error: t(:could_not_delete)
     end
+  end
+
+  private
+
+  def load_custom_field
+    @custom_field = CustomField.find(params[:id])
   end
 
 end

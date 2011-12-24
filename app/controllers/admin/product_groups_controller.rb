@@ -12,7 +12,7 @@ class Admin::ProductGroupsController < AdminController
 
   def update
     if @product_group.update_attributes(params[:product_group])
-      redirect_to admin_product_groups_path, notice: 'successfully updated'
+      redirect_to admin_product_groups_path, notice: t(:successfully_updated)
     else
       render 'edit'
     end

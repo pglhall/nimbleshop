@@ -9,6 +9,12 @@ en:
   welcome_admin: 'Welcome admin'
   paypal_image_alt: 'Make payments with PayPal'
 
+  successfully_added: 'Successfuly added'
+  successfully_created: 'Successfuly created'
+  successfully_updated: 'Successfuly updated'
+  successfully_deleted: 'Successfuly deleted'
+  could_not_delete:     'Could not delete'
+
   delete_confirmation_for_shipping_method: 'Do you really want to delete the shipping method ?'
 
   orders: 'Orders'

@@ -15,27 +15,27 @@ class Admin::ShippingZonesController < AdminController
   end
 
   def update
-    if @shipping_zone.save
-      redirect_to admin_shipping_zones_path, notice: 'successfully updates'
+    if @shipping_zone.update_attributes(params[:shipping_zone])
+      redirect_to admin_shipping_zones_path, notice: t(:successfully_updated)
     else
-      render 'edit'
+      render action: :edit
     end
   end
 
   def create
     @shipping_zone = ShippingZone.new(params[:shipping_zone])
     if @shipping_zone.save
-      redirect_to admin_shipping_zones_path, notice: 'successfully created'
+      redirect_to admin_shipping_zones_path, notice: t(:succssfully_created)
     else
-      render 'new'
+      render action: :new
     end
   end
 
   def destroy
     if @shipping_zone.destroy
-      redirect_to admin_shipping_zones_path, notice: 'successfully deleted'
+      redirect_to admin_shipping_zones_path, notice: t(:successfully_deleted)
     else
-      redirect_to admin_shipping_zones_path, error: 'could not delete'
+      redirect_to admin_shipping_zones_path, error: t(:could_not_delete)
     end
   end
 

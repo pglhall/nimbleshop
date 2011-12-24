@@ -1,6 +1,6 @@
 <div class="span12">
 
-  <%= nested_form_for([:admin, @shipping_method]) do |f| %>
+  <%= nested_form_for([:admin, @shipping_zone, @shipping_method]) do |f| %>
 
     <% if @shipping_method.errors.any? %>
       <div class="alert-message block-message error">
@@ -54,10 +54,3 @@
     </fieldset>
   <% end %>
 </div>
-
-
-<br />
-<br />
-<br />
-
-

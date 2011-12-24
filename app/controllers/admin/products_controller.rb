@@ -28,25 +28,25 @@ class Admin::ProductsController < AdminController
   end
 
   def create
-    @product  = Product.new(params[:product])
+    @product = Product.new(params[:product])
     if @product.save
-      redirect_to admin_products_url, notice: 'Successfully added'
+      redirect_to admin_products_url, notice: t(:successfully_added)
     else
-      render action: :new, status: :unprocessable_entity
+      render action: :new
     end
   end
 
   def update
     if @product.update_attributes(params[:product])
-      redirect_to admin_products_path, notice: "Successfully updated"
+      redirect_to admin_products_path, notice: t(:successfully_updated)
     else
-      render :action => 'edit'
+      render action: :edit
     end
   end
 
   def destroy
     @product.destroy
-    redirect_to admin_products_url, notice: 'Successfully deleted'
+    redirect_to admin_products_url, notice: t(:successfully_deleted)
   end
 
   private
