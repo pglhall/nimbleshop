@@ -1,0 +1,28 @@
+<%= @order.number %>
+
+
+<table class='zebra-striped'>
+  <thead>
+    <tr>
+      <th colspan="2" class="start">Description</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |line_item| %>
+      <%= render 'line_item', line_item: line_item %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<% if @order.shipping_method %>
+  <p>
+    <span>Shipping cost :</span> <%= number_to_currency(@order.shipping_method.shipping_cost) %>
+  </p>
+  <p>
+    Total: <%= number_to_currency(@order.price_with_shipping) %>
+  </p>
+<% end %>

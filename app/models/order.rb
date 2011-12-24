@@ -96,6 +96,10 @@ class Order < ActiveRecord::Base
     shipping_method.blank? || (shipping_method.shipping_cost == 0)
   end
 
+  def to_param
+    self.number
+  end
+
   private
 
   def line_item_of(product)
