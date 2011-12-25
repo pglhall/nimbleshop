@@ -11,17 +11,26 @@
 
 <% @shipping_zones.each do |shipping_zone| %>
   <table class="zebra-striped bordered-table">
-    <tbody>
+    <thead>
       <tr>
-        <td colspan='4'>
-          <strong><%= shipping_zone.name %></strong>
+        <th colspan='4'>
+
+          <h3><%= shipping_zone.name %></h3>
           <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
           |
           <%= link_to t(:edit), edit_admin_shipping_zone_path(shipping_zone) %>
           |
           <%= link_to t(:delete), [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete' %>
-        </td>
+        </th>
       </tr>
+      <tr>
+        <th> Shipping method name </th>
+        <th> Condition </th>
+        <th> Shipping price </th>
+        <th> &nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
       <% shipping_zone.shipping_methods.each do |shipping_method| %>
         <tr>
           <td> <%= shipping_method.name %> </td>

@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.integer  "price",                             :null => false
     t.integer  "creditcard_id",                     :null => false
     t.boolean  "active",          :default => true, :null => false
-    t.string   "order_id",                          :null => false
+    t.integer  "order_id",                          :null => false
     t.string   "status",                            :null => false
     t.integer  "parent_id"
     t.datetime "created_at"

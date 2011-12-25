@@ -6,7 +6,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.integer :price         ,  null: false
       t.integer :creditcard_id,   null: false
       t.boolean :active,          null: false, default: true
-      t.string  :order_id,        null: false
+      t.integer :order_id,        null: false
       t.string  :status,          null: false
       t.integer :parent_id,       null: true
 

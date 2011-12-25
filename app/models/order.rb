@@ -10,6 +10,7 @@ class Order < ActiveRecord::Base
   has_many :line_items
   has_many :products, :through => :line_items
   belongs_to :user
+  has_many :transactions
 
   has_one :shipping_address
   has_one :billing_address

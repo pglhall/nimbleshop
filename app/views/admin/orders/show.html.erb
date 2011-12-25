@@ -52,3 +52,12 @@
 
 <h3>Payment details </h3>
 
+Transaction amount: <%= @order.transactions.first.price %> <br />
+Transaction date: <%= @order.transactions.first.created_at %> <br />
+Credit card: <%= @order.transactions.first.creditcard.masked_number %>
+
+<p>
+  Payment address: <br />
+  <%= @order.transactions.first.full_address_array.join('<br />').html_safe %>
+
+</p>
