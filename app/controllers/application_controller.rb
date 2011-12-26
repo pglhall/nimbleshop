@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 
   def current_order
     @current_order ||= begin
-      Order.find_by_id!(session[:order_id]) if session[:order_id]
+      return nil if session[:order_id].blank?
+      order = Order.find_by_id(session[:order_id])
+      order.blank? ? reset_order : order
     end
   end
 
