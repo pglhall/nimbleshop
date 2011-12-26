@@ -146,7 +146,7 @@
             <div class="span4">
               <% if (%w(feedbacks carts).include? params[:controller]) || (params[:action] == 'paid_using_cc') %>
               <% else %>
-                <%= render 'shared/order_summary' %>
+                <%= render 'layouts/order_summary' %>
               <% end %>
             </div>
           <% end %>
@@ -156,14 +156,15 @@
       <footer>
         <div class='row'>
           <div class='span6'>
-            <% if PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled %>
               <%= image_tag('paypal.png') %>
               <%= image_tag('visa.png') %>
               <%= image_tag('mastercard.png') %>
               <%= image_tag('amex.png') %>
               <%= image_tag('discover.png') %>
-              <%= image_tag('splitable.png') %>
-            <% end %>
+
+              <% if splitable_enabled? %>
+                <%= image_tag('splitable.png') %>
+              <% end %>
           </div>
           <div class='span6'>
             &copy; Your company name @2011

@@ -6,6 +6,8 @@ class PaymentMethod < ActiveRecord::Base
 
   serialize :data
 
+  scope :enabled, where(enabled: true)
+
   def set_mode
     #ActiveMerchant::Billing::Base.mode = Rails.env.production? ? :production : :test
     ActiveMerchant::Billing::Base.mode = :test

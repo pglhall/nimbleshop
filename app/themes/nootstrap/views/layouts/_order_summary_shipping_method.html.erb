@@ -1,0 +1,16 @@
+<% if current_order.shipping_method %>
+  <div class='row'>
+    <div class='span4'>
+      <h3>
+        Shipping method
+        <small>
+          <%= link_to 'Edit', edit_shipping_method_order_path(current_order) %>
+        </small>
+      </h3>
+      <address>
+        <%= current_order.shipping_method.name %> <br />
+        <%= number_to_currency(current_order.shipping_method.shipping_price) %>
+      </address>
+    </div>
+  </div>
+<% end %>

@@ -1,144 +1,54 @@
-<% unless Rails.env.production? %>
-    <div class='alert-message block-message info' data-alert='alert'>
-      <a class="close" href="#">×</a>
-      <p> Here are the rules. </p>
-      <ul>
-        <li> Expiration date must be set to the present day or later. </li>
-        <li> Security code for American express must be 4 digits. For all others use 3 digits. </li>
-      </ul>
-
-      <br />
-      <p>Here are the valid credit card numbers as prescribed by Authorize.net .</p>
-      <ul>
-        <li> Visa: 4007000000027 </li>
-        <li> Second Visa card: 4012888818888 </li>
-        <li> American Express: 370000000000002 </li>
-        <li> Discover: 6011000000000012 </li>
-        <li> JCB: 3088000000000017 </li>
-        <li> Diners Club/ Carte Blanche: 38000000000006 </li>
-      </ul>
-
-      <br />
-      <p>
-        <%= link_to 'More information', '' %> .
-        <small>
-          <strong>
-          This message never appears in production environment .
-          </strong>
-        </small>
-      </p>
-    </div>
-<% end %>
+<%= render 'authorize_net_instructions' %>
 
 <div class='well'>
   <%= form_for @creditcard, url: '/creditcard_payments' do |f| %>
-    <% if @creditcard.errors.any? %>
-      <div class="alert-message block-message error">
-        <ul>
-          <% @creditcard.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+
+    <div class='clearfix'>
+      <div class='input'>
+        <div class='inputs-list'>
+
+          <% if splitable_enabled? %>
+            <li>
+              <label>
+                <%= radio_button_tag 'payment_choice', 'splitable' %>
+                <%= label_tag 'payment_choice', image_tag('splitable.png') %>
+              </label>
+            </li>
           <% end %>
-        </ul>
+
+          <% if paypal_website_payments_standard_enabled? %>
+            <li>
+              <label>
+                <%= radio_button_tag 'payment_choice', 'paypal' %>
+                <%= label_tag 'payment_choice', image_tag('paypal.png') %>
+              </label>
+            </li>
+          <% end %>
+
+          <% if authorize_net_enabled?  %>
+            <li>
+              <label>
+                <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
+                <label for='payment_choice'>
+                  <%= image_tag('visa.png') %>
+                  <%= image_tag('mastercard.png') %>
+                  <%= image_tag('amex.png') %>
+                  <%= image_tag('discover.png') %>
+                  <br />
+                  <small>
+                    All payments are secure and encrypted. We never store your credit card information.
+                  </small>
+                </label>
+              </label>
+            </li>
+          <% end %>
+        </div>
       </div>
+    </div>
+
+    <% if authorize_net_enabled? %>
+      <%= render 'authorize_net_form', f: f %>
     <% end %>
 
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :first_name %>
-        <div class='input'>
-          <%= f.text_field :first_name %>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :last_name %>
-        <div class='input'>
-          <%= f.text_field :last_name %>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :number, 'Credit card number' %>
-        <div class='input'>
-          <%= f.text_field :number %>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :cvv %>
-        <div class='input'>
-          <%= f.text_field :cvv %>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :address1 %>
-        <div class='input'>
-          <%= f.text_field :address1 %>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :address2 %>
-        <div class='input'>
-          <%= f.text_field :address2 %>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :city %>
-        <div class='input'>
-          <%= f.text_field :city %>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :state %>
-        <div class='input'>
-          <%= f.text_field :state %>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :zipcode %>
-        <div class='input'>
-          <%= f.text_field :zipcode %>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <fieldset>
-      <div class='clearfix'>
-        <%= f.label :expires_on, 'Expiration date' %>
-        <div class='input'>
-          <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <div class="actions">
-      <%= f.submit 'Submit', class: 'btn primary' %>
-    </div>
   <% end %>
 </div>

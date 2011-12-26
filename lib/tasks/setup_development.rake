@@ -99,14 +99,14 @@ task :setup_development => :environment do
   PaymentMethod.update_all(enabled: true)
   sz = ShippingZone.create!(name: 'USA')
   ShippingCountry.create!(shipping_zone_id: sz.id, country_code: 'USA')
-  ShippingMethod.create!(name: 'ground shipping', shipping_price: 10, shipping_zone_id: sz.id,
+  ShippingMethod.create!(name: 'Ground shipping', shipping_price: 10, shipping_zone_id: sz.id,
                          lower_price_limit: 10, upper_price_limit: 20)
-  ShippingMethod.create!(name: 'ground shipping', shipping_price: 20, shipping_zone_id: sz.id,
+  ShippingMethod.create!(name: 'Ground shipping', shipping_price: 20, shipping_zone_id: sz.id,
                          lower_price_limit: 20)
 
-  ShippingMethod.create!(name: 'express shipping', shipping_price: 15, shipping_zone_id: sz.id,
+  ShippingMethod.create!(name: 'Express shipping', shipping_price: 15, shipping_zone_id: sz.id,
                          lower_price_limit: 10, upper_price_limit: 20)
-  ShippingMethod.create!(name: 'express shipping', shipping_price: 25, shipping_zone_id: sz.id,
+  ShippingMethod.create!(name: 'Express shipping', shipping_price: 25, shipping_zone_id: sz.id,
                          lower_price_limit: 20)
 
 end

@@ -1,0 +1,30 @@
+<% if current_order.shipping_address %>
+  <div class='row'>
+    <div class='span4' style='min-height:150px;'>
+      <h3>
+        Shipping address
+        <small>
+          <%= link_to 'Edit', edit_order_path(current_order) %>
+        </small>
+      </h3>
+      <address>
+        <%= current_order.shipping_address.full_address_array.join('<br />').html_safe %>
+      </address>
+
+      <h3> Billing address </h3>
+
+      <address>
+      <% if current_order.shipping_address.use_for_billing %>
+        <i>Same as shipping address</i>
+      <% else %>
+        <%= current_order.billing_address.full_address_array.join('<br />').html_safe %>
+      <% end %>
+      </address>
+
+      <h3>Contact email</h3>
+      <address>
+        <%= current_order.email %>
+      </address>
+    </div>
+  </div>
+<% end %>

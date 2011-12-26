@@ -19,34 +19,29 @@
           <%= render 'line_item', line_item: line_item %>
         <% end %>
         <tr>
-          <td colspan='3'> <p>Not ready to checkout? <a href="/">Continue shopping...</a></p> </td>
-          <th> <%= submit_tag 'Update', class: 'btn primary' %> </th>
+          <td colspan='4'>&nbsp;</td>
           <th> Total: </th>
           <td> <%= number_to_currency(@cart.total_price) %> </td>
         </tr>
+
         <tr>
-          <td colspan='4'>&nbsp;</td>
+          <td colspan='5'>&nbsp;</td>
           <td>
-            <% if authorize_net_enabled? %>
-              <p class='button'>
-                <%= submit_tag 'Checkout with Authorize.net', name: "payment_method_permalink[authorize-net]", class: 'btn primary' %>
-              </p>
-            <% end %>
-
-            <% if splitable_enabled? %>
-              <p class='button'>
-                <%= submit_tag 'Checkout with splitable', name: "payment_method_permalink[splitable]", class: 'btn primary' %>
-              </p>
-            <% end %>
-
-            <% if paypal_website_payments_standard_enabled? %>
-              <p class='button'>
-                <%= image_submit_tag 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckoutsm.gif', name: "payment_method_permalink[paypal-website-payments-standard]", alt: t(:paypal_image_alt), style: 'transition: none; width: 145px; height:42px;border:0; -webkit-box-shadow:none; ' %>
-              </p>
-            <% end %>
-
+            <p class='button'>
+              <%= submit_tag 'Checkout', name: "checkout", class: 'btn primary' %>
+            </p>
+            <p class='button'>
+              <%= submit_tag 'Update', class: 'btn primary' %>
+            </p>
           </td>
         </tr>
+        <tr>
+          <td colspan='3'>&nbsp; </td>
+          <td colspan='3'>
+            Not ready to checkout ? <%= link_to 'Continue shopping ...', root_url %>
+          </td>
+        </tr>
+
       </tbody>
     </table>
   <% end %>

@@ -1,10 +1,5 @@
 class Address < ActiveRecord::Base
-  validates :first_name,  presence: true
-  validates :last_name,   presence: true
-  validates :address1,    presence: true
-  validates :state,       presence: true
-  validates :zip,         presence: true
-  validates :country,     presence: true
+  validates_presence_of :first_name, :last_name, :address1, :state, :zipcode, :country
 
   belongs_to :order
 
@@ -25,7 +20,7 @@ class Address < ActiveRecord::Base
   end
 
   def city_state_zip
-    [city_state_name, zip].join(' ')
+    [city_state_name, zipcode].join(' ')
   end
 
 end

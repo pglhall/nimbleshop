@@ -11,15 +11,7 @@ class OrdersController < ApplicationController
   def update_shipping_method
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
       current_order.update_attributes(params[:order].merge(status: 'added_shipping_method'))
-
-      case session[:payment_method_permalink]
-      when 'splitable'
-        redirect_to PaymentMethod::Splitable.first.url(current_order, request)
-      when 'paypal-website-payments-standard'
-        redirect_to current_order.paypal_url
-      when 'authorize-net'
-        redirect_to  new_creditcard_payment_path
-      end
+      redirect_to  new_creditcard_payment_path
     else
       current_order.errors.add(:base, 'Please select a shipping method')
       render 'edit_shipping_method'

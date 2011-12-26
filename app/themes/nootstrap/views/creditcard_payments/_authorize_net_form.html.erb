@@ -1,0 +1,42 @@
+<% if @creditcard.errors.any? %>
+  <div class="alert-message block-message error">
+    <ul>
+      <% @creditcard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<fieldset>
+  <div class='clearfix'>
+    <%= f.label :number, 'Credit card number', autocomplete: 'off' %>
+    <div class='input'>
+      <%= f.text_field :number %>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class='clearfix'>
+    <%= f.label :cvv, 'CVV number', autocomplete: 'off' %>
+    <div class='input'>
+      <%= f.text_field :cvv %>
+      &nbsp;
+      <%= link_to 'What is this?', '' %>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class='clearfix'>
+    <%= f.label :expires_on, 'Expiration date' %>
+    <div class='input'>
+      <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
+    </div>
+  </div>
+</fieldset>
+
+<div class="actions">
+  <%= f.submit 'Submit', class: 'btn primary' %>
+</div>

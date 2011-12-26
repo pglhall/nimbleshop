@@ -12,7 +12,15 @@
           </h3>
         </td>
         <td>
-          <h3><%= payment_method.name %></h3>
+          <h3>
+            <% if payment_method.permalink == 'authorize-net' %>
+              <%= image_tag('authorize_net_logo.png') %>
+            <% elsif payment_method.permalink == 'paypal-website-payments-standard' %>
+              <%= image_tag('paypal_logo.png', width: '200') %>
+            <% elsif payment_method.permalink == 'splitable' %>
+              <%= image_tag('splitable_logo.png', width: '200') %>
+            <% end %>
+          </h3>
         </td>
         <td>
           <%= raw payment_method.description %>

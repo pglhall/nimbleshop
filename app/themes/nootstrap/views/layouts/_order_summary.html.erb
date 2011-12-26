@@ -1,0 +1,13 @@
+<h3>
+  Order summary
+  <small>
+    <%= link_to 'Edit', cart_path %>
+  </small>
+</h3>
+
+<%= render 'layouts/order_summary_line_items' %>
+
+<%= render 'layouts/order_summary_shipping_address' %>
+
+<%= render 'layouts/order_summary_shipping_method' %>
+

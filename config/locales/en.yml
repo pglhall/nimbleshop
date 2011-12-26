@@ -8,6 +8,7 @@ en:
   delete: 'Delete'
   welcome_admin: 'Welcome admin'
   paypal_image_alt: 'Make payments with PayPal'
+  credit_card_declined_message: 'Credit card was declined. Please try again.'
 
   successfully_added: 'Successfuly added'
   successfully_created: 'Successfuly created'

@@ -1,0 +1,31 @@
+<table class='zebra-striped'>
+  <% current_order.line_items.each do |line_item| %>
+    <tr>
+      <td>
+        <%= truncate(line_item.product.title, length: 75) %>
+      </td>
+      <td>
+        <%= image_tag(line_item.product.picture.picture_url(:pico)) %>
+        <br />
+        <%= line_item.quantity %> for
+        <br />
+        <strong>
+          <%= number_to_currency(line_item.product.price) %>
+        </strong>
+      </td>
+    </tr>
+  <% end %>
+  <% if current_order.shipping_method %>
+    <tr> <td>Shipping</td> <td> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </td></tr>
+  <% end %>
+  <tr>
+    <td>
+      <h4>Total</h4>
+    </td>
+    <td>
+      <h4>
+        <%= number_to_currency(current_order.price_with_shipping) %>
+      </h4>
+    </td>
+  </tr>
+</table>

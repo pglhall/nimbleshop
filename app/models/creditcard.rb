@@ -39,7 +39,12 @@ class Creditcard < ActiveRecord::Base
       last_name:          last_name)
 
     unless self.amcard.valid?
-      self.amcard.errors.full_messages.each { |message| self.errors.add(:base, message) }
+      self.amcard.errors.full_messages.each do |message|
+        # TODO make it i18n compatible
+        message.gsub!(/Number is required/,'Credit card number is required')
+        message.gsub!(/Verification value is required/, 'CVV number is required')
+        self.errors.add(:base, message)
+      end
     end
   end
 
