@@ -39,3 +39,16 @@ class ApplicationController < ActionController::Base
   end
 
 end
+
+# TODO
+# - pass shipping address to paypal
+# - image rollover on hover
+# - image magnification
+# - better view when user pays
+# - order report
+# - fix link group
+# - pages
+#
+# - shipping zone should connect with a country
+# - a country should have states
+#
