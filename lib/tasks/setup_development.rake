@@ -1,9 +1,26 @@
 desc "setsup local development environment"
 task :setup_development => :environment do
 
-  Rake::Task["db:drop"].invoke
-  Rake::Task["db:create"].invoke
-  Rake::Task["db:migrate"].invoke
+  if Settings.using_heroku
+    Shop.delete_all
+    Link.delete_all
+    LinkGroup.delete_all
+    ProductGroup.delete_all
+    Page.delete_all
+    CustomField.delete_all
+    Order.delete_all
+    CustomFieldAnswer.delete_all
+    ShippingMethod.delete_all
+    ShippingZone.delete_all
+
+    Product.delete_all
+    Picture.delete_all
+  else
+    Rake::Task["db:drop"].invoke
+    Rake::Task["db:create"].invoke
+    Rake::Task["db:migrate"].invoke
+  end
+
   Rake::Task["db:data:load"].invoke
   Rake::Task["db:seed"].invoke
 
@@ -24,7 +41,6 @@ task :setup_development => :environment do
   payment_method = PaymentMethod.find_by_permalink('authorize-net')
   payment_method.update_attributes!(login_id: '56yBAar72', transaction_key: '9r3pbH5bnKH29f7d')
 
-
   payment_method = PaymentMethod.find_by_permalink('paypal-website-payments-standard')
   payment_method.update_attributes!(image_on_checkout_page: 'http://images.paypal.com/images/x-click-but1.gif',
                                     merchant_email_address: 'seller_1323037155_biz@bigbinary.com',
@@ -38,6 +54,7 @@ task :setup_development => :environment do
                        contact_email: 'neeraj@nimbleshop.com',
                        twitter_handle: '@nimbleshop',
                        facebook_url: 'www.facebook.com')
+
   shop.update_attributes!( gateway:  'AuthorizeNet',
                            facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845',
                            twitter_handle:  'nimbleshop')
