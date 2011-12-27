@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def paid_using_cc
+  def paid_using_creditcard
     @page_title = 'Purchase is complete'
     @order = Order.find(params[:id])
   end
