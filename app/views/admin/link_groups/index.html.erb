@@ -9,23 +9,28 @@
 <br />
 <br />
 
-<table class="zebra-striped">
-  <tbody>
-    <% @link_groups.each do |link_group| %>
+<% @link_groups.each do |link_group| %>
+  <table class="zebra-striped bordered-table">
+    <thead>
       <tr>
-        <td><%= link_group.name %></td>
-        <td>
-          <% link_group.navigations.each do |nav| %>
-            <%= link_to(nav.navigeable.name, '') %>
-            <br />
-          <% end %>
-        </td>
-        <td>
-          <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
-          |
-          <%= link_to t(:delete), [:admin, link_group], confirm: t(:delete_confirmation_for_link_group), method: 'delete' %>
-        </td>
+        <th colspan='2'><h2><%= link_group.name %></h2></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tr>
+        <th>Link name </th>
+        <th>Action </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% link_group.navigations.each do |nav| %>
+        <tr>
+          <td> <%= link_to(nav.navigeable.name, '') %> </td>
+          <td>
+            <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
+            |
+            <%= link_to t(:delete), [:admin, link_group], confirm: t(:delete_confirmation_for_link_group), method: 'delete' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
