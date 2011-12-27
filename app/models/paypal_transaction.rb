@@ -1,4 +1,4 @@
-class CreditcardTransaction < ActiveRecord::Base
+class PaypalTransaction < ActiveRecord::Base
 
   def capture(options)
     _amount  = options[:amount] || self.amount

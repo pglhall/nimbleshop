@@ -13,9 +13,16 @@ class CreditcardPaymentsController < ApplicationController
 
   def create
     if params[:payment_choice] == 'splitable'
-        redirect_to PaymentMethod::Splitable.first.url(current_order, request) and return
+      redirect_to PaymentMethod::Splitable.first.url(current_order, request) and return
     elsif params[:payment_choice] == 'paypal'
-        redirect_to current_order.paypal_url and return
+      # it is possible that a buyer hit a back button and went back to shop and made some changes to the cart
+      # and then is using paypal again to checkout
+      if paypal_record = PaypalTransaction.find_by_invoice(current_order.number)
+        paypal_record.update_attributes!(amount: current_order.grand_total)
+      else
+        PaypalTransaction.create!(order: current_order, amount: current_order.grand_total, invoice: current_order.number)
+      end
+      redirect_to current_order.paypal_url and return
     end
 
     order = current_order

@@ -8,12 +8,9 @@ class PaymentNotificationsController < ApplicationController
   def paypal
     Rails.logger.info params.inspect
     order = Order.find_by_number(params[:invoice])
-    order.update_attribute('status', 'paid')
-    #PaymentNotification.create!(params: params,
-                                #payment_provider: 'paypal',
-                                #order_number: params[:invoice],
-                                #status: params[:payment_status],
-                                #transaction_id: params[:txn_id])
+    transaction = PaypalTransaction.find_by_invoie(params[:invoice])
+    # TODO handle secret code to verify it is indeed coming from paypal
+    transaction.update_attributes(params: params, status: params[:payment_status], transaction_id: params[:txn_id])
     render :nothing => true
   end
 
