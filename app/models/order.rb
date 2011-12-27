@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
 
   validates :email, :email => true, :if => lambda {|record| record.validate_email }
 
-  validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info)
+  validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info failed_ipn)
 
   before_create :set_order_number
 

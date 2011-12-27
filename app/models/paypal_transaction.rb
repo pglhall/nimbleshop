@@ -1,3 +1,6 @@
+
+# TODO
+# needs status paid
 class PaypalTransaction < ActiveRecord::Base
 
   def capture(options)

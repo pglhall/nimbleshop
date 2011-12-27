@@ -19,6 +19,8 @@ class CreateTransactions < ActiveRecord::Migration
       t.string  :status,   null: true
       t.integer :amount,   null: false
       t.string  :invoice,  null: false
+      t.string  :txn_id,   null: true
+      t.string  :txn_type, null: true
     end
   end
 end
