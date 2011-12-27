@@ -45,11 +45,11 @@ password: 123456
 
 h3. Instant Payment Notification (IPN)
 
-So Steve (buyer) click on 'checkout with paypal' because he wants to use paypal to pay for the order. The shop site takes Steve to PayPal page. Here Steve makes the payment. After Steve makes the payment, Steve is taken back to the shop and everything looks good. Steve thinks that he has successfully paid and the items will be delivered to him. And Steve is right. He did pay the amount. However as far as shop is concerned shop does not think Steve has because . Well lets slow down and try to break things into pieces to understand what's going on here.
+So Steve (buyer) click on 'checkout with PayPal' because he wants to use paypal to pay for the order. The shop takes Steve to PayPal site. Here Steve makes the payment. After Steve makes the payment, Steve is taken back to the shop and everything looks good.
 
 Steve made a successful payment at PayPal. PayPal tells Steve all is good. So Steve is happy.
 
-However now the question is how would store know that Steve indeed paid the full amount at PayPal. Until the shop is sure that Steve paid in full at PayPal items cannot be shipped to him.
+However now the question is how would shop know that Steve indeed paid the full amount at PayPal. Until the shop is sure that Steve paid in full at PayPal items cannot be shipped to him.
 
 This is where IPN comes in picture. IPN stands for Instant Payment Notification.
 
@@ -57,7 +57,13 @@ When Steve makes successful payment at PayPal, PayPal sends an IPN to the shop. 
 
 h4. Periodic IPN
 
-Internet is not the most reliable medium when it comes to processing requests. HTTP requests get lost all the time. To ensure that the shop gets the IPN, PayPal keeps sending the IPN for 4 days. When shop gets an IPN then the shop should send that request back to PayPal. Now PayPal will send 'VERIFIED' or 'INVALID'. Only when the shop receives 'VERIFIED' and only when the payment status received with IPN is 'completed' the shop should send the merchandise to Steve. PayPal will stop sending IPN once it receives the message it sent.
+Internet is not the most reliable medium when it comes to processing requests. HTTP requests get lost all the time. To ensure that the shop gets the IPN, PayPal keeps sending the IPN for 4 days. Inorder to stop PayPal sending the IPN the shop needs to tell PayPal that it has received the IPN. This is how it works.
+
+* PayPal sends IPN to the shop.
+* Shop sends the same data in the same order back to PayPal.
+* PayPal sends either 'VERIFIED' or 'INVALID'. If PayPal sends 'VERIFIED' then it means it is all good and now PayPal will not send IPN for that transaction.
+
+When PayPal sends IPN multiple times all those IPNs carry the same txn_id. That txn_id is stored to check if the IPN is a duplicate or not .Duplicate IPN should be discarded.
 
 h4. IPN documentation
 

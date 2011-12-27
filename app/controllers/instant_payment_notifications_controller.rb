@@ -14,7 +14,6 @@ class InstantPaymentNotificationsController < ApplicationController
     order = Order.find_by_number!(params[:invoice])
     notify = Paypal::Notification.new(request.raw_post)
 
-    # TODO handle secret code to verify it is indeed coming from paypal
     if notify.acknowledge
       begin
         if notify.complete? && order.grand_total == notify.amount

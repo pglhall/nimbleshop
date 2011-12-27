@@ -18,6 +18,6 @@ Similarly "iphone4simulator.com":http://iphone4simulator.com allows you to test 
 
 h3. jQuery plugins
 
-http://www.flowslider.com/
+http://www.flowslider.com
 
-
+http://subtlepatterns.com

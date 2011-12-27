@@ -49,3 +49,7 @@ end
 # - a country should have states
 # - pass shipping address to paypal . This needs US states in two digit code. So it rquires the shipping zone fix first.
 #
+# - test IPN and paypal
+#
+# - make picture upload work on s3
+#

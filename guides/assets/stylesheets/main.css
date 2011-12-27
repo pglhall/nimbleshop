@@ -24,10 +24,10 @@ dl dt { font-weight: bold; }
 dd { margin-left: 1.5em;}
 
 pre,code { margin: 1.5em 0; overflow: auto; color: #222;}
-pre,code,tt {
-    font-size: 1em;
-    font-family: "Anonymous Pro", "Inconsolata", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
-    line-height: 1.5;
+pre, code, tt {
+  font-size: 18px;
+  font-family: monospace;
+  line-height: 1.5;
 }
 
 abbr, acronym { border-bottom: 1px dotted #666; }
@@ -111,6 +111,7 @@ body {
 
 #container {
 	background: #FFF;
+	background: #f6f5f1;
 	color: #333;
 	padding: 0.5em 0 1.5em 0;
 	}
@@ -156,7 +157,10 @@ a, a:link, a:visited {
 	text-decoration: none;
 	}
 
-#mainCol a, #subCol a, #feature a {color: #980905;}
+#mainCol a, #subCol a, #feature a {
+  color: #980905;
+  color: #0067E3;
+}
 
 
 /* Navigation
@@ -451,6 +455,7 @@ div.important p, div.caution p, div.warning p, div.note p, div.info p {
 
 #mainCol a {
   font-family: 'arvo, sans-serif';
+  font-family: 'MinionPro, serif';
   font-size: 18px;
   line-height: 28px;
   color: #0067e3;
@@ -460,7 +465,10 @@ div.important p, div.caution p, div.warning p, div.note p, div.info p {
   text-decoration: underline;
 }
 
-p {margin: 0 0 1.5em;font-family: arvo,sans-serif;font-size: 16px;line-height: 28px;}
+p {
+  margin: 0 0 1.5em;font-family: arvo,sans-serif;font-size: 16px;
+  line-height: 25px;
+}
 
 p.feedback, p.feedback a {
   color: #555;
