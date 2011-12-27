@@ -41,9 +41,6 @@ class ApplicationController < ActionController::Base
 end
 
 # TODO
-# - pass shipping address to paypal
-# - image rollover on hover
-# - image magnification
 # - better view when user pays
 # - order report
 # - fix link group
@@ -51,4 +48,5 @@ end
 #
 # - shipping zone should connect with a country
 # - a country should have states
+# - pass shipping address to paypal . This needs US states in two digit code. So it rquires the shipping zone fix first.
 #

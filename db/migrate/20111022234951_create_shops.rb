@@ -8,6 +8,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :twitter_handle
       t.string :contact_email
       t.string :facebook_url
+      t.string :company_name_on_creditcard_statements
 
       t.timestamps
     end

@@ -1,32 +1,33 @@
 class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
 
-  attr_accessor :image_on_checkout_page, :merchant_email_address, :return_url, :notify_url, :request_submission_url
+  attr_accessor :merchant_email_address, :return_url, :notify_url, :request_submission_url
 
-  def self.instance
-    @gateway ||= begin
-      set_mode
-      gateway_klass.logger = Rails.logger unless Rails.env.production?
-      ::BinaryMerchant::AuthorizeNetGateway.new( gateway_klass.new(credentials) )
+  def url(order)
+    values = {
+      :business => merchant_email_address,
+      :cmd => '_cart',
+      :upload => 1,
+      :return => return_url,
+      :invoice => order.number,
+      :secret  => 'xxxxxxx', #TODO this should be stored and verified later
+      :notify_url => notify_url
+    }
+    order.line_items.each_with_index do |item, index|
+      values.merge!({
+        "amount_#{index+1}"      => item.product.price,
+        "item_name_#{index+1}"   => item.product.name,
+        "item_number_#{index+1}" => item.id,
+        "quantity_#{index+1}"    => item.quantity
+      })
     end
+    request_submission_url + values.to_query
   end
 
   private
 
-  def self.credentials
-    { login: self.login_id , password: self.transaction_key }
-  end
-
-  def self.gateway_klass
-    if Rails.env.test?
-      ActiveMerchant::Billing::AuthorizeNetMockedGateway
-    else
-      ActiveMerchant::Billing::AuthorizeNetGateway
-    end
-  end
 
   def set_data
-    self.data = { image_on_checkout_page: @image_on_checkout_page,
-                  merchant_email_address: @merchant_email_address,
+    self.data = { merchant_email_address: @merchant_email_address,
                   return_url: @return_url,
                   notify_url: @notify_url,
                   request_submission_url: @request_submission_url }

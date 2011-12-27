@@ -42,8 +42,7 @@ task :setup_development => :environment do
   payment_method.update_attributes!(login_id: '56yBAar72', transaction_key: '9r3pbH5bnKH29f7d')
 
   payment_method = PaymentMethod.find_by_permalink('paypal-website-payments-standard')
-  payment_method.update_attributes!(image_on_checkout_page: 'http://images.paypal.com/images/x-click-but1.gif',
-                                    merchant_email_address: 'seller_1323037155_biz@bigbinary.com',
+  payment_method.update_attributes!( merchant_email_address: 'seller_1323037155_biz@bigbinary.com',
                                     return_url: 'http://localhost:3000/paypal_return',
                                     notify_url: 'http://localhost:3000/payment_notifications/paypal',
                                     request_submission_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?')

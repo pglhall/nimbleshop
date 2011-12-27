@@ -11,7 +11,6 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
   end
 
   def update
-    @payment_method.image_on_checkout_page = params[:image_on_checkout_page]
     @payment_method.merchant_email_address = params[:merchant_email_address]
     @payment_method.return_url             = params[:return_url]
     @payment_method.notify_url             = params[:notify_url]

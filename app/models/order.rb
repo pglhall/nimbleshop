@@ -27,25 +27,7 @@ class Order < ActiveRecord::Base
   end
 
   def paypal_url
-    payment_method = PaymentMethod::PaypalWebsitePaymentsStandard.first
-    values = {
-      :business => payment_method.merchant_email_address,
-      :cmd => '_cart',
-      :upload => 1,
-      :return => payment_method.return_url,
-      :invoice => self.number,
-      :secret  => 'xxxxxxx', #TODO this should be stored and verified later
-      :notify_url => payment_method.notify_url
-    }
-    line_items.each_with_index do |item, index|
-      values.merge!({
-        "amount_#{index+1}" => item.product.price,
-        "item_name_#{index+1}" => item.product.name,
-        "item_number_#{index+1}" => item.id,
-        "quantity_#{index+1}" => item.quantity
-      })
-    end
-    payment_method.request_submission_url + values.to_query
+    PaymentMethod::PaypalWebsitePaymentsStandard.first.url(self)
   end
 
   def item_count

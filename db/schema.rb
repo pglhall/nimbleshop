@@ -227,13 +227,14 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   create_table "shops", :force => true do |t|
-    t.string   "name",           :null => false
+    t.string   "name",                                  :null => false
     t.string   "theme"
     t.string   "gateway"
     t.string   "phone_number"
     t.string   "twitter_handle"
     t.string   "contact_email"
     t.string   "facebook_url"
+    t.string   "company_name_on_creditcard_statements"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

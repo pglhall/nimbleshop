@@ -9,6 +9,7 @@ class PaymentMethod < ActiveRecord::Base
   scope :enabled, where(enabled: true)
 
   def set_mode
+    # FIXME before going live
     #ActiveMerchant::Billing::Base.mode = Rails.env.production? ? :production : :test
     ActiveMerchant::Billing::Base.mode = :test
   end
