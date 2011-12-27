@@ -41,7 +41,6 @@ class ApplicationController < ActionController::Base
 end
 
 # TODO
-# - order report
 # - fix link group
 # - pages
 # - convert price to decimal everywhere

@@ -45,7 +45,6 @@ password: 123456
 
 h3. Instant Payment Notification (IPN)
 
-
 So Steve (buyer) click on 'checkout with paypal' because he wants to use paypal to pay for the order. The shop site takes Steve to PayPal page. Here Steve makes the payment. After Steve makes the payment, Steve is taken back to the shop and everything looks good. Steve thinks that he has successfully paid and the items will be delivered to him. And Steve is right. He did pay the amount. However as far as shop is concerned shop does not think Steve has because . Well lets slow down and try to break things into pieces to understand what's going on here.
 
 Steve made a successful payment at PayPal. PayPal tells Steve all is good. So Steve is happy.
