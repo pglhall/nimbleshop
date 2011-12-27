@@ -34,10 +34,7 @@ class CreditcardPaymentsController < ApplicationController
     if @gp.authorize(current_order.grand_total, @creditcard, order)
       current_order.update_attributes(status: 'authorized')
       reset_order
-      msg = "You paid #{current_order.grand_total} ."
-      msg << "In the credit card statement you will the charge against company xxxx."
-      msg << "A receipt is being emailed to #{current_order.email}."
-      render text: msg
+      redirect_to paid_using_creditcard_order_path(current_order)
     else
       @creditcard.errors.add(:base, t(:credit_card_declined_message))
       render action: "new"

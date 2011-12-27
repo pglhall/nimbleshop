@@ -1,6 +1,6 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
-    create_table :transactions do |t|
+    create_table :creditcard_transactions do |t|
       t.string  :transaction_gid, null: false
       t.text    :params        ,  null: false
       t.integer :price         ,  null: false

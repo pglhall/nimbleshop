@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.datetime "updated_at"
   end
 
+  create_table "creditcard_transactions", :force => true do |t|
+    t.string   "transaction_gid",                   :null => false
+    t.text     "params",                            :null => false
+    t.integer  "price",                             :null => false
+    t.integer  "creditcard_id",                     :null => false
+    t.boolean  "active",          :default => true, :null => false
+    t.integer  "order_id",                          :null => false
+    t.string   "status",                            :null => false
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "creditcards", :force => true do |t|
     t.string   "masked_number"
     t.datetime "expires_on"
@@ -235,19 +248,6 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.string   "contact_email"
     t.string   "facebook_url"
     t.string   "company_name_on_creditcard_statements"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transactions", :force => true do |t|
-    t.string   "transaction_gid",                   :null => false
-    t.text     "params",                            :null => false
-    t.integer  "price",                             :null => false
-    t.integer  "creditcard_id",                     :null => false
-    t.boolean  "active",          :default => true, :null => false
-    t.integer  "order_id",                          :null => false
-    t.string   "status",                            :null => false
-    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -33,7 +33,7 @@ class GatewayProcessor
   def update_transaction_record_and_add_another!(transaction, transaction_gid, response, status)
     if transaction_gid
       transaction.update_attributes!(active: false)
-      Transaction.create!(transaction_gid: transaction_gid,
+      CreditcardTransaction.create!(transaction_gid: transaction_gid,
                           params: response.params,
                           price: transaction.price,
                           creditcard_id: transaction.creditcard_id,
@@ -47,7 +47,7 @@ class GatewayProcessor
   def save_cc_and_create_transaction_record!(transaction_gid, response, status, order, creditcard)
     if transaction_gid
       creditcard.save!
-      Transaction.create!(transaction_gid: transaction_gid,
+      CreditcardTransaction.create!(transaction_gid: transaction_gid,
                           params: response.params,
                           price: order.price,
                           creditcard_id: creditcard.id,

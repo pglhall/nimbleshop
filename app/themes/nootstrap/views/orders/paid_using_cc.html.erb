@@ -1,8 +1,8 @@
 <div class='alert-message block-message success'>
   <p><strong> You have successfully completed the purchase. </strong> </p>
   <ul>
-    <li>Your credit card was charged <strong><%= number_to_currency(@order.amount) %> </strong> . </li>
-    <li> In the credit card statement name of the company would appear as <em>nimbleSHOP</em> .</li>
+    <li>Your credit card was charged <strong><%= number_to_currency(@order.creditcard_transactions.first.amount) %> </strong> . </li>
+    <li> In the credit card statement name of the company would appear as <em><%=@shop.company_name_on_creditcard_statements%></em> .</li>
     <li> An invoice is also sent to <em><%= @order.email %></em> . </li>
   </ul>
 </div>

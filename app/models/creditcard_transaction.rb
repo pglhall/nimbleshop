@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class CreditcardTransaction < ActiveRecord::Base
 
   alias_attribute :amount, :price
 
