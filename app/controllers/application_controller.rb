@@ -41,10 +41,10 @@ class ApplicationController < ActionController::Base
 end
 
 # TODO
-# - better view when user pays
 # - order report
 # - fix link group
 # - pages
+# - convert price to decimal everywhere
 #
 # - shipping zone should connect with a country
 # - a country should have states
