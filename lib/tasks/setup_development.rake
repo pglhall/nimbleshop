@@ -76,9 +76,9 @@ task :setup_development => :environment do
   pg_necklaces = ProductGroup.create!(name: 'necklaces', :condition => {"q#{cf.id}" => { op: 'eq', v: 'necklace'}})
 
   link_group = LinkGroup.create!(name: 'Shop by category')
-  Navigation.create!(link_group: link_group, navigeable: pg_bracelets)
-  Navigation.create!(link_group: link_group, navigeable: pg_earrings)
-  Navigation.create!(link_group: link_group, navigeable: pg_necklaces)
+  link_group.navigations.create(navigeable: pg_bracelets)
+  link_group.navigations.create(navigeable: pg_earrings)
+  link_group.navigations.create(navigeable: pg_necklaces)
 
   cf = CustomField.create!(name: 'price', field_type: 'number')
   Product.find(4).update_attributes(price: 10)
