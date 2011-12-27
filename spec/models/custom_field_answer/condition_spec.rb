@@ -3,6 +3,17 @@ require 'spec_helper'
 describe CustomFieldAnswer::Condition do
   let(:query_sql)  { condition.to_condition.to_sql }
 
+  describe "alias join" do
+    let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'eq', v: 'george', i: 1) }
+
+    it "should create inner join using alias" do
+      condition.arel_join(Product.arel_table).to_sql.must_be_like %{
+        SELECT FROM "products" INNER JOIN "custom_field_answers" 
+        "answers1" ON "answers1"."product_id" = "products"."id"
+      }
+    end
+  end
+
   describe "text condition" do
 
     it "should raise operator not supported exception" do
@@ -17,37 +28,37 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for string equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."value" ILIKE 'george'
+            "answers"."value" ILIKE 'george'
           }
         end
       end
 
       describe "#starts" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'starts', v: 'george') }
+        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'starts', v: 'george',i: 1) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
-            "custom_field_answers"."value" ILIKE 'george%'
+            "answers1"."value" ILIKE 'george%'
           }
         end
       end
 
       describe "#ends" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'ends', v: 'george') }
+        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'ends', v: 'george',i: 2) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
-            "custom_field_answers"."value" ILIKE '%george'
+            "answers2"."value" ILIKE '%george'
           }
         end
       end
 
       describe "#contains" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'contains', v: 'george') }
+        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'contains', v: 'george',i: 4) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
-            "custom_field_answers"."value" ILIKE '%george%'
+            "answers4"."value" ILIKE '%george%'
           }
         end
       end
@@ -68,7 +79,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for number equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."number_value" = 24
+            "answers"."number_value" = 24
           }
         end
       end
@@ -78,7 +89,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for number less than" do
           query_sql.must_be_like %{
-            "custom_field_answers"."number_value" < 24
+            "answers"."number_value" < 24
           }
         end
       end
@@ -88,7 +99,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for number greater than" do
           query_sql.must_be_like %{
-            "custom_field_answers"."number_value" > 24
+            "answers"."number_value" > 24
           }
         end
       end
@@ -98,7 +109,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for number less than equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."number_value" <= 24
+            "answers"."number_value" <= 24
           }
         end
       end
@@ -108,7 +119,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for number greater than equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."number_value" >= 24
+            "answers"."number_value" >= 24
           }
         end
       end
@@ -122,7 +133,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for date equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."datetime_value" = '1/2/2009'
+            "answers"."datetime_value" = '1/2/2009'
           }
         end
       end
@@ -132,7 +143,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for date less than" do
           query_sql.must_be_like %{
-            "custom_field_answers"."datetime_value" < '1/2/2009'
+            "answers"."datetime_value" < '1/2/2009'
           }
         end
       end
@@ -142,7 +153,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for date greater than" do
           query_sql.must_be_like %{
-            "custom_field_answers"."datetime_value" > '1/2/2009'
+            "answers"."datetime_value" > '1/2/2009'
           }
         end
       end
@@ -152,7 +163,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for date less than equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."datetime_value" <= '1/2/2009'
+            "answers"."datetime_value" <= '1/2/2009'
           }
         end
       end
@@ -162,7 +173,7 @@ describe CustomFieldAnswer::Condition do
 
         it "should create query for date greater than equal" do
           query_sql.must_be_like %{
-            "custom_field_answers"."datetime_value" >= '1/2/2009'
+            "answers"."datetime_value" >= '1/2/2009'
           }
         end
       end

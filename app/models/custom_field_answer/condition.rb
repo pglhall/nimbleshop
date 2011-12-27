@@ -7,14 +7,13 @@ class CustomFieldAnswer
 
     module ClassMethods
 
-      def to_arel_conditions(params = {})
-        params.map do | (field, condition) |
-          if Array === condition
-            condition.map { |cond| to_condition_klass(field).new(cond).to_condition }
-          else
-            to_condition_klass(field).new(condition).to_condition
+      def to_arel_conditions(conditions)
+        [].tap do | result |
+          Array.wrap(conditions).each_with_index do | condition, index |
+            field  = condition.keys.first
+            result << to_condition_klass(field).new(condition[field].merge(i: index)) 
           end
-        end.flatten
+        end
       end
 
       private
@@ -26,9 +25,14 @@ class CustomFieldAnswer
 
     class BaseCondition
       def initialize(params = {})
-        @operation, @value = params.values_at(:op, :v)
+        @operation, @value, @index = params.values_at(:op, :v, :i)
 
         validate_operator!
+      end
+
+      def arel_join(table, prv_join = nil)
+        prv_join ||= table
+        prv_join.join(arel_table).on(arel_table[:product_id].eq(table[:id]))
       end
 
       def to_condition
@@ -44,7 +48,7 @@ class CustomFieldAnswer
       end
 
       def arel_table
-        CustomFieldAnswer.arel_table
+        @arel_table ||= CustomFieldAnswer.arel_table.alias("answers#{@index}")
       end
     end
 

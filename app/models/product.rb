@@ -39,16 +39,19 @@ class Product < ActiveRecord::Base
 
   def self.search(params = {})
     conditions = CustomFieldAnswer.to_arel_conditions(params)
-    relation = self.scoped
-    conditions.each do |condition|
-      relation = relation.merge(where(condition))
+
+    relation = conditions.inject(nil) do | t, condition| 
+     condition.arel_join(arel_table, t)
     end
-    relation = relation.joins(:custom_field_answers)
-    relation.to_a
+
+    wh = conditions.inject(nil) do | t, condition |
+      t.nil? ? condition.to_condition : t.and(condition.to_condition)
+    end
+
+    Product.find_by_sql(relation.where(wh).project(Arel.sql("products.*")).to_sql)
   end
 
   def to_param
     self.permalink
   end
-
 end
