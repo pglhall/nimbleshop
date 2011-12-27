@@ -21,7 +21,7 @@ Nimbleshop::Application.routes.draw do
   end
 
   resources :creditcard_payments
-  resources :payment_notifications do
+  resources :instant_payment_notifications do
     collection do
       post 'paypal'
       post 'splitable'

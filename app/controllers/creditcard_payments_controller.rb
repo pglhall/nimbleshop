@@ -20,7 +20,7 @@ class CreditcardPaymentsController < ApplicationController
       if paypal_record = PaypalTransaction.find_by_invoice(current_order.number)
         paypal_record.update_attributes!(amount: current_order.grand_total)
       else
-        PaypalTransaction.create!(order: current_order, amount: current_order.grand_total, invoice: current_order.number)
+        PaypalTransaction.create!(order_id: current_order.id, amount: current_order.grand_total, invoice: current_order.number)
       end
       redirect_to current_order.paypal_url and return
     end

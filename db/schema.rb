@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   create_table "creditcard_transactions", :force => true do |t|
     t.string   "transaction_gid",                   :null => false
     t.text     "params",                            :null => false
-    t.integer  "price",                             :null => false
+    t.integer  "amount",                            :null => false
     t.integer  "creditcard_id",                     :null => false
     t.boolean  "active",          :default => true, :null => false
     t.integer  "order_id",                          :null => false
@@ -154,6 +154,16 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.string   "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "paypal_transactions", :force => true do |t|
+    t.text    "params"
+    t.integer "order_id", :null => false
+    t.string  "status"
+    t.integer "amount",   :null => false
+    t.string  "invoice",  :null => false
+    t.string  "txn_id"
+    t.string  "txn_type"
   end
 
   create_table "pictures", :force => true do |t|
