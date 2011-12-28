@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Product do
+
+  describe "#to_param" do
+    it "should return permalink" do
+      p = Product.new(permalink: 'test')
+      p.to_param.must_equal 'test'
+    end
+  end
+
   describe "#search" do
     let(:text)    { create(:text_custom_field)    }
     let(:date)    { create(:date_custom_field)    }

@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
 
   alias_attribute :title, :name
 
-  include Product::Scopes
+  include BuildPermalink
 
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true
@@ -49,9 +49,5 @@ class Product < ActiveRecord::Base
     end
 
     Product.find_by_sql(relation.where(wh).project(Arel.sql("products.*")).to_sql)
-  end
-
-  def to_param
-    self.permalink
   end
 end
