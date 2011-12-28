@@ -1,8 +1,10 @@
-class DateCondition < NumberCondition
+module Search
+  class DateCondition < NumberCondition
 
-  private
+    private
 
-  def query_column
-    arel_table[:datetime_value]
+    def query_column
+      arel_table[:datetime_value]
+    end
   end
 end

@@ -43,6 +43,14 @@ module Search
       end
     end
 
+    def resolve_condition_klass(field)
+      case field
+      when /name/
+        TextCondition
+      else
+      end
+    end
+
     def to_condition_klass(field)
       const_get("#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Condition")
     end
