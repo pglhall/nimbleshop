@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe CustomFieldAnswer::Condition do
+describe 'conditions' do
   let(:query_sql)  { condition.to_condition.to_sql }
 
   describe "alias join" do
-    let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'eq', v: 'george', i: 1) }
+    let(:condition) { TextCondition.new(op: 'eq', v: 'george', i: 1) }
 
     it "should create inner join using alias" do
       condition.arel_join(Product.arel_table).to_sql.must_be_like %{
@@ -18,13 +18,13 @@ describe CustomFieldAnswer::Condition do
 
     it "should raise operator not supported exception" do
       proc {
-        CustomFieldAnswer::Condition::TextCondition.new(op: 'lteq', v: 'george')
-      }.must_raise CustomFieldAnswer::Condition::OperatorNotSupported
+        TextCondition.new(op: 'lteq', v: 'george')
+      }.must_raise Search::OperatorNotSupported
     end
 
     describe "#to_condition" do
       describe "#eq" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'eq', v: 'george') }
+        let(:condition) { TextCondition.new(op: 'eq', v: 'george') }
 
         it "should create query for string equal" do
           query_sql.must_be_like %{
@@ -34,7 +34,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#starts" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'starts', v: 'george',i: 1) }
+        let(:condition) { TextCondition.new(op: 'starts', v: 'george',i: 1) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
@@ -44,7 +44,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#ends" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'ends', v: 'george',i: 2) }
+        let(:condition) { TextCondition.new(op: 'ends', v: 'george',i: 2) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
@@ -54,7 +54,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#contains" do
-        let(:condition) { CustomFieldAnswer::Condition::TextCondition.new(op: 'contains', v: 'george',i: 4) }
+        let(:condition) { TextCondition.new(op: 'contains', v: 'george',i: 4) }
 
         it "should create query for string starts with" do
           query_sql.must_be_like %{
@@ -69,13 +69,13 @@ describe CustomFieldAnswer::Condition do
 
     it "should raise operator not supported exception" do
       proc {
-        CustomFieldAnswer::Condition::NumberCondition.new(op: 'contains', v: 'george')
-      }.must_raise CustomFieldAnswer::Condition::OperatorNotSupported
+        NumberCondition.new(op: 'contains', v: 'george')
+      }.must_raise Search::OperatorNotSupported
     end
 
     describe "#to_condition" do
       describe "#eq" do
-        let(:condition) { CustomFieldAnswer::Condition::NumberCondition.new(op: 'eq', v: 24) }
+        let(:condition) { NumberCondition.new(op: 'eq', v: 24) }
 
         it "should create query for number equal" do
           query_sql.must_be_like %{
@@ -85,7 +85,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#lt" do
-        let(:condition) { CustomFieldAnswer::Condition::NumberCondition.new(op: 'lt', v: 24) }
+        let(:condition) { NumberCondition.new(op: 'lt', v: 24) }
 
         it "should create query for number less than" do
           query_sql.must_be_like %{
@@ -95,7 +95,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#gt" do
-        let(:condition) { CustomFieldAnswer::Condition::NumberCondition.new(op: 'gt', v: 24) }
+        let(:condition) { NumberCondition.new(op: 'gt', v: 24) }
 
         it "should create query for number greater than" do
           query_sql.must_be_like %{
@@ -105,7 +105,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#lteq" do
-        let(:condition) { CustomFieldAnswer::Condition::NumberCondition.new(op: 'lteq', v: 24) }
+        let(:condition) { NumberCondition.new(op: 'lteq', v: 24) }
 
         it "should create query for number less than equal" do
           query_sql.must_be_like %{
@@ -115,7 +115,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#gteq" do
-        let(:condition) { CustomFieldAnswer::Condition::NumberCondition.new(op: 'gteq', v: 24) }
+        let(:condition) { NumberCondition.new(op: 'gteq', v: 24) }
 
         it "should create query for number greater than equal" do
           query_sql.must_be_like %{
@@ -129,7 +129,7 @@ describe CustomFieldAnswer::Condition do
   describe "date condition" do
     describe "#to_condition" do
       describe "#eq" do
-        let(:condition) { CustomFieldAnswer::Condition::DateCondition.new(op: 'eq', v: '1/2/2009') }
+        let(:condition) { DateCondition.new(op: 'eq', v: '1/2/2009') }
 
         it "should create query for date equal" do
           query_sql.must_be_like %{
@@ -139,7 +139,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#lt" do
-        let(:condition) { CustomFieldAnswer::Condition::DateCondition.new(op: 'lt', v: '1/2/2009') }
+        let(:condition) { DateCondition.new(op: 'lt', v: '1/2/2009') }
 
         it "should create query for date less than" do
           query_sql.must_be_like %{
@@ -149,7 +149,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#gt" do
-        let(:condition) { CustomFieldAnswer::Condition::DateCondition.new(op: 'gt', v: '1/2/2009') }
+        let(:condition) { DateCondition.new(op: 'gt', v: '1/2/2009') }
 
         it "should create query for date greater than" do
           query_sql.must_be_like %{
@@ -159,7 +159,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#lteq" do
-        let(:condition) { CustomFieldAnswer::Condition::DateCondition.new(op: 'lteq', v: '1/2/2009') }
+        let(:condition) { DateCondition.new(op: 'lteq', v: '1/2/2009') }
 
         it "should create query for date less than equal" do
           query_sql.must_be_like %{
@@ -169,7 +169,7 @@ describe CustomFieldAnswer::Condition do
       end
 
       describe "#gteq" do
-        let(:condition) { CustomFieldAnswer::Condition::DateCondition.new(op: 'gteq', v: '1/2/2009') }
+        let(:condition) { DateCondition.new(op: 'gteq', v: '1/2/2009') }
 
         it "should create query for date greater than equal" do
           query_sql.must_be_like %{

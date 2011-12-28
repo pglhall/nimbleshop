@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   alias_attribute :title, :name
 
   include BuildPermalink
+  include Search
 
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true
@@ -35,19 +36,5 @@ class Product < ActiveRecord::Base
 
   def custom_field_value_for(custom_field_name)
     self.custom_field_answers.for(custom_field_name).value
-  end
-
-  def self.search(params = {})
-    conditions = CustomFieldAnswer.to_arel_conditions(params)
-
-    relation = conditions.inject(nil) do | t, condition| 
-     condition.arel_join(arel_table, t)
-    end
-
-    wh = conditions.inject(nil) do | t, condition |
-      t.nil? ? condition.to_condition : t.and(condition.to_condition)
-    end
-
-    Product.find_by_sql(relation.where(wh).project(Arel.sql("products.*")).to_sql)
   end
 end
