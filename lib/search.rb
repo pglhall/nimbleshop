@@ -26,7 +26,7 @@ module Search
         index = index + 1
       field, params  = condition.to_a.first
 
-      klass = to_condition_klass(field)
+      klass = resolve_condition_klass(field)
       klass.new(params.merge(i: index)) 
       end
     end
@@ -44,15 +44,16 @@ module Search
     end
 
     def resolve_condition_klass(field)
-      case field
-      when /name/
-        TextCondition
+      field_type = case field
+      when /(name|description)/
+        'text'
+      when /price/
+        'number'
       else
+        CustomField.find(field.gsub(/q/,'')).field_type
       end
-    end
 
-    def to_condition_klass(field)
-      const_get("#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Condition")
+      const_get("#{field_type.camelize}Condition")
     end
   end
 end
