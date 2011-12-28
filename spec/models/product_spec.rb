@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Product do
+
+  describe "#to_param" do
+    it "should return permalink" do
+      p = Product.new(permalink: 'test')
+      p.to_param.must_equal 'test'
+    end
+  end
+
   describe "#search" do
     let(:text)    { create(:text_custom_field)    }
     let(:date)    { create(:date_custom_field)    }
@@ -70,11 +78,10 @@ describe Product do
     end
 
     it "should show results for mixed operators" do
-      Product.search("q#{number.id}" => [{ op: 'gt', v: 22 }, { op: 'lt', v: 24}]).sort.must_equal [ p1 ]
-      Product.search("q#{number.id}" => [{ op: 'gt', v: 22 }, { op: 'lt', v: 77}]).sort.must_equal [ p1, p2, p3 ]
+      Product.search(["q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" =>{ op: 'lt', v: 24}]).sort.must_equal [ p1 ]
+      Product.search(["q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" => { op: 'lt', v: 77}]).sort.must_equal [ p1, p2, p3 ]
     end
   end
-
   describe 'search for mixed models' do
     let(:category) { create(:text_custom_field)    }
     let(:price)    { create(:number_custom_field)  }
@@ -107,7 +114,7 @@ describe Product do
     #}
 
     it "should show results" do
-      products = Product.search(pg_bangles.condition.merge(pg_price.condition))
+      products = Product.search([ pg_bangles.condition, pg_price.condition ])
       skip "subba will later look into it" do
         products.must_equal [p1]
       end

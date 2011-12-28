@@ -14,10 +14,6 @@ class ProductGroup < ActiveRecord::Base
     products.include?(product)
   end
 
-  def to_param
-    self.permalink
-  end
-
   def products
     Product.search(condition)
   end

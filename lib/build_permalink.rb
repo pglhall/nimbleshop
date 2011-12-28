@@ -8,23 +8,27 @@
 # end
 #
 module BuildPermalink
+  extend ActiveSupport::Concern
 
-  def self.included(base)
-    base.class_eval do
-      before_create :set_permalink
-    end
+  included do
+    before_create :set_permalink
   end
 
-  def set_permalink
-    permalink = self.name.parameterize
-    counter = 2
-
-    while self.class.exists?(permalink: permalink) do
-      permalink = "#{permalink}-#{counter}"
-      counter = counter + 1
+  module InstanceMethods
+    def to_param
+      self.permalink
     end
 
-    self.permalink ||= permalink
-  end
+    def set_permalink
+      permalink = self.name.parameterize
+      counter = 2
 
+      while self.class.exists?(permalink: permalink) do
+        permalink = "#{permalink}-#{counter}"
+        counter = counter + 1
+      end
+
+      self.permalink ||= permalink
+    end
+  end
 end

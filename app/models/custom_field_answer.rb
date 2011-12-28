@@ -1,5 +1,4 @@
 class CustomFieldAnswer < ActiveRecord::Base
-  include Condition
   belongs_to :product
 
 

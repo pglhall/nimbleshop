@@ -2,7 +2,8 @@ class Product < ActiveRecord::Base
 
   alias_attribute :title, :name
 
-  include Product::Scopes
+  include BuildPermalink
+  include Search
 
   has_many :pictures
   accepts_nested_attributes_for :pictures#, allow_destroy: true
@@ -36,19 +37,4 @@ class Product < ActiveRecord::Base
   def custom_field_value_for(custom_field_name)
     self.custom_field_answers.for(custom_field_name).value
   end
-
-  def self.search(params = {})
-    conditions = CustomFieldAnswer.to_arel_conditions(params)
-    relation = self.scoped
-    conditions.each do |condition|
-      relation = relation.merge(where(condition))
-    end
-    relation = relation.joins(:custom_field_answers)
-    relation.to_a
-  end
-
-  def to_param
-    self.permalink
-  end
-
 end
