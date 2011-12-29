@@ -5,8 +5,6 @@ class CreateProducts < ActiveRecord::Migration
       t.text    :description
       t.integer :price,             null: false
       t.boolean :new,               null: false, default: false
-      t.boolean :active,            default: true
-      t.string  :picture
       t.string  :permalink,         null: false
       t.timestamps
     end
