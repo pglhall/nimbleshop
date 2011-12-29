@@ -16,7 +16,9 @@ Nimbleshop::Application.routes.draw do
     resources :products
     resources :product_groups
     resources :custom_fields
-    resources :link_groups
+    resources :link_groups do
+      resources :navigations
+    end
     resource  :shop, only: [:update, :edit]
   end
 
