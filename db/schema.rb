@@ -48,15 +48,6 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   create_table "creditcards", :force => true do |t|
     t.string   "masked_number"
     t.datetime "expires_on"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "zipcode"
-    t.string   "city"
-    t.string   "state"
-    t.string   "card_type"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -133,6 +124,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pages", ["permalink"], :name => "index_pages_on_permalink", :unique => true
 
   create_table "payment_methods", :force => true do |t|
     t.boolean  "enabled",     :default => false
@@ -248,6 +241,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "shipping_zones", ["permalink"], :name => "index_shipping_zones_on_permalink", :unique => true
 
   create_table "shops", :force => true do |t|
     t.string   "name",                                  :null => false

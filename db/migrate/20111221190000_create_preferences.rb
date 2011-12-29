@@ -1,5 +1,5 @@
 class CreatePreferences < ActiveRecord::Migration
-  def up
+  def change
     create_table :preferences do |t|
       t.string :name, :null => false
       t.references :owner, :polymorphic => true, :null => false
@@ -8,10 +8,5 @@ class CreatePreferences < ActiveRecord::Migration
       t.timestamps
     end
     add_index :preferences, [:owner_id, :owner_type, :name, :group_id, :group_type], :unique => true, :name => 'index_preferences_on_owner_and_name_and_preference'
-  end
-
-  def down
-    remove_index :preferences, :name => 'index_preferences_on_owner_and_name_and_preference'
-    drop_table :preferences
   end
 end

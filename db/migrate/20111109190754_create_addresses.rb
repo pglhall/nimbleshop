@@ -2,7 +2,7 @@ class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
       t.string :type
-      t.integer :order_id
+      t.belongs_to :order
       t.string :first_name
       t.string :last_name
       t.string :company

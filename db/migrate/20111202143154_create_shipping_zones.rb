@@ -7,6 +7,7 @@ class CreateShippingZones < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :shipping_zones, :permalink, unique: true
   end
 
 end

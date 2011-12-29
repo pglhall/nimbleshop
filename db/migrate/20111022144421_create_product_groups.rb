@@ -7,7 +7,7 @@ class CreateProductGroups < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index(:product_groups, :name, unique: true)
-    add_index(:product_groups, :permalink, unique: true)
+    add_index :product_groups, :name,       unique: true
+    add_index :product_groups, :permalink,  unique: true
   end
 end

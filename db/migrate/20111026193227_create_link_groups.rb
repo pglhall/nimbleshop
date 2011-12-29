@@ -6,7 +6,7 @@ class CreateLinkGroups < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index(:link_groups, :name, unique: true)
-    add_index(:link_groups, :permalink, unique: true)
+    add_index :link_groups, :name,      unique: true
+    add_index :link_groups, :permalink, unique: true
   end
 end

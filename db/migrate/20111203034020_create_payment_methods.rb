@@ -10,6 +10,6 @@ class CreatePaymentMethods < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index(:payment_methods, :permalink, unique: true)
+    add_index :payment_methods, :permalink, unique: true
   end
 end
