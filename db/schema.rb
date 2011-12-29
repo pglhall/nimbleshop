@@ -208,8 +208,6 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.text     "description"
     t.integer  "price",                          :null => false
     t.boolean  "new",         :default => false, :null => false
-    t.boolean  "active",      :default => true
-    t.string   "picture"
     t.string   "permalink",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
