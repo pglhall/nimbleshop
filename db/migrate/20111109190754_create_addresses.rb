@@ -14,7 +14,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :state
       t.string :phone
       t.string :fax
-      t.boolean :use_for_billing
+      t.boolean :use_for_billing,    null: false, default: true
 
       t.timestamps
     end

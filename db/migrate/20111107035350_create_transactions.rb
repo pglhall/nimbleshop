@@ -3,7 +3,7 @@ class CreateTransactions < ActiveRecord::Migration
     create_table :creditcard_transactions do |t|
       t.string  :transaction_gid, null: false
       t.text    :params,          null: false
-      t.integer :amount,          null: false
+      t.decimal :amount,          null: false, precision: 8, scale: 2
       t.integer :creditcard_id,   null: false
       t.boolean :active,          null: false, default: true
       t.belongs_to :order,        null: false
@@ -17,7 +17,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.text       :params,   null: true
       t.belongs_to :order,    null: false
       t.string     :status,   null: true
-      t.integer    :amount,   null: false
+      t.decimal    :amount,   null: false, precision: 8, scale: 2
       t.string     :invoice,  null: false
       t.string     :txn_id,   null: true
       t.string     :txn_type, null: true

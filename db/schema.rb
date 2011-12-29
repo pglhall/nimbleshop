@@ -27,27 +27,27 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.string   "state"
     t.string   "phone"
     t.string   "fax"
-    t.boolean  "use_for_billing"
+    t.boolean  "use_for_billing", :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "creditcard_transactions", :force => true do |t|
-    t.string   "transaction_gid",                   :null => false
-    t.text     "params",                            :null => false
-    t.integer  "amount",                            :null => false
-    t.integer  "creditcard_id",                     :null => false
-    t.boolean  "active",          :default => true, :null => false
-    t.integer  "order_id",                          :null => false
-    t.string   "status",                            :null => false
+    t.string   "transaction_gid",                                                 :null => false
+    t.text     "params",                                                          :null => false
+    t.decimal  "amount",          :precision => 8, :scale => 2,                   :null => false
+    t.integer  "creditcard_id",                                                   :null => false
+    t.boolean  "active",                                        :default => true, :null => false
+    t.integer  "order_id",                                                        :null => false
+    t.string   "status",                                                          :null => false
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "creditcards", :force => true do |t|
-    t.string   "masked_number"
-    t.datetime "expires_on"
+    t.string   "masked_number", :null => false
+    t.datetime "expires_on",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   create_table "custom_fields", :force => true do |t|
-    t.string   "name"
-    t.string   "field_type"
+    t.string   "name",       :null => false
+    t.string   "field_type", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   add_index "link_groups", ["permalink"], :name => "index_link_groups_on_permalink", :unique => true
 
   create_table "links", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
+    t.string   "name",       :null => false
+    t.string   "url",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.integer  "shipping_method_id"
     t.datetime "purchased_at"
     t.string   "email"
-    t.string   "status",             :default => "added_to_cart"
+    t.string   "status",             :default => "added_to_cart", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   add_index "orders", ["number"], :name => "index_orders_on_number", :unique => true
 
   create_table "pages", :force => true do |t|
-    t.string   "name"
-    t.string   "permalink"
+    t.string   "name",       :null => false
+    t.string   "permalink",  :null => false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -142,19 +142,21 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
 
   create_table "paypal_payment_notifications", :force => true do |t|
     t.text     "params"
-    t.string   "order_number"
-    t.string   "status"
-    t.string   "transaction_id"
+    t.string   "order_number",   :null => false
+    t.string   "status",         :null => false
+    t.string   "transaction_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "paypal_payment_notifications", ["order_number"], :name => "index_paypal_payment_notifications_on_order_number", :unique => true
+
   create_table "paypal_transactions", :force => true do |t|
     t.text    "params"
-    t.integer "order_id", :null => false
+    t.integer "order_id",                               :null => false
     t.string  "status"
-    t.integer "amount",   :null => false
-    t.string  "invoice",  :null => false
+    t.decimal "amount",   :precision => 8, :scale => 2, :null => false
+    t.string  "invoice",                                :null => false
     t.string  "txn_id"
     t.string  "txn_type"
   end
@@ -185,8 +187,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
 
   create_table "product_group_conditions", :force => true do |t|
     t.integer  "product_group_id"
-    t.string   "column_name"
-    t.string   "operator"
+    t.string   "column_name",      :null => false
+    t.string   "operator",         :null => false
     t.integer  "value_integer"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -194,8 +196,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
 
   create_table "product_groups", :force => true do |t|
     t.string   "name",       :null => false
-    t.string   "permalink"
-    t.string   "condition"
+    t.string   "permalink",  :null => false
+    t.string   "condition",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -204,11 +206,11 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   add_index "product_groups", ["permalink"], :name => "index_product_groups_on_permalink", :unique => true
 
   create_table "products", :force => true do |t|
-    t.string   "name",                           :null => false
+    t.string   "name",                                                         :null => false
     t.text     "description"
-    t.integer  "price",                          :null => false
-    t.boolean  "new",         :default => false, :null => false
-    t.string   "permalink",                      :null => false
+    t.decimal  "price",       :precision => 8, :scale => 2,                    :null => false
+    t.boolean  "new",                                       :default => false, :null => false
+    t.string   "permalink",                                                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -226,8 +228,8 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.integer  "shipping_zone_id",                                                  :null => false
     t.string   "name",                                                              :null => false
     t.decimal  "lower_price_limit", :precision => 8, :scale => 2
-    t.integer  "upper_price_limit"
-    t.integer  "shipping_price"
+    t.decimal  "upper_price_limit", :precision => 8, :scale => 2
+    t.decimal  "shipping_price",    :precision => 8, :scale => 2
     t.boolean  "active",                                          :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -240,11 +242,12 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
     t.datetime "updated_at"
   end
 
+  add_index "shipping_zones", ["name"], :name => "index_shipping_zones_on_name", :unique => true
   add_index "shipping_zones", ["permalink"], :name => "index_shipping_zones_on_permalink", :unique => true
 
   create_table "shops", :force => true do |t|
-    t.string   "name",                                  :null => false
-    t.string   "theme"
+    t.string   "name",                                                           :null => false
+    t.string   "theme",                                 :default => "nootstrap", :null => false
     t.string   "gateway"
     t.string   "phone_number"
     t.string   "twitter_handle"

@@ -1,8 +1,8 @@
 class CreateCustomFieldAnswers < ActiveRecord::Migration
   def change
     create_table :custom_field_answers do |t|
-      t.integer   :product_id
-      t.integer   :custom_field_id
+      t.belongs_to :product
+      t.belongs_to :custom_field
       t.string    :value
       t.string    :text_value
       t.integer   :number_value
