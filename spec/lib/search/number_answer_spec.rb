@@ -6,13 +6,13 @@ describe "number condition" do
 
   it "should raise operator not supported exception" do
     proc {
-      Search::NumberCondition.new(op: 'contains', v: 'george')
+      Search::NumberAnswer.new(op: 'contains', v: 'george')
     }.must_raise Search::OperatorNotSupported
   end
 
   describe "#to_condition" do
     describe "#eq" do
-      let(:condition) { Search::NumberCondition.new(op: 'eq', v: 24) }
+      let(:condition) { Search::NumberAnswer.new(op: 'eq', v: 24) }
 
       it "should create query for number equal" do
         query_sql.must_be_like %{
@@ -22,7 +22,7 @@ describe "number condition" do
     end
 
     describe "#lt" do
-      let(:condition) { Search::NumberCondition.new(op: 'lt', v: 24) }
+      let(:condition) { Search::NumberAnswer.new(op: 'lt', v: 24) }
 
       it "should create query for number less than" do
         query_sql.must_be_like %{
@@ -32,7 +32,7 @@ describe "number condition" do
     end
 
     describe "#gt" do
-      let(:condition) { Search::NumberCondition.new(op: 'gt', v: 24) }
+      let(:condition) { Search::NumberAnswer.new(op: 'gt', v: 24) }
 
       it "should create query for number greater than" do
         query_sql.must_be_like %{
@@ -42,7 +42,7 @@ describe "number condition" do
     end
 
     describe "#lteq" do
-      let(:condition) { Search::NumberCondition.new(op: 'lteq', v: 24) }
+      let(:condition) { Search::NumberAnswer.new(op: 'lteq', v: 24) }
 
       it "should create query for number less than equal" do
         query_sql.must_be_like %{
@@ -52,7 +52,7 @@ describe "number condition" do
     end
 
     describe "#gteq" do
-      let(:condition) { Search::NumberCondition.new(op: 'gteq', v: 24) }
+      let(:condition) { Search::NumberAnswer.new(op: 'gteq', v: 24) }
 
       it "should create query for number greater than equal" do
         query_sql.must_be_like %{

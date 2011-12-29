@@ -1,5 +1,5 @@
 module Search
-  class DateCondition < NumberCondition
+  class DateAnswer < NumberAnswer
 
     private
 

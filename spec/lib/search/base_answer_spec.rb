@@ -4,7 +4,7 @@ describe 'base search' do
   let(:query_sql)  { condition.to_condition.to_sql }
 
   describe "alias join" do
-    let(:condition) { Search::TextCondition.new(op: 'eq', v: 'george', i: 1) }
+    let(:condition) { Search::TextAnswer.new(op: 'eq', v: 'george', i: 1) }
 
     it "should create inner join using alias" do
       condition.arel_join(Product.arel_table).to_sql.must_be_like %{

@@ -1,5 +1,5 @@
 module Search
-  class TextCondition < BaseCondition
+  class TextAnswer < BaseAnswer
 
     private
 

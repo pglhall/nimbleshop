@@ -78,8 +78,8 @@ describe Product do
     end
 
     it "should show results for mixed operators" do
-      Product.search(["q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" =>{ op: 'lt', v: 24}]).sort.must_equal [ p1 ]
-      Product.search(["q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" => { op: 'lt', v: 77}]).sort.must_equal [ p1, p2, p3 ]
+      Product.search("q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" =>{ op: 'lt', v: 24}).sort.must_equal [ p1 ]
+      Product.search("q#{number.id}" => { op: 'gt', v: 22 }, "q#{number.id}" => { op: 'lt', v: 77}).sort.must_equal [ p1, p2, p3 ]
     end
   end
   describe 'search for mixed models' do
@@ -114,7 +114,7 @@ describe Product do
     #}
 
     it "should show results" do
-      products = Product.search([ pg_bangles.condition, pg_price.condition ])
+      products = Product.search("q#{category.id}" => { op: 'eq', v: 'bangle' },"q#{price.id}" => { op: 'lt', v: 50})
       skip "subba will later look into it" do
         products.must_equal [p1]
       end

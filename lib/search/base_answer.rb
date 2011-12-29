@@ -1,7 +1,10 @@
 module Search
-  class BaseCondition
+  class BaseAnswer
     def initialize(params = {})
-      @operation, @value, @index = params.values_at(:op, :v, :i)
+      @name      = params[:name]
+      @value     = params[:v]
+      @index     = params[:i]
+      @operation = params[:op]
 
       validate_operator!
     end
