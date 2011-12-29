@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   include Search
 
   has_many :pictures
-  accepts_nested_attributes_for :pictures#, allow_destroy: true
+  accepts_nested_attributes_for :pictures, allow_destroy: true
 
   has_many :custom_field_answers do
     def for(custom_field_name)
