@@ -10,12 +10,10 @@
 <br />
 
 <table class="zebra-striped bordered-table">
-  <tr>
-    <th>
-      api_key:
-    </th>
-    <td>
-      <%= @payment_method.data[:api_key] %>
-    </td>
-  </tr>
+  <% @payment_method.preferences.each do |key, value| %>
+    <tr>
+      <th> <%= key %> </th>
+      <td> <%= value %> </td>
+    </tr>
+  <% end %>
 </table>

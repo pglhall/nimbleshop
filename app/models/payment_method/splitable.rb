@@ -1,18 +1,22 @@
 Order.class_eval do
-  preference :api_secret, :string
+  preference :api_secret,     :string
 end
 
 class PaymentMethod::Splitable < PaymentMethod
 
-  attr_accessor :api_key
+  preference :api_key,     :string
+  preference :api_secret,     :string
+  preference :submission_url, :string
+  preference :logo_url,       :string
+  preference :expires_in,     :string
+
 
   def url(order, request)
     product = order.line_items.first.product
 
-    submission_url = 'http://lvh.me:3000/split_payments/split?'
     data = {}
 
-    data.merge!(api_key: self.api_key)
+    data.merge!(api_key: self.preferred_api_key)
     data.merge!(title: product.name)
     data.merge!(total_amount: (order.grand_total*100).to_i)
     data.merge!(invoice: order.number)
@@ -28,20 +32,14 @@ class PaymentMethod::Splitable < PaymentMethod
     Rails.logger.info t
     data.merge!(api_notify_url: t)
 
-    data.merge!(logo_url: 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
+    data.merge!(logo_url: self.preferred_logo_url)
     data.merge!(product_picture_url: request.protocol + request.host_with_port + product.picture.picture_url(:small))
 
-    data.merge!(expires_in: 24)
+    data.merge!(expires_in: self.preferred_expires_in)
 
     Rails.logger.info data.to_yaml
 
-    submission_url + data.to_query
-  end
-
-  private
-
-  def set_data
-    self.data = {api_key: @api_key}
+    self.preferred_submission_url + data.to_query
   end
 
 end

@@ -11,7 +11,9 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
   end
 
   def update
-    @payment_method.api_key = params[:api_key]
+    @payment_method.preferences.keys.each do |key|
+      @payment_method.send(:write_preference, key.intern, params[key.intern])
+    end
     @payment_method.save
     redirect_to admin_paymentmethod_splitable_path, notice: 'Successfuly updated'
   end

@@ -6,12 +6,16 @@
 
   <fieldset>
 
+    <% @payment_method.preferences.each do |key, value| %>
     <div class="clearfix">
-      <%= label_tag 'api_key', 'api_key' %>
+      <%= label_tag key, key %>
       <div class="input">
-        <%= text_field_tag 'api_key', @payment_method.api_key, 'class' => 'xlarge focus' %>
+        <%= text_field_tag key, value, 'class' => 'xlarge' %>
       </div>
     </div><!-- /clearfix -->
+    <% end %>
+
+
 
     <div class="actions">
       <%= submit_tag('Submit', class: 'btn primary') %>

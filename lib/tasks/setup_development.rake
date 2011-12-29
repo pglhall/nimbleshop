@@ -35,8 +35,13 @@ task :setup_development => :environment do
   ShippingMethod.delete_all
   ShippingZone.delete_all
 
-  payment_method = PaymentMethod.find_by_permalink('splitable')
-  payment_method.update_attributes!(api_key: '42398cc9ac420bf4')
+  payment_method = PaymentMethod::Splitable.find_by_permalink('splitable')
+  payment_method.write_preference(:api_secret, 'AGT568GKLRW39S')
+  payment_method.write_preference(:expires_in, '24')
+  payment_method.write_preference(:submission_url, 'http://lvh.me:3000/split_payments/split?')
+  payment_method.write_preference(:logo_url, 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
+  payment_method.write_preference(:api_key, '42398cc9ac420bf4')
+  payment_method.save
 
   payment_method = PaymentMethod.find_by_permalink('authorize-net')
   payment_method.update_attributes!(login_id: '56yBAar72', transaction_key: '9r3pbH5bnKH29f7d')
