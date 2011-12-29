@@ -16,8 +16,6 @@ class Product < ActiveRecord::Base
     end
   end
 
-  before_create :set_permalink
-
   validates_presence_of :name, :description, :price
   validates_numericality_of :price
 
