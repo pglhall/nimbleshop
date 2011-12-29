@@ -1,5 +1,5 @@
 class CreateProducts < ActiveRecord::Migration
-  def up
+  def change
    create_table :products do |t|
       t.string  :name,              null: false
       t.text    :description
@@ -11,6 +11,4 @@ class CreateProducts < ActiveRecord::Migration
     add_index :products, :permalink, unique: true
   end
 
-  def down
-  end
 end
