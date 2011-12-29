@@ -60,6 +60,9 @@ module Nimbleshop
 
     config.generators do |g|
       g.test_framework :mini_test, :spec => true, :fixture => true
+
+      # do not generate a helper every time a controller is created
+      g.helper = false
     end
   end
 end
