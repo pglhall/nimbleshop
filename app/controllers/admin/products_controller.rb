@@ -5,7 +5,7 @@ class Admin::ProductsController < AdminController
   respond_to :html
 
   def index
-    @products = Product.where(:active => true).order(:name).paginate(
+    @products = Product.order(:name).paginate(
       :per_page => 12,
       :page     => params[:page]
     )
@@ -21,9 +21,11 @@ class Admin::ProductsController < AdminController
   def new
     @product = Product.new
     @product.pictures.build
+    @product.find_or_build_all_answers
   end
 
   def edit
+    @product.find_or_build_all_answers
     render
   end
 

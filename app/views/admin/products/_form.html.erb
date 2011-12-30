@@ -38,6 +38,10 @@
           <%= f.text_field :price, class: 'large', size: 30 %>
         </div>
       </div><!-- /clearfix -->
+      <% @product.custom_field_answers.each do | answer | %>
+        <%= render :partial => '/admin/products/custom_field_answer', 
+          :locals => { :f => f, :answer => answer } %>
+      <% end %>
 
       <div class="clearfix">
         <% unless @product.new_record? %>
@@ -80,5 +84,3 @@
 <br />
 <br />
 <br />
-
-

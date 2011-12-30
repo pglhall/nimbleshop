@@ -1,7 +1,12 @@
-require 'search/base_condition'
-require 'search/text_condition'
-require 'search/number_condition'
-require 'search/date_condition'
+require 'search/base_answer'
+require 'search/text_answer'
+require 'search/number_answer'
+require 'search/date_answer'
+
+require 'search/base_field'
+require 'search/text_field'
+require 'search/number_field'
+require 'search/date_field'
 
 module Search
   extend ActiveSupport::Concern
@@ -11,8 +16,8 @@ module Search
 
   module ClassMethods
 
-    def search(params = {})
-      conditions = to_conditions(params)
+    def search(args = {})
+      conditions = to_conditions(args)
       relation   = merge_joins(conditions).where(merge_where(conditions))
       relation   = relation.project(Arel.sql("products.*"))
 
@@ -22,12 +27,10 @@ module Search
     def to_conditions(conditions)
       index = 0 
 
-      Array.wrap(conditions).map do | condition |
+      conditions.map do | (field, params) |
         index = index + 1
-      field, params  = condition.to_a.first
-
-      klass = to_condition_klass(field)
-      klass.new(params.merge(i: index)) 
+        klass = resolve_condition_klass(field)
+        klass.new(params.merge(i: index, name: field)) 
       end
     end
 
@@ -43,8 +46,17 @@ module Search
       end
     end
 
-    def to_condition_klass(field)
-      const_get("#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Condition")
+    def resolve_condition_klass(field)
+      klass = case field
+      when /(name|description)/
+        'TextField'
+      when /price/
+        'NumberField'
+      else
+        "#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Answer"
+      end
+
+      const_get(klass)
     end
   end
 end
