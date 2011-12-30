@@ -6,7 +6,6 @@ task :setup_development => :environment do
     Link.delete_all
     LinkGroup.delete_all
     ProductGroup.delete_all
-    Page.delete_all
     CustomField.delete_all
     Order.delete_all
     CustomFieldAnswer.delete_all
@@ -28,7 +27,6 @@ task :setup_development => :environment do
   Link.delete_all
   LinkGroup.delete_all
   ProductGroup.delete_all
-  Page.delete_all
   CustomField.delete_all
   Order.delete_all
   CustomFieldAnswer.delete_all
