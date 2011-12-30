@@ -94,10 +94,10 @@ task :setup_development => :environment do
   Product.find(9).update_attributes(price: 137)
   Product.find(10).update_attributes(price: 141)
 
-  pg_lt_50 = ProductGroup.create!(name: '< $50', :condition => {"q#{cf.id}" => { op: 'lt', v: 50}})
+  pg_lt_50 = ProductGroup.create!(name: '< $50', :condition => { "price" => { op: 'lt', v: 50 } })
   pg_between_50_100 = ProductGroup.create!(name: '$50 - $100',
-                                           :condition => {"q#{cf.id}" => [{ op: 'gteq', v: 50}, { op: 'lteq', v: 100}]})
-  pg_gt_100 = ProductGroup.create!(name: '> $100', :condition => {"q#{cf.id}" => { op: 'gt', v: 100}})
+                                           :condition => [{"price" => { op: 'gteq', v: 50}}, {"price" => { op: 'lteq', v: 100}}])
+  pg_gt_100 = ProductGroup.create!(name: '> $100', :condition => {"price" => { op: 'gt', v: 100}})
 
   link_group = LinkGroup.create!(name: 'Shop by price')
   Navigation.create!(link_group: link_group, navigeable: pg_lt_50)

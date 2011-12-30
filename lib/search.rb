@@ -16,7 +16,7 @@ module Search
 
   module ClassMethods
 
-    def search(args = {})
+    def search(args)
       conditions = to_conditions(args)
       relation   = merge_joins(conditions).where(merge_where(conditions))
       relation   = relation.project(Arel.sql("products.*"))
@@ -24,17 +24,22 @@ module Search
       Product.find_by_sql(relation.to_sql)
     end
 
-    def to_conditions(conditions)
-      index = 0 
-
-      conditions.map do | (field, params) |
-        index = index + 1
-        klass = resolve_condition_klass(field)
-        klass.new(params.merge(i: index, name: field)) 
-      end
-    end
 
     private
+
+    def to_conditions(conditions)
+      result = []
+      Array.wrap(conditions).each_with_index do | condition, index |
+        result << to_condition(condition, index)
+      end
+      result
+    end
+
+    def to_condition(params, index)
+      field, hash = params.to_a.first
+      klass = resolve_condition_klass(field)
+      klass.new(hash.merge(i: index, name: field)) 
+    end
 
     def merge_joins(conditions)
       conditions.inject(nil) { | relation, condition| condition.arel_join(arel_table, relation) }
@@ -48,13 +53,13 @@ module Search
 
     def resolve_condition_klass(field)
       klass = case field
-      when /(name|description)/
-        'TextField'
-      when /price/
-        'NumberField'
-      else
-        "#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Answer"
-      end
+              when /(name|description)/
+                'TextField'
+              when /price/
+                'NumberField'
+              else
+                "#{CustomField.find(field.gsub(/q/,'')).field_type.camelize}Answer"
+              end
 
       const_get(klass)
     end

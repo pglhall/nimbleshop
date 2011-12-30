@@ -21,10 +21,10 @@ describe Search::TextField do
   end
 
   it "should find all products whose price is grater than 20 and name starts with baby" do
-    Product.search(price: { op: 'lt', v: 20 }, name: { op: 'starts', v:'baby'}).must_equal [ @product2 ]
+    Product.search([{price: { op: 'lt', v: 20 }}, {name: { op: 'starts', v:'baby'}}]).must_equal [ @product2 ]
   end
 
   it "should find all products whose price is grater than 20 and name starts with men" do
-    Product.search(price: { op: 'gt', v: 3 }, name: { op: 'starts', v:'men'}).must_equal  [ @product3 ]
+    Product.search([{price: { op: 'gt', v: 3 }}, {name: { op: 'starts', v:'men'}}]).must_equal  [ @product3 ]
   end
 end
