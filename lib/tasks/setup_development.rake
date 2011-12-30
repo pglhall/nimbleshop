@@ -44,13 +44,16 @@ task :setup_development => :environment do
   payment_method.save
 
   payment_method = PaymentMethod.find_by_permalink('authorize-net')
-  payment_method.update_attributes!(login_id: '56yBAar72', transaction_key: '9r3pbH5bnKH29f7d')
+  payment_method.write_preference(:login_id, '56yBAar72')
+  payment_method.write_preference(:transaction_key, '9r3pbH5bnKH29f7d')
+  payment_method.save
 
   payment_method = PaymentMethod.find_by_permalink('paypal-website-payments-standard')
-  payment_method.update_attributes!( merchant_email_address: 'seller_1323037155_biz@bigbinary.com',
-                                    return_url: 'http://localhost:3000/paypal_return',
-                                    notify_url: 'http://localhost:3000/payment_notifications/paypal',
-                                    request_submission_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?')
+  payment_method.write_preference(:merchant_email_address, 'seller_1323037155_biz@bigbinary.com')
+  payment_method.write_preference(:return_url, 'http://localhost:3000/paypal_return')
+  payment_method.write_preference(:notify_url, 'http://localhost:3000/payment_notifications/paypal')
+  payment_method.write_preference(:request_submission_url, 'https://www.sandbox.paypal.com/cgi-bin/webscr?')
+  payment_method.save
 
   shop = Shop.create!( name: 'nimbleshop',
                        theme: 'nootstrap',

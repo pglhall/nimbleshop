@@ -41,7 +41,6 @@ class ApplicationController < ActionController::Base
 end
 
 # TODO
-# - How to use preference
 # - fix link group
 # - pages
 #
