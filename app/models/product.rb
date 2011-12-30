@@ -6,7 +6,6 @@ class Product < ActiveRecord::Base
   include Search
 
   has_many :pictures
-  accepts_nested_attributes_for :pictures, allow_destroy: true
 
   has_many :custom_field_answers do
     def for(custom_field_name)
@@ -15,6 +14,9 @@ class Product < ActiveRecord::Base
       where(['custom_field_answers.custom_field_id = ?', custom_field.id]).limit(1).try(:first)
     end
   end
+
+  accepts_nested_attributes_for :pictures, allow_destroy: true
+  accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
 
   validates_presence_of :name, :description, :price
   validates_numericality_of :price
@@ -34,5 +36,14 @@ class Product < ActiveRecord::Base
 
   def custom_field_value_for(custom_field_name)
     self.custom_field_answers.for(custom_field_name).value
+  end
+
+  def find_or_build_answer_for_field(field)
+    self.custom_field_answers.detect {|t| t.custom_field_id.to_s == field.id.to_s } ||
+      self.custom_field_answers.build(custom_field_id: field.id)
+  end
+
+  def find_or_build_all_answers
+    CustomField.all.each { |f| find_or_build_answer_for_field(f) }
   end
 end

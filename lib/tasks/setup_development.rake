@@ -85,27 +85,14 @@ task :setup_development => :environment do
   link_group.navigations.create(navigeable: pg_earrings)
   link_group.navigations.create(navigeable: pg_necklaces)
 
-  cf = CustomField.create!(name: 'price', field_type: 'number')
+  cf = CustomField.create!(name: 'original price', field_type: 'number')
   Product.find(4).update_attributes(price: 10)
-  Product.find(4).custom_field_answers.create(custom_field: cf, value: 10)
-
   Product.find(5).update_attributes(price: 47)
-  Product.find(5).custom_field_answers.create(custom_field: cf, value: 47)
-
   Product.find(6).update_attributes(price: 78)
-  Product.find(6).custom_field_answers.create(custom_field: cf, value: 78)
-
   Product.find(7).update_attributes(price: 81)
-  Product.find(7).custom_field_answers.create(custom_field: cf, value: 81)
-
   Product.find(8).update_attributes(price: 107)
-  Product.find(8).custom_field_answers.create(custom_field: cf, value: 107)
-
   Product.find(9).update_attributes(price: 137)
-  Product.find(9).custom_field_answers.create(custom_field: cf, value: 137)
-
   Product.find(10).update_attributes(price: 141)
-  Product.find(10).custom_field_answers.create(custom_field: cf, value: 141)
 
   pg_lt_50 = ProductGroup.create!(name: '< $50', :condition => {"q#{cf.id}" => { op: 'lt', v: 50}})
   pg_between_50_100 = ProductGroup.create!(name: '$50 - $100',
