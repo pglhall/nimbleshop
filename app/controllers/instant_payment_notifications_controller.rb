@@ -8,6 +8,7 @@ class InstantPaymentNotificationsController < ApplicationController
   #curl -d "txn_id=3XC103945N720211C&invoice=923204115&payment_status=Completed" http://localhost:3000/instant_payment_notifications/paypal
   #
   def paypal
+    Rail.logger.info "paypal callback received: #{params.to_yaml}"
     transaction = PaypalTransaction.find_by_invoice!(params[:invoice])
     render :nothing => true and return if transaction.status == 'paid'
 
@@ -37,6 +38,7 @@ class InstantPaymentNotificationsController < ApplicationController
   # curl -d "api_secret=dsdfdsfswvf3dsdf&invoice=923204115&payment_status=paid" http://localhost:3000/instant_payment_notifications/splitable
   #
   def splitable
+    Rail.logger.info "splitable callback received: #{params.to_yaml}"
     order = Order.find_by_number(params[:invoice])
     if order.preferred_api_secret == params[:api_secret]
       order.update_attributes!(status: params[:payment_status])
