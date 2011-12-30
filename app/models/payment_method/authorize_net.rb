@@ -1,6 +1,7 @@
 class PaymentMethod::AuthorizeNet < PaymentMethod
 
-  attr_accessor :login_id, :transaction_key
+  preference :login_id,        :string
+  preference :transaction_key, :string
 
   def gateway
     set_mode
@@ -11,7 +12,7 @@ class PaymentMethod::AuthorizeNet < PaymentMethod
   private
 
   def credentials
-    { login: self.login_id , password: self.transaction_key }
+    { login: self.preferred_login_id , password: self.preferred_transaction_key }
   end
 
   def gateway_klass
@@ -20,10 +21,6 @@ class PaymentMethod::AuthorizeNet < PaymentMethod
     else
       ActiveMerchant::Billing::AuthorizeNetGateway
     end
-  end
-
-  def set_data
-    self.data = {login_id: @login_id, transaction_key: @transaction_key}
   end
 
 end

@@ -1,6 +1,6 @@
 class Admin::CustomFieldsController < AdminController
 
-  before_filter :load_custom_filed, only: [:show, :edit, :update, :destroy]
+  before_filter :load_custom_field, only: [:show, :edit, :update, :destroy]
 
   def index
     @custom_fields = CustomField.all

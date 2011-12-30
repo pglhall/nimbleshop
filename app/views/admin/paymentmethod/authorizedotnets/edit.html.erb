@@ -4,20 +4,7 @@
 <%= form_tag('/admin/paymentmethod/paypalwebsite_payments_standard', :method => :put) do %>
 
   <fieldset>
-
-    <div class="clearfix">
-      <%= label_tag 'login_id', 'Login ID' %>
-      <div class="input">
-        <%= text_field_tag 'login_id', @payment_method.login_id, 'class' => 'xlarge focus' %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= label_tag 'transaction_key', 'Transaction key' %>
-      <div class="input">
-        <%= text_field_tag 'transaction_key', @payment_method.transaction_key, 'class' => 'xlarge' %>
-      </div>
-    </div><!-- /clearfix -->
+    <%= render '/admin/paymentmethod/edit_attributes' %>
 
     <div class="actions">
       <%= submit_tag('Submit', class: 'btn primary') %>

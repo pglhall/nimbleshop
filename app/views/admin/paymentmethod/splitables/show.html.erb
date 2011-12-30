@@ -7,13 +7,4 @@
   <small><%= link_to 'Edit', edit_admin_paymentmethod_splitable_path %></small>
 </h3>
 
-<br />
-
-<table class="zebra-striped bordered-table">
-  <% @payment_method.preferences.each do |key, value| %>
-    <tr>
-      <th> <%= key %> </th>
-      <td> <%= value %> </td>
-    </tr>
-  <% end %>
-</table>
+<%= render '/admin/paymentmethod/show_attributes' %>
