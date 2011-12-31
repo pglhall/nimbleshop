@@ -6,6 +6,10 @@ module Search
 
     private
 
+    def to_name(field)
+      field
+    end
+
     def arel_table
       Product.arel_table
     end

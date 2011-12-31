@@ -14,7 +14,7 @@
     <% @product_groups.each do |product_group| %>
       <tr>
         <td><%= product_group.name %></td>
-        <td><%= product_group.condition_in_english %></td>
+        <td><%= product_group.summarize %></td>
         <td>
           <%= link_to t(:edit), edit_admin_product_group_path(product_group) %>
           |
@@ -25,4 +25,3 @@
     <% end %>
   </tbody>
 </table>
-

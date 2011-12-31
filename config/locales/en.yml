@@ -43,6 +43,15 @@ en:
   product_groups: 'Product groups'
   delete_confirmation_for_product_group: 'Do you really want to delete the product group ?'
 
+  eq: 'equal to'
+  gt: 'greater than'
+  gteq: 'greater than equal to'
+  lt: 'less than'
+  lteq: 'less than equal to'
+  ends: 'ends with'
+  starts: 'starts with'
+  contains: 'contains'
+
   helpers:
     label:
       product:

@@ -1,7 +1,7 @@
 module Search
   class BaseAnswer
     def initialize(params = {})
-      @name      = params[:name]
+      @name      = to_name(params[:name])
       @value     = params[:v]
       @index     = params[:i]
       @operation = params[:op]
@@ -18,7 +18,15 @@ module Search
       send(@operation)
     end
 
+    def summary
+     "#{@name} is #{I18n.t(@operation.to_sym)} #{@value}"
+    end
+
     private
+
+    def to_name(field)
+      CustomField.find(field.gsub(/q/,'')).name
+    end
 
     def validate_operator!
       unless valid_operators.include?(@operation)
