@@ -1,6 +1,6 @@
 class Creditcard < ActiveRecord::Base
 
-  attr_accessor :cvv, :number, :amcard, :month, :year
+  attr_accessor :cvv, :number, :amcard, :month, :year, :address1, :address2, :first_name, :last_name, :state, :zipcode, :card_type
 
   before_validation :set_card_type,               on: :create
   before_validation :strip_non_numeric_values,    on: :create

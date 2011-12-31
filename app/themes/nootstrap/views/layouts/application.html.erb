@@ -144,7 +144,7 @@
               <%= yield %>
             </div>
             <div class="span4">
-              <% if (%w(feedbacks carts).include? params[:controller]) || (params[:action] == 'paid_using_cc') %>
+              <% if (%w(feedbacks carts).include? params[:controller]) || (params[:action] == 'paid') %>
               <% else %>
                 <%= render 'layouts/order_summary' %>
               <% end %>

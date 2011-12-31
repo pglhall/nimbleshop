@@ -38,7 +38,7 @@ Nimbleshop::Application.routes.draw do
   resources :pages,     only: [:show]
   resources :orders,    only: [:edit, :update] do
     member do
-      get 'paid_using_creditcard'
+      get 'paid'
       get 'edit_shipping_method'
       put 'update_shipping_method'
     end

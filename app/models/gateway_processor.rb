@@ -49,7 +49,7 @@ class GatewayProcessor
       creditcard.save!
       CreditcardTransaction.create!(transaction_gid: transaction_gid,
                           params: response.params,
-                          price: order.price,
+                          amount: order.price,
                           creditcard_id: creditcard.id,
                           active: true,
                           status: status,
