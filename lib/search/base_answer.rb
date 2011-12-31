@@ -1,7 +1,7 @@
 module Search
   class BaseAnswer
     def initialize(params = {})
-      @name      = to_name(params[:name])
+      @name      = params[:name]
       @value     = params[:v]
       @index     = params[:i]
       @operation = params[:op]
@@ -19,7 +19,7 @@ module Search
     end
 
     def summary
-     "#{@name} is #{I18n.t(@operation.to_sym)} #{@value}"
+     I18n.t(@operation.to_sym, field: to_name(@name), value: @value)
     end
 
     private

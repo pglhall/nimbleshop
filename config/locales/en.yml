@@ -43,14 +43,14 @@ en:
   product_groups: 'Product groups'
   delete_confirmation_for_product_group: 'Do you really want to delete the product group ?'
 
-  eq: 'equal to'
-  gt: 'greater than'
-  gteq: 'greater than equal to'
-  lt: 'less than'
-  lteq: 'less than equal to'
-  ends: 'ends with'
-  starts: 'starts with'
-  contains: 'contains'
+  eq: '%{field} is equal to %{value}'
+  gt: '%{field} is greater than %{value}'
+  lt: '%{field} is less than %{value}'
+  lteq: '%{field} less than equal to %{value}'
+  gteq: '%{field} is greater than equal to %{value}'
+  ends: "%{field} ends with '%{value}'"
+  starts: "%{field} starts with '%{value}'"
+  contains: "%{field} contains '%{value}'"
 
   helpers:
     label:
