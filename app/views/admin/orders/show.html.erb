@@ -1,7 +1,7 @@
 <h3> Order #<%= @order.number %> </h3>
 
 
-<table class='zebra-striped'>
+<table class='zebra-striped bordered-table'>
   <thead>
     <tr>
       <th colspan="2" class="start">Description</th>
@@ -14,23 +14,28 @@
     <% @order.line_items.each do |line_item| %>
       <%= render 'line_item', line_item: line_item %>
     <% end %>
+
+    <% if @order.shipping_method %>
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          Shippping method: <%= @order.shipping_method.name %>
+        </td>
+        <td> <%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
+        <td>&nbsp;</td>
+        <td><%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td>Total</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td> <strong> <%= number_to_currency(@order.price_with_shipping) %> </strong> </td>
+    </tr>
   </tbody>
 </table>
-
-
-<% if @order.shipping_method %>
-  <h3> Shipping details </h3>
-  <p>
-    Shipping method : <%= @order.shipping_method.name %>
-  </p>
-  <p>
-    Shipping cost : <%= number_to_currency(@order.shipping_method.shipping_cost) %>
-  </p>
-<% end %>
-
-<p>
-  Total: <%= number_to_currency(@order.price_with_shipping) %>
-</p>
 
 <% if @order.shipping_address.present? %>
   <h3>Shipping address</h3>
@@ -50,14 +55,16 @@
 <% end %>
 
 
-<h3>Payment details </h3>
+<% if @order.creditcard_transactions.any? %>
+  <h3>Payment details </h3>
 
-Transaction amount: <%= number_to_currency(@order.creditcard_transactions.first.amount) %> <br />
-Transaction date: <%= @order.creditcard_transactions.first.created_at.strftime('%B %d %Y %I:%M %p') %> <br />
-Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
+  Transaction amount: <%= number_to_currency(@order.creditcard_transactions.first.amount) %> <br />
+  Transaction date: <%= @order.creditcard_transactions.first.created_at.strftime('%B %d %Y %I:%M %p') %> <br />
+  Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
+<% end %>
 
-<p>
-  Payment address: <br />
+<% if @order.shipping_address %>
+  <h3> Payment address </h3>
   <% address = @order.shipping_address.use_for_billing ? @order.shipping_address : @order.billing_address %>
   <%= address.full_address_array.join('<br />').html_safe %>
-</p>
+<% end %>
