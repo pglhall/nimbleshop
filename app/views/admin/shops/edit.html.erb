@@ -31,6 +31,13 @@
     </div><!-- /clearfix -->
 
     <div class="clearfix">
+      <%= f.label :time_zone %>
+      <div class="input">
+        <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
       <%= f.label :twitter_handle %>
       <div class="input">
         <%= f.text_field :twitter_handle, class: 'xlarge', size: 30 %>

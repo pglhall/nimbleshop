@@ -53,12 +53,11 @@
 <h3>Payment details </h3>
 
 Transaction amount: <%= number_to_currency(@order.creditcard_transactions.first.amount) %> <br />
-Transaction date: <%= @order.creditcard_transactions.first.created_at %> <br />
+Transaction date: <%= @order.creditcard_transactions.first.created_at.strftime('%B %d %Y %I:%M %p') %> <br />
 Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
 
 <p>
   Payment address: <br />
   <% address = @order.shipping_address.use_for_billing ? @order.shipping_address : @order.billing_address %>
   <%= address.full_address_array.join('<br />').html_safe %>
-
 </p>

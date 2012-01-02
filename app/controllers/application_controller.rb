@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
 end
 
 # TODO
+#
+# - fix date in admin/order show by asking admin for his/her timezone
+# - order print action
+#
+# - order show page for paypal
+#
 # - fix link group
 # - pages
 #

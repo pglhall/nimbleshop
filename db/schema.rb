@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   create_table "shops", :force => true do |t|
     t.string   "name",                                                           :null => false
     t.string   "theme",                                 :default => "nootstrap", :null => false
+    t.string   "time_zone",                             :default => "UTC",       :null => false
     t.string   "gateway"
     t.string   "phone_number"
     t.string   "twitter_handle"

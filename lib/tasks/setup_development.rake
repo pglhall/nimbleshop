@@ -2,18 +2,9 @@ desc "setsup local development environment"
 task :setup_development => :environment do
 
   if Settings.using_heroku
-    Shop.delete_all
-    Link.delete_all
-    LinkGroup.delete_all
-    ProductGroup.delete_all
-    CustomField.delete_all
-    Order.delete_all
-    CustomFieldAnswer.delete_all
-    ShippingMethod.delete_all
-    ShippingZone.delete_all
-
-    Product.delete_all
-    Picture.delete_all
+    ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
+      klass.delete_all
+    end
   else
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
@@ -39,19 +30,19 @@ task :setup_development => :environment do
   payment_method.write_preference(:submission_url, 'http://lvh.me:3000/split_payments/split?')
   payment_method.write_preference(:logo_url, 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
   payment_method.write_preference(:api_key, '42398cc9ac420bf4')
-  payment_method.save
+  payment_method.save!
 
   payment_method = PaymentMethod.find_by_permalink('authorize-net')
   payment_method.write_preference(:login_id, '56yBAar72')
   payment_method.write_preference(:transaction_key, '9r3pbH5bnKH29f7d')
-  payment_method.save
+  payment_method.save!
 
   payment_method = PaymentMethod.find_by_permalink('paypal-website-payments-standard')
   payment_method.write_preference(:merchant_email_address, 'seller_1323037155_biz@bigbinary.com')
   payment_method.write_preference(:return_url, 'http://localhost:3000/paypal_return')
   payment_method.write_preference(:notify_url, 'http://localhost:3000/payment_notifications/paypal')
   payment_method.write_preference(:request_submission_url, 'https://www.sandbox.paypal.com/cgi-bin/webscr?')
-  payment_method.save
+  payment_method.save!
 
   shop = Shop.create!( name: 'nimbleshop',
                        theme: 'nootstrap',
