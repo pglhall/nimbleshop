@@ -39,22 +39,3 @@ class ApplicationController < ActionController::Base
   end
 
 end
-
-# TODO
-#
-# - fix date in admin/order show by asking admin for his/her timezone
-# - order print action
-#
-# - order show page for paypal
-#
-# - fix link group
-# - pages
-#
-# - shipping zone should connect with a country
-# - a country should have states
-# - pass shipping address to paypal . This needs US states in two digit code. So it rquires the shipping zone fix first.
-#
-# - test IPN and paypal
-#
-# - make picture upload work on s3
-#
