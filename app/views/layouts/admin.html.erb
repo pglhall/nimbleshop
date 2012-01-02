@@ -24,12 +24,15 @@
     <div class="topbar">
       <div class="topbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="/"><%=@shop.name%></a>
           <ul class="nav">
             <li class="active"><a href="/admin">Admin</a></li>
-            <li><%= link_to 'Documentation', 'http://nimbleshop-guides.heroku.com' %></li>
+            <li><%= link_to 'Documentation', 'http://docs.nimbleshop.com' %></li>
           </ul>
-          <p class="pull-right">Logged in as <a href="#">username</a></p>
+          <p class="pull-right">
+            <a href="#" style='background:#3f8ae3;padding:5px;color:#fff; font-weight:bold;'>
+              Go to shop →
+            </a>
+          </p>
         </div>
       </div>
     </div>

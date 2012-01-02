@@ -1,56 +1,55 @@
 
 --- 
-navigations: 
+orders: 
   columns: 
   - id
-  - link_group_id
-  - navigeable_id
-  - navigeable_type
+  - number
+  - shipping_method_id
+  - purchased_at
+  - email
+  - status
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - "42026341"
+    - "6"
+    - 
+    - 
+    - added_to_cart
+    - 2012-01-02 18:54:46.141141
+    - 2012-01-02 18:54:46.211992
+  - - "2"
+    - "28088537"
+    - "6"
+    - 
+    - neeraj.cmu@gmail.com
+    - authorized
+    - 2012-01-02 18:55:45.650638
+    - 2012-01-02 18:56:11.688053
+
+--- 
+line_items: 
+  columns: 
+  - id
+  - order_id
+  - product_id
+  - quantity
   - created_at
   - updated_at
   records: 
   - - "1"
     - "1"
+    - "10"
     - "1"
-    - Link
-    - 2011-12-29 16:25:37.647998
-    - 2011-12-29 16:25:37.647998
+    - 2012-01-02 18:54:46.176336
+    - 2012-01-02 18:54:46.176336
   - - "2"
     - "2"
-    - "1"
-    - ProductGroup
-    - 2011-12-29 16:25:37.855585
-    - 2011-12-29 16:25:37.855585
-  - - "3"
-    - "2"
-    - "2"
-    - ProductGroup
-    - 2011-12-29 16:25:37.857892
-    - 2011-12-29 16:25:37.857892
-  - - "4"
-    - "2"
-    - "3"
-    - ProductGroup
-    - 2011-12-29 16:25:37.859829
-    - 2011-12-29 16:25:37.859829
-  - - "5"
-    - "3"
-    - "4"
-    - ProductGroup
-    - 2011-12-29 16:25:37.958747
-    - 2011-12-29 16:25:37.958747
-  - - "6"
-    - "3"
-    - "5"
-    - ProductGroup
-    - 2011-12-29 16:25:37.960625
-    - 2011-12-29 16:25:37.960625
-  - - "7"
-    - "3"
     - "6"
-    - ProductGroup
-    - 2011-12-29 16:25:37.962208
-    - 2011-12-29 16:25:37.962208
+    - "1"
+    - 2012-01-02 18:55:45.764599
+    - 2012-01-02 18:55:45.764599
 
 --- 
 product_groups: 
@@ -62,74 +61,347 @@ product_groups:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "7"
     - bracelets
     - bracelets
     - |
       --- 
-      q1: 
+      q3: 
         :op: eq
         :v: bracelet
 
-    - 2011-12-29 16:25:37.843089
-    - 2011-12-29 16:25:37.843089
-  - - "2"
+    - 2012-01-02 18:54:45.985168
+    - 2012-01-02 18:54:45.985168
+  - - "8"
     - earrings
     - earrings
     - |
       --- 
-      q1: 
+      q3: 
         :op: eq
         :v: earring
 
-    - 2011-12-29 16:25:37.847452
-    - 2011-12-29 16:25:37.847452
-  - - "3"
+    - 2012-01-02 18:54:45.98869
+    - 2012-01-02 18:54:45.98869
+  - - "9"
     - necklaces
     - necklaces
     - |
       --- 
-      q1: 
+      q3: 
         :op: eq
         :v: necklace
 
-    - 2011-12-29 16:25:37.849931
-    - 2011-12-29 16:25:37.849931
-  - - "4"
+    - 2012-01-02 18:54:45.991392
+    - 2012-01-02 18:54:45.991392
+  - - "10"
     - < $50
     - "50"
     - |
       --- 
-      q2: 
+      price: 
         :op: lt
         :v: 50
 
-    - 2011-12-29 16:25:37.949081
-    - 2011-12-29 16:25:37.949081
-  - - "5"
+    - 2012-01-02 18:54:46.018509
+    - 2012-01-02 18:54:46.018509
+  - - "11"
     - $50 - $100
     - 50-100
     - |
       --- 
-      q2: 
-      - :op: gteq
-        :v: 50
-      - :op: lteq
-        :v: 100
+      - price: 
+          :op: gteq
+          :v: 50
+      - price: 
+          :op: lteq
+          :v: 100
 
-    - 2011-12-29 16:25:37.951721
-    - 2011-12-29 16:25:37.951721
-  - - "6"
+    - 2012-01-02 18:54:46.02495
+    - 2012-01-02 18:54:46.02495
+  - - "12"
     - "> $100"
     - "100"
     - |
       --- 
-      q2: 
+      price: 
         :op: gt
         :v: 100
 
-    - 2011-12-29 16:25:37.954229
-    - 2011-12-29 16:25:37.954229
+    - 2012-01-02 18:54:46.029112
+    - 2012-01-02 18:54:46.029112
+
+--- 
+creditcards: 
+  columns: 
+  - id
+  - masked_number
+  - expires_on
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - XXXX-XXXX-XXXX-0027
+    - 2019-07-01 00:00:00
+    - 2012-01-02 18:56:11.658091
+    - 2012-01-02 18:56:11.658091
+
+--- 
+creditcard_transactions: 
+  columns: 
+  - id
+  - transaction_gid
+  - params
+  - amount
+  - creditcard_id
+  - active
+  - order_id
+  - status
+  - parent_id
+  - created_at
+  - updated_at
+  records: 
+  - - "2"
+    - "2167826089"
+    - |
+      --- 
+      response_code: 1
+      response_reason_code: "1"
+      response_reason_text: This transaction has been approved.
+      avs_result_code: Y
+      transaction_id: "2167826089"
+      card_code: P
+
+    - "78.00"
+    - "1"
+    - true
+    - "2"
+    - authorized
+    - 
+    - 2012-01-02 18:56:11.679725
+    - 2012-01-02 18:56:11.679725
+
+--- 
+addresses: 
+  columns: 
+  - id
+  - type
+  - order_id
+  - first_name
+  - last_name
+  - company
+  - address1
+  - address2
+  - city
+  - zipcode
+  - country
+  - state
+  - phone
+  - fax
+  - use_for_billing
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - ShippingAddress
+    - "1"
+    - Johnnie
+    - Walker
+    - 
+    - 100 Main Street
+    - 
+    - 
+    - "33332"
+    - USA
+    - Florida
+    - 
+    - 
+    - true
+    - 2012-01-02 18:54:46.205324
+    - 2012-01-02 18:54:46.205324
+  - - "2"
+    - ShippingAddress
+    - "2"
+    - Neeraj
+    - Singh
+    - 
+    - neeraj.cmu@gmail.com
+    - neeraj.cmu@gmail.com
+    - "2"
+    - "20170"
+    - United States
+    - Maryland
+    - 
+    - 
+    - true
+    - 2012-01-02 18:55:52.837818
+    - 2012-01-02 18:55:52.837818
+
+--- 
+preferences: 
+  columns: 
+  - id
+  - name
+  - owner_id
+  - owner_type
+  - group_id
+  - group_type
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - "1"
+    - api_secret
+    - "6"
+    - PaymentMethod
+    - 
+    - 
+    - AGT568GKLRW39S
+    - 2012-01-02 18:54:45.699441
+    - 2012-01-02 18:54:45.699441
+  - - "2"
+    - expires_in
+    - "6"
+    - PaymentMethod
+    - 
+    - 
+    - "24"
+    - 2012-01-02 18:54:45.721919
+    - 2012-01-02 18:54:45.721919
+  - - "3"
+    - submission_url
+    - "6"
+    - PaymentMethod
+    - 
+    - 
+    - http://lvh.me:3000/split_payments/split?
+    - 2012-01-02 18:54:45.725262
+    - 2012-01-02 18:54:45.725262
+  - - "4"
+    - logo_url
+    - "6"
+    - PaymentMethod
+    - 
+    - 
+    - http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png
+    - 2012-01-02 18:54:45.728443
+    - 2012-01-02 18:54:45.728443
+  - - "5"
+    - api_key
+    - "6"
+    - PaymentMethod
+    - 
+    - 
+    - 42398cc9ac420bf4
+    - 2012-01-02 18:54:45.731495
+    - 2012-01-02 18:54:45.731495
+  - - "6"
+    - login_id
+    - "4"
+    - PaymentMethod
+    - 
+    - 
+    - 56yBAar72
+    - 2012-01-02 18:54:45.740871
+    - 2012-01-02 18:54:45.740871
+  - - "7"
+    - transaction_key
+    - "4"
+    - PaymentMethod
+    - 
+    - 
+    - 9r3pbH5bnKH29f7d
+    - 2012-01-02 18:54:45.744881
+    - 2012-01-02 18:54:45.744881
+  - - "8"
+    - merchant_email_address
+    - "5"
+    - PaymentMethod
+    - 
+    - 
+    - seller_1323037155_biz@bigbinary.com
+    - 2012-01-02 18:54:45.754139
+    - 2012-01-02 18:54:45.754139
+  - - "9"
+    - return_url
+    - "5"
+    - PaymentMethod
+    - 
+    - 
+    - http://localhost:3000/paypal_return
+    - 2012-01-02 18:54:45.757427
+    - 2012-01-02 18:54:45.757427
+  - - "10"
+    - notify_url
+    - "5"
+    - PaymentMethod
+    - 
+    - 
+    - http://localhost:3000/payment_notifications/paypal
+    - 2012-01-02 18:54:45.760414
+    - 2012-01-02 18:54:45.760414
+  - - "11"
+    - request_submission_url
+    - "5"
+    - PaymentMethod
+    - 
+    - 
+    - https://www.sandbox.paypal.com/cgi-bin/webscr?
+    - 2012-01-02 18:54:45.763276
+    - 2012-01-02 18:54:45.763276
+
+--- 
+navigations: 
+  columns: 
+  - id
+  - link_group_id
+  - navigeable_id
+  - navigeable_type
+  - created_at
+  - updated_at
+  records: 
+  - - "8"
+    - "4"
+    - "2"
+    - Link
+    - 2012-01-02 18:54:45.87364
+    - 2012-01-02 18:54:45.87364
+  - - "9"
+    - "5"
+    - "7"
+    - ProductGroup
+    - 2012-01-02 18:54:45.99754
+    - 2012-01-02 18:54:45.99754
+  - - "10"
+    - "5"
+    - "8"
+    - ProductGroup
+    - 2012-01-02 18:54:45.999306
+    - 2012-01-02 18:54:45.999306
+  - - "11"
+    - "5"
+    - "9"
+    - ProductGroup
+    - 2012-01-02 18:54:46.000894
+    - 2012-01-02 18:54:46.000894
+  - - "12"
+    - "6"
+    - "10"
+    - ProductGroup
+    - 2012-01-02 18:54:46.034137
+    - 2012-01-02 18:54:46.034137
+  - - "13"
+    - "6"
+    - "11"
+    - ProductGroup
+    - 2012-01-02 18:54:46.035938
+    - 2012-01-02 18:54:46.035938
+  - - "14"
+    - "6"
+    - "12"
+    - ProductGroup
+    - 2012-01-02 18:54:46.03771
+    - 2012-01-02 18:54:46.03771
 
 --- 
 shops: 
@@ -137,6 +409,7 @@ shops:
   - id
   - name
   - theme
+  - time_zone
   - gateway
   - phone_number
   - twitter_handle
@@ -146,17 +419,18 @@ shops:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "2"
     - nimbleshop
     - nootstrap
+    - UTC
     - AuthorizeNet
     - 800-456-7890
     - nimbleshop
     - neeraj@nimbleshop.com
     - http://www.facebook.com/pages/NimbleSHOP/119319381517845
     - 
-    - 2011-12-29 16:25:37.517298
-    - 2011-12-29 16:25:37.520551
+    - 2012-01-02 18:54:45.780149
+    - 2012-01-02 18:54:45.783017
 
 --- 
 link_groups: 
@@ -167,21 +441,21 @@ link_groups:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "4"
     - Main-nav
     - main-nav
-    - 2011-12-29 16:25:37.531163
-    - 2011-12-29 16:25:37.531163
-  - - "2"
+    - 2012-01-02 18:54:45.839767
+    - 2012-01-02 18:54:45.839767
+  - - "5"
     - Shop by category
     - shop-by-category
-    - 2011-12-29 16:25:37.852617
-    - 2011-12-29 16:25:37.852617
-  - - "3"
+    - 2012-01-02 18:54:45.99417
+    - 2012-01-02 18:54:45.99417
+  - - "6"
     - Shop by price
     - shop-by-price
-    - 2011-12-29 16:25:37.956653
-    - 2011-12-29 16:25:37.956653
+    - 2012-01-02 18:54:46.032182
+    - 2012-01-02 18:54:46.032182
 
 --- 
 products: 
@@ -201,7 +475,7 @@ products:
       This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!
       
       A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
-    - "10"
+    - "10.00"
     - false
     - howlite-and-crystal-flower-bracelet
     - 2011-11-26 19:27:45.313309
@@ -212,7 +486,7 @@ products:
       4 acrylic stretch beaded bracelets with peace sign, butterfly and heart charms.
       
       A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags.
-    - "47"
+    - "47.00"
     - false
     - candy-colours-bracelet-set
     - 2011-11-26 19:33:40.065037
@@ -222,7 +496,7 @@ products:
     - "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.\r\n\
       \r\n\
       Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
-    - "78"
+    - "78.00"
     - false
     - gemstone-cross-necklaces
     - 2011-11-26 19:35:50.65876
@@ -235,7 +509,7 @@ products:
       The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
       
       All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
-    - "81"
+    - "81.00"
     - false
     - large-sterling-silver-hoop-earrings-aqua-freshwater-pearls-moonstone-hammered
     - 2011-11-26 19:43:13.217399
@@ -245,7 +519,7 @@ products:
     - "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads \r\n\
       \r\n\
       This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
-    - "107"
+    - "107.00"
     - false
     - red-black-silver-glass-bracelet
     - 2011-11-26 19:47:01.610002
@@ -255,7 +529,7 @@ products:
     - "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
       \r\n\
       This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
-    - "137"
+    - "137.00"
     - false
     - layered-coral-necklace
     - 2011-11-26 19:49:22.902551
@@ -266,7 +540,7 @@ products:
       These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
       
       The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
-    - "141"
+    - "141.00"
     - false
     - claddagh-earrings
     - 2011-11-26 19:51:39.583358
@@ -278,7 +552,7 @@ products:
       The syllable om is first described as all-encompassing mystical entity in the Upanishads. Today, in all Hindu art and all over India and Nepal, 'om' can be seen virtually everywhere, a common sign for Hinduism and its philosophy and theology. Hindus believe that as creation began, the divine, all-encompassing consciousness took the form of the first and original vibration manifesting as sound \"OM\".\r\n\
       \r\n Before creation began it was \"Shuny\xC4\x81k\xC4\x81sha\", the emptiness or the void. Shuny\xC4\x81k\xC4\x81sha, meaning literally \"no sky\", is more than nothingness, because everything then existed in a latent state of potentiality. The vibration of \"OM\" symbolizes the manifestation of God in form (\"s\xC4\x81guna brahman\"). \"OM\" is the reflection of the absolute reality, it is said to be \"Adi Anadi\", without beginning or the end and embracing all that exists.\r\n\
       \r\n The mantra \"OM\" is the name of God, the vibration of the Supreme. When taken letter by letter, A-U-M represents the divine energy (Shakti) united in its three elementary aspects: Bhrahma Shakti (creation), Vishnu Shakti (preservation) and Shiva Shakti (liberation, and/or destruction)."
-    - "101"
+    - "101.00"
     - false
     - om-necklace
     - 2011-12-22 02:02:35.163305
@@ -286,7 +560,7 @@ products:
   - - "12"
     - Men bracelet
     - Dude you got a bracelet.
-    - "32"
+    - "32.00"
     - false
     - men-bracelet
     - 2011-12-22 02:56:57.30991
@@ -301,11 +575,11 @@ links:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "2"
     - Home
     - /
-    - 2011-12-29 16:25:37.542585
-    - 2011-12-29 16:25:37.542585
+    - 2012-01-02 18:54:45.849299
+    - 2012-01-02 18:54:45.849299
 
 --- 
 custom_fields: 
@@ -316,16 +590,16 @@ custom_fields:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "3"
     - category
     - text
-    - 2011-12-29 16:25:37.659017
-    - 2011-12-29 16:25:37.659017
-  - - "2"
-    - price
+    - 2012-01-02 18:54:45.902745
+    - 2012-01-02 18:54:45.902745
+  - - "4"
+    - original price
     - number
-    - 2011-12-29 16:25:37.861518
-    - 2011-12-29 16:25:37.861518
+    - 2012-01-02 18:54:46.002591
+    - 2012-01-02 18:54:46.002591
 
 --- 
 custom_field_answers: 
@@ -340,132 +614,69 @@ custom_field_answers:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "15"
     - "5"
-    - "1"
+    - "3"
     - bracelet
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.790614
-    - 2011-12-29 16:25:37.790614
-  - - "2"
+    - 2012-01-02 18:54:45.934482
+    - 2012-01-02 18:54:45.934482
+  - - "16"
     - "4"
-    - "1"
+    - "3"
     - bracelet
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.799608
-    - 2011-12-29 16:25:37.799608
-  - - "3"
+    - 2012-01-02 18:54:45.941315
+    - 2012-01-02 18:54:45.941315
+  - - "17"
     - "8"
-    - "1"
+    - "3"
     - bracelet
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.80612
-    - 2011-12-29 16:25:37.80612
-  - - "4"
+    - 2012-01-02 18:54:45.947617
+    - 2012-01-02 18:54:45.947617
+  - - "18"
     - "10"
-    - "1"
+    - "3"
     - earring
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.81203
-    - 2011-12-29 16:25:37.81203
-  - - "5"
+    - 2012-01-02 18:54:45.953466
+    - 2012-01-02 18:54:45.953466
+  - - "19"
     - "7"
-    - "1"
+    - "3"
     - earring
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.81817
-    - 2011-12-29 16:25:37.81817
-  - - "6"
+    - 2012-01-02 18:54:45.96129
+    - 2012-01-02 18:54:45.96129
+  - - "20"
     - "6"
-    - "1"
+    - "3"
     - necklace
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.824359
-    - 2011-12-29 16:25:37.824359
-  - - "7"
+    - 2012-01-02 18:54:45.967178
+    - 2012-01-02 18:54:45.967178
+  - - "21"
     - "9"
-    - "1"
+    - "3"
     - necklace
     - 
     - 
     - 
-    - 2011-12-29 16:25:37.830605
-    - 2011-12-29 16:25:37.830605
-  - - "8"
-    - "4"
-    - "2"
-    - "10"
-    - 
-    - "10"
-    - 
-    - 2011-12-29 16:25:37.866823
-    - 2011-12-29 16:25:37.866823
-  - - "9"
-    - "5"
-    - "2"
-    - "47"
-    - 
-    - "47"
-    - 
-    - 2011-12-29 16:25:37.872225
-    - 2011-12-29 16:25:37.872225
-  - - "10"
-    - "6"
-    - "2"
-    - "78"
-    - 
-    - "78"
-    - 
-    - 2011-12-29 16:25:37.877268
-    - 2011-12-29 16:25:37.877268
-  - - "11"
-    - "7"
-    - "2"
-    - "81"
-    - 
-    - "81"
-    - 
-    - 2011-12-29 16:25:37.881945
-    - 2011-12-29 16:25:37.881945
-  - - "12"
-    - "8"
-    - "2"
-    - "107"
-    - 
-    - "107"
-    - 
-    - 2011-12-29 16:25:37.933851
-    - 2011-12-29 16:25:37.933851
-  - - "13"
-    - "9"
-    - "2"
-    - "137"
-    - 
-    - "137"
-    - 
-    - 2011-12-29 16:25:37.940298
-    - 2011-12-29 16:25:37.940298
-  - - "14"
-    - "10"
-    - "2"
-    - "141"
-    - 
-    - "141"
-    - 
-    - 2011-12-29 16:25:37.945439
-    - 2011-12-29 16:25:37.945439
+    - 2012-01-02 18:54:45.973455
+    - 2012-01-02 18:54:45.973455
 
 --- 
 shipping_methods: 
@@ -480,42 +691,42 @@ shipping_methods:
   - created_at
   - updated_at
   records: 
-  - - "1"
-    - "1"
+  - - "5"
+    - "2"
     - Ground shipping
     - "10.00"
-    - "20"
-    - "10"
+    - "20.00"
+    - "10.00"
     - true
-    - 2011-12-29 16:25:38.001272
-    - 2011-12-29 16:25:38.001272
-  - - "2"
-    - "1"
+    - 2012-01-02 18:54:46.122165
+    - 2012-01-02 18:54:46.122165
+  - - "6"
+    - "2"
     - Ground shipping
     - "20.00"
     - 
-    - "20"
+    - "20.00"
     - true
-    - 2011-12-29 16:25:38.004655
-    - 2011-12-29 16:25:38.004655
-  - - "3"
-    - "1"
+    - 2012-01-02 18:54:46.125603
+    - 2012-01-02 18:54:46.125603
+  - - "7"
+    - "2"
     - Express shipping
     - "10.00"
-    - "20"
-    - "15"
+    - "20.00"
+    - "15.00"
     - true
-    - 2011-12-29 16:25:38.006469
-    - 2011-12-29 16:25:38.006469
-  - - "4"
-    - "1"
+    - 2012-01-02 18:54:46.127994
+    - 2012-01-02 18:54:46.127994
+  - - "8"
+    - "2"
     - Express shipping
     - "20.00"
     - 
-    - "25"
+    - "25.00"
     - true
-    - 2011-12-29 16:25:38.008125
-    - 2011-12-29 16:25:38.008125
+    - 2012-01-02 18:54:46.129814
+    - 2012-01-02 18:54:46.129814
 
 --- 
 shipping_zones: 
@@ -526,11 +737,11 @@ shipping_zones:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "2"
     - USA
     - usa
-    - 2011-12-29 16:25:37.973574
-    - 2011-12-29 16:25:37.973574
+    - 2012-01-02 18:54:46.049344
+    - 2012-01-02 18:54:46.049344
 
 --- 
 shipping_countries: 
@@ -541,11 +752,11 @@ shipping_countries:
   - created_at
   - updated_at
   records: 
-  - - "1"
-    - "1"
+  - - "2"
+    - "2"
     - "0"
-    - 2011-12-29 16:25:37.988154
-    - 2011-12-29 16:25:37.988154
+    - 2012-01-02 18:54:46.108049
+    - 2012-01-02 18:54:46.108049
 
 --- 
 payment_methods: 
@@ -560,7 +771,7 @@ payment_methods:
   - created_at
   - updated_at
   records: 
-  - - "1"
+  - - "4"
     - true
     - Authorize.net
     - |-
@@ -575,14 +786,14 @@ payment_methods:
         It also provides an instant test account which you can use while
         your application is being processed.
       </p>
-    - "--- \n\
-      :login_id: 56yBAar72\n\
-      :transaction_key: 9r3pbH5bnKH29f7d\n"
+    - |+
+      --- {}
+      
     - PaymentMethod::AuthorizeNet
     - authorize-net
-    - 2011-12-29 16:25:37.107243
-    - 2011-12-29 16:25:37.500635
-  - - "2"
+    - 2012-01-02 18:54:45.108778
+    - 2012-01-02 18:54:45.738119
+  - - "5"
     - true
     - Paypal website payments standard
     - |-
@@ -597,16 +808,14 @@ payment_methods:
          more information
         </a>
       </p>
-    - "--- \n\
-      :merchant_email_address: seller_1323037155_biz@bigbinary.com\n\
-      :return_url: http://localhost:3000/paypal_return\n\
-      :notify_url: http://localhost:3000/payment_notifications/paypal\n\
-      :request_submission_url: https://www.sandbox.paypal.com/cgi-bin/webscr?\n"
+    - |+
+      --- {}
+      
     - PaymentMethod::PaypalWebsitePaymentsStandard
     - paypal-website-payments-standard
-    - 2011-12-29 16:25:37.207557
-    - 2011-12-29 16:25:37.503395
-  - - "3"
+    - 2012-01-02 18:54:45.133676
+    - 2012-01-02 18:54:45.751855
+  - - "6"
     - true
     - Splitable
     - |-
@@ -619,12 +828,13 @@ payment_methods:
          more information
         </a>
       </p>
-    - "--- \n\
-      :api_key: 42398cc9ac420bf4\n"
+    - |+
+      --- {}
+      
     - PaymentMethod::Splitable
     - splitable
-    - 2011-12-29 16:25:37.274124
-    - 2011-12-29 16:25:37.496664
+    - 2012-01-02 18:54:45.146231
+    - 2012-01-02 18:54:45.686343
 
 --- 
 pictures: 
