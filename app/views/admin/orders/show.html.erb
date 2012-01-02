@@ -59,7 +59,7 @@
   <h3>Payment details </h3>
 
   Transaction amount: <%= number_to_currency(@order.creditcard_transactions.first.amount) %> <br />
-  Transaction date: <%= @order.creditcard_transactions.first.created_at.strftime('%B %d %Y %I:%M %p') %> <br />
+  Transaction date: <%= @order.creditcard_transactions.first.created_at.to_s(:long) %> <br />
   Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
 <% end %>
 
