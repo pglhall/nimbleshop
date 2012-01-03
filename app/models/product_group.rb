@@ -21,4 +21,11 @@ class ProductGroup < ActiveRecord::Base
   def summarize
     Product.summarize(condition)
   end
+
+   # list of all product groups containing input product
+  def self.contains_product(product)
+    self.all.select do |pg|
+      pg.exists?(product)
+    end
+  end
 end
