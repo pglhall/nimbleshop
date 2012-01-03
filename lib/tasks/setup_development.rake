@@ -109,22 +109,25 @@ task :setup_development => :environment do
                          lower_price_limit: 20)
 
   order = Order.create!
-  order.add(Product.find_by_permalink('claddagh-earrings'))
-  order.shipping_address = ShippingAddress.new(first_name: 'Johnnie', last_name: 'Walker', address1: '100 Main Street', state: 'Florida',
-                                               city: 'Miami',
-                                               zipcode: '33332',
-                                               country: 'USA',
-                                               use_for_billing: true)
-  order.shipping_method = order.available_shipping_methods.first
-  order.email = 'hello.nimbleshop@gmail.com'
-  order.save!
-
-
   CreditcardTransaction.create!(transaction_gid: '2167825945',
                                 params: '--- response_code: 1 response_reason_code: "1" response_reason_text: This transaction has been approved. avs_result_code: Y transaction_id: "2167825945" card_code: P',
                                 amount: 141,
                                 creditcard_id: Creditcard.last,
                                 order_id: order.id,
                                 status: 'authorized')
+
+  order.add(Product.find_by_permalink('claddagh-earrings'))
+  order.shipping_address = ShippingAddress.new(first_name: 'Johnnie',
+                                               last_name: 'Walker',
+                                               address1: '100 Main Street',
+                                               state: 'Florida',
+                                               city: 'Miami',
+                                               zipcode: '33332',
+                                               country: 'USA',
+                                               use_for_billing: true)
+
+  order.shipping_method = order.available_shipping_methods.first
+  order.email = 'hello.nimbleshop@gmail.com'
+  order.save!
 
 end

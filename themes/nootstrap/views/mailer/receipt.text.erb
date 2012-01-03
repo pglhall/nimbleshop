@@ -1,7 +1,7 @@
 Here is receipt for your purchase at <%= @shop.name %> .
 
-Payment date: <%= @order.creditcard_transactions.first.created_at.to_s(:long) %>
-Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
+Payment date: <%= @payment_date %>
+Credit card: <%= @creditcard_masked_number %>
 
 Item will be shipped to :
 

@@ -95,7 +95,7 @@ class Order < ActiveRecord::Base
   end
 
   def email_receipt
-    if self.status_changed? && status == 'paid' || true
+    if self.status_changed? && status == 'paid'
       Mailer.receipt(self.number).deliver
     end
   end
