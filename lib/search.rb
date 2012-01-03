@@ -16,14 +16,17 @@ module Search
 
   module ClassMethods
 
+    def summarize(args)
+      to_conditions(args).map(&:summary).join(' and ').capitalize
+    end
+
     def search(args)
       conditions = to_conditions(args)
       relation   = merge_joins(conditions).where(merge_where(conditions))
       relation   = relation.project(Arel.sql("products.*"))
 
-      Product.find_by_sql(relation.to_sql)
+      find_by_sql(relation.to_sql)
     end
-
 
     private
 

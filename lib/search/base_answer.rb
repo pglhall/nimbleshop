@@ -18,7 +18,15 @@ module Search
       send(@operation)
     end
 
+    def summary
+     I18n.t(@operation.to_sym, field: to_name(@name), value: @value)
+    end
+
     private
+
+    def to_name(field)
+      CustomField.find(field.gsub(/q/,'')).name
+    end
 
     def validate_operator!
       unless valid_operators.include?(@operation)
