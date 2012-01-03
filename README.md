@@ -4,4 +4,4 @@
 
 # Documentation
 
-Documentation is available at "http://docs.nimbleshop.com":http://docs.nimbleshop.com .
+Documentation is available at [http://docs.nimbleshop.com](http://docs.nimbleshop.com) .
