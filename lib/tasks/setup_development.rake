@@ -43,7 +43,7 @@ task :setup_development => :environment do
   payment_method.write_preference(:request_submission_url, 'https://www.sandbox.paypal.com/cgi-bin/webscr?')
   payment_method.save!
 
-  shop = Shop.create!( name: 'nimbleshop',
+  shop = Shop.create!( name: 'chickscorner',
                        theme: 'nootstrap',
                        phone_number: '800-456-7890',
                        contact_email: 'neeraj@nimbleshop.com',
