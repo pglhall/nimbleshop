@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
 
   default :from => Settings.from_email
   default_url_options[:host] = Settings.host_for_email
-  #default_url_options[:protocol] = Settings.using_heroku ? 'https' : 'http'
+  default_url_options[:protocol] = 'http'
 
   def receipt(order_number)
     subject = "Receipt for sale"
