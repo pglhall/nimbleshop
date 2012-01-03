@@ -5,11 +5,7 @@ class Admin::ProductsController < AdminController
   respond_to :html
 
   def index
-    @products = Product.order(:name).paginate(
-      :per_page => 12,
-      :page     => params[:page]
-    )
-
+    @products = Product.order(:name)
     respond_with @products
   end
 

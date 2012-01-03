@@ -9,8 +9,6 @@ gem 'pg'
 # to handle credit card payments
 gem 'activemerchant'
 gem 'binary_merchant', git: 'git://github.com/bigbinary/binary_merchant.git'
-#gem 'binary_merchant', path: '/Users/nsingh/dev/personal/binary_merchant'
-
 
 # for uploading images
 gem 'carrierwave'
@@ -23,6 +21,11 @@ gem 'mini_magick'
 
 # to load sample data. It should be gone soon
 gem 'yaml_db'
+
+group :development, :test, :staging do
+  gem 'mailcatcher'
+  gem 'mail_safe'
+end
 
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
@@ -50,19 +53,12 @@ end
 
 # visit /admin_data to manage data using browser
 gem 'admin_data', '= 1.1.16'
-#gem 'admin_data', path: '/Users/nsingh/dev/personal/admin_data'
-#gem 'admin_data', git: 'git://github.com/bigbinary/admin_data.git', branch: 'test'
-
 
 # to support various themes
-gem 'themes_for_rails', git: 'git://github.com/neerajdotname/themes_for_rails.git'
-#gem 'themes_for_rails', path: '/Users/nsingh/dev/personal/themes_for_rails'
+gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
-
-# for storing preferences for individual models
-#gem 'preferences', git: 'git://github.com/neerajdotname/preferences.git'
 
 # to support i18n . Uncomment it if you are using any other language
 #gem 'rails-i18n'

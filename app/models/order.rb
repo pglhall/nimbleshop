@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
   validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info failed_ipn)
 
   before_create :set_order_number
+  after_save :email_receipt
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
@@ -91,6 +92,12 @@ class Order < ActiveRecord::Base
 
   def set_order_number
     self.number = Random.new.rand(11111111...99999999).to_s
+  end
+
+  def email_receipt
+    if self.status_changed? && status == 'paid' || true
+      Mailer.receipt(self.number).deliver
+    end
   end
 
 end

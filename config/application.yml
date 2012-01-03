@@ -3,25 +3,27 @@
 # Settings.s3_access_key_id
 #
 common:
-  # TODO move it to shop configuration and add a show link
   s3_access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
   s3_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
+  mail_safe_redirected_email: johnnie.walker@chickscorner.com
+  from_email: support@chickscorner.com
 
 development:
+  bare_url_with_port: localhost:3000
   using_heroku: false
   # TODO move it to shop configuration and add a show link
-  s3_bucket: nibmbleship-development
+  s3_bucket: chickscorner-development
 
 test:
+  bare_url_with_port: localhost:3000
   using_heroku: false
-  cookie_domain: example.com
-  s3_bucket: nimbleshop-test
+  cookie_domain: chickscorner.com
+  s3_bucket: chickscorner-test
 
 staging:
-  # TODO move it to shop configuration
-  paypal_return_url: http://nimbleshop-staging.heroku.com/paypal_return
-  paypal_notify_url: http://nimbleshop-staging.heroku.com/paypal_payment_notifications
+  bare_url_with_port: chickscorner-staging.heroku.com
+  s3_bucket: chickscorner-staging
 
 production:
-  paypal_return_url: http://nimbleshop.heroku.com/paypal_return
-  paypal_notify_url: http://nimbleshop.heroku.com/payment_notifications/paypal
+  bare_url_with_port: chickscorner.com
+  s3_bucket: chickscorner-production
