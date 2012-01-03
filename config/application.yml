@@ -7,6 +7,7 @@ common:
   s3_secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
   mail_safe_redirected_email: johnnie.walker@chickscorner.com
   from_email: support@chickscorner.com
+  http_basic_authentication_password: <%= ENV['HTTP_BASIC_AUTHENTICATION_PASSWORD']  || 'welcome' %>
 
 development:
   bare_url_with_port: localhost:3000
