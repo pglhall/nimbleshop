@@ -1,5 +1,5 @@
 # Do not actually deliver email unless it is production environment
-if defined?(MailSafe::Config) # && !Rails.env.production?
+if defined?(MailSafe::Config) && !Rails.env.production?
   MailSafe::Config.replacement_address = Settings.mail_safe_redirected_email
 end
 
