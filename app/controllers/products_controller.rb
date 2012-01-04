@@ -19,6 +19,9 @@ class ProductsController < ApplicationController
   end
 
   def all_pictures
+    @no_top_bar = true
+    @no_footer = true
+    @do_not_use_page_title = true
     @product = Product.find_by_permalink!(params[:id])
     @page_title = "all pictures for #{@product.name}"
     respond_with @product

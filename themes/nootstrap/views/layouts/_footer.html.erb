@@ -1,0 +1,32 @@
+<% unless @no_footer %>
+  <footer>
+    <div class='row'>
+      <div class='span6'>
+          <%= image_tag('paypal.png') %>
+          <%= image_tag('visa.png') %>
+          <%= image_tag('mastercard.png') %>
+          <%= image_tag('amex.png') %>
+          <%= image_tag('discover.png') %>
+
+          <% if splitable_enabled? %>
+            <%= image_tag('splitable.png') %>
+          <% end %>
+      </div>
+      <div class='span6'>
+        &copy; Your company name @2011
+      </div>
+      <div class='span2'>
+        <% if @shop.twitter_handle.present? %>
+          <%= link_to image_tag('twitter.png'), @shop.twitter_url %>
+        <% end %>
+        <% if @shop.facebook_url.present? %>
+          <%= link_to image_tag('facebook.png'), '' %>
+        <% end %>
+        <% if @shop.contact_email.present? %>
+          <%= link_to image_tag('mail.png'), "mailto:#{@shop.contact_email}" %>
+        <% end %>
+      </div>
+    </div>
+    </p>
+  </footer>
+<% end %>
