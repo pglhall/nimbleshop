@@ -7,7 +7,7 @@
     </li>
     <li>
       In the credit card statement name of the company would appear as
-      <strong><%=@shop.company_name_on_creditcard_statements%></strong> .
+      <strong><%= @order.payment_method.preferred_company_name_on_creditcard_statement %></strong> .
     </li>
     <li>
       An invoice is being sent to <strong><%= @order.email %></strong> .

@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   create_table "orders", :force => true do |t|
     t.string   "number",                                          :null => false
     t.integer  "shipping_method_id"
+    t.integer  "payment_method_id"
     t.datetime "purchased_at"
     t.string   "email"
     t.string   "status",             :default => "added_to_cart", :null => false
@@ -116,16 +117,6 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   add_index "orders", ["number"], :name => "index_orders_on_number", :unique => true
-
-  create_table "pages", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "permalink",  :null => false
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "pages", ["permalink"], :name => "index_pages_on_permalink", :unique => true
 
   create_table "payment_methods", :force => true do |t|
     t.boolean  "enabled",     :default => false

@@ -1,7 +1,8 @@
 class PaymentMethod::AuthorizeNet < PaymentMethod
 
-  preference :login_id,        :string
-  preference :transaction_key, :string
+  preference :login_id,                             :string
+  preference :transaction_key,                      :string
+  preference :company_name_on_creditcard_statement, :string
 
   def gateway
     set_mode

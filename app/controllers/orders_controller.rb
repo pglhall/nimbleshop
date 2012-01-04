@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   def paid
     @page_title = 'Purchase is complete'
     @order = Order.find_by_number!(params[:id])
+    @payment_method = PaymentMethod.find_by_permalink!('authorize-net')
   end
 
   def edit

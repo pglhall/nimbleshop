@@ -1,4 +1,4 @@
-<% if current_order.shipping_address %>
+<% unless current_order.shipping_address.new_record? %>
   <div class='row'>
     <div class='span4' style='min-height:150px;'>
       <h3>

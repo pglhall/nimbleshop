@@ -3,6 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.string     :number,             null: false
       t.belongs_to :shipping_method,    null: true
+      t.belongs_to :payment_method,     null: true
       t.datetime   :purchased_at,       null: true
       t.string     :email,              null: true
       t.string     :status,             null: false, default: 'added_to_cart'

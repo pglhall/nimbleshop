@@ -1,6 +1,6 @@
 <% @payment_method.preferences.each do |key, value| %>
   <div class="clearfix">
-    <%= label_tag key, key %>
+    <%= label_tag key %>
     <div class="input">
       <%= text_field_tag key, value, 'class' => 'xlarge' %>
     </div>

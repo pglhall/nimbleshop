@@ -12,6 +12,8 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :creditcard_transactions
 
+  belongs_to :payment_method
+
   has_one :shipping_address
   has_one :billing_address
   accepts_nested_attributes_for :shipping_address, :billing_address, allow_destroy: true
@@ -25,10 +27,6 @@ class Order < ActiveRecord::Base
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
-  end
-
-  def paypal_url
-    PaymentMethod::PaypalWebsitePaymentsStandard.first.url(self)
   end
 
   def item_count
