@@ -1,3 +1,2 @@
-class ProductGroupCondition < ActiveRecord::Base
-  belongs_to :product_group
+class ProductGroupCondition
 end

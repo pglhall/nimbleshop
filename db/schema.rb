@@ -176,15 +176,6 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
 
   add_index "preferences", ["owner_id", "owner_type", "name", "group_id", "group_type"], :name => "index_preferences_on_owner_and_name_and_preference", :unique => true
 
-  create_table "product_group_conditions", :force => true do |t|
-    t.integer  "product_group_id"
-    t.string   "column_name",      :null => false
-    t.string   "operator",         :null => false
-    t.integer  "value_integer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "product_groups", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "permalink",  :null => false
