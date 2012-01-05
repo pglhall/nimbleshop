@@ -24,7 +24,9 @@ test:
 staging:
   bare_url_with_port: chickscorner-staging.heroku.com
   s3_bucket: chickscorner-staging
+  using_heroku: true
 
 production:
   bare_url_with_port: chickscorner.com
   s3_bucket: chickscorner-production
+  using_heroku: true
