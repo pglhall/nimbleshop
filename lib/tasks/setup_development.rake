@@ -2,9 +2,12 @@ desc "setsup local development environment"
 task :setup_development => :environment do
 
   if Settings.using_heroku
-    ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
-      klass.delete_all
-    end
+    system "heroku pg:reset SHARED_DATABASE_URL --confirm chickscorner-staging"
+    Rake::Task["db:migrate"].invoke
+
+    #ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
+      #klass.delete_all
+    #end
   else
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
