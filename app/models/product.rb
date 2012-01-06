@@ -3,7 +3,6 @@ class Product < ActiveRecord::Base
   alias_attribute :title, :name
 
   include BuildPermalink
-  include Search
 
   has_many :pictures
 
