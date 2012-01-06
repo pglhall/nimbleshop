@@ -11,6 +11,7 @@ class ProductGroupCondition < ActiveRecord::Base
   validates_presence_of :name, :operator, :value
 
   validate :validate_operator
+  after_initialize :set_strategy
 
 
   def validate_operator
@@ -20,15 +21,19 @@ class ProductGroupCondition < ActiveRecord::Base
   end
 
   def name=(val)
-    super(val)
-    if val
-      set_join_module
-      @query_strategy = self.class.const_get(determine_query_strategy).new(self)
+    val = val.try(:to_s)
+    if super(val)
+      set_strategy
     end
   end
 
+  def set_strategy
+    set_join_module
+    @query_strategy = self.class.const_get(determine_query_strategy).new(self)
+  end
+
   def summary
-    I18n.t(self.operation.to_sym, field: localized_name, value: self.value)
+    I18n.t(self.operator.to_sym, field: localized_name, value: self.value)
   end
 
   private

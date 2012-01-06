@@ -70,9 +70,12 @@ task :setup_development => :environment do
   Product.find(6).custom_field_answers.create(custom_field: cf, value: 'necklace')
   Product.find(9).custom_field_answers.create(custom_field: cf, value: 'necklace')
 
-  pg_bracelets = ProductGroup.create!(name: 'bracelets', :condition => {"q#{cf.id}" => { op: 'eq', v: 'bracelet'}})
-  pg_earrings = ProductGroup.create!(name:  'earrings',  :condition => {"q#{cf.id}" => { op: 'eq', v: 'earring'}})
-  pg_necklaces = ProductGroup.create!(name: 'necklaces', :condition => {"q#{cf.id}" => { op: 'eq', v: 'necklace'}})
+  pg_bracelets = ProductGroup.create!(name: 'bracelets')
+  pg_bracelets.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'bracelet')
+  pg_earrings = ProductGroup.create!(name:  'earrings')
+  pg_earrings.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'earring')
+  pg_necklaces = ProductGroup.create!(name: 'necklaces')
+  pg_necklaces.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'necklace')
 
   link_group = LinkGroup.create!(name: 'Shop by category')
   link_group.navigations.create(navigeable: pg_bracelets)
@@ -88,10 +91,13 @@ task :setup_development => :environment do
   Product.find(9).update_attributes(price: 137)
   Product.find(10).update_attributes(price: 141)
 
-  pg_lt_50 = ProductGroup.create!(name: '< $50', :condition => { "price" => { op: 'lt', v: 50 } })
-  pg_between_50_100 = ProductGroup.create!(name: '$50 - $100',
-                                           :condition => [{"price" => { op: 'gteq', v: 50}}, {"price" => { op: 'lteq', v: 100}}])
-  pg_gt_100 = ProductGroup.create!(name: '> $100', :condition => {"price" => { op: 'gt', v: 100}})
+  pg_lt_50 = ProductGroup.create!(name: '< $50')
+  pg_lt_50.product_group_conditions.create(name: 'price', operator: 'lt', value: 50)
+  pg_between_50_100 = ProductGroup.create!(name: '$50 - $100')
+  pg_between_50_100.product_group_conditions.create(name: 'price', operator: 'gteq', value: 50)
+  pg_between_50_100.product_group_conditions.create(name: 'price', operator: 'lteq', value: 100)
+  pg_gt_100 = ProductGroup.create!(name: '> $100')
+  pg_gt_100.product_group_conditions.create(name: 'price', operator: 'gt', value: 100)
 
   link_group = LinkGroup.create!(name: 'Shop by price')
   Navigation.create!(link_group: link_group, navigeable: pg_lt_50)

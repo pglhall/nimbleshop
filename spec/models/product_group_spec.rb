@@ -30,6 +30,53 @@ describe ProductGroup do
       p5.custom_field_answers.create(custom_field: date, value: '6/7/2010')
     end
 
+    describe "when querying text answers" do
+      let(:group) { create(:product_group) }
+      let(:condition) { group.product_group_conditions.build(name: text.id) }
+
+      it "should return products using equality operator" do
+        condition.operator = 'eq'
+        condition.value = 'george washington'
+        group.products.must_equal [ p1 ]
+        
+        condition.value = 'george murphy'
+        group.products.must_equal [ p2 ]
+
+        condition.value = 'steve jobs'
+        group.products.must_equal [ p3 ]
+
+        condition.value = 'bill gates'
+        group.products.must_equal [ p4 ]
+      end
+
+      it "should return products using starts with operator" do
+        condition.operator = 'starts'
+        condition.value = 'george'
+        group.products.must_equal [ p1, p2 ]
+        
+        condition.value = 'steve'
+        group.products.must_equal [ p3 ]
+
+        condition.value = 'bill gates'
+        group.products.must_equal [ p4 ]
+
+        condition.value = 'george m'
+        group.products.must_equal [ p2 ]
+      end
+
+      it "should return products using ends with operator" do
+        condition.operator = 'ends'
+        condition.value = 'murphy'
+        group.products.must_equal [ p2 ]
+        
+        condition.value = 'jobs'
+        group.products.must_equal [ p3 ]
+
+        condition.value = 'bill gates'
+        group.products.must_equal [ p4 ]
+      end
+    end
+
     it "should show results to equality operator" do
       group     = create(:product_group)
       condition = group.product_group_conditions.create(name: number.id.to_s, operator: 'eq', value: 23)
