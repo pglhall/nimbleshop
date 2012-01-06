@@ -11,6 +11,7 @@ class ProductGroupCondition < ActiveRecord::Base
   validates_presence_of :name, :operator, :value
 
   validate :validate_operator
+
   after_initialize :set_strategy
 
 
@@ -29,7 +30,7 @@ class ProductGroupCondition < ActiveRecord::Base
 
   def set_strategy
     set_join_module
-    @query_strategy = self.class.const_get(determine_query_strategy).new(self)
+    @query_strategy = self.class.const_get("#{field_type.classify}Field").new(self)
   end
 
   def summary
@@ -42,11 +43,9 @@ class ProductGroupCondition < ActiveRecord::Base
     extend(custom_field? ? CustomFieldStrategy : CoreFieldStrategy)
   end
 
-
   def arel_field
     target_table.send(:[], query_column)
   end
-
 
   module CustomFieldStrategy
     def join(proxy)
@@ -74,8 +73,8 @@ class ProductGroupCondition < ActiveRecord::Base
       end
     end
 
-    def determine_query_strategy
-      "#{custom_field.field_type.classify}Field"
+    def field_type
+      custom_field.field_type
     end
 
     def localized_name
@@ -99,11 +98,11 @@ class ProductGroupCondition < ActiveRecord::Base
       self.name.try(:to_sym)
     end
 
-    def determine_query_strategy
+    def field_type
       if query_column == :price
-        'NumberField'
+        'number'
       else
-        'TextField'
+        'text'
       end
     end
 
@@ -115,6 +114,7 @@ class ProductGroupCondition < ActiveRecord::Base
   class BaseField
     attr_accessor :condition
     delegate :arel_field, :to => :condition
+
     def initialize(condition)
       self.condition = condition
     end
@@ -163,7 +163,6 @@ class ProductGroupCondition < ActiveRecord::Base
 
   class DateField < NumberField
   end
-
 
   def custom_field?
     self.name =~ /\d+/

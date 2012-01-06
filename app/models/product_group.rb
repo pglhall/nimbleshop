@@ -2,6 +2,8 @@ class ProductGroup < ActiveRecord::Base
 
   has_many :product_group_conditions
 
+  accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
+
   include BuildPermalink
 
 
@@ -10,6 +12,26 @@ class ProductGroup < ActiveRecord::Base
   # determines if the given product exists in the product group
   def exists?(product)
     products.include?(product)
+  end
+
+  def self.fields
+    c = []
+    c << { "id" => 'name', "name" => 'Name', "field_type" => 'text' }
+    c << { "id" => 'price', "name" => 'Price', "field_type" => 'number' }
+
+    CustomField.all.map do | field |
+      c << field.attributes.slice("id", "name", "field_type")
+    end
+
+    c 
+  end
+
+  def self.operators
+    {
+      text: [['Contains', 'contains'], ['Starts With','starts'], ['Ends With','ends']],
+      number: [['Equal To', 'eq'], ['Greater Than', 'gt'], ['Less Than', 'lt'], ['Greater Than Equal To', 'gteq'], ['Less Than Equal To', 'lteq']],
+      date: [['On', 'eq'], ['After', 'gt'], ['Before', 'lt'], ['On or After', 'gteq'], ['On or Before', 'lteq']],
+    }
   end
 
   def products

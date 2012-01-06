@@ -22,12 +22,15 @@
 
     <div class="clearfix">
       <%= f.label :condition, 'Condition' %>
-      <div class="input">
-        <%= collection_select(:product_group, :custom_field_id, @custom_fields, :id, :name) %>
-        <%= f.text_field :custom_field_operator, class: 'xlarge focus', size: 30 %>
-        <%= f.text_field :custom_field_value, class: 'xlarge focus', size: 30 %>
-
-      </div>
+      <% @product_group.product_group_conditions.each do | condition | %> 
+        <div id ="condition-klass" class="input" data-fields="<%= ProductGroup.fields.to_json %>" data-fields="<%= ProductGroup.operators.to_json %>">
+          <%= f.fields_for :product_group_conditions, condition do | condition_field | %>
+            <%= condition_field.select :name, ProductGroup.fields.map { |t| t.values_at("name", "id") }, class: 'xlarge focus', size: 30 %>
+            <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym], class: 'xlarge focus', size: 30 %>
+            <%= condition_field.text_field :value, class: 'xlarge focus', size: 30 %>
+          <% end %>
+        </div>
+      <% end %>
     </div><!-- /clearfix -->
 
 
