@@ -1,7 +1,7 @@
 module Search
   class BaseField
     attr_accessor :condition
-    delegate :arel_field, :to => :condition
+    delegate :arel_field, :value, :to => :condition
 
     def initialize(condition)
       self.condition = condition
@@ -12,7 +12,7 @@ module Search
     end
 
     def where(proxy = nil)
-      clause = send(condition.operator, condition.value)
+      clause = send(condition.operator, value)
       proxy ? proxy.and(clause) : clause
     end
   end

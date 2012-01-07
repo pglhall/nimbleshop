@@ -21,5 +21,9 @@ module Search
     def valid_operators
       %w(eq contains starts ends)
     end
+
+    def valid_value_data_type?
+      condition.value.present?
+    end
   end
 end
