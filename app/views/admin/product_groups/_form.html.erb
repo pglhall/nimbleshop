@@ -21,14 +21,22 @@
     </div><!-- /clearfix -->
 
     <div class="clearfix">
-      <%= f.label :condition, 'Condition' %>
       <div id ="condition-klass" data-fields="<%= ProductGroup.fields.to_json %>" data-operators="<%= ProductGroup.operators.to_json %>">
+      </div>
       <% @product_group.product_group_conditions.each_with_index do | condition, index | %> 
         <div class="input condition" data-index="<%= index %>">
           <%= f.fields_for :product_group_conditions, condition do | condition_field | %>
-            <%= condition_field.select :name, ProductGroup.fields.map { |t| t.values_at("name", "id") }, {}, {class: 'field'} %>
-            <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym].map { |t| t.values_at(:name, :value) }, {}, class: 'operator' %>
-            <%= condition_field.text_field :value, class: 'value' %>
+            <% unless condition.marked_for_destruction? %>
+              <%= condition_field.select :name, ProductGroup.fields.map { |t| t.values_at("name", "id") }, {}, {class: 'field'} %>
+              <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym].map { |t| t.values_at(:name, :value) }, {}, class: 'operator' %>
+              <%= condition_field.text_field :value, class: 'value' %>
+            <% end %>
+            <% if index.nonzero? %>
+              <%= link_to "remove", "#", class: "remove-condition" %>
+            <% end %>
+            <% if condition.persisted? && !condition.marked_for_destruction? %>
+              <%= condition_field.hidden_field :_destroy, class: 'destroy-flag' %>
+            <% end %>
           <% end %>
         </div>
       <% end %>

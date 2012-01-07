@@ -1,13 +1,12 @@
 jQuery ->
 	data = ($ "#condition-klass").data()
 	($ ".condition .field").live "change", (evt)->
-		$target = $(evt.target)
+		$target = $(evt.target).siblings('input.value').val('').end()
 		for element in data.fields
 			if (""+ element.id) == $target.val()
 				field = element
-		$select = $target.next('select.operator')
-		$select.html ''
-		$.each data.operators[field.field_type], (i, e) -> 
+		$select = $target.siblings('select.operator').html ''
+		for e in data.operators[field.field_type]
 		  $select.append $("<option />", { value: e.value, text: e.name })
 		false
 	($ ".add-condition").live "click", (evt)->
@@ -16,7 +15,10 @@ jQuery ->
 		html = Mustache.to_html($("#product_template").html(), params)
 		($ ".condition:last").after html
 		false
-
 	($ ".remove-condition").live "click", (evt)->
-		$(evt.target).parents(".condition").remove()
+		condition = $(evt.target).parents(".condition")
+		for element in condition.find(":input:not(:hidden)")
+		  $(element).remove()
+		condition.find(".remove-condition").remove()
+		condition.find(".destroy-flag").val('1')
 		false
