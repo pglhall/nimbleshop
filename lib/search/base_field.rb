@@ -12,7 +12,7 @@ module Search
     end
 
     def where(proxy = nil)
-      clause = send(condition.operator, value)
+      clause = send(condition.operator, coerced_value)
       proxy ? proxy.and(clause) : clause
     end
   end

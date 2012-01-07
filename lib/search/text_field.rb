@@ -22,6 +22,10 @@ module Search
       %w(eq contains starts ends)
     end
 
+    def coerced_value
+      value.try(:to_s)
+    end
+
     def valid_value_data_type?
       condition.value.present?
     end

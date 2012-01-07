@@ -149,7 +149,7 @@ describe ProductGroupCondition do
     end
     it "should return where clause with products.price" do
       condition.where.to_sql.must_be_like %Q{
-        "products"."price\" < 23
+        "products"."price\" < 23.0
       }
     end
   end
