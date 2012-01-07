@@ -89,6 +89,13 @@ GEM
     celerity (0.9.1)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
+    coffee-rails (3.1.1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.2.0)
     columnize (0.3.4)
     culerity (0.2.15)
     daemons (1.1.5)
@@ -143,6 +150,7 @@ GEM
       minitest (~> 2.2)
       railties (~> 3.1.0.rc1)
     multi_json (1.0.3)
+    mustache (0.99.4)
     nokogiri (1.5.0)
     pg (0.11.0)
     polyglot (0.3.3)
@@ -231,6 +239,7 @@ DEPENDENCIES
   admin_data (= 1.1.16)
   binary_merchant!
   carrierwave
+  coffee-rails (~> 3.1.1)
   database_cleaner
   email_validator!
   factory_girl_rails
@@ -243,6 +252,7 @@ DEPENDENCIES
   mini_magick
   minitest-capybara (~> 0.0.1)!
   minitest-rails
+  mustache
   nested_form!
   pg
   rails (= 3.1.1)
