@@ -6,6 +6,20 @@ class Admin::ProductGroupsController < AdminController
     @product_groups = ProductGroup.all
   end
 
+  def new
+    @product_group = ProductGroup.new
+    @product_group.product_group_conditions.build
+  end
+
+  def create
+    @product_group = ProductGroup.new(params[:product_group])
+    if @product_group.save
+      redirect_to admin_product_groups_path, notice: t(:successfully_updated)
+    else
+      render 'new'
+    end
+  end
+
   def edit
     @custom_fields = CustomField.order('name asc').all
   end
