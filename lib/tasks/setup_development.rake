@@ -169,9 +169,6 @@ task :setup_development => :environment do
   order.shipping_status = 'shipping_pending'
   order.save!
 
-  Shipment.create!(tracking_number: 'xyz', shipment_carrier: ShipmentCarrier.last, order: Order.last)
-
-
   CreditcardTransaction.create!(transaction_gid: '2167825945',
                                 params: '--- response_code: 1 response_reason_code: "1" response_reason_text: This transaction has been approved. avs_result_code: Y transaction_id: "2167825945" card_code: P',
                                 amount: 141,

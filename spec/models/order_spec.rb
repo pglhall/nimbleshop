@@ -5,7 +5,7 @@ describe Order do
     describe 'default value' do
       let(:order)  { create(:order)  }
       it '' do
-        order.status.must_equal 'added_to_cart'
+        order.status.must_equal 'open'
       end
     end
 
@@ -15,7 +15,7 @@ describe Order do
         order.update_attributes(email: 'a@example.com')
       end
       it '' do
-        order.status.must_equal 'billing_info_provided'
+        order.status.must_equal 'open'
       end
     end
   end
