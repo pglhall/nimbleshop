@@ -6,11 +6,8 @@ namespace :ns do
     dir = Rails.root.join('db', 'data')
 
     Dir.foreach(dir) do |i|
-      if i =~ /yml/
-        if ['pictures.yml', 'creditcards.yml'].include? i
-        else
-          FileUtils.rm( Rails.root.join('db', 'data', i ))
-        end
+      if (i =~ /yml/) && !['pictures.yml', 'creditcards.yml'].include?(i)
+        FileUtils.rm( Rails.root.join('db', 'data', i ))
       end
     end
   end
