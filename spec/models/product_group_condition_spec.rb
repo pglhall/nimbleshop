@@ -25,132 +25,191 @@ end
 
 describe ProductGroupCondition do
   describe "of type text" do
-    let(:text_field) { create(:text_custom_field) }
-
-    before do
-      @condition = ProductGroupCondition.new({
-        name: text_field.id, value: 't'
-      })
-    end
+    let(:condition) { build(:text_group_condition) }
 
     it "should raise unsupported operator for non text operators" do
       %w(lt gt lteq gteq).each do | operator |
-        @condition.operator = operator
-        @condition.wont_be(:valid?)
-        @condition.errors[:operator].must_equal ["is invalid"]
+        condition.operator = operator
+      condition.wont_be(:valid?)
+      condition.errors[:operator].must_equal ["is invalid"]
       end
     end
 
-    it "should not raise unsupported operator for non text operators" do
+    it "should not raise unsupported operator for text operators" do
       %w(contains starts ends eq).each do | operator |
-        @condition.operator = operator
-        @condition.must_be(:valid?)
+        condition.operator = operator
+      condition.must_be(:valid?)
       end
     end
   end
 
   describe "of type date" do
-    let(:custom_field) { create(:date_custom_field) }
-
-    before do
-      @condition = ProductGroupCondition.new({
-        name: custom_field.id, value: '1/1/2009'
-      })
-    end
+    let(:condition) { build(:date_group_condition) }
 
     it "should raise unsupported operator for non text operators" do
       %w(contains starts ends).each do | operator |
-        @condition.operator = operator
-        @condition.wont_be(:valid?)
-        @condition.errors[:operator].must_equal ["is invalid"]
+        condition.operator = operator
+      condition.wont_be(:valid?)
+      condition.errors[:operator].must_equal ["is invalid"]
       end
     end
 
-    it "should not raise unsupported operator for non text operators" do
+    it "should not raise unsupported operator for date operators" do
       %w(lt gt lteq gteq).each do | operator |
-        @condition.operator = operator
-        @condition.must_be(:valid?)
+        condition.operator = operator
+      condition.must_be(:valid?)
       end
     end
   end
-
 
   describe "of type number" do
-    let(:custom_field) { create(:number_custom_field) }
+    let(:condition) { build(:number_group_condition) }
 
-    before do
-      @condition = ProductGroupCondition.new({
-        name: custom_field.id, value: 43
-      })
-    end
-
-    it "should raise error with text value" do
-      @condition.operator = 'lt'
-      @condition.value = 'lt'
-      @condition.wont_be(:valid?)
-      @condition.errors[:value].must_equal ["is invalid"]
+    it "should raise error with non number value" do
+      condition.value = 'lt'
+      condition.wont_be(:valid?)
+      condition.errors[:value].must_equal ["is invalid"]
     end
 
     it "should raise unsupported operator for non text operators" do
       %w(contains starts ends).each do | operator |
-        @condition.operator = operator
-        @condition.wont_be(:valid?)
-        @condition.errors[:operator].must_equal ["is invalid"]
+        condition.operator = operator
+      condition.wont_be(:valid?)
+      condition.errors[:operator].must_equal ["is invalid"]
       end
     end
 
-    it "should not raise unsupported operator for non text operators" do
+    it "should not raise unsupported operators" do
       %w(lt gt lteq gteq).each do | operator |
-        @condition.operator = operator
-        @condition.must_be(:valid?)
+        condition.operator = operator
+      condition.must_be(:valid?)
+      end
+    end
+
+    describe "#to_search_sql" do
+
+      let(:product_group) { ProductGroup.new }
+      let(:search_sql) {  product_group.product_group_conditions.to_search_sql }
+
+      before do
+        condition.value    = "4"
+        product_group.product_group_conditions = [ condition ]
+      end
+
+      it "should handle less than operation" do
+        condition.operator = "lt"
+
+        search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.0
+        }
+      end
+
+      it "should handle less than equal operation" do
+        condition.operator = "lteq"
+
+        search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.0
+        }
+      end
+
+      it "should handle greater than operation" do
+        condition.operator = "gt"
+        search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.0
+        }
+      end
+
+      it "should handle greater than equal  operation" do
+        condition.operator = "gteq"
+        search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.0
+        }
+      end
+
+      it "should handle equal operation" do
+        condition.operator = "eq"
+        search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.0
+        }
       end
     end
   end
 
-  describe "when condition belongs to custom field" do
-    let(:condition) do
-      ProductGroupCondition.new(name: field.id, operator: 'contains', value: "test")
-    end
+  describe "with multiple conditions" do
+    describe "#to_search_sql" do
 
-    describe "of type text" do
-      let(:field) { create(:text_custom_field) }
+      let(:condition1) { build(:number_group_condition) }
+      let(:condition2) { build(:text_group_condition) }
+      let(:product_group) { ProductGroup.new }
+      let(:search_sql) {  product_group.product_group_conditions.to_search_sql }
 
-      it "should write sql by joining custom field answers table" do
-        condition.index = 1
-        condition.join(Product.arel_table).to_sql.must_be_like %{
-          SELECT FROM "products" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id"
+      before do
+        condition1.value  = "4.34"
+        condition2.value  = "george"
+        product_group.product_group_conditions = [ condition1, condition2 ]
+      end
+
+      it "should handle less than operation and contains" do
+        condition1.operator = "lt"
+        condition2.operator = "contains"
+
+        search_sql.must_be_like %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" ILIKE '%george%'
         }
       end
 
-      it "should return value as query column" do
-        condition.query_column.must_equal :value
-      end
+      it "should handle less than equal operation and starts with" do
+        condition1.operator = "lteq"
+        condition2.operator = "starts"
 
-      it "should return where clause with answers1.value" do
-        condition.index=2
-        condition.where.to_sql.must_be_like %Q{
-          "answers2"."value" ILIKE '%test%'
+        search_sql.must_be_like %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" ILIKE 'george%'
         }
       end
-    end
-  end
 
-  describe "when condition belongs to core field" do
-    let(:condition) do
-      ProductGroupCondition.new(name: "price", operator: 'lt', value: "23")
-    end
-    it "should not join table with custom field answer" do
-      condition.index = 1
-      condition.join(Product.arel_table).must_equal Product.arel_table
-    end
+      it "should handle greater than operation and ends with" do
+        condition1.operator = "gt"
+        condition2.operator = "ends"
+        search_sql.must_be_like %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" ILIKE '%george'
+        }
+      end
 
-    it "should return price as query column" do
-      condition.query_column.must_equal :price
-    end
-    it "should return where clause with products.price" do
-      condition.where.to_sql.must_be_like %Q{
-        "products"."price\" < 23.0
-      }
+      it "should handle greater than equal  operation" do
+        condition1.operator = "gteq"
+        condition2.operator = "eq"
+        search_sql.must_be_like %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" ILIKE 'george'
+        }
+      end
+
+      it "should handle equal operation and equal" do
+        condition1.operator = "eq"
+        condition2.operator = "eq"
+        search_sql.must_be_like %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" ILIKE 'george'
+        }
+      end
+
+      describe "with price condition" do
+        let(:condition3) { create(:price_group_condition) }
+
+        before do
+          condition1.value  = "4.34"
+          condition2.value  = "george"
+          condition3.value  = "19.99"
+          condition1.operator = "lt"
+          condition2.operator = "starts"
+          condition3.operator = "gteq"
+          product_group.product_group_conditions = [ condition1, condition2, condition3 ]
+        end
+
+        it "should handle search" do
+          search_sql.must_be_like %{
+            SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" ILIKE 'george%' AND "products"."price" >= 19.99
+          }
+        end
+      end
     end
   end
 end

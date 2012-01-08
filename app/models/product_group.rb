@@ -1,6 +1,6 @@
 class ProductGroup < ActiveRecord::Base
 
-  has_many :product_group_conditions
+  has_many :product_group_conditions, :extend => SearchExtension
 
   accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
 
@@ -35,22 +35,9 @@ class ProductGroup < ActiveRecord::Base
   end
 
   def products
-    join_proxy = Product.arel_table
-    product_group_conditions.each_with_index do | condition, index |
-      condition.index = index
-      join_proxy = condition.join(join_proxy)
-    end
-
-    where_proxy = nil
-
-    product_group_conditions.each do | condition |
-      where_proxy = condition.where(where_proxy)
-    end
-
-    sql = join_proxy.where(where_proxy).project(Arel.sql("products.*")).to_sql
-
-    Product.find_by_sql(sql)
+    product_group_conditions.search
   end
+
 
   def summarize
     product_group_conditions.map(&:summary).join('  and ')
