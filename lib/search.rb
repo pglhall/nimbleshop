@@ -21,7 +21,7 @@ module Search
     validate  :validate_value_data_type
     validate  :validate_operator
 
-    after_initialize  :set_strategy
+    after_initialize  :prepare_instance
   end
 
   module InstanceMethods
@@ -29,17 +29,14 @@ module Search
     def name=(val)
       val = val.try(:to_s)
       if super(val)
-        set_strategy
+        prepare_instance
       end
     end
 
-    def set_strategy
-      set_join_module
-      @query_strategy = self.class.const_get("#{field_type.classify}Field").new(self)
-    end
-
     def summary
-      I18n.t(self.operator.to_sym, field: localized_name, value: self.value)
+      I18n.t(self.operator.to_sym, {
+        field: localized_name, value: self.value
+      })
     end
 
     private
@@ -60,17 +57,22 @@ module Search
       extend(custom_field? ? CustomFieldStrategy : CoreFieldStrategy)
     end
 
+    def prepare_instance
+      set_join_module
+      set_where_module
+    end
+
+    def set_where_module
+      klass = Search.const_get("#{field_type.classify}Field")
+      @query_strategy = klass.new(self)
+    end
+
     def arel_field
       target_table.send(:[], query_column)
     end
 
     def custom_field?
-      self.name =~ /\d+/
-    end
-
-    def custom_field
-      if custom_field?
-      end
+      name.try(:match, /\A[+-]?\d+?\Z/).present?
     end
   end
 end
