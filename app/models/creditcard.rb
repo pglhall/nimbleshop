@@ -1,8 +1,8 @@
 class Creditcard < ActiveRecord::Base
 
-  attr_accessor :cvv, :number, :amcard, :month, :year, :address1, :address2, :first_name, :last_name, :state, :zipcode, :card_type
+  attr_accessor :cvv, :number, :amcard, :month, :year, :address1, :address2, :first_name, :last_name, :state, :zipcode
 
-  before_validation :set_card_type,               on: :create
+  before_validation :set_cardtype,               on: :create
   before_validation :strip_non_numeric_values,    on: :create
 
   validate :validation_by_active_merchant,        on: :create
@@ -21,8 +21,8 @@ class Creditcard < ActiveRecord::Base
     self.number = self.number.gsub(/[^\d]/, '') if self.number
   end
 
-  def set_card_type
-    self.card_type = ActiveMerchant::Billing::CreditCard.type?(number)
+  def set_cardtype
+    self.cardtype = ActiveMerchant::Billing::CreditCard.type?(number)
   end
 
   def validation_by_active_merchant
@@ -30,7 +30,7 @@ class Creditcard < ActiveRecord::Base
     self.year = self.expires_on.strftime('%Y').to_i
 
     self.amcard = ActiveMerchant::Billing::CreditCard.new(
-      type:               card_type,
+      type:               cardtype,
       number:             number,
       verification_value: verification_value,
       month:              month,
@@ -49,7 +49,7 @@ class Creditcard < ActiveRecord::Base
   end
 
   def set_masked_number
-    self.masked_number = self.amcard.display_number
+    self.masked_number ||= self.amcard.display_number
   end
 
 end

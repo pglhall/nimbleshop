@@ -13,3 +13,10 @@
 form .input {
   padding-left: 8px;
 }
+
+.boxy {
+  background: #fafafa;
+  border: 1px solid #eaeaea;
+  padding: 7px;
+}
+

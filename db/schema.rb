@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111221190000) do
+ActiveRecord::Schema.define(:version => 20120105234553) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   create_table "creditcards", :force => true do |t|
     t.string   "masked_number", :null => false
     t.datetime "expires_on",    :null => false
+    t.string   "cardtype",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,12 +107,14 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   create_table "orders", :force => true do |t|
-    t.string   "number",                                          :null => false
+    t.string   "number",                                            :null => false
     t.integer  "shipping_method_id"
     t.integer  "payment_method_id"
     t.datetime "purchased_at"
     t.string   "email"
-    t.string   "status",             :default => "added_to_cart", :null => false
+    t.string   "status",             :default => "open",            :null => false
+    t.string   "payment_status",     :default => "abandoned_early", :null => false
+    t.string   "shipping_status",    :default => "nothing_to_ship", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,6 +209,23 @@ ActiveRecord::Schema.define(:version => 20111221190000) do
   end
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
+
+  create_table "shipment_carriers", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "permalink",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shipment_carriers", ["permalink"], :name => "index_shipment_carriers_on_permalink", :unique => true
+
+  create_table "shipments", :force => true do |t|
+    t.string   "tracking_number",     :null => false
+    t.integer  "shipment_carrier_id", :null => false
+    t.integer  "order_id",            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shipping_countries", :force => true do |t|
     t.integer  "shipping_zone_id", :null => false

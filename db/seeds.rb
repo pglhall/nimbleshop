@@ -46,3 +46,9 @@ description = %Q{
 }
 
 PaymentMethod::Splitable.create!(name: 'Splitable', description: description)
+
+ShipmentCarrier.delete_all
+
+ShipmentCarrier.create!(name: 'UPS')
+ShipmentCarrier.create!(name: 'USPS')
+ShipmentCarrier.create!(name: 'Fedex')

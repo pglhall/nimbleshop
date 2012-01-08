@@ -1,30 +1,64 @@
-desc "setsup local development environment"
+namespace :ns do
+  task :dump_data do
+    FileUtils.rm_rf(Rails.root.join('db', 'data'))
+    ENV['dir'] = 'data'
+    Rake::Task["db:data:dump_dir"].invoke
+    dir = Rails.root.join('db', 'data')
+
+    Dir.foreach(dir) do |i|
+      if i =~ /yml/
+        if ['pictures.yml', 'creditcards.yml'].include? i
+        else
+          FileUtils.rm( Rails.root.join('db', 'data', i ))
+        end
+      end
+    end
+  end
+
+  task :load_data do
+    ENV['dir'] = 'data'
+    Rake::Task["db:data:load_dir"].invoke
+  end
+end
+
+desc "sets up local development environment"
 task :setup_development => :environment do
 
   if Settings.using_heroku
     system "heroku pg:reset SHARED_DATABASE_URL --confirm chickscorner-staging"
     Rake::Task["db:migrate"].invoke
-
-    #ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
-      #klass.delete_all
-    #end
   else
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
     Rake::Task["db:migrate"].invoke
   end
 
-  Rake::Task["db:data:load"].invoke
-  Rake::Task["db:seed"].invoke
-
   ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
-    case klass.name
-    when *['Product', 'Picture', 'Creditcard', 'PaymentMethod']
-    when *%w(Product Picture Creditcard PaymentMethod)
-    else
-      klass.delete_all
-    end
+    klass.delete_all
   end
+
+  Rake::Task["db:seed"].invoke
+  Rake::Task["ns:load_data"].invoke
+
+  product4 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
+
+  product5 = Product.create!( title: "Candy Colours Bracelet Set", price: 47, description: 'tbd')
+
+  product6 = Product.create!( title: "Gemstone Cross Necklaces", price: 78, description: 'tbd')
+
+  product7 = Product.create!( title: "Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered",
+                              price: 81,
+                              description: 'tbd')
+
+  product8 = Product.create!( title: "Red, Black & Silver Glass Bracelet", price: 107, description: 'tbd')
+
+  product9 = Product.create!( title: "Layered Coral Necklace", price: 137, description: 'tbd')
+
+  product10 = Product.create!( title: "Claddagh Earrings", price: 141, description: 'tbd')
+
+  product11 = Product.create!( title: "Om necklace", price: 101, description: 'tbd')
+
+  product12 = Product.create!(title: "Men bracelet", price: 32, description: 'tbd')
 
   payment_method = PaymentMethod::Splitable.find_by_permalink!('splitable')
   payment_method.write_preference(:api_secret, 'AGT568GKLRW39S')
@@ -62,13 +96,13 @@ task :setup_development => :environment do
   Navigation.create!(link_group: link_group, navigeable: link_home)
 
   cf = CustomField.create!(name: 'category', field_type: 'text')
-  Product.find(5).custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  Product.find(4).custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  Product.find(8).custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  Product.find(10).custom_field_answers.create(custom_field: cf, value: 'earring')
-  Product.find(7).custom_field_answers.create(custom_field: cf, value: 'earring')
-  Product.find(6).custom_field_answers.create(custom_field: cf, value: 'necklace')
-  Product.find(9).custom_field_answers.create(custom_field: cf, value: 'necklace')
+  product5.custom_field_answers.create(custom_field: cf, value: 'bracelet')
+  product4.custom_field_answers.create(custom_field: cf, value: 'bracelet')
+  product8.custom_field_answers.create(custom_field: cf, value: 'bracelet')
+  product10.custom_field_answers.create(custom_field: cf, value: 'earring')
+  product7.custom_field_answers.create(custom_field: cf, value: 'earring')
+  product6.custom_field_answers.create(custom_field: cf, value: 'necklace')
+  product9.custom_field_answers.create(custom_field: cf, value: 'necklace')
 
   pg_bracelets = ProductGroup.create!(name: 'bracelets')
   pg_bracelets.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'bracelet')
@@ -83,13 +117,13 @@ task :setup_development => :environment do
   link_group.navigations.create(navigeable: pg_necklaces)
 
   cf = CustomField.create!(name: 'original price', field_type: 'number')
-  Product.find(4).update_attributes(price: 10)
-  Product.find(5).update_attributes(price: 47)
-  Product.find(6).update_attributes(price: 78)
-  Product.find(7).update_attributes(price: 81)
-  Product.find(8).update_attributes(price: 107)
-  Product.find(9).update_attributes(price: 137)
-  Product.find(10).update_attributes(price: 141)
+  product4.update_attributes(price: 10)
+  product5.update_attributes(price: 47)
+  product6.update_attributes(price: 78)
+  product7.update_attributes(price: 81)
+  product8.update_attributes(price: 107)
+  product9.update_attributes(price: 137)
+  product10.update_attributes(price: 141)
 
   pg_lt_50 = ProductGroup.create!(name: '< $50')
   pg_lt_50.product_group_conditions.create(name: 'price', operator: 'lt', value: 50)
@@ -116,14 +150,7 @@ task :setup_development => :environment do
                          lower_price_limit: 10, upper_price_limit: 20)
   ShippingMethod.create!(name: 'Express shipping', shipping_price: 25, shipping_zone_id: sz.id,
                          lower_price_limit: 20)
-
   order = Order.create!
-  CreditcardTransaction.create!(transaction_gid: '2167825945',
-                                params: '--- response_code: 1 response_reason_code: "1" response_reason_text: This transaction has been approved. avs_result_code: Y transaction_id: "2167825945" card_code: P',
-                                amount: 141,
-                                creditcard_id: Creditcard.last,
-                                order_id: order.id,
-                                status: 'authorized')
 
   order.add(Product.find_by_permalink('claddagh-earrings'))
   order.shipping_address = ShippingAddress.new(first_name: 'Johnnie',
@@ -139,4 +166,72 @@ task :setup_development => :environment do
   order.email = 'hello.nimbleshop@gmail.com'
   order.save!
 
+  order.shipping_status = 'shipping_pending'
+  order.save!
+
+  Shipment.create!(tracking_number: 'xyz', shipment_carrier: ShipmentCarrier.last, order: Order.last)
+
+
+  CreditcardTransaction.create!(transaction_gid: '2167825945',
+                                params: '--- response_code: 1 response_reason_code: "1" response_reason_text: This transaction has been approved. avs_result_code: Y transaction_id: "2167825945" card_code: P',
+                                amount: 141,
+                                creditcard_id: Creditcard.last,
+                                order_id: order.id,
+                                status: 'authorized')
+
+  desc = "This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!  A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
+  product4.update_attributes(description: desc)
+
+  desc = "acrylic stretch beaded bracelets with peace sign, butterfly and heart charms. A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
+  product5.update_attributes(description: desc)
+
+  des = %q{
+      "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.
+
+        Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
+    }
+  product6.update_attributes(description: desc)
+
+  desc = %q{
+        These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
+
+        The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
+
+        All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
+  }
+  product7.update_attributes(description: desc)
+
+  desc = %q{
+      "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads.
+
+        This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
+  }
+  product8.update_attributes(description: desc)
+
+  desc = %q{
+      Om necklace for men .
+
+        The syllable om is first described as all-encompassing mystical entity in the Upanishads. Today, in all Hindu art and all over India and Nepal, 'om' can be seen virtually everywhere, a common sign for Hinduism and its philosophy and theology. Hindus believe that as creation began, the divine, all-encompassing consciousness took the form of the first and original vibration manifesting as sound \"OM\".
+        \r\n Before creation began it was \"Shuny\xC4\x81k\xC4\x81sha\", the emptiness or the void. Shuny\xC4\x81k\xC4\x81sha, meaning literally \"no sky\", is more than nothingness, because everything then existed in a latent state of potentiality. The vibration of \"OM\" symbolizes the manifestation of God in form (\"s\xC4\x81guna brahman\"). \"OM\" is the reflection of the absolute reality, it is said to be \"Adi Anadi\", without beginning or the end and embracing all that exists.
+        \r\n The mantra \"OM\" is the name of God, the vibration of the Supreme. When taken letter by letter, A-U-M represents the divine energy (Shakti) united in its three elementary aspects: Bhrahma Shakti (creation), Vishnu Shakti (preservation) and Shiva Shakti (liberation, and/or destruction)."
+  }
+  product11.update_attributes(description: desc)
+
+
+  desc = %w{ Dude you got a bracelet. }
+  product12.update_attributes(description: desc)
+
+  desc = %q{
+        These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
+
+        The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
+  }
+  product10.update_attributes(description: desc)
+
+  desc = %q{
+      "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
+        \r\n\
+        This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
+  }
+  product9.update_attributes(description: desc)
 end

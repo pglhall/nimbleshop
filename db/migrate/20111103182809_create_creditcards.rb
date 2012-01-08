@@ -3,6 +3,7 @@ class CreateCreditcards < ActiveRecord::Migration
     create_table :creditcards do |t|
       t.string   :masked_number,  null: false
       t.datetime :expires_on,     null: false
+      t.string   :cardtype,       null: false
 
       t.timestamps
     end

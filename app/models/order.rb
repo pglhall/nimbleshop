@@ -6,24 +6,28 @@ class Order < ActiveRecord::Base
   attr_protected :number
   attr_accessor :validate_email
 
+  has_many    :shipments
   belongs_to  :shipping_method
-  has_many :line_items
-  has_many :products, :through => :line_items
-  belongs_to :user
-  has_many :creditcard_transactions
+  has_many    :line_items
+  has_many    :products, :through => :line_items
+  belongs_to  :user
+  has_many    :creditcard_transactions
 
-  belongs_to :payment_method
+  belongs_to  :payment_method
 
-  has_one :shipping_address
-  has_one :billing_address
+  has_one     :shipping_address
+  has_one     :billing_address
   accepts_nested_attributes_for :shipping_address, :billing_address, allow_destroy: true
 
   validates :email, :email => true, :if => lambda {|record| record.validate_email }
 
-  validates_inclusion_of :status, :in => %W( added_to_cart added_shipping_method authorized paid added_shipping_info failed_ipn)
+  validates_inclusion_of :payment_status,  :in => %W( abandoned_early abandoned_late authorized paid refunded voided )
+  validates_inclusion_of :shipping_status, :in => %W( nothing_to_ship shipped partially_shipped shipping_pending )
+  validates_inclusion_of :status,          :in => %W( open closed )
 
   before_create :set_order_number
-  after_save :email_receipt
+  before_save   :change_shipping_status
+  after_save    :send_order_confirmation_email
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
@@ -82,6 +86,15 @@ class Order < ActiveRecord::Base
     self.number
   end
 
+  def final_billing_address
+    return nil if shipping_address.blank?
+    shipping_address.use_for_billing ? shipping_address : billing_address
+  end
+
+  def shipping_status
+    ActiveSupport::StringInquirer.new(self['shipping_status'])
+  end
+
   private
 
   def line_item_of(product)
@@ -92,9 +105,16 @@ class Order < ActiveRecord::Base
     self.number = Random.new.rand(11111111...99999999).to_s
   end
 
-  def email_receipt
-    if self.status_changed? && status == 'paid'
-      Mailer.receipt(self.number).deliver
+  def send_order_confirmation_email
+    if self.payment_status_changed? && payment_status == 'authorized'
+      Mailer.order_confirmation(self.number).deliver
+      AdminMailer.new_order_notification(self.number).deliver
+    end
+  end
+
+  def change_shipping_status
+    if self.payment_status_changed? && payment_status == 'authorized' && self.shipping_status == 'nothing_to_ship'
+      self.shipping_status = 'shipping_pending'
     end
   end
 

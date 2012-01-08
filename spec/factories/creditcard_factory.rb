@@ -10,6 +10,7 @@ FactoryGirl.define do
     zipcode '33324'
     city 'Miami'
     state 'Florida'
+    cardtype 'visa'
     expires_on { 1.year.from_now }
   end
 end

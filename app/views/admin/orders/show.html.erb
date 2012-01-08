@@ -1,70 +1,83 @@
-<h3> Order #<%= @order.number %> </h3>
+<h1> Order #<%= @order.number %> </h1>
 
+<div class='row'>
+  <div class='span10 boxy'>
+    <%= gravatar_for(@order.email) %>
+    <h2><%= @order.final_billing_address.name %></h2>
+    <p>
+      <strong><%= @order.email %></strong> <br />
+      <%= link_to 'Send Email', '#' %>
+    </p>
+  </div>
+</div>
 
-<table class='zebra-striped bordered-table'>
-  <thead>
-    <tr>
-      <th colspan="2" class="start">Description</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order.line_items.each do |line_item| %>
-      <%= render 'line_item', line_item: line_item %>
+<br />
+
+<div class='row'>
+  <div class='span10 boxy'>
+    <h3> Payment status <%= display_payment_status(@order) %> </h3>
+
+    <% if @order.creditcard_transactions.any? %>
+      <p>
+        <table style='margin-bottom:0px;'>
+          <tr>
+            <td> <%= @order.creditcard_transactions.first.created_at.to_s(:long) %> </td>
+            <td> Authorized <%= number_to_currency(@order.creditcard_transactions.first.amount) %> </td>
+            <td>
+              <%= creditcard_logo_for(@order.creditcard_transactions.first.creditcard) %>
+              <%= @order.creditcard_transactions.first.creditcard.masked_number %>
+            </td>
+          </tr>
+        </table>
+      </p>
     <% end %>
 
-    <% if @order.shipping_method %>
-      <tr>
-        <td>&nbsp;</td>
-        <td>
-          Shippping method: <%= @order.shipping_method.name %>
-        </td>
-        <td> <%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
-        <td>&nbsp;</td>
-        <td><%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
-      </tr>
+    <% if @order.final_billing_address.present? %>
+      <h4> Billing address</h4>
+      <p>
+        <address> <%= @order.final_billing_address.full_address_array.join('<br />').html_safe %> </address>
+      </p>
     <% end %>
+  </div>
+</div>
 
-    <tr>
-      <td>&nbsp;</td>
-      <td>Total</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td> <strong> <%= number_to_currency(@order.price_with_shipping) %> </strong> </td>
-    </tr>
-  </tbody>
-</table>
+<br />
 
-<% if @order.shipping_address.present? %>
-  <h3>Shipping address</h3>
-  <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
+<div class='row'>
+  <div class='span10 boxy'>
+    <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
+    <p>
+      Shipping method: <%= @order.shipping_method.name %>
+      <br />
+      <% if @order.shipping_status.shipping_pending? %>
+        <%= link_to 'Ship items', '#', class: 'btn success ship_items_link' %>
+      <% elsif @order.shipping_status.shipped? %>
+        Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
+        Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
+      <% end %>
+    </p>
 
-  <% unless @order.shipping_address.use_for_billing %>
-    <h3> Billing address </h3>
-    <address>
-      <%= @order.billing_address.full_address_array.join('<br />').html_safe %>
-    </address>
-  <% end %>
+    <div style="display:none;" id='ship_items_action_box'>
+      <%= form_for([:admin, @order, @shipment]) do |f| %>
+        <%= f.label :tracking_number %>
+        <%= f.text_field :tracking_number, class: 'xlarge focus', size: 30 %> <br />
+        <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, class: 'xlarge', size: 30 %>
+        <br />
+        <%= f.label :notify_customer %>
+        <%= f.check_box :notify_customer %>
+        <%= f.submit 'Submit', class: 'btn primary' %>
+      <% end %>
+    </div>
 
-  <h3>Contact email</h3>
-  <address>
-    <%= @order.email %>
-  </address>
-<% end %>
+    <p>
+      <% if @order.shipping_address.present? %>
+        <h4>Shipping address</h4>
+        <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
+      <% end %>
+    </p>
+  </div>
+</div>
 
+<br />
 
-<% if @order.creditcard_transactions.any? %>
-  <h3>Payment details </h3>
-
-  Transaction amount: <%= number_to_currency(@order.creditcard_transactions.first.amount) %> <br />
-  Transaction date: <%= @order.creditcard_transactions.first.created_at.to_s(:long) %> <br />
-  Credit card: <%= @order.creditcard_transactions.first.creditcard.masked_number %>
-<% end %>
-
-<% if @order.shipping_address %>
-  <h3> Payment address </h3>
-  <% address = @order.shipping_address.use_for_billing ? @order.shipping_address : @order.billing_address %>
-  <%= address.full_address_array.join('<br />').html_safe %>
-<% end %>
+<%= render 'line_items' %>

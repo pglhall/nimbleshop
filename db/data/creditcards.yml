@@ -1,0 +1,17 @@
+
+---
+creditcards:
+  columns:
+  - id
+  - masked_number
+  - expires_on
+  - cardtype
+  - created_at
+  - updated_at
+  records:
+  - - "1"
+    - XXXX-XXXX-XXXX-0027
+    - 2019-07-01 00:00:00
+    - visa
+    - 2012-01-02 18:56:11.658091
+    - 2012-01-02 18:56:11.658091

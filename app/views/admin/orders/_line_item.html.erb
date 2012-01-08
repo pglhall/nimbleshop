@@ -5,9 +5,6 @@
   </td>
   <td>
     <strong><%= link_to(product.title, product) %></strong>
-    <p>
-      <%= truncate(sanitize(product.description), length: 90) %>
-    </p>
   </td>
   <td><%= number_to_currency(product.price) %></td>
   <td> <%=line_item.quantity%> </td>

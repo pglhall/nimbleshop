@@ -8,7 +8,9 @@ Nimbleshop::Application.routes.draw do
     end
     resources :payment_methods
 
-    resources :orders
+    resources :orders do
+      resources :shipments
+    end
     resources :shipping_zones do
       resources :shipping_methods
     end

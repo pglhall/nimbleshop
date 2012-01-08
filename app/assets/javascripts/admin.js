@@ -11,4 +11,4 @@
 //= require focus
 //= require mustache
 //= require condition
-
+//= require shipit

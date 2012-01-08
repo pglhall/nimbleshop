@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   def update_shipping_method
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
-      current_order.update_attributes(params[:order].merge(status: 'added_shipping_method'))
+      current_order.update_attributes(shipping_method_id: params[:order][:shipping_method_id])
       redirect_to  new_creditcard_payment_path
     else
       current_order.errors.add(:base, 'Please select a shipping method')
@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
         (current_order.billing_address && current_order.billing_address.errors.any?)
       render 'edit'
     else
-      current_order.update_attributes!(status: 'added_shipping_info')
+      current_order.update_attributes!(payment_status: 'abandoned_late')
       redirect_to edit_shipping_method_order_path(current_order)
     end
   end
