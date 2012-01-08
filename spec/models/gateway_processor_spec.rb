@@ -15,8 +15,8 @@ describe GatewayProcessor do
     describe '#authorize' do
       it '' do
         @credit_card_handler.authorize(1234, @creditcard, @order)
-        tran = Transaction.first
-        Transaction.count.must_equal 1
+        tran = CreditcardTransaction.first
+        CreditcardTransaction.count.must_equal 1
         tran.status.must_equal 'authorized'
         tran.active.must_equal true
         tran.transaction_gid.must_equal '1234567890'
@@ -26,8 +26,8 @@ describe GatewayProcessor do
     describe '#purchase' do
       it '' do
         @credit_card_handler.purchase(1234, @creditcard, @order)
-        tran = Transaction.first
-        Transaction.count.must_equal 1
+        tran = CreditcardTransaction.first
+        CreditcardTransaction.count.must_equal 1
         tran.status.must_equal 'purchased'
         tran.active.must_equal true
         tran.transaction_gid.must_equal '1234567892'
@@ -37,11 +37,11 @@ describe GatewayProcessor do
     describe '#capture' do
       it '' do
         @credit_card_handler.authorize(1234, @creditcard, @order)
-        transaction = Transaction.last
+        transaction = CreditcardTransaction.last
         transaction.capture(payment_method_permalink: @payment_method_permalink)
 
-        tran = Transaction.last
-        Transaction.count.must_equal 2
+        tran = CreditcardTransaction.last
+        CreditcardTransaction.count.must_equal 2
         tran.status.must_equal 'captured'
         tran.active.must_equal true
         tran.transaction_gid.must_equal '1234567891'

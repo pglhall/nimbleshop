@@ -7,7 +7,7 @@ FactoryGirl.define do
     last_name 'Walker'
     address1 '100 Main street'
     state 'Florida'
-    zip '33333'
+    zipcode '33333'
     expires_on { 1.year.from_now }
   end
 end

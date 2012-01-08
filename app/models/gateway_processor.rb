@@ -35,7 +35,7 @@ class GatewayProcessor
       transaction.update_attributes!(active: false)
       CreditcardTransaction.create!(transaction_gid: transaction_gid,
                           params: response.params,
-                          price: transaction.price,
+                          amount: transaction.amount,
                           creditcard_id: transaction.creditcard_id,
                           active: true,
                           status: status,
@@ -49,7 +49,7 @@ class GatewayProcessor
       creditcard.save!
       CreditcardTransaction.create!(transaction_gid: transaction_gid,
                           params: response.params,
-                          amount: order.price,
+                          amount: order.total_amount,
                           creditcard_id: creditcard.id,
                           active: true,
                           status: status,
