@@ -22,7 +22,6 @@ class Admin::ProductsController < AdminController
 
   def edit
     @product.find_or_build_all_answers
-    render
   end
 
   def create

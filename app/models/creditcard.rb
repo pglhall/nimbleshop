@@ -2,7 +2,7 @@ class Creditcard < ActiveRecord::Base
 
   attr_accessor :cvv, :number, :amcard, :month, :year, :address1, :address2, :first_name, :last_name, :state, :zipcode
 
-  before_validation :set_cardtype,               on: :create
+  before_validation :set_cardtype,                on: :create
   before_validation :strip_non_numeric_values,    on: :create
 
   validate :validation_by_active_merchant,        on: :create

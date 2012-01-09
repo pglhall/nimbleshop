@@ -32,7 +32,7 @@ class Admin::PaymentMethodsController < AdminController
 
   def load_payment_methods
     @payment_methods = PaymentMethod.order('name asc').all
-    @enabled_payment_methods = PaymentMethod.where(:enabled => true).all
+    @enabled_payment_methods = PaymentMethod.where(enabled: true).all
   end
 
 end

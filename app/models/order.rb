@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   has_many    :shipments
   belongs_to  :shipping_method
   has_many    :line_items
-  has_many    :products, :through => :line_items
+  has_many    :products, through: :line_items
   belongs_to  :user
   has_many    :creditcard_transactions
 
@@ -19,17 +19,17 @@ class Order < ActiveRecord::Base
   has_one     :billing_address
   accepts_nested_attributes_for :shipping_address, :billing_address, allow_destroy: true
 
-  validates :email, :email => true, :if => lambda {|record| record.validate_email }
+  validates :email, email: true, if: lambda {|record| record.validate_email }
 
-  validates_inclusion_of :payment_status,  :in => %W( abandoned_early abandoned_late authorized paid refunded voided )
-  validates_inclusion_of :shipping_status, :in => %W( nothing_to_ship shipped partially_shipped shipping_pending )
-  validates_inclusion_of :status,          :in => %W( open closed )
+  validates_inclusion_of :payment_status,  in: %W( abandoned_early abandoned_late authorized paid refunded voided )
+  validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending )
+  validates_inclusion_of :status,          in: %W( open closed )
 
   before_create :set_order_number
 
   state_machine :payment_status, :initial => :abandoned_early do
     after_transition on: :authorized, do: :after_authorized
-    event :authorized     do
+    event :authorized do
       transition from: [:abandoned_late],  to: :authorized
     end
     event :abandoned_late do
@@ -37,13 +37,13 @@ class Order < ActiveRecord::Base
     end
   end
 
-  state_machine :shipping_status, :initial => :nothing_to_ship do
-    after_transition :on => :shipped, :do => :after_shipped
+  state_machine :shipping_status, initial:  :nothing_to_ship do
+    after_transition :on => :shipped, do:  :after_shipped
     event :shipping_pending do
-      transition :from => [:nothing_to_ship], :to => :shipping_pending
+      transition from: [:nothing_to_ship], to: :shipping_pending
     end
     event :shipped do
-      transition :from => [:shipping_pending], :to => :shipped
+      transition from: [:shipping_pending], to: :shipped
     end
   end
 
@@ -71,7 +71,7 @@ class Order < ActiveRecord::Base
 
   def add(product)
     return if self.products.include?(product)
-    self.line_items.create!(:product => product, :quantity => 1)
+    self.line_items.create!(product: product, quantity: 1)
   end
 
   def set_quantity(product, quantity)
@@ -79,26 +79,25 @@ class Order < ActiveRecord::Base
     if quantity <= 0
       line_item_of(product).destroy
     else
-      line_item_of(product).update_attributes(:quantity => quantity)
+      line_item_of(product).update_attributes(quantity: quantity)
     end
   end
 
   def remove(product)
-    return unless self.products.include?(product)
-    line_item_of(product).destroy
+    line_item_of(product).destroy if self.products.include?(product)
   end
 
   def price
-    self.line_items.inject(0) { |sum, item| sum += item.line_price }
+    self.line_items.inject(0) { |sum, item| sum += item.price }
   end
-  alias :amount :price
+  alias_method :amount, :price
 
   def price_with_shipping
     shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost
   end
-  alias :total_amount :price_with_shipping
-  alias :total_price :price_with_shipping
-  alias :grand_total :price_with_shipping
+  alias_method :total_amount, :price_with_shipping
+  alias_method :total_price,  :price_with_shipping
+  alias_method :grand_total,  :price_with_shipping
 
 
   # This methods returns true if the shipping cost is zero and usre has no choice. This
@@ -121,6 +120,14 @@ class Order < ActiveRecord::Base
 
   def shipping_status
     ActiveSupport::StringInquirer.new(self['shipping_status'])
+  end
+
+  def payment_status
+    ActiveSupport::StringInquirer.new(self['payment_status'])
+  end
+
+  def status
+    ActiveSupport::StringInquirer.new(self['status'])
   end
 
   private

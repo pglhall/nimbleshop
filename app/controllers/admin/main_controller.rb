@@ -1,8 +1,9 @@
 class Admin::MainController < AdminController
 
-  skip_before_filter :set_shop, :only => :reset
+  skip_before_filter :set_shop, only: :reset
 
   def index
+    render
   end
 
   def change_theme

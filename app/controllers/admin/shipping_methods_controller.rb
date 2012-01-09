@@ -1,6 +1,6 @@
 class Admin::ShippingMethodsController < AdminController
 
-  before_filter :load_shipping_zone, [:new, :create, :destroy]
+  before_filter :load_shipping_zone, only: [:new, :create, :destroy]
 
   def new
     @shipping_method = @shipping_zone.shipping_methods.build

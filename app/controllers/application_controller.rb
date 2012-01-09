@@ -32,9 +32,6 @@ class ApplicationController < ActionController::Base
     end
     @shop_by_category_link_group = LinkGroup.find_by_permalink('shop-by-category')
     @shop_by_price_link_group = LinkGroup.find_by_permalink('shop-by-price')
-
-    #Mailer.order_confirmation(Order.last.number).deliver
-    #AdminMailer.new_order_notification(Order.last.number).deliver
   end
 
   def current_shop

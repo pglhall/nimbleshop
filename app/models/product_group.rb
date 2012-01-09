@@ -1,6 +1,6 @@
 class ProductGroup < ActiveRecord::Base
 
-  has_many :product_group_conditions, :extend => SearchExtension
+  has_many :product_group_conditions, extend: SearchExtension
 
   accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
 
@@ -23,7 +23,7 @@ class ProductGroup < ActiveRecord::Base
       c << field.attributes.slice("id", "name", "field_type")
     end
 
-    c 
+    c
   end
 
   def self.operators

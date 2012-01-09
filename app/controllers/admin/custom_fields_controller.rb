@@ -18,7 +18,7 @@ class Admin::CustomFieldsController < AdminController
     if @custom_field.update_attributes(params[:custom_field])
       redirect_to admin_custom_fields_path, notice: t(:successfully_updated)
     else
-      render :action => 'edit'
+      render action: :edit
     end
   end
 

@@ -21,7 +21,7 @@ Items purchased:
 Name: <%= truncate(sanitize(product.name), length: 90) %>
 Item price: <%= number_to_currency(product.price) %>
 Item quantity: <%= line_item.quantity %>
-Item total price: <%= number_to_currency(line_item.line_price) %>
+Item total price: <%= number_to_currency(line_item.price) %>
 <% end %>
 
 Shipping method: <%= @order.shipping_method.name %>

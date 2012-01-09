@@ -7,14 +7,15 @@ class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
 
   def url(order)
     values = {
-      :business => self.preferred_merchant_email_address,
-      :cmd => '_cart',
-      :upload => 1,
-      :return => self.preferred_return_url,
-      :invoice => order.number,
-      :secret  => 'xxxxxxx', #TODO this should be stored and verified later
-      :notify_url => self.preferred_notify_url
+      business: self.preferred_merchant_email_address,
+      cmd: '_cart',
+      upload: 1,
+      return: self.preferred_return_url,
+      invoice: order.number,
+      secret:  'xxxxxxx', #TODO this should be stored and verified later
+      notify_url: self.preferred_notify_url
     }
+
     order.line_items.each_with_index do |item, index|
       values.merge!({
         "amount_#{index+1}"      => item.product.price,

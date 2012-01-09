@@ -4,7 +4,7 @@ class CartsController < ApplicationController
 
   def show
     @page_title = 'Your cart'
-    @line_items = current_order.blank? ? [] : current_order.line_items(:include => :product).order('id')
+    @line_items = current_order.blank? ? [] : current_order.line_items(include: :product).order('id')
   end
 
   def add
