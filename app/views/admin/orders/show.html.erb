@@ -20,14 +20,16 @@
     <% if @order.creditcard_transactions.any? %>
       <p>
         <table style='margin-bottom:0px;'>
-          <tr>
-            <td> <%= @order.creditcard_transactions.first.created_at.to_s(:long) %> </td>
-            <td> Authorized <%= number_to_currency(@order.creditcard_transactions.first.amount) %> </td>
-            <td>
-              <%= creditcard_logo_for(@order.creditcard_transactions.first.creditcard) %>
-              <%= @order.creditcard_transactions.first.creditcard.masked_number %>
-            </td>
-          </tr>
+          <% @order.creditcard_transactions.each do |t| %>
+            <tr>
+              <td> <%= t.created_at.to_s(:long) %> </td>
+              <td> <%= t.status.titleize %> <%= number_to_currency(t.amount) %> </td>
+              <td>
+                <%= creditcard_logo_for(t.creditcard) %>
+                <%= t.creditcard.masked_number %>
+              </td>
+            </tr>
+          <% end %>
         </table>
       </p>
     <% end %>
