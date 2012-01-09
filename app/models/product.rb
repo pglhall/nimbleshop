@@ -17,15 +17,13 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :pictures, allow_destroy: true
   accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
 
+  scope :with_prictures, includes: 'pictures'
+
   validates_presence_of :name, :description, :price
   validates_numericality_of :price
 
   def picture
     pictures.first
-  end
-
-  def self.with_pictures
-    includes(:pictures)
   end
 
   # TODO this method should not exist. All such custom fields should be generated dynamically

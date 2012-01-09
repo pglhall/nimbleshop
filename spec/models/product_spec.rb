@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Product do
 
+  it "needs alias title" do
+    product = Product.new(name: 'welcome') 
+    product.title.must_equal 'welcome'
+  end
+
   describe "#to_param" do
     it "should return permalink" do
       p = Product.new(permalink: 'test')
@@ -17,14 +22,13 @@ describe Product do
       @answer  = @product.custom_field_answers.create(custom_field: @field1, value: 23)
     end
 
-    it "should build new custom field answer" do
+    it "needs to build new answer" do
       answer = @product.find_or_build_answer_for_field(@field2)
       answer.id.must_be_nil
     end
 
-    it "should return existing custom field answer" do
+    it "needs to return exisitng answer" do
       @product.find_or_build_answer_for_field(@field1).must_equal @answer
     end
   end
-
 end
