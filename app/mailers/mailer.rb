@@ -9,7 +9,7 @@ class Mailer < ActionMailer::Base
   default_url_options[:host] = Settings.host_for_email
   default_url_options[:protocol] = 'http'
 
-  def order_confirmation(order_number)
+  def order_notification(order_number)
     subject = "Order confirmation for order ##{order_number}"
     @order = Order.find_by_number!(order_number)
 
@@ -18,7 +18,14 @@ class Mailer < ActionMailer::Base
     @payment_date = @order.creditcard_transactions.first.created_at.to_s(:long)
 
     mail_options = {:to => @order.email, :subject => subject}
+    mail(mail_options)
+  end
 
+  def shipping_notification(order_number)
+    subject = "Items for order ##{order_number} have been shipped"
+    @order = Order.find_by_number!(order_number)
+
+    mail_options = {:to => @order.email, :subject => subject}
     mail(mail_options)
   end
 

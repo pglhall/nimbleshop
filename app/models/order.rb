@@ -26,8 +26,38 @@ class Order < ActiveRecord::Base
   validates_inclusion_of :status,          :in => %W( open closed )
 
   before_create :set_order_number
-  before_save   :change_shipping_status
-  after_save    :send_order_confirmation_email
+
+  state_machine :payment_status, :initial => :abandoned_early do
+    after_transition on: :authorized, do: :after_authorized
+    event :authorized     do
+      transition from: [:abandoned_late],  to: :authorized
+    end
+    event :abandoned_late do
+      transition from: [:abandoned_early], to: :abandoned_late
+    end
+  end
+
+  state_machine :shipping_status, :initial => :nothing_to_ship do
+    after_transition :on => :shipped, :do => :after_shipped
+    event :shipping_pending do
+      transition :from => [:nothing_to_ship], :to => :shipping_pending
+    end
+    event :shipped do
+      transition :from => [:shipping_pending], :to => :shipped
+    end
+  end
+
+  def after_authorized
+    Mailer.order_notification(self.number).deliver
+    AdminMailer.new_order_notification(self.number).deliver
+    self.shipping_pending
+  end
+
+  def after_shipped
+    Mailer.shipping_notification(self.number).deliver
+    transaction = self.creditcard_transactions.first
+    GatewayProcessor.new(payment_method_permalink: 'authorize-net').capture(self.total_amount, transaction)
+  end
 
   def available_shipping_methods
     ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
@@ -37,9 +67,7 @@ class Order < ActiveRecord::Base
     self.line_items.count
   end
 
-  def items
-    line_items
-  end
+  alias_method :items, :line_items
 
   def add(product)
     return if self.products.include?(product)
@@ -102,20 +130,11 @@ class Order < ActiveRecord::Base
   end
 
   def set_order_number
-    self.number = Random.new.rand(11111111...99999999).to_s
-  end
-
-  def send_order_confirmation_email
-    if self.payment_status_changed? && payment_status == 'authorized'
-      Mailer.order_confirmation(self.number).deliver
-      AdminMailer.new_order_notification(self.number).deliver
+    _number = Random.new.rand(11111111...99999999).to_s
+    while self.class.exists?(number: _number) do
+      _number = Random.new.rand(11111111...99999999).to_s
     end
-  end
-
-  def change_shipping_status
-    if self.payment_status_changed? && payment_status == 'authorized' && self.shipping_status == 'nothing_to_ship'
-      self.shipping_status = 'shipping_pending'
-    end
+    self.number = _number
   end
 
 end

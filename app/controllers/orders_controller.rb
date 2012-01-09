@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
         (current_order.billing_address && current_order.billing_address.errors.any?)
       render 'edit'
     else
-      current_order.update_attributes!(payment_status: 'abandoned_late')
+      current_order.abandoned_late
       redirect_to edit_shipping_method_order_path(current_order)
     end
   end

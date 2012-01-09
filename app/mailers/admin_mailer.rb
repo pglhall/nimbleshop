@@ -5,16 +5,6 @@ class AdminMailer < ActionMailer::Base
   default_url_options[:host] = Settings.host_for_email
   default_url_options[:protocol] = 'http'
 
-  def shipping_notification(order_number)
-    subject = "Items for order ##{order_number} have been shipped"
-    @order = Order.find_by_number!(order_number)
-
-    mail_options = {:to => @order.email, :subject => subject}
-    mail(mail_options) do |format|
-      format.text { render "admin/mailer/shipping_notification" }
-    end
-  end
-
   def new_order_notification(order_number)
     subject = "Order ##{order_number} was recetly placed"
     @order = Order.find_by_number!(order_number)

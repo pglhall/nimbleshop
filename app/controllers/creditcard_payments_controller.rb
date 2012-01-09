@@ -41,8 +41,8 @@ class CreditcardPaymentsController < ApplicationController
       if gp.authorize(order.grand_total, @creditcard, order)
 
         payment_method = PaymentMethod.find_by_permalink!('authorize-net')
-        order.update_attributes!(payment_method: payment_method, payment_status: 'authorized')
-
+        order.update_attributes!(payment_method: payment_method)
+        order.authorized
         reset_order
         redirect_to paid_order_path(current_order)
       else

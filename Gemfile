@@ -19,6 +19,9 @@ gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
 # for creating thumbnails for images
 gem 'mini_magick'
 
+# to manage states of payment_status and shipping_status
+gem 'state_machine'
+
 # to load sample data. It should be gone soon
 gem 'yaml_db'
 
@@ -60,6 +63,3 @@ gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
-
-# to support i18n . Uncomment it if you are using any other language
-#gem 'rails-i18n'
