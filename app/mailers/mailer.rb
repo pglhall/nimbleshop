@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
 
   layout 'email'
 
-  default :from => Settings.from_email
+  default :from => Shop.first.from_email
   default_url_options[:host] = Settings.host_for_email
   default_url_options[:protocol] = 'http'
 

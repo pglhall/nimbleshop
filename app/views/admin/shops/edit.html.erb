@@ -60,10 +60,18 @@
     </div><!-- /clearfix -->
 
     <div class="clearfix">
-      <%= f.label :company_name_on_creditcard_statements %>
+      <%= f.label :intercept_email %>
       <%= link_to ' ! ', '#', :class => 'help' %>
       <div class="input">
-        <%= f.text_field :company_name_on_creditcard_statements, class: 'xlarge', size: 30 %>
+        <%= f.text_field :intercept_email, class: 'xlarge', size: 30 %>
+      </div>
+    </div><!-- /clearfix -->
+
+    <div class="clearfix">
+      <%= f.label :from_email %>
+      <%= link_to ' ! ', '#', :class => 'help' %>
+      <div class="input">
+        <%= f.text_field :from_email, class: 'xlarge', size: 30 %>
       </div>
     </div><!-- /clearfix -->
 

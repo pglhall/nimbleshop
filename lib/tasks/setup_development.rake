@@ -80,8 +80,10 @@ task :setup_development => :environment do
   shop = Shop.create!( name: 'chickscorner',
                        theme: 'nootstrap',
                        phone_number: '800-456-7890',
-                       contact_email: 'neeraj@nimbleshop.com',
+                       contact_email: 'johnnie.walker@nimbleshop.com',
                        twitter_handle: '@nimbleshop',
+                       intercept_email: 'johnnie.walker@nimbleshop.com',
+                       from_email:      'support@nimbleshop.com',
                        facebook_url: 'www.facebook.com')
 
   shop.update_attributes!( gateway:  'AuthorizeNet',
@@ -137,7 +139,6 @@ task :setup_development => :environment do
 
   PaymentMethod.update_all(enabled: true)
   sz = ShippingZone.create!(name: 'USA')
-  ShippingCountry.create!(shipping_zone_id: sz.id, country_code: 'USA')
   ShippingMethod.create!(name: 'Ground shipping', shipping_price: 10, shipping_zone_id: sz.id,
                          lower_price_limit: 10, upper_price_limit: 20)
   ShippingMethod.create!(name: 'Ground shipping', shipping_price: 20, shipping_zone_id: sz.id,

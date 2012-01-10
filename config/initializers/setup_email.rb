@@ -1,6 +1,6 @@
 # Do not actually deliver email unless it is production environment
 if defined?(MailSafe::Config) && !Rails.env.production?
-  MailSafe::Config.replacement_address = Settings.mail_safe_redirected_email
+  MailSafe::Config.replacement_address = Shop.first.intercept_email
 end
 
 Nimbleshop::Application.configure do
