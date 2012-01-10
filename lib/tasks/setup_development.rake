@@ -147,31 +147,6 @@ task :setup_development => :environment do
                          lower_price_limit: 10, upper_price_limit: 20)
   ShippingMethod.create!(name: 'Express shipping', shipping_price: 25, shipping_zone_id: sz.id,
                          lower_price_limit: 20)
-  order = Order.create!
-
-  order.add(Product.find_by_permalink('claddagh-earrings'))
-  order.shipping_address = ShippingAddress.new(first_name: 'Johnnie',
-                                               last_name: 'Walker',
-                                               address1: '100 Main Street',
-                                               state: 'Florida',
-                                               city: 'Miami',
-                                               zipcode: '33332',
-                                               country: 'USA',
-                                               use_for_billing: true)
-
-  order.shipping_method = order.available_shipping_methods.first
-  order.email = 'hello.nimbleshop@gmail.com'
-  order.save!
-
-  order.shipping_status = 'shipping_pending'
-  order.save!
-
-  CreditcardTransaction.create!(transaction_gid: '2167825945',
-                                params: '--- response_code: 1 response_reason_code: "1" response_reason_text: This transaction has been approved. avs_result_code: Y transaction_id: "2167825945" card_code: P',
-                                amount: 141,
-                                creditcard_id: Creditcard.last,
-                                order_id: order.id,
-                                status: 'authorized')
 
   desc = "This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!  A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
   product4.update_attributes(description: desc)

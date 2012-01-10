@@ -21,19 +21,20 @@ class Order < ActiveRecord::Base
 
   validates :email, email: true, if: lambda {|record| record.validate_email }
 
-  validates_inclusion_of :payment_status,  in: %W( abandoned_early abandoned_late authorized paid refunded voided )
+  validates_inclusion_of :payment_status,  in: %W( abandoned authorized paid refunded voided )
   validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending )
   validates_inclusion_of :status,          in: %W( open closed )
+  validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided)
 
   before_create :set_order_number
 
-  state_machine :payment_status, :initial => :abandoned_early do
+  state_machine :payment_status, :initial => :abandoned do
     after_transition on: :authorized, do: :after_authorized
     event :authorized do
-      transition from: [:abandoned_late],  to: :authorized
+      transition from: [:abandoned],  to: :authorized
     end
-    event :abandoned_late do
-      transition from: [:abandoned_early], to: :abandoned_late
+    event :captured do
+      transition from: [:authorized],  to: :paid
     end
   end
 
@@ -56,7 +57,9 @@ class Order < ActiveRecord::Base
   def after_shipped
     Mailer.shipping_notification(self.number).deliver
     transaction = self.creditcard_transactions.first
-    GatewayProcessor.new(payment_method_permalink: 'authorize-net').capture(self.total_amount, transaction)
+    if GatewayProcessor.new(payment_method_permalink: 'authorize-net').capture(self.total_amount, transaction)
+      self.captured
+    end
   end
 
   def available_shipping_methods
