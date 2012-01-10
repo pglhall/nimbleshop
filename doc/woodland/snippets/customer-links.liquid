@@ -1,7 +1,0 @@
-{% if shop.customer_accounts_enabled %}
-  {% if customer  %}
-    <a href="/account">Welcome {{customer.first_name}}</a> | {{ "Logout" | customer_logout_link }}
-  {% else %}
-    {{ "Login" | customer_login_link }}
-  {% endif %}
-{% endif %}
