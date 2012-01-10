@@ -28,9 +28,21 @@ class ProductGroup < ActiveRecord::Base
 
   def self.operators
     {
-      text: [{ name: 'Contains', value: 'contains'}, {name: 'Starts With', value: 'starts'}, { name: 'Ends With', value:'ends'}],
-      number: [{ name: 'Equal', value: 'eq'}, {name: 'Greater Than', value: 'gt'}, { name: 'Grater Than Equal To', value:'gteq'}, {name: 'Less Than', value: 'lt'}, {name: 'Less Than Equal To', value: 'lteq'}],
-      date: [{ name: 'On', value: 'eq'}, {name: 'After', value: 'gt'}, { name: 'On or After', value:'gteq'}, {name: 'Before', value: 'lt'}, {name: 'On or Before', value: 'lteq'}],
+      text:   [{ name: 'Contains',    value: 'contains' },
+               { name: 'Starts With', value: 'starts'},
+               { name: 'Ends With',   value:'ends'}],
+
+      number: [{ name: 'Equal', value: 'eq' },
+               { name: 'Greater Than', value: 'gt' },
+               { name: 'Grater Than Equal To', value:'gteq' },
+               { name: 'Less Than', value: 'lt' },
+               { name: 'Less Than Equal To', value: 'lteq'}],
+
+      date:   [{ name: 'On', value: 'eq' },
+               { name: 'After', value: 'gt' },
+               { name: 'On or After', value:'gteq' },
+               { name: 'Before', value: 'lt' },
+               { name: 'On or Before', value: 'lteq'}],
     }
   end
 

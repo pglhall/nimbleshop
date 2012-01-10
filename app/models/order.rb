@@ -1,6 +1,3 @@
-# TODO why is this needed
-Address
-
 class Order < ActiveRecord::Base
 
   attr_protected :number
