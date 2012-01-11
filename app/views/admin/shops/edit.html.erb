@@ -76,10 +76,23 @@
     </div><!-- /clearfix -->
 
     <div class="clearfix">
-      <%= f.label :default_creditcard_action %>
+      <%= f.label :aaa, 'How to process credit card' %>
       <%= link_to ' ! ', '#', :class => 'help' %>
-      <div class="input">
-        <%= f.text_field :default_creditcard_action, class: 'xlarge', size: 30 %>
+      <div class='input'>
+        <ul class='inputs-list'>
+          <li>
+            <label>
+              <%= f.radio_button :default_creditcard_action, 'authorize' %>
+              <span> Authorize the credit card for the total amount of the order .</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= f.radio_button :default_creditcard_action, 'purchase' %>
+              <span> Authorize and capture the credit card for the total amount of the order .</span>
+            </label>
+          </li>
+        </ul>
       </div>
     </div><!-- /clearfix -->
 

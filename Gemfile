@@ -25,11 +25,6 @@ gem 'state_machine'
 # to load sample data. It should be gone soon
 gem 'yaml_db'
 
-group :development, :test, :staging do
-  gem 'mailcatcher'
-  gem 'mail_safe'
-end
-
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
