@@ -8,11 +8,10 @@ Items have been shipped using <%= @order.shipments.first.shipment_carrier.name %
 
 Note that sometimes it takes upto 12 hours for a tracking number is show up in the system.
 
-Items are being shipped to following address:
+Items are being shipped to the following address:
 <% @order.shipping_address.full_address_array.each do |line| %>
 <%= line %>
 <% end %>
-
 
 For your reference here are the contents of the shipment.
 <% @order.line_items.each do |line_item| %>
@@ -24,5 +23,5 @@ Item total price: <%= number_to_currency(line_item.price) %>
 <% end %>
 
 <% if @order.payment_method.permalink == 'authorize-net' %>
-Your credit card has been charged  <%= number_to_currency(@order.total_price) %> .This charge will appear on your credit card statement as "<%= @order.payment_method.preferred_company_name_on_creditcard_statement%>".
+Your credit card has been charged <%= number_to_currency(@order.total_price) %> .This charge will appear on your credit card statement as "<%= @order.payment_method.preferred_company_name_on_creditcard_statement%>".
 <% end %>

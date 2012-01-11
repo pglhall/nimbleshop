@@ -257,11 +257,12 @@ ActiveRecord::Schema.define(:version => 20120105234553) do
   add_index "shipping_zones", ["permalink"], :name => "index_shipping_zones_on_permalink", :unique => true
 
   create_table "shops", :force => true do |t|
-    t.string   "name",                                     :null => false
-    t.string   "theme",           :default => "nootstrap", :null => false
-    t.string   "time_zone",       :default => "UTC",       :null => false
-    t.string   "intercept_email",                          :null => false
-    t.string   "from_email",                               :null => false
+    t.string   "name",                                               :null => false
+    t.string   "theme",                     :default => "nootstrap", :null => false
+    t.string   "time_zone",                 :default => "UTC",       :null => false
+    t.string   "intercept_email",                                    :null => false
+    t.string   "from_email",                                         :null => false
+    t.string   "default_creditcard_action", :default => "authorize", :null => false
     t.string   "gateway"
     t.string   "phone_number"
     t.string   "twitter_handle"

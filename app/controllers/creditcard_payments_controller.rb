@@ -1,3 +1,39 @@
+class PaymentProcessor
+  attr_accessor :order, :creditcard, :gateway_processor, :payment_method, :amount
+
+  def initialize(_amount, _creditcard, _order)
+    @amount = _amount
+    @creditcard = _creditcard
+    @order = _order
+    @payment_method = PaymentMethod.find_by_permalink!('authorize-net')
+    @gateway_processor = build_gateway_processor
+  end
+
+  def purchase
+    handle_action(:purchase, :purchased)
+  end
+
+  def authorize
+    handle_action(:authorize, :authorized)
+  end
+
+  def handle_action(action, status)
+    if gateway_processor.send(action)
+      order.send(status)
+      order.update_attributes!(payment_method: payment_method)
+    else
+      creditcard.errors.add(:base, t(:credit_card_declined_message))
+    end
+  end
+
+  def build_gateway_processor
+    GatewayProcessor.new(payment_method_permalink: 'authorize-net',
+                        amount: amount,
+                        creditcard: creditcard,
+                        order: order)
+  end
+end
+
 class CreditcardPaymentsController < ApplicationController
 
   theme :theme_resolver, only: [:new, :create]
@@ -35,19 +71,27 @@ class CreditcardPaymentsController < ApplicationController
                                                              last_name: addr.last_name,
                                                              state: addr.state,
                                                              zipcode: addr.zipcode))
+
       render action: 'new' and return unless @creditcard.valid?
 
-      gp = GatewayProcessor.new(payment_method_permalink: 'authorize-net')
-      if gp.authorize(order.grand_total, @creditcard, order)
-
-        payment_method = PaymentMethod.find_by_permalink!('authorize-net')
-        order.update_attributes!(payment_method: payment_method)
-        order.authorized
-        reset_order
-        redirect_to paid_order_path(current_order)
-      else
-        @creditcard.errors.add(:base, t(:credit_card_declined_message))
-        render action: "new"
+      pp = PaymentProcessor.new(order.grand_total, @creditcard, order)
+      case Shop.first.default_creditcard_action
+      when 'authorize'
+        pp.authorize
+        if @creditcard.errors.any?
+          render(action: :new)
+        else
+          reset_order
+          redirect_to(paid_order_path(current_order))
+        end
+      when 'purchase'
+        pp.purchase
+        if @creditcard.errors.any?
+          render(action: :new)
+        else
+          reset_order
+          redirect_to(paid_order_path(current_order))
+        end
       end
 
     end

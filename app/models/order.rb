@@ -27,11 +27,15 @@ class Order < ActiveRecord::Base
 
   state_machine :payment_status, :initial => :abandoned do
     after_transition on: :authorized, do: :after_authorized
+    after_transition on: :purchased,  do: :after_purchased
     event :authorized do
       transition from: [:abandoned],  to: :authorized
     end
     event :captured do
       transition from: [:authorized],  to: :paid
+    end
+    event :purchased do
+      transition from: [:abandoned],  to: :paid
     end
   end
 
@@ -53,10 +57,18 @@ class Order < ActiveRecord::Base
 
   def after_shipped
     Mailer.shipping_notification(self.number).deliver
-    transaction = self.creditcard_transactions.first
-    if GatewayProcessor.new(payment_method_permalink: 'authorize-net').capture(self.total_amount, transaction)
-      self.captured
+    if self.payment_status.authorized?
+      transaction = self.creditcard_transactions.first
+      if GatewayProcessor.new(payment_method_permalink: 'authorize-net', amount: self.total_amount).capture(transaction)
+        self.captured
+      end
     end
+  end
+
+  def after_purchased
+    Mailer.order_notification(self.number).deliver
+    AdminMailer.new_order_notification(self.number).deliver
+    self.shipping_pending
   end
 
   def available_shipping_methods

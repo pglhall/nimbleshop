@@ -25,8 +25,5 @@ class Address < ActiveRecord::Base
 
 end
 
-class ShippingAddress < Address
-end
-
 class BillingAddress < Address
 end

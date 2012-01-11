@@ -1,6 +1,7 @@
 # Do not actually deliver email unless it is production environment
 if defined?(MailSafe::Config) && !Rails.env.production?
-  MailSafe::Config.replacement_address = Shop.first.intercept_email
+  # Hack given below is required because while running test Shop.first is not available
+  MailSafe::Config.replacement_address = Shop.first.try(:intercept_email) || 'hello@example.com'
 end
 
 Nimbleshop::Application.configure do

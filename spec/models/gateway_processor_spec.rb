@@ -9,12 +9,15 @@ describe GatewayProcessor do
       @order = Factory(:order)
       create_authorizenet_payment_method
       @payment_method_permalink = PaymentMethod.find_by_permalink!('authorize-net').permalink
-      @credit_card_handler = GatewayProcessor.new(payment_method_permalink: @payment_method_permalink)
     end
 
     describe '#authorize' do
       it '' do
-        @credit_card_handler.authorize(1234, @creditcard, @order)
+      GatewayProcessor.new(payment_method_permalink: @payment_method_permalink,
+                           order: @order,
+                           amount: 1234,
+                           creditcard: @creditcard).authorize
+
         tran = CreditcardTransaction.first
         CreditcardTransaction.count.must_equal 1
         tran.status.must_equal 'authorized'
@@ -25,7 +28,11 @@ describe GatewayProcessor do
 
     describe '#purchase' do
       it '' do
-        @credit_card_handler.purchase(1234, @creditcard, @order)
+      GatewayProcessor.new(payment_method_permalink: @payment_method_permalink,
+                           order: @order,
+                           amount: 1234,
+                           creditcard: @creditcard).purchase
+
         tran = CreditcardTransaction.first
         CreditcardTransaction.count.must_equal 1
         tran.status.must_equal 'purchased'
@@ -36,7 +43,10 @@ describe GatewayProcessor do
 
     describe '#capture' do
       it '' do
-        @credit_card_handler.authorize(1234, @creditcard, @order)
+        GatewayProcessor.new(payment_method_permalink: @payment_method_permalink,
+                             order: @order,
+                             amount: 1234,
+                             creditcard: @creditcard).authorize
         transaction = CreditcardTransaction.last
         transaction.capture(payment_method_permalink: @payment_method_permalink)
 

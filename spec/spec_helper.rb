@@ -15,6 +15,7 @@ class MiniTest::Spec
   include Factory::Syntax::Methods
   # Add methods to be used by all specs here...
   before :each do
+    Factory(:shop)
     DatabaseCleaner.clean
   end
 end

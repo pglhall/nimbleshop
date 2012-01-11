@@ -68,6 +68,7 @@ task :setup_development => :environment do
   payment_method = PaymentMethod.find_by_permalink!('authorize-net')
   payment_method.write_preference(:login_id, '56yBAar72')
   payment_method.write_preference(:transaction_key, '9r3pbH5bnKH29f7d')
+  payment_method.write_preference(:company_name_on_creditcard_statement, 'chickscorner LLC')
   payment_method.save!
 
   payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')
