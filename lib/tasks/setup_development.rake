@@ -22,8 +22,8 @@ desc "sets up local development environment"
 task :setup_development => :environment do
 
   if Settings.using_heroku
-    system "heroku pg:reset SHARED_DATABASE_URL --confirm chickscorner-staging"
-    Rake::Task["db:migrate"].invoke
+    #system "heroku pg:reset SHARED_DATABASE_URL --confirm chickscorner-staging"
+    #Rake::Task["db:migrate"].invoke
   else
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
