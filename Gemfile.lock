@@ -20,16 +20,17 @@ GIT
       capybara (~> 0.4)
 
 GIT
+  remote: git://github.com/neerajdotname/themes_for_rails.git
+  revision: f3efda87d9902fad04501d36ed1dac05f4a862b4
+  specs:
+    themes_for_rails (0.4.3)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/ryanb/nested_form.git
   revision: 54da3123d9f1b14b37df608794508adccd6ac5ba
   specs:
     nested_form (0.1.1)
-
-PATH
-  remote: /Users/nsingh/dev/personal/themes_for_rails
-  specs:
-    themes_for_rails (0.4.3)
-      rails (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/
