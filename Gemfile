@@ -63,3 +63,4 @@ gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.g
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
+
