@@ -21,9 +21,9 @@
     </div><!-- /clearfix -->
 
     <div class="clearfix">
-      <div id ="condition-klass" data-fields="<%= ProductGroup.fields.to_json %>" data-operators="<%= ProductGroup.operators.to_json %>">
+      <div id ="product-group-condition-klass" data-fields="<%= ProductGroup.fields.to_json %>" data-operators="<%= ProductGroup.operators.to_json %>">
       </div>
-      <% @product_group.product_group_conditions.each_with_index do | condition, index | %> 
+      <% @product_group.product_group_conditions.each_with_index do | condition, index | %>
         <div class="input condition" data-index="<%= index %>">
           <%= f.fields_for :product_group_conditions, condition do | condition_field | %>
             <% unless condition.marked_for_destruction? %>

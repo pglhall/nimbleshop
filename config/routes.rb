@@ -1,5 +1,7 @@
 Nimbleshop::Application.routes.draw do
 
+  themes_for_rails
+
   namespace :admin do
     namespace :paymentmethod do
       resource :authorizedotnet

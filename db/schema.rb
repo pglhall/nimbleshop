@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105234553) do
+ActiveRecord::Schema.define(:version => 20120112071455) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -268,6 +268,30 @@ ActiveRecord::Schema.define(:version => 20120105234553) do
     t.string   "twitter_handle"
     t.string   "contact_email"
     t.string   "facebook_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "variants", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "variation1_value"
+    t.string   "variation1_parameterized",                               :default => ""
+    t.string   "variation2_value"
+    t.string   "variation2_parameterized",                               :default => ""
+    t.string   "variation3_value"
+    t.string   "variation3_parameterized",                               :default => ""
+    t.decimal  "price",                    :precision => 8, :scale => 2,                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "variations", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "name"
+    t.string   "default_value"
+    t.integer  "position",       :default => 1
+    t.text     "content"
+    t.text     "variation_type",                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -39,6 +39,19 @@ task :setup_development => :environment do
 
   product4 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
 
+  product4.variations.find_by_variation_type('variation1').update_attributes!(label: 'Color', default_value: 'Black')
+  product4.variations.find_by_variation_type('variation2').update_attributes!(label: 'Size', default_value: 'Medium')
+
+  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Small',  price: 11)
+  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Small',  price: 111)
+
+  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Medium', price: 21)
+  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Medium', price: 121)
+
+  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Large', price:   31)
+  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Large', price: 131)
+
+
   product5 = Product.create!( title: "Candy Colours Bracelet Set", price: 47, description: 'tbd')
 
   product6 = Product.create!( title: "Gemstone Cross Necklaces", price: 78, description: 'tbd')

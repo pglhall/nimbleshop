@@ -2,14 +2,14 @@
   <footer>
     <div class='row'>
       <div class='span6'>
-          <%= image_tag('paypal.png') %>
-          <%= image_tag('visa.png') %>
-          <%= image_tag('mastercard.png') %>
-          <%= image_tag('amex.png') %>
-          <%= image_tag('discover.png') %>
+          <%= image_tag(current_theme_image_path('paypal.png')) %>
+          <%= image_tag(current_theme_image_path('visa.png')) %>
+          <%= image_tag(current_theme_image_path('mastercard.png')) %>
+          <%= image_tag(current_theme_image_path('amex.png')) %>
+          <%= image_tag(current_theme_image_path('discover.png')) %>
 
           <% if splitable_enabled? %>
-            <%= image_tag('splitable.png') %>
+            <%= image_tag(current_theme_image_path('splitable.png')) %>
           <% end %>
       </div>
       <div class='span6'>
@@ -17,13 +17,13 @@
       </div>
       <div class='span2'>
         <% if @shop.twitter_handle.present? %>
-          <%= link_to image_tag('twitter.png'), @shop.twitter_url %>
+          <%= link_to image_tag(current_theme_image_path('twitter.png')), @shop.twitter_url %>
         <% end %>
         <% if @shop.facebook_url.present? %>
-          <%= link_to image_tag('facebook.png'), '' %>
+          <%= link_to image_tag(current_theme_image_path('facebook.png')), '' %>
         <% end %>
         <% if @shop.contact_email.present? %>
-          <%= link_to image_tag('mail.png'), "mailto:#{@shop.contact_email}" %>
+          <%= link_to image_tag(current_theme_image_path('mail.png')), "mailto:#{@shop.contact_email}" %>
         <% end %>
       </div>
     </div>

@@ -8,27 +8,40 @@
 
     <br />
     <p>
-    <ul class="media-grid">
-      <% @product.pictures.each do |picture| %>
-        <% img = image_tag(picture.picture_url(:thumb), {class: 'thumb',
-                                                         'data-large-picture' => picture.picture_url(:large),
-                                                         'data-grande-picture' => picture.picture_url(:grande)}) %>
-        <li>
-          <%= link_to(img, '#') %>
-        </li>
-      <% end %>
-    </ul>
+      <ul class="media-grid">
+        <% @product.pictures.each do |picture| %>
+          <% img = image_tag(picture.picture_url(:thumb), {class: 'thumb',
+                                                           'data-large-picture' => picture.picture_url(:large),
+                                                           'data-grande-picture' => picture.picture_url(:grande)}) %>
+          <li>
+            <%= link_to(img, '#') %>
+          </li>
+        <% end %>
+      </ul>
     </p>
-    <a href="/">Continue shopping...</a>
+    <%= link_to 'Continue shopping ...', root_url %>
   </div>
 
   <div class='span1'>
     &nbsp;
   </div>
   <div class='span5'>
-    <h3><%= number_to_currency(@product.price) %></h3>
-
+    <h3 id='product-price'><%= number_to_currency(@product.price) %></h3>
     <%= form_tag('/cart/add', method: 'post') do %>
+
+      <div id ="product-show-variant-price-data" data-fields="<%= @product.variant_price_data.to_json %>">
+
+      <div class='variants'>
+        <% @product.variations.active.each do |variation| %>
+          <%= variation.label %>
+          <%= select_tag( "#{variation.variation_type}_value", options_for_select(variation.content_for_select_options)) %>
+          <br />
+          <br />
+        <% end %>
+        <br />
+        <br />
+      </div>
+
       <input type="hidden" name="permalink" value="<%= @product.permalink %>" />
 			<div id="buy" class="clear">
 				<input type="submit" value="Add to Cart" class='btn primary' />
@@ -37,7 +50,6 @@
 
     <h4>Description</h4>
     <%= simple_format(@product.description) %>
-
   </div>
 </div>
 
