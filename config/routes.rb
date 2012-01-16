@@ -26,7 +26,9 @@ Nimbleshop::Application.routes.draw do
     resource  :shop, only: [:update, :edit]
   end
 
-  resources :creditcard_payments
+  #resources :creditcard_payments
+  resources :payment_processors
+
   resources :instant_payment_notifications do
     collection do
       post 'paypal'
@@ -54,7 +56,7 @@ Nimbleshop::Application.routes.draw do
     end
   end
 
-  resource :cart do
+  resource :cart, only: [:show, :update] do
     member do
       post 'add'
     end

@@ -11,7 +11,6 @@ class CartsController < ApplicationController
     product = Product.find_by_permalink!(params[:permalink])
     session[:order_id] = Order.create!.id unless current_order
     current_order.add(product)
-    current_order.update_attributes(status: 'added_to_cart')
     redirect_to cart_url
   end
 
@@ -25,12 +24,6 @@ class CartsController < ApplicationController
       end
       redirect_to cart_url
     end
-  end
-
-  def destroy
-    product = Product.find(params[:product_id])
-    current_order.remove(product)
-    redirect_to cart_url
   end
 
 end

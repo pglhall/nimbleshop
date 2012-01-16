@@ -84,6 +84,7 @@ class Order < ActiveRecord::Base
   def add(product)
     return if self.products.include?(product)
     self.line_items.create!(product: product, quantity: 1)
+    self.update_attributes(status: 'added_to_cart')
   end
 
   def set_quantity(product, quantity)

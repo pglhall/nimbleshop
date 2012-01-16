@@ -15,6 +15,16 @@ class Creditcard < ActiveRecord::Base
     true # ActiveMerchant needs this
   end
 
+  def self.build_for_payment_processing(params, order)
+    addr = order.final_billing_address
+    Creditcard.new(params[:creditcard].merge(address1: addr.address1,
+                                             address2: addr.address2,
+                                             first_name: addr.first_name,
+                                             last_name: addr.last_name,
+                                             state: addr.state,
+                                             zipcode: addr.zipcode))
+  end
+
   private
 
   def strip_non_numeric_values

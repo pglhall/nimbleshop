@@ -1,7 +1,7 @@
 <%= render 'authorize_net_instructions' %>
 
 <div class='well'>
-  <%= form_for @creditcard, url: '/creditcard_payments' do |f| %>
+  <%= form_for @creditcard, payment_processors_path do |f| %>
 
     <div class='clearfix'>
       <div class='input'>
