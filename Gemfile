@@ -40,8 +40,8 @@ group :test do
   gem 'guard-minitest'
   gem 'minitest-rails'
   gem 'factory_girl_rails'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-  gem "capybara_minitest_spec", path: "vendor/gems/capybara_minitest_spec"
+  gem "minitest-capybara", "~> 0.0.1", git: "git://github.com/clnclarinet/minitest-capybara.git"
+  gem 'database_cleaner'
 end
 
 # Gems used only for assets and not required

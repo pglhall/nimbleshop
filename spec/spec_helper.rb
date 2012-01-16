@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "minitest/rails"
+require 'minitest/capybara'
 
 require 'database_cleaner'
 
