@@ -12,9 +12,26 @@ class LineItem < ActiveRecord::Base
   validates_presence_of :product_id
   validates_numericality_of :quantity, minimum: 1
 
+  before_create :copy_product_attributes
+
+  alias_attribute :name, :product_name
+  alias_attribute :description, :product_description
+
   def price
-    self.product.price * self.quantity
+    self.product_price * self.quantity
   end
   alias_method :amount, :price
+
+  alias_attribute :name,  :product_name
+  alias_attribute :title, :product_name
+
+  private
+
+  def copy_product_attributes
+    self.product_name        = product.name
+    self.product_description = product.description
+    self.product_price       = product.price
+  end
+
 
 end

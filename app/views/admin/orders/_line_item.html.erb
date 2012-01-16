@@ -1,12 +1,11 @@
-<% product = line_item.product %>
 <tr>
   <td class="pic">
-    <%= link_to(image_tag(product.picture.picture_url(:thumb), alt: product.title), product) %>
+    <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.title), line_item.product) %>
   </td>
   <td>
-    <strong><%= link_to(product.title, product) %></strong>
+    <strong><%= link_to(line_item.title, line_item.product) %></strong>
   </td>
-  <td><%= number_to_currency(product.price) %></td>
+  <td><%= number_to_currency(line_item.product_price) %></td>
   <td> <%=line_item.quantity%> </td>
   <td><%= number_to_currency(line_item.price) %></td>
 </tr>

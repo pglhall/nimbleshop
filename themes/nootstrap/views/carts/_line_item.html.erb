@@ -1,20 +1,20 @@
-<% product = line_item.product %>
 <tr>
   <td class="pic">
-    <%= link_to(image_tag(product.picture.picture_url(:thumb), alt: line_item.product.title), line_item.product) %>
+    <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.title), line_item.product) %>
   </td>
   <td>
-    <strong><%= link_to(product.title, line_item.product) %></strong>
+    <strong><%= link_to(line_item.title, line_item.product) %></strong>
     <p>
-      <%= truncate(sanitize(product.description), length: 90) %>
+      <%= truncate(sanitize(line_item.description), length: 90) %>
     </p>
   </td>
-  <td><%= number_to_currency(product.price) %></td>
+  <td><%= number_to_currency(line_item.price) %></td>
   <td>
-    <input type="text" size="2" name="updates[<%=product.permalink%>]" id="updates_<%=product.permalink%>" class="quantity-field" value="<%=line_item.quantity%>"/>
-</td>
+    <%= text_field_tag "updates[#{line_item.product.permalink}]", line_item.quantity, size: 2,
+                                          id: "updates_#{line_item.product.permalink}", class: "quantity-field" %>
+  </td>
   <td class="remove">
-    <%= link_to 'Remove', '#', class: 'remove-item', 'data-permalink' => product.permalink %>
+    <%= link_to 'Remove', '#', class: 'remove-item', 'data-permalink' => line_item.product.permalink %>
   </td>
   <td><strong><%= number_to_currency(line_item.price) %></strong></td>
 </tr>
