@@ -1,15 +1,15 @@
 module PaymentMethodHelper
 
   def paypal_website_payments_standard_enabled?
-    PaymentMethod.find_by_permalink('paypal-website-payments-standard').enabled
+    PaymentMethod.find_by_permalink('paypal-website-payments-standard').try(:enabled)
   end
 
   def authorize_net_enabled?
-    PaymentMethod.find_by_permalink('authorize-net').enabled
+    PaymentMethod.find_by_permalink('authorize-net').try(:enabled)
   end
 
   def splitable_enabled?
-    PaymentMethod.find_by_permalink('splitable').enabled
+    PaymentMethod.find_by_permalink('splitable').try(:enabled)
   end
 
   def build_payment_method_tabs

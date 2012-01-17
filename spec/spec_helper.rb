@@ -6,17 +6,25 @@ require 'database_cleaner'
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+require 'capybara/rails'
 
 # Do not change to :transaction since :truncation is much faster.
 DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
+
   # Add methods to be used by all specs here...
   before :each do
-    Factory(:shop)
     DatabaseCleaner.clean
+
+    create(:shop)
+    create(:link_group, permalink: 'shop-by-category')
+    create(:link_group, permalink: 'shop-by-price')
   end
+
+  include Rails.application.routes.url_helpers
+  include Capybara::DSL
 end
 
 # Uncomment to support fixtures in Model tests...
