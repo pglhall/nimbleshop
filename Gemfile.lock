@@ -13,6 +13,12 @@ GIT
       activemodel
 
 GIT
+  remote: git://github.com/jim/carmen.git
+  revision: 9057b5f5ca35f215a19a4a9a50195997e4cbb06c
+  specs:
+    carmen (1.0.0.pre)
+
+GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: edd4283edfe702674a4caa4b8278f3c2f4750e7d
   specs:
@@ -220,6 +226,7 @@ DEPENDENCIES
   binary_merchant!
   capybara!
   capybara_minitest_spec
+  carmen!
   carrierwave
   coffee-rails (~> 3.1.1)
   database_cleaner

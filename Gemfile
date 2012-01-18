@@ -72,3 +72,4 @@ gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 #
 #  I can't use open-struct because that does not list all the keys
 gem 'hashr'
+gem 'carmen', git: 'git://github.com/jim/carmen.git'
