@@ -16,7 +16,7 @@ class PaymentMethod < ActiveRecord::Base
 
   after_initialize :set_data_instance_variables
 
-  def self.load_default
+  def self.load_default!
     if count > 0
       raise "Only load into empty db"
     end
