@@ -15,14 +15,13 @@ module BuildPermalink
 
   included do
     before_create :set_permalink
+    class_inheritable_accessor :permalink_options
+    self.permalink_options = {}
   end
 
   module ClassMethods
     def build_permalink(options = {})
-      unless respond_to?(:max_rating)
-        class_inheritable_accessor :permalink_options
-        self.permalink_options = options
-      end
+      self.permalink_options = options
     end
   end
 

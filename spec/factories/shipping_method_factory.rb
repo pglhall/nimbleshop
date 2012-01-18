@@ -4,6 +4,6 @@ FactoryGirl.define do
     lower_price_limit 10
     upper_price_limit 10
     shipping_price    10
-    shipping_zone
+    association :shipping_zone, :factory => :region_shipping_zone
   end
 end

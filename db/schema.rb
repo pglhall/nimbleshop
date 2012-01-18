@@ -253,14 +253,15 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   end
 
   create_table "shipping_zones", :force => true do |t|
-    t.string   "name",         :null => false
-    t.string   "permalink",    :null => false
-    t.string   "country_code", :null => false
+    t.string   "name"
+    t.string   "permalink",                :null => false
+    t.string   "carmen_code"
+    t.string   "type",                     :null => false
+    t.integer  "country_shipping_zone_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "shipping_zones", ["name"], :name => "index_shipping_zones_on_name", :unique => true
   add_index "shipping_zones", ["permalink"], :name => "index_shipping_zones_on_permalink", :unique => true
 
   create_table "shops", :force => true do |t|
