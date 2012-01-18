@@ -21,6 +21,7 @@ class MiniTest::Spec
     create(:shop)
     create(:link_group, permalink: 'shop-by-category')
     create(:link_group, permalink: 'shop-by-price')
+    PaymentMethod.load_default
   end
 
   include Rails.application.routes.url_helpers

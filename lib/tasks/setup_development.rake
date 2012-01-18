@@ -70,26 +70,7 @@ task :setup_development => :environment do
 
   product12 = Product.create!(title: "Men bracelet", price: 32, description: 'tbd')
 
-  payment_method = PaymentMethod::Splitable.find_by_permalink!('splitable')
-  payment_method.write_preference(:api_secret, 'AGT568GKLRW39S')
-  payment_method.write_preference(:expires_in, '24')
-  payment_method.write_preference(:submission_url, 'http://lvh.me:3000/split_payments/split?')
-  payment_method.write_preference(:logo_url, 'http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png')
-  payment_method.write_preference(:api_key, '42398cc9ac420bf4')
-  payment_method.save!
-
-  payment_method = PaymentMethod.find_by_permalink!('authorize-net')
-  payment_method.write_preference(:login_id, '56yBAar72')
-  payment_method.write_preference(:transaction_key, '9r3pbH5bnKH29f7d')
-  payment_method.write_preference(:company_name_on_creditcard_statement, 'chickscorner LLC')
-  payment_method.save!
-
-  payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')
-  payment_method.write_preference(:merchant_email_address, 'seller_1323037155_biz@bigbinary.com')
-  payment_method.write_preference(:return_url, 'http://localhost:3000/paypal_return')
-  payment_method.write_preference(:notify_url, 'http://localhost:3000/payment_notifications/paypal')
-  payment_method.write_preference(:request_submission_url, 'https://www.sandbox.paypal.com/cgi-bin/webscr?')
-  payment_method.save!
+  PaymentMethod.load_default!
 
   shop = Shop.create!( name: 'chickscorner',
                        theme: 'nootstrap',

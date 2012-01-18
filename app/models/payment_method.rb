@@ -16,6 +16,31 @@ class PaymentMethod < ActiveRecord::Base
 
   after_initialize :set_data_instance_variables
 
+  def self.load_default
+    if count > 0
+      raise "Only load into empty db"
+    end
+
+    file  = File.join(Rails.root, 'config', 'payment.yml')
+    config = YAML::load(ERB.new(IO.read(file)).result)[Rails.env]
+
+    config.each_pair do | payment_method_name, preferences |
+      attributes = { 
+        name: preferences.delete("name"), 
+        description: preferences.delete("description") 
+      }
+    
+      payment_klass = const_get(payment_method_name.classify)
+
+      instance = payment_klass.create!(attributes)
+
+      preferences.each_pair do | preference, value |
+        instance.write_preference(preference.to_sym, value)
+      end
+      instance.save
+    end
+  end
+
   private
 
   def set_data
