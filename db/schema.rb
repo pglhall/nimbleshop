@@ -253,9 +253,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   end
 
   create_table "shipping_zones", :force => true do |t|
-    t.string   "name",          :null => false
-    t.string   "permalink",     :null => false
-    t.string   "shipping_code", :null => false
+    t.string   "name",         :null => false
+    t.string   "permalink",    :null => false
+    t.string   "country_code", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

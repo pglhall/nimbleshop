@@ -3,5 +3,6 @@ class ShippingZone < ActiveRecord::Base
 
   has_many :shipping_methods, dependent: :destroy, conditions: { active: true }
 
-  validates_presence_of :name
+  validates :name,         presence: true
+  validates :country_code, presence: true, carmen_country_code: true
 end
