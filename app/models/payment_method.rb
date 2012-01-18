@@ -25,11 +25,11 @@ class PaymentMethod < ActiveRecord::Base
     config = YAML::load(ERB.new(IO.read(file)).result)[Rails.env]
 
     config.each_pair do | payment_method_name, preferences |
-      attributes = { 
-        name: preferences.delete("name"), 
-        description: preferences.delete("description") 
+      attributes = {
+        name: preferences.delete("name"),
+        description: preferences.delete("description")
       }
-    
+
       payment_klass = const_get(payment_method_name.classify)
 
       instance = payment_klass.create!(attributes)
