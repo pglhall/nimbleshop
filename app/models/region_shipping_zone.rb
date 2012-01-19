@@ -1,4 +1,5 @@
 class RegionShippingZone < ShippingZone
+
   belongs_to :country_shipping_zone
 
   validates :carmen_code, carmen_region_code: true
