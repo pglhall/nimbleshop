@@ -1,17 +1,14 @@
 class ShippingMethod < ActiveRecord::Base
 
-  alias_attribute :higher_price_limit, :upper_price_limit
+  alias_attribute :higher_price_limit,  :upper_price_limit
+  alias_attribute :shipping_cost,       :shipping_price
 
   belongs_to :shipping_zone
 
+  validates_presence_of     :lower_price_limit, :shipping_price, :name
+  validates_numericality_of :lower_price_limit, less_than: :higher_price_limit, allow_nil: true
+
   scope :active, where(active: true)
-
-  validates :lower_price_limit, presence: true
-  validates :shipping_price,    presence: true
-  validates :name,              presence: true
-  validate :lower_price_limit_should_be_lower_than_higher_price_limit
-
-  alias_attribute :shipping_cost, :shipping_price
 
   # indicates if the shipping method is available for the given order
   def available_for(order)
@@ -21,11 +18,4 @@ class ShippingMethod < ActiveRecord::Base
       order.amount >= lower_price_limit
     end
   end
-
-  def lower_price_limit_should_be_lower_than_higher_price_limit
-    if higher_price_limit.present? && (lower_price_limit > higher_price_limit)
-      self.errors.add(:lower_price_limit, 'Lower price limit should be lower than higher price limit')
-    end
-  end
-
 end
