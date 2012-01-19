@@ -234,13 +234,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.datetime "updated_at"
   end
 
-  create_table "shipping_countries", :force => true do |t|
-    t.integer  "shipping_zone_id", :null => false
-    t.integer  "country_code",     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "shipping_methods", :force => true do |t|
     t.integer  "shipping_zone_id",                                                  :null => false
     t.string   "name",                                                              :null => false
