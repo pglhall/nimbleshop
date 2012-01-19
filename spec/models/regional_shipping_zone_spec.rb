@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe RegionShippingZone do
+describe RegionalShippingZone do
   describe "#validations" do
 
     it "allows valid state code" do
       country = CountryShippingZone.new(carmen_code: 'US') 
-      region  = RegionShippingZone.new(carmen_code: 'AL')
+      region  = RegionalShippingZone.new(carmen_code: 'AL')
 
       region.country_shipping_zone = country
 
@@ -16,7 +16,7 @@ describe RegionShippingZone do
 
     it "will not allow invalid state code" do
       country = CountryShippingZone.new(carmen_code: 'CA') 
-      region  = RegionShippingZone.new(carmen_code: 'AL')
+      region  = RegionalShippingZone.new(carmen_code: 'AL')
 
       region.country_shipping_zone = country
 

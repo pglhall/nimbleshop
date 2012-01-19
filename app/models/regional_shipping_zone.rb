@@ -1,4 +1,4 @@
-class RegionShippingZone < ShippingZone
+class RegionalShippingZone < ShippingZone
 
   belongs_to :country_shipping_zone
 

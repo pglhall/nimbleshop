@@ -30,14 +30,14 @@ describe CountryShippingZone do
       canada  = CountryShippingZone.create(carmen_code: 'CA', name: 'Canada')
       regions = Carmen::Country.coded("CA").subregions
 
-      canada.region_shipping_zones.length.must_equal regions.length
+      canada.regional_shipping_zones.length.must_equal regions.length
     end
 
     it "should create all regions from usa" do
       usa     = CountryShippingZone.create(carmen_code: 'US', name: 'USA')
       regions = Carmen::Country.coded("US").subregions
 
-      usa.region_shipping_zones.length.must_equal regions.length
+      usa.regional_shipping_zones.length.must_equal regions.length
     end
   end
 

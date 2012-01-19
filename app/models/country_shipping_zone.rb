@@ -1,6 +1,6 @@
 class CountryShippingZone < ShippingZone
 
-  has_many  :region_shipping_zones do
+  has_many  :regional_shipping_zones do
     def create_by_carmen(carmen)
       create(name: carmen.name, carmen_code: carmen.code)
     end
@@ -25,7 +25,9 @@ class CountryShippingZone < ShippingZone
 
   private
 
-    def create_regions
-      country_code.subregions.each { | r | region_shipping_zones.create_by_carmen(r) }
+  def create_regions
+    country_code.subregions.each do | r | 
+      regional_shipping_zones.create_by_carmen(r)
     end
+  end
 end
