@@ -45,7 +45,9 @@ describe CountryShippingZone do
     it "should create by carmen code" do
       zone    = CountryShippingZone.create_by_carmen_code('US')
       country = Carmen::Country.coded("US")
+      
       zone.name.must_equal country.name
+      zone.must_be(:persisted?)
     end
 
     it "should return nil for invalid carmen code" do

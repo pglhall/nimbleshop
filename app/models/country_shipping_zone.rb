@@ -20,7 +20,11 @@ class CountryShippingZone < ShippingZone
 
   def self.create_by_carmen_code(carmen_code)
     country = to_carmen_country(carmen_code)
-    country && create(name: country.name, code: country.code)
+    country && create(name: country.name, code: carmen_code)
+  end
+
+  def country?
+    true
   end
 
   private
