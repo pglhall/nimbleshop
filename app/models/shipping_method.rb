@@ -6,7 +6,9 @@ class ShippingMethod < ActiveRecord::Base
   belongs_to :shipping_zone
 
   validates_presence_of     :lower_price_limit, :shipping_price, :name
-  validates_numericality_of :lower_price_limit, less_than: :higher_price_limit, allow_nil: true
+  validates_numericality_of :lower_price_limit, less_than: :higher_price_limit, 
+                                                if: :higher_price_limit,
+                                                allow_nil: true
 
   scope :active, where(active: true)
 

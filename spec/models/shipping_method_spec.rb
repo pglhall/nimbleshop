@@ -17,6 +17,14 @@ describe ShippingMethod do
   describe "#validations" do
     let(:shipping) { ShippingMethod.new(higher_price_limit: 20) }
 
+    it "allow highter price value nil" do
+      shipping.higher_price_limit = nil
+      shipping.lower_price_limit  = 45 
+      shipping.valid?
+
+      shipping.errors[:lower_price_limit].must_be(:empty?)
+    end
+
     it "wont allow lower price value greater than higher price" do
       shipping.lower_price_limit = 45 
       shipping.valid?
