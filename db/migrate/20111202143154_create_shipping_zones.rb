@@ -3,7 +3,7 @@ class CreateShippingZones < ActiveRecord::Migration
     create_table :shipping_zones do |t|
       t.string  :name
       t.string  :permalink,     null: false
-      t.string  :carmen_code
+      t.string  :code
       t.string  :type,          null: false
 
       t.integer :country_shipping_zone_id
