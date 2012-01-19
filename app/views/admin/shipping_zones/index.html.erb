@@ -19,7 +19,7 @@
           |
           <%= link_to t(:edit), edit_admin_shipping_zone_path(shipping_zone) %>
           |
-          <%= link_to t(:delete), [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete' %>
+          <%= link_to t(:delete), admin_shipping_zone_path(shipping_zone), confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete' %>
         </th>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
           <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
           <td> <%= number_to_currency(shipping_method.shipping_price) %> </td>
           <td>
-            <%= link_to t(:delete), [:admin, shipping_method.shipping_zone, shipping_method], confirm: t(:delete_confirmation_for_shipping_method), method: 'delete' %>
+            <%= link_to t(:delete), admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method), confirm: t(:delete_confirmation_for_shipping_method), method: 'delete' %>
           </td>
         </tr>
       <% end %>
