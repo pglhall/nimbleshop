@@ -12,3 +12,6 @@
 //= require mustache
 //= require condition
 //= require shipit
+//= require jquery-form
+//= require ajaxify-price-variant-form
+//= require enable_disable_price_variant

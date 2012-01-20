@@ -43,8 +43,8 @@
       </div>
 
       <input type="hidden" name="permalink" value="<%= @product.permalink %>" />
-			<div id="buy" class="clear">
-				<input type="submit" value="Add to Cart" class='btn primary' />
+      <div id="buy" class="clear">
+        <%= submit_tag 'Add to cart', class: 'btn primary', id: 'add-to-cart' %>
 			</div>
     <% end %>
 

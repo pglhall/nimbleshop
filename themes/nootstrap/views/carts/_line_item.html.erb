@@ -3,12 +3,15 @@
     <%= link_to(image_tag(line_item.product.picture.picture_url(:thumb), alt: line_item.title), line_item.product) %>
   </td>
   <td>
-    <strong><%= link_to(line_item.title, line_item.product) %></strong>
+    <strong>
+      <%= link_to(line_item.title, line_item.product) %>
+      <%= display_variant_info(line_item) %>
+    </strong>
     <p>
       <%= truncate(sanitize(line_item.description), length: 90) %>
     </p>
   </td>
-  <td><%= number_to_currency(line_item.price) %></td>
+  <td><%= number_to_currency(line_item.product_price) %></td>
   <td>
     <%= text_field_tag "updates[#{line_item.product.permalink}]", line_item.quantity, size: 2,
                                           id: "updates_#{line_item.product.permalink}", class: "quantity-field" %>

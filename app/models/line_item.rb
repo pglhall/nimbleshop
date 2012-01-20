@@ -6,12 +6,15 @@ class LineItem < ActiveRecord::Base
   # instead used the attributes copied from product to line_item
   belongs_to :product
 
+  belongs_to :variant
+
   belongs_to :order
 
   validates_presence_of :order_id
   validates_presence_of :product_id
   validates_numericality_of :quantity, minimum: 1
 
+  before_create :set_variant_info
   before_create :copy_product_attributes
 
   alias_attribute :name, :product_name
@@ -27,10 +30,14 @@ class LineItem < ActiveRecord::Base
 
   private
 
+  def set_variant_info
+    self.variant_info = variant.info if variant
+  end
+
   def copy_product_attributes
     self.product_name        = product.name
     self.product_description = product.description
-    self.product_price       = product.price
+    self.product_price       = variant ? variant.price : product.price
   end
 
 

@@ -38,9 +38,10 @@ task :setup_development => :environment do
   Rake::Task["ns:load_data"].invoke
 
   product4 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
+  product4.update_attributes!(variants_enabled: true)
 
-  product4.variations.find_by_variation_type('variation1').update_attributes!(label: 'Color', default_value: 'Black')
-  product4.variations.find_by_variation_type('variation2').update_attributes!(label: 'Size', default_value: 'Medium')
+  product4.variation3.update_attributes!(active: false)
+  product4 = Product.first
 
   product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Small',  price: 11)
   product4.variants.create!(variation1_value: 'White',  variation2_value: 'Small',  price: 111)

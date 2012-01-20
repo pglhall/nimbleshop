@@ -1,11 +1,16 @@
-require 'ostruct'
 require 'yaml'
 
-file            = "#{Rails.root}/config/application.yml"
-yaml            = YAML.load(ERB.new(File.read(file)).result)
-appconfig       = OpenStruct.new(yaml)
-env_config      = appconfig.send(Rails.env) rescue nil
+file            = Rails.root.join('config', 'application.yml')
+hash            = YAML.load(ERB.new(File.read(file)).result)
 
-appconfig.common.update(env_config) unless env_config.nil?
+# I am not using openstruct because it does not have each_pair method.
+common_hash = hash['common'] || {}
+env_hash = hash[Rails.env.to_s] || {}
 
-Settings       = OpenStruct.new(appconfig.common)
+Settings = common_hash.merge(env_hash)
+
+class << Settings
+  def method_missing m
+    self[m.to_s]
+  end
+end

@@ -4,9 +4,13 @@ class Product < ActiveRecord::Base
 
   include BuildPermalink
 
-  has_many :variations
+  has_many :variations, order: "variation_type asc"
+
   has_many :variants
+  accepts_nested_attributes_for :variants, allow_destroy: true
+
   has_many :pictures
+  accepts_nested_attributes_for :pictures, allow_destroy: true
 
   has_many :custom_field_answers do
     def for(custom_field_name)
@@ -15,8 +19,6 @@ class Product < ActiveRecord::Base
       where(['custom_field_answers.custom_field_id = ?', custom_field.id]).limit(1).try(:first)
     end
   end
-
-  accepts_nested_attributes_for :pictures, allow_destroy: true
   accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
 
   scope :with_prictures, includes: 'pictures'
@@ -25,6 +27,25 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price
 
   after_create :create_variation_records
+
+  def variation1
+    self.variations.find_by_variation_type('variation1')
+  end
+  def variation2
+    self.variations.find_by_variation_type('variation2')
+  end
+  def variation3
+    self.variations.find_by_variation_type('variation3')
+  end
+
+  def update_variation_names(params)
+    %w(variation1 variation2 variation3).each do |v|
+      key = "#{v}_value".intern
+      if params[key].present?
+        self.variations.find_by_variation_type(v).update_attributes(name: params[key])
+      end
+    end
+  end
 
   def picture
     pictures.first
@@ -49,9 +70,9 @@ class Product < ActiveRecord::Base
   end
 
   def create_variation_records
-    self.variations.create!(variation_type: 'variation1')
-    self.variations.create!(variation_type: 'variation2')
-    self.variations.create!(variation_type: 'variation3')
+    self.variations.create!(variation_type: 'variation1', name: 'Color')
+    self.variations.create!(variation_type: 'variation2', name: 'Size')
+    self.variations.create!(variation_type: 'variation3', name: 'Material')
   end
 
   def variant_price_data

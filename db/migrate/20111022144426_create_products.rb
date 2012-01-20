@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.text    :description
       t.decimal :price,             null: false, precision: 8, scale: 2
       t.boolean :new,               null: false, default: false
+      t.boolean :variants_enabled,  null: false, default: false
       t.string  :permalink,         null: false
       t.timestamps
     end

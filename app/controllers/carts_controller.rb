@@ -10,7 +10,14 @@ class CartsController < ApplicationController
   def add
     product = Product.find_by_permalink!(params[:permalink])
     session[:order_id] = Order.create!.id unless current_order
-    current_order.add(product)
+    record = Variant.record_for_given_variations(params[:variation1_value],
+                                                 params[:variation2_value],
+                                                 params[:variation3_value])
+    if record
+      current_order.add(product, record)
+    else
+      current_order.add(product)
+    end
     redirect_to cart_url
   end
 

@@ -2,6 +2,11 @@ class PaymentProcessorsController < ApplicationController
 
   theme :theme_resolver, only: [:new, :create]
 
+  # TODO if Authorize.net is not used then there is no need to force_ssl
+  force_ssl :if => lambda { |controller|
+    Rails.env.production? || Rails.env.staging?
+  }
+
   def new
     # If there is only one payment method enabled and that payment method
     # splitable or paypal then just redirect to that page

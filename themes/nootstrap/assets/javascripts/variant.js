@@ -8,6 +8,7 @@ $(function(){
         key             = '',
         $productShowVariantPriceData = $('#product-show-variant-price-data'),
         $productPrice   = $('#product-price'),
+        $addToCart      = $('#add-to-cart'),
         newPrice;
 
      if (!(variation1Value === undefined)) {
@@ -23,7 +24,15 @@ $(function(){
      }
 
      newPrice = $productShowVariantPriceData.data('fields')[key];
-     $productPrice.text(accounting.formatMoney(newPrice));
+     console.log(newPrice);
+     if (newPrice) {
+      $productPrice.text(accounting.formatMoney(newPrice));
+      $addToCart.removeClass('disabled').removeAttr('disabled');
+     } else {
+      $productPrice.text('Not available');
+      $addToCart.addClass('disabled').attr('disabled', 'disabled');
+     }
+
      $productPrice.effect("highlight", {}, 1000);
 
   });

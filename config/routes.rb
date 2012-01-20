@@ -17,7 +17,11 @@ Nimbleshop::Application.routes.draw do
       resources :shipping_methods
     end
     resource  :payment_gateway
-    resources :products
+    resources :products do
+      member do
+        put 'variants'
+      end
+    end
     resources :product_groups
     resources :custom_fields
     resources :link_groups do

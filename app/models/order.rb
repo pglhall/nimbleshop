@@ -81,9 +81,13 @@ class Order < ActiveRecord::Base
 
   alias_method :items, :line_items
 
-  def add(product)
-    return if self.products.include?(product)
-    self.line_items.create!(product: product, quantity: 1)
+  def add(product, variant = nil)
+    if variant
+      return if self.line_items.find_by_product_id_and_variant_id(product.id, variant.id)
+    else
+      return if self.products.include?(product)
+    end
+    self.line_items.create!(product: product, quantity: 1, variant: variant)
     self.update_attributes(status: 'added_to_cart')
   end
 

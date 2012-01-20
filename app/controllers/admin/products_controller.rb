@@ -1,12 +1,29 @@
 class Admin::ProductsController < AdminController
 
-  before_filter :load_product, only: [:show, :edit, :update, :destroy ]
+  before_filter :load_product, only: [:show, :edit, :update, :destroy, :variants ]
 
-  respond_to :html
+  def variants
+    # update variation name event if the variant data is invalid
+    @product.update_variation_names(params)
+    Product.transaction do
+      #handle_active_operation
+      @result = @product.update_attributes(params[:product])
+    end
+
+    respond_to do |format|
+      format.html do
+        if @result
+          render json: {success: 'done'}
+        else
+          render json: {error: @product.errors.full_messages}
+        end
+      end
+    end
+  end
 
   def index
-    @products = Product.order(:name)
-    respond_with @products
+    @products = Product.order(:id)
+    #respond_with @products
   end
 
   def show

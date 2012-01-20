@@ -6,7 +6,8 @@ class Variation < ActiveRecord::Base
 
   belongs_to :product
 
-  scope :active, where("name is NOT null")
+  scope :active, where(active: true)
+  scope :not_active, where(active: false)
 
   def content_for_select_options
     content

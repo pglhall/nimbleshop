@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "line_items", :force => true do |t|
     t.integer  "order_id",                                          :null => false
     t.integer  "product_id",                                        :null => false
+    t.integer  "variant_id"
+    t.string   "variant_info"
     t.integer  "quantity",                                          :null => false
     t.string   "product_name",                                      :null => false
     t.text     "product_description"
@@ -82,7 +84,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.datetime "updated_at"
   end
 
-  add_index "line_items", ["order_id", "product_id"], :name => "index_line_items_on_order_id_and_product_id", :unique => true
+  add_index "line_items", ["product_id", "variant_id"], :name => "line_items_product_id_variant_id_idx", :unique => true
+  add_index "line_items", ["product_id"], :name => "line_items_product_id_variant_id_null_idx", :unique => true
 
   create_table "link_groups", :force => true do |t|
     t.string   "name",       :null => false
@@ -203,11 +206,12 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   add_index "product_groups", ["permalink"], :name => "index_product_groups_on_permalink", :unique => true
 
   create_table "products", :force => true do |t|
-    t.string   "name",                                                         :null => false
+    t.string   "name",                                                              :null => false
     t.text     "description"
-    t.decimal  "price",       :precision => 8, :scale => 2,                    :null => false
-    t.boolean  "new",                                       :default => false, :null => false
-    t.string   "permalink",                                                    :null => false
+    t.decimal  "price",            :precision => 8, :scale => 2,                    :null => false
+    t.boolean  "new",                                            :default => false, :null => false
+    t.boolean  "variants_enabled",                               :default => false, :null => false
+    t.string   "permalink",                                                         :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -290,11 +294,10 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
 
   create_table "variations", :force => true do |t|
     t.integer  "product_id"
-    t.string   "name"
-    t.string   "default_value"
-    t.integer  "position",       :default => 1
+    t.string   "name",                             :null => false
     t.text     "content"
-    t.text     "variation_type",                :null => false
+    t.text     "variation_type",                   :null => false
+    t.boolean  "active",         :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
