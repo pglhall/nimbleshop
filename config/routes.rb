@@ -13,6 +13,11 @@ Nimbleshop::Application.routes.draw do
     resources :orders do
       resources :shipments
     end
+
+    resources :country_shipping_zones, controller: :shipping_zones do
+      resources :shipping_methods
+    end
+
     resources :shipping_zones do
       resources :shipping_methods
     end
