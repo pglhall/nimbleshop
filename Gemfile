@@ -37,6 +37,7 @@ group :test do
   gem 'growl'
   gem 'rb-fsevent'
   gem 'guard'
+  gem 'minitest', '~> 2.10.1'
   gem 'guard-minitest'
   gem 'minitest-rails'
   gem 'factory_girl_rails'
