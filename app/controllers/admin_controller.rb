@@ -17,5 +17,4 @@ class AdminController < ApplicationController
   def set_timezone
     Time.zone = @shop.time_zone
   end
-
 end

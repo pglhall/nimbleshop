@@ -13,6 +13,8 @@ DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
+  include Capybara::DSL
+  include AdminHelper
 
   # Add methods to be used by all specs here...
   before :each do

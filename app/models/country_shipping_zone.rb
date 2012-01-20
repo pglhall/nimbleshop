@@ -6,6 +6,8 @@ class CountryShippingZone < ShippingZone
     end
   end
 
+  before_validation :assign_name, unless: :name, if: :code
+
   validates :code, presence: true, carmen_country_code: true
 
   after_create :create_regions
@@ -27,11 +29,20 @@ class CountryShippingZone < ShippingZone
     true
   end
 
+
   private
 
   def create_regions
     country_code.subregions.each do | r | 
       regional_shipping_zones.create_by_carmen(r)
+    end
+  end
+
+  def assign_name
+    @_country_code = nil
+
+    if country_code
+      self.name = country_code.name
     end
   end
 end
