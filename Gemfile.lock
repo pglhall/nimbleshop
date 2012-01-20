@@ -73,6 +73,7 @@ GEM
       activesupport (= 3.1.1)
     activesupport (3.1.1)
       multi_json (~> 1.0)
+    addressable (2.2.6)
     admin_data (1.1.16)
       will_paginate (>= 3.0.0)
     archive-tar-minitar (0.5.2)
@@ -119,6 +120,8 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.5)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     mail (2.3.0)
@@ -225,6 +228,7 @@ DEPENDENCIES
   guard
   guard-minitest
   jquery-rails
+  launchy
   mini_magick
   minitest-rails
   mustache

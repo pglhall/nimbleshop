@@ -19,8 +19,8 @@ class MiniTest::Spec
     DatabaseCleaner.clean
 
     create(:shop)
-    create(:link_group, permalink: 'shop-by-category')
-    create(:link_group, permalink: 'shop-by-price')
+    create(:link_group, name: "Shop by category", permalink: 'shop-by-category')
+    create(:link_group, name: "Shop by price", permalink: 'shop-by-price')
     PaymentMethod.load_default!
   end
 
