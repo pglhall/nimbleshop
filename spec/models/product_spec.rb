@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe Product do
 
+  it 'should create a default picture record' do
+    product = create(:product)
+    product.pictures.size.must_equal 1
+  end
+
   it "needs alias title" do
-    product = Product.new(name: 'welcome') 
+    product = Product.new(name: 'welcome')
     product.title.must_equal 'welcome'
   end
 
