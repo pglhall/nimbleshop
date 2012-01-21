@@ -7,6 +7,8 @@ class AdminController < ApplicationController
   private
 
   def authenticate
+    #TODO remove the next line
+    return false if Rails.env.test?
     authenticate_or_request_with_http_basic do |username, password|
       username == "admin" && password == Settings.http_basic_authentication_password
     end
