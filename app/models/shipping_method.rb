@@ -26,21 +26,17 @@ class ShippingMethod < ActiveRecord::Base
   end
 
   def create_regional
-    if shipping_zone.country?
+    if shipping_zone.regions?
       shipping_zone.regional_shipping_zones.each do | zone |
-        copy_attributes = %w( 
-                              lower_price_limit 
-                              upper_price_limit 
-                              shipping_price 
-                              name
-                            )
-
-        zone_attributes = attributes.slice(*copy_attributes)
-
-        zone_attributes.update(shipping_zone: zone)
-
-        ShippingMethod.create(zone_attributes)
+        clone_for_region.tap { |t| t.shipping_zone = zone }.save
       end
     end
+  end
+
+  private
+
+  def clone_for_region
+    copy_attributes = %w(lower_price_limit upper_price_limit shipping_price name)
+    ShippingMethod.new(attributes.slice(*copy_attributes))
   end
 end

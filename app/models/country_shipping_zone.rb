@@ -25,11 +25,6 @@ class CountryShippingZone < ShippingZone
     country && create(name: country.name, code: carmen_code)
   end
 
-  def country?
-    true
-  end
-
-
   private
 
   def create_regions
