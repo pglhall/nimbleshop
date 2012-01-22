@@ -65,3 +65,10 @@ gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.g
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 
+# to make settings more flexible. Without hashr the code would be like this
+#  Settings.s3['bucket_name']
+# with hashr it becomes
+#  Settings.s3.bucket_name
+#
+#  I can't use open-struct because that does not list all the keys
+gem 'hashr'

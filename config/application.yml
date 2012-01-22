@@ -1,6 +1,6 @@
 # Usage
 #
-# Settings.s3['bucket_name']
+# Settings.s3.bucket_name
 #
 common:
   s3:

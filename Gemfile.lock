@@ -114,6 +114,7 @@ GEM
       thor (~> 0.14.6)
     guard-minitest (0.4.0)
       guard (~> 0.4)
+    hashr (0.0.19)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.19)
@@ -227,6 +228,7 @@ DEPENDENCIES
   growl
   guard
   guard-minitest
+  hashr
   jquery-rails
   launchy
   mini_magick
