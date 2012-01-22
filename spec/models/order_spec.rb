@@ -1,21 +1,6 @@
 require 'spec_helper'
 
 describe Order do
-  describe 'line_item should copy product attributes' do
-    let(:order) { create(:order) }
-    before do
-      product = create(:product, name: 'n1', description: 'desc1', price: 10)
-      order.add(product)
-      product.update_attributes!(name: 'n2', description: 'desc2', price: 11)
-    end
-    it '' do
-      line_item = order.line_items.first
-      line_item.price.must_equal 10
-      line_item.name.must_equal 'n1'
-      line_item.description.must_equal 'desc1'
-    end
-  end
-
   describe '#available_shipping_methods' do
     let(:order1)  { create(:order)  }
     let(:order2)  { create(:order)  }
