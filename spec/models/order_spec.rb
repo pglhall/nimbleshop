@@ -18,7 +18,7 @@ describe Order do
       shipping_method1
       shipping_method2
     end
-    it '' do
+    it 'should have right values' do
       order1.amount.must_equal 50
       order2.amount.must_equal 100
       order1.available_shipping_methods.map(&:id).must_equal [ shipping_method1.id]
