@@ -49,8 +49,3 @@ def create_authorizenet_payment_method
     payment_method.save!
   end
 end
-
-# These classes needed to be loaded so that they the preference method
-#PaymentMethod::Splitable
-#PaymentMethod::PaypalWebsitePaymentsStandard
-#PaymentMethod::AuthorizeNet

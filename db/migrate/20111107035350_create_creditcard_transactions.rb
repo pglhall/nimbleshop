@@ -1,12 +1,12 @@
-class CreateTransactions < ActiveRecord::Migration
+class CreateCreditcardTransactions < ActiveRecord::Migration
   def change
     create_table :creditcard_transactions do |t|
+      t.belongs_to :order,        null: false
       t.string  :transaction_gid, null: false
       t.text    :params,          null: false
       t.decimal :amount,          null: false, precision: 8, scale: 2
       t.integer :creditcard_id,   null: false
       t.boolean :active,          null: false, default: true
-      t.belongs_to :order,        null: false
       t.string  :status,          null: false
       t.integer :parent_id,       null: true
 
