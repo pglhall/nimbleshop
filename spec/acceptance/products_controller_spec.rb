@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe "products" do
-  include Capybara::DSL
+describe "products integration" do
 
   it "index page" do
     visit root_path

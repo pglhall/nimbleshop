@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-describe "product group" do
-  include Capybara::DSL
+describe "product group integration" do
 
   before do
-    Capybara.javascript_driver = :selenium
     Shop.destroy_all
     create(:shop, name: 'Nimble')
   end

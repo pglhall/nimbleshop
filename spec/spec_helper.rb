@@ -13,6 +13,7 @@ require "minitest/pride"
 require "capybara/rails"
 require 'database_cleaner'
 require "capybara-webkit"
+
 Capybara.default_driver = :webkit
 
 # Require ruby files in support dir.
