@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration
       t.boolean :new,               null: false, default: false
       t.boolean :variants_enabled,  null: false, default: false
       t.string  :permalink,         null: false
+
       t.timestamps
     end
     add_index :products, :permalink, unique: true

@@ -6,11 +6,9 @@ describe Variant do
     describe "all three variations active" do
       let(:product) { create(:product) }
       before do
-        @variant1 = product.variants.build(variation1_value: 'v1', variation2_value: 'v2',
-                                                                                      variation3_value: 'v3', price: 10)
+        @variant1 = create(:variant, product: product)
         @variant1.save!
-        @variant2 = product.variants.build(variation1_value: 'v1', variation2_value: 'v2',
-                                                                                      variation3_value: 'v3', price: 10)
+        @variant2 = build(:variant, product: product)
         @variant2.save
       end
       it 'should have error' do
@@ -21,9 +19,9 @@ describe Variant do
       let(:product) { create(:product) }
       before do
         product.variation3.update_attributes!(active: false)
-        @variant1 = product.variants.build(variation1_value: 'v1', variation2_value: 'v2', price: 10)
+        @variant1 = build(:variant, product: product)
         @variant1.save!
-        @variant2 = product.variants.build(variation1_value: 'v1', variation2_value: 'v2', price: 10)
+        @variant2 = build(:variant, product: product)
         @variant2.save
       end
       it 'should have error' do
@@ -35,9 +33,9 @@ describe Variant do
       before do
         product.variation2.update_attributes!(active: false)
         product.variation3.update_attributes!(active: false)
-        @variant1 = product.variants.build(variation1_value: 'v1', price: 10)
+        @variant1 = build(:variant, product: product)
         @variant1.save!
-        @variant2 = product.variants.build(variation1_value: 'v1', price: 10)
+        @variant2 = build(:variant, product: product)
         @variant2.save
       end
       it 'should have error' do
@@ -52,12 +50,11 @@ describe Variant do
     describe "all three variations active" do
       let(:product) { create(:product)    }
       before do
-        @variant1 = product.variants.build(variation1_value: nil, variation2_value: nil,
-                                                                                        variation3_value: nil, price: 10)
+        @variant1 = build(:variant, product: product, variation1_value: nil,
+                                                                            variation2_value: nil, variation3_value: nil)
         @variant1.save
 
-        @variant2 = product.variants.build(variation1_value: nil, variation2_value: nil, variation3_value: 'v3',
-                                                                                                              price: nil)
+        @variant2 = build(:variant, product: product, variation1_value: nil, variation2_value: nil, price: nil)
         @variant2.save
       end
       it '' do
@@ -72,12 +69,11 @@ describe Variant do
       let(:product) { create(:product)    }
       before do
         product.variation3.update_attributes!(active: false)
-        @variant1 = product.variants.build(variation1_value: nil, variation2_value: nil,
-                                                                                        variation3_value: nil, price: 10)
+        @variant1 = build(:variant, product: product, variation1_value: nil, variation2_value: nil,
+                                                                                                variation3_value: nil)
         @variant1.save
 
-        @variant2 = product.variants.build(variation1_value: 'v1', variation2_value: 'v2', variation3_value: 'v3',
-                                                                                                              price: 10)
+        @variant2 = build(:variant, product: product)
         @variant2.save
       end
       it '' do

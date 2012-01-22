@@ -45,9 +45,9 @@ class Variant < ActiveRecord::Base
     count = v.count
     if count > 0
       msg = []
-      msg << self.variation1_value
-      msg << self.variation2_value
-      msg << self.variation3_value
+      msg << self.variation1_value if product.variation1.active
+      msg << self.variation2_value if product.variation2.active
+      msg << self.variation3_value if product.variation3.active
       msg.compact!
       self.errors.add(:base, "Already a record exists for combination #{msg.to_sentence}")
     end

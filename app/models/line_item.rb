@@ -40,5 +40,4 @@ class LineItem < ActiveRecord::Base
     self.product_price       = variant ? variant.price : product.price
   end
 
-
 end

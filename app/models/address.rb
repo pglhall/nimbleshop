@@ -12,7 +12,7 @@ class Address < ActiveRecord::Base
   end
 
   def address_lines(join_chars = ', ')
-    [address1, address2].delete_if{|add| add.blank?}.join(join_chars)
+    [address1, address2].delete_if { |add| add.blank? }.join(join_chars)
   end
 
   def city_state_name

@@ -3,4 +3,3 @@ FactoryGirl.define do
     name 'Cash'
   end
 end
-

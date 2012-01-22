@@ -1,8 +1,13 @@
 require 'spec_helper'
 
 describe LineItem do
-  describe 'partial index' do
-    it 'should save record' do
+  describe 'variant present' do
+    let(:product) { create(:product, variants_enabled: true) }
+    let(:order) { create(:order) }
+    let(:variant) { create(:variant, product: product) }
+    before do
+      order.add(product, record)
+
     end
   end
 end
