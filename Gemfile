@@ -41,9 +41,10 @@ group :test do
   gem 'guard-minitest'
   gem 'minitest-rails'
   gem 'factory_girl_rails'
-  gem 'capybara', git: 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara'
   gem "capybara_minitest_spec"
   gem "launchy"
+  gem 'capybara-webkit'
 end
 
 # Gems used only for assets and not required

@@ -1,20 +1,28 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "minitest/rails"
+require 'bundler'
 
-require 'database_cleaner'
+Bundler.setup(:test)
 
 ENV["RAILS_ENV"] = "test"
+
 require File.expand_path('../../config/environment', __FILE__)
-require 'capybara/rails'
+
+require 'minitest/autorun'
+require 'minitest/spec'
+require "minitest/rails"
+require "minitest/pride"
+require "capybara/rails"
+require 'database_cleaner'
+require "capybara-webkit"
+Capybara.default_driver = :webkit
+
+# Require ruby files in support dir.
+Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 
 # Do not change to :transaction since :truncation is much faster.
 DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
-  include Capybara::DSL
-  include AdminHelper
 
   # Add methods to be used by all specs here...
   before :each do
@@ -25,23 +33,8 @@ class MiniTest::Spec
     create(:link_group, name: "Shop by price", permalink: 'shop-by-price')
     PaymentMethod.load_default!
   end
-
-  include Rails.application.routes.url_helpers
-  include Capybara::DSL
 end
 
-# Uncomment to support fixtures in Model tests...
-#require "active_record/fixtures"
-#class MiniTest::Rails::Model
-  #include ActiveRecord::TestFixtures
-  #self.fixture_path = File.join(Rails.root, "test", "fixtures")
-#end
-
-class Object
-  def must_be_like other
-    gsub(/\s+/, ' ').strip.must_equal other.gsub(/\s+/, ' ').strip
-  end
-end
 
 def create_authorizenet_payment_method
   unless PaymentMethod.find_by_permalink('authorize-net')

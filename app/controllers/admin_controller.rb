@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
   layout 'admin'
 
-  before_filter :authenticate
-  before_filter :set_timezone
+  #before_filter :authenticate
+  #before_filter :set_timezone
 
   private
 
