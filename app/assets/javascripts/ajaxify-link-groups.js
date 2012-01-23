@@ -1,7 +1,6 @@
-//= require jquery-ui
-$(document).ready(function() {
+$(function(){
 
-  var $link_group_dialog = $('#link-group-form').dialog({ 
+  var $linkGroupDialog = $('#link-group-form').dialog({ 
     autoOpen: false, 
     modal: true,
     draggable: false
@@ -9,12 +8,12 @@ $(document).ready(function() {
 
   $('#new-link-group').click(function(){
   	$("div#link-group-form").load("/admin/link_groups/new");
-    $link_group_dialog.dialog('open');
+    $linkGroupDialog.dialog('open');
   });
 
   $('a.edit-link-group').click(function(){
   	$("div#link-group-form").load("/admin/link_groups/" + $(this).attr('id') + "/edit");
-    $link_group_dialog.dialog('open');
+    $linkGroupDialog.dialog('open');
   });
 
 });
