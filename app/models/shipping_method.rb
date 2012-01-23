@@ -14,7 +14,7 @@ class ShippingMethod < ActiveRecord::Base
 
   scope :active, where(active: true)
 
-  after_create :create_regional
+  after_create :create_regional_shipping_methods, :if => :country?
 
   # indicates if the shipping method is available for the given order
   def available_for(order)
@@ -25,15 +25,25 @@ class ShippingMethod < ActiveRecord::Base
     end
   end
 
-  def create_regional
-    if shipping_zone.regions?
-      shipping_zone.regional_shipping_zones.each do | zone |
-        clone_for_region.tap { |t| t.shipping_zone = zone }.save
-      end
+  def effective_cost
+    if country?
+      shipping_price
+    else
+      shipping_price + offset
     end
   end
 
   private
+
+  def create_regional_shipping_methods
+    shipping_zone.regional_shipping_zones.each do | zone |
+      clone_for_region.tap { |t| t.shipping_zone = zone }.save
+    end
+  end
+
+  def country?
+    shipping_zone.regions?
+  end
 
   def clone_for_region
     copy_attributes = %w(lower_price_limit upper_price_limit shipping_price name)

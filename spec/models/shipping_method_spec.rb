@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ShippingMethod do
   describe "#available_for" do
     let(:shipping_method)  { create(:shipping_method, shipping_price: 100,
-                                                      lower_price_limit: 1,
-                                                      upper_price_limit: 99)  }
+                                    lower_price_limit: 1,
+                                    upper_price_limit: 99)  }
     let(:order)  { create(:order) }
     before do
       order.line_items << create(:line_item)
@@ -95,5 +95,23 @@ describe ShippingMethod do
       alabama_shipping_method.higher_price_limit.must_equal 44.5
       alabama_shipping_method.shipping_price.must_equal 24.5
     end
+  end
+
+  describe "#effective_cost" do
+    let(:shipping_method) { ShippingMethod.new(shipping_zone: zone, shipping_price: 20, offset: 0.20) } 
+    describe "for regional shipping zone" do
+      let(:zone) { RegionalShippingZone.new } 
+      it "is equal to shipping_price + offset " do
+        shipping_method.effective_cost.must_equal 20.20
+      end
+    end
+
+    describe "for country shipping zone" do
+      let(:zone) { CountryShippingZone.new } 
+      it "is equal to shipping_price " do
+        shipping_method.effective_cost.must_equal 20
+      end
+    end
+
   end
 end

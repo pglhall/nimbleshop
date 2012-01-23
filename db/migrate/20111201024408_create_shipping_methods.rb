@@ -8,6 +8,7 @@ class CreateShippingMethods < ActiveRecord::Migration
       t.decimal :shipping_price,    precision: 8, scale: 2
       t.decimal :offset,            precision: 8, scale: 2
       t.boolean :active,            default: true
+      t.integer :parent_id
 
       t.timestamps
     end

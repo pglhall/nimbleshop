@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.decimal  "shipping_price",    :precision => 8, :scale => 2
     t.decimal  "offset",            :precision => 8, :scale => 2
     t.boolean  "active",                                          :default => true
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
