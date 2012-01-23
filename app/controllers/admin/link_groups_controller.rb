@@ -4,9 +4,11 @@ class Admin::LinkGroupsController < AdminController
   before_filter :load_link_groups, only: [:index, :create, :edit ]
 
   def index
+    render
   end
 
   def show
+    render
   end
 
   def new
