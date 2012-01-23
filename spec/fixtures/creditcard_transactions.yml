@@ -1,0 +1,41 @@
+
+---
+creditcard_transactions:
+  columns:
+  - id
+  - order_id
+  - transaction_gid
+  - params
+  - amount
+  - creditcard_id
+  - active
+  - status
+  - parent_id
+  - created_at
+  - updated_at
+  records:
+  - - '1'
+    - '1'
+    - '2168375803'
+    - ! '---
+
+      response_code: 1
+
+      response_reason_code: ''1''
+
+      response_reason_text: This transaction has been approved.
+
+      avs_result_code: Y
+
+      transaction_id: ''2168375803''
+
+      card_code: P
+
+'
+    - '106.00'
+    - '1'
+    - true
+    - authorized
+    - !!null
+    - '2012-01-22 17:30:22.235534'
+    - '2012-01-22 17:30:22.235534'
