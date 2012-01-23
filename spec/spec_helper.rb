@@ -29,11 +29,11 @@ class MiniTest::Spec
 end
 
 # Uncomment to support fixtures in Model tests...
-# require "active_record/fixtures"
-class MiniTest::Rails::Model
-  # include ActiveRecord::TestFixtures
-  # self.fixture_path = File.join(Rails.root, "test", "fixtures")
-end
+#require "active_record/fixtures"
+#class MiniTest::Rails::Model
+  #include ActiveRecord::TestFixtures
+  #self.fixture_path = File.join(Rails.root, "test", "fixtures")
+#end
 
 class Object
   def must_be_like other
@@ -49,8 +49,3 @@ def create_authorizenet_payment_method
     payment_method.save!
   end
 end
-
-# These classes needed to be loaded so that they the preference method
-#PaymentMethod::Splitable
-#PaymentMethod::PaypalWebsitePaymentsStandard
-#PaymentMethod::AuthorizeNet
