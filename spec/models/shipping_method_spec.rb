@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe ShippingMethod do
   describe "#available_for" do
-    let(:shipping_method)  { create(:shipping_method, shipping_price: 100,
-                                    lower_price_limit: 1,
-                                    upper_price_limit: 99)  }
-    let(:order)  { create(:order) }
+    let(:shipping_method)  { create(:country_shipping_method) }
+    let(:order)            { create(:order) }
     before do
       order.line_items << create(:line_item)
     end
@@ -14,104 +12,125 @@ describe ShippingMethod do
     end
   end
 
-  describe "#validations" do
-    let(:shipping) { ShippingMethod.new(higher_price_limit: 20) }
+  describe "of country type" do
+    let(:shipping) { build(:country_shipping_method) }
 
-    it "allow highter price value nil" do
-      shipping.higher_price_limit = nil
-      shipping.lower_price_limit  = 45 
-      shipping.valid?
+    describe "#validations" do
 
-      shipping.errors[:lower_price_limit].must_be(:empty?)
-    end
+      it "allow highter price value nil" do
+        shipping.higher_price_limit = nil
+        shipping.lower_price_limit  = 45 
+        shipping.valid?
 
-    it "wont allow lower price value greater than higher price" do
-      shipping.lower_price_limit = 45 
-      shipping.valid?
+        shipping.errors[:lower_price_limit].must_be(:empty?)
+      end
 
-      shipping.errors[:lower_price_limit].wont_be(:empty?)
-    end
+      it "will allow offset to be nil" do
+        shipping.offset = nil
+        shipping.valid?
 
-    it "wont allow lower price value equal to higher price" do
-      shipping.lower_price_limit = 20
-      shipping.valid?
+        shipping.errors[:offset].must_be(:empty?)
+      end
 
-      shipping.errors[:lower_price_limit].wont_be(:empty?)
-    end
+      it "wont allow lower price value greater than higher price" do
+        shipping.lower_price_limit = 45 
+        shipping.valid?
 
-    it "allow lower price value greater than higher price" do
-      shipping.lower_price_limit = 2
-      shipping.valid?
+        shipping.errors[:lower_price_limit].wont_be(:empty?)
+      end
 
-      shipping.errors[:lower_price_limit].must_be(:empty?)
-    end
+      it "wont allow lower price value equal to higher price" do
+        shipping.lower_price_limit = 20
+        shipping.valid?
 
-    it "wont allow nil lower price value" do
-      shipping.valid?
+        shipping.errors[:lower_price_limit].wont_be(:empty?)
+      end
 
-      shipping.errors[:lower_price_limit].wont_be(:empty?)
-    end
+      it "allow lower price value greater than higher price" do
+        shipping.lower_price_limit = 2
+        shipping.valid?
 
-    it "wont allow nil name value" do
-      shipping.valid?
+        shipping.errors[:lower_price_limit].must_be(:empty?)
+      end
 
-      shipping.errors[:name].wont_be(:empty?)
-    end
+      it "wont allow nil lower price value" do
+        shipping.lower_price_limit = nil
+        shipping.valid?
 
-    it "wont allow nil shipping price" do
-      shipping.valid?
+        shipping.errors[:lower_price_limit].wont_be(:empty?)
+      end
 
-      shipping.errors[:shipping_price].wont_be(:empty?)
-    end
-  end
+      it "wont allow nil name value" do
+        shipping.name = nil
+        shipping.valid?
 
-  describe "#callbacks" do
-    let(:shipping_zone) do
-      CountryShippingZone.create_by_carmen_code("US")
-    end
+        shipping.errors[:name].wont_be(:empty?)
+      end
 
-    before do
-      @shipping_method = ShippingMethod.new(lower_price_limit: 34)
-      @shipping_method.name = 'ground shipping'
-      @shipping_method.higher_price_limit = 44.5
-      @shipping_method.shipping_price = 24.5
-      @shipping_method.shipping_zone = shipping_zone
-    end
+      it "wont allow nil shipping price" do
+        shipping.shipping_price = nil
 
-    it "will create all regional shipping zones shipping methods" do
-      shipping_methods = ShippingMethod.count
-      @shipping_method.save
-      count = shipping_zone.regional_shipping_zones.count + 1
+        shipping.valid?
 
-      (ShippingMethod.count - shipping_methods).must_equal count
-    end
-
-    it "newly created regional shipping methods should inherit attributes from country" do
-      @shipping_method.save
-      alabama = RegionalShippingZone.find_by_code("AL")
-      alabama_shipping_method = ShippingMethod.find_by_shipping_zone_id(alabama.id)
-
-      alabama_shipping_method.lower_price_limit.must_equal 34
-      alabama_shipping_method.higher_price_limit.must_equal 44.5
-      alabama_shipping_method.shipping_price.must_equal 24.5
-    end
-  end
-
-  describe "#effective_cost" do
-    let(:shipping_method) { ShippingMethod.new(shipping_zone: zone, shipping_price: 20, offset: 0.20) } 
-    describe "for regional shipping zone" do
-      let(:zone) { RegionalShippingZone.new } 
-      it "is equal to shipping_price + offset " do
-        shipping_method.effective_cost.must_equal 20.20
+        shipping.errors[:shipping_price].wont_be(:empty?)
       end
     end
 
-    describe "for country shipping zone" do
-      let(:zone) { CountryShippingZone.new } 
-      it "is equal to shipping_price " do
-        shipping_method.effective_cost.must_equal 20
+    describe "on create #callbacks" do
+      it "will create all regional shipping zones shipping methods" do
+        shipping.save
+        shipping.regions.count.must_equal 57
+      end
+    end
+  end
+
+  describe "of state type" do
+    let(:shipping) { build(:regional_shipping_method) }
+
+    describe "#validations" do
+
+      it "allow highter price value nil" do
+        shipping.higher_price_limit = nil
+        shipping.valid?
+
+        shipping.errors[:higher_price_limit].must_be(:empty?)
+      end
+
+      it "will allow offset to be nil" do
+        shipping.offset = nil
+        shipping.valid?
+
+        shipping.errors[:offset].must_be(:empty?)
+      end
+
+      it "allow lower price value greater than higher price" do
+        shipping.lower_price_limit = nil
+        shipping.valid?
+
+        shipping.errors[:lower_price_limit].must_be(:empty?)
+      end
+
+      it "wont allow nil name value" do
+        shipping.name = nil
+        shipping.valid?
+
+        shipping.errors[:name].wont_be(:empty?)
+      end
+
+      it "allow nil shipping price" do
+        shipping.shipping_price = nil
+
+        shipping.valid?
+
+        shipping.errors[:shipping_price].must_be(:empty?)
       end
     end
 
+    describe "on create #callbacks" do
+      it "wont create all regional shipping zones shipping methods" do
+        shipping.save
+        shipping.regions.count.must_equal 0
+      end
+    end
   end
 end
