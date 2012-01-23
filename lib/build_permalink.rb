@@ -42,6 +42,20 @@ module BuildPermalink
       end
 
       self.permalink ||= permalink
+      self.permalink ||= ""
+
+      case self.permalink.empty?
+      when true then handle_permalink_error
+      else self.permalink
+      end
+
     end
+
+    protected
+    def handle_permalink_error
+      self.errors.add(:permalink, I18n.t('wrong_permalink') )
+      false
+    end
+
   end
 end
