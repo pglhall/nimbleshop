@@ -13,11 +13,11 @@ class Admin::LinkGroupsController < AdminController
 
   def new
     @link_group = LinkGroup.new
-    render :partial => 'form'
+    render partial: 'form'
   end
 
   def edit
-    render :partial => 'form'
+    render partial: 'form'
   end
 
   def create
