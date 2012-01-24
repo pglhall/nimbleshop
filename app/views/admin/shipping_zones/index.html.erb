@@ -13,7 +13,7 @@
   <table class="zebra-striped bordered-table">
     <thead>
       <tr>
-        <th colspan='4'>
+        <th colspan='5'>
           <h3><%= shipping_zone.name %></h3>
           <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
           |
@@ -27,6 +27,7 @@
         <th> Condition </th>
         <th> Shipping price </th>
         <th> &nbsp;</th>
+        <th> &nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +36,9 @@
           <td> <%= shipping_method.name %> </td>
           <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
           <td> <%= number_to_currency(shipping_method.base_price) %> </td>
+          <td>
+            <%= link_to t(:edit), [:edit, :admin, shipping_method.shipping_zone, shipping_method ] %>
+          </td>
           <td>
             <%= link_to t(:delete), admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method), confirm: t(:delete_confirmation_for_shipping_method), method: 'delete' %>
           </td>
