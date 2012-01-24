@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ShippingMethod do
+
   describe "#available_for" do
     let(:shipping_method)  { create(:country_shipping_method) }
     let(:order)            { create(:order) }
@@ -76,11 +77,12 @@ describe ShippingMethod do
       end
     end
 
-    describe "#effective_cost" do
+    describe "#shipping_price" do
       it "will ignore offset value" do
         shipping.offset = 0.10
         shipping.base_price = 10
-        shipping.base_price.must_equal 10.0
+
+        shipping.shipping_price.must_equal 10.0
       end
     end
 
@@ -131,6 +133,16 @@ describe ShippingMethod do
         shipping.valid?
 
         shipping.errors[:base_price].must_be(:empty?)
+      end
+    end
+
+    describe "#shipping_price" do
+      it "will ignore base_price value" do
+        shipping.parent.base_price = 10
+        shipping.offset = 0.10
+        shipping.base_price = 20
+
+        shipping.shipping_price.to_f.must_equal 10.10
       end
     end
 

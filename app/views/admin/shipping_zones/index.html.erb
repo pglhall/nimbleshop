@@ -19,7 +19,7 @@
           |
           <%= link_to t(:edit), edit_admin_shipping_zone_path(shipping_zone) %>
           |
-          <%= link_to t(:delete), admin_shipping_zone_path(shipping_zone), confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete' %>
+          <%= link_to t(:delete), [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', remote: true %>
         </th>
       </tr>
       <tr>

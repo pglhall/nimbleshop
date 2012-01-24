@@ -12,6 +12,7 @@ FactoryGirl.define do
     trait :regional do
       association :shipping_zone, :factory => :regional_shipping_zone
       offset 1.00
+      association :parent, :factory => :country_shipping_method
     end
 
     factory :country_shipping_method,   traits: [:country]

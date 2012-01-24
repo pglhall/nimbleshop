@@ -1,7 +1,9 @@
 class ShippingMethod < ActiveRecord::Base
 
-  alias_attribute :higher_price_limit,  :upper_price_limit
   alias_attribute :shipping_cost,       :base_price
+  alias_attribute :higher_price_limit,  :upper_price_limit
+
+  delegate :shipping_price, :to => :strategy
 
   belongs_to :shipping_zone
 
@@ -29,12 +31,9 @@ class ShippingMethod < ActiveRecord::Base
     end
   end
 
-  def effective_cost
-    if country_level?
-      base_price
-    else
-      base_price + offset
-    end
+  def strategy
+    klass = shipping_zone.class.to_s.gsub(/Zone/, 'Method')
+    @_strategy ||= self.class.const_get(klass).new(self)
   end
 
   def country_level?
