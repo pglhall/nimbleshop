@@ -32,7 +32,7 @@ class ShippingMethod < ActiveRecord::Base
   end
 
   def strategy
-    klass = shipping_zone.class.to_s.gsub(/Zone/, 'Method')
+    klass = shipping_zone.class.name.gsub(/Zone/, 'Method')
     @_strategy ||= self.class.const_get(klass).new(self)
   end
 

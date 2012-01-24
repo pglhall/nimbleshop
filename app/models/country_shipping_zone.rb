@@ -8,20 +8,20 @@ class CountryShippingZone < ShippingZone
 
   before_validation :assign_name, unless: :name, if: :code
 
-  validates :code, presence: true, carmen_country_code: true
+  validates :code, presence: true, country_code: true
 
   after_create :create_regions
 
   def country_code
-    @_country_code ||= self.class.to_carmen_country(code)
+    @_country_code ||= self.class.to_country(code)
   end
 
-  def self.to_carmen_country(code)
+  def self.to_country(code)
     Carmen::Country.coded(code)
   end
 
   def self.create_by_carmen_code(carmen_code)
-    country = to_carmen_country(carmen_code)
+    country = to_country(carmen_code)
     country && create(name: country.name, code: carmen_code)
   end
 

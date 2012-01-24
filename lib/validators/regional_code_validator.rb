@@ -1,4 +1,4 @@
-class CarmenRegionCodeValidator < ActiveModel::EachValidator
+class RegionalCodeValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
     unless record.country_code.subregions.any? { |t| t.code == value }
