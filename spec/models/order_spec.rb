@@ -5,11 +5,11 @@ describe Order do
     let(:order1)  { create(:order)  }
     let(:order2)  { create(:order)  }
     let(:shipping_method1)  { create(:country_shipping_method,
-                                                      shipping_price: 100,
+                                                      base_price: 100,
                                                       lower_price_limit: 1,
                                                       upper_price_limit: 199)  }
     let(:shipping_method2)  { create(:country_shipping_method,
-                                                      shipping_price: 120,
+                                                      base_price: 120,
                                                       lower_price_limit: 70,
                                                       upper_price_limit: 199)  }
     before do

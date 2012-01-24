@@ -14,15 +14,15 @@ Nimbleshop::Application.routes.draw do
       resources :shipments
     end
 
+    resources :country_shipping_zones, :controller => 'shipping_zones' do
+      resources :shipping_methods
+    end
+
+    resources :regional_shipping_zones, :controller => 'shipping_zones' do
+      resources :shipping_methods
+    end
+
     resources :shipping_zones do
-      resources :shipping_methods
-    end
-
-    resources :country_shipping_zones, :as => :shipping_zones, controller: :shipping_zones do
-      resources :shipping_methods
-    end
-
-    resources :regional_shipping_zones, :as => :shipping_zones, controller: :shipping_zones do
       resources :shipping_methods
     end
 

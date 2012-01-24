@@ -1,11 +1,11 @@
 class ShippingMethod < ActiveRecord::Base
 
   alias_attribute :higher_price_limit,  :upper_price_limit
-  alias_attribute :shipping_cost,       :shipping_price
+  alias_attribute :shipping_cost,       :base_price
 
   belongs_to :shipping_zone
 
-  validates_presence_of :lower_price_limit, :shipping_price, if: :country_level?
+  validates_presence_of :lower_price_limit, :base_price, if: :country_level?
   validates_presence_of :name
 
   validates_numericality_of :lower_price_limit, 
@@ -31,9 +31,9 @@ class ShippingMethod < ActiveRecord::Base
 
   def effective_cost
     if country_level?
-      shipping_price
+      base_price
     else
-      shipping_price + offset
+      base_price + offset
     end
   end
 

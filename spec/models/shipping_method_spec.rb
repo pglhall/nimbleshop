@@ -68,11 +68,19 @@ describe ShippingMethod do
       end
 
       it "wont allow nil shipping price" do
-        shipping.shipping_price = nil
+        shipping.base_price = nil
 
         shipping.valid?
 
-        shipping.errors[:shipping_price].wont_be(:empty?)
+        shipping.errors[:base_price].wont_be(:empty?)
+      end
+    end
+
+    describe "#effective_cost" do
+      it "will ignore offset value" do
+        shipping.offset = 0.10
+        shipping.base_price = 10
+        shipping.base_price.must_equal 10.0
       end
     end
 
@@ -118,11 +126,11 @@ describe ShippingMethod do
       end
 
       it "allow nil shipping price" do
-        shipping.shipping_price = nil
+        shipping.base_price = nil
 
         shipping.valid?
 
-        shipping.errors[:shipping_price].must_be(:empty?)
+        shipping.errors[:base_price].must_be(:empty?)
       end
     end
 
