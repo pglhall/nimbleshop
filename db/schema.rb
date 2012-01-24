@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   end
 
   create_table "creditcard_transactions", :force => true do |t|
+    t.integer  "order_id",                                                        :null => false
     t.string   "transaction_gid",                                                 :null => false
     t.text     "params",                                                          :null => false
     t.decimal  "amount",          :precision => 8, :scale => 2,                   :null => false
     t.integer  "creditcard_id",                                                   :null => false
     t.boolean  "active",                                        :default => true, :null => false
-    t.integer  "order_id",                                                        :null => false
     t.string   "status",                                                          :null => false
     t.integer  "parent_id"
     t.datetime "created_at"
@@ -165,10 +165,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "pictures", :force => true do |t|
     t.integer  "product_id"
     t.string   "picture"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.string   "picture_file_size"
-    t.string   "picture_updated_at"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.string   "file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

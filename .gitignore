@@ -7,3 +7,5 @@ vendor/ruby
 config/database.yml
 guides/output
 public/assets
+public/uploads
+.DS_Store

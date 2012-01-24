@@ -18,6 +18,20 @@ namespace :ns do
   end
 end
 
+task :process_pictures => :environment do
+  class FilelessIO < StringIO
+      attr_accessor :original_filename
+  end
+  img = File.open(Rails.root.join('public', 'pictures', 'original', 'cws.png' )) {|i| i.read}
+  encoded_img = Base64.encode64 img
+  io = FilelessIO.new(Base64.decode64(encoded_img))
+  io.original_filename = "cws.png"
+  p = Picture.new
+  p.product = Product.first
+  p.picture = io
+  p.save
+end
+
 desc "sets up local development environment"
 task :setup_development => :environment do
 
@@ -37,39 +51,8 @@ task :setup_development => :environment do
   Rake::Task["db:seed"].invoke
   Rake::Task["ns:load_data"].invoke
 
-  product4 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
-  product4.update_attributes!(variants_enabled: true)
-
-  product4.variation3.update_attributes!(active: false)
-  product4 = Product.first
-
-  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Small',  price: 11)
-  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Small',  price: 111)
-
-  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Medium', price: 21)
-  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Medium', price: 121)
-
-  product4.variants.create!(variation1_value: 'Black',  variation2_value: 'Large', price:   31)
-  product4.variants.create!(variation1_value: 'White',  variation2_value: 'Large', price: 131)
-
-
-  product5 = Product.create!( title: "Candy Colours Bracelet Set", price: 47, description: 'tbd')
-
-  product6 = Product.create!( title: "Gemstone Cross Necklaces", price: 78, description: 'tbd')
-
-  product7 = Product.create!( title: "Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered",
-                              price: 81,
-                              description: 'tbd')
-
-  product8 = Product.create!( title: "Red, Black & Silver Glass Bracelet", price: 107, description: 'tbd')
-
-  product9 = Product.create!( title: "Layered Coral Necklace", price: 137, description: 'tbd')
-
-  product10 = Product.create!( title: "Claddagh Earrings", price: 141, description: 'tbd')
-
-  product11 = Product.create!( title: "Om necklace", price: 101, description: 'tbd')
-
-  product12 = Product.create!(title: "Men bracelet", price: 32, description: 'tbd')
+  sampledata = Sampledata.new
+  sampledata.load_products
 
   PaymentMethod.load_default!
 
@@ -80,124 +63,21 @@ task :setup_development => :environment do
                        twitter_handle: '@nimbleshop',
                        intercept_email: 'johnnie.walker@nimbleshop.com',
                        from_email:      'support@nimbleshop.com',
-                       facebook_url: 'www.facebook.com')
-
-  shop.update_attributes!( gateway:  'AuthorizeNet',
-                           facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845',
-                           twitter_handle:  'nimbleshop')
+                       gateway: 'AuthorizeNet',
+                       facebook_url: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
 
   link_group = LinkGroup.create!(name: 'Main-nav')
   link_home = Link.create!(name: 'Home', url: '/')
   Navigation.create!(link_group: link_group, navigeable: link_home)
 
-  cf = CustomField.create!(name: 'category', field_type: 'text')
-  product5.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  product4.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  product8.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-  product10.custom_field_answers.create(custom_field: cf, value: 'earring')
-  product7.custom_field_answers.create(custom_field: cf, value: 'earring')
-  product6.custom_field_answers.create(custom_field: cf, value: 'necklace')
-  product9.custom_field_answers.create(custom_field: cf, value: 'necklace')
-
-  pg_bracelets = ProductGroup.create!(name: 'bracelets')
-  pg_bracelets.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'bracelet')
-  pg_earrings = ProductGroup.create!(name:  'earrings')
-  pg_earrings.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'earring')
-  pg_necklaces = ProductGroup.create!(name: 'necklaces')
-  pg_necklaces.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'necklace')
-
-  link_group = LinkGroup.create!(name: 'Shop by category')
-  link_group.navigations.create(navigeable: pg_bracelets)
-  link_group.navigations.create(navigeable: pg_earrings)
-  link_group.navigations.create(navigeable: pg_necklaces)
-
-  cf = CustomField.create!(name: 'original price', field_type: 'number')
-  product4.update_attributes(price: 10)
-  product5.update_attributes(price: 47)
-  product6.update_attributes(price: 78)
-  product7.update_attributes(price: 81)
-  product8.update_attributes(price: 107)
-  product9.update_attributes(price: 137)
-  product10.update_attributes(price: 141)
-
-  pg_lt_50 = ProductGroup.create!(name: '< $50')
-  pg_lt_50.product_group_conditions.create(name: 'price', operator: 'lt', value: 50)
-  pg_between_50_100 = ProductGroup.create!(name: '$50 - $100')
-  pg_between_50_100.product_group_conditions.create(name: 'price', operator: 'gteq', value: 50)
-  pg_between_50_100.product_group_conditions.create(name: 'price', operator: 'lteq', value: 100)
-  pg_gt_100 = ProductGroup.create!(name: '> $100')
-  pg_gt_100.product_group_conditions.create(name: 'price', operator: 'gt', value: 100)
-
-  link_group = LinkGroup.create!(name: 'Shop by price')
-  Navigation.create!(link_group: link_group, navigeable: pg_lt_50)
-  Navigation.create!(link_group: link_group, navigeable: pg_between_50_100)
-  Navigation.create!(link_group: link_group, navigeable: pg_gt_100)
+  sampledata.load_price_information
+  sampledata.load_category_information
 
   PaymentMethod.update_all(enabled: true)
-  sz = ShippingZone.create!(name: 'USA')
-  ShippingMethod.create!(name: 'Ground shipping', shipping_price: 10, shipping_zone_id: sz.id,
-                         lower_price_limit: 10, upper_price_limit: 20)
-  ShippingMethod.create!(name: 'Ground shipping', shipping_price: 20, shipping_zone_id: sz.id,
-                         lower_price_limit: 20)
 
-  ShippingMethod.create!(name: 'Express shipping', shipping_price: 15, shipping_zone_id: sz.id,
-                         lower_price_limit: 10, upper_price_limit: 20)
-  ShippingMethod.create!(name: 'Express shipping', shipping_price: 25, shipping_zone_id: sz.id,
-                         lower_price_limit: 20)
+  sampledata.load_shipping_methods
 
-  desc = "This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!  A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
-  product4.update_attributes(description: desc)
+  sampledata.load_products_desc
+  sampledata.process_pictures
 
-  desc = "acrylic stretch beaded bracelets with peace sign, butterfly and heart charms. A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
-  product5.update_attributes(description: desc)
-
-  des = %q{
-      "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.
-
-        Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
-    }
-  product6.update_attributes(description: desc)
-
-  desc = %q{
-        These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
-
-        The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
-
-        All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
-  }
-  product7.update_attributes(description: desc)
-
-  desc = %q{
-      "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads.
-
-        This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
-  }
-  product8.update_attributes(description: desc)
-
-  desc = %q{
-      Om necklace for men .
-
-        The syllable om is first described as all-encompassing mystical entity in the Upanishads. Today, in all Hindu art and all over India and Nepal, 'om' can be seen virtually everywhere, a common sign for Hinduism and its philosophy and theology. Hindus believe that as creation began, the divine, all-encompassing consciousness took the form of the first and original vibration manifesting as sound \"OM\".
-        \r\n Before creation began it was \"Shuny\xC4\x81k\xC4\x81sha\", the emptiness or the void. Shuny\xC4\x81k\xC4\x81sha, meaning literally \"no sky\", is more than nothingness, because everything then existed in a latent state of potentiality. The vibration of \"OM\" symbolizes the manifestation of God in form (\"s\xC4\x81guna brahman\"). \"OM\" is the reflection of the absolute reality, it is said to be \"Adi Anadi\", without beginning or the end and embracing all that exists.
-        \r\n The mantra \"OM\" is the name of God, the vibration of the Supreme. When taken letter by letter, A-U-M represents the divine energy (Shakti) united in its three elementary aspects: Bhrahma Shakti (creation), Vishnu Shakti (preservation) and Shiva Shakti (liberation, and/or destruction)."
-  }
-  product11.update_attributes(description: desc)
-
-
-  desc = %w{ Dude you got a bracelet. }
-  product12.update_attributes(description: desc)
-
-  desc = %q{
-        These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
-
-        The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
-  }
-  product10.update_attributes(description: desc)
-
-  desc = %q{
-      "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
-        \r\n\
-        This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
-  }
-  product9.update_attributes(description: desc)
 end
