@@ -28,7 +28,6 @@ class Admin::ProductsController < AdminController
 
   def show
     @product_groups = ProductGroup.contains_product(@product)
-    respond_with @product
   end
 
   def new
