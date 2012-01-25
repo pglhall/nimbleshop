@@ -31,6 +31,13 @@ GIT
   specs:
     nested_form (0.1.1)
 
+GIT
+  remote: git://github.com/wojtekmach/valid_attribute.git
+  revision: cf96d8b1544ed068a97d694c3124ac86ea37f398
+  branch: minitest-matchers-11
+  specs:
+    valid_attribute (1.2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -137,6 +144,8 @@ GEM
     mini_magick (3.4)
       subexec (~> 0.2.1)
     minitest (2.10.1)
+    minitest-matchers (1.2.0)
+      minitest (>= 2.5.0)
     minitest-rails (0.0.5)
       actionpack (~> 3.1.0.rc1)
       activesupport (~> 3.1.0.rc1)
@@ -175,6 +184,7 @@ GEM
     rb-fsevent (0.4.3.1)
     rdoc (3.12)
       json (~> 1.4)
+    rr (1.0.4)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -191,6 +201,7 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    shoulda-matchers (1.0.0)
     sprockets (2.0.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -239,16 +250,20 @@ DEPENDENCIES
   launchy
   mini_magick
   minitest (~> 2.10.1)
+  minitest-matchers
   minitest-rails
   mustache
   nested_form!
   pg
   rails (= 3.1.1)
   rb-fsevent
+  rr
   ruby-debug19
+  shoulda-matchers
   state_machine
   themes_for_rails!
   thin
   uglifier (>= 1.0.3)
+  valid_attribute!
   will_paginate
   yaml_db

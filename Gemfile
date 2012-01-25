@@ -30,6 +30,7 @@ gem 'yaml_db'
 
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'minitest-rails'
 end
 
 group :test do
@@ -45,6 +46,11 @@ group :test do
   gem "capybara_minitest_spec"
   gem "launchy"
   gem 'capybara-webkit'
+  gem 'minitest-matchers'
+  gem 'valid_attribute', git: "git://github.com/wojtekmach/valid_attribute.git", branch: "minitest-matchers-11"
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'rr'
 end
 
 # Gems used only for assets and not required

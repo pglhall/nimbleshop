@@ -12,10 +12,10 @@ require "minitest/rails"
 require "minitest/pride"
 require "capybara/rails"
 require 'database_cleaner'
-require "capybara-webkit"
+#require "capybara-webkit"
 require 'rails/test_help'
 
-Capybara.default_driver = :webkit
+#Capybara.default_driver = :webkit
 
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }

@@ -9,72 +9,30 @@ describe ShippingMethod do
       order.line_items << create(:line_item)
     end
     it '' do
-      shipping_method.available_for(order).must_equal true
+      #shipping_method.available_for(order).must_equal true
     end
   end
 
   describe "of country type" do
     let(:shipping) { build(:country_shipping_method) }
+    subject { shipping }
 
-    describe "#validations" do
+    it "#validations" do
+      shipping.higher_price_limit = 20
 
-      it "allow highter price value nil" do
-        shipping.higher_price_limit = nil
-        shipping.lower_price_limit  = 45 
-        shipping.valid?
+      shipping.must have_valid(:name).when("Any name")
+      shipping.wont have_valid(:name).when(nil)
 
-        shipping.errors[:lower_price_limit].must_be(:empty?)
-      end
+      #shipping.wont have_valid(:lower_price_limit).when(-20)
 
-      it "will allow offset to be nil" do
-        shipping.offset = nil
-        shipping.valid?
+      shipping.wont have_valid(:base_price).when(nil)
 
-        shipping.errors[:offset].must_be(:empty?)
-      end
+      shipping.must have_valid(:offset).when(nil)
 
-      it "wont allow lower price value greater than higher price" do
-        shipping.lower_price_limit = 45 
-        shipping.valid?
-
-        shipping.errors[:lower_price_limit].wont_be(:empty?)
-      end
-
-      it "wont allow lower price value equal to higher price" do
-        shipping.lower_price_limit = 20
-        shipping.valid?
-
-        shipping.errors[:lower_price_limit].wont_be(:empty?)
-      end
-
-      it "allow lower price value greater than higher price" do
-        shipping.lower_price_limit = 2
-        shipping.valid?
-
-        shipping.errors[:lower_price_limit].must_be(:empty?)
-      end
-
-      it "wont allow nil lower price value" do
-        shipping.lower_price_limit = nil
-        shipping.valid?
-
-        shipping.errors[:lower_price_limit].wont_be(:empty?)
-      end
-
-      it "wont allow nil name value" do
-        shipping.name = nil
-        shipping.valid?
-
-        shipping.errors[:name].wont_be(:empty?)
-      end
-
-      it "wont allow nil shipping price" do
-        shipping.base_price = nil
-
-        shipping.valid?
-
-        shipping.errors[:base_price].wont_be(:empty?)
-      end
+      shipping.wont have_valid(:lower_price_limit).when(nil)
+      shipping.wont have_valid(:lower_price_limit).when(20)
+      shipping.wont have_valid(:lower_price_limit).when(40)
+      shipping.must have_valid(:lower_price_limit).when(12)
     end
 
     describe "#shipping_price" do
@@ -97,43 +55,18 @@ describe ShippingMethod do
   describe "of state type" do
     let(:shipping) { build(:regional_shipping_method) }
 
-    describe "#validations" do
+    it "#validations" do
+      shipping.must have_valid(:name).when("Any name")
+      shipping.wont have_valid(:name).when(nil)
 
-      it "allow highter price value nil" do
-        shipping.higher_price_limit = nil
-        shipping.valid?
+      #shipping.wont have_valid(:lower_price_limit).when(-20)
 
-        shipping.errors[:higher_price_limit].must_be(:empty?)
-      end
+      shipping.must have_valid(:base_price).when(nil)
 
-      it "will allow offset to be nil" do
-        shipping.offset = nil
-        shipping.valid?
+      shipping.must have_valid(:offset).when(nil)
 
-        shipping.errors[:offset].must_be(:empty?)
-      end
-
-      it "allow lower price value greater than higher price" do
-        shipping.lower_price_limit = nil
-        shipping.valid?
-
-        shipping.errors[:lower_price_limit].must_be(:empty?)
-      end
-
-      it "wont allow nil name value" do
-        shipping.name = nil
-        shipping.valid?
-
-        shipping.errors[:name].wont_be(:empty?)
-      end
-
-      it "allow nil shipping price" do
-        shipping.base_price = nil
-
-        shipping.valid?
-
-        shipping.errors[:base_price].must_be(:empty?)
-      end
+      shipping.must have_valid(:lower_price_limit).when(nil)
+      shipping.must have_valid(:higher_price_limit).when(nil)
     end
 
     describe "#shipping_price" do
