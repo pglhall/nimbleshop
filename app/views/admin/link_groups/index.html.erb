@@ -2,8 +2,19 @@
   <h1><%= t(:link_groups) %></h1>
 </div>
 
-<%= link_to(new_admin_link_group_path) do %>
-  <button class="btn info">+ <%= t(:add_new_link_group) %></button>
+<% if @link_group && @link_group.errors.any? %>
+  <div class="alert-message block-message error">
+    <p> <%= t(:error_bang) %> </p>
+    <ul>
+      <% @link_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= link_to "#" do %>
+  <button id="new-link-group" class="btn info">+ <%= t(:add_new_link_group) %></button>
 <% end %>
 
 <br />
@@ -13,7 +24,13 @@
   <table class="zebra-striped bordered-table">
     <thead>
       <tr>
-        <th colspan='2'><h2><%= link_group.name %></h2></th>
+        <th colspan='2'>
+          <h2><%= link_group.name %></h2>
+          <%= button_to "destroy", [:admin, link_group], :method => :delete %>
+          <%= link_to '#', :id => link_group.permalink, :class => 'edit-link-group' do %>
+            <button class="btn"><%= t(:edit) %></button>
+          <% end %>  
+        </th>
       </tr>
       <tr>
         <th>Link name </th>
@@ -36,3 +53,6 @@
     </tbody>
   </table>
 <% end %>
+
+<div id="link-group-form">
+</div>

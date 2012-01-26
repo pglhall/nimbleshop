@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require highlight_error_field
 //= require nested_form
@@ -16,3 +17,4 @@
 //= require jquery-form
 //= require ajaxify-price-variant-form
 //= require enable_disable_price_variant
+//= require ajaxify-link-groups
