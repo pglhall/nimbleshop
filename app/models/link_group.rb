@@ -4,4 +4,6 @@ class LinkGroup < ActiveRecord::Base
 
   has_many :navigations
 
+  validates :name, format: { with: /\b\w{2,}\b/ }
+
 end
