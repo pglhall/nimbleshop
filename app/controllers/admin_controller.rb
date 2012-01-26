@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   layout 'admin'
 
-  before_filter :authenticate
+  #before_filter :authenticate
   before_filter :set_timezone
 
   private
@@ -17,5 +17,4 @@ class AdminController < ApplicationController
   def set_timezone
     Time.zone = @shop.time_zone
   end
-
 end

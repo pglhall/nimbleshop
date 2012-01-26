@@ -15,7 +15,8 @@
           <li>
             <label>
               <%= f.radio_button :shipping_method_id, shipping_method.id %>
-              <%= f.label :shipping_method_id, shipping_method.name + ' -- ' + number_to_currency(shipping_method.shipping_price.to_s) %>
+              <%= f.label :shipping_method_id, number_to_currency(shipping_method.shipping_price) %>
+              <%#= f.label :shipping_method_id, shipping_method.name + ' -- ' + number_to_currency(shipping_method.shipping_price.to_s) %>
             </label>
           </li>
         <% end %>

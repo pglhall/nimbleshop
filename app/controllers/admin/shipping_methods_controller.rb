@@ -1,9 +1,13 @@
 class Admin::ShippingMethodsController < AdminController
 
-  before_filter :load_shipping_zone, only: [:new, :create, :destroy]
+  before_filter :load_shipping_zone, only: [:new, :create, :destroy, :edit]
 
   def new
     @shipping_method = @shipping_zone.shipping_methods.build
+  end
+
+  def edit
+    @shipping_method = ShippingMethod.find(params[:id])
   end
 
   def create
@@ -27,7 +31,7 @@ class Admin::ShippingMethodsController < AdminController
   private
 
   def load_shipping_zone
-    @shipping_zone = ShippingZone.find_by_permalink!(params[:shipping_zone_id])
+    @shipping_zone = ShippingZone.find_by_permalink!(params[:country_shipping_zone_id])
   end
 
 end

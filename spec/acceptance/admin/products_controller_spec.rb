@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe "admin" do
-  include Capybara::DSL
+describe "admin integration" do
 
   describe "product new" do
     it "should be at product show page" do
@@ -9,5 +8,4 @@ describe "admin" do
       #save_and_open_page
     end
   end
-
 end

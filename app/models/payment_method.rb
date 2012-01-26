@@ -5,6 +5,7 @@ class PaymentMethod < ActiveRecord::Base
   before_save :set_data
 
   serialize :data
+  store :settings
 
   scope :enabled, where(enabled: true)
 
@@ -21,21 +22,21 @@ class PaymentMethod < ActiveRecord::Base
       raise "Only load into empty db"
     end
 
-    file  = File.join(Rails.root, 'config', 'payment.yml')
-    config = YAML::load(ERB.new(IO.read(file)).result)[Rails.env]
+    settings = ConfigLoader.new('payment.yml').load
 
-    config.each_pair do | payment_method_name, preferences |
+    settings.each_pair do | payment_method_name, preferences |
       attributes = {
-        name: preferences.delete("name"),
-        description: preferences.delete("description")
+        name: preferences.delete(:name),
+        description: preferences.delete(:description)
       }
 
-      payment_klass = const_get(payment_method_name.classify)
+      payment_klass = const_get(payment_method_name.to_s.classify)
 
       instance = payment_klass.create!(attributes)
 
       preferences.each_pair do | preference, value |
-        instance.write_preference(preference.to_sym, value)
+        m = "#{payment_method_name}_#{preference}="
+        instance.send(m, value)
       end
       instance.save
     end

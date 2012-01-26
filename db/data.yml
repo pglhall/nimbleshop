@@ -650,7 +650,7 @@ shipping_methods:
   - name
   - lower_price_limit
   - upper_price_limit
-  - shipping_price
+  - base_price
   - active
   - created_at
   - updated_at

@@ -1,8 +1,7 @@
 class PaymentMethod::AuthorizeNet < PaymentMethod
 
-  preference :login_id,                             :string
-  preference :transaction_key,                      :string
-  preference :company_name_on_creditcard_statement, :string
+  store_accessor :settings, :authorize_net_login_id, :authorize_net_transaction_key,
+                            :authorize_net_company_name_on_creditcard_statement
 
   def gateway
     set_mode
@@ -13,7 +12,7 @@ class PaymentMethod::AuthorizeNet < PaymentMethod
   private
 
   def credentials
-    { login: self.preferred_login_id , password: self.preferred_transaction_key }
+    { login: self.authorize_net_login_id , password: self.authorize_net_transaction_key }
   end
 
   def gateway_klass

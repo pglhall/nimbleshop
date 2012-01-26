@@ -23,7 +23,7 @@ class Admin::ShippingZonesController < AdminController
   end
 
   def create
-    @shipping_zone = ShippingZone.new(params[:shipping_zone])
+    @shipping_zone = CountryShippingZone.new(params[:shipping_zone])
     if @shipping_zone.save
       redirect_to admin_shipping_zones_path, notice: t(:succssfully_created)
     else

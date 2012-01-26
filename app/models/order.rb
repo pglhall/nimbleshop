@@ -72,7 +72,7 @@ class Order < ActiveRecord::Base
   end
 
   def available_shipping_methods
-    ShippingMethod.order('shipping_price asc').all.select { |e| e.available_for(self) }
+    ShippingMethod.order('base_price asc').all.select { |e| e.available_for(self) }
   end
 
   def item_count

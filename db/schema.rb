@@ -28,29 +28,29 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "phone"
     t.string   "fax"
     t.boolean  "use_for_billing", :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "creditcard_transactions", :force => true do |t|
+    t.integer  "order_id",                                                        :null => false
     t.string   "transaction_gid",                                                 :null => false
     t.text     "params",                                                          :null => false
     t.decimal  "amount",          :precision => 8, :scale => 2,                   :null => false
     t.integer  "creditcard_id",                                                   :null => false
     t.boolean  "active",                                        :default => true, :null => false
-    t.integer  "order_id",                                                        :null => false
     t.string   "status",                                                          :null => false
     t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
   end
 
   create_table "creditcards", :force => true do |t|
     t.string   "masked_number", :null => false
     t.datetime "expires_on",    :null => false
     t.string   "cardtype",      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "custom_field_answers", :force => true do |t|
@@ -60,15 +60,15 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "text_value"
     t.integer  "number_value"
     t.datetime "datetime_value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "custom_fields", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "field_type", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "line_items", :force => true do |t|
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "product_name",                                      :null => false
     t.text     "product_description"
     t.decimal  "product_price",       :precision => 8, :scale => 2, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   add_index "line_items", ["product_id", "variant_id"], :name => "line_items_product_id_variant_id_idx", :unique => true
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "link_groups", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "permalink",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "link_groups", ["name"], :name => "index_link_groups_on_name", :unique => true
@@ -100,16 +100,16 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "links", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "url",        :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "navigations", :force => true do |t|
     t.integer  "link_group_id",   :null => false
     t.integer  "navigeable_id"
     t.string   "navigeable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "orders", :force => true do |t|
@@ -122,8 +122,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "payment_status",     :default => "abandoned_early",     :null => false
     t.string   "shipping_status",    :default => "nothing_to_ship",     :null => false
     t.string   "checkout_status",    :default => "items_added_to_cart", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "settings"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "orders", ["number"], :name => "index_orders_on_number", :unique => true
@@ -135,8 +136,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.text     "data"
     t.string   "type"
     t.string   "permalink",                      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "settings"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "payment_methods", ["permalink"], :name => "index_payment_methods_on_permalink", :unique => true
@@ -146,8 +148,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "order_number",   :null => false
     t.string   "status",         :null => false
     t.string   "transaction_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "paypal_payment_notifications", ["order_number"], :name => "index_paypal_payment_notifications_on_order_number", :unique => true
@@ -165,12 +167,11 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "pictures", :force => true do |t|
     t.integer  "product_id"
     t.string   "picture"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.string   "picture_file_size"
-    t.string   "picture_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.string   "file_size"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "preferences", :force => true do |t|
@@ -180,8 +181,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.integer  "group_id"
     t.string   "group_type"
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "preferences", ["owner_id", "owner_type", "name", "group_id", "group_type"], :name => "index_preferences_on_owner_and_name_and_preference", :unique => true
@@ -191,15 +192,15 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "name",             :null => false
     t.string   "operator",         :null => false
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "product_groups", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "permalink",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "product_groups", ["name"], :name => "index_product_groups_on_name", :unique => true
@@ -212,8 +213,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.boolean  "new",                                            :default => false, :null => false
     t.boolean  "variants_enabled",                               :default => false, :null => false
     t.string   "permalink",                                                         :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
   end
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
@@ -221,8 +222,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "shipment_carriers", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "permalink",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "shipment_carriers", ["permalink"], :name => "index_shipment_carriers_on_permalink", :unique => true
@@ -231,15 +232,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "tracking_number",     :null => false
     t.integer  "shipment_carrier_id", :null => false
     t.integer  "order_id",            :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "shipping_countries", :force => true do |t|
-    t.integer  "shipping_zone_id", :null => false
-    t.integer  "country_code",     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "shipping_methods", :force => true do |t|
@@ -247,20 +241,24 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "name",                                                              :null => false
     t.decimal  "lower_price_limit", :precision => 8, :scale => 2
     t.decimal  "upper_price_limit", :precision => 8, :scale => 2
-    t.decimal  "shipping_price",    :precision => 8, :scale => 2
+    t.decimal  "base_price",        :precision => 8, :scale => 2
+    t.decimal  "offset",            :precision => 8, :scale => 2, :default => 0.0
     t.boolean  "active",                                          :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
   end
 
   create_table "shipping_zones", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "permalink",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "permalink",                :null => false
+    t.string   "code"
+    t.string   "type"
+    t.integer  "country_shipping_zone_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
-  add_index "shipping_zones", ["name"], :name => "index_shipping_zones_on_name", :unique => true
   add_index "shipping_zones", ["permalink"], :name => "index_shipping_zones_on_permalink", :unique => true
 
   create_table "shops", :force => true do |t|
@@ -275,8 +273,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "twitter_handle"
     t.string   "contact_email"
     t.string   "facebook_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "variants", :force => true do |t|
@@ -288,8 +286,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "variation3_value"
     t.string   "variation3_parameterized",                               :default => ""
     t.decimal  "price",                    :precision => 8, :scale => 2,                 :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
   end
 
   create_table "variations", :force => true do |t|
@@ -298,8 +296,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.text     "content"
     t.text     "variation_type",                   :null => false
     t.boolean  "active",         :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
 end

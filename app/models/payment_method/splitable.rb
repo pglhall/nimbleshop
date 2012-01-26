@@ -1,28 +1,24 @@
 Order.class_eval do
-  preference :api_secret,     :string
+  store_accessor :settings, :splitable_api_secret
 end
 
 class PaymentMethod::Splitable < PaymentMethod
 
-  preference :api_key,     :string
-  preference :api_secret,     :string
-  preference :submission_url, :string
-  preference :logo_url,       :string
-  preference :expires_in,     :string
-
+  store_accessor :settings, :splitable_api_key, :splitable_api_secret, :splitable_submission_url,
+                              :splitable_logo_url, :splitable_expires_in
 
   def url(order, request)
     product = order.line_items.first.product
 
     data = {}
 
-    data.merge!(api_key: self.preferred_api_key)
+    data.merge!(api_key: self.splitable_api_key)
     data.merge!(title: product.name)
     data.merge!(total_amount: (order.grand_total*100).to_i)
     data.merge!(invoice: order.number)
 
     api_secret = ActiveSupport::SecureRandom.hex(10)
-    order.write_preference(:api_secret, api_secret)
+    order.splitable_api_secret = api_secret
     order.save
 
     data.merge!(api_secret: api_secret)
@@ -32,14 +28,14 @@ class PaymentMethod::Splitable < PaymentMethod
     Rails.logger.info t
     data.merge!(api_notify_url: t)
 
-    data.merge!(logo_url: self.preferred_logo_url)
+    data.merge!(logo_url: self.splitable_logo_url)
     data.merge!(product_picture_url: request.protocol + request.host_with_port + product.picture.picture_url(:small))
 
-    data.merge!(expires_in: self.preferred_expires_in)
+    data.merge!(expires_in: self.splitable_expires_in)
 
     Rails.logger.info data.to_yaml
 
-    self.preferred_submission_url + data.to_query
+    self.splitable_submission_url + data.to_query
   end
 
 end

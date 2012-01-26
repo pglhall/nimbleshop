@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # standard rails stuff
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.0'
 gem 'jquery-rails'
 gem 'will_paginate'
 gem 'pg'
@@ -30,6 +30,7 @@ gem 'yaml_db'
 
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'minitest-rails', git: 'git://github.com/neerajdotname/minitest-rails.git'
 end
 
 group :test do
@@ -37,19 +38,25 @@ group :test do
   gem 'growl'
   gem 'rb-fsevent'
   gem 'guard'
+  gem 'minitest', '~> 2.10.1'
   gem 'guard-minitest'
-  gem 'minitest-rails'
   gem 'factory_girl_rails'
-  gem 'capybara', git: 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara'
   gem "capybara_minitest_spec"
   gem "launchy"
+  #gem 'capybara-webkit'
+  gem 'minitest-matchers'
+  gem 'valid_attribute', git: "git://github.com/wojtekmach/valid_attribute.git", branch: "minitest-matchers-11"
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'rr'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  #gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
+  #gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -72,3 +79,4 @@ gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 #
 #  I can't use open-struct because that does not list all the keys
 gem 'hashr'
+gem 'carmen', git: 'git://github.com/jim/carmen.git'

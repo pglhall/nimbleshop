@@ -7,6 +7,7 @@ class CreatePaymentMethods < ActiveRecord::Migration
       t.text    :data
       t.string  :type
       t.string  :permalink, null: false
+      t.text    :settings
 
       t.timestamps
     end

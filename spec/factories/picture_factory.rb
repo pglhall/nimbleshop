@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :picture do |f|
     product
-    picture_file_name nil
-    picture_content_type nil
-    picture_file_size nil
-    picture_updated_at nil
+    file_name nil
+    content_type nil
+    file_size nil
   end
 end
