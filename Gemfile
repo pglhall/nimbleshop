@@ -33,6 +33,8 @@ group :development, :test do
   gem 'minitest-rails', git: 'git://github.com/neerajdotname/minitest-rails.git'
 end
 
+gem 'fog'
+
 group :test do
   gem 'database_cleaner'
   gem 'growl'

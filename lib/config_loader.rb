@@ -13,7 +13,8 @@ class ConfigLoader
     common_hash = hash['common'] || {}
     env_hash = hash[Rails.env.to_s] || {}
 
-    Hashr.new(common_hash.merge(env_hash))
+    final_hash = common_hash.deep_merge(env_hash)
+    Hashr.new(final_hash)
   end
 
 end

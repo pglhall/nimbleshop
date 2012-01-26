@@ -16,12 +16,19 @@ elsif Rails.env.staging? || Rails.env.production?
 
   CarrierWave.configure do |config|
     config.cache_dir = "#{Rails.root}/tmp/uploads"
-    config.storage = :file
+    config.storage = :fog
     config.enable_processing = true
+    config.fog_directory  = Settings.s3.bucket_name
+    config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
+    config.fog_public     = true
 
-    config.s3_access_key_id = Settings.s3.access_key_id
-    config.s3_secret_access_key = Settings.s3.secret_access_key
-    config.s3_bucket = Settings.s3.bucket_name
+
+    config.fog_credentials = {
+        :provider               => 'AWS',
+        :aws_access_key_id      => Settings.s3.access_key_id,
+        :aws_secret_access_key  => Settings.s3.secret_access_key,
+        :region                 => 'us-east-1'
+      }
   end
 
 else

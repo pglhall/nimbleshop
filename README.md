@@ -12,3 +12,4 @@ git remote rm heroku
 
 
 Tools: http://cambelt.co/
+http://lorempixel.com/
