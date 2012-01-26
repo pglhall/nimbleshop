@@ -1,7 +1,7 @@
 class Admin::LinkGroupsController < AdminController
 
   before_filter :load_link_group, only: [:show, :destroy, :edit, :update ]
-  before_filter :load_link_groups, only: [:index, :create, :edit ]
+  before_filter :load_link_groups, only: [:index, :create, :edit, :update ]
 
   def index
     render
