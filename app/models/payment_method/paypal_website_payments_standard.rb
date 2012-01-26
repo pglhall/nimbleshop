@@ -1,19 +1,20 @@
 class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
 
-  preference :merchant_email_address, :string
-  preference :return_url,             :string
-  preference :notify_url,             :string
-  preference :request_submission_url, :string
+  store_accessor  :settings,
+                  :paypal_website_payments_standard_merchant_email_address,
+                  :paypal_website_payments_standard_return_url,
+                  :paypal_website_payments_standard_notify_url,
+                  :paypal_website_payments_standard_request_submission_url
 
   def url(order)
     values = {
-      business: self.preferred_merchant_email_address,
+      business: self.paypal_website_payments_standard_merchant_email_address,
       cmd: '_cart',
       upload: 1,
-      return: self.preferred_return_url,
+      return: self.paypal_website_payments_standard_return_url,
       invoice: order.number,
       secret:  'xxxxxxx', #TODO this should be stored and verified later
-      notify_url: self.preferred_notify_url
+      notify_url: self.paypal_website_payments_standard_notify_url
     }
 
     order.line_items.each_with_index do |item, index|
@@ -24,7 +25,7 @@ class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
         "quantity_#{index+1}"    => item.quantity
       })
     end
-    self.preferred_request_submission_url + values.to_query
+    self.paypal_website_payments_standard_request_submission_url + values.to_query
   end
 
 end

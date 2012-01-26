@@ -47,8 +47,8 @@ end
 def create_authorizenet_payment_method
   unless PaymentMethod.find_by_permalink('authorize-net')
     payment_method = PaymentMethod::AuthorizeNet.create!(name: 'Authorize.net')
-    payment_method.write_preference(:login_id, '56yBAar72')
-    payment_method.write_preference(:transaction_key, '9r3pbH5bnKH29f7d')
+    payment_method.authorize_net_login_id = '56yBAar72'
+    payment_method.authorize_net_transaction_key = '9r3pbH5bnKH29f7d'
     payment_method.save!
   end
 end

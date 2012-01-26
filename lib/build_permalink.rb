@@ -15,7 +15,7 @@ module BuildPermalink
 
   included do
     before_create :set_permalink
-    class_inheritable_accessor :permalink_options
+    class_attribute :permalink_options
     self.permalink_options = {}
   end
 

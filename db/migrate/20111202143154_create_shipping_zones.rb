@@ -4,7 +4,10 @@ class CreateShippingZones < ActiveRecord::Migration
       t.string  :name
       t.string  :permalink,     null: false
       t.string  :code
-      t.string  :type,          null: false
+
+      # TODO it should be not nullable. It is a hack being added
+      # by Neeraj because migration to rails 3.2 is failing
+      t.string  :type,          null: true
 
       t.integer :country_shipping_zone_id
       t.timestamps

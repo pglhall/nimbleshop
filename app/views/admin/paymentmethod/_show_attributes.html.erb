@@ -1,7 +1,7 @@
 <br />
 
 <table class="zebra-striped bordered-table">
-  <% @payment_method.preferences.each do |key, value| %>
+  <% @payment_method.settings.each do |key, value| %>
     <tr>
       <th> <%= key %> </th>
       <td> <%= value %> </td>

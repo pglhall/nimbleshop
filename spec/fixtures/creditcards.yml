@@ -1,4 +1,4 @@
 record1:
  masked_number: XXXX-XXXX-XXXX-0027
- expires_on: '2018-07-01 00:00:00'
+ expires_on: <%= 2.months.from_now %>
  cardtype: visa

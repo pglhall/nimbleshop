@@ -10,6 +10,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string     :payment_status,     null: false, default: 'abandoned_early'
       t.string     :shipping_status,    null: false, default: 'nothing_to_ship'
       t.string     :checkout_status,    null: false, default: 'items_added_to_cart'
+      t.text       :settings
 
       t.timestamps
     end
