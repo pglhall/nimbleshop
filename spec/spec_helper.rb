@@ -21,7 +21,7 @@ require 'rails/test_help'
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 
 # Do not change to :transaction since :truncation is much faster.
-DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.strategy = :truncation , {:except => %w[creditcards  creditcard_transactions]}
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
@@ -42,7 +42,6 @@ class MiniTest::Spec
     PaymentMethod.load_default!
   end
 end
-
 
 def create_authorizenet_payment_method
   unless PaymentMethod.find_by_permalink('authorize-net')
