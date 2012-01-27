@@ -3,13 +3,29 @@ require 'spec_helper'
 describe ShippingMethod do
 
   describe "#available_for" do
-    let(:shipping_method)  { create(:country_shipping_method) }
-    let(:order)            { create(:order) }
-    before do
-      order.line_items << create(:line_item)
+    describe "upper_price_limit is present" do
+      let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51) }
+      let(:order1)           { create(:order) }
+      let(:order2)           { create(:order) }
+      it '' do
+        order1.line_items << create(:line_item)
+        order2.line_items << create(:line_item) << create(:line_item)
+
+        shipping_method.available_for(order1).must_equal true
+        shipping_method.available_for(order2).must_equal false
+      end
     end
-    it '' do
-      #shipping_method.available_for(order).must_equal true
+    describe "upper_price_limit is nil" do
+      let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: nil) }
+      let(:order1)           { create(:order) }
+      let(:order2)           { create(:order) }
+      it '' do
+        order1.line_items << create(:line_item)
+        order2.line_items << create(:line_item) << create(:line_item)
+
+        shipping_method.available_for(order1).must_equal true
+        shipping_method.available_for(order2).must_equal true
+      end
     end
   end
 
@@ -23,8 +39,6 @@ describe ShippingMethod do
       shipping.must have_valid(:name).when("Any name")
       shipping.wont have_valid(:name).when(nil)
 
-      #shipping.wont have_valid(:lower_price_limit).when(-20)
-
       shipping.wont have_valid(:base_price).when(nil)
 
       shipping.must have_valid(:offset).when(nil)
@@ -36,7 +50,7 @@ describe ShippingMethod do
     end
 
     describe "#shipping_price" do
-      it "will ignore offset value" do
+      it "ignores offset value" do
         shipping.offset = 0.10
         shipping.base_price = 10
 
@@ -45,7 +59,7 @@ describe ShippingMethod do
     end
 
     describe "on create #callbacks" do
-      it "will create all regional shipping zones shipping methods" do
+      it "creates all regional shipping zone records" do
         shipping.save
         shipping.regions.count.must_equal 57
       end
@@ -59,8 +73,6 @@ describe ShippingMethod do
       shipping.must have_valid(:name).when("Any name")
       shipping.wont have_valid(:name).when(nil)
 
-      #shipping.wont have_valid(:lower_price_limit).when(-20)
-
       shipping.must have_valid(:base_price).when(nil)
 
       shipping.must have_valid(:offset).when(nil)
@@ -70,7 +82,7 @@ describe ShippingMethod do
     end
 
     describe "#shipping_price" do
-      it "will ignore base_price value" do
+      it "ignores base_price value" do
         shipping.parent.base_price = 10
         shipping.offset = 0.10
         shipping.base_price = 20
@@ -80,7 +92,7 @@ describe ShippingMethod do
     end
 
     describe "on create #callbacks" do
-      it "wont create all regional shipping zones shipping methods" do
+      it "does not create all regional shipping zone records" do
         shipping.save
         shipping.regions.count.must_equal 0
       end
