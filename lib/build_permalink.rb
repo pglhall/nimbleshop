@@ -25,22 +25,20 @@ module BuildPermalink
     end
   end
 
-  module InstanceMethods
-    def to_param
-      self.permalink
+  def to_param
+    self.permalink
+  end
+
+  def set_permalink
+    return if self.name.blank? && permalink_options[:allow_nil]
+    permalink = self.name.parameterize
+    counter = 2
+
+    while self.class.exists?(permalink: permalink) do
+      permalink = "#{permalink}-#{counter}"
+      counter = counter + 1
     end
 
-    def set_permalink
-      return if self.name.blank? && permalink_options[:allow_nil]
-      permalink = self.name.parameterize
-      counter = 2
-
-      while self.class.exists?(permalink: permalink) do
-        permalink = "#{permalink}-#{counter}"
-        counter = counter + 1
-      end
-
-      self.permalink ||= permalink
-    end
+    self.permalink ||= permalink
   end
 end
