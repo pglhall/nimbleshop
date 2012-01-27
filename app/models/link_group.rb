@@ -4,7 +4,6 @@ class LinkGroup < ActiveRecord::Base
 
   has_many :navigations
 
-  #only words, more than two letters
-  validates :name, format: { with: /\b\w{2,}\b/ }
+  validates :name, presence: true
 
 end

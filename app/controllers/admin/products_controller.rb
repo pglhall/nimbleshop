@@ -11,7 +11,7 @@ class Admin::ProductsController < AdminController
     end
 
     respond_to do |format|
-      format.html do
+      format.js do
         if @result
           render json: {success: 'done'}
         else

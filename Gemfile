@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 # standard rails stuff
 gem 'rails', '3.2.1'
-gem 'jquery-rails'
 gem 'will_paginate'
 gem 'pg'
 

@@ -8,7 +8,7 @@ class Admin::LinkGroupsController < AdminController
   end
 
   def show
-    render
+    render partial: 'link_group_title', locals: { link_group: @link_group }
   end
 
   def new
@@ -30,12 +30,16 @@ class Admin::LinkGroupsController < AdminController
   end
 
    def update
-    if @link_group.update_attributes(params[:link_group])
-      redirect_to admin_link_groups_url, notice: t(:successfully_updated)
-    else
-      render action: :index
+    respond_to do |format|
+      format.json do
+        if @link_group.update_attributes(params[:link_group])
+          render json: { success: @link_group.name }
+        else
+          render json: { error: @link_group.errors.full_messages }
+        end
+      end
     end
-  end 
+  end
 
   def destroy
     @link_group.destroy
@@ -45,7 +49,7 @@ class Admin::LinkGroupsController < AdminController
   private
 
   def load_link_groups
-    @link_groups = LinkGroup.all
+    @link_groups = LinkGroup.order('name asc')
   end
 
   def load_link_group

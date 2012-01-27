@@ -25,11 +25,9 @@
     <thead>
       <tr>
         <th colspan='2'>
-          <h2><%= link_group.name %></h2>
-          <%= button_to "destroy", [:admin, link_group], :method => :delete %>
-          <%= link_to '#', :id => link_group.permalink, :class => 'edit-link-group' do %>
-            <button class="btn"><%= t(:edit) %></button>
-          <% end %>  
+          <div id="link-group-<%=link_group.permalink%>">
+            <%= render partial: 'link_group_title', locals: { link_group: link_group } %>
+          </div>  
         </th>
       </tr>
       <tr>

@@ -10,25 +10,25 @@ common:
 
 development:
   s3:
-    bucket_name: nimbleshopdemo-development
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-development' %>
   bare_url_with_port: localhost:3000
   using_heroku: false
 
 test:
   s3:
-    bucket_name: nimbleshopdemo-test
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-test' %>
   bare_url_with_port: localhost:3000
   using_heroku: false
   cookie_domain: chickscorner.com
 
 staging:
   s3:
-    bucket_name: nimbleshopdemo-staging
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-staging' %>
   bare_url_with_port: chickscorner-staging.heroku.com
   using_heroku: true
 
 production:
   s3:
-    bucket_name: nimbleshopdemo-production
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-production' %>
   bare_url_with_port: chickscorner.com
   using_heroku: true

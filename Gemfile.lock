@@ -143,9 +143,6 @@ GEM
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.1)
-    jquery-rails (2.0.0)
-      railties (>= 3.2.0.beta, < 5.0)
-      thor (~> 0.14)
     json (1.6.5)
     launchy (2.0.5)
       addressable (~> 2.2.6)
@@ -258,7 +255,6 @@ DEPENDENCIES
   guard
   guard-minitest
   hashr
-  jquery-rails
   launchy
   mini_magick
   minitest (~> 2.10.1)
