@@ -4,31 +4,31 @@
 #
 common:
   s3:
-    access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] || '0R6QCF3V0RF98YB0TC02' %>
-    secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] || 'cBvUcnMbci0H4QW4UxSNu3FZt1RsCc5jiKearC/y' %>
+    access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
+    secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
   http_basic_authentication_password: <%= ENV['HTTP_BASIC_AUTHENTICATION_PASSWORD']  || 'welcome' %>
 
 development:
   s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-development' %>
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   using_heroku: false
 
 test:
   s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-test' %>
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   using_heroku: false
   cookie_domain: chickscorner.com
 
 staging:
   s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-staging' %>
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: chickscorner-staging.heroku.com
   using_heroku: true
 
 production:
   s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshopdemo-production' %>
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: chickscorner.com
   using_heroku: true

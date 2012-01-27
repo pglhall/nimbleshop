@@ -66,9 +66,9 @@ gem 'admin_data', '= 1.1.16'
 gem 'mustache'
 
 # to support various themes
-#gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
+gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
 #gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
-gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
+#gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
