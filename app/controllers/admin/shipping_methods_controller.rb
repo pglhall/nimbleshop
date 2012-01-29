@@ -2,6 +2,16 @@ class Admin::ShippingMethodsController < AdminController
 
   before_filter :load_shipping_zone, only: [:new, :create, :destroy, :edit]
 
+  def update_offset
+    @shipping_zone = ShippingZone.find_by_permalink!(params[:regional_shipping_zone_id])
+    @shipping_method = @shipping_zone.shipping_methods.find_by_id(params[:id])
+    @shipping_method.update_offset(params[:offset])
+
+    text = render_to_string(:partial => "admin/shipping_methods/shipping_method", :locals => { :shipping_method => @shipping_method })
+
+    render json: { html:  text }
+  end
+
   def new
     @shipping_method = @shipping_zone.shipping_methods.build
   end

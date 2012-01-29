@@ -19,7 +19,11 @@ Nimbleshop::Application.routes.draw do
     end
 
     resources :regional_shipping_zones, :controller => 'shipping_zones' do
-      resources :shipping_methods
+      resources :shipping_methods do
+        member do
+          put :update_offset
+        end
+      end
     end
 
     resources :shipping_zones do

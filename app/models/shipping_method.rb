@@ -41,6 +41,16 @@ class ShippingMethod < ActiveRecord::Base
     shipping_zone.is_a?(CountryShippingZone)
   end
 
+  def update_offset(value)
+    value ||= 0
+    value = value.to_f
+
+    unless country_level?
+      self.offset += value
+      save
+    end
+  end
+
   private
 
   def create_regional_shipping_methods
