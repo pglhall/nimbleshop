@@ -2,6 +2,38 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
+  describe "#update_offset" do
+    let(:shipment) { ShippingMethod.new(base_price: 10) }
+    describe "of country" do
+      it "is not going to update" do
+        shipment.shipping_zone = CountryShippingZone.new
+
+        shipment.update_offset(0.20)
+
+        shipment.offset.to_f.must_equal 0.0
+      end
+    end
+
+    describe "of state" do
+      it "is going to increase by 0.20" do
+        shipment.shipping_zone = RegionalShippingZone.new
+
+        shipment.update_offset(0.20)
+
+        shipment.offset.to_f.must_equal 0.20
+      end
+
+      it "is going to decreate by 0.20" do
+        shipment.shipping_zone = RegionalShippingZone.new
+        shipment.offset = 0.80
+
+        shipment.update_offset(-0.20)
+
+        shipment.offset.to_f.must_be_within_delta 0.60
+      end
+    end
+  end
+
   describe "#available_for" do
     describe "upper_price_limit is present" do
       let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51) }
@@ -31,7 +63,6 @@ describe ShippingMethod do
 
   describe "of country type" do
     let(:shipping) { build(:country_shipping_method) }
-    subject { shipping }
 
     it "#validations" do
       shipping.higher_price_limit = 20
@@ -47,7 +78,7 @@ describe ShippingMethod do
       shipping.wont have_valid(:lower_price_limit).when(20)
       shipping.wont have_valid(:lower_price_limit).when(40)
       shipping.must have_valid(:lower_price_limit).when(12)
-    end
+      end
 
     describe "#shipping_price" do
       it "ignores offset value" do
@@ -79,7 +110,7 @@ describe ShippingMethod do
 
       shipping.must have_valid(:lower_price_limit).when(nil)
       shipping.must have_valid(:higher_price_limit).when(nil)
-    end
+      end
 
     describe "#shipping_price" do
       it "ignores base_price value" do
