@@ -1,6 +1,5 @@
 $(function() {
-				$(".update-offset").live("ajax:success", function(t, result) {
-								var html = result.html;
-								$(t.target).parents('tr').replaceWith(html);
-				});
+  $(".update-shipping").live("ajax:success", function(t, result) {
+     $(t.target).parents('tr').replaceWith(result.html);
+  });
 });

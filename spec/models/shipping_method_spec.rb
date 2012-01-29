@@ -2,6 +2,24 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
+  let "#enable!" do
+    it "must set active flag to true" do
+      shipping = create(:shipping_method)
+      shipping.enable!
+
+      shiipping.must_be(:acitve)
+    end
+  end
+
+  let "#disable!" do
+    it "must set active flag to false" do
+      shipping = create(:shipping_method)
+      shipping.disable!
+
+      shiipping.wont_be(:acitve)
+    end
+  end
+
   describe "#update_offset" do
     let(:shipment) { ShippingMethod.new(base_price: 10) }
     describe "of country" do
@@ -47,6 +65,7 @@ describe ShippingMethod do
         shipping_method.available_for(order2).must_equal false
       end
     end
+
     describe "upper_price_limit is nil" do
       let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: nil) }
       let(:order1)           { create(:order) }

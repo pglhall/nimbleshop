@@ -22,6 +22,8 @@ Nimbleshop::Application.routes.draw do
       resources :shipping_methods do
         member do
           put :update_offset
+          put :disable
+          put :enable
         end
       end
     end

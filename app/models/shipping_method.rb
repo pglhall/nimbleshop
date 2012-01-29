@@ -51,6 +51,14 @@ class ShippingMethod < ActiveRecord::Base
     end
   end
 
+  def enable!
+    update_attributes(active: true)
+  end
+
+  def disable!
+    update_attributes(active: false)
+  end
+
   private
 
   def create_regional_shipping_methods
