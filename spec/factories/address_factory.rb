@@ -8,3 +8,14 @@ FactoryGirl.define do
     sequence(:zipcode) { |t| "name#{t}" }
   end
 end
+
+FactoryGirl.define do
+  factory :shipping_address do
+    sequence(:first_name) { |t| "name#{t}" }
+    sequence(:last_name) { |t| "name#{t}" }
+    sequence(:address1) { |t| "name#{t}" }
+    sequence(:state) { |t| "name#{t}" }
+    sequence(:country) { |t| "name#{t}" }
+    sequence(:zipcode) { |t| "name#{t}" }
+  end
+end
