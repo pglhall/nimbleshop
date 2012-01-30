@@ -98,7 +98,8 @@ describe "admin integration" do
       page.has_content?("Name can't be blank").must_equal true
       page.has_content?("Description can't be blank").must_equal true
       page.has_content?("Price is not a number").must_equal true
-      page.has_content?("Pictures picture You are not allowed to upload \"css\" files, allowed types: [\"jpg\", \"jpeg\", \"gif\", \"png\"]").must_equal true
+      mgs = %Q{Pictures picture You are not allowed to upload "css" files, allowed types: ["jpg", "jpeg", "gif", "png"]}
+      page.has_content?(msg).must_equal true
     end
 
   end
