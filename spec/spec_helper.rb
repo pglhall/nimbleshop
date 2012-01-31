@@ -16,6 +16,10 @@ require "capybara-webkit"
 require 'rails/test_help'
 
 #Capybara.default_driver = :webkit
+#Capybara.server_port = "8000"
+#Capybara.app_host = "http://localhost:8000"
+#Capybara.default_wait_time = 2000
+#
 
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
