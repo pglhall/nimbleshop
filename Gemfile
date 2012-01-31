@@ -45,7 +45,7 @@ group :test do
   gem 'capybara'
   gem "capybara_minitest_spec"
   gem "launchy"
-  #gem 'capybara-webkit'
+  gem 'capybara-webkit'
   gem 'minitest-matchers'
   gem 'valid_attribute', git: "git://github.com/wojtekmach/valid_attribute.git", branch: "minitest-matchers-11"
   gem 'capybara'

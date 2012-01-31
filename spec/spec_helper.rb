@@ -12,7 +12,7 @@ require "minitest/rails"
 require "minitest/pride"
 require "capybara/rails"
 require 'database_cleaner'
-#require "capybara-webkit"
+require "capybara-webkit"
 require 'rails/test_help'
 
 #Capybara.default_driver = :webkit
