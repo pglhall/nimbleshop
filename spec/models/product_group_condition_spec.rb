@@ -153,42 +153,52 @@ describe ProductGroupCondition do
         condition1.operator = "lt"
         condition2.operator = "contains"
 
-        search_sql.must_be_like %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" ILIKE '%george%'
+        expected_sql = %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE '%george%'
         }
+
+        search_sql.must_be_like dbify_sql(expected_sql)
       end
 
       it "should handle less than equal operation and starts with" do
         condition1.operator = "lteq"
         condition2.operator = "starts"
 
-        search_sql.must_be_like %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" ILIKE 'george%'
+        expected_sql = %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" LIKE 'george%'
         }
+
+        search_sql.must_be_like dbify_sql(expected_sql)
       end
 
       it "should handle greater than operation and ends with" do
         condition1.operator = "gt"
         condition2.operator = "ends"
-        search_sql.must_be_like %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" ILIKE '%george'
+        expected_sql = %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" LIKE '%george'
         }
+
+        search_sql.must_be_like dbify_sql(expected_sql)
       end
 
       it "should handle greater than equal  operation" do
         condition1.operator = "gteq"
         condition2.operator = "eq"
-        search_sql.must_be_like %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" ILIKE 'george'
+        expected_sql = %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" LIKE 'george'
         }
+
+        search_sql.must_be_like dbify_sql(expected_sql)
       end
 
       it "should handle equal operation and equal" do
         condition1.operator = "eq"
         condition2.operator = "eq"
-        search_sql.must_be_like %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" ILIKE 'george'
+        expected_sql = %{
+          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" LIKE 'george'
         }
+
+        search_sql.must_be_like dbify_sql(expected_sql)
       end
 
       describe "with price condition" do
@@ -205,9 +215,11 @@ describe ProductGroupCondition do
         end
 
         it "should handle search" do
-          search_sql.must_be_like %{
-            SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" ILIKE 'george%' AND "products"."price" >= 19.99
+          expected_sql = %{
+            SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."price" >= 19.99
           }
+
+          search_sql.must_be_like dbify_sql(expected_sql)
         end
       end
     end
