@@ -35,6 +35,9 @@ end
 gem 'fog'
 
 group :test do
+  # capybara-webkit hangs if run with postgresql
+  gem 'sqlite3'
+
   gem 'database_cleaner'
   gem 'growl'
   gem 'rb-fsevent'
