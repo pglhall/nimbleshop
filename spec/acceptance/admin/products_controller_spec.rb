@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe "admin integration" do
+  before do
+    Capybara.current_driver = :rack_test
+  end
 
   describe "product new" do
     it "should be at product show page" do
