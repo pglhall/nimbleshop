@@ -29,12 +29,12 @@ DatabaseCleaner.strategy = :truncation , {:except => %w[creditcards  creditcard_
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
-  include ActiveSupport::Testing::SetupAndTeardown
-  include ActiveRecord::TestFixtures
 
-  alias :method_name :__name__ if defined? :__name__
-  self.fixture_path = File.join(Rails.root, 'spec', 'fixtures')
-  fixtures :all
+  #include ActiveSupport::Testing::SetupAndTeardown
+  #include ActiveRecord::TestFixtures
+  #alias :method_name :__name__ if defined? :__name__
+  #self.fixture_path = File.join(Rails.root, 'spec', 'fixtures')
+  #fixtures :all
 
   # Add methods to be used by all specs here...
   before :each do
