@@ -25,7 +25,7 @@ Capybara.default_wait_time = 100
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 
 # Do not change to :transaction since :truncation is much faster.
-DatabaseCleaner.strategy = :truncation , {:except => %w[creditcards  creditcard_transactions]}
+DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
