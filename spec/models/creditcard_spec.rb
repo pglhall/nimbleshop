@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Creditcard do
 
-  describe "of country type" do
+  describe "#save" do
     let(:creditcard) { build(:creditcard) }
 
     it "should save" do
