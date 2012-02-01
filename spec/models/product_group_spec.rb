@@ -38,7 +38,7 @@ describe ProductGroup do
         condition.operator = 'eq'
         condition.value = 'george washington'
         group.products.must_equal [ p1 ]
-        
+
         condition.value = 'george murphy'
         group.products.must_equal [ p2 ]
 
@@ -53,7 +53,7 @@ describe ProductGroup do
         condition.operator = 'starts'
         condition.value = 'george'
         group.products.must_equal [ p1, p2 ]
-        
+
         condition.value = 'steve'
         group.products.must_equal [ p3 ]
 
@@ -68,7 +68,7 @@ describe ProductGroup do
         condition.operator = 'ends'
         condition.value = 'murphy'
         group.products.must_equal [ p2 ]
-        
+
         condition.value = 'jobs'
         group.products.must_equal [ p3 ]
 
@@ -160,9 +160,7 @@ describe ProductGroup do
 
     it "should show results" do
       products = Product.search(category.id => { op: 'eq', v: 'bangle' }, price.id => { op: 'lt', v: 50})
-      skip "subba will later look into it" do
         products.must_equal [p1]
-      end
     end
   end
 =end
