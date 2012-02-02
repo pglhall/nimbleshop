@@ -11,7 +11,7 @@
 //= require enable_payment_method
 //= require focus
 //= require mustache
-//= require condition
+//= require product-group-condition
 //= require shipit
 //= require jquery-form
 //= require ajaxify-price-variant-form
