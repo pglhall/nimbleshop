@@ -16,7 +16,7 @@ class Admin::ShippingZonesController < AdminController
 
   def update
     if @shipping_zone.update_attributes(params[:shipping_zone])
-      redirect_to admin_shipping_zones_path, notice: t(:successfully_updated)
+      redirect_to admin_shipping_zones_path, notice: t(:successfully_created)
     else
       render action: :edit
     end

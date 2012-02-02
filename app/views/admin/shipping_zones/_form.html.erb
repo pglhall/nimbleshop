@@ -13,7 +13,7 @@
 
   <fieldset>
     <div class="clearfix">
-      <%= f.label :name %>
+      <%= f.label :code, "Name" %>
       <div class="input">
         <%= f.select :code, Carmen::Country.all.map { |t| [t.name, t.alpha_2_code] }, class: 'xlarge focus', size: 30 %>
       </div>

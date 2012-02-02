@@ -3,4 +3,4 @@ class RequestSpec < MiniTest::Spec
   include Rails.application.routes.url_helpers
 end
 
-MiniTest::Spec.register_spec_type /integration$/i, RequestSpec
+MiniTest::Spec.register_spec_type /(controller|integration)$/i, RequestSpec
