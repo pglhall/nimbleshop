@@ -24,19 +24,17 @@ gem 'mini_magick'
 # to manage states of payment_status and shipping_status
 gem 'state_machine'
 
-# to load sample data. It should be gone soon
-gem 'yaml_db'
-
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'minitest-rails', git: 'git://github.com/neerajdotname/minitest-rails.git'
 end
 
-gem 'fog'
-
 group :test do
   # capybara-webkit hangs if run with postgresql
   gem 'sqlite3'
+
+  # Colorize MiniTest output and show failing tests instantly
+  gem 'minitest-colorize', git: 'https://github.com/nohupbrasil/minitest-colorize'
 
   gem 'database_cleaner'
   gem 'growl'
@@ -45,7 +43,6 @@ group :test do
   gem 'minitest', '~> 2.10.1'
   gem 'guard-minitest'
   gem 'factory_girl_rails'
-  gem 'capybara'
   gem "capybara_minitest_spec"
   gem "launchy"
   gem 'capybara-webkit'
@@ -66,12 +63,8 @@ end
 
 # visit /admin_data to manage data using browser
 gem 'admin_data', '= 1.1.16'
-gem 'mustache'
 
-# to support various themes
-#gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
-#gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
-gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
+gem 'mustache'
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
@@ -84,3 +77,12 @@ gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 #  I can't use open-struct because that does not list all the keys
 gem 'hashr'
 gem 'carmen', git: 'git://github.com/jim/carmen.git'
+
+# for uploading pictures to s3 using carrierwave
+gem 'fog'
+
+# to support various themes
+#gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
+#gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
+gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
+

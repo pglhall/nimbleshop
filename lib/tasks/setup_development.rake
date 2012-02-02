@@ -1,23 +1,3 @@
-namespace :ns do
-  task :dump_data do
-    FileUtils.rm_rf(Rails.root.join('db', 'data'))
-    ENV['dir'] = 'data'
-    Rake::Task["db:data:dump_dir"].invoke
-    dir = Rails.root.join('db', 'data')
-
-    Dir.foreach(dir) do |i|
-      if (i =~ /yml/) && !['pictures.yml', 'creditcards.yml'].include?(i)
-        FileUtils.rm( Rails.root.join('db', 'data', i ))
-      end
-    end
-  end
-
-  task :load_data do
-    ENV['dir'] = 'data'
-    Rake::Task["db:data:load_dir"].invoke
-  end
-end
-
 task :process_pictures => :environment do
   class FilelessIO < StringIO
       attr_accessor :original_filename
@@ -49,7 +29,6 @@ task :setup_development => :environment do
   end
 
   Rake::Task["db:seed"].invoke
-  Rake::Task["ns:load_data"].invoke
 
   sampledata = Sampledata.new
   sampledata.load_products
