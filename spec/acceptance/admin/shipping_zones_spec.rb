@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Shipping Method integration" do
-
   def assert_regions_created(count)
     bef = RegionalShippingZone.count
     yield
@@ -14,9 +13,7 @@ describe "Shipping Method integration" do
       assert_regions_created(13) do
         select 'Canada', :from => 'Name'
         click_button('Submit')
-        page.has_content?('created')
+        page.must_have_content('Successfuly created')
       end
     }
-  end
-
 end
