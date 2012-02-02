@@ -4,7 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
+//= require jquery-1.7.1
 //= require jquery-ui-1.8.16
 //= require accounting
 //= require shipping_address_same_as_billing_address
