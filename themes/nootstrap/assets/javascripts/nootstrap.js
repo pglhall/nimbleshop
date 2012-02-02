@@ -5,7 +5,7 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery-ui
+//= require jquery-ui-1.8.16
 //= require accounting
 //= require shipping_address_same_as_billing_address
 //= require thumbnail
