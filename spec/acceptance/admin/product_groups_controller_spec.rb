@@ -38,8 +38,7 @@ describe "Product Groups integration" do
       page.has_content?('Successfuly updated').must_equal true
       page.has_content?("name starts with 'awesome'").must_equal true
 
-      page.evaluate_script('window.confirm = function() { return true; }')
-
+      #https://github.com/thoughtbot/capybara-webkit/issues/109
       # handle_js_confirm do
       #   click_link 'Delete'
       # end
