@@ -16,4 +16,5 @@ describe "Shipping Method integration" do
         page.must_have_content('Successfuly created')
       end
     }
+  end
 end

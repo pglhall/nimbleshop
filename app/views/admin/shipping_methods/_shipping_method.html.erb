@@ -14,9 +14,9 @@
   </td>
   <td>
     <% if shipping_method.active %>
-      <%= link_to 'disable', [ :disable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping'  %>
+      <%= link_to 'disable', [ :disable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "disable-#{shipping_method.shipping_zone_id}"  %>
     <% else %>
-      <%= link_to 'enable', [ :enable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping'  %>
+      <%= link_to 'enable', [ :enable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "enable-#{shipping_method.shipping_zone_id}"  %>
     <% end %>
   </td>
 </tr>
