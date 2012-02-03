@@ -30,7 +30,7 @@ class CreateLineItems < ActiveRecord::Migration
     #  100        | 200        |
     #  100        | NULL       |
     #
-    if ActiveRecord::Base.connection.adapter_name == "PostgreSQL"
+    if ActiveRecord::Base.connection.adapter_name == "PostgreSQL__"
       sql = %Q{
         CREATE UNIQUE INDEX line_items_product_id_variant_id_idx ON line_items (product_id, variant_id);
       }
