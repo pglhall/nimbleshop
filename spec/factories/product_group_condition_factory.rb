@@ -31,10 +31,10 @@ FactoryGirl.define do
       value { '1/1/2001' }
     end
 
-    factory :date_group_condition,  :traits => [ :date_condition ]
-    factory :text_group_condition,  :traits => [ :text_condition ]
-    factory :number_group_condition,:traits => [ :number_condition ]
-    factory :price_group_condition, :traits => [ :price_condition ]
-    factory :name_group_condition,  :traits => [ :name_condition ]
+    factory :date_group_condition,   traits: [ :date_condition ]
+    factory :text_group_condition,   traits: [ :text_condition ]
+    factory :number_group_condition, traits: [ :number_condition ]
+    factory :price_group_condition,  traits: [ :price_condition ]
+    factory :name_group_condition,   traits: [ :name_condition ]
   end
 end
