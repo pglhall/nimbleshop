@@ -6,7 +6,7 @@ class Variant < ActiveRecord::Base
   validates_numericality_of :price, greater_than: 0, :if => lambda {|record| record.price.present?}
 
   validate :all_active_variations_not_empty
-  validate :ensure_no_duplicate_records
+  validate :ensure_no_duplicate_records, :ensure_only_active_variations_have_value
 
   before_save :set_parameterized_value, :all_non_active_variations_should_be_nil
   after_save  :update_variation_content
@@ -40,6 +40,7 @@ class Variant < ActiveRecord::Base
     v = v.where(variation1_value: self.variation1_value) if product.variation1.active
     v = v.where(variation2_value: self.variation2_value) if product.variation2.active
     v = v.where(variation3_value: self.variation3_value) if product.variation3.active
+    v = v.where(product_id: product.id)
     v = v.where("id != #{self.id}") if self.persisted?
     count = v.count
     if count > 0
@@ -74,6 +75,18 @@ class Variant < ActiveRecord::Base
         b = a.map { |e| [e, e.parameterize] }
         variation.update_attributes!(content: b)
       end
+    end
+  end
+
+  def ensure_only_active_variations_have_value
+    if !self.product.variation1.active && self.variation1_value.present?
+      self.errors.add(:variation1_value, "variation1 is not active and a value was provided for variation1")
+    end
+    if !self.product.variation2.active && self.variation2_value.present?
+      self.errors.add(:variation2_value, "variation2 is not active and a value was provided for variation2")
+    end
+    if !self.product.variation3.active && self.variation3_value.present?
+      self.errors.add(:variation3_value, "variation3 is not active and a value was provided for variation3")
     end
   end
 

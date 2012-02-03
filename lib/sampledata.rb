@@ -92,7 +92,8 @@ class Sampledata
   def load_products
     self.product1 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
     product1.update_attributes!(variants_enabled: true)
-    product1.variation3.update_attributes!(active: false)
+    product1.variation1.update_attributes!(active: true)
+    product1.variation2.update_attributes!(active: true)
     product1.variants.create!(variation1_value: 'Black',  variation2_value: 'Small',  price: 11)
     product1.variants.create!(variation1_value: 'White',  variation2_value: 'Small',  price: 111)
     product1.variants.create!(variation1_value: 'Black',  variation2_value: 'Medium', price: 21)

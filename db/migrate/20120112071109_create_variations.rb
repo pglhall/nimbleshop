@@ -6,7 +6,7 @@ class CreateVariations < ActiveRecord::Migration
       t.string     :name,           null: false
       t.text       :content
       t.text       :variation_type, null: false
-      t.boolean    :active,         null: false, default: true
+      t.boolean    :active,         null: false, default: false
 
       t.timestamps
     end

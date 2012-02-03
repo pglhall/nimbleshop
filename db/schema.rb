@@ -292,12 +292,12 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
 
   create_table "variations", :force => true do |t|
     t.integer  "product_id"
-    t.string   "name",                             :null => false
+    t.string   "name",                              :null => false
     t.text     "content"
-    t.text     "variation_type",                   :null => false
-    t.boolean  "active",         :default => true, :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.text     "variation_type",                    :null => false
+    t.boolean  "active",         :default => false, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
 end

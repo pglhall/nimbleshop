@@ -21,8 +21,9 @@ describe LineItem do
     describe 'with variant' do
       let(:product) { create(:product, variants_enabled: true, price: 11) }
       let(:order) { create(:order) }
-      let(:variant) { create(:variant, product: product, price: 27) }
       before do
+        product.variations.each { |variation| variation.update_attributes!(active: true) }
+        variant = create(:variant, product: product, price: 27)
         order.add(product, variant)
         @line_item = order.line_items.first
       end
