@@ -15,6 +15,7 @@ describe "Shipping Method integration" do
         select 'Canada', :from => 'Name'
         click_button('Submit')
         page.has_content?('created')
+      end
     }
   end
 
