@@ -2,12 +2,12 @@ module AdminHelper
 
   def display_payment_status(order)
     css_klass = order.payment_status == 'paid' ? 'success' : 'important'
-    %Q{<span class="label #{css_klass}"> #{@order.payment_status} </span>}.html_safe
+    %Q{<span class="label #{css_klass}"> #{order.payment_status} </span>}.html_safe
   end
 
   def display_shipping_status(order)
     css_klass = %w(shipped nothing_to_ship).include?(order.shipping_status) ? 'success' : 'important'
-    %Q{<span class="label #{css_klass}"> #{@order.shipping_status} </span>}.html_safe
+    %Q{<span class="label #{css_klass}"> #{order.shipping_status} </span>}.html_safe
   end
 
   def creditcard_logo_for(creditcard)

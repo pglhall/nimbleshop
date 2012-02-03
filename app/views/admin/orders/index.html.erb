@@ -19,7 +19,7 @@
         <td> <%= number_to_currency(order.grand_total) %> </td>
         <td><%= display_payment_status(order) %></td>
         <td><%= order.created_at.to_s(:long) %></td>
-        <td><%= order.shipped_at.to_s(:long) %></td>
+        <td><%= display_shipping_status(order) %></td>
       </tr>
     <% end %>
   </tbody>

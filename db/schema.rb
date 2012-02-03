@@ -116,12 +116,12 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "number",                                                :null => false
     t.integer  "shipping_method_id"
     t.integer  "payment_method_id"
-    t.datetime "purchased_at"
     t.string   "email"
     t.string   "status",             :default => "open",                :null => false
     t.string   "payment_status",     :default => "abandoned_early",     :null => false
     t.string   "shipping_status",    :default => "nothing_to_ship",     :null => false
     t.string   "checkout_status",    :default => "items_added_to_cart", :null => false
+    t.datetime "shipped_at"
     t.text     "settings"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
