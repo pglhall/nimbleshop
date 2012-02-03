@@ -89,6 +89,9 @@ GEM
     addressable (2.2.6)
     admin_data (1.1.16)
       will_paginate (>= 3.0.0)
+    airbrake (3.0.9)
+      activesupport
+      builder
     archive-tar-minitar (0.5.2)
     arel (3.0.0)
     braintree (2.13.2)
@@ -251,6 +254,7 @@ PLATFORMS
 DEPENDENCIES
   activemerchant
   admin_data (= 1.1.16)
+  airbrake
   binary_merchant!
   capybara
   capybara-webkit

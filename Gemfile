@@ -86,3 +86,4 @@ gem 'fog'
 #gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
 gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
 
+gem "airbrake"
