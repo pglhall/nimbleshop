@@ -1,5 +1,8 @@
 class Order < ActiveRecord::Base
 
+  # to allow extensions to keep data
+  store :settings
+
   attr_protected :number
   attr_accessor :validate_email
 

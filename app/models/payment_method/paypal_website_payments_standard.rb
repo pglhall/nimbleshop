@@ -7,7 +7,7 @@ class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
                   :paypal_website_payments_standard_request_submission_url
 
   def url(order)
-    values = {
+    data = {
       business: self.paypal_website_payments_standard_merchant_email_address,
       cmd: '_cart',
       upload: 1,
@@ -18,14 +18,16 @@ class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
     }
 
     order.line_items.each_with_index do |item, index|
-      values.merge!({
+      data.merge!({
         "amount_#{index+1}"      => item.product.price,
         "item_name_#{index+1}"   => item.product.name,
         "item_number_#{index+1}" => item.id,
         "quantity_#{index+1}"    => item.quantity
       })
     end
-    self.paypal_website_payments_standard_request_submission_url + values.to_query
+    final_url = self.paypal_website_payments_standard_request_submission_url + values.to_query
+    Rails.logger.info "final_url: #{final_url}"
+    final_url
   end
 
 end

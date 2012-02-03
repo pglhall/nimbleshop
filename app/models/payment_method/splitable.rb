@@ -1,3 +1,4 @@
+
 Order.class_eval do
   store_accessor :settings, :splitable_api_secret
 end
@@ -8,34 +9,34 @@ class PaymentMethod::Splitable < PaymentMethod
                               :splitable_logo_url, :splitable_expires_in
 
   def url(order, request)
-    product = order.line_items.first.product
-
-    data = {}
-
-    data.merge!(api_key: self.splitable_api_key)
-    data.merge!(title: product.name)
-    data.merge!(total_amount: (order.grand_total*100).to_i)
-    data.merge!(invoice: order.number)
-
-    api_secret = ActiveSupport::SecureRandom.hex(10)
-    order.splitable_api_secret = api_secret
+    order.splitable_api_secret = SecureRandom.hex(10)
     order.save
 
-    data.merge!(api_secret: api_secret)
-    data.merge!(details_url: request.protocol + request.host_with_port + "/products/#{product.permalink}")
+    product = order.line_items.first.product
+    api_notify_url = request.protocol + request.host_with_port + '/payment_notifications/splitable'
 
-    t = request.protocol + request.host_with_port + '/payment_notifications/splitable'
-    Rails.logger.info t
-    data.merge!(api_notify_url: t)
+    data = {api_key: self.splitable_api_key,
+            total_amount: (order.grand_total*100).to_i,
+            invoice: order.number,
+            api_secret: order.splitable_api_secret,
+            api_notify_url: api_notify_url,
+            logo_url: self.splitable_logo_url,
+            expires_in: self.splitable_expires_in}
 
-    data.merge!(logo_url: self.splitable_logo_url)
-    data.merge!(product_picture_url: request.protocol + request.host_with_port + product.picture.picture_url(:small))
-
-    data.merge!(expires_in: self.splitable_expires_in)
+    order.line_items.each_with_index do |item, i|
+      index = i + 1
+      data.merge!({
+        "amount_#{index}"      => item.product.price,
+        "item_name_#{index}"   => item.product.name,
+        "item_number_#{index}" => item.id,
+        "quantity_#{index}"    => item.quantity,
+        "url_#{index}"           => request.protocol + request.host_with_port + "/products/#{item.product.permalink}"
+      })
+    end
 
     Rails.logger.info data.to_yaml
-
-    self.splitable_submission_url + data.to_query
+    final_url = self.splitable_submission_url + data.to_query
+    final_url
   end
 
 end
