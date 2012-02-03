@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe CountryShippingZone do
 
-  describe "#before_validation" do
-    it "should assign name from carmen" do
+  describe "should assign name from carmen" do
+    it {
       zone = CountryShippingZone.new(code: "US")
       zone.valid?
 
       zone.name.must_equal "United States"
-    end
+    }
   end
 
   describe "#validations" do
