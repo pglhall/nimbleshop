@@ -84,9 +84,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.datetime "updated_at",                                        :null => false
   end
 
-  add_index "line_items", ["product_id", "variant_id"], :name => "line_items_product_id_variant_id_idx", :unique => true
-  add_index "line_items", ["product_id"], :name => "line_items_product_id_variant_id_null_idx", :unique => true
-
   create_table "link_groups", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "permalink",  :null => false
