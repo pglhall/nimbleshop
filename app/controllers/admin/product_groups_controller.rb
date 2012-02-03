@@ -3,7 +3,7 @@ class Admin::ProductGroupsController < AdminController
   before_filter :load_product_group, only: [:edit, :update]
 
   def index
-    @product_groups = ProductGroup.all
+    @product_groups = ProductGroup.order('name asc')
   end
 
   def new
