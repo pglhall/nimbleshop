@@ -57,6 +57,7 @@ class Order < ActiveRecord::Base
 
   def after_shipped
     Mailer.shipping_notification(self.number).deliver
+    self.update_attributes!(shipped_at: Time.now)
     if self.payment_status.authorized?
       transaction = self.creditcard_transactions.first
       if GatewayProcessor.new(payment_method_permalink: 'authorize-net', amount: self.total_amount).capture(transaction)
