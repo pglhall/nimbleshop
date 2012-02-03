@@ -3,11 +3,10 @@ require 'spec_helper'
 describe Creditcard do
 
   describe "#save" do
-    let(:creditcard) { build(:creditcard) }
-
-    it "should save" do
+    it {
+      creditcard = build(:creditcard)
       creditcard.save(validate: false)
       Creditcard.count.must_equal 1
-      end
+    }
   end
 end
