@@ -7,7 +7,7 @@
         <td>
           <h3>
             <%= form_tag("/admin/payment_methods/#{payment_method.id}", :method => :put) do %>
-              <%= check_box_tag 'enabled', '1', payment_method.enabled ,class: 'submittable' %>
+              <%= check_box_tag 'enabled', '1', payment_method.enabled, class: 'submittable', id: payment_method.permalink %>
             <% end %>
           </h3>
         </td>
