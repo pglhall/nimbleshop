@@ -38,11 +38,11 @@ describe "Product Groups integration" do
       page.has_content?('Successfuly updated').must_equal true
       page.has_content?("name starts with 'awesome'").must_equal true
 
-      #https://github.com/thoughtbot/capybara-webkit/issues/109
-      # handle_js_confirm do
-      #   click_link 'Delete'
-      # end
-      # page.has_content?("name starts with 'awesome'").must_equal false
+#      https://github.com/thoughtbot/capybara-webkit/issues/109
+      handle_js_confirm do
+        click_link 'Delete'
+      end
+      page.has_content?("name starts with 'awesome'").must_equal false
 
     end
   end
