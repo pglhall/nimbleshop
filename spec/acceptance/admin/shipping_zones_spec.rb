@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Shipping Method integration" do
+describe "Shipping zone acceptance" do
   def assert_regions_created(count)
     bef = RegionalShippingZone.count
     yield
