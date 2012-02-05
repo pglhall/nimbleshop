@@ -15,7 +15,10 @@ class Mailer < ActionMailer::Base
 
     # TODO ideally I should be able to use current_shop below
     @shop = Shop.first
-    @payment_date = @order.creditcard_transactions.first.created_at.to_s(:long)
+
+    # TODO ideally it should be the other way round gut creating creditcard_transaction record
+    # is a bit difficult in test. should be fixed soon
+    @payment_date = @order.created_at.to_s(:long) || @order.creditcard_transactions.first.created_at.to_s(:long)
 
     mail_options = {:to => @order.email, :subject => subject}
     mail(mail_options)
