@@ -1,6 +1,6 @@
 class Admin::ProductGroupsController < AdminController
 
-  before_filter :load_product_group, only: [:edit, :update]
+  before_filter :load_product_group, only: [:edit, :update, :destroy]
 
   def index
     @product_groups = ProductGroup.order('name asc')
@@ -30,6 +30,11 @@ class Admin::ProductGroupsController < AdminController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @product_group.destroy
+    redirect_to admin_product_groups_path, notice: t(:successfully_deleted)
   end
 
   private
