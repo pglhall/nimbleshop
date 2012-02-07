@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Order do
+
   describe '#available_shipping_methods' do
     it {
       order = create(:order)
@@ -10,4 +11,5 @@ describe Order do
       order.available_shipping_methods.size.must_equal 1
     }
   end
+
 end
