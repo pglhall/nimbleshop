@@ -11,3 +11,4 @@ public/uploads
 .DS_Store
 .tddium*
 .tddium
+db/test.sqlite3-journal

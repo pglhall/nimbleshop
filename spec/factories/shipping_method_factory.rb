@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :shipping_method do
     sequence(:name) { |t| "name#{t}" }
+    active true
 
     trait :country do
       association :shipping_zone, factory: :country_shipping_zone

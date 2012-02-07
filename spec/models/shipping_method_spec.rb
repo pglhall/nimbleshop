@@ -2,6 +2,26 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
+  describe "making country level shipping method inactive should make children inactive" do
+    describe "updating record" do
+      it {
+        shipping_method = create(:country_shipping_method)
+        region = shipping_method.regions.first
+        region.active.must_equal true
+        shipping_method.update_attributes!(active: false)
+        region.reload
+        region.active.must_equal false
+      }
+    end
+    describe "creating record" do
+      it {
+        shipping_method = create(:country_shipping_method, active: false)
+        region = shipping_method.regions.first
+        region.active.must_equal false
+      }
+    end
+  end
+
   describe "#enable! #disable!" do
     it {
       shipping = create(:country_shipping_method)
@@ -47,7 +67,7 @@ describe ShippingMethod do
   end
 
   describe "#available_for" do
-    describe "upper_price_limit is present" do
+    describe "with one shipping method" do
       it {
         shipping_method = create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51)
         CountryShippingZone.count.must_equal 1
@@ -58,6 +78,33 @@ describe ShippingMethod do
         address.state_code.must_equal 'FL'
         RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'}).must_equal 1
 
+        ShippingMethod.available_for(25, address).size.must_equal 1
+        ShippingMethod.available_for(200, address).size.must_equal 0
+      }
+    end
+
+    describe "with two shipping methods" do
+      it {
+        create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'General')
+        create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'Express')
+        RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'}).must_equal 2
+
+        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
+        ShippingMethod.available_for(25, address).size.must_equal 2
+        ShippingMethod.available_for(200, address).size.must_equal 0
+      }
+    end
+    describe "with two shipping methods and make one active" do
+      it {
+        s1 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, name: 'General')
+        s2 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, active: false, name: 'Express')
+        s1.active.must_equal true
+        s1.regions.each { |r| r.active.must_equal true }
+
+        s2.active.must_equal false
+        s2.regions.each { |r| r.active.must_equal false }
+
+        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
         ShippingMethod.available_for(25, address).size.must_equal 1
         ShippingMethod.available_for(200, address).size.must_equal 0
       }
