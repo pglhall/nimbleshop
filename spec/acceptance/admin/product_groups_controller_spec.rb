@@ -5,6 +5,7 @@ describe "Product Groups integration" do
   before do
     create(:price_group_condition)
     create(:date_group_condition)
+    Capybara.current_driver = :webkit
   end
 
   describe "good path" do
