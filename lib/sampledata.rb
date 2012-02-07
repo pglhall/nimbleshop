@@ -99,6 +99,9 @@ class Sampledata
     ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
                            lower_price_limit: 10, upper_price_limit: 999999)
 
+    ShippingMethod.create!(name: 'Express shipping', base_price: 30, shipping_zone_id: sz.id,
+                           lower_price_limit: 10, upper_price_limit: 999999)
+
     return
     ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
                            lower_price_limit: 10, upper_price_limit: 20)
