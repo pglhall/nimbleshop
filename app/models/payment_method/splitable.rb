@@ -20,16 +20,14 @@ class PaymentMethod::Splitable < PaymentMethod
             invoice: order.number,
             api_secret: order.splitable_api_secret,
             api_notify_url: api_notify_url,
-            logo_url: self.splitable_logo_url,
             shipping: (order.shipping_method.shipping_cost * 100).to_i,
             expires_in: self.splitable_expires_in}
 
     order.line_items.each_with_index do |item, i|
       index = i + 1
       data.merge!({
-        "amount_#{index}"      => item.product.price,
+        "amount_#{index}"      => (item.product.price * 100).to_i,
         "item_name_#{index}"   => item.product.name,
-        "item_number_#{index}" => item.id,
         "quantity_#{index}"    => item.quantity,
         "url_#{index}"           => request.protocol + request.host_with_port + "/products/#{item.product.permalink}"
       })
