@@ -2,66 +2,47 @@ require 'spec_helper'
 
 describe CountryShippingZone do
 
-  describe "should assign name from carmen" do
+  describe "assign name from carmen" do
     it {
-      zone = CountryShippingZone.new(code: "US")
-      zone.valid?
+      create(:country_shipping_zone).name.must_equal "United States"
+      RegionalShippingZone.count.must_equal 57
+    }
+  end
 
-      zone.name.must_equal "United States"
+  describe "testing that factory take country_code takes override" do
+    it {
+      create(:country_shipping_zone, country_code: 'IN').name.must_equal "India"
     }
   end
 
   describe "#validations" do
-
-    it "should succed on valid carmen country code" do
-      zone = CountryShippingZone.new(code: 'US')
+    it "should not accept wrong country code" do
+      zone = build(:country_shipping_zone, country_code: 'XXX')
       zone.valid?
-
-      zone.errors[:code].must_be(:empty?)
+      zone.errors[:country_code].wont_be(:empty?)
+      zone.errors.full_messages.sort.first.must_equal "Country code is invalid"
     end
 
-    it "raise errors on invalid carmen country code" do
-      zone = CountryShippingZone.new(code: 'ZZ')
-      zone.valid?
-
-      zone.errors[:code].wont_be(:empty?)
-    end
-
-    it "raise errors on nil carmen code" do
+    it "ensures that country code is required" do
       zone = CountryShippingZone.new
       zone.valid?
-
-      zone.errors[:code].wont_be(:empty?)
+      zone.errors[:country_code].wont_be(:empty?)
+      zone.errors.full_messages.sort.first.must_equal "Country code can't be blank"
     end
   end
 
   describe "#callbacks" do
     it "should create all regions from canada" do
-      canada  = CountryShippingZone.create(code: 'CA', name: 'Canada')
+      canada  = create(:country_shipping_zone, country_code: 'CA')
       regions = Carmen::Country.coded("CA").subregions
-
       canada.regional_shipping_zones.length.must_equal regions.length
     end
 
-    it "should create all regions from usa" do
-      usa     = CountryShippingZone.create(code: 'US', name: 'USA')
+    it "should create all regions for USA" do
+      usa     = create(:country_shipping_zone, country_code: 'US')
       regions = Carmen::Country.coded("US").subregions
-
       usa.regional_shipping_zones.length.must_equal regions.length
     end
   end
 
-  describe "#create_by_carmen_code" do
-    it "should create by carmen code" do
-      zone    = CountryShippingZone.create_by_carmen_code('US')
-      country = Carmen::Country.coded("US")
-      
-      zone.name.must_equal country.name
-      zone.must_be(:persisted?)
-    end
-
-    it "should return nil for invalid carmen code" do
-      CountryShippingZone.create_by_carmen_code('ZZ').must_be(:nil?)
-    end
-  end
 end

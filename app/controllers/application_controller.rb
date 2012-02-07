@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_shop
+  before_filter :load_early, :set_shop
   helper_method :current_order, :current_shop
 
   protected
@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def reset_order
     session[:order_id] = nil
+  end
+
+  def load_early
+    Address
   end
 
   def set_shop

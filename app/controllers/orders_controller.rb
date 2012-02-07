@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   def update_shipping_method
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
       current_order.update_attributes(shipping_method_id: params[:order][:shipping_method_id])
-      #redirect_to  new_creditcard_payment_path
       redirect_to  new_payment_processor_path
     else
       current_order.errors.add(:base, 'Please select a shipping method')
@@ -28,7 +27,9 @@ class OrdersController < ApplicationController
   def edit
     @page_title = 'Shipping information'
     unless current_order.shipping_address
-      current_order.build_shipping_address
+      a = current_order.build_shipping_address
+      a.country_code = 'US'
+      a.state_code = 'MD'
       current_order.shipping_address.use_for_billing = true
     end
     current_order.build_billing_address unless current_order.billing_address

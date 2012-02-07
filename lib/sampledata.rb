@@ -1,6 +1,24 @@
 class Sampledata
   attr_accessor :product1, :product2, :product3, :product4, :product5, :product6, :product7
 
+  def process_link_group
+    link_group = LinkGroup.create!(name: 'Main-nav')
+    link_home = Link.create!(name: 'Home', url: '/')
+    Navigation.create!(link_group: link_group, navigeable: link_home)
+  end
+
+  def load_shop
+      Shop.create!( name:           'nimbleshopdemo',
+                   theme:           'nootstrap',
+                   phone_number:    '800-456-7890',
+                   contact_email:   'johnnie.walker@nimbleshop.com',
+                   twitter_handle:  '@nimbleshop',
+                   intercept_email: 'johnnie.walker@nimbleshop.com',
+                   from_email:      'support@nimbleshop.com',
+                   gateway:         'AuthorizeNet',
+                   facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
+  end
+
   def process_pictures
     puts "processing pictures. Might take a while ...."
     process_picture('pic1_1.jpg', product1)
@@ -77,7 +95,11 @@ class Sampledata
   end
 
   def load_shipping_methods
-    sz = CountryShippingZone.create!(name: 'USA', code: 'US')
+    sz = CountryShippingZone.create!(country_code: 'US')
+    ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
+                           lower_price_limit: 10, upper_price_limit: 999999)
+
+    return
     ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
                            lower_price_limit: 10, upper_price_limit: 20)
     ShippingMethod.create!(name: 'Ground shipping', base_price: 20, shipping_zone_id: sz.id,

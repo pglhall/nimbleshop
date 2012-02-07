@@ -11,7 +11,7 @@ describe "Shipping zone integration" do
     it {
       visit new_admin_shipping_zone_path
       assert_regions_created(13) do
-        select 'Canada', :from => 'Name'
+        select 'Canada', :from => 'Country name'
         click_button('Submit')
         page.must_have_content('Successfuly created')
       end

@@ -76,7 +76,8 @@ class Order < ActiveRecord::Base
   end
 
   def available_shipping_methods
-    ShippingMethod.order('base_price asc').all.select { |e| e.available_for(self) }
+    ShippingMethod.available_for(amount, shipping_address)
+    #ShippingMethod.order('base_price asc').all.select { |e| e.available_for(order.amount, order.shipping_address) }
   end
 
   def item_count

@@ -8,7 +8,7 @@ describe Order do
                                                       lower_price_limit: 1,
                                                       upper_price_limit: 199)  }
     before do
-      order.shipping_address = create(:shipping_address, state: 'Florida', country: 'USA')
+      order.shipping_address = create(:shipping_address)
       shipping_method
     end
     it 'should have right values' do

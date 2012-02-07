@@ -16,15 +16,17 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "addresses", :force => true do |t|
     t.string   "type"
     t.integer  "order_id"
-    t.string   "first_name"
+    t.string   "first_name",                        :null => false
     t.string   "last_name"
     t.string   "company"
-    t.string   "address1"
+    t.string   "address1",                          :null => false
     t.string   "address2"
-    t.string   "city"
+    t.string   "city",                              :null => false
     t.string   "zipcode"
-    t.string   "country"
-    t.string   "state"
+    t.string   "country_name",                      :null => false
+    t.string   "country_code",                      :null => false
+    t.string   "state_name",                        :null => false
+    t.string   "state_code"
     t.string   "phone"
     t.string   "fax"
     t.boolean  "use_for_billing", :default => true, :null => false
@@ -249,7 +251,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "shipping_zones", :force => true do |t|
     t.string   "name"
     t.string   "permalink",                :null => false
-    t.string   "code"
+    t.string   "country_code"
+    t.string   "state_code"
     t.string   "type"
     t.integer  "country_shipping_zone_id"
     t.datetime "created_at",               :null => false

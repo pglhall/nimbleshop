@@ -1,6 +1,6 @@
 class ShippingMethod < ActiveRecord::Base
 
-  alias_attribute :shipping_cost,       :base_price
+  alias_attribute :shipping_cost,       :shipping_price
   alias_attribute :higher_price_limit,  :upper_price_limit
 
   belongs_to :shipping_zone
@@ -20,12 +20,19 @@ class ShippingMethod < ActiveRecord::Base
   belongs_to  :parent,  class_name: 'ShippingMethod', foreign_key: 'parent_id'
   has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id'
 
-  # indicates if the shipping method is available for the given order
-  def available_for(order)
-    if upper_price_limit
-      (order.amount >= (lower_price_limit || parent.lower_price_limit)) && (order.amount <= upper_price_limit)
+  # return shipping methods available to the given address for the given amount
+  def self.available_for(amount, shipping_address)
+    country_code = shipping_address.country_code
+    state_code   = shipping_address.state_code
+
+    if state_code
+      scoped = self.scoped.where("? >= lower_price_limit", amount).where("? <= upper_price_limit", amount)
+      scoped = scoped.joins(:shipping_zone).where(shipping_zones: {country_code: shipping_address.country_code})
+      scoped = scoped.where(shipping_zones: {state_code: shipping_address.state_code})
+      scoped.all
     else
-      order.amount >= (lower_price_limit || parent.lower_price_limit)
+      scope = CountryShippingZone.where(country_code: country_code)
+      scope.where("lower_price_limit >= #{amount}").where("uppper_price_limit <= #{amount}")
     end
   end
 
@@ -63,7 +70,10 @@ class ShippingMethod < ActiveRecord::Base
 
   def create_regional_shipping_methods
     shipping_zone.regional_shipping_zones.each do |t|
-      regions.build(shipping_zone: t, name: name)
+      regions.build(shipping_zone: t,
+                    name: name,
+                    lower_price_limit: lower_price_limit,
+                    upper_price_limit: upper_price_limit)
     end
   end
 end

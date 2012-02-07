@@ -35,19 +35,9 @@ task :setup_development => :environment do
 
   PaymentMethod.load_default!
 
-  shop = Shop.create!( name:            'nimbleshopdemo',
-                       theme:           'nootstrap',
-                       phone_number:    '800-456-7890',
-                       contact_email:   'johnnie.walker@nimbleshop.com',
-                       twitter_handle:  '@nimbleshop',
-                       intercept_email: 'johnnie.walker@nimbleshop.com',
-                       from_email:      'support@nimbleshop.com',
-                       gateway:         'AuthorizeNet',
-                       facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
+  sampledata.load_shop
 
-  link_group = LinkGroup.create!(name: 'Main-nav')
-  link_home = Link.create!(name: 'Home', url: '/')
-  Navigation.create!(link_group: link_group, navigeable: link_home)
+  sampledata.process_link_group
 
   sampledata.load_price_information
   sampledata.load_category_information

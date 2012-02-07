@@ -2,22 +2,16 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
-  let "#enable!" do
-    it "must set active flag to true" do
-      shipping = create(:shipping_method)
+  describe "#enable! #disable!" do
+    it {
+      shipping = create(:country_shipping_method)
+
       shipping.enable!
+      shipping.must_be(:active)
 
-      shiipping.must_be(:acitve)
-    end
-  end
-
-  let "#disable!" do
-    it "must set active flag to false" do
-      shipping = create(:shipping_method)
       shipping.disable!
-
-      shiipping.wont_be(:acitve)
-    end
+      shipping.wont_be(:active)
+    }
   end
 
   describe "#update_offset" do
@@ -54,29 +48,19 @@ describe ShippingMethod do
 
   describe "#available_for" do
     describe "upper_price_limit is present" do
-      let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51) }
-      let(:order1)           { create(:order) }
-      let(:order2)           { create(:order) }
-      it '' do
-        order1.line_items << create(:line_item)
-        order2.line_items << create(:line_item) << create(:line_item)
+      it {
+        shipping_method = create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51)
+        CountryShippingZone.count.must_equal 1
+        RegionalShippingZone.count.must_equal 57
+        shipping_method.shipping_zone.country_code.must_equal 'US'
 
-        shipping_method.available_for(order1).must_equal true
-        shipping_method.available_for(order2).must_equal false
-      end
-    end
+        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
+        address.state_code.must_equal 'FL'
+        RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'}).must_equal 1
 
-    describe "upper_price_limit is nil" do
-      let(:shipping_method)  { create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: nil) }
-      let(:order1)           { create(:order) }
-      let(:order2)           { create(:order) }
-      it '' do
-        order1.line_items << create(:line_item)
-        order2.line_items << create(:line_item) << create(:line_item)
-
-        shipping_method.available_for(order1).must_equal true
-        shipping_method.available_for(order2).must_equal true
-      end
+        ShippingMethod.available_for(25, address).size.must_equal 1
+        ShippingMethod.available_for(200, address).size.must_equal 0
+      }
     end
   end
 

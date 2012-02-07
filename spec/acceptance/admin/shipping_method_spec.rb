@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Shipping Method integration" do
   def create_shipping_zone(code)
-    CountryShippingZone.create_by_carmen_code(code)
+    create(:country_shipping_zone, country_code: code)
   end
 
   describe "add new shipping method to country" do
