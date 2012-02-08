@@ -25,8 +25,10 @@ class PaymentMethod::PaypalWebsitePaymentsStandard < PaymentMethod
         "quantity_#{index+1}"    => item.quantity
       })
     end
-    final_url = self.paypal_website_payments_standard_request_submission_url + values.to_query
+    Rails.logger.info data.to_yaml
+    final_url = self.paypal_website_payments_standard_request_submission_url + data.to_query
     Rails.logger.info "final_url: #{final_url}"
+    Rails.logger.info "final_url size: #{final_url.size}"
     final_url
   end
 

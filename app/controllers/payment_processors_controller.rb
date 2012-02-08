@@ -7,7 +7,19 @@ class PaymentProcessorsController < ApplicationController
     Rails.env.production? || Rails.env.staging?
   }
 
+  def set_splitable_data
+    order = current_order
+    product = order.line_items.first.product
+    api_notify_url = request.protocol + request.host_with_port + '/payment_notifications/splitable'
+
+  end
+
   def new
+    if @splitable_record = PaymentMethod::Splitable.first
+      @base_data_for_splitable = @splitable_record.base_data(current_order, request)
+      @line_items_data_for_splitable = @splitable_record.line_items_data(current_order, request)
+    end
+
     # If there is only one payment method enabled and that payment method
     # splitable or paypal then just redirect to that page
     if url = payment_method_url
