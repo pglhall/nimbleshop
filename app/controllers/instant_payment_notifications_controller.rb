@@ -38,15 +38,40 @@ class InstantPaymentNotificationsController < ApplicationController
   # curl -d "api_secret=dsdfdsfswvf3dsdf&invoice=923204115&payment_status=paid" http://localhost:3000/instant_payment_notifications/splitable
   #
   def splitable
-    Rail.logger.info "splitable callback received: #{params.to_yaml}"
-    order = Order.find_by_number(params[:invoice])
-    if order.preferred_api_secret == params[:api_secret]
-      order.update_attributes!(status: params[:payment_status])
-      render :nothing => true
+
+    # this is line to make the file load which has class_eval code for Order
+    PaymentMethod::Splitable
+
+    Rails.logger.info "splitable callback received: #{params.to_yaml}"
+    error = validate_splitable_webhook
+
+    if error
+      Rails.logger.info "webhook with data #{params.to_yaml} was rejected"
+      Rails.logger.info "error: #{error}"
+      render nothing: true, status: 403
     else
-      # TODO do not return 200
-      render :nothing => true
+      order = Order.find_by_number(params[:invoice])
+      order.payment_status = params[:payment_status]
+      order.payment_method = PaymentMethod::Splitable.first
+      order.splitable_transaction_number = params[:transaction_id]
+      order.save!
+      render nothing: true
     end
+  end
+
+  private
+
+  def validate_splitable_webhook
+    unless order = Order.find_by_number(params[:invoice])
+      return "invoice number #{params[:invoice]} does not match}"
+    end
+
+    unless order.splitable_api_secret == params[:api_secret]
+      return "api_secret does not match"
+    end
+    return "payment_status is blank" if params[:payment_status].blank?
+    return "transaction_id is blank" if params[:transaction_id].blank?
+
   end
 
 end
