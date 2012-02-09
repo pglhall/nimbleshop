@@ -17,6 +17,14 @@
   <div class='span10 boxy'>
     <h3> Payment status <%= display_payment_status(@order) %> </h3>
 
+    <% if PaymentMethod::Splitable === @order.payment_method %>
+      <p>
+        Payment method: <%= @order.payment_method.name %> <br />
+        Transaction Id: <%= @order.splitable_transaction_number %>
+
+      </p>
+    <% end %>
+
     <% if @order.creditcard_transactions.any? %>
       <p>
         <table style='margin-bottom:0px;'>

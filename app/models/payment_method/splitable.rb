@@ -1,5 +1,5 @@
 Order.class_eval do
-  store_accessor :settings, :splitable_api_secret
+  store_accessor :settings, :splitable_api_secret, :splitable_transaction_number
 end
 
 class PaymentMethod::Splitable < PaymentMethod
@@ -12,7 +12,7 @@ class PaymentMethod::Splitable < PaymentMethod
     order.save
 
     product = order.line_items.first.product
-    api_notify_url = request.protocol + request.host_with_port + '/payment_notifications/splitable'
+    api_notify_url = request.protocol + request.host_with_port + '/instant_payment_notifications/splitable'
 
     { api_key: self.splitable_api_key,
       total_amount: (order.grand_total*100).to_i,
