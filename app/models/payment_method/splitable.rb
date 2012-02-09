@@ -13,7 +13,7 @@ class PaymentMethod::Splitable < PaymentMethod
 
     product = order.line_items.first.product
     #api_notify_url = request.protocol + request.host_with_port + '/instant_payment_notifications/splitable'
-    api_notify_url = 'http' + request.host_with_port + '/instant_payment_notifications/splitable'
+    api_notify_url = 'http://' + request.host_with_port + '/instant_payment_notifications/splitable'
 
     { api_key: self.splitable_api_key,
       total_amount: (order.grand_total*100).to_i,
