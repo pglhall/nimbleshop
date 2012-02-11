@@ -7,6 +7,19 @@ class PaymentMethod::Splitable < PaymentMethod
   store_accessor :settings, :splitable_api_key, :splitable_api_secret, :splitable_submission_url,
                               :splitable_logo_url, :splitable_expires_in
 
+  def process_request(order, request)
+    conn = Faraday.new(:url => self.splitable_submission_url) do |builder|
+      builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
+      builder.use Faraday::Response::Logger     # log the request to STDOUT
+      builder.use Faraday::Adapter::NetHttp     # make http requests with Net::HTTP
+    end
+
+    options = base_data(order, request).merge(line_items_data(order, request))
+    response = conn.post '/api/splits/create', options
+    data = ActiveSupport::JSON.decode(response.body)
+    data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
+  end
+
   def base_data(order, request)
     order.splitable_api_secret = SecureRandom.hex(10)
     order.save

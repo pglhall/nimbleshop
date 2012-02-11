@@ -5,6 +5,9 @@ gem 'rails', '3.2.1'
 gem 'will_paginate'
 gem 'pg'
 
+# splitable needs this to send POST request
+gem 'faraday'
+
 # heroku cedar stack needs it
 gem 'thin'
 

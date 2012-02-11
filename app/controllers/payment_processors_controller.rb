@@ -37,7 +37,13 @@ class PaymentProcessorsController < ApplicationController
     when 'splitable'
       payment_method = PaymentMethod::Splitable.first
       order.update_attributes!(payment_method: payment_method)
-      redirect_to payment_method.url(order, request)
+      error, url = payment_method.process_request(order, request)
+
+      if error
+        render text: error
+      else
+        redirect_to url
+      end
 
     when 'paypal'
 
