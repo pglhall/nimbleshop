@@ -1,47 +1,7 @@
 <div class='row'>
-  <div class='span2'>&nbsp;</div>
-  <div class='span3'>
-    <h4><%= @shop_by_category_link_group.name %></h4>
-    <ul class='unstyled'>
-      <% @shop_by_category_link_group.navigations.each do |nav| %>
-        <li>
-          <%= link_to nav.navigeable.name, nav.navigeable %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
 
-  <div class='span5'>
-    <h4><%= @shop_by_price_link_group.name %></h4>
-    <ul class='unstyled'>
-      <% @shop_by_price_link_group.navigations.each do |nav| %>
-        <li>
-          <%= link_to nav.navigeable.name, nav.navigeable %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render 'sidebar' %>
+
+  <%= render 'products', products: @products %>
+
 </div>
-
-<div class='row'>
-  <div class='span12'>
-
-    <% @products.in_groups_of(3) do |group| %>
-      <table>
-        <tr>
-          <% group.each do |product| %>
-            <% if product.blank? %>
-              &nbsp;
-            <% else %>
-              <td>
-                <%= render 'products', product: product %>
-              </td>
-            <% end %>
-          <% end %>
-        </tr>
-      </table>
-    <% end %>
-
-  </div>
-</div>
-

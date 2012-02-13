@@ -1,11 +1,17 @@
-<ul class='thumbnails'>
-  <li class='span1'>&nbsp;</li>
-  <li class='span3'>
-    <%= link_to(image_tag(product.picture.picture_url(:medium)), product, class: 'thumbnail') %>
-    <p>
-      <%= number_to_currency(product.price) %>
-      <br />
-      <%= link_to(truncate(product.name, length: 30), product, title: product.name) %>
-    </p>
-  </li>
-</ul>
+<div class='span10'>
+  <% products.in_groups_of(3) do |group| %>
+    <table>
+      <tr>
+        <% group.each do |product| %>
+          <td>
+            <% if product.blank? %>
+              &nbsp;
+            <% else %>
+              <%= render 'products/product', product: product %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+  <% end %>
+</div>

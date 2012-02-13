@@ -1,22 +1,7 @@
 <div class='row'>
-  <div class='span12'>
 
-    <% @products.in_groups_of(3) do |group| %>
-      <table>
-        <tr>
-          <% group.each do |product| %>
-            <% if product.blank? %>
-              &nbsp;
-            <% else %>
-              <td>
-                <%= render 'products/products', product: product %>
-              </td>
-            <% end %>
-          <% end %>
-        </tr>
-      </table>
-    <% end %>
+  <%= render 'products/sidebar' %>
 
-  </div>
+  <%= render 'products/products', products: @products %>
+
 </div>
-

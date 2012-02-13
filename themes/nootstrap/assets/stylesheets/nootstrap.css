@@ -11,3 +11,7 @@
 #complete p.button {
   margin: 10px 0 10px 0;
 }
+
+.thumbnails .product .price {
+  color: #999;
+}

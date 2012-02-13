@@ -1,0 +1,14 @@
+<ul class='thumbnails'>
+  <li class='span1'>&nbsp;</li>
+  <li class='span3'>
+    <p>
+      <%= link_to(image_tag(product.picture.picture_url(:medium)), product, class: 'thumbnail') %>
+    </p>
+
+    <p class='product'>
+      <span class='price'><%= number_to_currency(product.price) %></span>
+      <br />
+      <%= link_to(truncate(product.name, length: 30), product, title: product.name) %>
+    </p>
+  </li>
+</ul>

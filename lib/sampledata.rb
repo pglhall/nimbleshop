@@ -81,11 +81,11 @@ class Sampledata
     product6.custom_field_answers.create(custom_field: cf, value: 'necklace')
     product3.custom_field_answers.create(custom_field: cf, value: 'necklace')
 
-    pg_bracelets = ProductGroup.create!(name: 'bracelets')
+    pg_bracelets = ProductGroup.create!(name: 'Bracelets')
     pg_bracelets.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'bracelet')
-    pg_earrings = ProductGroup.create!(name:  'earrings')
+    pg_earrings = ProductGroup.create!(name:  'Earrings')
     pg_earrings.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'earring')
-    pg_necklaces = ProductGroup.create!(name: 'necklaces')
+    pg_necklaces = ProductGroup.create!(name: 'Necklaces')
     pg_necklaces.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'necklace')
 
     link_group = LinkGroup.create!(name: 'Shop by category')
