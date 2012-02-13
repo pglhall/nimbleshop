@@ -1,8 +1,9 @@
-<div class="span12">
-  <h2>
-    <%= @product.name %>
-    <%= number_to_currency @product.price %>
-  </h2>
+<div class='page-header'>
+<h1>
+  <%= @product.name %>
+  <span class="label label-warning" style='font-size:90%;'> <%= number_to_currency @product.price %> </span>
+</h1>
+</div>
 
   <%= simple_format(@product.description) %>
 
@@ -46,5 +47,3 @@
     <%= link_to 'Edit', edit_admin_product_path(@product), class: 'btn small primary' %>
     <%= link_to 'Delete', [:admin, @product], class: 'btn small', confirm: 'Are you sure?', method: 'delete' %>
   </p>
-
-</div>

@@ -16,7 +16,7 @@ describe "admin integration" do
     describe "should create a new product" do
       it {
         visit admin_products_path
-        click_link '+ Add new product'
+        click_link 'add_new_product'
 
         fill_in 'Name', :with => 'the very wicked name for product'
         fill_in 'Description', :with => 'test desc for user'
@@ -33,7 +33,7 @@ describe "admin integration" do
     describe "should not create product with wrong params" do
       it {
         visit admin_products_path
-        click_link '+ Add new product'
+        click_link 'add_new_product'
         attach_file "Picture", "#{Rails.root}/app/assets/stylesheets/admin.css"
         click_button 'Submit'
 

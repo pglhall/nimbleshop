@@ -1,9 +1,8 @@
 <% @payment_method.settings.each do |key, value| %>
-  <div class="clearfix">
-    <%= label_tag key %>
-    <div class="input">
-      <%= text_field_tag key, value, 'class' => 'xlarge' %>
+  <div class="control-group">
+    <%= label_tag key, nil, class: 'control-label' %>
+    <div class="controls">
+      <%= text_field_tag key, value, class: 'input-xlarge' %>
     </div>
-  </div><!-- /clearfix -->
+  </div>
 <% end %>
-

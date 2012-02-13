@@ -1,33 +1,26 @@
 <%= render 'authorize_net_instructions' %>
 
 <div class='well'>
-  <%= form_for @creditcard, url: payment_processors_path do |f| %>
+  <%= form_for @creditcard, url: payment_processors_path, html: {class: 'form-horizontal'} do |f| %>
 
-    <div class='clearfix'>
-      <div class='input'>
-        <div class='inputs-list'>
-
+    <div class='control-group'>
+      <div class='controls'>
           <% if splitable_enabled? %>
-            <li>
-              <label>
+              <label class='radio'>
                 <%= radio_button_tag 'payment_choice', 'splitable' %>
-                <%= label_tag 'payment_choice', image_tag('splitable.png') %>
+                <%= image_tag('splitable.png') %>
               </label>
-            </li>
           <% end %>
 
           <% if paypal_website_payments_standard_enabled? %>
-            <li>
-              <label>
+              <label class='radio'>
                 <%= radio_button_tag 'payment_choice', 'paypal' %>
-                <%= label_tag 'payment_choice', image_tag('paypal.png') %>
+                <%= image_tag('paypal.png') %>
               </label>
-            </li>
           <% end %>
 
           <% if authorize_net_enabled?  %>
-            <li>
-              <label>
+              <label class='radio'>
                 <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
                 <label for='payment_choice'>
                   <%= image_tag('visa.png') %>
@@ -40,15 +33,14 @@
                   </small>
                 </label>
               </label>
-            </li>
           <% end %>
         </div>
       </div>
-    </div>
 
     <% if authorize_net_enabled? %>
       <%= render 'authorize_net_form', f: f %>
     <% end %>
+    </div>
 
   <% end %>
 </div>

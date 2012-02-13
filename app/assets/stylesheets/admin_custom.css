@@ -1,0 +1,11 @@
+.ns-page-title {
+  float:left;
+}
+
+.new-action {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}

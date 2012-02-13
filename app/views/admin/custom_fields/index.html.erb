@@ -1,15 +1,15 @@
 <div>
-  <h1><%= t(:custom_fields) %></h1>
+  <h1 class='ns-page-title'><%= t(:custom_fields) %></h1>
+
+  <%= link_to(new_admin_custom_field_path, class: 'btn btn-success new-action') do %>
+    <i class="icon-plus"></i><%= t(:add_new_custom_field) %>
+  <% end %>
+  <div class='clear'></div>
 </div>
 
-<%= link_to(new_admin_custom_field_path) do %>
-  <button class="btn info">+ <%= t(:add_new_custom_field) %></button>
-<% end %>
-
-<br />
 <br />
 
-<table class="zebra-striped">
+<table class="table table-striped">
   <tbody>
     <% @custom_fields.each do |custom_field| %>
       <tr>

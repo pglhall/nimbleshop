@@ -1,15 +1,14 @@
 <div>
-  <h1><%= t(:product_groups) %></h1>
+  <h1 class='ns-page-title'><%= t(:product_groups) %></h1>
+  <%= link_to(new_admin_product_group_path, class: 'btn btn-success new-action', id: 'add_new_product_group') do %>
+    <i class="icon-plus"></i> Add new product group
+  <% end %>
+  <div class='clear'></div>
 </div>
 
-<%= link_to(new_admin_product_group_path) do %>
-  <button class="btn info">+ Add new product group</button>
-<% end %>
-
-<br />
 <br />
 
-<table class="zebra-striped">
+<table class="table table-striped">
   <tbody>
     <% @product_groups.each do |product_group| %>
       <tr>

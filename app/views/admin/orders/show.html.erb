@@ -1,20 +1,27 @@
-<h1> Order #<%= @order.number %> </h1>
-
 <div class='row'>
-  <div class='span10 boxy'>
-    <%= gravatar_for(@order.email) %>
-    <h2><%= @order.final_billing_address.name %></h2>
-    <p>
-      <strong><%= @order.email %></strong> <br />
-      <%= link_to 'Send Email', '#' %>
+  <div class='span10'>
+  <div class='ns-page-title'>
+    <h1> Order #<%= @order.number %> </h1>
+  </div>
+  <div class='new-action'>
+    <div style='float:left;'>
+      <%= gravatar_for(@order.email) %>
+    </div>
+    <div style='float:right;margin-left: 7px;'>
+    <h4><%= @order.final_billing_address.name %></h4>
+    <div><i class="icon-search icon-envelope"></i>&nbsp;<%= @order.email %></div>
+      <%= link_to '', '#' %>
     </p>
   </div>
+  </div>
+  </div>
+  <div class='clear'></div>
 </div>
 
 <br />
 
 <div class='row'>
-  <div class='span10 boxy'>
+  <div class='span10 alert alert-success'>
     <h3> Payment status <%= display_payment_status(@order) %> </h3>
 
     <% if PaymentMethod::Splitable === @order.payment_method %>
@@ -43,7 +50,7 @@
     <% end %>
 
     <% if @order.final_billing_address.present? %>
-      <h4> Billing address</h4>
+      <h5> Billing address</h5>
       <p>
         <address> <%= @order.final_billing_address.full_address_array.join('<br />').html_safe %> </address>
       </p>
@@ -54,7 +61,7 @@
 <br />
 
 <div class='row'>
-  <div class='span10 boxy'>
+  <div class='span10 alert alert-info'>
     <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
     <p>
       Shipping method: <%= @order.shipping_method.name %>

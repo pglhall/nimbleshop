@@ -1,15 +1,14 @@
 <div>
-  <h1><%= t(:products) %></h1>
+  <h1 class='ns-page-title'><%= t(:products) %></h1>
+  <%= link_to(new_admin_product_path, class: 'btn btn-success new-action', id: 'add_new_product') do %>
+    <i class="icon-plus"></i> Add new product
+  <% end %>
+  <div class='clear'></div>
 </div>
 
-<%= link_to(new_admin_product_path) do %>
-  <button class="btn info">+ Add new product</button>
-<% end %>
-
-<br />
 <br />
 
-<table class="zebra-striped">
+<table class="table table-striped">
   <tbody>
     <% @products.each do |product| %>
       <tr>

@@ -1,110 +1,100 @@
 <div>
-  <h1>Shop configuration</h1>
+  <h1 class='ns-page-title'>Shop configuration</h1>
+  <div class='clear'></div>
 </div>
 
-<%= form_for([:admin, @shop]) do |f| %>
+<br />
 
-  <% if @shop.errors.any? %>
-    <div class="alert-message block-message error">
-      <p> <%= t(:error_bang) %> </p>
-      <ul>
-        <% @shop.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class='well'>
+  <%= form_for([:admin, @shop], html: {class: 'form-horizontal'}) do |f| %>
 
-  <fieldset>
-    <div class="clearfix">
-      <%= f.label :name %>
-      <div class="input">
-        <%= f.text_field :name, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :theme %>
-      <div class="input">
-        <%= f.text_field :theme, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :time_zone %>
-      <div class="input">
-        <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :twitter_handle %>
-      <div class="input">
-        <%= f.text_field :twitter_handle, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :facebook_url %>
-      <div class="input">
-        <%= f.text_field :facebook_url, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :contact_email %>
-      <%= link_to ' ! ', '#', :class => 'help' %>
-      <div class="input">
-        <%= f.text_field :contact_email, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :intercept_email %>
-      <%= link_to ' ! ', '#', :class => 'help' %>
-      <div class="input">
-        <%= f.text_field :intercept_email, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :from_email %>
-      <%= link_to ' ! ', '#', :class => 'help' %>
-      <div class="input">
-        <%= f.text_field :from_email, class: 'xlarge', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <%= f.label :aaa, 'How to process credit card' %>
-      <%= link_to ' ! ', '#', :class => 'help' %>
-      <div class='input'>
-        <ul class='inputs-list'>
-          <li>
-            <label>
-              <%= f.radio_button :default_creditcard_action, 'authorize' %>
-              <span> Authorize the credit card for the total amount of the order .</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <%= f.radio_button :default_creditcard_action, 'purchase' %>
-              <span> Authorize and capture the credit card for the total amount of the order .</span>
-            </label>
-          </li>
+    <% if @shop.errors.any? %>
+      <div class="alert alert-error">
+        <p> <%= t(:error_bang) %> </p>
+        <ul>
+          <% @shop.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
-    </div><!-- /clearfix -->
+    <% end %>
 
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :name, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, class: 'input-xlarge' %>
+        </div>
+      </div>
 
+      <div class="control-group">
+        <%= f.label :theme, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :theme, class: 'input-xlarge' %>
+        </div>
+      </div>
 
-  </fieldset>
+      <div class="control-group">
+        <%= f.label :time_zone, class: 'control-label' %>
+        <div class="controls">
+          <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s %>
+        </div>
+      </div>
 
-  <div class="actions">
-    <%= f.submit('Submit', class: 'btn primary') %>
-    &nbsp;
-    <%= link_to 'Cancel', edit_admin_shop_path, class: 'btn' %>
-  </div>
+      <div class="control-group">
+        <%= f.label :twitter_handle, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :twitter_handle, class: 'input-xlarge' %>
+        </div>
+      </div>
 
-<% end %>
+      <div class="control-group">
+        <%= f.label :facebook_url, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :facebook_url, class: 'input-xlarge' %>
+        </div>
+      </div>
 
+      <div class="control-group">
+        <%= f.label :contact_email, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :contact_email, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :intercept_email, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :intercept_email, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :from_email, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :from_email, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :aaa, 'How to process credit card', class: 'control-label' %>
+        <div class='controls'>
+          <label class='radio'>
+            <%= f.radio_button :default_creditcard_action, 'authorize' %>
+            Authorize the credit card for the total amount of the order .
+          </label>
+          <label class='radio'>
+            <%= f.radio_button :default_creditcard_action, 'purchase' %>
+            Authorize and capture the credit card for the total amount of the order .
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to 'Cancel', edit_admin_shop_path, class: 'btn' %>
+    </div>
+  <% end %>
+</div>

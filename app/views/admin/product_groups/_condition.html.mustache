@@ -1,14 +1,20 @@
 <div class="input condition" data-index="{{index}}">
-				<select name="product_group[product_group_conditions_attributes][{{index}}][name]" id="product_group_product_group_conditions_attributes_{{index}}_name" class="field">
-								{{#fields}}
-								<option value="{{id}}">{{name}}</option>
-								{{/fields}}
-				</select>
-				<select name="product_group[product_group_conditions_attributes][{{index}}][operator]" id="product_group_product_group_conditions_attributes_{{index}}_operator" class="operator">
-								{{#operators.text}}
-								<option value="{{value}}">{{name}}</option>
-								{{/operators.text}}
-				</select>
-				<input type="text" size="30" name="product_group[product_group_conditions_attributes][{{index}}][value]" id="product_group_product_group_conditions_attributes_{{index}}_value" class="value">
-				<a class="remove-condition" href="#">remove</a>
+  <select name="product_group[product_group_conditions_attributes][{{index}}][name]" id="product_group_product_group_conditions_attributes_{{index}}_name" class="field">
+	  {{#fields}}
+		<option value="{{id}}">{{name}}</option>
+		{{/fields}}
+	</select>
+
+	<select name="product_group[product_group_conditions_attributes][{{index}}][operator]" id="product_group_product_group_conditions_attributes_{{index}}_operator" class="operator">
+	  {{#operators.text}}
+		<option value="{{value}}">{{name}}</option>
+		{{/operators.text}}
+	</select>
+
+	<input type="text" size="30" name="product_group[product_group_conditions_attributes][{{index}}][value]" id="product_group_product_group_conditions_attributes_{{index}}_value" class="value">
+
+  <a href='#' class='remove-condition btn btn-danger'>
+    <i class='icon-trash icon-white'></i> Remove
+  </a>
+
 </div>

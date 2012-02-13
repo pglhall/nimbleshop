@@ -1,5 +1,5 @@
 <% if @creditcard.errors.any? %>
-  <div class="alert-message block-message error">
+  <div class="alert alert-error">
     <ul>
       <% @creditcard.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -9,27 +9,23 @@
 <% end %>
 
 <fieldset>
-  <div class='clearfix'>
-    <%= f.label :number, 'Credit card number', autocomplete: 'off' %>
-    <div class='input'>
-      <%= f.text_field :number, class: 'focus' %>
+  <div class='control-group'>
+    <%= f.label :number, 'Credit card number', autocomplete: 'off', class: 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :number, class: 'input-xlarge focus' %>
     </div>
   </div>
-</fieldset>
 
-<fieldset>
-  <div class='clearfix'>
-    <%= f.label :cvv, 'CVV number', autocomplete: 'off' %>
-    <div class='input'>
+  <div class='control-group'>
+    <%= f.label :cvv, 'CVV number', autocomplete: 'off', class: 'control-label' %>
+    <div class='controls'>
       <%= f.text_field :cvv %>
       &nbsp;
       <%= link_to 'What is this?', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=p/acc/cvv_info-amex_pop-outside', target: '_blank' %>
     </div>
   </div>
-</fieldset>
 
-<fieldset>
-  <div class='clearfix'>
+  <div class='control-group'>
     <%= f.label :expires_on, 'Expiration date' %>
     <div class='input'>
       <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
@@ -37,6 +33,6 @@
   </div>
 </fieldset>
 
-<div class="actions">
-  <%= f.submit 'Submit', class: 'btn primary' %>
+<div class="form-actions">
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
 </div>

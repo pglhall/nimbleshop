@@ -1,8 +1,7 @@
-<%= nested_form_for([:admin, @product], html: {multipart: true}) do |f| %>
-  <i>Basics</i>
-  <div class='well'>
+<div class='well'>
+  <%= nested_form_for([:admin, @product], html: {multipart: true, class: 'form-horizontal'}) do |f| %>
     <% if @product.errors.any? %>
-      <div class="alert-message block-message error">
+      <div class="alert alert-error">
         <p> <%= t(:error_bang) %> </p>
         <ul>
           <% @product.errors.full_messages.each do |message| %>
@@ -13,38 +12,37 @@
     <% end %>
 
     <fieldset>
-      <div class="clearfix">
-        <%= f.label :name, 'Name' %>
-        <div class="input">
-          <%= f.text_field :name, class: 'xlarge focus', size: 30 %>
+      <div class="control-group">
+        <%= f.label :name, 'Name', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, class: 'input-xlarge focus' %>
         </div>
-      </div><!-- /clearfix -->
+      </div>
 
-      <div class="clearfix">
-        <%= f.label :description, 'Description' %>
-        <div class="input">
-          <%= f.text_area :description, class: 'xxlarge', rows: 5 %>
-          <span class="help-block">
+      <div class="control-group">
+        <%= f.label :description, 'Description', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :description, class: 'input-xxlarge', rows: 5 %>
+          <p class="help-block">
             No html is allowed but paragraphs are maintainded.
-          </span>
+          </p>
         </div>
-      </div><!-- /clearfix -->
+      </div>
 
-      <div class="clearfix">
-        <%= f.label :price, 'Price' %>
-        <div class="input">
+      <div class="control-group">
+        <%= f.label :price, 'Price', class: 'control-label' %>
+        <div class="controls">
           $
-          <%= f.text_field :price, class: 'large', size: 30 %>
+          <%= f.text_field :price, class: 'input-xlarge' %>
         </div>
-      </div><!-- /clearfix -->
-
+      </div>
 
       <% @product.custom_field_answers.each do | answer | %>
         <%= render :partial => '/admin/products/custom_field_answer',
                           :locals => { :f => f, :answer => answer } %>
       <% end %>
 
-      <div class="clearfix">
+      <div class="control-group">
         <% unless @product.new_record? %>
           <div class='row'>
             <div class='span3'>Images</div>
@@ -69,12 +67,13 @@
         <%= picture_form.link_to_remove 'Remove picture' %>
       <% end %>
       <%= f.link_to_add 'Add picture', :pictures %>
+    </fieldset>
 
-      <div class="actions">
-        <%= f.submit('Submit', class: 'btn primary') %>
-        &nbsp;
-        <%= link_to t(:cancel), admin_products_path, class: 'btn' %>
-      </div>
-    </div> <!-- end of well -->
-  </fieldset>
-<% end %>
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), admin_products_path, class: 'btn' %>
+    </div>
+
+  <% end %>
+</div>

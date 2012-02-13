@@ -1,12 +1,16 @@
 <%= render '/admin/payment_methods/tabs' %>
-<%= image_tag('paypal_logo.png', width: '100') %>
 
-<h3>
-  Configuration info
-  <small>
-    <%= link_to 'Edit', edit_admin_paymentmethod_paypalwebsite_payments_standard_path %>
-  </small>
-</h3>
+<div>
+  <div style='float:left;'>
+    <%= image_tag('paypal_logo.png', width: 140) %>
+  </div>
+  <div style='float:left;margin-top:25px;margin-left: 10px;'>
+    <h3>
+      <%= link_to 'Edit Configuration Info', edit_admin_paymentmethod_paypalwebsite_payments_standard_path %>
+    </h3>
+  </div>
+  <div style='clear:both;'></div>
+</div>
 
 <%= render '/admin/paymentmethod/show_attributes' %>
 

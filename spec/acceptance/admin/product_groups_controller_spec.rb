@@ -12,13 +12,13 @@ describe "Product Groups integration" do
     it "should allow to list and create a product group" do
       visit admin_product_groups_path
       page.has_content?("Product groups").must_equal true
-      click_button '+ Add new product group'
+      click_link 'add_new_product_group'
 
       fill_in 'Name', with: 'sweet candies'
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text, :from => 'product_group_product_group_conditions_attributes_0_name')
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='contains']").text, :from => 'product_group_product_group_conditions_attributes_0_operator')
       fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'candy'
-      click_link 'add'
+      click_link 'Add'
 
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_name']/option[@value='name']").text, :from => 'product_group_product_group_conditions_attributes_1_name')
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_operator']/option[@value='starts']").text, :from => 'product_group_product_group_conditions_attributes_1_operator')
@@ -33,7 +33,7 @@ describe "Product Groups integration" do
       fill_in 'Name', with: 'awesome candies'
       fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'awesome'
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text, :from => 'product_group_product_group_conditions_attributes_0_operator')
-      click_link 'remove'
+      click_link 'Remove'
       click_button 'Submit'
 
       page.has_content?('Successfuly updated').must_equal true
@@ -51,7 +51,7 @@ describe "Product Groups integration" do
   describe "bad path" do
     it "should not allow to create wrong product group" do
       visit admin_product_groups_path
-      click_button '+ Add new product group'
+      click_link 'add_new_product_group'
       fill_in 'Name', with: ''
       click_button 'Submit'
 

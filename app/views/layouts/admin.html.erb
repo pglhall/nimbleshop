@@ -13,59 +13,68 @@
 
     <!-- Le styles -->
     <%= stylesheet_link_tag 'admin' %>
-    <%= javascript_include_tag 'admin' %>
     <style type="text/css">
-      body { padding-top: 60px; }
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
     </style>
+
+    <%= javascript_include_tag 'admin' %>
+
   </head>
 
   <body>
 
-    <div class="topbar">
-      <div class="topbar-inner">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container-fluid">
-          <ul class="nav">
-            <li class="active"><a href="/admin">Admin</a></li>
-            <li><%= link_to 'Documentation', 'http://docs.nimbleshop.com' %></li>
-          </ul>
-          <p class="pull-right">
-            <%= link_to 'Go to shop →', root_url, style: 'background:#3f8ae3;padding:5px;color:#fff; font-weight:bold;' %>
-          </p>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/admin">Admin</a></li>
+              <li><a href="http://docs.nimbleshop.com">Documentation</a></li>
+              <li><%= link_to 'Go to shop →', root_url %></li>
+            </ul>
+            <p class="navbar-text pull-right">Logged in as <a href="#">Neeraj Singh</a></p>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+
+
 
     <div class="container-fluid">
-      <div class="sidebar">
-        <div class="well">
-
-          <h5>Manage your shop</h5>
-          <ul>
-            <li><%= link_to 'Products', admin_products_path %></li>
-            <li><%= link_to 'Custom fields', admin_custom_fields_path %></li>
-            <li><%= link_to 'Product groups', admin_product_groups_path %></li>
-            <li><%= link_to 'Link groups', admin_link_groups_path %></li>
-            <li><%= link_to 'Shipping zones', admin_shipping_zones_path %></li>
-            <li><%= link_to 'Payment methods', admin_payment_methods_path %></li>
-            <li><%= link_to 'Shop configuration', edit_admin_shop_path %></li>
-          </ul>
-
-          <h5>Reports</h5>
-          <ul>
-            <li><%= link_to 'Orders', admin_orders_path %></li>
-          </ul>
-
+      <div class="row-fluid">
+        <div class="span3">
+          <%= render 'layouts/sidebar' %>
+        </div><!--/span-->
+        <div class="span9">
+          <div class="row-fluid">
+            <div class="span12">
+            <% if flash[:notice] %><div class='alert alert-success'><%= flash[:notice] %></div><% end %>
+            <p>
+              <%= yield %>
+            </p>
+          </div>
+          </div>
         </div>
-      </div>
-      <div class="content">
-        <% if flash[:notice] %><div class='alert-message success'><%= flash[:notice] %></div><% end %>
+      </div><!--/row-->
 
-        <p>
-          <%= yield %>
-        </p>
+      <hr>
 
-      </div>
-    </div>
+      <footer>
+        <p>&copy; nimbleshop 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
 
   </body>
 </html>

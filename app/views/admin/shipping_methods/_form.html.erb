@@ -1,9 +1,8 @@
-<div class="span12">
-
-  <%= nested_form_for([:admin, @shipping_zone, @shipping_method]) do |f| %>
+<div class="well">
+  <%= nested_form_for([:admin, @shipping_zone, @shipping_method], html: {class: 'form-horizontal'}) do |f| %>
 
     <% if @shipping_method.errors.any? %>
-      <div class="alert-message block-message error">
+      <div class="alert alert-error">
         <p> <%= t(:error_bang) %> </p>
         <ul>
           <% @shipping_method.errors.full_messages.each do |message| %>
@@ -14,43 +13,43 @@
     <% end %>
 
     <fieldset>
-      <div class="clearfix">
-        <%= f.label :name %>
-        <div class="input">
-          <%= f.text_field :name, class: 'xlarge focus', size: 30 %>
+      <div class="control-group">
+        <%= f.label :name, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, class: 'input-xlarge focus' %>
         </div>
-      </div><!-- /clearfix -->
-
-      <div class="clearfix">
-        <%= f.label :lower_price_limit %>
-        <div class="input">
-          <%= f.text_field :lower_price_limit, class: 'xlarge', size: 30 %>
-        </div>
-      </div><!-- /clearfix -->
-
-      <div class="clearfix">
-        <%= f.label :upper_price_limit %>
-        <div class="input">
-          <%= f.text_field :upper_price_limit, class: 'xlarge', size: 30 %>
-          <span class="help-block">
-            Leave this field blank if there is no upper limit
-          </span>
-        </div>
-      </div><!-- /clearfix -->
-
-      <div class="clearfix">
-        <%= f.label :base_price %>
-        <div class="input">
-          <%= f.text_field :base_price, class: 'xlarge', size: 30 %>
-        </div>
-      </div><!-- /clearfix -->
-
-      <div class="actions">
-        <%= f.submit('Submit', class: 'btn primary') %>
-        &nbsp;
-        <%= link_to t(:cancel), admin_shipping_zones_path, class: 'btn' %>
       </div>
 
+      <div class="control-group">
+        <%= f.label :lower_price_limit, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :lower_price_limit, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :upper_price_limit, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :upper_price_limit, class: 'input-xlarge' %>
+          <p class="help-block">
+            Leave this field blank if there is no upper limit
+          </p>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :base_price, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :base_price, class: 'input-xlarge' %>
+        </div>
+      </div>
     </fieldset>
+
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), admin_shipping_zones_path, class: 'btn' %>
+    </div>
+
   <% end %>
 </div>

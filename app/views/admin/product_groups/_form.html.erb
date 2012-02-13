@@ -1,62 +1,64 @@
-<%= form_for([:admin, @product_group]) do |f| %>
+<div class='well'>
+  <%= form_for([:admin, @product_group], html: {class: 'form-horizontal'}) do |f| %>
 
-  <% if @product_group.errors.any? %>
-    <div class="alert-message block-message error">
-      <p> <%= t(:error_bang) %> </p>
-      <ul>
-        <% @product_group.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <fieldset>
-
-    <div class="clearfix">
-      <%= f.label :name %>
-      <div class="input">
-        <%= f.text_field :name, class: 'xlarge focus', size: 30 %>
-      </div>
-    </div><!-- /clearfix -->
-
-    <div class="clearfix">
-      <div id ="product-group-condition-klass" data-fields="<%= ProductGroup.fields.to_json %>" data-operators="<%= ProductGroup.operators.to_json %>">
-      </div>
-      <% @product_group.product_group_conditions.each_with_index do | condition, index | %>
-        <div class="input condition" data-index="<%= index %>">
-          <%= f.fields_for :product_group_conditions, condition do | condition_field | %>
-            <% unless condition.marked_for_destruction? %>
-              <%= condition_field.select :name, ProductGroup.fields.map { |t| t.values_at("name", "id") }, {}, {class: 'field'} %>
-              <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym].map { |t| t.values_at(:name, :value) }, {}, class: 'operator' %>
-              <%= condition_field.text_field :value, class: 'value' %>
-            <% end %>
-            <% if index.nonzero? %>
-              <%= link_to "remove", "#", class: "remove-condition" %>
-            <% end %>
-            <% if condition.persisted? && !condition.marked_for_destruction? %>
-              <%= condition_field.hidden_field :_destroy, class: 'destroy-flag' %>
-            <% end %>
+    <% if @product_group.errors.any? %>
+      <div class="alert alert-error">
+        <p> <%= t(:error_bang) %> </p>
+        <ul>
+          <% @product_group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
           <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :name, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, class: 'input-xlarge focus' %>
         </div>
-      <% end %>
+      </div>
 
-      <%= link_to 'add', '#', class: 'add-condition'%>
+      <div class="clearfix">
+        <div id ="product-group-condition-klass" data-fields="<%= ProductGroup.fields.to_json %>" data-operators="<%= ProductGroup.operators.to_json %>">
+        </div>
+        <% @product_group.product_group_conditions.each_with_index do | condition, index | %>
+          <div class="input condition" data-index="<%= index %>">
+            <%= f.fields_for :product_group_conditions, condition do | condition_field | %>
+              <% unless condition.marked_for_destruction? %>
+                <%= condition_field.select :name, ProductGroup.fields.map { |t| t.values_at("name", "id") }, {}, {class: 'field'} %>
+                <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym].map { |t| t.values_at(:name, :value) }, {}, class: 'operator' %>
+                <%= condition_field.text_field :value, class: 'value' %>
+              <% end %>
+              <% if index.nonzero? %>
+                <%= link_to '#', class: "remove-condition btn btn-danger" do %>
+                  <i class='icon-trash icon-white'></i> Remove
+                <% end %>
+              <% end %>
+              <% if condition.persisted? && !condition.marked_for_destruction? %>
+                <%= condition_field.hidden_field :_destroy, class: 'destroy-flag' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
 
-      <script type="text/html" id="product_template">
-        <%= render "condition" %>
-      </script>
-    </div><!-- /clearfix -->
+        <br />
+        <%= link_to '#', class: 'add-condition btn btn-success' do %>
+          <i class='icon-plus'> </i> Add
+        <% end %>
 
+        <script type="text/html" id="product_template">
+          <%= render "condition" %>
+        </script>
+      </div>
+    </fieldset>
 
-    <div class="clearfix">
-    </div><!-- /clearfix -->
-  </fieldset>
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to 'Cancel', admin_product_groups_path, class: 'btn' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit('Submit', class: 'btn primary') %>
-    &nbsp;
-    <%= link_to 'Cancel', admin_product_groups_path, class: 'btn' %>
-  </div>
-
-<% end %>
+  <% end %>
+</div>

@@ -1,9 +1,9 @@
 <%= f.fields_for :custom_field_answers, answer do | field | %>
-  <div class="clearfix">
-    <%= field.label :value, answer.custom_field.name %>
+  <div class="control-group">
+    <%= field.label :value, answer.custom_field.name.titleize, class: 'control-label' %>
     <%= field.hidden_field :custom_field_id %>
-    <div class="input">
-      <%= field.text_field :value, class: 'xlarge focus', size: 30 %>
+    <div class="controls">
+      <%= field.text_field :value, class: 'input-xlarge' %>
     </div>
-  </div><!-- /clearfix -->
+  </div>
 <% end %>

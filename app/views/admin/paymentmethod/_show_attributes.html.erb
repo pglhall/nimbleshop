@@ -1,9 +1,9 @@
 <br />
 
-<table class="zebra-striped bordered-table">
+<table class="table table-striped">
   <% @payment_method.settings.each do |key, value| %>
     <tr>
-      <th> <%= key %> </th>
+      <td> <%= key %> : </td>
       <td> <%= value %> </td>
     </tr>
   <% end %>

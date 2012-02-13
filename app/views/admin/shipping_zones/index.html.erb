@@ -1,16 +1,15 @@
 <div>
-  <h1><%= t(:shipping_zones) %></h1>
+  <h1 class='ns-page-title'><%= t(:shipping_zones) %></h1>
+  <%= link_to(new_admin_shipping_zone_path, class: 'btn btn-success new-action') do %>
+    <i class="icon-plus"></i><%= t(:add_new_shipping_zone) %>
+  <% end %>
+  <div class='clear'></div>
 </div>
 
-<%= link_to(new_admin_shipping_zone_path) do %>
-  <button class="btn info">+ <%= t(:add_new_shipping_zone) %></button>
-<% end %>
-
-<br />
 <br />
 
 <% CountryShippingZone.all.each do |shipping_zone| %>
-  <table class="zebra-striped bordered-table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th colspan='5'>

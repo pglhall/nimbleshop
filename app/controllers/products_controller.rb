@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   respond_to :html
 
   def index
+    @do_not_use_page_title = true
     @page_title = 'Catalog'
     @products = Product.order(:name).all
     @product_groups = ProductGroup.all

@@ -1,12 +1,55 @@
 module AdminHelper
 
+  def admin_sidebar(label, path, identifier)
+    case identifier
+    when 'admin_products_path'
+      hash = (params[:controller] == 'admin/products') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_custom_fields_path'
+      hash = (params[:controller] == 'admin/custom_fields') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_product_groups_path'
+      hash = (params[:controller] == 'admin/product_groups') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_link_groups_path'
+      hash = (params[:controller] == 'admin/link_groups') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_shipping_zones_path'
+      actions = ["admin/shipping_zones", "admin/shipping_methods"]
+      hash = actions.include?(params[:controller]) ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_payment_methods_path'
+      hash = (params[:controller] == 'admin/payment_methods') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'edit_admin_shop_path'
+      hash = (params[:controller] == 'admin/shops') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+
+    when 'admin_orders_path'
+      hash = (params[:controller] == 'admin/orders') ? {'class' => 'active'} : {}
+      content_tag(:li, link_to(label, path), hash)
+    end
+
+  end
+
   def display_payment_status(order)
-    css_klass = order.payment_status == 'paid' ? 'success' : 'important'
+    css_klass = order.payment_status == 'paid' ? 'label-success' : 'label-important'
     %Q{<span class="label #{css_klass}"> #{order.payment_status} </span>}.html_safe
   end
 
   def display_shipping_status(order)
-    css_klass = %w(shipped nothing_to_ship).include?(order.shipping_status) ? 'success' : 'important'
+    css_klass = case order.shipping_status
+    when 'shipped'
+      'label-success'
+    when 'nothing_to_ship'
+      'label-info'
+    end
     %Q{<span class="label #{css_klass}"> #{order.shipping_status} </span>}.html_safe
   end
 

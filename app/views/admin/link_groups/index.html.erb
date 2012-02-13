@@ -1,5 +1,9 @@
 <div>
-  <h1><%= t(:link_groups) %></h1>
+  <h1 class='ns-page-title'><%= t(:link_groups) %></h1>
+  <%= link_to('#', class: 'btn btn-success new-action') do %>
+    <i class="icon-plus"></i> <%= t(:add_new_link_group) %>
+  <% end %>
+  <div class='clear'></div>
 </div>
 
 <% if @link_group && @link_group.errors.any? %>
@@ -13,21 +17,18 @@
   </div>
 <% end %>
 
-<%= link_to "#" do %>
-  <button id="new-link-group" class="btn info">+ <%= t(:add_new_link_group) %></button>
-<% end %>
 
 <br />
 <br />
 
 <% @link_groups.each do |link_group| %>
-  <table class="zebra-striped bordered-table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th colspan='2'>
           <div id="link-group-<%=link_group.permalink%>">
             <%= render partial: 'link_group_title', locals: { link_group: link_group } %>
-          </div>  
+          </div>
         </th>
       </tr>
       <tr>

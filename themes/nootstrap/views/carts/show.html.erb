@@ -4,7 +4,7 @@
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
   <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
-	  <table class='zebra-striped'>
+	  <table class='table table-striped'>
       <thead>
         <tr>
           <th colspan="2" class="start">Description</th>
@@ -28,10 +28,10 @@
           <td colspan='5'>&nbsp;</td>
           <td>
             <p class='button'>
-              <%= submit_tag 'Checkout', name: "checkout", class: 'btn primary' %>
+              <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
             </p>
             <p class='button'>
-              <%= submit_tag 'Update', class: 'btn primary' %>
+              <%= submit_tag 'Update', class: 'btn btn-primary' %>
             </p>
           </td>
         </tr>
