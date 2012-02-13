@@ -1,19 +1,22 @@
-<table class='zebra-striped'>
+<table class='table table-bordered' width='100%'>
   <% current_order.line_items.each do |line_item| %>
     <tr>
-      <td>
+      <td colspan='2'>
+        <div style='float:left; width:200px;border:0px solid red;'>
         <%= truncate(line_item.product.title, length: 75) %>
 
         <p>
           <i><%= display_variant_info(line_item) %> </i>
         </p>
-        <%= line_item.quantity %> for <%= number_to_currency(line_item.product_price) %>
-      </td>
-      <td>
-        <%= image_tag(line_item.product.picture.picture_url(:pico)) %>
-        <br />
-        <strong> <%= number_to_currency(line_item.price) %> </strong>
-      </td>
+        <p>
+          <%= line_item.quantity %> x <%= number_to_currency(line_item.product_price) %> =
+          <strong> <%= number_to_currency(line_item.price) %> </strong>
+        </p>
+      </div>
+      <div style='float:right; width: 100px;border: 0px solid blue;'>
+        <%= image_tag(line_item.product.picture.picture_url(:small)) %>
+      </div>
+      <div style='clear:both;'></div>
     </tr>
   <% end %>
   <% if current_order.shipping_method %>
@@ -21,11 +24,8 @@
   <% end %>
   <tr>
     <td>
-      <h4>Total</h4>
-    </td>
-    <td>
       <h4>
-        <%= number_to_currency(current_order.price_with_shipping) %>
+        Total: <%= number_to_currency(current_order.price_with_shipping) %>
       </h4>
     </td>
   </tr>

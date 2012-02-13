@@ -21,7 +21,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   version :pico do
-    process :resize_to_limit => [50, 50]
+    process :resize_to_limit => [16, 16]
   end
 
   version :icon do
