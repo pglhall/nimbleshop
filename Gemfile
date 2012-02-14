@@ -71,6 +71,10 @@ end
 
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
+
+  # when command
+  #     rails generate model User
+  # is exected then following gem ensures that tests are generated using minitest
   gem 'minitest-rails', git: 'git://github.com/neerajdotname/minitest-rails.git'
 end
 
