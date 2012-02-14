@@ -91,10 +91,10 @@ group :test do
   gem 'minitest-colorize', git: 'https://github.com/nohupbrasil/minitest-colorize'
 
   gem 'database_cleaner'
-  gem 'growl'
   gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
   gem 'factory_girl_rails'
   gem "launchy"
+
   gem 'shoulda-matchers'
   gem 'rr'
 end
