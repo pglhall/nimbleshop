@@ -97,7 +97,7 @@ class Order < ActiveRecord::Base
   end
 
   def set_quantity(product, quantity)
-    return unless self.products.include?(product)
+    return unless self.line_items.find_by_product_id(product.id)
     if quantity <= 0
       line_item_of(product).destroy
     else

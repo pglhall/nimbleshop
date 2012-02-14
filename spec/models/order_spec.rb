@@ -12,4 +12,13 @@ describe Order do
     }
   end
 
+  describe '#set_quantity' do
+    it {
+      order = create(:order)
+      product = create(:product)
+      order.add(product)
+      order.set_quantity(product, 3)
+    }
+  end
+
 end
