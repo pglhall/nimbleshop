@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def theme_resolver
-    @shop.theme
+    current_shop.theme
   end
 
   def current_order
@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_shop
-    @shop = Shop.first
     @product_groups = ProductGroup.all
     @main_nav_link_group = LinkGroup.last
     @cart = current_order
@@ -39,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_shop
-    @shop
+    @shop ||= Shop.first
   end
 
 end

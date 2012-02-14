@@ -5,7 +5,7 @@ class Admin::ShopsController < AdminController
   end
 
   def update
-    if @shop.update_attributes(params[:shop])
+    if current_shop.update_attributes(params[:shop])
       redirect_to edit_admin_shop_path, notice: 'Shop was successfully updated'
     else
       render 'edit'

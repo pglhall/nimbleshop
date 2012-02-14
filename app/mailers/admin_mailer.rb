@@ -9,8 +9,7 @@ class AdminMailer < ActionMailer::Base
     subject = "Order ##{order_number} was recetly placed"
     @order = Order.find_by_number!(order_number)
 
-    # TODO ideally I should be able to use current_shop below
-    @shop = Shop.first
+    @shop = current_shop
     @payment_date = @order.creditcard_transactions.first.created_at.to_s(:long)
     @creditcard_masked_number = @order.creditcard_transactions.first.creditcard.masked_number
 
