@@ -92,7 +92,7 @@ group :test do
 
   gem 'database_cleaner'
   gem 'growl'
-  gem 'rb-fsevent'
+  gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
   gem 'factory_girl_rails'
   gem "launchy"
   gem 'shoulda-matchers'
