@@ -9,7 +9,6 @@ class Order < ActiveRecord::Base
   has_many    :shipments
   belongs_to  :shipping_method
   has_many    :line_items
-  has_many    :products, through: :line_items
   belongs_to  :user
   has_many    :creditcard_transactions
 
@@ -92,7 +91,7 @@ class Order < ActiveRecord::Base
     if variant
       return if self.line_items.find_by_product_id_and_variant_id(product.id, variant.id)
     else
-      return if self.products.include?(product)
+      return if self.line_items.find_by_product_id(product.id)
     end
     self.line_items.create!(product: product, quantity: 1, variant: variant)
   end
