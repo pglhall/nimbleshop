@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.boolean  "enabled",     :default => false
     t.string   "name"
     t.text     "description"
-    t.text     "data"
     t.string   "type"
     t.string   "permalink",                      :null => false
     t.text     "settings"

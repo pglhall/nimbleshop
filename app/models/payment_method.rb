@@ -2,9 +2,6 @@ class PaymentMethod < ActiveRecord::Base
 
   include BuildPermalink
 
-  before_save :set_data
-
-  serialize :data
   store :settings
 
   scope :enabled, where(enabled: true)
@@ -14,8 +11,6 @@ class PaymentMethod < ActiveRecord::Base
     #ActiveMerchant::Billing::Base.mode = Rails.env.production? ? :production : :test
     ActiveMerchant::Billing::Base.mode = :test
   end
-
-  after_initialize :set_data_instance_variables
 
   def self.load_default!
     if count > 0
@@ -43,16 +38,5 @@ class PaymentMethod < ActiveRecord::Base
   end
 
   private
-
-  def set_data
-    self.data = { }
-  end
-
-  def set_data_instance_variables
-    return if self.data.blank?
-    self.data.each do |key, value|
-      self.instance_variable_set("@#{key.to_s}", value)
-    end
-  end
 
 end

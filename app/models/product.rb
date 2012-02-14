@@ -78,5 +78,4 @@ class Product < ActiveRecord::Base
     Hash[*temp]
   end
 
-
 end
