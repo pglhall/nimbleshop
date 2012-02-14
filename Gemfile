@@ -94,6 +94,4 @@ group :test do
   gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
   gem 'factory_girl_rails'
   gem "launchy"
-
-  gem 'rr'
 end

@@ -203,7 +203,6 @@ GEM
     rb-fsevent (0.4.3.1)
     rdoc (3.12)
       json (~> 1.4)
-    rr (1.0.4)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -277,7 +276,6 @@ DEPENDENCIES
   pg
   rails (= 3.2.1)
   rb-fsevent
-  rr
   ruby-debug19
   sqlite3
   state_machine
