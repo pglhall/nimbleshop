@@ -1,38 +1,39 @@
-<%= render 'authorize_net_instructions' %>
+<div class='span7'>
+  <div class='well'>
+    <%= render 'authorize_net_instructions' %>
 
-<div class='well'>
-  <%= form_for @creditcard, url: payment_processors_path, html: {class: 'form-horizontal'} do |f| %>
+    <div class='alert alert-success'>
+      All payments are secure and encrypted. We never store your credit card information.
+    </div>
 
-    <div class='control-group'>
-      <div class='controls'>
+    <%= form_for @creditcard, url: payment_processors_path, html: {class: 'form-horizontal'} do |f| %>
+
+      <div class='control-group'>
+        <div class='controls'>
           <% if splitable_enabled? %>
-              <label class='radio'>
-                <%= radio_button_tag 'payment_choice', 'splitable' %>
-                <%= image_tag('splitable.png') %>
-              </label>
+            <label class='radio'>
+              <%= radio_button_tag 'payment_choice', 'splitable' %>
+              <%= image_tag('splitable.png') %>
+            </label>
           <% end %>
 
           <% if paypal_website_payments_standard_enabled? %>
-              <label class='radio'>
-                <%= radio_button_tag 'payment_choice', 'paypal' %>
-                <%= image_tag('paypal.png') %>
-              </label>
+            <label class='radio'>
+              <%= radio_button_tag 'payment_choice', 'paypal' %>
+              <%= image_tag('paypal.png') %>
+            </label>
           <% end %>
 
           <% if authorize_net_enabled?  %>
-              <label class='radio'>
-                <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
-                <label for='payment_choice'>
-                  <%= image_tag('visa.png') %>
-                  <%= image_tag('mastercard.png') %>
-                  <%= image_tag('amex.png') %>
-                  <%= image_tag('discover.png') %>
-                  <br />
-                  <small>
-                    All payments are secure and encrypted. We never store your credit card information.
-                  </small>
-                </label>
+            <label class='radio'>
+              <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
+              <label for='payment_choice'>
+                <%= image_tag('visa.png') %>
+                <%= image_tag('mastercard.png') %>
+                <%= image_tag('amex.png') %>
+                <%= image_tag('discover.png') %>
               </label>
+            </label>
           <% end %>
         </div>
       </div>
@@ -41,6 +42,7 @@
       <%= render 'authorize_net_form', f: f %>
     <% end %>
     </div>
-
   <% end %>
 </div>
+
+<%= render 'layouts/order_summary' %>
