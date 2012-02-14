@@ -11,7 +11,7 @@ Nimbleshop::Application.routes.draw do
     resources :payment_methods
 
     resources :orders do
-      resources :shipments
+      resources :shipments, except: [:edit, :update]
     end
 
     resources :country_shipping_zones, :controller => 'shipping_zones' do
