@@ -51,11 +51,6 @@ class Product < ActiveRecord::Base
     pictures.first
   end
 
-  # TODO this method should not exist. All such custom fields should be generated dynamically
-  def category
-    custom_field_value_for('category')
-  end
-
   def custom_field_value_for(custom_field_name)
     self.custom_field_answers.for(custom_field_name).value
   end
