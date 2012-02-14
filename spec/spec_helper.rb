@@ -8,7 +8,6 @@ require File.expand_path('../../config/environment', __FILE__)
 
 require 'minitest/autorun'
 require 'minitest/spec'
-require "minitest/rails"
 require "minitest/pride"
 require "capybara/rails"
 require 'database_cleaner'

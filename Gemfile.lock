@@ -19,12 +19,6 @@ GIT
     carmen (1.0.0.pre)
 
 GIT
-  remote: git://github.com/neerajdotname/minitest-rails.git
-  revision: 935304f5029905c84049b0d7949d71c23c02e900
-  specs:
-    minitest-rails (0.0.5)
-
-GIT
   remote: git://github.com/neerajdotname/themes_for_rails.git
   revision: f3efda87d9902fad04501d36ed1dac05f4a862b4
   specs:
@@ -281,7 +275,6 @@ DEPENDENCIES
   minitest (~> 2.10.1)
   minitest-colorize!
   minitest-matchers
-  minitest-rails!
   mustache
   nested_form!
   pg
