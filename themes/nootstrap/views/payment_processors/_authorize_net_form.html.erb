@@ -26,8 +26,8 @@
   </div>
 
   <div class='control-group'>
-    <%= f.label :expires_on, 'Expiration date' %>
-    <div class='input'>
+    <%= f.label :expires_on, 'Expiration date', class: 'control-label' %>
+    <div class='controls'>
       <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
     </div>
   </div>
