@@ -6,10 +6,6 @@ class Admin::MainController < AdminController
     render
   end
 
-  def change_theme
-    @shop.update_attributes(theme: params[:theme])
-  end
-
   def reset
     reset_session
     redirect_to '/admin', notice: 'done'
