@@ -116,7 +116,7 @@ class Order < ActiveRecord::Base
   alias_method :amount, :price
 
   def price_with_shipping
-    shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost
+    shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost.to_s.to_d
   end
   alias_method :total_amount, :price_with_shipping
   alias_method :total_price,  :price_with_shipping
