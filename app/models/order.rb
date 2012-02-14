@@ -98,11 +98,9 @@ class Order < ActiveRecord::Base
 
   def set_quantity(product, quantity)
     return unless self.line_items.find_by_product_id(product.id)
-    if quantity <= 0
-      line_item_of(product).destroy
-    else
-      line_item_of(product).update_attributes(quantity: quantity)
-    end
+
+    line_item = line_item_of(product)
+    (quantity > 0) ? line_item.update_attributes(quantity: quantity) : line_item.destroy
   end
 
   def remove(product)
