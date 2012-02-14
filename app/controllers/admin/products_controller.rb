@@ -1,6 +1,6 @@
 class Admin::ProductsController < AdminController
 
-  before_filter :load_product, only: [:show, :edit, :update, :destroy, :variants ]
+  before_filter :load_product!, only: [:show, :edit, :update, :destroy, :variants ]
 
   def variants
     # update variation name event if the variant data is invalid
@@ -64,7 +64,7 @@ class Admin::ProductsController < AdminController
 
   private
 
-  def load_product
+  def load_product!
     @product = Product.find_by_permalink!(params[:id])
   end
 
