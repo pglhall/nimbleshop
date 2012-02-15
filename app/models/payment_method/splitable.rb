@@ -42,10 +42,10 @@ class PaymentMethod::Splitable < PaymentMethod
     order.line_items.each_with_index do |item, i|
       index = i + 1
       data.merge!({
-        "amount_#{index}"      => (item.product.price * 100).to_i,
-        "item_name_#{index}"   => item.product.name,
+        "amount_#{index}"      => (item.price * 100).to_i,
+        "item_name_#{index}"   => item.title,
         "quantity_#{index}"    => item.quantity,
-        "url_#{index}"           => request.protocol + request.host_with_port + "/products/#{item.product.permalink}"
+        "url_#{index}"         => request.protocol + request.host_with_port + "/products/#{item.product_permalink}"
       })
     end
     data

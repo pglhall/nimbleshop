@@ -13,11 +13,11 @@
   </td>
   <td><%= number_to_currency(line_item.product_price) %></td>
   <td>
-    <%= text_field_tag "updates[#{line_item.product.permalink}]", line_item.quantity, size: 2,
-                                          id: "updates_#{line_item.product.permalink}", class: "quantity-field" %>
+    <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
+                                          id: "updates_#{line_item.product_id}", class: "quantity-field" %>
   </td>
   <td class="remove">
-    <%= link_to 'Remove', '#', class: 'remove-item', 'data-permalink' => line_item.product.permalink %>
+    <%= link_to 'Remove', '#', class: 'remove-item', 'data-permalink' => line_item.product_id %>
   </td>
   <td><strong><%= number_to_currency(line_item.price) %></strong></td>
 </tr>

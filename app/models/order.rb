@@ -96,10 +96,10 @@ class Order < ActiveRecord::Base
     self.line_items.create!(product: product, quantity: 1, variant: variant)
   end
 
-  def set_quantity(product, quantity)
-    return unless self.line_items.find_by_product_id(product.id)
+  def set_quantity(product_id, quantity)
+    return unless self.line_items.find_by_product_id(product_id)
 
-    line_item = line_item_of(product)
+    line_item = line_item_of(product_id)
     (quantity > 0) ? line_item.update_attributes(quantity: quantity) : line_item.destroy
   end
 
@@ -152,8 +152,8 @@ class Order < ActiveRecord::Base
 
   private
 
-  def line_item_of(product)
-    self.line_items.find_by_product_id(product.id)
+  def line_item_of(product_id)
+    self.line_items.find_by_product_id(product_id)
   end
 
   def set_order_number

@@ -3,7 +3,7 @@
     <tr>
       <td colspan='2'>
         <div style='float:left; width:200px;border:0px solid red;'>
-        <%= truncate(line_item.product.title, length: 75) %>
+        <%= truncate(line_item.title, length: 75) %>
 
         <p>
           <i><%= display_variant_info(line_item) %> </i>
@@ -14,7 +14,7 @@
         </p>
       </div>
       <div style='float:right; width: 100px;border: 0px solid blue;'>
-        <%= image_tag line_item.picture_small, alt: line_item.product.name %>
+        <%= image_tag line_item.picture_small, alt: line_item.title %>
       </div>
       <div style='clear:both;'></div>
     </tr>

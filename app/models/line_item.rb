@@ -7,7 +7,8 @@ class LineItem < ActiveRecord::Base
   belongs_to :product
 
   store :settings, accessors: [ :picture_tiny,      :picture_small,      :picture_medium,      :picture_large,
-                                :picture_tiny_plus, :picture_small_plus, :picture_medium_plus, :picture_large_plus ]
+                                :picture_tiny_plus, :picture_small_plus, :picture_medium_plus, :picture_large_plus,
+                                :product_permalink ]
 
   belongs_to :variant
 
@@ -41,6 +42,7 @@ class LineItem < ActiveRecord::Base
     self.product_name        = product.name
     self.product_description = product.description
     self.product_price       = variant ? variant.price : product.price
+    self.product_permalink   = product.permalink
 
     %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |size|
       self.send("picture_#{size}=", product.picture.picture_url(size.intern))

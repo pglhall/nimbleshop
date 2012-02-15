@@ -25,9 +25,8 @@ class CartsController < ApplicationController
     if params[:checkout]
       redirect_to edit_order_url(current_order)
     else
-      params[:updates].each do |permalink, quantity|
-        product = Product.find_by_permalink!(permalink)
-        current_order.set_quantity(product, quantity.to_i)
+      params[:updates].each do |product_id, quantity|
+        current_order.set_quantity(product_id, quantity.to_i)
       end
       redirect_to cart_url
     end
