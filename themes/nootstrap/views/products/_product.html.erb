@@ -2,7 +2,7 @@
   <li class='span1'>&nbsp;</li>
   <li class='span3'>
     <p>
-      <%= link_to(image_tag(product.picture.picture_url(:medium_plus)), product, class: 'thumbnail') %>
+      <%= link_to(image_tag(product.picture.picture_url(:medium_plus), alt: product.name), product, class: 'thumbnail') %>
     </p>
 
     <p class='product'>

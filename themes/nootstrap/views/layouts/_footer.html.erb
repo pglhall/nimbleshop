@@ -4,28 +4,28 @@
   <footer>
     <div class='row'>
       <div class='span4'>
-          <%= image_tag(current_theme_image_path('paypal.png')) %>
-          <%= image_tag(current_theme_image_path('visa.png')) %>
-          <%= image_tag(current_theme_image_path('mastercard.png')) %>
-          <%= image_tag(current_theme_image_path('amex.png')) %>
-          <%= image_tag(current_theme_image_path('discover.png')) %>
+          <%= image_tag current_theme_image_path('paypal.png'),     alt: 'paypal' %>
+          <%= image_tag current_theme_image_path('visa.png'),       alt: 'visa' %>
+          <%= image_tag current_theme_image_path('mastercard.png'), alt: 'mastercard' %>
+          <%= image_tag current_theme_image_path('amex.png'),       alt: 'amex' %>
+          <%= image_tag current_theme_image_path('discover.png'),   alt: 'discover' %>
 
           <% if splitable_enabled? %>
-            <%= image_tag(current_theme_image_path('splitable.png')) %>
+            <%= image_tag current_theme_image_path('splitable.png'), alt: 'splitable' %>
           <% end %>
       </div>
       <div class='span6'>
         &copy; Your company name @2011
       </div>
       <div class='span2'>
-        <% if @shop.twitter_handle.present? %>
-          <%= link_to image_tag(current_theme_image_path('twitter.png')), @shop.twitter_url %>
+        <% if current_shop.twitter_handle.present? %>
+          <%= link_to image_tag(current_theme_image_path('twitter.png'), alt: 'twitter link'), @shop.twitter_url %>
         <% end %>
-        <% if @shop.facebook_url.present? %>
-          <%= link_to image_tag(current_theme_image_path('facebook.png')), '' %>
+        <% if current_shop.facebook_url.present? %>
+          <%= link_to image_tag(current_theme_image_path('facebook.png'), alt: 'facebook link'), current_shop.facebook_url %>
         <% end %>
-        <% if @shop.contact_email.present? %>
-          <%= link_to image_tag(current_theme_image_path('mail.png')), "mailto:#{@shop.contact_email}" %>
+        <% if current_shop.contact_email.present? %>
+          <%= link_to image_tag(current_theme_image_path('mail.png'), alt: 'mail'), "mailto:#{@shop.contact_email}" %>
         <% end %>
       </div>
     </div>

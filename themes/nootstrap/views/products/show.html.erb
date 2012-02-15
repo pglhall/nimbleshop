@@ -4,7 +4,7 @@
   <div class='span6'>
     <ul class="thumbnails">
       <li>
-        <%= link_to(image_tag(@product.picture.picture_url(:large)), all_pictures_product_path(@product), id: 'main-image', class: 'thumbnail') %>
+        <%= link_to(image_tag(@product.picture.picture_url(:large), alt: @product.name), all_pictures_product_path(@product), id: 'main-image', class: 'thumbnail') %>
       </li>
     </ul>
 
@@ -12,7 +12,7 @@
     <p>
       <ul class="thumbnails">
         <% @product.pictures.each do |picture| %>
-          <% img = image_tag(picture.picture_url(:small), {class: 'thumb',
+          <% img = image_tag(picture.picture_url(:small), alt: @product.name, {class: 'thumb',
                                                            'data-large-picture' => picture.picture_url(:large),
                                                            'data-grande-picture' => picture.picture_url(:large_plus)}) %>
           <li>

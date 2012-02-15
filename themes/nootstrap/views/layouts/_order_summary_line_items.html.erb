@@ -14,7 +14,7 @@
         </p>
       </div>
       <div style='float:right; width: 100px;border: 0px solid blue;'>
-        <%= image_tag(line_item.product.picture.picture_url(:small)) %>
+        <%= image_tag line_item.product.picture.picture_url(:small), alt: line_item.product.name %>
       </div>
       <div style='clear:both;'></div>
     </tr>
