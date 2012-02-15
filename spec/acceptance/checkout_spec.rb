@@ -29,8 +29,11 @@ describe "checkout integration" do
     page.has_content?('2 Items').must_equal true
     page.has_content?('$39').must_equal true
 
-    fill_in 'updates_candy-colours-bracelet-set', with: '4'
-    fill_in 'updates_layered-coral-necklace', with: '2'
+    p1 = Product.find_by_name 'Candy Colours Bracelet Set'
+    p2 = Product.find_by_name 'Layered Coral Necklace'
+
+    fill_in "updates_#{p1.id}", with: '4'
+    fill_in "updates_#{p2.id}", with: '2'
 
     click_button 'Update'
     page.has_content?('$128').must_equal true
