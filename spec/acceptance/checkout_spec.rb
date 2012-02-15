@@ -22,7 +22,7 @@ describe "checkout integration" do
     page.has_content?('1 Item').must_equal true
     page.has_content?('$25').must_equal true
 
-    click_link 'Continue shopping ...'
+    visit root_path
     click_link 'Layered Coral Necklace'
     click_button 'Add to cart'
 
