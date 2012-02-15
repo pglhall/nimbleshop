@@ -12,7 +12,7 @@
   <div class='span11'>
     <ul class="thumbnails">
       <% @product.pictures.each do |picture| %>
-        <li> <%= image_tag(picture.picture_url(:grande)) %> </li>
+        <li> <%= image_tag(picture.picture_url(:large_plus)) %> </li>
       <% end %>
     </ul>
   </div>
