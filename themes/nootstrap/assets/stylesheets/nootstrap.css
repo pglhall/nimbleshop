@@ -6,12 +6,6 @@
  *= require_self
  *= require twitter_bootstrap
  *= require twitter_bootstrap_responsive
+ *= require custom
 */
 
-#complete p.button {
-  margin: 10px 0 10px 0;
-}
-
-.thumbnails .product .price {
-  color: #999;
-}

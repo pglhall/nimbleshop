@@ -1,0 +1,34 @@
+#complete p.button {
+  margin: 10px 0 10px 0;
+}
+
+.thumbnails .product .price {
+  color: #999;
+}
+
+/*
+ * overrite bootstrap
+ */
+
+.navbar-inner {
+  background: #f0f1f4;
+  background-color: #f0f1f4;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  border-bottom: 1px solid #D8DDE1;
+}
+
+.navbar .nav > li > a:hover {
+  color: #005580;
+}
+
+
+#site-name {
+  color: #005580;
+  font-weight: bold;
+}
+
+a#site-name:hover {
+  text-decoration: underline;
+}
