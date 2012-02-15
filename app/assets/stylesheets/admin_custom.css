@@ -9,3 +9,19 @@
 .clear {
   clear: both;
 }
+
+
+/*
+ * overrite bootstrap
+ */
+
+.navbar-inner {
+  background: #f0f1f4;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.navbar .nav > li > a:hover {
+  color: #005580;
+}
