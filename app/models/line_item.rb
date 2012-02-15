@@ -1,10 +1,7 @@
 class LineItem < ActiveRecord::Base
 
-  # this is used only to pull the picture of the line_item. If after an order is created a product
-  # is deleted then that product and all the pictures are gone. In that case line item should
-  # display image not available. Besides image line_item should not pull any data from product and
-  # instead used the attributes copied from product to line_item
-  belongs_to :product
+  store :settings, accessors: [ :picture_tiny,      :picture_small,      :picture_medium,      :picture_large,
+                                :picture_tiny_plus, :picture_small_plus, :picture_medium_plus, :picture_large_plus ]
 
   belongs_to :variant
 

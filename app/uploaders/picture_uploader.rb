@@ -20,35 +20,35 @@ class PictureUploader < CarrierWave::Uploader::Base
     "/images/no_image/" + [version_name, "no-image.png"].compact.join('_')
   end
 
-  version :pico do
+  version :tiny do #pico
     process :resize_to_limit => [16, 16]
   end
 
-  version :icon do
+  version :tiny_plus do #icon
     process :resize_to_limit => [32, 32]
   end
 
-  version :thumb do
+  version :small do #thumb
     process :resize_to_limit => [50, 50]
   end
 
-  version :small do
+  version :small_plus do #small
     process :resize_to_limit => [100, 100]
   end
 
-  version :compact do
+  version :medium do #compact
     process :resize_to_limit => [160, 160]
   end
 
-  version :medium do
+  version :medium_plus do #medium
     process :resize_to_limit => [240, 240]
   end
 
-  version :large do
+  version :large do # large
     process :resize_to_limit => [480, 480]
   end
 
-  version :grande do
+  version :large_plus do #grande
     process :resize_to_limit => [600, 600]
   end
 

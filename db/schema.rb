@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "product_name",                                      :null => false
     t.text     "product_description"
     t.decimal  "product_price",       :precision => 8, :scale => 2, :null => false
+    t.text     "settings"
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
   end
