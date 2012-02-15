@@ -41,6 +41,10 @@ class LineItem < ActiveRecord::Base
     self.product_name        = product.name
     self.product_description = product.description
     self.product_price       = variant ? variant.price : product.price
+
+    %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |size|
+      self.send("picture_#{size}=", product.picture.picture_url(size.intern))
+    end
   end
 
 end
