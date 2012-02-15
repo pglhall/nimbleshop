@@ -34,9 +34,6 @@ class InstantPaymentNotificationsController < ApplicationController
     render :nothing => true
   end
 
-  #
-  # curl -d "api_secret=dsdfdsfswvf3dsdf&invoice=923204115&payment_status=paid" http://localhost:3000/instant_payment_notifications/splitable
-  #
   def splitable
 
     # this is line to make the file load which has class_eval code for Order
@@ -54,8 +51,11 @@ class InstantPaymentNotificationsController < ApplicationController
       order.payment_status = params[:payment_status]
       order.payment_method = PaymentMethod::Splitable.first
       order.splitable_transaction_number = params[:transaction_id]
-      order.save!
-      render nothing: true
+      if order.save
+        render nothing: true
+      else
+        render "error: #{order.errors.full_messages.to_sentence}", status: 403
+      end
     end
   end
 

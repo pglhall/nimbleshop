@@ -22,7 +22,6 @@ class Order < ActiveRecord::Base
 
   # cancelled is when third party service like Splitable sends  a webhook stating that order
   # has been cancelled
-  validates_inclusion_of :payment_status,  in: %W( abandoned authorized paid refunded voided cancelled)
   validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending )
   validates_inclusion_of :status,          in: %W( open closed )
   validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided)
@@ -32,6 +31,7 @@ class Order < ActiveRecord::Base
   state_machine :payment_status, :initial => :abandoned do
     after_transition on: :authorized, do: :after_authorized
     after_transition on: :purchased,  do: :after_purchased
+
     event :authorized do
       transition from: [:abandoned],  to: :authorized
     end
@@ -41,6 +41,8 @@ class Order < ActiveRecord::Base
     event :purchased do
       transition from: [:abandoned],  to: :paid
     end
+
+    state :authorized, :paid, :refunded, :voided, :cancelled
   end
 
   state_machine :shipping_status, initial:  :nothing_to_ship do

@@ -15,7 +15,7 @@ class PaymentMethod::Splitable < PaymentMethod
     end
 
     options = base_data(order, request).merge(line_items_data(order, request))
-    response = conn.post '/api/splits/create', options
+    response = conn.post '/api/splits', options
     data = ActiveSupport::JSON.decode(response.body)
     data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
   end
