@@ -26,7 +26,7 @@ describe "admin integration" do
 
         page.has_content?('Successfuly added').must_equal true
         page.has_content?('the very wicked name for product').must_equal true
-        page.has_xpath?("//img[@alt='Thumb_visa']").must_equal true
+        page.has_xpath?("//img[@alt='Small_visa']").must_equal true
       }
     end
 
@@ -83,7 +83,7 @@ describe "admin integration" do
 
       page.has_content?('Successfuly updated').must_equal true
       page.has_content?('the very wicked name for product').must_equal true
-      page.has_xpath?("//img[@alt='Thumb_visa']").must_equal true
+      page.has_xpath?("//img[@alt='Small_visa']").must_equal true
     end
 
     it "should not allow to save product with wrong params" do

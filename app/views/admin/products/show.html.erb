@@ -13,7 +13,7 @@
 
   <p>
     <% @product.pictures.each do |picture| %>
-      <%= image_tag(picture.picture_url(:thumb), alt: @product.title) %>
+      <%= image_tag(picture.picture_url(:small), alt: @product.title) %>
     <% end %>
   </p>
 

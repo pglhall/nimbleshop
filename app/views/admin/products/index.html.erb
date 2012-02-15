@@ -14,7 +14,7 @@
       <tr>
         <td>
           <% if product.picture %>
-            <%= image_tag(product.picture.picture_url(:thumb)) %>
+            <%= image_tag(product.picture.picture_url(:small)) %>
           <% end %>
         </td>
         <td><%= product.name %></td>
