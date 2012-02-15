@@ -8,7 +8,7 @@ class Sampledata
   end
 
   def load_shop
-      Shop.create!( name:           'nimbleshopdemo',
+      Shop.create!( name:           'nimbleShop',
                    theme:           'nootstrap',
                    phone_number:    '800-456-7890',
                    contact_email:   'johnnie.walker@nimbleshop.com',
