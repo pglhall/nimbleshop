@@ -91,7 +91,7 @@ group :test do
   gem 'minitest-colorize', git: 'https://github.com/nohupbrasil/minitest-colorize'
 
   gem 'database_cleaner'
-  gem 'rb-fsevent'# if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent'
   gem 'factory_girl_rails'
   gem "launchy"
 end

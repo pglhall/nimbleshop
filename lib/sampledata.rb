@@ -127,7 +127,7 @@ class Sampledata
     product1.variants.create!(variation1_value: 'White',  variation2_value: 'Large', price: 131)
 
 
-    self.product2 = Product.create!( title: "Candy Colours Bracelet Set", price: 47, description: 'tbd')
+    self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd')
 
     self.product3 = Product.create!( title: "Gemstone Cross Necklaces", price: 78, description: 'tbd')
 
@@ -147,7 +147,12 @@ class Sampledata
     desc = "This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!  A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
     product1.update_attributes(description: desc)
 
-    desc = "acrylic stretch beaded bracelets with peace sign, butterfly and heart charms. A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
+    desc = "Is belt a decorative item or a utilitarian item? \n
+
+    In the armed forces of Prussia, Tsarist Russia, and other Eastern European nations, it was common for officers to wear extremely tight, wide belts around the waist, on the outside of the uniform, both to support a saber as well as for aesthetic reasons. These tightly cinched belts served to draw in the waist and give the wearer a trim physique, emphasizing wide shoulders and a pouting chest.
+
+    This lovely orange is just what you need to make girls look at you instead of police officers.
+    "
     product2.update_attributes(description: desc)
 
     des = %q{
