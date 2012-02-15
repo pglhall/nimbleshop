@@ -12,9 +12,9 @@
     <p>
       <ul class="thumbnails">
         <% @product.pictures.each do |picture| %>
-          <% img = image_tag(picture.picture_url(:small), alt: @product.name, {class: 'thumb',
+          <% img = image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb',
                                                            'data-large-picture' => picture.picture_url(:large),
-                                                           'data-grande-picture' => picture.picture_url(:large_plus)}) %>
+                                                           'data-grande-picture' => picture.picture_url(:large_plus) %>
           <li>
             <%= link_to(img, '#', class: 'thumbnail') %>
           </li>
