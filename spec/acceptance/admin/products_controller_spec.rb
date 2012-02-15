@@ -21,12 +21,12 @@ describe "admin integration" do
         fill_in 'Name', :with => 'the very wicked name for product'
         fill_in 'Description', :with => 'test desc for user'
         fill_in 'Price', :with => '45.99'
-        attach_file "Picture", "#{Rails.root}/app/assets/images/visa.png"
+        attach_file "Picture", "#{Rails.root}/spec/support/images/cookware.jpg"
         click_button 'Submit'
 
         page.has_content?('Successfuly added').must_equal true
         page.has_content?('the very wicked name for product').must_equal true
-        page.has_xpath?("//img[@alt='Small_visa']").must_equal true
+        page.has_xpath?("//img[@alt='Small_cookware']").must_equal true
       }
     end
 
