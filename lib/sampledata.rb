@@ -22,8 +22,8 @@ class Sampledata
   def process_pictures
     puts "processing pictures. Might take a while ...."
     process_picture('pic1_1.jpg', product1)
-    process_picture('pic2_1.jpg', product2)
-    process_picture('pic2_2.jpg', product2)
+    process_picture('pic2_1.jpeg', product2)
+    process_picture('pic2_2.jpeg', product2)
     process_picture('pic3_1.jpg', product3)
     process_picture('pic3_2.jpg', product3)
     process_picture('pic4_1.jpg', product4)
