@@ -25,11 +25,12 @@
   </div>
 
   <div class='span6'>
-    <h3 id='product-price'><%= number_to_currency(@product.price) %></h3>
+    <h2 id='product-price'><%= number_to_currency(@product.price) %></h2>
     <%= form_tag('/cart/add', method: 'post') do %>
 
       <div id ="product-show-variant-price-data" data-fields="<%= @product.variant_price_data.to_json %>">
 
+        <% if @product.variations.active.any? %>
       <div class='variants'>
         <% @product.variations.active.each do |variation| %>
           <%= variation.label %>
@@ -40,6 +41,7 @@
         <br />
         <br />
       </div>
+    <% end %>
 
       <input type="hidden" name="permalink" value="<%= @product.permalink %>" />
       <div id="buy" class="clear">
@@ -47,7 +49,7 @@
 			</div>
     <% end %>
 
-    <h4>Description</h4>
+    <h4 id='product-description'>Description</h4>
     <%= simple_format(@product.description) %>
   </div>
 </div>

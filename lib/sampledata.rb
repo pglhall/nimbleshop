@@ -115,7 +115,7 @@ class Sampledata
   end
 
   def load_products
-    self.product1 = Product.create!( title: "Howlite and Crystal Flower Bracelet", price: 10, description: 'tbd')
+    self.product1 = Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd')
     product1.update_attributes!(variants_enabled: true)
     product1.variation1.update_attributes!(active: true)
     product1.variation2.update_attributes!(active: true)
@@ -129,13 +129,13 @@ class Sampledata
 
     self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd')
 
-    self.product3 = Product.create!( title: "Gemstone Cross Necklaces", price: 78, description: 'tbd')
+    self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd')
 
     self.product4 = Product.create!( title: "Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered",
                                 price: 81,
                                 description: 'tbd')
 
-    self.product5 = Product.create!( title: "Red, Black & Silver Glass Bracelet", price: 107, description: 'tbd')
+    self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd')
 
     self.product6 = Product.create!( title: "Layered Coral Necklace", price: 137, description: 'tbd')
 
@@ -144,7 +144,22 @@ class Sampledata
 
   def load_products_desc
 
-    desc = "This lovely elastic bracelet is made of dyed turquoise Howlite flowers and champagne colored crystals. It is fun and goes with any outfit!  A bracelet is an article of jewelry which is worn around the wrist. Bracelets can be manufactured from metal, leather, cloth, plastic or other materials and sometimes contain jewels, rocks, wood, and/or shells. Bracelets are also used for medical and identification purposes, such as allergy bracelets and hospital patient-identification tags."
+    desc = "
+      Year of Construction: 1631
+      Completed In: 1653
+      Time Taken: 22 years
+      Built By: Shah Jahan
+      Dedicated to: Mumtaz Mahal (Arjumand Bano Begum), the wife of Shah Jahan
+      Location: Agra (Uttar Pradesh), India
+      Building Type: Islamic tomb
+      Architecture: Mughal (Combination of Persian, Islamic and Indian architecture style)
+      Architect: Ustad Ahmad Lahauri
+      Cost of Construction: 32 crore rupees
+      Number of workers: 20,000
+      Highlights: One of the Seven Wonders of the World; A UNESCO World Heritage Site
+
+      Facts do not capture what Tajmahal is.
+    "
     product1.update_attributes(description: desc)
 
     desc = "Is belt a decorative item or a utilitarian item? \n
@@ -172,9 +187,11 @@ class Sampledata
     product4.update_attributes(description: desc)
 
     desc = %q{
-        "Deep red oval faceted beads with clear glass rondelles with red and black stripes. I added some silver plated \"Turkish knot\" spacers and some clear silver edged Czech glass table cut beads.
+      The term tote, meaning "to carry". This bag will let you carry items.
 
-          This one is 7 3/4\" or 19cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Red Stripe"
+      It is also a simple design. Sometime just being simple makes you stand out. No need to have a bag that is screaming "save the earth". If you carry this bag then it means you stand for all that and much more.
+
+      No make use of this barry and "carry" items.
     }
     product5.update_attributes(description: desc)
 
