@@ -34,6 +34,7 @@ class OrdersController < ApplicationController
     if @current_order.update_attributes(params[:order].merge(validate_email: true))
       redirect_to edit_shipping_method_order_path(current_order)
     else
+      @countries = ShippingMethod.available_for_countries(current_order.amount)
       @current_order.initialize_addresses
       render 'edit'
     end
