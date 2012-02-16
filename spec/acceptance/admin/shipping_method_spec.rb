@@ -11,10 +11,11 @@ describe "Shipping Method integration" do
     it "should add state level shipping methods" do
       bef = ShippingZone.count
       visit new_admin_shipping_zone_shipping_method_path(shipping_zone)
-      fill_in "Name", with: "Ground Shipping"
-      fill_in "Lower price limit", with: "10"
-      fill_in "Upper price limit", with: "30"
-      fill_in "Base price", with: "10"
+
+      fill_in "shipping_method_name", with: "Ground Shipping"
+      fill_in "shipping_method_lower_price_limit", with: "10"
+      fill_in "shipping_method_upper_price_limit", with: "30"
+      fill_in "shipping_method_base_price", with: "10"
       click_button('Submit')
 
       page.must_have_content('Successfuly created')
