@@ -25,3 +25,7 @@
 .navbar .nav > li > a:hover {
   color: #005580;
 }
+
+.navbar .nav > li > a {
+  text-shadow: none;
+}
