@@ -15,11 +15,11 @@ if Rails.env.production?|| (Rails.env.staging? && Settings.deliver_email_for_rea
 else
 
   ActionMailer::Base.smtp_settings = {
-    :user_name => "nimbleshop",
-    :password => "7663e1f272637a4b",
-    :address => "mailtrap.io",
-    :port => 2525,
-    :authentication => :plain }
+    user_name:      "nimbleshop",
+    password:       "7663e1f272637a4b",
+    address:        "mailtrap.io",
+    port:           2525,
+    authentication: :plain }
 
 end
 

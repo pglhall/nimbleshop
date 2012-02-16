@@ -22,7 +22,7 @@ class PaymentProcessor
       order.send(status)
       order.update_attributes!(payment_method: payment_method)
     else
-      creditcard.errors.add(:base, t(:credit_card_declined_message))
+      creditcard.errors.add(:base, 'Credit card was declined. Please try again! ')
     end
   end
 

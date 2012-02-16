@@ -21,7 +21,7 @@ class Creditcard < ActiveRecord::Base
                                              address2: addr.address2,
                                              first_name: addr.first_name,
                                              last_name: addr.last_name,
-                                             state: addr.state,
+                                             state: 'Florida' || addr.state, #TODO
                                              zipcode: addr.zipcode))
   end
 

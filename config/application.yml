@@ -11,6 +11,9 @@ common:
     username: <%= ENV['SENDGRID_USERNAME'] %>
     password: <%= ENV['SENDGRID_PASSWORD'] %>
     domain:   <%= ENV['SENDGRID_DOMAIN'] %>
+  mailtrapio:
+    username: <%= ENV['MAILTRAPIO_USERNAME'] %>
+    password: <%= ENV['MAILTRAPIO_PASSWORD'] %>
 
 development:
   s3:

@@ -57,7 +57,7 @@ class Order < ActiveRecord::Base
 
   def after_authorized
     Mailer.order_notification(self.number).deliver
-    AdminMailer.new_order_notification(self.number).deliver
+    AdminMailer.new_order_notification(self.number, Shop.first).deliver
     self.shipping_pending
   end
 

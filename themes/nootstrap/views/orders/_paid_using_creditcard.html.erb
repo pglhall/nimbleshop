@@ -1,6 +1,11 @@
-<div class='alert-message block-message success'>
+<br />
+<div class='alert alert-success'>
   <p><strong> You have successfully completed the purchase. </strong> </p>
   <ul>
+    <li>
+      An email is being sent to <strong><%= @order.email %></strong> with full information regarding
+      the order number, contents of the order and other details.
+    </li>
     <li>
       Your order number is #<strong><%= @order.number %></strong>. Please note down this number and use this order
       number in case you need to contact us.
@@ -12,9 +17,6 @@
     <li>
       In the credit card statement name of the company would appear as
       <strong><%= @order.payment_method.authorize_net_company_name_on_creditcard_statement %></strong> .
-    </li>
-    <li>
-      An invoice is being sent to <strong><%= @order.email %></strong> .
     </li>
   </ul>
 </div>
