@@ -89,25 +89,25 @@ class Sampledata
 
   def load_category_information
     cf = CustomField.create!(name: 'category', field_type: 'text')
-    product5.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-    product1.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-    product2.custom_field_answers.create(custom_field: cf, value: 'bracelet')
-    product7.custom_field_answers.create(custom_field: cf, value: 'earring')
-    product4.custom_field_answers.create(custom_field: cf, value: 'earring')
-    product6.custom_field_answers.create(custom_field: cf, value: 'necklace')
-    product3.custom_field_answers.create(custom_field: cf, value: 'necklace')
+    product1.custom_field_answers.create(custom_field: cf, value: 'art')
+    product2.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    product3.custom_field_answers.create(custom_field: cf, value: 'rug')
+    product4.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    product5.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    product6.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    product7.custom_field_answers.create(custom_field: cf, value: 'fashion')
 
-    pg_bracelets = ProductGroup.create!(name: 'Bracelets')
-    pg_bracelets.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'bracelet')
-    pg_earrings = ProductGroup.create!(name:  'Earrings')
-    pg_earrings.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'earring')
-    pg_necklaces = ProductGroup.create!(name: 'Necklaces')
-    pg_necklaces.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'necklace')
+    pg_rug = ProductGroup.create!(name: 'Rug')
+    pg_rug.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'rug')
+    pg_art = ProductGroup.create!(name:  'Art')
+    pg_art.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'art')
+    pg_fashion = ProductGroup.create!(name: 'Fashion')
+    pg_fashion.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'fashion')
 
     link_group = LinkGroup.create!(name: 'Shop by category')
-    link_group.navigations.create(navigeable: pg_bracelets)
-    link_group.navigations.create(navigeable: pg_earrings)
-    link_group.navigations.create(navigeable: pg_necklaces)
+    link_group.navigations.create(navigeable: pg_rug)
+    link_group.navigations.create(navigeable: pg_art)
+    link_group.navigations.create(navigeable: pg_fashion)
   end
 
   def load_shipping_methods
