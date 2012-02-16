@@ -28,4 +28,9 @@ module ApplicationHelper
   def options_for_countries(country_codes)
     country_codes.map {|t| [ Carmen::Country.coded(t).name, t ] }
   end
+
+  def unconfigured_shipping_zone_countries
+    existing = CountryShippingZone.all.map(&:country_code)
+    options_for_all_countries.reject { |_, t| existing.include?(t) }
+  end
 end

@@ -17,4 +17,14 @@ describe "Shipping zone integration" do
       end
     }
   end
+
+  describe "should remove already created countries" do
+    it {
+      visit new_admin_shipping_zone_path
+      select 'Canada', :from => 'Country name'
+      click_button('Submit')
+      visit new_admin_shipping_zone_path
+      page.wont_have_xpath "//select[@id = 'shipping_zone_country_code']/option[@value = 'CA']"
+    }
+  end
 end
