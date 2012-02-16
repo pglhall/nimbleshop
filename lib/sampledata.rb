@@ -132,28 +132,26 @@ class Sampledata
 
   def load_products
     self.product1 = Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd')
-    product1.update_attributes!(variants_enabled: true)
-    product1.variation1.update_attributes!(active: true)
-    product1.variation2.update_attributes!(active: true)
-    product1.variants.create!(variation1_value: 'Black',  variation2_value: 'Small',  price: 11)
-    product1.variants.create!(variation1_value: 'White',  variation2_value: 'Small',  price: 111)
-    product1.variants.create!(variation1_value: 'Black',  variation2_value: 'Medium', price: 21)
-    product1.variants.create!(variation1_value: 'White',  variation2_value: 'Medium', price: 121)
-    product1.variants.create!(variation1_value: 'Black',  variation2_value: 'Large', price:   31)
-    product1.variants.create!(variation1_value: 'White',  variation2_value: 'Large', price: 131)
-
 
     self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd')
-
     self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd')
-
-    self.product4 = Product.create!( title: "Large Sterling Silver Hoop Earrings Aqua Freshwater Pearls Moonstone Hammered",
-                                price: 81,
-                                description: 'tbd')
-
+    self.product4 = Product.create!( title: "Large Sterling Silver Hoop Earrings", price: 81, description: 'tbd')
     self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd')
 
-    self.product6 = Product.create!( title: "Layered Coral Necklace", price: 137, description: 'tbd')
+    self.product6 = Product.create!( title: "Handmade vibrant bangles", price: 11, description: 'tbd')
+    product6.update_attributes!(variants_enabled: true)
+    product6.variation1.update_attributes!(active: true)
+    product6.variation2.update_attributes!(active: true)
+
+    product6.variants.create!(variation1_value: 'Pink',   variation2_value: 'Small',  price: 19)
+    product6.variants.create!(variation1_value: 'Yellow', variation2_value: 'Small',  price: 11)
+    product6.variants.create!(variation1_value: 'Blue',   variation2_value: 'Small',  price: 11)
+    product6.variants.create!(variation1_value: 'Orangy', variation2_value: 'Small',  price: 14)
+
+    product6.variants.create!(variation1_value: 'Pink',   variation2_value: 'Medium',  price: 39)
+    product6.variants.create!(variation1_value: 'Yellow', variation2_value: 'Medium',  price: 31)
+    product6.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
+    product6.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
 
     self.product7 = Product.create!( title: "Colorful rajasthani shoes", price: 141, description: 'tbd')
   end
