@@ -9,18 +9,26 @@
     </ul>
 
     <br />
-    <p>
-      <ul class="thumbnails">
-        <% @product.pictures.each do |picture| %>
-          <% img = image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb',
+    <table id='product-thumbnails'>
+      <% @product.pictures.in_groups_of(5) do |group| %>
+        <tr>
+          <% group.each do |picture| %>
+            <td>
+              <% if picture.blank? %>
+                &nbsp;
+              <% else %>
+              <% img = image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb',
                                                            'data-large-picture' => picture.picture_url(:large),
                                                            'data-grande-picture' => picture.picture_url(:large_plus) %>
-          <li>
-            <%= link_to(img, '#', class: 'thumbnail') %>
-          </li>
-        <% end %>
-      </ul>
-    </p>
+              <%= link_to(img, '#', class: 'thumbnail') %>
+            <% end %>
+
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+
     <%= link_to 'Continue shopping ...', root_url %>
   </div>
 

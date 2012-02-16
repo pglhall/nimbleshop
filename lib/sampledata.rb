@@ -32,9 +32,25 @@ class Sampledata
     process_picture('pic5_1.jpeg', product5)
     process_picture('pic5_2.jpeg', product5)
     process_picture('pic5_3.jpeg', product5)
+
     process_picture('pic6_1.jpg', product6)
     process_picture('pic6_2.jpg', product6)
     process_picture('pic6_3.jpg', product6)
+    process_picture('pic6_4.jpg', product6)
+    process_picture('pic6_5.jpg', product6)
+    process_picture('pic6_6.jpg', product6)
+    process_picture('pic6_7.jpg', product6)
+    process_picture('pic6_8.jpg', product6)
+    process_picture('pic6_9.jpg', product6)
+    process_picture('pic6_10.jpg', product6)
+    process_picture('pic6_11.jpg', product6)
+    process_picture('pic6_12.jpg', product6)
+    process_picture('pic6_13.jpg', product6)
+    process_picture('pic6_14.jpg', product6)
+    process_picture('pic6_15.jpg', product6)
+    process_picture('pic6_16.jpg', product6)
+    process_picture('pic6_17.jpg', product6)
+
     process_picture('pic7_1.jpg', product7)
     process_picture('pic7_2.jpg', product7)
     process_picture('pic7_3.jpg', product7)
@@ -197,9 +213,12 @@ class Sampledata
 
 
     desc = %q{
-          These earrings have Irish claddagh silver charms dangling from wire wrapped erinite green Swarovski crystals and silver beads, hanging from silver earwires.
+Bangles are part of traditional Indian jewelry. They are usually worn in pairs by women, one or more on each arm. Most Indian women prefer wearing either gold or glass bangles or combination of both. Inexpensive bangles made from plastic are slowly replacing those made by glass, but the ones made of glass are still preferred at traditional occasions such as marriages and on festivals.
 
-          The length is 1 5/8" from the earwire loop. The claddagh symbol is two hands gently holding a crowned heart.
+The designs range from simple to intricate handmade designs, often studded with precious and semi-precious stones such as diamonds, gems and pearls. Sets of expensive bangles made of gold and silver make a jingling sound. The imitation jewelry, tend to make a tinny sound when jingled.
+
+It is tradition that the bride will try to wear as many small glass bangles as possible at her wedding and the honeymoon will end when the last bangle breaks.
+
     }
     product6.update_attributes(description: desc)
 

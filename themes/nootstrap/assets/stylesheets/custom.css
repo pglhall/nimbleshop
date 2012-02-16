@@ -47,3 +47,8 @@ a#site-name:hover {
   color: #818181;
   line-height: 22px;
 }
+
+
+table#product-thumbnails a {
+  margin: 6px;
+}
