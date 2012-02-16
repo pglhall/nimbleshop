@@ -20,5 +20,4 @@ describe Order do
       order.set_quantity(product, 3)
     }
   end
-
 end

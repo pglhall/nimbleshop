@@ -13,6 +13,7 @@
       </div>
     <% end %>
 
+	<% if @shipping_methods.any? %>
     <div class='control-group'>
       <div class='controls'>
         <% @shipping_methods.each do |shipping_method| %>
@@ -27,6 +28,13 @@
     <div class="form-actions">
       <%= f.submit 'Submit', class: 'btn btn-primary' %>
     </div>
+	<% else %>
+		<div class="well" style="margin-top:20px;text-align: center;">
+			<h4>  unable to complete your order (no shipping method available)</h4>
+			<%= link_to "Edit Shipping Address", [:edit, current_order]%>
+		</div>
+
+    <% end %>
 
   <% end %>
 </div>

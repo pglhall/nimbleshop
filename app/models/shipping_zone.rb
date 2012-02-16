@@ -3,6 +3,8 @@ class ShippingZone < ActiveRecord::Base
   include BuildPermalink
 
   has_many :shipping_methods, dependent: :destroy, conditions: { active: true }
+
+  belongs_to :country_shipping_zone
 end
 
 class CountryShippingZone < ShippingZone
@@ -42,9 +44,8 @@ end
 
 class RegionalShippingZone < ShippingZone
 
-  belongs_to :country_shipping_zone
-
   validates :state_code, presence: true
+
   validate :code_validity
 
   before_save :set_name

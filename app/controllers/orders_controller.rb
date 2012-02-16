@@ -26,52 +26,15 @@ class OrdersController < ApplicationController
 
   def edit
     @page_title = 'Shipping information'
-    unless current_order.shipping_address
-      a = current_order.build_shipping_address
-      a.country_code = 'US'
-      a.state_code = 'MD'
-      current_order.shipping_address.use_for_billing = true
-    end
-    current_order.build_billing_address unless current_order.billing_address
+    current_order.initialize_addresses
   end
 
   def update
-    @current_order.validate_email = true
-    @current_order.email = params[:order][:email]
-
-    # ensure email is entered and is valid
-    current_order.valid?
-
-    handle_shipping_address
-    handle_billing_address unless current_order.shipping_address.use_for_billing
-    current_order.save
-
-    if  current_order.errors.any? ||
-        current_order.shipping_address.errors.any?  ||
-        (current_order.billing_address && current_order.billing_address.errors.any?)
-      render 'edit'
-    else
+    if @current_order.update_attributes(params[:order].merge(validate_email: true))
       redirect_to edit_shipping_method_order_path(current_order)
-    end
-  end
-
-  private
-
-  def handle_shipping_address
-    _attributes = params[:order][:shipping_address_attributes]
-    if current_order.shipping_address
-      current_order.shipping_address.update_attributes(_attributes)
     else
-      current_order.create_shipping_address(_attributes)
-    end
-  end
-
-  def handle_billing_address
-    _attributes = params[:order][:billing_address_attributes]
-    if current_order.billing_address
-      current_order.billing_address.update_attributes(_attributes)
-    else
-      current_order.create_billing_address(_attributes)
+      @current_order.initialize_addresses
+      render 'edit'
     end
   end
 
@@ -79,7 +42,6 @@ class OrdersController < ApplicationController
 
   def set_instance_variables_for_shipping_method
     @page_title = 'Pick shipping method'
-    @shipping_methods = current_order.available_shipping_methods
+    @shipping_methods = Array.wrap(current_order.available_shipping_methods)
   end
-
 end

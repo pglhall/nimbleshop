@@ -2,6 +2,23 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
+  describe "#scopes" do
+    let(:country_shipping_method) { create(:country_shipping_method) }
+    let(:state_shipping_method) { country_shipping_method.regions[0] }
+    let(:state_zone)            { state_shipping_method.shipping_zone }
+    let(:country_zone)          { country_shipping_method.shipping_zone }
+
+    it "list shipping zones with state/country" do
+      result = ShippingMethod.in_state(state_zone.state_code, country_zone.country_code)
+      result.to_ary =~ [ state_shipping_method ]
+    end
+
+    it "list shipping zones with country" do
+      result = ShippingMethod.in_country(country_zone.country_code)
+      result.to_ary =~ [ country_shipping_method ]
+    end
+  end
+
   describe "making country level shipping method inactive should make children inactive" do
     describe "updating record" do
       it {

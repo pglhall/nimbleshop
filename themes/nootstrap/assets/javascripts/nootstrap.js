@@ -13,5 +13,6 @@
 //= require bootstrap-alert
 //= require remove_item_from_cart
 //= require payment_method
-//= require hide_radio_button
 //= require variant
+//= require load_states
+//= require order

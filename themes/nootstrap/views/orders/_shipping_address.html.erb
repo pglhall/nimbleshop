@@ -39,9 +39,23 @@
       </div>
 
       <div class='control-group'>
+        <%= shipping_form.label :country_code, class: 'control-label' %>
+        <div class='controls'>
+          <%= shipping_form.select :country_code, options_for_countries, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
         <%= shipping_form.label :state_code, class: 'control-label' %>
         <div class='controls'>
-          <%= shipping_form.text_field :state_code, class: 'input-xlarge' %>
+          <%= shipping_form.select :state_code, options_for_country(shipping_form.object.country_code), class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= shipping_form.label :state_name, class: 'control-label' %>
+        <div class='controls'>
+          <%= shipping_form.text_field :state_name, class: 'input-xlarge' %>
         </div>
       </div>
 
@@ -52,12 +66,6 @@
         </div>
       </div>
 
-      <div class='control-group'>
-        <%= shipping_form.label :country_code, class: 'control-label' %>
-        <div class='controls'>
-          <%= shipping_form.text_field :country_code, class: 'input-xlarge' %>
-        </div>
-      </div>
 
     <%= shipping_form.check_box :use_for_billing %>
     Use this address as billing address too

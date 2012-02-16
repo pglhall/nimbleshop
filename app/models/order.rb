@@ -16,9 +16,11 @@ class Order < ActiveRecord::Base
 
   has_one     :shipping_address
   has_one     :billing_address
-  accepts_nested_attributes_for :shipping_address, :billing_address, allow_destroy: true
 
-  validates :email, email: true, if: lambda {|record| record.validate_email }
+  accepts_nested_attributes_for :shipping_address, allow_destroy: true
+  accepts_nested_attributes_for :billing_address, :reject_if => proc { |attributes| attributes['use_for_billing'].blank? || attributes['use_for_billing'] == "false" }, allow_destroy: true
+
+  validates :email, email: true, if: :validate_email
 
   # cancelled is when third party service like Splitable sends  a webhook stating that order
   # has been cancelled
@@ -80,7 +82,6 @@ class Order < ActiveRecord::Base
 
   def available_shipping_methods
     ShippingMethod.available_for(amount, shipping_address)
-    #ShippingMethod.order('base_price asc').all.select { |e| e.available_for(order.amount, order.shipping_address) }
   end
 
   def item_count
@@ -150,6 +151,11 @@ class Order < ActiveRecord::Base
 
   def status
     ActiveSupport::StringInquirer.new(self['status'])
+  end
+
+  def initialize_addresses
+    shipping_address || build_shipping_address(country_code: "US", use_for_billing:  true)
+    billing_address || build_billing_address(country_code: "US")
   end
 
   private

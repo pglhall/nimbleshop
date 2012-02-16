@@ -40,9 +40,23 @@
       </div>
 
       <div class='control-group'>
+        <%= billing_form.label :country_code, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.select :country_code, options_for_countries, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group state-name'>
+        <%= billing_form.label :state_name, class: 'control-label' %>
+        <div class='controls'>
+			<%= billing_form.select :state_name, options_for_country(billing_form.object.country_code), class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group state-code'>
         <%= billing_form.label :state_code, class: 'control-label' %>
         <div class='controls'>
-          <%= billing_form.text_field :state_code, class: 'input-xlarge' %>
+			<%= billing_form.select :state_code, options_for_country(billing_form.object.country_code), class: 'input-xlarge' %>
         </div>
       </div>
 
@@ -53,13 +67,7 @@
         </div>
       </div>
 
-      <div class='control-group'>
-        <%= billing_form.label :country_code, class: 'control-label' %>
-        <div class='controls'>
-          <%= billing_form.text_field :country_code, class: 'input-xlarge' %>
-        </div>
-      </div>
+    	<%= billing_form.hidden_field :use_for_billing %>
     </fieldset>
-
   <% end %>
 </div>

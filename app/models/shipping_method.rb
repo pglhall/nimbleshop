@@ -15,6 +15,31 @@ class ShippingMethod < ActiveRecord::Base
 
   scope :active, where(active: true)
 
+  scope :atleast, lambda { |r| 
+    where('shipping_methods.lower_price_limit <= ?', r)
+  }
+
+  scope :atmost,  lambda { |r| 
+    where('shipping_methods.upper_price_limit >= ?', r)
+  }
+
+  scope :in_price_limit,  lambda { |r| atleast(r).atmost(r) }
+
+  scope :in_country, lambda { | code | 
+    joins(:shipping_zone).where(shipping_zones: { country_code: code })
+  }
+
+  def self.in_state(state_code, country_code)
+    where({
+      shipping_zones: { 
+        state_code: state_code, 
+          country_shipping_zones_shipping_zones: { 
+            country_code: country_code
+        } 
+      }
+    }).joins(shipping_zone: :country_shipping_zone)
+  end
+
   before_create :create_regional_shipping_methods, if: :country_level?
   before_save   :set_regions_inactive, if: :country_level?
 
@@ -22,22 +47,14 @@ class ShippingMethod < ActiveRecord::Base
   has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id'
 
   # return shipping methods available to the given address for the given amount
-  def self.available_for(amount, shipping_address)
-    country_code = shipping_address.country_code
-    state_code   = shipping_address.state_code
+  def self.available_for(amount, address)
+    proxy = active.in_price_limit(amount)
 
-    if state_code
-      scoped = self.scoped
-      scoped = scoped.where("? >= lower_price_limit", amount)
-      scoped = scoped.where("? <= upper_price_limit", amount)
-      scoped = scoped.where(active: true)
-      scoped = scoped.joins(:shipping_zone).where(shipping_zones: {country_code: shipping_address.country_code})
-      scoped = scoped.where(shipping_zones: {state_code: shipping_address.state_code})
-      scoped.all
+    if address.state_code
+      proxy.in_state(address.state_code, address.country_code)  
     else
-      scope = CountryShippingZone.where(country_code: country_code)
-      scope.where("lower_price_limit >= #{amount}").where("uppper_price_limit <= #{amount}")
-    end
+      proxy.in_country(address.country_code)
+    end.active
   end
 
   def shipping_price
