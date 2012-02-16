@@ -23,13 +23,17 @@
                         confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', remote: true %>
           </th>
         </tr>
-        <tr>
-          <th> Shipping method name </th>
-          <th> Condition </th>
-          <th> Shipping price </th>
-          <th> &nbsp;</th>
-          <th> &nbsp;</th>
-        </tr>
+
+        <% if shipping_zone.shipping_methods.any? %>
+          <tr>
+            <th> Shipping method name </th>
+            <th> Condition </th>
+            <th> Shipping price </th>
+            <th> &nbsp;</th>
+            <th> &nbsp;</th>
+          </tr>
+        <% end %>
+
       </thead>
       <tbody>
         <% shipping_zone.shipping_methods.each do |shipping_method| %>

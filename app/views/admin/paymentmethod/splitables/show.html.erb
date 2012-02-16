@@ -1,15 +1,17 @@
 <%= render '/admin/payment_methods/tabs' %>
 
-<div>
-  <div style='float:left;'>
-    <%= image_tag('splitable_logo.png', width: 130) %>
+<div class='well'>
+  <div>
+    <div style='float:left;'>
+      <%= image_tag('splitable_logo.png', width: 130) %>
+    </div>
+    <div style='float:left;margin-left: 10px;'>
+      <h3>
+        <%= link_to 'Edit Configuration Info', edit_admin_paymentmethod_splitable_path %>
+      </h3>
+    </div>
+    <div style='clear:both;'></div>
   </div>
-  <div style='float:left;margin-left: 10px;'>
-    <h3>
-      <%= link_to 'Edit Configuration Info', edit_admin_paymentmethod_splitable_path %>
-    </h3>
-  </div>
-  <div style='clear:both;'></div>
-</div>
 
-<%= render '/admin/paymentmethod/show_attributes' %>
+  <%= render '/admin/paymentmethod/show_attributes' %>
+</div>
