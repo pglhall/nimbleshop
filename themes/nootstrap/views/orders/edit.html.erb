@@ -7,8 +7,8 @@
   <%= form_for(@current_order, html: {class: 'form-horizontal'}) do |f| %>
     <%= render 'error', f: f %>
     <%= render 'contact_information', f: f %>
-    <%= render 'shipping_address',    f: f %>
-    <%= render 'billing_address',     f: f %>
+    <%= render 'shipping_address',    f: f, countries: @countries %>
+    <%= render 'billing_address',     f: f, countries: @countries %>
     <div class="form-actions">
       <%= f.submit 'Submit', class: 'btn btn-primary' %>
     </div>

@@ -3,19 +3,51 @@ require 'spec_helper'
 describe ShippingMethod do
 
   describe "#scopes" do
-    let(:country_shipping_method) { create(:country_shipping_method) }
-    let(:state_shipping_method) { country_shipping_method.regions[0] }
-    let(:state_zone)            { state_shipping_method.shipping_zone }
-    let(:country_zone)          { country_shipping_method.shipping_zone }
+    def with_regions(countries)
+      countries + countries.map(&:regions).flatten
+    end
+    before do
+      @us = create(:country_shipping_zone, country_code: 'US')
+      @ca = create(:country_shipping_zone, country_code: 'CA')
+      @hk = create(:country_shipping_zone, country_code: 'HK')
 
-    it "list shipping zones with state/country" do
-      result = ShippingMethod.in_state(state_zone.state_code, country_zone.country_code)
-      result.to_ary =~ [ state_shipping_method ]
+      @usground1  = create(:shipping_method, lower_price_limit: 0, higher_price_limit: nil, base_price: 3.99, shipping_zone: @us)
+      @usair1     = create(:shipping_method, lower_price_limit: 0, higher_price_limit: 600, base_price: 8.99, shipping_zone: @us)
+      @hkground1  = create(:shipping_method, lower_price_limit: 100, higher_price_limit: 1000, base_price: 8.99, shipping_zone: @hk)
+      @caground1  = create(:shipping_method, lower_price_limit: 0, higher_price_limit: 700, base_price: 5.99, shipping_zone: @ca)
+      @hkair1     = create(:shipping_method, lower_price_limit: 900, higher_price_limit: 2000, base_price: 28.99, shipping_zone: @hk)
     end
 
-    it "list shipping zones with country" do
-      result = ShippingMethod.in_country(country_zone.country_code)
-      result.to_ary =~ [ country_shipping_method ]
+    describe "#in_price_range" do
+      it "knows in which shipping methods are available" do
+        result = ShippingMethod.in_price_range(1500).to_ary
+        result.must_have_same_elements with_regions([@hkair1, @usground1])
+      end
+    end
+
+    describe "#atmost" do
+      it "knows who price is less than the given amount" do
+        ShippingMethod.atmost(1000).to_ary.must_have_same_elements  with_regions([ @usground1, @hkground1, @hkair1])
+        ShippingMethod.atmost(0).to_ary.must_have_same_elements with_regions([ @usground1, @usair1, @hkground1, @caground1, @hkair1])
+      end
+    end
+
+    describe "#aleast" do
+      it "knows who price is greater than the given amount" do
+        ShippingMethod.atleast(10).to_ary.must_have_same_elements  with_regions([ @usground1, @usair1, @caground1])
+      end
+    end
+
+    describe "#in_country" do
+      it "knows by country code" do
+        ShippingMethod.in_country('US').to_ary.must_have_same_elements with_regions([@usground1, @usair1])
+      end
+    end
+
+    describe "#available_countries" do
+      it "knows countries where shipping method available for the price" do
+        ShippingMethod.available_for_countries(1000).must_have_same_elements ['US', 'HK']
+      end
     end
   end
 

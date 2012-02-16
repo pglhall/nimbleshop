@@ -39,6 +39,6 @@ class window.App.toggleStates
 		@toggleVisibility $country 
 		false
 	constructor:  ->
-		($ "select[name$='[country_code]']")
-			.bind('change', @handler)
-			.triggerHandler 'change'
+		($ "select[name$='[country_code]']").bind('change', @handler)
+		for country in  ($ "select[name$='[country_code]']")
+			$(country).triggerHandler 'change'

@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   def edit
     @page_title = 'Shipping information'
     current_order.initialize_addresses
+    @countries = ShippingMethod.available_for_countries(current_order.amount)
   end
 
   def update
