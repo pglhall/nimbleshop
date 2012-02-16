@@ -1,12 +1,6 @@
 class Sampledata
   attr_accessor :product1, :product2, :product3, :product4, :product5, :product6, :product7
 
-  def process_link_group
-    link_group = LinkGroup.create!(name: 'Main-nav')
-    link_home = Link.create!(name: 'Home', url: '/')
-    Navigation.create!(link_group: link_group, navigeable: link_home)
-  end
-
   def load_shop
       Shop.create!( name:           'nimbleShop',
                    theme:           'nootstrap',

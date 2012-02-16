@@ -30,9 +30,6 @@ class ApplicationController < ActionController::Base
     @product_groups = ProductGroup.all
     @main_nav_link_group = LinkGroup.last
     @cart = current_order
-    @categories = LinkGroup.first.navigations.map do |nav|
-      [nav.navigeable.url, nav.navigeable.name]
-    end
     @shop_by_category_link_group = LinkGroup.find_by_permalink('shop-by-category')
     @shop_by_price_link_group = LinkGroup.find_by_permalink('shop-by-price')
   end

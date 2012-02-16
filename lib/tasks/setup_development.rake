@@ -37,8 +37,6 @@ task :setup_development => :environment do
 
   sampledata.load_shop
 
-  sampledata.process_link_group
-
   sampledata.load_price_information
   sampledata.load_category_information
 
