@@ -14,35 +14,24 @@
 
     <fieldset>
       <div class="control-group">
-        <%= f.label :name, class: 'control-label' %>
+        <%= f.label :name, 'Shipping method name', class: 'control-label' %>
         <div class="controls">
           <%= f.text_field :name, class: 'input-xlarge focus' %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :lower_price_limit, class: 'control-label' %>
+        <%= f.label :base_price, 'Shipping cost', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :lower_price_limit, class: 'input-xlarge' %>
+          <%= f.text_field :base_price, class: 'span1' %> USD
         </div>
       </div>
 
-      <div class="control-group">
-        <%= f.label :upper_price_limit, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :upper_price_limit, class: 'input-xlarge' %>
-          <p class="help-block">
-            Leave this field blank if there is no upper limit
-          </p>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :base_price, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :base_price, class: 'input-xlarge' %>
-        </div>
-      </div>
+      This shipping method should be applied to orders with total amount of greater than
+      <%= f.text_field :lower_price_limit, class: 'span1' %>
+      and lower than
+      <%= f.text_field :upper_price_limit, class: 'span1', placeholder: 'infinity' %>
+      .
     </fieldset>
 
     <div class="form-actions">
