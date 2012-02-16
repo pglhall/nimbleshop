@@ -75,7 +75,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'capybara-webkit'
   gem "capybara_minitest_spec"
 
   gem 'minitest', '~> 2.10.1'

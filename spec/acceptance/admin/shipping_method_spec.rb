@@ -31,7 +31,7 @@ describe "Shipping Method integration" do
       create(:country_shipping_method, :shipping_zone => shipping_zone)
     end
 
-    before(:each) { Capybara.current_driver = :webkit }
+    before(:each) { Capybara.current_driver = :selenium }
 
     it "should by increment" do
       visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
@@ -50,7 +50,7 @@ describe "Shipping Method integration" do
       create(:country_shipping_method, :shipping_zone => shipping_zone)
     end
 
-    before(:each) { Capybara.current_driver = :webkit }
+    before(:each) { Capybara.current_driver = :selenium }
 
     it "should by increment" do
       visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)

@@ -11,15 +11,7 @@ require 'minitest/spec'
 require "minitest/pride"
 require "capybara/rails"
 require 'database_cleaner'
-require "capybara-webkit"
 require 'rails/test_help'
-
-Capybara.javascript_driver = :webkit
-Capybara.server_port = "8000"
-Capybara.app_host = "http://localhost:8000"
-Capybara.default_wait_time = 100
-Capybara.default_selector = :css
-#
 
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }

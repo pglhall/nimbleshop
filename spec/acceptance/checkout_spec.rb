@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "checkout integration" do
 
   before do
-    Capybara.current_driver  = :webkit
+    Capybara.current_driver  = :selenium
     create(:product, name: 'Candy Colours Bracelet Set', price: 25)
     create(:product, name: 'Layered Coral Necklace', price: 14)
     create(:regional_shipping_zone)
