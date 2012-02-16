@@ -1,18 +1,22 @@
 <%= render '/admin/payment_methods/tabs' %>
-<%= image_tag('paypal_logo.png', width: '100') %>
 
 <div class='well'>
-  <%= form_tag('/admin/paymentmethod/paypalwebsite_payments_standard', method: :put, class: 'form-horizontal') do %>
+  <div>
+    <div style='float:left;'>
+      <%= image_tag('paypal_logo.png', width: 140) %>
+    </div>
+    <div style='clear:both;'></div>
+  </div>
 
+  <%= form_tag('/admin/paymentmethod/paypalwebsite_payments_standard', method: :put, class: 'form-horizontal') do %>
     <fieldset>
       <%= render '/admin/paymentmethod/edit_attributes' %>
     </fieldset>
-
     <div class="form-actions">
       <%= submit_tag('Submit', class: 'btn btn-primary') %>
       &nbsp;
       <%= link_to t(:cancel), admin_paymentmethod_paypalwebsite_payments_standard_path, class: 'btn' %>
     </div>
-
   <% end %>
+
 </div>

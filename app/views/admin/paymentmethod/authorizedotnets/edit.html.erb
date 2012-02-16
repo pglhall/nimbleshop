@@ -1,17 +1,22 @@
 <%= render '/admin/payment_methods/tabs' %>
-<%= image_tag('authorize_net_logo.png') %>
 
 <div class='well'>
-  <%= form_tag('/admin/paymentmethod/authorizedotnet', method: :put, class: 'form-horizontal') do %>
+  <div>
+    <div style='float:left;'>
+      <%= image_tag('authorize_net_logo.png') %>
+    </div>
+    <div style='clear:both;'></div>
+  </div>
 
+  <%= form_tag('/admin/paymentmethod/authorizedotnet', method: :put, class: 'form-horizontal') do %>
     <fieldset>
       <%= render '/admin/paymentmethod/edit_attributes' %>
     </fieldset>
-
     <div class="form-actions">
       <%= submit_tag('Submit', class: 'btn btn-primary') %>
       &nbsp;
       <%= link_to t(:cancel), admin_paymentmethod_authorizedotnet_path, class: 'btn' %>
     </div>
   <% end %>
+
 </div>
