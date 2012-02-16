@@ -71,8 +71,6 @@ class Sampledata
   end
 
   def load_price_information
-    cf = CustomField.create!(name: 'original price', field_type: 'number')
-
     pg_lt_50 = ProductGroup.create!(name: '< $50')
     pg_lt_50.product_group_conditions.create(name: 'price', operator: 'lt', value: 50)
     pg_between_50_100 = ProductGroup.create!(name: '$50 - $100')
