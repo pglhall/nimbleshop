@@ -52,3 +52,15 @@ a#site-name:hover {
 table#product-thumbnails a {
   margin: 6px;
 }
+
+#products-show {
+  h2#product-price {
+    font-family: 'Arial';
+    margin-bottom: 10px;
+  }
+
+  h4#product-description {
+    margin-top: 12px;
+    maring-bottom: 3px;
+  }
+}

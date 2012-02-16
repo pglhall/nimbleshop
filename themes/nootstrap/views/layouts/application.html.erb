@@ -21,7 +21,6 @@
         padding: 9px 0;
       }
     </style>
-    <%= stylesheet_link_tag "#{params[:controller]}-#{params[:action]}" %>
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -32,7 +31,7 @@
     <%= csrf_meta_tag %>
   </head>
 
-  <body>
+  <body id=<%=body_id%>>
 
     <%= render 'layouts/top_bar' %>
 
