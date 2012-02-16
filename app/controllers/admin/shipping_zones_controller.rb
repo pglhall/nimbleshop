@@ -3,7 +3,7 @@ class Admin::ShippingZonesController < AdminController
   before_filter :load_shipping_zone, only: [:edit, :update, :destroy]
 
   def index
-    @shipping_zones = ShippingZone.all
+    @shipping_zones = CountryShippingZone.order('name asc')
   end
 
   def new

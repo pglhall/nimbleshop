@@ -1,5 +1,6 @@
 <div>
   <h1 class='ns-page-title'><%= t(:shipping_zones) %></h1>
+
   <%= link_to(new_admin_shipping_zone_path, class: 'btn btn-success new-action') do %>
     <i class="icon-plus"></i><%= t(:add_new_shipping_zone) %>
   <% end %>
@@ -8,40 +9,35 @@
 
 <br />
 
-<% CountryShippingZone.all.each do |shipping_zone| %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th colspan='5'>
-          <h3><%= shipping_zone.name %></h3>
-          <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
-          |
-          <%= link_to t(:delete), [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', remote: true %>
-        </th>
-      </tr>
-      <tr>
-        <th> Shipping method name </th>
-        <th> Condition </th>
-        <th> Shipping price </th>
-        <th> &nbsp;</th>
-        <th> &nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% shipping_zone.shipping_methods.each do |shipping_method| %>
+<% @shipping_zones.each do |shipping_zone| %>
+  <div class='well'>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td> <%= shipping_method.name %> </td>
-          <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
-          <td> <%= number_to_currency(shipping_method.base_price) %> </td>
-          <td>
-            <%= link_to t(:edit), [:edit, :admin, shipping_method.shipping_zone, shipping_method ] %>
-          </td>
-          <td>
-            <%= link_to t(:delete), admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method), confirm: t(:delete_confirmation_for_shipping_method), method: 'delete' %>
-          </td>
+          <th colspan='5'>
+            <h3><%= shipping_zone.name %></h3>
+            <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
+            |
+            <%= link_to t(:delete),
+                        [:admin, shipping_zone],
+                        confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', remote: true %>
+          </th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tr>
+          <th> Shipping method name </th>
+          <th> Condition </th>
+          <th> Shipping price </th>
+          <th> &nbsp;</th>
+          <th> &nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% shipping_zone.shipping_methods.each do |shipping_method| %>
+          <%= render 'shipping_method', shipping_method: shipping_method %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <br />
 <% end %>

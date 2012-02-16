@@ -15,14 +15,14 @@
       <div class="control-group">
         <%= f.label :name, 'Name', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :name, class: 'input-xlarge focus' %>
+          <%= f.text_field :name, class: 'span8 focus' %>
         </div>
       </div>
 
       <div class="control-group">
         <%= f.label :description, 'Description', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_area :description, class: 'input-xxlarge', rows: 5 %>
+          <%= f.text_area :description, class: 'span8', rows: 5 %>
           <p class="help-block">
             No html is allowed but paragraphs are maintainded.
           </p>
@@ -32,8 +32,7 @@
       <div class="control-group">
         <%= f.label :price, 'Price', class: 'control-label' %>
         <div class="controls">
-          $
-          <%= f.text_field :price, class: 'input-xlarge' %>
+          <%= f.text_field :price, class: 'span1' %> USD
         </div>
       </div>
 
