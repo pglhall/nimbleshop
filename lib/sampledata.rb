@@ -139,7 +139,7 @@ class Sampledata
 
     self.product6 = Product.create!( title: "Layered Coral Necklace", price: 137, description: 'tbd')
 
-    self.product7 = Product.create!( title: "Claddagh Earrings", price: 141, description: 'tbd')
+    self.product7 = Product.create!( title: "Colorful rajasthani shoes", price: 141, description: 'tbd')
   end
 
   def load_products_desc
@@ -204,9 +204,9 @@ class Sampledata
     product6.update_attributes(description: desc)
 
     desc = %q{
-        "Simple layered necklace made from \"farmed\" coral (sustainable). I spaced the beds with gold plated daisy spacers and then added some simple gold plated chain to give the desired length. \r\n\
-          \r\n\
-          This one 21\" or 53cm long This item is handmade by myself and is totally original in design and is the only one that will ever be made, so if you decide to own this item, you will have a truly unique and beautiful item in your jewelry collection. Thank you for looking and have a nice day! - Lottie :) \xC2\xA9 Lottie's Trinkets 2005 - 2011 - All Rights Reserved Ref LT Layered Coral"
+      People of Rajasthan love color. Everything they use from top to bottom is colorful.
+
+      Lets talk about shoes. Making good looking shoes is an art they have perfected over centuries. Making a shoe takes the whole village. And the whole village participates in the business of making and selling quality colorful shoes.
     }
     product7.update_attributes(description: desc)
   end

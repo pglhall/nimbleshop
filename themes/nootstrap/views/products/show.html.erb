@@ -50,7 +50,9 @@
     <% end %>
 
     <h4 id='product-description'>Description</h4>
-    <%= simple_format(@product.description) %>
+    <div id='product-description-content'>
+      <%= simple_format(@product.description) %>
+    </div>
   </div>
 </div>
 

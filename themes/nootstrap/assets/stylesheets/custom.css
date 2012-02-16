@@ -41,3 +41,9 @@ a#site-name:hover {
 .navbar .navbar-text a:hover {
   color: #08c;
 }
+
+#product-description-content p {
+  font-size: 14px;
+  color: #818181;
+  line-height: 22px;
+}
