@@ -37,3 +37,7 @@ a#site-name:hover {
   text-shadow: none;
 }
 
+
+.navbar .navbar-text a:hover {
+  color: #08c;
+}
