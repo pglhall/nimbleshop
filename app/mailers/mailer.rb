@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  helper :variant
+  helper :nootstrap
 
   default :theme => "nootstrap"
 
