@@ -1,9 +1,9 @@
 <tr>
   <td class="pic">
-    <%= link_to(image_tag(line_item.product.picture.picture_url(:small), alt: line_item.title), line_item.product) %>
+    <%= image_tag(line_item.picture_small, alt: line_item.title) %>
   </td>
   <td>
-    <strong><%= link_to(line_item.title, line_item.product) %></strong>
+    <strong><%= line_item.title %></strong>
   </td>
   <td><%= number_to_currency(line_item.product_price) %></td>
   <td> <%=line_item.quantity%> </td>
