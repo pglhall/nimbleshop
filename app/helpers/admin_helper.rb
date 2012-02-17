@@ -39,17 +39,17 @@ module AdminHelper
   end
 
   def display_payment_status(order)
-    css_klass = order.payment_status == 'paid' ? 'label-success' : 'label-important'
+    css_klass = order.payment_status == 'paid' ? 'label-success' : 'label-info'
     %Q{<span class="label #{css_klass}"> #{order.payment_status} </span>}.html_safe
   end
 
   def display_shipping_status(order)
     css_klass = case order.shipping_status
-    when 'shipped'
-      'label-success'
-    when 'nothing_to_ship'
-      'label-info'
-    end
+                when 'shipped'
+                  'label-success'
+                when 'nothing_to_ship'
+                  'label-info'
+                end
     %Q{<span class="label #{css_klass}"> #{order.shipping_status} </span>}.html_safe
   end
 
