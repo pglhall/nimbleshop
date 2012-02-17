@@ -13,6 +13,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :twitter_handle
       t.string :contact_email
       t.string :facebook_url
+      t.string :google_analytics_tracking_id
 
       t.timestamps
     end
