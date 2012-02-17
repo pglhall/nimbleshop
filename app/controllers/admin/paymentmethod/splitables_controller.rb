@@ -3,11 +3,11 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
   before_filter :load_payment_method!
 
   def show
-    render
+    @page_title = 'splitable'
   end
 
   def edit
-    render
+    @page_title = 'edit splitable'
   end
 
   def update

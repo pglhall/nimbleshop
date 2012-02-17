@@ -3,11 +3,12 @@ class Admin::PaymentMethodsController < AdminController
   before_filter :load_payment_methods
 
   def index
-    render
+    @page_title = 'Payment methods'
   end
 
   def show
     @payment_method = PaymentMethod.find(params[:id])
+    @page_title = "Payment method: #{@payment_method.name}"
   end
 
   def update
@@ -31,8 +32,8 @@ class Admin::PaymentMethodsController < AdminController
   private
 
   def load_payment_methods
-    @payment_methods = PaymentMethod.order('name asc').all
-    @enabled_payment_methods = PaymentMethod.where(enabled: true).all
+    @payment_methods = PaymentMethod.order('name asc')
+    @enabled_payment_methods = PaymentMethod.where(enabled: true)
   end
 
 end

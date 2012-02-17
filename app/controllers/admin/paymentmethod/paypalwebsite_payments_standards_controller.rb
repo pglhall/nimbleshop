@@ -3,11 +3,12 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
   before_filter :load_payment_method
 
   def show
+    @page_title = 'paypal'
     render
   end
 
   def edit
-    render
+    @page_title = 'edit paypal'
   end
 
   def update

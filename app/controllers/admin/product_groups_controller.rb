@@ -3,10 +3,12 @@ class Admin::ProductGroupsController < AdminController
   before_filter :load_product_group, only: [:edit, :update, :destroy]
 
   def index
+    @page_title = 'Product groups'
     @product_groups = ProductGroup.order('name asc')
   end
 
   def new
+    @page_title = 'New product groups'
     @product_group = ProductGroup.new
     @product_group.product_group_conditions.build
   end
@@ -21,7 +23,8 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def edit
-    @custom_fields = CustomField.order('name asc').all
+    @page_title = 'Edit product groups'
+    @custom_fields = CustomField.order('name asc')
   end
 
   def update

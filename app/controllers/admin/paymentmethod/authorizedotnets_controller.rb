@@ -1,10 +1,12 @@
 class Admin::Paymentmethod::AuthorizedotnetsController < Admin::PaymentMethodsController
 
   def show
+    @page_title = 'authorize.net'
     @payment_method = PaymentMethod.find_by_permalink('authorize-net')
   end
 
   def edit
+    @page_title = 'edit authorize.net'
     @payment_method = PaymentMethod.find_by_permalink('authorize-net')
   end
 

@@ -1,5 +1,6 @@
 <div class='well'>
   <%= nested_form_for([:admin, @product], html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+
     <% if @product.errors.any? %>
       <div class="alert alert-error">
         <p> <%= t(:error_bang) %> </p>
