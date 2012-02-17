@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "twitter_handle"
     t.string   "contact_email"
     t.string   "facebook_url"
+    t.string   "google_analytics_tracking_id"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
   end
