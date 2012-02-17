@@ -1,7 +1,7 @@
 class Admin::ShopsController < AdminController
 
   def edit
-    render
+    @page_title = 'shop configuration'
   end
 
   def update
