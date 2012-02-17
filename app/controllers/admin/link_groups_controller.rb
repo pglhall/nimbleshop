@@ -1,10 +1,10 @@
 class Admin::LinkGroupsController < AdminController
 
-  before_filter :load_link_group, only: [:show, :destroy, :edit, :update ]
+  before_filter :load_link_group,  only: [:show, :destroy, :edit, :update ]
   before_filter :load_link_groups, only: [:index, :create, :edit, :update ]
 
   def index
-    render
+    @page_title = 'link groups'
   end
 
   def show
@@ -13,11 +13,10 @@ class Admin::LinkGroupsController < AdminController
 
   def new
     @link_group = LinkGroup.new
-    render partial: 'form'
   end
 
   def edit
-    render partial: 'form'
+    render
   end
 
   def create
@@ -25,21 +24,17 @@ class Admin::LinkGroupsController < AdminController
     if @link_group.save
       redirect_to admin_link_groups_url, notice: t(:successfully_added)
     else
-      render action: :index
+      render action: :new
     end
   end
 
    def update
-    respond_to do |format|
-      format.json do
-        if @link_group.update_attributes(params[:link_group])
-          render json: { success: @link_group.name }
-        else
-          render json: { error: @link_group.errors.full_messages }
-        end
+      if @link_group.update_attributes(params[:link_group])
+        redirect_to admin_link_groups_path, notice: t(:successfully_updated)
+      else
+        render action: :edit
       end
     end
-  end
 
   def destroy
     @link_group.destroy

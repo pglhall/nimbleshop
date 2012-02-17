@@ -10,38 +10,5 @@
 <br />
 
 <% @shipping_zones.each do |shipping_zone| %>
-  <div class='well'>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th colspan='5'>
-            <h3><%= shipping_zone.name %></h3>
-            <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
-            |
-            <%= link_to t(:delete),
-                        [:admin, shipping_zone],
-                        confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', remote: true %>
-          </th>
-        </tr>
-
-        <% if shipping_zone.shipping_methods.any? %>
-          <tr>
-            <th> Shipping method name </th>
-            <th> Condition </th>
-            <th> Shipping price </th>
-            <th> &nbsp;</th>
-            <th> &nbsp;</th>
-          </tr>
-        <% end %>
-
-      </thead>
-      <tbody>
-        <% shipping_zone.shipping_methods.each do |shipping_method| %>
-          <%= render 'shipping_method', shipping_method: shipping_method %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <br />
+  <%= render 'shipping_zone', shipping_zone: shipping_zone %>
 <% end %>

@@ -1,8 +1,31 @@
-<%= form_for([:admin, @link_group], remote: true, 'data-type' => 'html', html: {id: 'form-link-group'} ) do |f| %>
+<div class='well'>
+  <%= form_for [:admin, @link_group], html: {class: 'form-horizontal' } do |f| %>
 
-  <%= f.text_field :name %>
-  <% unless @link_group.new_record? %>
-    <a href="#" class="cancel-link-group" id="<%= @link_group.permalink %>"><%= t(:cancel) %></a>
+    <% if @link_group.errors.any? %>
+      <div class="alert alert-error">
+        <p> <%= t(:error_bang) %> </p>
+        <ul>
+          <% @link_group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :name, 'Name', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name, class: 'span6 focus' %>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), admin_link_groups_path, class: 'btn' %>
+    </div>
+
   <% end %>
-  <%= f.submit %>
-<% end %>
+</div>

@@ -3,15 +3,17 @@ class Admin::ShippingZonesController < AdminController
   before_filter :load_shipping_zone, only: [:edit, :update, :destroy]
 
   def index
+    @page_title = 'shipping zone'
     @shipping_zones = CountryShippingZone.order('name asc')
   end
 
   def new
+    @page_title = 'new shipping zone'
     @shipping_zone = ShippingZone.new
   end
 
   def edit
-    render
+    @page_title = 'edit shipping zone'
   end
 
   def update

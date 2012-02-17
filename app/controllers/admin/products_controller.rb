@@ -6,7 +6,6 @@ class Admin::ProductsController < AdminController
     # update variation name event if the variant data is invalid
     @product.update_variation_names(params)
     Product.transaction do
-      #handle_active_operation
       @result = @product.update_attributes(params[:product])
     end
 
@@ -23,7 +22,6 @@ class Admin::ProductsController < AdminController
 
   def index
     @products = Product.order(:id)
-    #respond_with @products
   end
 
   def show

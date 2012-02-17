@@ -1,6 +1,6 @@
 <div>
   <h1 class='ns-page-title'><%= t(:link_groups) %></h1>
-  <%= link_to('#', class: 'btn btn-success new-action') do %>
+  <%= link_to(new_admin_link_group_path, class: 'btn btn-success new-action', id: 'add_new_link_group') do %>
     <i class="icon-plus"></i> <%= t(:add_new_link_group) %>
   <% end %>
   <div class='clear'></div>
@@ -22,36 +22,5 @@
 <br />
 
 <% @link_groups.each do |link_group| %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th colspan='2'>
-          <div id="link-group-<%=link_group.permalink%>">
-            <%= render partial: 'link_group_title', locals: { link_group: link_group } %>
-          </div>
-        </th>
-      </tr>
-      <tr>
-        <th>Link name </th>
-        <th>Action </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% link_group.navigations.each do |nav| %>
-        <tr>
-          <td> <%= link_to(nav.navigeable.name, '') %> </td>
-          <td>
-            <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
-            |
-            <%= link_to t(:delete), [:admin, link_group], confirm: t(:delete_confirmation_for_link_group), method: 'delete' %>
-          </td>
-        </tr>
-      <% end %>
-      <tr>
-        <td colspan='2'> <%= link_to '+ Add a link', new_admin_link_group_navigation_path(link_group) %> </td>
-    </tbody>
-  </table>
+  <%= render 'link_group', link_group: link_group %>
 <% end %>
-
-<div id="link-group-form">
-</div>
