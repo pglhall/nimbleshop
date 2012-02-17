@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   has_one     :billing_address
 
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
-  accepts_nested_attributes_for :billing_address, :reject_if => proc { |attributes| attributes['use_for_billing'].blank? || attributes['use_for_billing'] == "false" }, allow_destroy: true
+  accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
 
   validates :email, email: true, if: :validate_email
 
@@ -158,6 +158,11 @@ class Order < ActiveRecord::Base
     billing_address || build_billing_address(country_code: "US")
   end
 
+  def billing_disabled?(attributes)
+    attributes['use_for_billing'].blank? || 
+      attributes['use_for_billing'] == "false"
+  end
+
   private
 
   def line_item_of(product_id)
@@ -171,5 +176,4 @@ class Order < ActiveRecord::Base
     end
     self.number = _number
   end
-
 end

@@ -8,7 +8,7 @@ module ApplicationHelper
     %|#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}|
   end
 
-  def options_for_countries
+  def options_for_all_countries
     Carmen::Country.all.map { |t| [t.name, t.alpha_2_code] }
   end
 
@@ -23,5 +23,14 @@ module ApplicationHelper
 
   def options_for_country(country_code)
     grouped_options_for_country_state_codes[country_code]
+  end
+
+  def options_for_countries(country_codes)
+    country_codes.map {|t| [ Carmen::Country.coded(t).name, t ] }
+  end
+
+  def unconfigured_shipping_zone_countries
+    existing = CountryShippingZone.all.map(&:country_code)
+    options_for_all_countries.reject { |_, t| existing.include?(t) }
   end
 end

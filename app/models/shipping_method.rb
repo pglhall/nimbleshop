@@ -20,10 +20,10 @@ class ShippingMethod < ActiveRecord::Base
   }
 
   scope :atmost,  lambda { |r| 
-    where('shipping_methods.upper_price_limit >= ?', r)
+    where('shipping_methods.upper_price_limit is null or shipping_methods.upper_price_limit >= ?', r)
   }
 
-  scope :in_price_limit,  lambda { |r| atleast(r).atmost(r) }
+  scope :in_price_range,  lambda { |r| atleast(r).atmost(r) }
 
   scope :in_country, lambda { | code | 
     joins(:shipping_zone).where(shipping_zones: { country_code: code })
@@ -48,13 +48,17 @@ class ShippingMethod < ActiveRecord::Base
 
   # return shipping methods available to the given address for the given amount
   def self.available_for(amount, address)
-    proxy = active.in_price_limit(amount)
-
     if address.state_code
-      proxy.in_state(address.state_code, address.country_code)  
+      in_state(address.state_code, address.country_code)  
     else
-      proxy.in_country(address.country_code)
-    end.active
+      in_country(address.country_code)
+    end.active.in_price_range(amount)
+  end
+
+  def self.available_for_countries(amount)
+    active.in_price_range(amount).includes(:shipping_zone).map do | t |
+      t.shipping_zone.country_code
+    end.uniq
   end
 
   def shipping_price
