@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
 
   include BuildPermalink
 
+  validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
+
   has_many :variations, order: "variation_type asc"
 
   has_many :variants

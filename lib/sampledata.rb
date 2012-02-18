@@ -124,14 +124,14 @@ class Sampledata
   end
 
   def load_products
-    self.product1 = Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd')
+    self.product1 = Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd', status: 'active')
 
-    self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd')
-    self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd')
-    self.product4 = Product.create!( title: "Large Sterling Silver Hoop Earrings", price: 81, description: 'tbd')
-    self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd')
+    self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd', status: 'active')
+    self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd', status: 'active')
+    self.product4 = Product.create!( title: "Large Sterling Silver Hoop Earrings", price: 81, description: 'tbd', status: 'active')
+    self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd', status: 'active')
 
-    self.product6 = Product.create!( title: "Handmade vibrant bangles", price: 11, description: 'tbd')
+    self.product6 = Product.create!( title: "Handmade vibrant bangles", price: 11, description: 'tbd', status: 'active')
     product6.update_attributes!(variants_enabled: true)
     product6.variation1.update_attributes!(active: true)
     product6.variation2.update_attributes!(active: true)
@@ -146,7 +146,7 @@ class Sampledata
     product6.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
     product6.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
 
-    self.product7 = Product.create!( title: "Colorful rajasthani shoes", price: 141, description: 'tbd')
+    self.product7 = Product.create!( title: "Colorful rajasthani shoes", price: 141, description: 'tbd', status: 'active')
   end
 
   def load_products_desc
