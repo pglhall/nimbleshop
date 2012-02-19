@@ -2,7 +2,7 @@ common:
   splitable:
     api_secret: AGT568GKLRW39S
     expires_in: 24
-    submission_url: http://lvh.me:3000/split_payments/split?
+    submission_url: http://lvh.me:3000
     logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png
     api_key: 42398cc9ac420bf4
     name: Splitable
