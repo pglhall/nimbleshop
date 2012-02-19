@@ -1,4 +1,4 @@
-if Settingg.using_heroku
+if Settings.using_heroku
   config.serve_static_assets = true
 
   # cache images for 1 hour
