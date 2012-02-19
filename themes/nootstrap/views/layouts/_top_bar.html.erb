@@ -34,7 +34,7 @@
               <li><a href="#contact">Contact</a></li>
             </ul>
             <p class='navbar-text pull-right'>
-              <a href="/cart">View cart ( <%= items_count_in_cart %> )</a>
+              <%= link_to "View cart ( #{items_count_in_cart} )", '/cart' %>
             </p>
           </div><!--/.nav-collapse -->
         </div>
