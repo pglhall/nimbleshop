@@ -4,13 +4,19 @@ class Product < ActiveRecord::Base
 
   include BuildPermalink
 
+  validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
+
   has_many :variations, order: "variation_type asc"
 
   has_many :variants
+
   accepts_nested_attributes_for :variants, allow_destroy: true
 
   has_many :pictures
+
   accepts_nested_attributes_for :pictures, allow_destroy: true
+
+  after_initialize :initialize_status
 
   has_many :custom_field_answers do
     def for(custom_field_name)
@@ -78,4 +84,7 @@ class Product < ActiveRecord::Base
     Hash[*temp]
   end
 
+  def initialize_status
+    self.status ||= 'active'
+  end
 end

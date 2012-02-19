@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe Product do
 
+  describe "#initialize_status" do
+    it "sets status as active" do
+      product = Product.new
+      product.status.must_equal 'active'
+    end
+
+    it "wont update status" do
+      product = Product.new(status: 'hidden')
+      product.status.must_equal 'hidden'
+    end
+  end
+
   it 'should create a default picture record' do
     product = create(:product)
     product.pictures.size.must_equal 1
