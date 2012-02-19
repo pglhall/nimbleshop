@@ -4,13 +4,17 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+// bootstrap-collapse file is needed so that twitter bootstrap can collapse top navigation and make it work on iphone
+//
 //= require jquery-1.7.1
 //= require jquery-ui-1.8.16
+//= require bootstrap-collapse
 //= require accounting
+//= require bootstrap-alert
+//
 //= require shipping_address_same_as_billing_address
 //= require thumbnail
 //= require highlight_error_field
-//= require bootstrap-alert
 //= require remove_item_from_cart
 //= require payment_method
 //= require variant
