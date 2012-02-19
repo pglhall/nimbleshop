@@ -71,7 +71,9 @@ end
 
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
+  gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
 end
+
 
 group :test do
   gem 'simplecov', :require => false
@@ -79,8 +81,7 @@ group :test do
   gem "capybara_minitest_spec"
 
   gem 'minitest', '~> 2.10.1'
-  gem 'minitest-matchers'
-  gem 'valid_attribute', git: "git://github.com/wojtekmach/valid_attribute.git", branch: "minitest-matchers-11"
+  gem "minitest-rails-shoulda", git: 'git://github.com/rawongithub/minitest-rails-shoulda.git'
 
   gem 'guard'
   gem 'guard-minitest'
@@ -88,7 +89,7 @@ group :test do
   gem 'sqlite3' # capybara-webkit hangs if run with postgresql
 
   # Colorize MiniTest output and show failing tests instantly
-  gem 'minitest-colorize', git: 'https://github.com/nohupbrasil/minitest-colorize'
+  gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 
   gem 'database_cleaner'
   gem 'rb-fsevent'
