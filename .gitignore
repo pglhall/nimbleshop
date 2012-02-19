@@ -12,3 +12,4 @@ public/uploads
 .tddium*
 .tddium
 db/test.sqlite3-journal
+coverage/
