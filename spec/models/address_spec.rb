@@ -3,13 +3,14 @@ require 'spec_helper'
 describe Address do
 
   describe "#validations" do
-    let(:address) { build(:address) }
+    subject { create(:address) }
     it {
-      address.wont have_valid(:first_name).when(nil)
-      address.wont have_valid(:last_name).when(nil)
-      address.wont have_valid(:address1).when(nil)
-      address.wont have_valid(:country_code).when(nil)
-      address.wont have_valid(:zipcode).when(nil)
+      must validate_presence_of(:first_name)
+      must validate_presence_of(:last_name)
+      must validate_presence_of(:address1)
+      must validate_presence_of(:zipcode)
+      must validate_presence_of(:country_code)
+      must validate_presence_of(:city)
     }
   end
 

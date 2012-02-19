@@ -2,6 +2,35 @@ require 'spec_helper'
 
 describe ShippingMethod do
 
+  describe "regional" do
+    describe "#validations" do
+      subject { create(:regional_shipping_method) }
+      it  {
+        must validate_presence_of(:name)
+        wont validate_presence_of(:base_price)
+        #must validate_presence_of(:offset)
+        wont validate_presence_of(:lower_price_limit)
+        wont validate_presence_of(:higher_price_limit)
+      }
+    end
+  end
+
+  describe "country" do
+    describe "#validations" do
+      subject { create(:country_shipping_method, higher_price_limit: 20) }
+      it  {
+        must validate_presence_of(:name)
+        must validate_presence_of(:base_price)
+        wont validate_presence_of(:offset)
+        must validate_presence_of(:lower_price_limit)
+        must allow_value(19).for(:lower_price_limit)
+        wont allow_value(20).for(:lower_price_limit)
+        wont allow_value(21).for(:lower_price_limit)
+      }
+    end
+  end
+
+
   describe "#scopes" do
     def with_regions(countries)
       countries + countries.map(&:regions).flatten
@@ -163,22 +192,6 @@ describe ShippingMethod do
   describe "of country type" do
     let(:shipping) { build(:country_shipping_method) }
 
-    it "#validations" do
-      shipping.higher_price_limit = 20
-
-      shipping.must have_valid(:name).when("Any name")
-      shipping.wont have_valid(:name).when(nil)
-
-      shipping.wont have_valid(:base_price).when(nil)
-
-      shipping.must have_valid(:offset).when(nil)
-
-      shipping.wont have_valid(:lower_price_limit).when(nil)
-      shipping.wont have_valid(:lower_price_limit).when(20)
-      shipping.wont have_valid(:lower_price_limit).when(40)
-      shipping.must have_valid(:lower_price_limit).when(12)
-      end
-
     describe "#shipping_price" do
       it "ignores offset value" do
         shipping.offset = 0.10
@@ -199,17 +212,6 @@ describe ShippingMethod do
   describe "of state type" do
     let(:shipping) { build(:regional_shipping_method) }
 
-    it "#validations" do
-      shipping.must have_valid(:name).when("Any name")
-      shipping.wont have_valid(:name).when(nil)
-
-      shipping.must have_valid(:base_price).when(nil)
-
-      shipping.must have_valid(:offset).when(nil)
-
-      shipping.must have_valid(:lower_price_limit).when(nil)
-      shipping.must have_valid(:higher_price_limit).when(nil)
-      end
 
     describe "#shipping_price" do
       it "ignores base_price value" do
