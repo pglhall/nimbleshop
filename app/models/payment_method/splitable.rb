@@ -15,6 +15,10 @@ class PaymentMethod::Splitable < PaymentMethod
     end
 
     options = base_data(order, request).merge(line_items_data(order, request))
+
+    msg = "splitable_submission_url: #{self.splitable_submission_url} . options: #{options.inspect}"
+    Rails.logger.info msg
+
     response = conn.post '/api/splits', options
     data = ActiveSupport::JSON.decode(response.body)
     data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
