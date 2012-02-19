@@ -59,7 +59,7 @@ module Nimbleshop
     config.assets.version = '1.0'
 
     config.generators do |g|
-      g.test_framework :mini_test, :spec => true, :fixture => true
+      g.test_framework :mini_test, spec: false, fixture: false
 
       # do not generate a helper every time a controller is created
       g.helper = false

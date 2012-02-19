@@ -3,14 +3,17 @@
 # Settings.s3.bucket_name
 #
 common:
+  airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>
+
   s3:
     access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
     secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
-  http_basic_authentication_password: <%= ENV['HTTP_BASIC_AUTHENTICATION_PASSWORD']  || 'welcome' %>
+
   sendgrid:
     username: <%= ENV['SENDGRID_USERNAME'] %>
     password: <%= ENV['SENDGRID_PASSWORD'] %>
     domain:   <%= ENV['SENDGRID_DOMAIN'] %>
+
   mailtrapio:
     username: <%= ENV['MAILTRAPIO_USERNAME'] %>
     password: <%= ENV['MAILTRAPIO_PASSWORD'] %>
@@ -26,19 +29,17 @@ test:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   using_heroku: false
-  cookie_domain: chickscorner.com
+  cookie_domain: nimbleshop.net
 
 staging:
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
-  bare_url_with_port: chickscorner-staging.heroku.com
+  bare_url_with_port: nimbleshop.net
   using_heroku: true
-  airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>
   deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
 
 production:
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
-  bare_url_with_port: chickscorner.com
+  bare_url_with_port: nimbleshop.com
   using_heroku: true
-  airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>

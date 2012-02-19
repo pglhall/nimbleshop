@@ -11,7 +11,7 @@ common:
   authorize_net:
     login_id: 56yBAar72
     transaction_key: 9r3pbH5bnKH29f7d
-    company_name_on_creditcard_statement: chickscorner LLC
+    company_name_on_creditcard_statement: Nimbleshop LLC
     name: Authorize.net
     description: <p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>
 
