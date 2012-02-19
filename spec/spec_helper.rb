@@ -1,3 +1,10 @@
+=begin
+#uncomment this to check coverage 
+require 'simplecov'
+SimpleCov.start 'rails'
+SimpleCov.command_name
+=end
+
 require 'bundler'
 
 Bundler.setup(:test)

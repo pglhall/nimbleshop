@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
 
   create_table "products", :force => true do |t|
     t.string   "name",                                                              :null => false
+    t.string   "status",                                                            :null => false
     t.text     "description"
     t.decimal  "price",            :precision => 8, :scale => 2,                    :null => false
     t.boolean  "new",                                            :default => false, :null => false
