@@ -1,9 +1,8 @@
-=begin
-#uncomment this to check coverage 
-require 'simplecov'
-SimpleCov.start 'rails'
-SimpleCov.command_name
-=end
+# Uncomment below code block and execute `rake` to see test coverage
+#
+#require 'simplecov'
+#SimpleCov.start 'rails'
+#SimpleCov.command_name
 
 require 'bundler'
 
@@ -61,7 +60,6 @@ def create_authorizenet_payment_method
     payment_method.save!
   end
 end
-
 
 def dbify_sql(sql)
   case ActiveRecord::Base.connection.adapter_name
