@@ -20,6 +20,7 @@ class PaymentMethod::Splitable < PaymentMethod
     Rails.logger.info msg
 
     response = conn.post '/api/splits', options
+    Rails.logger.info "response.body is #{response.body}"
     data = ActiveSupport::JSON.decode(response.body)
     data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
   end

@@ -1,32 +1,40 @@
 <table class='table table-bordered' width='100%'>
   <% current_order.line_items.each do |line_item| %>
     <tr>
-      <td colspan='2'>
-        <div style='float:left; width:200px;border:0px solid red;'>
-        <%= truncate(line_item.title, length: 75) %>
-
-        <p>
-          <i><%= display_variant_info(line_item) %> </i>
-        </p>
-        <p>
-          <%= line_item.quantity %> x <%= number_to_currency(line_item.product_price) %> =
-          <strong> <%= number_to_currency(line_item.price) %> </strong>
-        </p>
-      </div>
-      <div style='float:right; width: 100px;border: 0px solid blue;'>
-        <%= image_tag line_item.picture_small, alt: line_item.title %>
-      </div>
-      <div style='clear:both;'></div>
+      <td>
+        <div class='lhs'>
+          <%= truncate(line_item.title, length: 75) %>
+          <p>
+            <i><%= display_variant_info(line_item) %> </i>
+          </p>
+          <p>
+            <%= line_item.quantity %> x <%= number_to_currency(line_item.product_price) %> =
+            <strong> <%= number_to_currency(line_item.price) %> </strong>
+          </p>
+        </div>
+        <div class='rhs'>
+          <%= image_tag line_item.picture_small, alt: line_item.title %>
+        </div>
+        <div class='clear'></div>
     </tr>
   <% end %>
   <% if current_order.shipping_method %>
-    <tr> <td>Shipping</td> <td> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </td></tr>
+    <tr>
+      <td>
+        <div class='lhs'>
+          Shipping :
+          <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
+        </div>
+        <div class='clear'></div>
+    </tr>
   <% end %>
   <tr>
     <td>
-      <h4>
-        Total: <%= number_to_currency(current_order.price_with_shipping) %>
-      </h4>
+      <div class='lhs'>
+        Total :
+        <strong> <%= number_to_currency(current_order.price_with_shipping) %> </strong>
+      </div>
+      <div class='clear'></div>
     </td>
   </tr>
 </table>

@@ -64,3 +64,13 @@ table#product-thumbnails a {
     maring-bottom: 3px;
   }
 }
+
+
+table tr td .lhs {
+  float:left;
+  width:200px;
+}
+table tr td .rhs {
+  float:right;
+  width: 100px;
+}
