@@ -206,15 +206,15 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   add_index "product_groups", ["permalink"], :name => "index_product_groups_on_permalink", :unique => true
 
   create_table "products", :force => true do |t|
-    t.string   "name",                                                              :null => false
-    t.string   "status",                                                            :null => false
+    t.string   "name",                                                                 :null => false
+    t.string   "status",                                         :default => "active", :null => false
     t.text     "description"
-    t.decimal  "price",            :precision => 8, :scale => 2,                    :null => false
-    t.boolean  "new",                                            :default => false, :null => false
-    t.boolean  "variants_enabled",                               :default => false, :null => false
-    t.string   "permalink",                                                         :null => false
-    t.datetime "created_at",                                                        :null => false
-    t.datetime "updated_at",                                                        :null => false
+    t.decimal  "price",            :precision => 8, :scale => 2,                       :null => false
+    t.boolean  "new",                                            :default => false,    :null => false
+    t.boolean  "variants_enabled",                               :default => false,    :null => false
+    t.string   "permalink",                                                            :null => false
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
   end
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
