@@ -1,11 +1,7 @@
 require 'spec_helper'
 
 describe "checkout integration" do
-  def create_regional_shipping_method
-    country_zone  = create(:country_shipping_zone)
-    regional_zone = country_zone.regional_shipping_zones[0]
-    create(:shipping_method,name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999, shipping_zone: regional_zone)
-  end
+  include RegionalShippingMethodTestHelper
 
   before do
     Capybara.current_driver  = :selenium

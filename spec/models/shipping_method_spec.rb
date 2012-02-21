@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe ShippingMethod do
+  include RegionalShippingMethodTestHelper
+
 
   describe "regional" do
     describe "#validations" do
-      subject { create(:regional_shipping_method) }
+      subject { create_regional_shipping_method }
+
       it  {
         must validate_presence_of(:name)
         wont validate_presence_of(:base_price)
@@ -210,7 +213,7 @@ describe ShippingMethod do
   end
 
   describe "of state type" do
-    let(:shipping) { build(:regional_shipping_method) }
+    let(:shipping) { create_regional_shipping_method }
 
 
     describe "#shipping_price" do
