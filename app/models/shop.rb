@@ -1,10 +1,13 @@
 class Shop < ActiveRecord::Base
 
-  before_validation :sanitize_twitter_handle
+  before_validation :sanitize_twitter_handle, if: :twitter_handle
 
   validates :contact_email, email: true, allow_blank: true
+
   validates :from_email, email: true, allow_blank: false
+
   validates :intercept_email, email: true, allow_blank: false
+
   validates_format_of :facebook_url, :with => URI::regexp, allow_blank: true
   
   validates_presence_of :name, :theme, :time_zone, :default_creditcard_action
@@ -17,7 +20,6 @@ class Shop < ActiveRecord::Base
   private
 
   def sanitize_twitter_handle
-    self.twitter_handle.gsub!(/^@/, '') if twitter_handle
+    self.twitter_handle.gsub!(/^@/, '')
   end
-
 end
