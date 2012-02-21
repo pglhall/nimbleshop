@@ -10,13 +10,6 @@ FactoryGirl.define do
       base_price    2.99
     end
 
-    trait :regional do
-      association :shipping_zone, factory: :regional_shipping_zone
-      offset 1.00
-      association :parent, factory: :country_shipping_method
-    end
-
     factory :country_shipping_method,   traits: [:country]
-    factory :regional_shipping_method,  traits: [:regional]
   end
 end
