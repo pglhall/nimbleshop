@@ -166,6 +166,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "pictures", :force => true do |t|
     t.integer  "product_id"
     t.string   "picture"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.string   "file_size"
     t.string   "picture_width"
     t.string   "picture_height"
     t.string   "picture_tiny_width"

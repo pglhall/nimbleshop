@@ -78,6 +78,19 @@ table tr td .rhs {
 
 #products-index table tr td {
   vertical-align: top;
+
+  ul.thumbnails a.thumbnail {
+    border: 0;
+  }
+
+  ul.thumbnails p.product {
+    margin-left: 18px;
+  }
+
+  li.product_info {
+    border:1px solid #ddd;
+  }
+
 }
 
 
