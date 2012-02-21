@@ -14,18 +14,19 @@
           <% end %>
       </div>
       <div class='span4'>
+
+        <div>
         <% if current_shop.twitter_handle.present? %>
-          <%= link_to image_tag(current_theme_image_path('twitter.png'), alt: 'twitter link'), @shop.twitter_url %>
+          <div style='float:left;width:80px;'> <%= render 'layouts/twitter' %> </div>
         <% end %>
         <% if current_shop.facebook_url.present? %>
-          <%= link_to image_tag(current_theme_image_path('facebook.png'), alt: 'facebook link'), current_shop.facebook_url %>
+          <div style='float:left;'> <%= render 'layouts/facebook' %> </div>
         <% end %>
-        <% if current_shop.contact_email.present? %>
-          <%= link_to image_tag(current_theme_image_path('mail.png'), alt: 'mail'), "mailto:#{@shop.contact_email}" %>
-        <% end %>
+        <div style='clear:both;'></div>
+        </div>
       </div>
       <div class='span2 powered_by'>
-        Powered by <%= link_to 'nimbleShop', 'http://www.nimbleshop.com' %>
+        powered by <%= link_to 'nimbleShop', 'http://www.nimbleshop.com' %>
       </div>
     </div>
     </p>
