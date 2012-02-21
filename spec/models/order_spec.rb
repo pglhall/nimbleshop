@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe Order do
 
+  describe "validations" do
+    subject { create(:order) }
+    it {
+    
+    }
+  end
+
   describe '#available_shipping_methods' do
     it {
       order = create(:order)
