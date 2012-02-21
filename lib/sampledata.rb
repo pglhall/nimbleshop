@@ -51,18 +51,9 @@ class Sampledata
     process_picture('pic7_3.jpg', product7)
   end
 
-  class FilelessIO < StringIO
-    attr_accessor :original_filename
-  end
   def process_picture(filename, product)
-    img = File.open(Rails.root.join('db', 'original_pictures', filename )) {|i| i.read}
-    encoded_img = Base64.encode64 img
-    io = FilelessIO.new(Base64.decode64(encoded_img))
-    io.original_filename = filename
-    p = Picture.new
-    p.product = product
-    p.picture = io
-    p.save
+    path = Rails.root.join('db', 'original_pictures', filename )
+    product.attach_picture(filename, path)
   end
 
   def load_price_information

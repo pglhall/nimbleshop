@@ -3,14 +3,13 @@ class Picture < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader
 
-  before_save :set_picture_attributes
+  %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |version|
+    define_method :"#{version}_height" do
+      self.picture.send(version).height
+    end
 
-  private
-
-  def set_picture_attributes
-    if picture.present? && picture_changed?
-      self.content_type = picture.file.content_type
-      self.file_size    = picture.file.size
+    define_method :"#{version}_width" do
+      self.picture.send(version).width
     end
   end
 

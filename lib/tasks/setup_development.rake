@@ -1,20 +1,5 @@
-task :process_pictures => :environment do
-  class FilelessIO < StringIO
-      attr_accessor :original_filename
-  end
-  img = File.open(Rails.root.join('public', 'pictures', 'original', 'cws.png' )) {|i| i.read}
-  encoded_img = Base64.encode64 img
-  io = FilelessIO.new(Base64.decode64(encoded_img))
-  io.original_filename = "cws.png"
-  p = Picture.new
-  p.product = Product.first
-  p.picture = io
-  p.save
-end
-
 desc "sets up local development environment"
 task :setup_development => :environment do
-
   if Settings.using_heroku
     #
   else

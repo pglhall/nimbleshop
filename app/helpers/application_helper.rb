@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def product_main_picture(product, version)
+    pic = product.picture
+    image_tag(pic.picture_url(:medium_plus),
+                                  alt: product.name,
+                                  height: pic.medium_plus_height,
+                                  width: pic.medium_plus_width)
+  end
+
   def items_count_in_cart
     current_order.blank? ? 0 : current_order.item_count
   end
@@ -13,9 +21,9 @@ module ApplicationHelper
   end
 
   def grouped_options_for_country_state_codes
-    Carmen::Country.all.inject({}) do |h, country| 
-      h[country.alpha_2_code] = country.subregions.map do |r| 
-        [r.name, r.code] 
+    Carmen::Country.all.inject({}) do |h, country|
+      h[country.alpha_2_code] = country.subregions.map do |r|
+        [r.name, r.code]
       end
       h
     end

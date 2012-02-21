@@ -57,6 +57,23 @@ class Product < ActiveRecord::Base
     pictures.first
   end
 
+  # this is neeed to make attach_picture work
+  class FilelessIO < StringIO
+    attr_accessor :original_filename
+  end
+  # Input is full path to the picture.
+  #
+  # Rails.root.join('db', 'original_pictures', filename )
+  #
+  def attach_picture(filename, path)
+    img = File.open(path) {|i| i.read}
+    encoded_img = Base64.encode64 img
+    io = FilelessIO.new(Base64.decode64(encoded_img))
+    io.original_filename = filename
+    p = Picture.new(product: self, picture: io)
+    p.save
+  end
+
   def custom_field_value_for(custom_field_name)
     self.custom_field_answers.for(custom_field_name).value
   end

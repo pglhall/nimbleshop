@@ -74,3 +74,25 @@ table tr td .rhs {
   float:right;
   width: 100px;
 }
+
+
+#products-index table tr td {
+  vertical-align: top;
+}
+
+
+.powered_by {
+  color: #888;
+
+  a {
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: #6b6b6b;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}

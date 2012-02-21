@@ -9,7 +9,7 @@ elsif Rails.env.test?
 
   CarrierWave.configure do |config|
     config.storage = :file
-    config.enable_processing = false
+    config.enable_processing = true
   end
 
 elsif Rails.env.staging? || Rails.env.production?

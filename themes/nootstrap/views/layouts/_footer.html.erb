@@ -2,7 +2,7 @@
   <hr>
   <footer>
     <div class='row'>
-      <div class='span4'>
+      <div class='span6'>
           <%= image_tag current_theme_image_path('paypal.png'),     alt: 'paypal' %>
           <%= image_tag current_theme_image_path('visa.png'),       alt: 'visa' %>
           <%= image_tag current_theme_image_path('mastercard.png'), alt: 'mastercard' %>
@@ -13,10 +13,7 @@
             <%= image_tag current_theme_image_path('splitable.png'), alt: 'splitable' %>
           <% end %>
       </div>
-      <div class='span6'>
-        &copy; Your company name @2011
-      </div>
-      <div class='span2'>
+      <div class='span4'>
         <% if current_shop.twitter_handle.present? %>
           <%= link_to image_tag(current_theme_image_path('twitter.png'), alt: 'twitter link'), @shop.twitter_url %>
         <% end %>
@@ -26,6 +23,9 @@
         <% if current_shop.contact_email.present? %>
           <%= link_to image_tag(current_theme_image_path('mail.png'), alt: 'mail'), "mailto:#{@shop.contact_email}" %>
         <% end %>
+      </div>
+      <div class='span2 powered_by'>
+        Powered by <%= link_to 'nimbleShop', 'http://www.nimbleshop.com' %>
       </div>
     </div>
     </p>

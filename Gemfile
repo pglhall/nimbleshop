@@ -24,6 +24,9 @@ gem 'binary_merchant', git: 'git://github.com/bigbinary/binary_merchant.git'
 # for uploading images
 gem 'carrierwave'
 
+# for storing image properties like height, width,size etc. It adds those info for thumbnails too
+gem 'carrierwave-meta'
+
 # for having nested items. order has billing_address and shipping_address nested
 gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
 
