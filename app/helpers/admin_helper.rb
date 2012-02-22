@@ -36,6 +36,8 @@ module AdminHelper
                   'label-success'
                 when 'nothing_to_ship'
                   'label-info'
+                when 'shipping_pending'
+                  'label-important'
                 end
     %Q{<span class="label #{css_klass}"> #{order.shipping_status} </span>}.html_safe
   end

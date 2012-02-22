@@ -2,30 +2,36 @@
   <div class='row'>
     <div class='span10 alert alert-info'>
       <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
-      <p>
-        Shipping method: <%= @order.shipping_method.name %>
 
-        <br />
-        <% if @order.shipping_status.shipping_pending? %>
-          <%= link_to 'Ship items', '#', class: 'btn success ship_items_link' %>
-        <% elsif @order.shipping_status.shipped? %>
-          Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
-          Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
-        <% end %>
-      </p>
+      <table class='table'>
+        <tr>
+          <td>
+            Shipping method: <%= @order.shipping_method.name %>
+          </td>
 
-      <div style="display:none;" id='ship_items_action_box'>
-        <%= form_for([:admin, @order, @shipment]) do |f| %>
-          <%= f.label :tracking_number %>
-          <%= f.text_field :tracking_number, class: 'xlarge focus', size: 30 %> <br />
-          <%= f.select :shipment_carrier_id,
-                                        ShipmentCarrier.all.collect {|p| [p.name, p.id] }, class: 'xlarge', size: 30 %>
-          <br />
-          <%= f.label :notify_customer %>
-          <%= f.check_box :notify_customer %>
-          <%= f.submit 'Submit', class: 'btn primary' %>
-        <% end %>
-      </div>
+          <td>
+            <% if @order.shipping_status.shipping_pending? %>
+              <%= link_to 'Ship items', '#', class: 'btn success ship_items_link' %>
+            <% elsif @order.shipping_status.shipped? %>
+              Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
+              Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
+            <% end %>
+
+            <div style="display:none;" id='ship_items_action_box'>
+              <%= form_for([:admin, @order, @shipment]) do |f| %>
+                <%= f.label :tracking_number %>
+                <%= f.text_field :tracking_number, class: 'xlarge focus', size: 30 %> <br />
+                <%= f.select :shipment_carrier_id,
+                                              ShipmentCarrier.all.collect {|p| [p.name, p.id] }, class: 'xlarge', size: 30 %>
+                <br />
+                <%= f.label :notify_customer %>
+                <%= f.check_box :notify_customer %>
+                <%= f.submit 'Submit', class: 'btn primary' %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      </table>
 
       <p>
         <% if @order.shipping_address.present? %>
