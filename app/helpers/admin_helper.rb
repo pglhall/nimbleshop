@@ -1,41 +1,28 @@
 module AdminHelper
+  ROUTE_MAP = {
+      admin_products_path:        'admin/products',
+      admin_custom_fields_path:   'admin/custom_fields',
+      admin_product_groups_path:  'admin/product_groups',
+      admin_link_groups_path:     'admin/link_groups',
+      admin_payment_methods_path: 'admin/payment_methods',
+      admin_shipping_zones_path:  ['admin/shipping_zones', 'admin/shipping_methods'],
+      edit_admin_shop_path:       'admin/shops',
+      edit_admin_orders_path:     'admin/orders'
+  }
+
+  def active?(path, current_controller)
+    Array.wrap(ROUTE_MAP[path.to_sym]).include?(current_controller)
+  end
 
   def admin_sidebar(label, path, identifier)
-    case identifier
-    when 'admin_products_path'
-      hash = (params[:controller] == 'admin/products') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
 
-    when 'admin_custom_fields_path'
-      hash = (params[:controller] == 'admin/custom_fields') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
+    html_options = {}
 
-    when 'admin_product_groups_path'
-      hash = (params[:controller] == 'admin/product_groups') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
-
-    when 'admin_link_groups_path'
-      hash = (params[:controller] == 'admin/link_groups') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
-
-    when 'admin_shipping_zones_path'
-      actions = ["admin/shipping_zones", "admin/shipping_methods"]
-      hash = actions.include?(params[:controller]) ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
-
-    when 'admin_payment_methods_path'
-      hash = (params[:controller] == 'admin/payment_methods') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
-
-    when 'edit_admin_shop_path'
-      hash = (params[:controller] == 'admin/shops') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
-
-    when 'admin_orders_path'
-      hash = (params[:controller] == 'admin/orders') ? {'class' => 'active'} : {}
-      content_tag(:li, link_to(label, path), hash)
+    if active?(identifier, params[:controller])
+      html_options['class'] = 'active'
     end
 
+    content_tag(:li, link_to(label, path), html_options)
   end
 
   def display_payment_status(order)
