@@ -21,6 +21,7 @@ describe "checkout integration" do
     page.has_content?('Your cart').must_equal true
     page.has_content?('1 Item').must_equal true
     page.has_content?('$25').must_equal true
+    page.has_no_css?('table tr.shipping_cost')
 
     visit root_path
     click_link 'Layered Coral Necklace'
@@ -84,6 +85,7 @@ describe "checkout integration" do
     fill_in "updates_#{p.id}", with: '10'
     click_button 'Update'
     assert page.has_content?('$250.00')
+    page.has_css?('table tr.shipping_cost')
 
     click_button 'Checkout'
 
