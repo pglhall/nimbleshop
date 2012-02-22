@@ -47,6 +47,9 @@ gem 'mustache'
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 
+# for performance monitoring
+gem 'newrelic_rpm'
+
 # to make settings more flexible. Without hashr the code would be like this
 #  Settings.s3['bucket_name']
 # with hashr it becomes
