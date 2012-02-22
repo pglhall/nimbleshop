@@ -75,16 +75,14 @@ describe "checkout integration" do
     click_button 'Submit'
     page.has_content?('Same as shipping address').must_equal true
 
-    #TODO admin delete, product still present on cart
-    skip do
-      Product.find_by_name('Candy Colours Bracelet Set').destroy
-      click_link 'edit_cart'
-      assert current_path == cart_path
-      fill_in 'updates_candy-colours-bracelet-set', with: '8'
+    # if product is deleted and update is clicked then it should work
+    Product.find_by_name('Candy Colours Bracelet Set').destroy
+    click_link 'edit_cart'
+    assert current_path == cart_path
+    click_button 'Update'
+    assert page.has_content?('$131.99')
 
-      click_button 'Checkout'
-      assert page.has_content?('$231.99')
-    end
+    click_button 'Checkout'
 
     click_link 'edit_shipping_method'
     assert current_path == edit_shipping_method_order_path(current_order)

@@ -18,6 +18,15 @@
         <% @line_items.each do |line_item| %>
           <%= render 'line_item', line_item: line_item %>
         <% end %>
+
+        <% if current_order.shipping_method %>
+          <tr class='shipping_cost'>
+            <td colspan='4'>&nbsp;</td>
+            <td> Shipping </td>
+            <td><strong><%= number_to_currency(@cart.shipping_cost) %></strong></td>
+          </tr>
+        <% end %>
+
         <tr>
           <td colspan='3'>&nbsp;</td>
           <td>

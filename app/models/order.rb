@@ -20,6 +20,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
 
+  delegate :shipping_cost, to: :shipping_method
+
   validates :email, email: true, if: :validate_email
 
   # cancelled is when third party service like Splitable sends  a webhook stating that order
@@ -115,8 +117,9 @@ class Order < ActiveRecord::Base
   end
   alias_method :amount, :price
 
+
   def price_with_shipping
-    shipping_cost_zero_with_no_choice? ? price : price + shipping_method.shipping_cost.to_s.to_d
+    shipping_cost_zero_with_no_choice? ? price : price + shipping_cost.to_s.to_d
   end
   alias_method :total_amount, :price_with_shipping
   alias_method :total_price,  :price_with_shipping
@@ -159,7 +162,7 @@ class Order < ActiveRecord::Base
   end
 
   def billing_disabled?(attributes)
-    attributes['use_for_billing'].blank? || 
+    attributes['use_for_billing'].blank? ||
       attributes['use_for_billing'] == "false"
   end
 
