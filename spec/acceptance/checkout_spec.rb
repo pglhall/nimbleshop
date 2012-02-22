@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe "checkout integration" do
+  include RegionalShippingMethodTestHelper
 
   before do
     Capybara.current_driver  = :selenium
     create(:product, name: 'Candy Colours Bracelet Set', price: 25)
     create(:product, name: 'Layered Coral Necklace', price: 14)
-    create(:regional_shipping_zone)
-    create(:regional_shipping_method)
-    create(:regional_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)
+    create_regional_shipping_method 
     create(:payment_method, enabled: true)
   end
 

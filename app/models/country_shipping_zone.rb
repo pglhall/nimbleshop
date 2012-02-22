@@ -2,10 +2,11 @@ class CountryShippingZone < ShippingZone
 
   has_many  :regional_shipping_zones
 
-  before_save :set_name
-
   validates_presence_of :country_code
+
   validate :code_validity
+
+  before_save :set_name
 
   after_create :create_regions
 
@@ -30,5 +31,4 @@ class CountryShippingZone < ShippingZone
   def set_name
     self.name = country.name
   end
-
 end

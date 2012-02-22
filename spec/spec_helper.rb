@@ -58,3 +58,9 @@ def dbify_sql(sql)
     sql.gsub('LIKE', 'ILIKE')
   end
 end
+
+module RegionalShippingMethodTestHelper
+  def create_regional_shipping_method
+    create(:country_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999).regions[0]
+  end
+end

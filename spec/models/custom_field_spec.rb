@@ -1,25 +1,14 @@
 require 'spec_helper'
 
 describe CustomField do
-  let(:custom_field) { build(:custom_field) }
-
-  it {
-    custom_field.name = nil
-    custom_field.must_be(:invalid?)
-    custom_field.errors[:name].wont_be_nil
-  }
-
-  it "needs field_type be 'text,number,date'" do
-    custom_field.field_type = "text"
-    custom_field.must_be(:valid?)
-
-    custom_field.field_type = "number"
-    custom_field.must_be(:valid?)
-
-    custom_field.field_type = "date"
-    custom_field.must_be(:valid?)
-
-    custom_field.field_type = "boolean"
-    custom_field.wont_be(:valid?)
+  describe "validations " do
+    subject { create(:custom_field, field_type: 'number') } 
+    it {
+      must validate_presence_of(:name)
+      must allow_value("number").for(:field_type)
+      must allow_value("text").for(:field_type)
+      must allow_value("date").for(:field_type)
+      wont allow_value("boolean").for(:field_type)
+    }
   end
 end
