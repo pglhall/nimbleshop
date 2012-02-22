@@ -7,7 +7,7 @@ describe "checkout integration" do
     Capybara.current_driver  = :selenium
     create(:product, name: 'Candy Colours Bracelet Set', price: 25)
     create(:product, name: 'Layered Coral Necklace', price: 14)
-    create_regional_shipping_method 
+    create_regional_shipping_method
     create(:payment_method, enabled: true)
   end
 
@@ -76,11 +76,14 @@ describe "checkout integration" do
     page.has_content?('Same as shipping address').must_equal true
 
     # if product is deleted and update is clicked then it should work
-    Product.find_by_name('Candy Colours Bracelet Set').destroy
     click_link 'edit_cart'
     assert current_path == cart_path
+
+    p = Product.find_by_name('Candy Colours Bracelet Set')
+    p.destroy
+    fill_in "updates_#{p.id}", with: '10'
     click_button 'Update'
-    assert page.has_content?('$131.99')
+    assert page.has_content?('$250.00')
 
     click_button 'Checkout'
 
