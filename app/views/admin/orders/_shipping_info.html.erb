@@ -20,7 +20,7 @@
               Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
             <% end %>
 
-            <div style="display:none;" id='ship_items_action_box'>
+            <div id='ship_items_action_box'>
               <%= form_for([:admin, @order, @shipment], html: {class: 'well form-inline'}) do |f| %>
                 <p>
                   <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, {}, class: 'span2' %>
@@ -29,7 +29,7 @@
                 </p>
                 <p>
                   <%= f.submit 'Submit', class: 'btn btn-primary' %>
-                  <%= link_to 'Cancel', '#' %>
+                  <%= link_to 'Cancel', '#', id: 'ship_items_cancel' %>
                 </p>
               <% end %>
             </div>

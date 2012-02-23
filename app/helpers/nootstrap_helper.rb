@@ -1,7 +1,7 @@
 module NootstrapHelper
 
   def body_id
-    "#{params[:controller]}-#{params[:action]}"
+    "#{params[:controller]}-#{params[:action]}".parameterize
   end
 
   def display_variant_info(line_item)

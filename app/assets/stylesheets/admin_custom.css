@@ -29,3 +29,7 @@
 .navbar .nav > li > a {
   text-shadow: none;
 }
+
+#ship_items_action_box {
+  display: none;
+}
