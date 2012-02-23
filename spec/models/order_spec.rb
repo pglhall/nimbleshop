@@ -2,6 +2,31 @@ require 'spec_helper'
 
 describe Order do
 
+  describe "inquirer methods" do
+    let(:order) do 
+      Order.new(shipping_status: 'nothing_to_ship', payment_status: 'purchased', status: 'open')
+    end
+
+    it "kind of string inquirer" do
+      order.shipping_status.must_be_kind_of ActiveSupport::StringInquirer
+      order.payment_status.must_be_kind_of ActiveSupport::StringInquirer
+      order.status.must_be_kind_of ActiveSupport::StringInquirer
+     end
+
+    it "reflect current values" do
+      order.shipping_status = 'shipped'
+      order.shipping_status.must_be(:shipped?)
+
+      order.status.must_be(:open?)
+      order.status = 'closed'
+      order.status.must_be(:closed?)
+
+      order.payment_status.must_be(:purchased?)
+      order.payment_status = 'captured'
+      order.payment_status.must_be(:captured?)
+    end
+  end
+
   describe "validations" do
     subject { create(:order) }
     it {

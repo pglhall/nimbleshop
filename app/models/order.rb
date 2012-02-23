@@ -1,10 +1,12 @@
 class Order < ActiveRecord::Base
+  include InquirerMethods
 
   # to allow extensions to keep data
   store :settings
 
   attr_protected :number
   attr_accessor :validate_email
+  inquire_method :shipping_status, :payment_status, :status
 
   has_many    :shipments
   belongs_to  :shipping_method
@@ -154,12 +156,13 @@ class Order < ActiveRecord::Base
   alias_method :items, :line_items
 
   def add(product, variant = nil)
-    if variant
-      return if self.line_items.find_by_product_id_and_variant_id(product.id, variant.id)
-    else
-      return if self.line_items.find_by_product_id(product.id)
+    options = { product_id: product.id }
+
+    options.update(variant_id: variant.id) if variant
+
+    unless line_items.where(options).any?
+      line_items.create(options.merge(quantity: 1))
     end
-    self.line_items.create!(product: product, quantity: 1, variant: variant)
   end
 
   def set_quantity(product_id, quantity)
@@ -205,20 +208,13 @@ class Order < ActiveRecord::Base
     shipping_address.use_for_billing ? shipping_address : billing_address
   end
 
-  def shipping_status
-    ActiveSupport::StringInquirer.new(self['shipping_status'])
-  end
-
-  def payment_status
-    ActiveSupport::StringInquirer.new(self['payment_status'])
-  end
-
-  def status
-    ActiveSupport::StringInquirer.new(self['status'])
-  end
-
   def initialize_addresses
-    shipping_address || build_shipping_address(country_code: "US", use_for_billing:  true)
+    unless shipping_address
+      build_shipping_address({
+        country_code: "US", use_for_billing:  true
+      })
+    end
+
     billing_address || build_billing_address(country_code: "US")
   end
 
