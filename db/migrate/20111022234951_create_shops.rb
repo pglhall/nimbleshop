@@ -14,6 +14,7 @@ class CreateShops < ActiveRecord::Migration
       t.string :contact_email
       t.string :facebook_url
       t.string :google_analytics_tracking_id
+      t.decimal :tax_percentage, precision: 4, scale: 2, null: false, default: 0
 
       t.timestamps
     end
