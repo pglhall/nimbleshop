@@ -1,17 +1,20 @@
 <% if @order.shipping_method %>
   <div class='row'>
     <div class='span10 alert alert-info'>
-      <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
-
       <table class='table'>
         <tr>
+          <td colspan='2'>
+            <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
+          </td>
+        </tr>
+        <tr>
           <td>
-            Shipping method: <%= @order.shipping_method.name %>
+            <h4> Shipping method: </h4> <%= @order.shipping_method.name %>
           </td>
 
           <td>
             <% if @order.shipping_status.shipping_pending? %>
-              <%= link_to 'Ship items', '#', class: 'btn success ship_items_link' %>
+              <%= link_to 'Ship items', '#', class: 'btn btn-success ship_items_link' %>
             <% elsif @order.shipping_status.shipped? %>
               Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
               Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
@@ -31,14 +34,17 @@
             </div>
           </td>
         </tr>
+        <tr>
+          <td colspan='2'>
+            <% if @order.shipping_address.present? %>
+              <h4>Shipping address</h4>
+              <p>
+                <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
+              </p>
+            <% end %>
+          </td>
+        </tr>
       </table>
-
-      <p>
-        <% if @order.shipping_address.present? %>
-          <h4>Shipping address</h4>
-          <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
-        <% end %>
-      </p>
     </div>
   </div>
 <% end %>
