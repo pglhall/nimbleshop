@@ -21,19 +21,21 @@
             <% end %>
 
             <div style="display:none;" id='ship_items_action_box'>
-              <%= form_for([:admin, @order, @shipment]) do |f| %>
-                <%= f.label :tracking_number %>
-                <%= f.text_field :tracking_number, class: 'xlarge focus', size: 30 %> <br />
-                <%= f.select :shipment_carrier_id,
-                                              ShipmentCarrier.all.collect {|p| [p.name, p.id] }, class: 'xlarge', size: 30 %>
-                <br />
-                <%= f.label :notify_customer %>
-                <%= f.check_box :notify_customer %>
-                <%= f.submit 'Submit', class: 'btn primary' %>
+              <%= form_for([:admin, @order, @shipment], html: {class: 'well form-inline'}) do |f| %>
+                <p>
+                  <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, {}, class: 'span2' %>
+                  <%= f.text_field :tracking_number, class: 'input-medium', placeholder: 'Tracking number' %>
+                  <label class='checkbox'> <%= f.check_box :notify_customer %> Notify customer </label>
+                </p>
+                <p>
+                  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+                  <%= link_to 'Cancel', '#' %>
+                </p>
               <% end %>
             </div>
           </td>
         </tr>
+
         <tr>
           <td colspan='2'>
             <% if @order.shipping_address.present? %>
