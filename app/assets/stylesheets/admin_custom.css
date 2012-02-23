@@ -33,3 +33,7 @@
 #ship_items_action_box {
   display: none;
 }
+
+#admin-orders-show td.shipment_tracking_info a {
+  text-decoration: underline;
+}

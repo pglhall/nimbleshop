@@ -4,6 +4,8 @@ class Shipment < ActiveRecord::Base
   belongs_to :shipment_carrier
   belongs_to :order
 
+  delegate :name, to: :shipment_carrier
+
   def tracking_url
     case shipment_carrier.permalink
     when 'fedex'

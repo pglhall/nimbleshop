@@ -12,12 +12,13 @@
             <h4> Shipping method: </h4> <%= @order.shipping_method.name %>
           </td>
 
-          <td>
+          <td class='shipment_tracking_info'>
             <% if @order.shipping_status.shipping_pending? %>
               <%= link_to 'Ship items', '#', class: 'btn btn-success ship_items_link' %>
             <% elsif @order.shipping_status.shipped? %>
               Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
-              Tracking: <%= link_to @shipment.tracking_number, @shipment.tracking_url %>
+              via
+              <%= link_to @shipment.name + ' #' + @shipment.tracking_number, @shipment.tracking_url %>
             <% end %>
 
             <div id='ship_items_action_box'>
