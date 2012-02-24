@@ -27,5 +27,5 @@ Item total price: <%= number_to_currency(line_item.price) %>
 Shipping method: <%= @order.shipping_method.name %>
 Shipping cost: <%= number_to_currency(@order.shipping_method.shipping_cost) %>
 
-Total amount: <%= number_to_currency(@order.price_with_shipping) %>
+Total amount: <%= number_to_currency(@order.total_amount) %>
 
