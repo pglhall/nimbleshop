@@ -3,7 +3,7 @@ class Admin::MainController < AdminController
   skip_before_filter :set_shop, only: :reset
 
   def index
-    render
+    @page_title = 'Dashboard'
   end
 
   def reset

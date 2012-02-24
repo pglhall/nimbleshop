@@ -21,20 +21,25 @@ class Admin::ProductsController < AdminController
   end
 
   def index
+    @page_title = 'Products'
     @products = Product.order(:id)
   end
 
   def show
+    @page_title = "Product - #{@product.name}"
     @product_groups = ProductGroup.contains_product(@product)
   end
 
   def new
+    @page_title = 'New product'
+    @products = Product.order(:id)
     @product = Product.new
     @product.pictures.build
     @product.find_or_build_all_answers
   end
 
   def edit
+    @page_title = 'Edit product'
     @product.find_or_build_all_answers
   end
 

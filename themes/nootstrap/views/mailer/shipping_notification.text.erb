@@ -6,16 +6,18 @@ Items have been shipped using <%= @order.shipments.first.shipment_carrier.name %
 
 <%= @order.shipments.first.tracking_url %>
 
-Note that sometimes it takes upto 12 hours for a tracking number is show up in the system.
+Sometimes it takes upto 12 hours for a tracking number to show up in the system.
 
 Items are being shipped to the following address:
+
 <% @order.shipping_address.full_address_array.each do |line| %>
 <%= line %>
 <% end %>
 
-For your reference here are the contents of the shipment.
+Here are the contents of the shipment.
+
 <% @order.line_items.each do |line_item| %>
-  Name: <%= truncate(sanitize(line_item.name), length: 90) %> <%= display_variant_info(line_item) %>
+Name: <%= truncate(sanitize(line_item.name), length: 90) %> <%= display_variant_info(line_item) %>
 Item price: <%= number_to_currency(line_item.product_price) %>
 Item quantity: <%= line_item.quantity %>
 Item total price: <%= number_to_currency(line_item.price) %>

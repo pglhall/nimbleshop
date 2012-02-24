@@ -6,7 +6,7 @@ class AdminMailer < ActionMailer::Base
   default_url_options[:protocol] = 'http'
 
   def new_order_notification(order_number, current_shop)
-    subject = "Order ##{order_number} was recetly placed"
+    subject = "Order ##{order_number} was recently placed"
     @order = Order.find_by_number!(order_number)
 
     @shop = current_shop
