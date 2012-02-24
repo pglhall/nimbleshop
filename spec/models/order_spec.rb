@@ -61,6 +61,30 @@ describe Order do
     }
   end
 
+  describe "#add" do
+    let(:order)     { create(:order) }
+    let(:product1)  { create(:product, price: 10) }
+    let(:product2)  { create(:product, price: 30) }
+
+    before { order.add(product1) }
+    let(:line_item) { order.line_item_of(product1) }
+
+    it do
+      line_item.product.must_equal product1
+      line_item.quantity.must_equal 1
+    end
+
+    describe "#remove" do
+      before { order.remove(product1) }
+      it { line_item.must_equal nil }
+    end
+
+    describe "#set_quantity" do
+      before { order.set_quantity(product1, 20) }
+      it { line_item.quantity.must_equal 20 }
+    end
+  end
+
   describe "#price" do
     let(:order)     { create(:order) }
     let(:product1)  { create(:product, price: 10) }

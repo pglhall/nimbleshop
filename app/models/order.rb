@@ -11,6 +11,7 @@ class Order < ActiveRecord::Base
   has_many    :shipments
   belongs_to  :shipping_method
   has_many    :line_items
+  has_many    :products, through: :line_items
   belongs_to  :user
   has_many    :creditcard_transactions
 
@@ -147,7 +148,7 @@ class Order < ActiveRecord::Base
   end
 
   def available_shipping_methods
-    ShippingMethod.available_for(amount, shipping_address)
+    ShippingMethod.available_for(price, shipping_address)
   end
 
   def item_count
@@ -167,14 +168,17 @@ class Order < ActiveRecord::Base
   end
 
   def set_quantity(product_id, quantity)
-    return unless self.line_items.find_by_product_id(product_id)
+    return unless line_item = line_item_of(product_id)
 
-    line_item = line_item_of(product_id)
-    (quantity > 0) ? line_item.update_attributes(quantity: quantity) : line_item.destroy
+    if quantity > 0 
+      line_item.update_attributes(quantity: quantity) 
+    else
+      line_item.destroy
+    end
   end
 
   def remove(product)
-    line_item_of(product).destroy if self.products.include?(product)
+    set_quantity(product.id, 0)
   end
 
   def price
@@ -210,11 +214,12 @@ class Order < ActiveRecord::Base
       attributes['use_for_billing'] == "false"
   end
 
-  private
-
   def line_item_of(product_id)
     self.line_items.find_by_product_id(product_id)
   end
+
+  private
+
 
   def set_order_number
     _number = Random.new.rand(11111111...99999999).to_s
