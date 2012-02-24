@@ -1,7 +1,7 @@
-ActionMailer::Base.delivery_method = :smtp
 
-if Rails.env.production?|| (Rails.env.staging? && Settings.deliver_email_for_real_in_staging)
+if Rails.env.production? || (Rails.env.staging? && Settings.deliver_email_for_real_in_staging)
 
+  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     user_name: Settings.sendgrid.username,
     password: Settings.sendgrid.password,
@@ -12,8 +12,9 @@ if Rails.env.production?|| (Rails.env.staging? && Settings.deliver_email_for_rea
     enable_starttls_auto: true
   }
 
-else
+elsif Rails.env.development? || Rails.env.staging?
 
+  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     user_name:      Settings.mailtrapio.username || "nimbleshop",
     password:       Settings.mailtrapio.password || "7663e1f272637a4b",

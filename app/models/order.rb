@@ -24,17 +24,16 @@ class Order < ActiveRecord::Base
 
   validates :email, email: true, if: :validate_email
 
-  # cancelled is when third party service like Splitable sends  a webhook stating that order
-  # has been cancelled
-  validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending )
+  # cancelled is when third party service like Splitable sends a webhook stating that order has been cancelled
+  validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending cancelled )
   validates_inclusion_of :status,          in: %W( open closed )
-  validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided)
+  validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided )
 
   before_create :set_order_number
 
   state_machine :payment_status, :initial => :abandoned do
     after_transition on: :authorized, do: :after_authorized
-    after_transition on: :purchased,  do: :after_purchased
+    after_transition on: :paid,  do: :after_paid
 
     event :authorized do
       transition from: [:abandoned],  to: :authorized
@@ -42,7 +41,7 @@ class Order < ActiveRecord::Base
     event :captured do
       transition from: [:authorized],  to: :paid
     end
-    event :purchased do
+    event :paid do
       transition from: [:abandoned],  to: :paid
     end
 
@@ -76,7 +75,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def after_purchased
+  def after_paid
     Mailer.order_notification(self.number).deliver
     AdminMailer.new_order_notification(self.number).deliver
     self.shipping_pending

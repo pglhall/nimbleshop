@@ -8,7 +8,7 @@ describe Mailer do
     creditcard_transaction.save(validate: false)
   end
 
-  describe "send out order notification" do
+  describe "sends out order notification" do
     it {
       @order.line_items.count.must_equal 1
       mail = Mailer.order_notification(@order.number)
