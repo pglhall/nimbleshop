@@ -61,6 +61,20 @@ describe Order do
     }
   end
 
+  describe "#price" do
+    let(:order)     { create(:order) }
+    let(:product1)  { create(:product, price: 10) }
+    let(:product2)  { create(:product, price: 20) }
+
+    before do
+      order.add(product1)
+      order.add(product2)
+      order.set_quantity(product1.id, 3)
+    end
+
+    it { order.price.to_f.must_equal 50.0 }
+  end
+
   describe '#available_shipping_methods' do
     it {
       order = create(:order)

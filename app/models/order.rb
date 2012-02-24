@@ -178,18 +178,12 @@ class Order < ActiveRecord::Base
   end
 
   def price
-    self.line_items.inject(0) { |sum, item| sum += item.price }
+    self.line_items.map(&:price).reduce(:+)
   end
-
-
-  alias_method :amount, :price
 
   def total_amount
     price + shipping_cost + tax
   end
-
-  alias_method :total_price,  :total_amount
-  alias_method :grand_total,  :total_amount
 
   def to_param
     self.number
