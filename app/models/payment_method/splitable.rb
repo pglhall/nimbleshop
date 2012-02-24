@@ -28,17 +28,38 @@ class PaymentMethod::Splitable < PaymentMethod
     data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
   end
 
+  def validate_splitable_webhook(params)
+    order = Order.find_by_number(params[:invoice])
+
+    return "Invoice number #{params[:invoice]} does not match}" if order.blank?
+    return "Parameter api_secret does not match" unless order.splitable_api_secret == params[:api_secret]
+    return "Parameter payment_status is blank" if params[:payment_status].blank?
+    return "transaction_id is blank" if params[:transaction_id].blank?
+
+    unless %w(paid cancelled).include? params[:payment_status]
+      return "Parameter payment_status must be 'paid' or 'cancelled'. It was #{params[:payment_status]}"
+    end
+
+    if order.update_attributes(payment_status: params[:payment_status],
+                                   payment_method: self,
+                                   splitable_transaction_number: params[:transaction_id])
+      # do nothing
+    else
+      return order.errors.full_messages.to_sentence
+    end
+  end
+
   private
 
   def base_data
     order.splitable_api_secret = SecureRandom.hex(10)
-    order.save
+    order.save!
 
     #api_notify_url = request.protocol + request.host_with_port + '/instant_payment_notifications/splitable'
     api_notify_url = 'http://' + request.host_with_port + '/instant_payment_notifications/splitable'
 
     { api_key:        self.splitable_api_key,
-      total_amount:   (order.grand_total*100).to_i,
+      total_amount:   (order.grand_total * 100).to_i,
       invoice:        order.number,
       api_secret:     order.splitable_api_secret,
       api_notify_url: api_notify_url,

@@ -4,6 +4,18 @@ class InstantPaymentNotificationsController < ApplicationController
 
   include ActiveMerchant::Billing::Integrations
 
+  def splitable
+    Rails.logger.info "splitable callback received: #{params.to_yaml}"
+    error = PaymentMethod::Splitable.validate_splitable_webhook
+
+    if error
+      Rails.logger.info "webhook with data #{params.to_yaml} was rejected. error: #{error}"
+      render "error: #{error}", status: 403
+    else
+      render nothing: true
+    end
+  end
+
   #
   #curl -d "txn_id=3XC103945N720211C&invoice=923204115&payment_status=Completed" http://localhost:3000/instant_payment_notifications/paypal
   #
@@ -34,44 +46,5 @@ class InstantPaymentNotificationsController < ApplicationController
     render :nothing => true
   end
 
-  def splitable
-
-    # this is line to make the file load which has class_eval code for Order
-    PaymentMethod::Splitable
-
-    Rails.logger.info "splitable callback received: #{params.to_yaml}"
-    error = validate_splitable_webhook
-
-    if error
-      Rails.logger.info "webhook with data #{params.to_yaml} was rejected"
-      Rails.logger.info "error: #{error}"
-      render nothing: true, status: 403
-    else
-      order = Order.find_by_number(params[:invoice])
-      order.payment_status = params[:payment_status]
-      order.payment_method = PaymentMethod::Splitable.first
-      order.splitable_transaction_number = params[:transaction_id]
-      if order.save
-        render nothing: true
-      else
-        render "error: #{order.errors.full_messages.to_sentence}", status: 403
-      end
-    end
-  end
-
-  private
-
-  def validate_splitable_webhook
-    unless order = Order.find_by_number(params[:invoice])
-      return "invoice number #{params[:invoice]} does not match}"
-    end
-
-    unless order.splitable_api_secret == params[:api_secret]
-      return "api_secret does not match"
-    end
-    return "payment_status is blank" if params[:payment_status].blank?
-    return "transaction_id is blank" if params[:transaction_id].blank?
-
-  end
 
 end
