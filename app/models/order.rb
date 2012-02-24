@@ -23,6 +23,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
 
   delegate :shipping_cost, to: :shipping_method
+  delegate :tax, to: :tax_calculator
 
   validates :email, email: true, if: :validate_email
 
@@ -179,12 +180,20 @@ class Order < ActiveRecord::Base
   def price
     self.line_items.inject(0) { |sum, item| sum += item.price }
   end
+
+
   alias_method :amount, :price
 
-
   def price_with_shipping
-    shipping_cost_zero_with_no_choice? ? price : price + shipping_cost.to_s.to_d
+    total = price
+
+    unless shipping_cost_zero_with_no_choice?  
+      total += shipping_cost.to_s.to_d
+    end
+
+    total + tax
   end
+
   alias_method :total_amount, :price_with_shipping
   alias_method :total_price,  :price_with_shipping
   alias_method :grand_total,  :price_with_shipping
@@ -235,5 +244,9 @@ class Order < ActiveRecord::Base
       _number = Random.new.rand(11111111...99999999).to_s
     end
     self.number = _number
+  end
+
+  def tax_calculator
+    @_tax_calculator ||= SimpleTaxDecorator.new(self, Shop.first)
   end
 end

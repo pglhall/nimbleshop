@@ -101,4 +101,5 @@ group :test do
   gem 'rb-fsevent'
   gem 'factory_girl_rails'
   gem "launchy"
+  gem "mocha", :require => false
 end
