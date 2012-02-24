@@ -22,8 +22,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
 
-  delegate :shipping_cost, to: :shipping_method
   delegate :tax, to: :tax_calculator
+  delegate :shipping_cost, to: :shipping_cost_calculator
 
   validates :email, email: true, if: :validate_email
 
@@ -184,44 +184,28 @@ class Order < ActiveRecord::Base
 
   alias_method :amount, :price
 
-  def price_with_shipping
-    total = price
-
-    unless shipping_cost_zero_with_no_choice?  
-      total += shipping_cost.to_s.to_d
-    end
-
-    total + tax
+  def total_amount
+    price + shipping_cost + tax
   end
 
-  alias_method :total_amount, :price_with_shipping
-  alias_method :total_price,  :price_with_shipping
-  alias_method :grand_total,  :price_with_shipping
-
-
-  # This methods returns true if the shipping cost is zero and usre has no choice. This
-  # case could arise
-  # * if shop has not configured shipping cost
-  # * if shop has configured shipping cost . However for this order the shipping cost is zero
-  #   and no other shipping rule applies. So user must select the only option available
-  def shipping_cost_zero_with_no_choice?
-    shipping_method.blank? || (shipping_method.shipping_cost == 0)
-  end
+  alias_method :total_price,  :total_amount
+  alias_method :grand_total,  :total_amount
 
   def to_param
     self.number
   end
 
   def final_billing_address
-    return nil if shipping_address.blank?
-    shipping_address.use_for_billing ? shipping_address : billing_address
+    unless shipping_address.try(:use_for_billing)
+      return billing_address
+    end
+
+    shipping_address
   end
 
   def initialize_addresses
     unless shipping_address
-      build_shipping_address({
-        country_code: "US", use_for_billing:  true
-      })
+      build_shipping_address(country_code: "US", use_for_billing: true)
     end
 
     billing_address || build_billing_address(country_code: "US")
@@ -248,5 +232,9 @@ class Order < ActiveRecord::Base
 
   def tax_calculator
     @_tax_calculator ||= SimpleTaxDecorator.new(self, Shop.first)
+  end
+
+  def shipping_cost_calculator
+    @_shipping_cost_calculator ||= ShippingCostDecorator.new(self)
   end
 end

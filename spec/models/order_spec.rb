@@ -27,6 +27,33 @@ describe Order do
     end
   end
 
+  describe "#final_billing_address" do
+    let(:order) do
+      Order.new(billing_address: billing, shipping_address: shipping)
+    end
+
+    context "when shipping address is nil" do
+      let(:shipping)  { nil }
+      let(:billing)   { nil }
+
+      it { order.final_billing_address.must_equal nil }
+    end
+
+    context "when shipping address used_for_billing" do
+      let(:shipping)  { ShippingAddress.new(use_for_billing: true) }
+      let(:billing)   { BillingAddress.new }
+
+      it { order.final_billing_address.must_equal shipping }
+    end
+
+    context "shipping address is not used_for_billing" do
+      let(:shipping)  { ShippingAddress.new(use_for_billing: false) }
+      let(:billing)   { BillingAddress.new }
+
+      it { order.final_billing_address.must_equal billing }
+    end
+  end
+
   describe "validations" do
     subject { create(:order) }
     it {
