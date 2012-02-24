@@ -4,14 +4,18 @@ describe Order do
 
   describe "inquirer methods" do
     let(:order) do 
-      Order.new(shipping_status: 'nothing_to_ship', payment_status: 'purchased', status: 'open')
+      Order.new({ 
+        shipping_status: 'nothing_to_ship', 
+        payment_status: 'purchased', 
+        status: 'open'
+      })
     end
 
     it "kind of string inquirer" do
       order.shipping_status.must_be_kind_of ActiveSupport::StringInquirer
       order.payment_status.must_be_kind_of ActiveSupport::StringInquirer
       order.status.must_be_kind_of ActiveSupport::StringInquirer
-     end
+    end
 
     it "reflect current values" do
       order.shipping_status = 'shipped'
@@ -90,13 +94,17 @@ describe Order do
     let(:product1)  { create(:product, price: 10) }
     let(:product2)  { create(:product, price: 20) }
 
-    before do
+    it "no products" do
+      order.price.to_f.must_equal 0.0
+    end
+
+    it "with products" do
       order.add(product1)
       order.add(product2)
       order.set_quantity(product1.id, 3)
-    end
 
-    it { order.price.to_f.must_equal 50.0 }
+      order.price.to_f.must_equal 50.0
+    end
   end
 
   describe '#available_shipping_methods' do
@@ -132,13 +140,13 @@ describe Order do
       mail = ActionMailer::Base.deliveries.first
       mail.subject.must_equal "Order confirmation for order ##{order.number}"
       mail.encoded.must_match /Here is receipt for your purchase/
-      mail.encoded.must_match /When items are shipped you will get an email with tracking number/
+        mail.encoded.must_match /When items are shipped you will get an email with tracking number/
 
-      mail = ActionMailer::Base.deliveries.last
+        mail = ActionMailer::Base.deliveries.last
       mail.subject.must_equal "Order ##{order.number} was recently placed"
       mail.encoded.must_match Regexp.new("Order ##{order.number} was placed by")
     }
-  end
+        end
 
   describe "captured" do
     let(:order) { order_with_authorized_transaction }

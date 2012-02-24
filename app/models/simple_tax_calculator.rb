@@ -1,4 +1,4 @@
-class SimpleTaxDecorator
+class SimpleTaxCalculator
   def initialize(order, shop)
     @order = order 
     @shop  = shop

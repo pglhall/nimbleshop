@@ -1,4 +1,4 @@
-class ShippingCostDecorator
+class ShippingCostCalculator
   def initialize(order)
     @order = order 
   end

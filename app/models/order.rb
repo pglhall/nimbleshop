@@ -182,7 +182,7 @@ class Order < ActiveRecord::Base
   end
 
   def price
-    self.line_items.map(&:price).reduce(:+)
+    self.line_items.map(&:price).reduce(:+) || 0
   end
 
   def total_amount
@@ -230,10 +230,10 @@ class Order < ActiveRecord::Base
   end
 
   def tax_calculator
-    @_tax_calculator ||= SimpleTaxDecorator.new(self, Shop.first)
+    @_tax_calculator ||= SimpleTaxCalculator.new(self, Shop.first)
   end
 
   def shipping_cost_calculator
-    @_shipping_cost_calculator ||= ShippingCostDecorator.new(self)
+    @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
   end
 end
