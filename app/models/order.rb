@@ -29,56 +29,118 @@ class Order < ActiveRecord::Base
   validates_inclusion_of :status,          in: %W( open closed )
   validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided )
 
+  validates :payment_method, presence: true, if: lambda { |record| record.payment_status != 'abandoned' }
+
   before_create :set_order_number
 
+  # captured and purchased statues are only for a brief transition. Once a transaction is captured then after_cpatured is called and
+  # there after doing a bunch of things the status changes to 'paid'.
+  #
+  # Similarly status 'paid' is only for a brief transition. Once an order is put in 'purchased' state then after_purchased is called and
+  # this method sets the status as 'paid'.
   state_machine :payment_status, :initial => :abandoned do
-    after_transition on: :authorized, do: :after_authorized
-    after_transition on: :paid,  do: :after_paid
+    after_transition  on: :authorized, do: :after_authorized
+    after_transition  on: :purchased,  do: :after_purchased
+    after_transition  on: :captured,   do: :after_captured
+    before_transition on: :cancelled,  do: :before_cancelled
+    before_transition on: :refunded,   do: :before_refunded
 
     event :authorized do
       transition from: [:abandoned],  to: :authorized
     end
+
     event :captured do
       transition from: [:authorized],  to: :paid
     end
-    event :paid do
+
+    event :purchased do
       transition from: [:abandoned],  to: :paid
     end
 
-    state :authorized, :paid, :refunded, :voided, :cancelled
-  end
+    event :cancelled do
+      transition [:authorized] => :cancelled, if: lambda { |o| o.authorized? }
+    end
 
-  state_machine :shipping_status, initial:  :nothing_to_ship do
-    after_transition :on => :shipped, do:  :after_shipped
-    event :shipping_pending do
-      transition from: [:nothing_to_ship], to: :shipping_pending
+    event :refunded do
+      transition [:paid] => :refunded, if: lambda { |o| o.paid? }
     end
-    event :shipped do
-      transition from: [:shipping_pending], to: :shipped
-    end
+
+
+    state :authorized, :captured, :purchased, :paid, :refunded, :cancelled
   end
 
   def after_authorized
     Mailer.order_notification(self.number).deliver
-    AdminMailer.new_order_notification(self.number, Shop.first).deliver
+    AdminMailer.new_order_notification(self.number).deliver
     self.shipping_pending
+  end
+
+  def after_captured
+    # so that others can overrite
+  end
+
+  def after_paid
+    # so that others can overrite
+  end
+
+  def after_purchased
+    Mailer.order_notification(self.number).deliver
+    AdminMailer.new_order_notification(self.number).deliver
+    self.update_attributes!(shipping_status: 'shipping_pending', splitable_paid_at: Time.zone.now.to_s(:long))
+  end
+
+  def before_cancelled
+    self.creditcard_transactions.find_all_by_status_and_active('authorized', true).each { |t| t.void }
+    self.nothing_to_ship
+  end
+
+  def before_refunded
+    self.creditcard_transactions.find_all_by_status_and_active('captured', true).each { |t| t.void }
+    self.nothing_to_ship
+  end
+
+
+  state_machine :shipping_status, initial: :nothing_to_ship do
+    after_transition :on => :shipped, do:  :after_shipped
+
+    event :shipping_pending do
+      transition from: [:nothing_to_ship], to: :shipping_pending
+    end
+
+    event :shipped do
+      transition from: [:shipping_pending], to: :shipped
+    end
+
+    event :nothing_to_ship do
+      transition from: [:shipping_pending], to: :nothing_to_ship, if: lambda { |o| o.shipping_pending? }
+    end
+
+    state :nothing_to_ship, :shippping_pending, :shipped
   end
 
   def after_shipped
     Mailer.shipping_notification(self.number).deliver
     self.update_attributes!(shipped_at: Time.now)
-    if self.payment_status.authorized?
-      transaction = self.creditcard_transactions.first
-      if GatewayProcessor.new(payment_method_permalink: 'authorize-net', amount: self.total_amount).capture(transaction)
-        self.captured
-      end
+  end
+
+
+
+  def payment_date
+    case payment_method
+    when PaymentMethod::Splitable
+      self.splitable_paid_at
+    when PaymentMethod::AuthorizeNet
+      self.creditcard_transactions.first.created_at.to_s(:long)
     end
   end
 
-  def after_paid
-    Mailer.order_notification(self.number).deliver
-    AdminMailer.new_order_notification(self.number).deliver
-    self.shipping_pending
+  def masked_creditcard_number
+    case payment_method
+    when PaymentMethod::Splitable
+      nil
+    when PaymentMethod::AuthorizeNet
+      self.creditcard_transactions.first.creditcard.masked_number
+    end
   end
 
   def available_shipping_methods

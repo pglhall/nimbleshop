@@ -9,4 +9,8 @@ class CreditcardTransaction < ActiveRecord::Base
                           amount: amount).capture(self)
   end
 
+  def void(options)
+    GatewayProcessor.new( payment_method_permalink: options.fetch(:payment_method_permalink)).void(self)
+  end
+
 end

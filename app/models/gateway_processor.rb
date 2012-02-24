@@ -12,26 +12,30 @@ class GatewayProcessor
 
   def purchase
     response = gateway.purchase(amount, creditcard)
-    if transaction_gid = gateway.get_transaction_id_for_purchase(response)
+    gateway.get_transaction_id_for_purchase(response).tap do |transaction_gid|
       save_cc_and_create_transaction_record!(transaction_gid, response, 'purchased')
     end
-    transaction_gid
   end
 
   def authorize
     response = gateway.authorize(amount, creditcard)
-    if transaction_gid = gateway.get_transaction_id_for_authorize(response)
+    gateway.get_transaction_id_for_authorize(response).tap do |transaction_gid|
       save_cc_and_create_transaction_record!(transaction_gid, response, 'authorized')
     end
-    transaction_gid
   end
 
   def capture(transaction)
     response = gateway.capture(amount, transaction.transaction_gid, {})
-    if transaction_gid = gateway.get_transaction_id_for_capture(response)
+    gateway.get_transaction_id_for_capture(response).tap do |transaction_gid|
       update_transaction_record_and_add_another!(transaction, transaction_gid, response, 'captured')
     end
-    transaction_gid
+  end
+
+  def void(transaction)
+    response = gateway.void(amount, transaction.transaction_gid, {})
+    gateway.get_transaction_id_for_void(response).tap do |transaction_gid|
+      update_transaction_record_and_add_another!(transaction, transaction_gid, response, 'voided')
+    end
   end
 
   private

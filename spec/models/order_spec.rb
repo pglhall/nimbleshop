@@ -28,13 +28,16 @@ describe Order do
     }
   end
 
-  describe "#after_authorized" do
+  describe "authorized" do
+    let(:order) { order_with_authorized_transaction }
+
     it {
-      order = create(:order)
-      create(:creditcard_transaction, order: order)
       order.authorized
+      order.reload
+      order.payment_method.name.must_equal 'Authorize.net'
       order.payment_status.must_equal 'authorized'
       ActionMailer::Base.deliveries.size.must_equal 2
+      order.shipping_status.must_equal 'shipping_pending'
 
       mail = ActionMailer::Base.deliveries.first
       mail.subject.must_equal "Order confirmation for order ##{order.number}"
@@ -47,4 +50,79 @@ describe Order do
     }
   end
 
+  describe "captured" do
+    let(:order) { order_with_authorized_transaction }
+
+    it {
+      order.authorized
+      order.captured
+      order.reload
+      order.payment_method.name.must_equal 'Authorize.net'
+      order.payment_status.must_equal 'paid'
+      order.shipping_status.must_equal 'shipping_pending'
+    }
+  end
+
+  describe "purchased" do
+    it {
+      order = create(:order)
+      order.update_attributes!(payment_method: PaymentMethod::Splitable.first)
+      order.purchased
+      order.reload
+      order.payment_method.name.must_equal 'Splitable'
+      order.payment_status.must_equal 'paid'
+      order.shipping_status.must_equal 'shipping_pending'
+    }
+  end
+
+  describe "cancelled" do
+    describe "at initial state" do
+      it {
+        order = create(:order)
+        order.cancelled
+        order.reload
+        order.payment_status.must_equal 'abandoned' # abandonded orders cannot be cancelled
+        order.shipping_status.must_equal 'nothing_to_ship'
+      }
+    end
+
+    describe "after authorized" do
+      let(:order) { order_with_authorized_transaction }
+
+      it {
+        order.authorized
+        order.cancelled
+        order.reload
+        order.payment_status.must_equal 'cancelled'
+        order.shipping_status.must_equal 'nothing_to_ship'
+      }
+    end
+  end
+
+  describe "refunded" do
+    let(:order) { order_with_authorized_transaction }
+
+    describe "after captured" do
+      it {
+        order.authorized
+        order.captured
+        order.refunded
+        order.reload
+        order.payment_status.must_equal 'refunded'
+        order.shipping_status.must_equal 'nothing_to_ship'
+      }
+    end
+    describe "after authorized" do
+      it {
+        order.authorized
+        order.refunded
+        order.reload
+        order.payment_status.must_equal 'authorized' # only captured transactions can be refunded
+        order.shipping_status.must_equal 'shipping_pending'
+      }
+    end
+  end
+
 end
+
+

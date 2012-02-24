@@ -1,5 +1,5 @@
 Order.class_eval do
-  store_accessor :settings, :splitable_api_secret, :splitable_transaction_number
+  store_accessor :settings, :splitable_api_secret, :splitable_transaction_number, :splitable_paid_at
 end
 
 class PaymentMethod::Splitable < PaymentMethod
@@ -40,10 +40,11 @@ class PaymentMethod::Splitable < PaymentMethod
       return "Parameter payment_status must be 'paid' or 'cancelled'. It was #{params[:payment_status]}"
     end
 
-    if order.update_attributes(payment_status: params[:payment_status],
-                                   payment_method: self,
-                                   splitable_transaction_number: params[:transaction_id])
-      # do nothing
+    payment_status = params[:payment_status] == 'paid' ? 'purchased' : 'cancelled'
+
+    if order.update_attributes( payment_method: self, splitable_transaction_number: params[:transaction_id])
+      order.send(payment_status)
+      nil
     else
       return order.errors.full_messages.to_sentence
     end
