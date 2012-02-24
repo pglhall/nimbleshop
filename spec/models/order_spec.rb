@@ -42,7 +42,7 @@ describe Order do
       mail.encoded.must_match /When items are shipped you will get an email with tracking number/
 
       mail = ActionMailer::Base.deliveries.last
-      mail.subject.must_equal "Order ##{order.number} was recetly placed"
+      mail.subject.must_equal "Order ##{order.number} was recently placed"
       mail.encoded.must_match Regexp.new("Order ##{order.number} was placed by")
     }
   end
