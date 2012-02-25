@@ -58,52 +58,43 @@ describe Order do
     end
   end
 
-  describe "validations" do
-    subject { create(:order) }
-    it {
-
-    }
-  end
-
-  describe "#add" do
+  describe "products" do
     let(:order)     { create(:order) }
     let(:product1)  { create(:product, price: 10) }
     let(:product2)  { create(:product, price: 30) }
-
-    before { order.add(product1) }
     let(:line_item) { order.line_item_of(product1) }
 
-    it do
+    it "#add" do
+      order.add(product1)
       line_item.product.must_equal product1
       line_item.quantity.must_equal 1
     end
 
-    describe "#remove" do
-      before { order.remove(product1) }
-      it { line_item.must_equal nil }
-    end
-
-    describe "#set_quantity" do
-      before { order.set_quantity(product1, 20) }
-      it { line_item.quantity.must_equal 20 }
-    end
-  end
-
-  describe "#price" do
-    let(:order)     { create(:order) }
-    let(:product1)  { create(:product, price: 10) }
-    let(:product2)  { create(:product, price: 20) }
-
-    it "no products" do
-      order.price.to_f.must_equal 0.0
-    end
-
-    it "with products" do
+    it "#remove" do
       order.add(product1)
-      order.add(product2)
-      order.set_quantity(product1.id, 3)
+      order.remove(product1)
 
-      order.price.to_f.must_equal 50.0
+      line_item.must_equal nil
+    end
+
+    it "#set_quantity" do
+      order.add(product1)
+      order.set_quantity(product1, 20)
+      line_item.quantity.must_equal 20
+    end
+
+    describe "#price" do
+      it "no products" do
+        order.price.to_f.must_equal 0.0
+      end
+
+      it "with products" do
+        order.add(product1)
+        order.add(product2)
+        order.set_quantity(product1.id, 3)
+
+        order.price.to_f.must_equal 60.0
+      end
     end
   end
 
@@ -114,15 +105,6 @@ describe Order do
       shipping_method = create(:country_shipping_method, base_price: 100, lower_price_limit: 1, upper_price_limit: 99999)
       order.shipping_address = create(:shipping_address)
       order.available_shipping_methods.size.must_equal 1
-    }
-  end
-
-  describe '#set_quantity' do
-    it {
-      order = create(:order)
-      product = create(:product)
-      order.add(product)
-      order.set_quantity(product, 3)
     }
   end
 
@@ -220,7 +202,4 @@ describe Order do
       }
     end
   end
-
 end
-
-
