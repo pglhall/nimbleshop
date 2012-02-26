@@ -2,11 +2,100 @@ require 'spec_helper'
 
 describe Order do
 
-  describe "validations" do
-    subject { create(:order) }
-    it {
+  describe "inquirer methods" do
+    let(:order) do 
+      Order.new({ 
+        shipping_status: 'nothing_to_ship', 
+        payment_status: 'purchased', 
+        status: 'open'
+      })
+    end
 
-    }
+    it "kind of string inquirer" do
+      order.shipping_status.must_be_kind_of ActiveSupport::StringInquirer
+      order.payment_status.must_be_kind_of ActiveSupport::StringInquirer
+      order.status.must_be_kind_of ActiveSupport::StringInquirer
+    end
+
+    it "reflect current values" do
+      order.shipping_status = 'shipped'
+      order.shipping_status.must_be(:shipped?)
+
+      order.status.must_be(:open?)
+      order.status = 'closed'
+      order.status.must_be(:closed?)
+
+      order.payment_status.must_be(:purchased?)
+      order.payment_status = 'captured'
+      order.payment_status.must_be(:captured?)
+    end
+  end
+
+  describe "#final_billing_address" do
+    let(:order) do
+      Order.new(billing_address: billing, shipping_address: shipping)
+    end
+
+    context "when shipping address is nil" do
+      let(:shipping)  { nil }
+      let(:billing)   { nil }
+
+      it { order.final_billing_address.must_equal nil }
+    end
+
+    context "when shipping address used_for_billing" do
+      let(:shipping)  { ShippingAddress.new(use_for_billing: true) }
+      let(:billing)   { BillingAddress.new }
+
+      it { order.final_billing_address.must_equal shipping }
+    end
+
+    context "shipping address is not used_for_billing" do
+      let(:shipping)  { ShippingAddress.new(use_for_billing: false) }
+      let(:billing)   { BillingAddress.new }
+
+      it { order.final_billing_address.must_equal billing }
+    end
+  end
+
+  describe "products" do
+    let(:order)     { create(:order) }
+    let(:product1)  { create(:product, price: 10) }
+    let(:product2)  { create(:product, price: 30) }
+    let(:line_item) { order.line_item_of(product1) }
+
+    it "#add" do
+      order.add(product1)
+      line_item.product.must_equal product1
+      line_item.quantity.must_equal 1
+    end
+
+    it "#remove" do
+      order.add(product1)
+      order.remove(product1)
+
+      line_item.must_equal nil
+    end
+
+    it "#set_quantity" do
+      order.add(product1)
+      order.set_quantity(product1, 20)
+      line_item.quantity.must_equal 20
+    end
+
+    describe "#price" do
+      it "no products" do
+        order.price.to_f.must_equal 0.0
+      end
+
+      it "with products" do
+        order.add(product1)
+        order.add(product2)
+        order.set_quantity(product1.id, 3)
+
+        order.price.to_f.must_equal 60.0
+      end
+    end
   end
 
   describe '#available_shipping_methods' do
@@ -16,15 +105,6 @@ describe Order do
       shipping_method = create(:country_shipping_method, base_price: 100, lower_price_limit: 1, upper_price_limit: 99999)
       order.shipping_address = create(:shipping_address)
       order.available_shipping_methods.size.must_equal 1
-    }
-  end
-
-  describe '#set_quantity' do
-    it {
-      order = create(:order)
-      product = create(:product)
-      order.add(product)
-      order.set_quantity(product, 3)
     }
   end
 
@@ -42,13 +122,13 @@ describe Order do
       mail = ActionMailer::Base.deliveries.first
       mail.subject.must_equal "Order confirmation for order ##{order.number}"
       mail.encoded.must_match /Here is receipt for your purchase/
-      mail.encoded.must_match /When items are shipped you will get an email with tracking number/
+        mail.encoded.must_match /When items are shipped you will get an email with tracking number/
 
-      mail = ActionMailer::Base.deliveries.last
+        mail = ActionMailer::Base.deliveries.last
       mail.subject.must_equal "Order ##{order.number} was recently placed"
       mail.encoded.must_match Regexp.new("Order ##{order.number} was placed by")
     }
-  end
+        end
 
   describe "captured" do
     let(:order) { order_with_authorized_transaction }
@@ -122,7 +202,4 @@ describe Order do
       }
     end
   end
-
 end
-
-

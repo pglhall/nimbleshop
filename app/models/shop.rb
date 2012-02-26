@@ -12,6 +12,7 @@ class Shop < ActiveRecord::Base
   
   validates_presence_of :name, :theme, :time_zone, :default_creditcard_action
   validates_inclusion_of :default_creditcard_action,  in: %W( authorize purchase )
+  validates_numericality_of :tax_percentage, greater_than_or_equal_to: 0, less_than: 100
 
   def twitter_url
     twitter_handle.blank? ? nil : "http://twitter.com/#{twitter_handle}"

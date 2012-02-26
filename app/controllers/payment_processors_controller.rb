@@ -51,7 +51,7 @@ class PaymentProcessorsController < ApplicationController
 
       render action: 'new' and return unless @creditcard.valid?
 
-      pp = PaymentProcessor.new(order.grand_total, @creditcard, order)
+      pp = PaymentProcessor.new(order.total_amount, @creditcard, order)
       case Shop.first.default_creditcard_action
       when 'authorize'
         pp.authorize

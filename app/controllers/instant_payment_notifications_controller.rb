@@ -29,7 +29,7 @@ class InstantPaymentNotificationsController < ApplicationController
 
     if notify.acknowledge
       begin
-        if notify.complete? && order.grand_total == notify.amount
+        if notify.complete? && order.total_amount == notify.amount
           order.status = 'paid'
           transaction.update_attributes!(params: params, status: params[:payment_status], txn_id: params[:txn_id])
         else

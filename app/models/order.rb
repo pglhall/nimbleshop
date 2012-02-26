@@ -1,14 +1,17 @@
 class Order < ActiveRecord::Base
+  include InquirerMethods
 
   # to allow extensions to keep data
   store :settings
 
   attr_protected :number
   attr_accessor :validate_email
+  inquire_method :shipping_status, :payment_status, :status
 
   has_many    :shipments
   belongs_to  :shipping_method
   has_many    :line_items
+  has_many    :products, through: :line_items
   belongs_to  :user
   has_many    :creditcard_transactions
 
@@ -20,7 +23,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
 
-  delegate :shipping_cost, to: :shipping_method
+  delegate :tax, to: :tax_calculator
+  delegate :shipping_cost, to: :shipping_cost_calculator
 
   validates :email, email: true, if: :validate_email
 
@@ -144,7 +148,7 @@ class Order < ActiveRecord::Base
   end
 
   def available_shipping_methods
-    ShippingMethod.available_for(amount, shipping_address)
+    ShippingMethod.available_for(price, shipping_address)
   end
 
   def item_count
@@ -154,46 +158,35 @@ class Order < ActiveRecord::Base
   alias_method :items, :line_items
 
   def add(product, variant = nil)
-    if variant
-      return if self.line_items.find_by_product_id_and_variant_id(product.id, variant.id)
-    else
-      return if self.line_items.find_by_product_id(product.id)
+    options = { product_id: product.id }
+
+    options.update(variant_id: variant.id) if variant
+
+    unless line_items.where(options).any?
+      line_items.create(options.merge(quantity: 1))
     end
-    self.line_items.create!(product: product, quantity: 1, variant: variant)
   end
 
   def set_quantity(product_id, quantity)
-    return unless self.line_items.find_by_product_id(product_id)
+    return unless line_item = line_item_of(product_id)
 
-    line_item = line_item_of(product_id)
-    (quantity > 0) ? line_item.update_attributes(quantity: quantity) : line_item.destroy
+    if quantity > 0 
+      line_item.update_attributes(quantity: quantity) 
+    else
+      line_item.destroy
+    end
   end
 
   def remove(product)
-    line_item_of(product).destroy if self.products.include?(product)
+    set_quantity(product.id, 0)
   end
 
   def price
-    self.line_items.inject(0) { |sum, item| sum += item.price }
+    self.line_items.map(&:price).reduce(:+) || 0
   end
-  alias_method :amount, :price
 
-
-  def price_with_shipping
-    shipping_cost_zero_with_no_choice? ? price : price + shipping_cost.to_s.to_d
-  end
-  alias_method :total_amount, :price_with_shipping
-  alias_method :total_price,  :price_with_shipping
-  alias_method :grand_total,  :price_with_shipping
-
-
-  # This methods returns true if the shipping cost is zero and usre has no choice. This
-  # case could arise
-  # * if shop has not configured shipping cost
-  # * if shop has configured shipping cost . However for this order the shipping cost is zero
-  #   and no other shipping rule applies. So user must select the only option available
-  def shipping_cost_zero_with_no_choice?
-    shipping_method.blank? || (shipping_method.shipping_cost == 0)
+  def total_amount
+    price + shipping_cost + tax
   end
 
   def to_param
@@ -201,24 +194,18 @@ class Order < ActiveRecord::Base
   end
 
   def final_billing_address
-    return nil if shipping_address.blank?
-    shipping_address.use_for_billing ? shipping_address : billing_address
-  end
+    unless shipping_address.try(:use_for_billing)
+      return billing_address
+    end
 
-  def shipping_status
-    ActiveSupport::StringInquirer.new(self['shipping_status'])
-  end
-
-  def payment_status
-    ActiveSupport::StringInquirer.new(self['payment_status'])
-  end
-
-  def status
-    ActiveSupport::StringInquirer.new(self['status'])
+    shipping_address
   end
 
   def initialize_addresses
-    shipping_address || build_shipping_address(country_code: "US", use_for_billing:  true)
+    unless shipping_address
+      build_shipping_address(country_code: "US", use_for_billing: true)
+    end
+
     billing_address || build_billing_address(country_code: "US")
   end
 
@@ -227,11 +214,12 @@ class Order < ActiveRecord::Base
       attributes['use_for_billing'] == "false"
   end
 
-  private
-
   def line_item_of(product_id)
     self.line_items.find_by_product_id(product_id)
   end
+
+  private
+
 
   def set_order_number
     _number = Random.new.rand(11111111...99999999).to_s
@@ -239,5 +227,13 @@ class Order < ActiveRecord::Base
       _number = Random.new.rand(11111111...99999999).to_s
     end
     self.number = _number
+  end
+
+  def tax_calculator
+    @_tax_calculator ||= SimpleTaxCalculator.new(self, Shop.first)
+  end
+
+  def shipping_cost_calculator
+    @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
   end
 end

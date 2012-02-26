@@ -20,7 +20,7 @@ require 'database_cleaner'
 require 'rails/test_help'
 require "minitest/rails"
 require 'minitest-rails-shoulda'
-
+require "mocha"
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 

@@ -18,6 +18,18 @@
         <div class='clear'></div>
     </tr>
   <% end %>
+  <% if current_order.tax %>
+    <tr>
+      <td>
+        <div class='lhs'>
+          Tax :
+		  <strong> 
+			  <%= number_to_currency(current_order.tax) %> 
+		  </strong>
+        </div>
+        <div class='clear'></div>
+    </tr>
+  <% end %>
   <% if current_order.shipping_method %>
     <tr>
       <td>
@@ -32,7 +44,7 @@
     <td>
       <div class='lhs'>
         Total :
-        <strong> <%= number_to_currency(current_order.price_with_shipping) %> </strong>
+        <strong> <%= number_to_currency(current_order.total_amount) %> </strong>
       </div>
       <div class='clear'></div>
     </td>

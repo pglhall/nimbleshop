@@ -27,6 +27,14 @@
           </tr>
         <% end %>
 
+        <% if current_order.tax %>
+          <tr class='shipping_cost'>
+            <td colspan='4'>&nbsp;</td>
+            <td> Tax </td>
+            <td><strong><%= number_to_currency(current_order.tax) %></strong></td>
+          </tr>
+        <% end %>
+
         <tr>
           <td colspan='3'>&nbsp;</td>
           <td>
@@ -35,7 +43,7 @@
           </td>
           <td> Total: </td>
           <td style='font-size:120%;'>
-            <strong><%= number_to_currency(@cart.total_price) %></strong>
+            <strong><%= number_to_currency(@cart.total_amount) %></strong>
           </td>
         </tr>
 
