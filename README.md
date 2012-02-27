@@ -11,7 +11,7 @@
 
 # Documentation
 
-Documentation is available at [http://docs.nimbleshop.com](http://docs.nimbleshop.com) .
+Documentation is available at [http://documentup.com/neerajdotname/nimbleshop_doc/](http://documentup.com/neerajdotname/nimbleshop_doc/) .
 
 # Contribution
 
