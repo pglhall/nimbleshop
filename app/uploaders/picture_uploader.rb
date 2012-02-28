@@ -28,43 +28,45 @@ class PictureUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
+  manipulation_type = :resize_to_limit
+
   version :tiny do
-    process :resize_to_limit => [16, 16]
+    process manipulation_type => [16, 16]
     process :store_meta
   end
 
   version :tiny_plus do
-    process :resize_to_limit => [32, 32]
+    process manipulation_type => [32, 32]
     process :store_meta
   end
 
   version :small do
-    process :resize_to_limit => [50, 50]
+    process manipulation_type => [50, 50]
     process :store_meta
   end
 
   version :small_plus do
-    process :resize_to_limit => [100, 100]
+    process manipulation_type => [100, 100]
     process :store_meta
   end
 
   version :medium do
-    process :resize_to_limit => [160, 160]
+    process manipulation_type => [160, 160]
     process :store_meta
   end
 
   version :medium_plus do
-    process :resize_to_limit => [240, 240]
+    process manipulation_type => [240, 240]
     process :store_meta
   end
 
   version :large do
-    process :resize_to_limit => [480, 480]
+    process manipulation_type => [480, 480]
     process :store_meta
   end
 
   version :large_plus do
-    process :resize_to_limit => [600, 600]
+    process manipulation_type => [600, 600]
     process :store_meta
   end
 
