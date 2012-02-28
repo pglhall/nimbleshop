@@ -22,7 +22,6 @@ class Sampledata
     process_picture('pic3_1.jpg', product3)
     process_picture('pic3_2.jpg', product3)
     process_picture('pic4_1.jpg', product4)
-    process_picture('pic4_2.jpg', product4)
     process_picture('pic4_3.jpg', product4)
     process_picture('pic5_1.jpeg', product5)
     process_picture('pic5_2.jpeg', product5)
@@ -76,21 +75,27 @@ class Sampledata
     product1.custom_field_answers.create(custom_field: cf, value: 'art')
     product2.custom_field_answers.create(custom_field: cf, value: 'fashion')
     product3.custom_field_answers.create(custom_field: cf, value: 'rug')
-    product4.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    product4.custom_field_answers.create(custom_field: cf, value: 'food')
     product5.custom_field_answers.create(custom_field: cf, value: 'fashion')
     product6.custom_field_answers.create(custom_field: cf, value: 'fashion')
     product7.custom_field_answers.create(custom_field: cf, value: 'fashion')
 
+    pg_food = ProductGroup.create!(name: 'Food')
+    pg_food.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'food')
+
     pg_rug = ProductGroup.create!(name: 'Rug')
     pg_rug.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'rug')
+
     pg_art = ProductGroup.create!(name:  'Art')
     pg_art.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'art')
+
     pg_fashion = ProductGroup.create!(name: 'Fashion')
     pg_fashion.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'fashion')
 
     link_group = LinkGroup.create!(name: 'Shop by category')
     link_group.navigations.create(navigeable: pg_rug)
     link_group.navigations.create(navigeable: pg_art)
+    link_group.navigations.create(navigeable: pg_food)
     link_group.navigations.create(navigeable: pg_fashion)
   end
 
@@ -119,7 +124,7 @@ class Sampledata
 
     self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd', status: 'active')
     self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd', status: 'active')
-    self.product4 = Product.create!( title: "Sterling Silver Earrings", price: 81, description: 'tbd', status: 'active')
+    self.product4 = Product.create!( title: "Indian mangoes", price: 81, description: 'tbd', status: 'active')
     self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd', status: 'active')
 
     self.product6 = Product.create!( title: "Handmade vibrant bangles", price: 11, description: 'tbd', status: 'active')
@@ -176,11 +181,15 @@ class Sampledata
     product3.update_attributes(description: desc)
 
     desc = %q{
-          These large hand forged Sterling Silver hoops are comfortable and lightweight. I have lightly hammered them for shine and strength.
+            The mango is the national fruit of India and Pakistan. It is also the national fruit in the Philippines. The mango tree is the national tree of Bangladesh.
 
-          The hoops are adorned with aqua Chalcedony, creamy freshwater pearls, and moonstone. All of these gorgeous stones are wrapped in Sterling Silver wire.
+In Hinduism, the perfectly ripe mango is often held by Lord Ganesha as a symbol of attainment, regarding the devotees potential perfection. Mango blossoms are also used in the worship of the goddess Saraswati. No Telugu/Kannada new year's day called Ugadi passes without eating ugadi pacchadi made with mango pieces as one of the ingredients. In Tamil Brahmin homes mango is an ingredient in making vadai paruppu on Sri Rama Navami day (Lord Ram's Birth Day) and also in preparation of pachchadi on Tamil new year's day.
+The Jain goddess Ambika is traditionally represented as sitting under a mango tree.
 
-          All Olivia Clare jewelry is lovingly made in my Hawaiian Studio on the Big Island.
+
+An image of Ambika under a mango tree in Cave of the Ellora Caves
+Mango leaves are used to decorate archways and doors in Indian houses and during weddings and celebrations like Ganesh Chaturthi. Mango motifs and paisleys are widely used in different Indian embroidery styles, and are found in Kashmiri shawls, Kanchipuram silk sarees, etc. Paisleys are also common to Iranian art, because of its pre-Islamic Zoroastrian past.
+
     }
     product4.update_attributes(description: desc)
 
