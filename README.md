@@ -6,6 +6,7 @@
 
     cp config/database.yml.example config/database.yml
     bundle install
+    bundle exec rake db:create
     bundle exec rake setup_development
     rails server
 
