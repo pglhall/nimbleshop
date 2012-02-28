@@ -31,6 +31,28 @@ describe Product do
     end
   end
 
+  describe "status based scopes" do
+    before do
+      @product1 = create(:product, status: 'active')
+      @product2 = create(:product, status: 'hidden')
+      @product3 = create(:product, status: 'hidden')
+      @product4 = create(:product)
+      @product5 = create(:product, status: 'sold_out')
+    end
+
+    it { 
+      Product.active.must_have_same_elements [ @product1, @product4 ] 
+    }
+
+    it { 
+      Product.hidden.must_have_same_elements [ @product2, @product3 ] 
+    }
+
+    it { 
+      Product.sold_out.must_have_same_elements  [ @product5 ] 
+    }
+  end
+
   describe "#find_or_build_for_field" do
     before do
       @product = create(:product)
