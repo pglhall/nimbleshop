@@ -1,9 +1,13 @@
 class PagesController < ApplicationController
 
-  theme :theme_resolver, only: [:show]
+  theme :theme_resolver
 
-  def show
-    @page = Page.find_by_permalink!(params[:id])
+  def about_us
+    render
+  end
+
+  def contact_us
+    render
   end
 
 end

@@ -1,43 +1,25 @@
-<% if false && @no_top_bar %>
-  <div class="topbar">
-    <div class="fill">
-      <div class="container">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <%= link_to @shop.name, root_path, class: 'brand', id: 'site-name' %>
+
+      <div class="nav-collapse">
         <ul class="nav">
-          <li class="active"><%= link_to 'Home', root_path %></li>
-          <li><a href="">About</a></li>
-          <li><a href="">Contact</a></li>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'About us', about_us_path %></li>
+          <li><%= link_to 'Contact us', contact_us_path %></li>
         </ul>
-        <ul class="nav secondary-nav">
-          <li>
-          </li>
-        </ul>
-      </div>
+        <p class='navbar-text pull-right'>
+          <%= link_to "View cart ( #{items_count_in_cart} )", '/cart' %>
+        </p>
+      </div><!--/.nav-collapse -->
     </div>
   </div>
-<% end %>
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-
-          <%= link_to @shop.name, root_path, class: 'brand', id: 'site-name' %>
-
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><%= link_to 'Home', root_path %></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-            <p class='navbar-text pull-right'>
-              <%= link_to "View cart ( #{items_count_in_cart} )", '/cart' %>
-            </p>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+</div>
 

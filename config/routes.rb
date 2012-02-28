@@ -2,6 +2,9 @@ Nimbleshop::Application.routes.draw do
 
   themes_for_rails
 
+  get "/pages/about-us",           to: "pages#about_us",   as: :about_us
+  get "/pages/contact-us",         to: "pages#contact_us", as: :contact_us
+
   resources :payment_processors
   resources :product_groups
   resources :pages,     only: :show

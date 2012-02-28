@@ -23,7 +23,7 @@
           <tr class='shipping_cost'>
             <td colspan='4'>&nbsp;</td>
             <td> Shipping </td>
-            <td><strong><%= number_to_currency(@cart.shipping_cost) %></strong></td>
+            <td><strong><%= number_to_currency(current_order.shipping_cost) %></strong></td>
           </tr>
         <% end %>
 
@@ -38,12 +38,12 @@
         <tr>
           <td colspan='3'>&nbsp;</td>
           <td>
-              <%= submit_tag 'Update', class: 'btn' %>
-              <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
+            <%= submit_tag 'Update', class: 'btn' %>
+            <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
           </td>
           <td> Total: </td>
           <td style='font-size:120%;'>
-            <strong><%= number_to_currency(@cart.total_amount) %></strong>
+            <strong><%= number_to_currency(current_order.total_amount) %></strong>
           </td>
         </tr>
 

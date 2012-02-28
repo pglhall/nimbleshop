@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
   def set_shop
     @product_groups = ProductGroup.all
     @main_nav_link_group = LinkGroup.last
-    @cart = current_order
     @shop_by_category_link_group = LinkGroup.find_by_permalink('shop-by-category')
     @shop_by_price_link_group = LinkGroup.find_by_permalink('shop-by-price')
   end

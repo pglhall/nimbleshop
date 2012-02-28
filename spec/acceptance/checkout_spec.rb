@@ -50,8 +50,8 @@ describe "checkout integration" do
     fill_in 'order_billing_address_attributes_address2', with: '69'
     fill_in 'order_billing_address_attributes_city', with: 'New York'
     fill_in 'order_billing_address_attributes_zipcode', with: '544355'
-    select 'United States', from: 'order_billing_address_attributes_country_code'
-    select   'Alabama', from: 'order_billing_address_attributes_state_code'
+    select  'United States',  from: 'order_billing_address_attributes_country_code'
+    select  'Alabama',        from: 'order_billing_address_attributes_state_code'
 
     click_button 'Submit'
 
