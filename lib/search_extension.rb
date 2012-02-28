@@ -1,8 +1,9 @@
 module SearchExtension
   def to_search_sql
     set_indexes
-    search_proxy = merge_joins.where(merge_where)
+    search_proxy = filter_on_active(merge_joins.where(merge_where))
     search_proxy = search_proxy.project(Arel.sql("products.*"))
+
     search_proxy.to_sql
   end
 
@@ -22,5 +23,9 @@ module SearchExtension
 
   def merge_where
     inject(nil) { | p, condition | condition.where(p) }
+  end
+
+  def filter_on_active(search)
+    search.where(Product.arel_table[:status].eq('active'))
   end
 end

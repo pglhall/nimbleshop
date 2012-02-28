@@ -30,10 +30,4 @@ class ProductsController < ApplicationController
 
     respond_with @product
   end
-
-  private
-
-    def no_page_title
-      @do_not_use_page_title = true
-    end
 end
