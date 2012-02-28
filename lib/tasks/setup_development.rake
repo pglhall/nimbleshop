@@ -1,17 +1,7 @@
 desc "sets up local development environment"
 task :setup_development => :environment do
-  if Settings.using_heroku
-    #
-  else
-    Rake::Task["db:drop"].invoke
-    Rake::Task["db:create"].invoke
-    Rake::Task["db:migrate"].invoke
-  end
 
-  ActiveRecord::Base.connection.tables.collect{|t| t.classify.constantize rescue nil }.compact.each do |klass|
-    klass.delete_all
-  end
-
+  Rake::Task["db:migrate"].invoke
   Rake::Task["db:seed"].invoke
 
   sampledata = Sampledata.new
