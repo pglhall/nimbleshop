@@ -1,11 +1,4 @@
-if Rails.env.development?
-
-  CarrierWave.configure do |config|
-    config.storage = :file
-    config.enable_processing = true
-  end
-
-elsif Rails.env.test?
+if Rails.env.development? || Rails.env.test?
 
   CarrierWave.configure do |config|
     config.storage = :file
