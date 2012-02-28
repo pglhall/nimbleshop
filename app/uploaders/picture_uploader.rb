@@ -30,43 +30,53 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   manipulation_type = :resize_to_limit
 
+  sizes = { tiny:        [16, 16],
+            tiny_plus:   [32, 32],
+            small:       [50, 50],
+            small_plus:  [100, 100],
+            medium:      [160, 160],
+            medium_plus: [240, 240],
+            large:       [480, 480],
+            large_plus:  [600, 600]
+          }
+
   version :tiny do
-    process manipulation_type => [16, 16]
+    process manipulation_type => sizes.fetch(:tiny)
     process :store_meta
   end
 
   version :tiny_plus do
-    process manipulation_type => [32, 32]
+    process manipulation_type => sizes.fetch(:tiny_plus)
     process :store_meta
   end
 
   version :small do
-    process manipulation_type => [50, 50]
+    process manipulation_type => sizes.fetch(:small)
     process :store_meta
   end
 
   version :small_plus do
-    process manipulation_type => [100, 100]
+    process manipulation_type => sizes.fetch(:small_plus)
     process :store_meta
   end
 
   version :medium do
-    process manipulation_type => [160, 160]
+    process manipulation_type => sizes.fetch(:medium)
     process :store_meta
   end
 
   version :medium_plus do
-    process manipulation_type => [240, 240]
+    process manipulation_type => sizes.fetch(:medium_plus)
     process :store_meta
   end
 
   version :large do
-    process manipulation_type => [480, 480]
+    process manipulation_type => sizes.fetch(:large)
     process :store_meta
   end
 
   version :large_plus do
-    process manipulation_type => [600, 600]
+    process manipulation_type => sizes.fetch(:large_plus)
     process :store_meta
   end
 
