@@ -12,6 +12,7 @@
 //= require mustache
 //= require nested_form
 //= require jquery-form
+//= require autoresize
 //
 //= require highlight_error_field
 //= require enable_payment_method
@@ -22,3 +23,8 @@
 //= require enable_disable_price_variant
 //= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
+
+
+$(function(){
+  $('.autoresize').autoResize({maxHeight: 300});
+});
