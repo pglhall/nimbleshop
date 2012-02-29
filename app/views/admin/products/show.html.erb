@@ -1,9 +1,20 @@
-<div class='page-header'>
-  <h1>
+
+<div>
+  <h1 class='ns-page-title'>
     <%= @product.name %>
     <span class="label label-warning" style='font-size:90%;'> <%= number_to_currency @product.price %> </span>
   </h1>
+
+  <%= link_to(edit_admin_product_path(@product), class: 'btn btn-info new-action', id: 'edit_product') do %>
+    <i class="icon-plus"></i> Edit product
+  <% end %>
+  <%= link_to 'Delete', [:admin, @product], class: 'btn btn-info new-action', confirm: 'Are you sure?', method: 'delete', style: 'margin-right: 5px;' %>
+
+  <div class='clear'></div>
 </div>
+
+<br />
+
 
 <%= simple_format @product.description %>
 
@@ -43,7 +54,3 @@
 
 <br />
 
-<p>
-  <%= link_to 'Edit', edit_admin_product_path(@product), class: 'btn small primary' %>
-  <%= link_to 'Delete', [:admin, @product], class: 'btn small', confirm: 'Are you sure?', method: 'delete' %>
-</p>
