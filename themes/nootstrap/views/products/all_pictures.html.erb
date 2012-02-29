@@ -8,11 +8,10 @@
 <br />
 
 <div class='row'>
-  <div class='span1'>&nbsp;</div>
-  <div class='span11'>
+  <div class='span8'>
     <ul class="thumbnails">
       <% @product.pictures.each do |picture| %>
-        <li> <%= image_tag picture.picture_url(:large_plus), alt: @product.name %> </li>
+        <li> <%= image_tag picture.picture_url(:large_plus), alt: @product.name, class: 'thumbnail' %> </li>
       <% end %>
     </ul>
   </div>
