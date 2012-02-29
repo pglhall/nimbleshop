@@ -28,7 +28,9 @@ class PictureUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  manipulation_type = :resize_to_limit
+  #manipulation_type = :resize_to_limit
+  #manipulation_type = :resize_to_fit
+  manipulation_type = :resize_to_fill
 
   sizes = { tiny:        [16, 16],
             tiny_plus:   [32, 32],
