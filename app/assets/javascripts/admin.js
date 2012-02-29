@@ -9,15 +9,15 @@
 //= require jquery-1.7.1
 //= require jquery-ujs
 //= require bootstrap-collapse
+//= require mustache
+//= require nested_form
+//= require jquery-form
 //
 //= require highlight_error_field
-//= require nested_form
 //= require enable_payment_method
 //= require focus
-//= require mustache
 //= require product-group-condition
 //= require shipit
-//= require jquery-form
 //= require ajaxify-price-variant-form
 //= require enable_disable_price_variant
 //= require ajaxify-link-groups
