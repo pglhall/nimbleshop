@@ -2,9 +2,9 @@ common:
   splitable:
     api_secret: AGT568GKLRW39S
     expires_in: 24
-    submission_url: http://lvh.me:3000
+    submission_url: https://www.splitable.com
     logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png
-    api_key: 42398cc9ac420bf4
+    api_key: edb5fd7b39652986
     name: Splitable
     description: <p> Splitable helps split the cost of product with friends and family.  </p> <p> <a href="http://splitable.com"> more information </a> </p>
 

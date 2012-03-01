@@ -10,6 +10,7 @@ class Sampledata
                    intercept_email: 'johnnie.walker@nimbleshop.com',
                    from_email:      'support@nimbleshop.com',
                    gateway:         'AuthorizeNet',
+                   tax_percentage: 1.23,
                    google_analytics_tracking_id: ENV['GOOGLE_ANALYTICS_TRACKING_ID'],
                    facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
   end
