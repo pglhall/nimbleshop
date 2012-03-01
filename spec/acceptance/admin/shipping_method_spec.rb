@@ -24,6 +24,22 @@ describe "Shipping Method integration" do
     end
   end
 
+  describe "edit shipping method to country" do
+    let(:shipping_zone)   { create_shipping_zone("US") }
+
+    let(:shipping_method) do
+      create(:country_shipping_method, shipping_zone: shipping_zone)
+    end
+
+    it {
+      visit edit_admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method)
+      fill_in "shipping_method_upper_price_limit", with: "40"
+      click_button('Submit')
+
+      page.must_have_content('Successfuly updated')
+    }
+  end
+
   describe "disbale state shipping zone" do
     let(:shipping_zone) { create_shipping_zone("US") }
     let(:state_zone) { shipping_zone.regional_shipping_zones[0] }
@@ -59,6 +75,5 @@ describe "Shipping Method integration" do
      find("a[@rel='enable-#{state_zone.id} nofollow']").click
     end
     after(:each) { Capybara.current_driver = :rack_test }
-
   end
 end

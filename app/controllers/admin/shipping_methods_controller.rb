@@ -36,6 +36,15 @@ class Admin::ShippingMethodsController < AdminController
     end
   end
 
+  def update
+    @shipping_method = @shipping_zone.shipping_methods.find(params[:id])
+    if @shipping_method.update_attributes(params[:shipping_method])
+      redirect_to [:edit, :admin, @shipping_zone, @shipping_method], notice: t(:successfully_updated)
+    else
+      render action: :new
+    end
+  end
+
   def destroy
     if @shipping_method.update_attributes(active: false)
       redirect_to admin_shipping_zones_path, notice: t(:successfully_deleted)
