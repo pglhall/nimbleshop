@@ -29,6 +29,11 @@ class Product < ActiveRecord::Base
 
   scope :with_prictures, includes: 'pictures'
 
+  scope :active,    where(status: 'active') 
+  scope :hidden,    where(status: 'hidden') 
+  scope :sold_out,  where(status: 'sold_out') 
+
+
   validates_presence_of :name, :description, :price
   validates_numericality_of :price
 

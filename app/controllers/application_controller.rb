@@ -37,4 +37,9 @@ class ApplicationController < ActionController::Base
     @shop ||= Shop.first
   end
 
+  private
+
+    def no_page_title
+      @do_not_use_page_title = true
+    end
 end
