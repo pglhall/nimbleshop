@@ -62,10 +62,6 @@ class Product < ActiveRecord::Base
     pictures.first
   end
 
-  # this is neeed to make attach_picture work
-  class FilelessIO < StringIO
-    attr_accessor :original_filename
-  end
   # Input is full path to the picture.
   #
   # Rails.root.join('db', 'original_pictures', filename )

@@ -2,10 +2,7 @@ module ApplicationHelper
 
   def product_main_picture(product, version)
     pic = product.picture
-    image_tag(pic.picture_url(:medium_plus),
-                                  alt: product.name,
-                                  height: pic.medium_plus_height,
-                                  width: pic.medium_plus_width)
+    image_tag(pic.picture_url(:medium_plus), alt: product.name)
   end
 
   def items_count_in_cart
