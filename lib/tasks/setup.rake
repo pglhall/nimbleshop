@@ -1,7 +1,9 @@
-desc "sets up local development environment"
-task :setup_development => :environment do
+desc "sets up environment"
+task :setup => :environment do
 
-  Rake::Task["db:migrate"].invoke
+ raise "this task should not be run in production" if Rails.env.production?
+
+  Rake::Task["db:reset"].invoke
   Rake::Task["db:seed"].invoke
 
   sampledata = Sampledata.new
