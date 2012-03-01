@@ -45,6 +45,9 @@ module Nimbleshop
     # do not compress the assets for the time being
     config.assets.compress = false
 
+    # do not use application for precompiling
+    config.assets.initialize_on_precompile = false
+
     config.assets.precompile += ['admin.css', 'admin.js']
     config.assets.precompile += ['admin_data.css', 'admin_data.js']
 
