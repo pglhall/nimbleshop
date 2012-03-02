@@ -1,9 +1,7 @@
 <div class='span2'>
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-		<% [@shop_by_category_link_group, @shop_by_price_link_group].compact.each do | group | %>
-			<%= render "products/link_group",  link_group: group %>
-		<% end %>
+			<%= render  @link_groups %>
     </ul>
   </div><!--/.well -->
 </div><!-- span -->
