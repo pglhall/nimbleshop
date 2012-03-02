@@ -1,0 +1,6 @@
+<li class="nav-header">
+	<%= link_group.name %>
+</li>
+<% link_group.navigations.each do |nav| %>
+	<li> <%= link_to nav.navigeable.name, nav.navigeable %> </li>
+<% end %>

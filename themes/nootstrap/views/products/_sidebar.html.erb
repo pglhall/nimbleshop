@@ -1,19 +1,9 @@
 <div class='span2'>
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">
-        <%= @shop_by_category_link_group.name %>
-      </li>
-      <% @shop_by_category_link_group.navigations.each do |nav| %>
-        <li> <%= link_to nav.navigeable.name, nav.navigeable %> </li>
-      <% end %>
-
-      <li class="nav-header">
-        <%= @shop_by_price_link_group.name %>
-      </li>
-      <% @shop_by_price_link_group.navigations.each do |nav| %>
-        <li> <%= link_to nav.navigeable.name, nav.navigeable %> </li>
-      <% end %>
+		<% [@shop_by_category_link_group, @shop_by_price_link_group].compact.each do | group | %>
+			<%= render "products/link_group",  link_group: group %>
+		<% end %>
     </ul>
   </div><!--/.well -->
 </div><!-- span -->
