@@ -8,11 +8,11 @@
 //
 //= require jquery-1.7.1
 //= require jquery-ujs
-//= require bootstrap-collapse
 //= require mustache
 //= require nested_form
 //= require jquery-form
 //= require autoresize
+//= require twitter/bootstrap
 //
 //= require highlight_error_field
 //= require enable_payment_method

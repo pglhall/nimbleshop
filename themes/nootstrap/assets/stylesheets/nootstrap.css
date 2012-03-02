@@ -4,7 +4,6 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require twitter_bootstrap
- *= require twitter_bootstrap_responsive
+ *= require themed_bootstrap_and_overrides
  *= require custom
 */
