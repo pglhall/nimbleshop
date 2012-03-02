@@ -1,6 +1,6 @@
 common:
   splitable:
-    api_secret: AGT568GKLRW39S
+    api_secret: edb5fd7b39652986
     expires_in: 24
     submission_url: https://www.splitable.com
     logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png
