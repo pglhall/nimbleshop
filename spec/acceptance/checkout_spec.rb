@@ -11,21 +11,48 @@ describe "checkout integration" do
     create(:payment_method, enabled: true)
   end
 
+  describe "when current order expired" do
+    before do
+      visit root_path
+      add_item_to_cart
+      click_button 'Checkout'
+    end
+
+    it "must redirect to home page" do
+      Order.last.destroy
+      visit current_path
+      current_path.must_equal("/")
+    end
+
+    it "must redirect from shipping method page to home page" do
+      fill_in 'Your email address', with: 'test@example.com'
+      fill_good_address
+      click_button 'Submit'
+      Order.last.destroy
+      visit current_path
+      current_path.must_equal("/")
+    end
+  end
+
+  def add_item_to_cart(item = 'Candy Colours Bracelet Set')
+    click_link item
+    click_button 'Add to cart'
+  end
+
   let(:current_order) { Order.last }
+  
 
   it "should be ok for good path" do
     visit root_path
-    click_link 'Candy Colours Bracelet Set'
-
-    click_button 'Add to cart'
+    add_item_to_cart('Candy Colours Bracelet Set')
     page.has_content?('Your cart').must_equal true
     page.has_content?('1 Item').must_equal true
     page.has_content?('$25').must_equal true
     page.has_no_css?('table tr.shipping_cost')
 
     visit root_path
-    click_link 'Layered Coral Necklace'
-    click_button 'Add to cart'
+
+    add_item_to_cart 'Layered Coral Necklace'
 
     page.has_content?('2 Items').must_equal true
     page.has_content?('$39').must_equal true
