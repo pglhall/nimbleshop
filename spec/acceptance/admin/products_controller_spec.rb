@@ -107,11 +107,11 @@ describe "admin integration" do
 
   describe "show product" do
     it {
-      create(:product, name: 'test name', description: 'the description', price: 46.99)
+      create(:product, name: 'ipad', description: 'the description', price: 46.99)
       visit admin_products_path
-      click_link 'Show'
+      click_link 'ipad'
 
-      page.has_content?("test name $46.99").must_equal true
+      page.has_content?("ipad $46.99").must_equal true
       page.has_content?("the description").must_equal true
     }
   end
