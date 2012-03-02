@@ -12,10 +12,22 @@ describe "checkout integration" do
   end
 
   describe "when current order expired" do
-    it "must redirect to home page" do
+    before do
       visit root_path
       add_item_to_cart
       click_button 'Checkout'
+    end
+
+    it "must redirect to home page" do
+      Order.last.destroy
+      visit current_path
+      current_path.must_equal("/")
+    end
+
+    it "must redirect from shipping method page to home page" do
+      fill_in 'Your email address', with: 'test@example.com'
+      fill_good_address
+      click_button 'Submit'
       Order.last.destroy
       visit current_path
       current_path.must_equal("/")

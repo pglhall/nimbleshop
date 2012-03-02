@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
-
-  before_filter :set_shipping_method, only: [:edit_shipping_method, :update_shipping_method]
-  before_filter :verify_current_order, only: [:edit_shipping_method, :update_shipping_method, :edit, :update]
+  before_filter :verify_current_order,  only: [:edit_shipping_method, :update_shipping_method, :edit, :update]
+  before_filter :set_shipping_method,   only: [:edit_shipping_method, :update_shipping_method]
 
   theme :theme_resolver
 
@@ -47,13 +46,14 @@ class OrdersController < ApplicationController
 
   private
 
-  def set_shipping_method
-    @shipping_methods = Array.wrap(current_order.available_shipping_methods)
-  end
 
   def verify_current_order
     unless current_order
       redirect_to root_path
     end
+  end
+
+  def set_shipping_method
+    @shipping_methods = Array.wrap(current_order.available_shipping_methods)
   end
 end
