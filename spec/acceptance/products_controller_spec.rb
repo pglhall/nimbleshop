@@ -4,7 +4,13 @@ describe "products integration" do
 
   it "index page" do
     visit root_path
-    page.has_content?('Shop by category').must_equal true
+    page.must_have_content('Shop by category')
+  end
+
+  it "index page when default link group deleted" do
+    LinkGroup.find_by_permalink('shop-by-price').destroy
+    visit root_path
+    page.must_have_content('Shop by category')
   end
 
   describe "show page" do
