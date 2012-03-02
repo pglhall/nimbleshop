@@ -13,3 +13,4 @@ public/uploads
 .tddium
 db/test.sqlite3-journal
 coverage/
+tags
