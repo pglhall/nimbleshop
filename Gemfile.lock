@@ -99,6 +99,7 @@ GEM
     airbrake (3.0.9)
       activesupport
       builder
+    ansi (1.4.2)
     archive-tar-minitar (0.5.2)
     arel (3.0.0)
     braintree (2.13.4)
@@ -277,6 +278,8 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    turn (0.9.3)
+      ansi
     twitter-bootstrap-rails (2.0.3)
       actionpack (>= 3.1)
       less-rails (~> 2.1.6)
@@ -332,6 +335,7 @@ DEPENDENCIES
   state_machine
   themes_for_rails!
   thin
+  turn
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   will_paginate

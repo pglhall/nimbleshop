@@ -21,6 +21,7 @@ require 'rails/test_help'
 require "minitest/rails"
 require 'minitest-rails-shoulda'
 require "mocha"
+require "active_support/testing/setup_and_teardown"
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 
@@ -64,3 +65,27 @@ module RegionalShippingMethodTestHelper
     create(:country_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999).regions[0]
   end
 end
+
+
+class IntegerationTest < MiniTest::Spec
+  include Capybara::DSL
+  include Rails.application.routes.url_helpers
+  register_spec_type /(controller|integration)$/i, self
+end
+
+
+require "active_support/testing/setup_and_teardown"
+
+class IntegrationTest < MiniTest::Spec
+  include Rails.application.routes.url_helpers
+  include Capybara::DSL
+  register_spec_type(/integration$/, self)
+end
+
+class HelperTest < MiniTest::Spec
+  include ActiveSupport::Testing::SetupAndTeardown
+  include ActionView::TestCase::Behavior
+  register_spec_type(/Helper$/, self)
+end
+
+Turn.config.format = :outline

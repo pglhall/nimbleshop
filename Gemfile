@@ -83,6 +83,7 @@ end
 
 
 group :test do
+  gem 'turn'
   gem 'simplecov', :require => false
   gem 'capybara'
   gem "capybara_minitest_spec"
