@@ -4,7 +4,7 @@
       <tr>
         <th colspan='3'>
           <h3><%= link_group.name %></h3>
-          <%= link_to 'Add new link', '' %>
+          <%= link_to 'Add new link', new_admin_link_group_navigation_path(link_group) %>
           |
           <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
           |
@@ -22,12 +22,12 @@
     <tbody>
       <% link_group.navigations.each do |nav| %>
         <tr>
-          <td> <%= nav.navigeable.name %> </td>
+          <td> <%= nav.product_group.name %> </td>
           <td>
           </td>
           <td>
             <%= link_to t(:delete),
-                    [:admin, link_group],
+                    [:admin, link_group, nav],
                     confirm: t(:delete_confirmation_for_link_group),
                     method: 'delete' %>
           </td>

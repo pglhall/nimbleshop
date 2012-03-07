@@ -105,11 +105,10 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   end
 
   create_table "navigations", :force => true do |t|
-    t.integer  "link_group_id",   :null => false
-    t.integer  "navigeable_id"
-    t.string   "navigeable_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "link_group_id",    :null => false
+    t.integer  "product_group_id", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "orders", :force => true do |t|

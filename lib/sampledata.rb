@@ -70,9 +70,9 @@ class Sampledata
     pg_gt_100.product_group_conditions.create(name: 'price', operator: 'gt', value: 100)
 
     link_group = LinkGroup.create!(name: 'Shop by price')
-    Navigation.create!(link_group: link_group, navigeable: pg_lt_50)
-    Navigation.create!(link_group: link_group, navigeable: pg_between_50_100)
-    Navigation.create!(link_group: link_group, navigeable: pg_gt_100)
+    Navigation.create!(link_group: link_group, product_group: pg_lt_50)
+    Navigation.create!(link_group: link_group, product_group: pg_between_50_100)
+    Navigation.create!(link_group: link_group, product_group: pg_gt_100)
   end
 
   def load_category_information
@@ -98,10 +98,10 @@ class Sampledata
     pg_fashion.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'fashion')
 
     link_group = LinkGroup.create!(name: 'Shop by category')
-    link_group.navigations.create(navigeable: pg_rug)
-    link_group.navigations.create(navigeable: pg_art)
-    link_group.navigations.create(navigeable: pg_food)
-    link_group.navigations.create(navigeable: pg_fashion)
+    link_group.navigations.create(product_group: pg_rug)
+    link_group.navigations.create(product_group: pg_art)
+    link_group.navigations.create(product_group: pg_food)
+    link_group.navigations.create(product_group: pg_fashion)
   end
 
   def load_shipping_methods

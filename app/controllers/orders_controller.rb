@@ -2,10 +2,14 @@ class OrdersController < ApplicationController
   before_filter :verify_current_order,  only: [:edit_shipping_method, :update_shipping_method, :edit, :update]
   before_filter :set_shipping_method,   only: [:edit_shipping_method, :update_shipping_method]
 
+  respond_to :html
+
   theme :theme_resolver
 
   def edit_shipping_method
     @page_title = 'Pick shipping method'
+
+    respond_with(current_order)
   end
 
   def update_shipping_method
@@ -19,9 +23,11 @@ class OrdersController < ApplicationController
   end
 
   def paid
-    @page_title = 'Purchase is complete'
-    @order = Order.find_by_number!(params[:id])
+    @page_title     = 'Purchase is complete'
+    @order          = Order.find_by_number!(params[:id])
     @payment_method = PaymentMethod.find_by_permalink!('authorize-net')
+
+    respond_with(@order)
   end
 
   def edit
@@ -32,6 +38,8 @@ class OrdersController < ApplicationController
     #
     # current_order.shippable_countries
     @countries = ShippingMethod.available_for_countries(current_order.price)
+
+    respond_with(current_order)
   end
 
   def update

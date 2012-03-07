@@ -8,17 +8,17 @@ class Order < ActiveRecord::Base
   attr_accessor :validate_email
   inquire_method :shipping_status, :payment_status, :status
 
-  has_many    :shipments
-  belongs_to  :shipping_method
-  has_many    :line_items
-  has_many    :products, through: :line_items
   belongs_to  :user
-  has_many    :creditcard_transactions
-
   belongs_to  :payment_method
+  belongs_to  :shipping_method
 
-  has_one     :shipping_address
-  has_one     :billing_address
+  has_many    :shipments
+  has_many    :line_items,              dependent: :destroy
+  has_many    :products,                through: :line_items
+  has_many    :creditcard_transactions, dependent: :destroy
+
+  has_one     :shipping_address,        dependent: :destroy
+  has_one     :billing_address,         dependent: :destroy
 
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true

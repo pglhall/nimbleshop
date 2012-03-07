@@ -1,14 +1,12 @@
 class CountryShippingZone < ShippingZone
 
-  has_many  :regional_shipping_zones
+  has_many      :regional_shipping_zones, dependent: :destroy
 
-  validates_presence_of :country_code
+  validates     :country_code,  presence: true
+  validate      :code_validity
 
-  validate :code_validity
-
-  before_save :set_name
-
-  after_create :create_regions
+  before_save   :set_name,      if: :country_code_changed?
+  after_create  :create_regions
 
   def country
     Carmen::Country.coded(country_code)
@@ -23,8 +21,10 @@ class CountryShippingZone < ShippingZone
   end
 
   def create_regions
-    country.subregions.each do | r |
-      regional_shipping_zones.create(state_code: r.code, country_code: country_code)
+    country.subregions.each do | region |
+      regional_shipping_zones.create({
+        state_code: region.code, country_code: country_code 
+      })
     end
   end
 

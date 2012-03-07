@@ -1,8 +1,8 @@
 class CustomField < ActiveRecord::Base
 
-  has_many :custom_field_answers
+  has_many :custom_field_answers, dependent: :destroy
 
   validates :field_type, presence: true, inclusion: { :in => %w(text number date) }
 
-  validates_presence_of :name
+  validates :name, presence: true
 end

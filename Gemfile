@@ -83,9 +83,11 @@ end
 
 
 group :test do
+  gem 'turn'
   gem 'simplecov', :require => false
   gem 'capybara'
   gem "capybara_minitest_spec"
+  gem 'faker'
 
   gem 'minitest', '~> 2.10.1'
   gem "minitest-rails-shoulda", git: 'git://github.com/rawongithub/minitest-rails-shoulda.git'

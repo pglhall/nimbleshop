@@ -1,5 +1,24 @@
+<div class='well'>
+  <%= form_for([:admin, @link_group, @navigation], html: {class: 'form-horizontal'}) do |f| %>
+
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :product_group_id, 'Product Group', class: 'control-label' %>
+        <div class="controls">
+          <%= f.collection_select :product_group_id, ProductGroup.all, :id, :name %>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= f.submit('Add', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to 'Cancel', admin_custom_fields_path, class: 'btn' %>
+    </div>
+
+  <% end %>
 <div>
-  <h1><%= t(:add_new_link) %></h1>
-</div>
+
+
 
 <%= render 'form' %>
