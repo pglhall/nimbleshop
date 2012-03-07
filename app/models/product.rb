@@ -1,31 +1,31 @@
 class Product < ActiveRecord::Base
 
-  alias_attribute :title, :name
-
   include BuildPermalink
+
+  alias_attribute :title, :name
 
   validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
 
-  has_many :variations, order: "variation_type asc"
-
-  has_many :variants
-
-  accepts_nested_attributes_for :variants, allow_destroy: true
+  has_many :variations, dependent: :destroy, order: "variation_type asc"
+  has_many :variants, dependent: :destroy
 
   has_many :pictures
 
-  accepts_nested_attributes_for :pictures, allow_destroy: true
-
-  after_initialize :initialize_status
-
-  has_many :custom_field_answers do
+  has_many :custom_field_answers, dependent: :destroy do
     def for(custom_field_name)
       # TODO this one is causing one extra query. Look into removing it
       custom_field = CustomField.find_by_name(custom_field_name)
       where(['custom_field_answers.custom_field_id = ?', custom_field.id]).limit(1).try(:first)
     end
   end
+
+  accepts_nested_attributes_for :variants, allow_destroy: true
+
+  accepts_nested_attributes_for :pictures, allow_destroy: true
+
   accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
+
+  after_initialize :initialize_status
 
   scope :with_prictures, includes: 'pictures'
 

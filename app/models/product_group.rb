@@ -1,13 +1,16 @@
 class ProductGroup < ActiveRecord::Base
 
-  has_many :product_group_conditions, extend: SearchExtension
-
-  accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
-
   include BuildPermalink
 
-
   validates :name, presence: true
+
+  has_many :product_group_conditions, dependent: :destroy, extend: SearchExtension
+
+  has_many :navigations, dependent:  :destroy
+
+  has_many :link_groups, through:    :navigations
+
+  accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
 
   # determines if the given product exists in the product group
   def exists?(product)
@@ -49,7 +52,6 @@ class ProductGroup < ActiveRecord::Base
   def products
     product_group_conditions.search
   end
-
 
   def summarize
     product_group_conditions.map(&:summary).join('  and ')

@@ -88,9 +88,11 @@ Nimbleshop::Application.routes.draw do
     end
     resources :product_groups
     resources :custom_fields
+
     resources :link_groups do
-      resources :navigations
+      resources :navigations, only: [:create, :new, :destroy] 
     end
+
     resource  :shop, only: [:update, :edit]
   end
 

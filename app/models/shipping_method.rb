@@ -44,7 +44,7 @@ class ShippingMethod < ActiveRecord::Base
   before_save   :set_regions_inactive, if: :country_level?
 
   belongs_to  :parent,  class_name: 'ShippingMethod', foreign_key: 'parent_id'
-  has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id'
+  has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id', dependent: :destroy
 
   # return shipping methods available to the given address for the given amount
   def self.available_for(amount, address)
