@@ -18,7 +18,7 @@ class Mailer < ActionMailer::Base
 
     # TODO ideally it should be the other way round gut creating creditcard_transaction record
     # is a bit difficult in test. should be fixed soon
-    @payment_date = @order.created_at.to_s(:long) || @order.creditcard_transactions.first.created_at.to_s(:long)
+    @payment_date = @order.created_at.to_s(:long) || @order.transactions.first.created_at.to_s(:long)
 
     mail_options = {:to => @order.email, :subject => subject}
     mail(mail_options)

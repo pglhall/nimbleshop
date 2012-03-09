@@ -1,9 +1,9 @@
 <tr>
   <td class="pic">
-    <%= image_tag(line_item.picture_small, alt: line_item.title) %>
+    <%= image_tag(line_item.picture_small, alt: line_item.product_name) %>
   </td>
   <td>
-    <strong><%= line_item.title %></strong>
+    <strong><%= line_item.product_name %></strong>
   </td>
   <td><%= number_to_currency(line_item.product_price) %></td>
   <td> <%=line_item.quantity%> </td>

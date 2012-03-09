@@ -22,6 +22,9 @@ require "minitest/rails"
 require 'minitest-rails-shoulda'
 require "mocha"
 require "active_support/testing/setup_and_teardown"
+require 'vcr'
+
+
 # Require ruby files in support dir.
 Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 
@@ -30,26 +33,11 @@ DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
   include Factory::Syntax::Methods
-
+  include ActiveMerchant::Billing
   # Add methods to be used by all specs here...
-  before :each do
-    DatabaseCleaner.clean
-
-    create(:shop)
-    create(:link_group, name: "Shop by category", permalink: 'shop-by-category')
-    create(:link_group, name: "Shop by price", permalink: 'shop-by-price')
-    PaymentMethod.load_default!
-  end
+  include PrepareSpec
 end
 
-def create_authorizenet_payment_method
-  unless PaymentMethod.find_by_permalink('authorize-net')
-    payment_method = PaymentMethod::AuthorizeNet.create!(name: 'Authorize.net')
-    payment_method.authorize_net_login_id = '56yBAar72'
-    payment_method.authorize_net_transaction_key = '9r3pbH5bnKH29f7d'
-    payment_method.save!
-  end
-end
 
 def dbify_sql(sql)
   case ActiveRecord::Base.connection.adapter_name
@@ -73,19 +61,14 @@ class IntegerationTest < MiniTest::Spec
   register_spec_type /(controller|integration)$/i, self
 end
 
-
-require "active_support/testing/setup_and_teardown"
-
-class IntegrationTest < MiniTest::Spec
-  include Rails.application.routes.url_helpers
-  include Capybara::DSL
-  register_spec_type(/integration$/, self)
-end
-
 class HelperTest < MiniTest::Spec
   include ActiveSupport::Testing::SetupAndTeardown
   include ActionView::TestCase::Behavior
   register_spec_type(/Helper$/, self)
 end
 
-Turn.config.format = :outline
+VCR.configure do |c|
+  c.ignore_hosts '127.0.0.1', 'localhost'
+  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.hook_into :webmock # or :fakeweb
+end

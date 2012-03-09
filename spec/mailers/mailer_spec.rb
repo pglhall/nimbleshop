@@ -3,7 +3,7 @@ require "spec_helper"
 describe Mailer do
 
   before do
-    @order = order_with_line_items
+    @order = create(:order_with_line_items)
     creditcard_transaction = build(:creditcard_transaction, order: @order)
     creditcard_transaction.save(validate: false)
   end

@@ -1,0 +1,38 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://test.authorize.net/gateway/transact.dll
+    body: 
+      encoding: US-ASCII
+      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=AUTH_ONLY&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_invoice_num=&x_description=&x_card_num=4007000000027&x_card_code=123&x_exp_date=0313&x_first_name=Noemi&x_last_name=Kutch&x_amount=12.34&x_test_request=FALSE
+    headers: 
+      Content-Type: 
+      - application/x-www-form-urlencoded
+      Accept: 
+      - "*/*"
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Connection: 
+      - close
+      Date: 
+      - Thu, 15 Mar 2012 21:33:51 GMT
+      Server: 
+      - Microsoft-IIS/6.0
+      X-Powered-By: 
+      - ASP.NET
+      Content-Type: 
+      - text/html
+      Content-Length: 
+      - "330"
+    body: 
+      encoding: US-ASCII
+      string: $1$,$1$,$1$,$This transaction has been approved.$,$A9MXK0$,$Y$,$2169881780$,$$,$$,$12.34$,$CC$,$auth_only$,$$,$Noemi$,$Kutch$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$918A57EDEBA4459EA243C4506714A87D$,$P$,$2$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
+    http_version: 
+  recorded_at: Thu, 15 Mar 2012 21:33:51 GMT
+recorded_with: VCR 2.0.0

@@ -30,6 +30,9 @@ test:
   bare_url_with_port: localhost:3000
   using_heroku: false
   cookie_domain: nimbleshop.net
+  authorize_net:
+    login_id: 56yBAar72
+    transaction_key: 9r3pbH5bnKH29f7d
 
 staging:
   s3:

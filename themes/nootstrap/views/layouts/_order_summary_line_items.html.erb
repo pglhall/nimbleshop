@@ -3,7 +3,7 @@
     <tr>
       <td>
         <div class='lhs'>
-          <%= truncate(line_item.title, length: 75) %>
+          <%= truncate(line_item.product_name, length: 75) %>
           <p>
             <i><%= display_variant_info(line_item) %> </i>
           </p>
@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class='rhs'>
-          <%= image_tag line_item.picture_small, alt: line_item.title %>
+          <%= image_tag line_item.picture_small, alt: line_item.product_name %>
         </div>
         <div class='clear'></div>
     </tr>
