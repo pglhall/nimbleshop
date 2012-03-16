@@ -28,7 +28,7 @@
           <td>
             <%= link_to t(:delete),
                     [:admin, link_group, nav],
-                    confirm: t(:delete_confirmation_for_link_group),
+                    confirm: t(:delete_confirmation_for_link_group), class: 'delete', title: 'Delete',
                     method: 'delete' %>
           </td>
         </tr>

@@ -62,20 +62,22 @@
 
       <div class="control-group">
         <% unless @product.new_record? %>
-          <div class='row'>
-            <div class='span3'>Images</div>
-            <div class='span7'>
-              <ul class="media-grid">
+            <label class="control-label">Images</label>
+            <div class='controls'>
+              <ul class="media-grid product_pictures">
                 <% @product.pictures.each do |picture| %>
                   <li>
                     <a href="#">
                       <%= image_tag picture.picture_url(:medium) %>
                     </a>
+                    <div class="actions">
+                      <a class="move" href="#">Move</a>
+                      <a class="delete" href="#">Delete</a>
+                    </div>
                   </li>
                 <% end %>
               </ul>
             </div>
-          </div>
         <% end %>
       </div><!-- /clearfix -->
 

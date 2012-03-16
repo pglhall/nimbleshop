@@ -37,3 +37,70 @@
 #admin-orders-show td.shipment_tracking_info a {
   text-decoration: underline;
 }
+
+/*image actions*/
+
+.product_pictures li a{
+	display: block;
+}
+
+.product_pictures .actions{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	display: none;
+}
+
+.product_pictures li:hover .actions{
+	display: block;
+}
+
+.product_pictures .actions a{
+	display: inline;
+	float: left;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	background-image: url("/assets/actions.png");
+	margin-left: 5px;
+	background-color: #0088CC;
+}
+
+.product_pictures .actions .move{
+	background-position: 0 -25px;
+}
+
+.product_pictures .actions .delete{
+	background-position: 0 0;
+}
+
+/*end image actions*/
+
+/*image layout*/
+.product_pictures{
+	margin: 0;
+}
+
+.product_pictures li{
+	position: relative;
+	display: inline-block;
+	list-style-type: none;
+	margin-right: 30px;
+}
+
+
+/*end image layout*/
+
+/*Delete button*/
+
+.delete{
+	display: inline-block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	background: url("/assets/trash.gif") no-repeat transparent;
+	vertical-align: middle;
+}
+
+/*End Delete button*/
+

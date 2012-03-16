@@ -15,9 +15,10 @@
         <td><%= product_group.name %></td>
         <td><%= product_group.summarize %></td>
         <td>
-          <%= link_to t(:edit), edit_admin_product_group_path(product_group) %>
+          <%= link_to t(:edit), edit_admin_product_group_path(product_group), title: 'Edit' %>
           |
-          <%= link_to t(:delete), [:admin, product_group], confirm: t(:delete_confirmation_for_product_group), method: 'delete' %>
+          <%= link_to t(:delete), [:admin, product_group], confirm: t(:delete_confirmation_for_product_group),
+                                                                          method: 'delete', class: 'delete', title: 'Delete' %>
         </td>
         </td>
       </tr>

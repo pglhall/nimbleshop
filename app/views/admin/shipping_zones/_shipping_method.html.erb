@@ -3,12 +3,11 @@
   <td> <%= shipping_method_condition_in_english(shipping_method) %> </td>
   <td> <%= number_to_currency(shipping_method.base_price) %> </td>
   <td>
-    <%= link_to t(:edit), [:edit, :admin, shipping_method.shipping_zone, shipping_method ] %>
+    <%= link_to t(:edit), [:edit, :admin, shipping_method.shipping_zone, shipping_method ], title: 'Edit' %>
   </td>
   <td>
     <%= link_to t(:delete),
       admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method),
-      confirm: t(:delete_confirmation_for_shipping_method),
-      method: 'delete' %>
+      confirm: t(:delete_confirmation_for_shipping_method), class: 'delete', title: 'Delete', method: 'delete' %>
   </td>
 </tr>

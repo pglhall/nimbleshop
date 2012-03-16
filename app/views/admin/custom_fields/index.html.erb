@@ -16,9 +16,10 @@
         <td><%= custom_field.name %></td>
         <td><%= custom_field.field_type %></td>
         <td>
-          <%= link_to t(:edit), edit_admin_custom_field_path(custom_field) %>
+          <%= link_to t(:edit), edit_admin_custom_field_path(custom_field), title: 'Edit' %>
           |
-          <%= link_to t(:delete), [:admin, custom_field], confirm: t(:delete_confirmation_for_custom_field), method: 'delete' %>
+          <%= link_to t(:delete), [:admin, custom_field], confirm: t(:delete_confirmation_for_custom_field),
+                                                                            method: 'delete', class: 'delete', title: 'Delete'  %>
         </td>
         </td>
       </tr>
