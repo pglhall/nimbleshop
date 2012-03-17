@@ -1,36 +1,6 @@
 require 'spec_helper'
 
 describe Order do
-
-  describe "inquirer methods" do
-    let(:order) do 
-      Order.new({ 
-        shipping_status: 'nothing_to_ship', 
-        payment_status: 'purchased', 
-        status: 'open'
-      })
-    end
-
-    it "kind of string inquirer" do
-      order.shipping_status.must_be_kind_of ActiveSupport::StringInquirer
-      order.payment_status.must_be_kind_of ActiveSupport::StringInquirer
-      order.status.must_be_kind_of ActiveSupport::StringInquirer
-    end
-
-    it "reflect current values" do
-      order.shipping_status = 'shipped'
-      order.shipping_status.must_be(:shipped?)
-
-      order.status.must_be(:open?)
-      order.status = 'closed'
-      order.status.must_be(:closed?)
-
-      order.payment_status.must_be(:purchased?)
-      order.payment_status = 'captured'
-      order.payment_status.must_be(:captured?)
-    end
-  end
-
   describe "#final_billing_address" do
     let(:order) do
       Order.new(billing_address: billing, shipping_address: shipping)
@@ -108,98 +78,68 @@ describe Order do
     }
   end
 
-  describe "authorized" do
-    let(:order) { order_with_authorized_transaction }
-
-    it {
-      order.authorized
-      order.reload
-      order.payment_method.name.must_equal 'Authorize.net'
-      order.payment_status.must_equal 'authorized'
-      ActionMailer::Base.deliveries.size.must_equal 2
-      order.shipping_status.must_equal 'shipping_pending'
-
-      mail = ActionMailer::Base.deliveries.first
-      mail.subject.must_equal "Order confirmation for order ##{order.number}"
-      mail.encoded.must_match /Here is receipt for your purchase/
-        mail.encoded.must_match /When items are shipped you will get an email with tracking number/
-
-        mail = ActionMailer::Base.deliveries.last
-      mail.subject.must_equal "Order ##{order.number} was recently placed"
-      mail.encoded.must_match Regexp.new("Order ##{order.number} was placed by")
-    }
-        end
-
-  describe "captured" do
-    let(:order) { order_with_authorized_transaction }
-
-    it {
-      order.authorized
-      order.captured
-      order.reload
-      order.payment_method.name.must_equal 'Authorize.net'
-      order.payment_status.must_equal 'paid'
-      order.shipping_status.must_equal 'shipping_pending'
-    }
-  end
-
-  describe "purchased" do
-    it {
-      order = create(:order)
-      order.update_attributes!(payment_method: PaymentMethod::Splitable.first)
-      order.purchased
-      order.reload
-      order.payment_method.name.must_equal 'Splitable'
-      order.payment_status.must_equal 'paid'
-      order.shipping_status.must_equal 'shipping_pending'
-    }
-  end
-
-  describe "cancelled" do
-    describe "at initial state" do
-      it {
-        order = create(:order)
-        order.cancelled
-        order.reload
-        order.payment_status.must_equal 'abandoned' # abandonded orders cannot be cancelled
-        order.shipping_status.must_equal 'nothing_to_ship'
-      }
+  describe "#transaction_authorized" do
+    before do
+      @order = create(:order)
     end
 
-    describe "after authorized" do
-      let(:order) { order_with_authorized_transaction }
+    it "must verify payment method" do
+      @order.transaction_authorized
 
-      it {
-        order.authorized
-        order.cancelled
-        order.reload
-        order.payment_status.must_equal 'cancelled'
-        order.shipping_status.must_equal 'nothing_to_ship'
-      }
+      @order.errors[:payment_method].must_equal ["can't be blank"]
+      Order.find(@order.id).must_be(:abandoned?)
+    end
+
+    it "must update shipping state to pending" do
+      create(:creditcard_transaction, order: @order)
+      @order.update_attributes(payment_method: PaymentMethod::AuthorizeNet.first)
+
+      @order = Order.find(@order.id)
+      ActionMailer::Base.deliveries.clear
+      @order.transaction_authorized
+
+      @order = Order.find(@order.id)
+      @order.must_be(:authorized?)
+      @order.must_be(:shipping_pending?)
+      ActionMailer::Base.deliveries.count.must_equal 2
     end
   end
 
-  describe "refunded" do
-    let(:order) { order_with_authorized_transaction }
+  describe "#transaction_captured" do
+    it {
+      @order = create(:authorized_order)
+      @order.transaction_captured
 
-    describe "after captured" do
-      it {
-        order.authorized
-        order.captured
-        order.refunded
-        order.reload
-        order.payment_status.must_equal 'refunded'
-        order.shipping_status.must_equal 'nothing_to_ship'
-      }
-    end
-    describe "after authorized" do
-      it {
-        order.authorized
-        order.refunded
-        order.reload
-        order.payment_status.must_equal 'authorized' # only captured transactions can be refunded
-        order.shipping_status.must_equal 'shipping_pending'
-      }
-    end
+      Order.find(@order.id).must_be(:paid?)
+    }
+  end
+
+  describe "#transaction_purchased" do
+    it {
+      @order = create(:order_with_transaction)
+      @order.transaction_purchased
+
+      @order = Order.find(@order.id)
+      @order.must_be(:paid?)
+      @order.splitable_paid_at.must_equal(@order.updated_at.to_s(:long))
+    }
+  end
+
+  describe "#transaction_cancelled" do
+    it {
+      @order = create(:authorized_order)
+      @order.transaction_cancelled
+
+      Order.find(@order.id).must_be(:cancelled?)
+    }
+  end
+
+  describe "#transaction_refunded" do
+    it {
+      @order = create(:captured_order)
+      @order.transaction_refunded
+
+      Order.find(@order.id).must_be(:refunded?)
+    }
   end
 end

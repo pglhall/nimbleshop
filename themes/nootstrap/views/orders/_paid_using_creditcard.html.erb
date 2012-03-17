@@ -12,7 +12,7 @@
     </li>
     <li>
       Your credit card was charged
-      <strong><%= number_to_currency(@order.creditcard_transactions.first.amount) %> </strong> .
+      <strong><%= number_to_currency(@order.transactions.first.amount) %> </strong> .
     </li>
     <li>
       In the credit card statement name of the company would appear as

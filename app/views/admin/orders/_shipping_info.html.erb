@@ -13,9 +13,9 @@
           </td>
 
           <td class='shipment_tracking_info'>
-            <% if @order.shipping_status.shipping_pending? %>
+            <% if @order.shipping_pending? %>
               <%= link_to 'Ship items', '#', class: 'btn btn-success ship_items_link' %>
-            <% elsif @order.shipping_status.shipped? %>
+            <% elsif @order.shipped? %>
               Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
               via
               <%= link_to @shipment.name + ' #' + @shipment.tracking_number, @shipment.tracking_url %>

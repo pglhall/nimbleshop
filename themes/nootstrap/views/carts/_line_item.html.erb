@@ -1,10 +1,10 @@
 <tr>
   <td class="pic">
-    <%= link_to(image_tag(line_item.picture_small, alt: line_item.title), line_item.product) %>
+    <%= link_to(image_tag(line_item.picture_small, alt: line_item.product_name), line_item.product) %>
   </td>
   <td>
     <strong>
-      <%= link_to(line_item.title, line_item.product) %>
+      <%= link_to(line_item.product_name, line_item.product) %>
       <%= display_variant_info(line_item) %>
     </strong>
     <p>

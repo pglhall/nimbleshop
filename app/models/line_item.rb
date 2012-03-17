@@ -27,10 +27,6 @@ class LineItem < ActiveRecord::Base
   def price
     self.product_price * self.quantity
   end
-  alias_method :amount, :price
-
-  alias_attribute :name,  :product_name
-  alias_attribute :title, :product_name
 
   private
 
@@ -48,5 +44,4 @@ class LineItem < ActiveRecord::Base
       self.send("picture_#{size}=", product.picture.picture_url(size.intern))
     end
   end
-
 end

@@ -1,15 +1,29 @@
 class Creditcard < ActiveRecord::Base
 
-  attr_accessor :cvv, :number, :amcard, :month, :year, :address1, :address2, :first_name, :last_name, :state, :zipcode
+  attr_accessor :cvv, 
+                :number, 
+                :first_name, 
+                :last_name, 
+                :address1, 
+                :address2, 
+                :state, 
+                :zipcode
 
-  before_validation :set_cardtype,                on: :create
-  before_validation :strip_non_numeric_values,    on: :create
+  attr_accessible :masked_number, :cardtype, :expires_on
 
-  validate :validation_by_active_merchant,        on: :create
+  alias :verification_value :cvv # ActiveMerchant needs this
+
+  before_validation :set_cardtype,              on: :create
+
+  before_validation :strip_non_numeric_values,  on: :create
+
+  validate :validation_by_active_merchant,      on: :create
 
   before_create :set_masked_number
 
-  alias :verification_value :cvv # ActiveMerchant needs this
+  validates :number,      presence: true, on: :create
+  validates :last_name,   presence: true, on: :create
+  validates :first_name,  presence: true, on: :create
 
   def verification_value?
     true # ActiveMerchant needs this
@@ -25,7 +39,28 @@ class Creditcard < ActiveRecord::Base
                                              zipcode: addr.zipcode))
   end
 
+  def month
+    expires_on.strftime('%m').to_i
+  end
+
+  def year
+    expires_on.strftime('%Y').to_i
+  end
+
   private
+
+  def add_user_data(options = {})
+    options[:first_name]  = first_name
+    options[:last_name]   = last_name
+  end
+
+  def add_credit_card_data(options = {})
+    options[:year]    = year
+    options[:month]   = month
+    options[:number]  = number
+    options[:type]    = cardtype
+    options[:verification_value]  = verification_value
+  end
 
   def strip_non_numeric_values
     self.number = self.number.gsub(/[^\d]/, '') if self.number
@@ -36,30 +71,29 @@ class Creditcard < ActiveRecord::Base
   end
 
   def validation_by_active_merchant
-    self.month = self.expires_on.strftime('%m').to_i
-    self.year = self.expires_on.strftime('%Y').to_i
+    to_active_merchant_credit_card.tap do | card |
+      propogate_active_merchant_errors(card) unless card.valid?
+    end
+  end
 
-    self.amcard = ActiveMerchant::Billing::CreditCard.new(
-      type:               cardtype,
-      number:             number,
-      verification_value: verification_value,
-      month:              month,
-      year:               year,
-      first_name:         first_name,
-      last_name:          last_name)
+  def to_active_merchant_credit_card
+    options = {}
+    add_user_data(options)
+    add_credit_card_data(options)
 
-    unless self.amcard.valid?
-      self.amcard.errors.full_messages.each do |message|
+    ActiveMerchant::Billing::CreditCard.new(options)
+  end
+
+  def propogate_active_merchant_errors(amcard)
+    amcard.errors.full_messages.each do |message|
         # TODO make it i18n compatible
         message.gsub!(/Number is required/,'Credit card number is required')
         message.gsub!(/Verification value is required/, 'CVV number is required')
-        self.errors.add(:base, message)
-      end
+      self.errors.add(:base, message)
     end
   end
 
   def set_masked_number
-    self.masked_number ||= self.amcard.display_number
+    self.masked_number = to_active_merchant_credit_card.display_number
   end
-
 end
