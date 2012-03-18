@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/bigbinary/binary_merchant.git
-  revision: cec659063082e8b771614a72a7b3f85567006669
-  specs:
-    binary_merchant (0.0.1)
-      activemerchant (= 1.17.0)
-
-GIT
   remote: git://github.com/bigbinary/email_validator.git
   revision: 9bff984da3a7f7dad08f229aa486c7976b9b2107
   specs:
@@ -301,7 +294,6 @@ DEPENDENCIES
   activemerchant
   admin_data (= 1.1.16)
   airbrake
-  binary_merchant!
   capybara
   capybara_minitest_spec
   carmen!

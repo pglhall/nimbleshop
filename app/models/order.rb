@@ -44,11 +44,14 @@ class Order < ActiveRecord::Base
   # Similarly status 'paid' is only for a brief transition. Once an order is put in 'purchased' state then after_purchased is called and
   # this method sets the status as 'paid'.
   state_machine :payment_status, initial: :abandoned do
-    after_transition  on: :transaction_authorized, do: :after_authorized
-    after_transition  on: :transaction_captured,   do: :after_captured
-    after_transition  on: :transaction_purchased,  do: :after_purchased
-    before_transition on: :transaction_cancelled,  do: :before_cancelled
-    before_transition on: :transaction_refunded,   do: :before_refunded
+    after_transition  abandoned: [ :paid, :authorized ], do: :send_email_notifications
+    after_transition  abandoned: [ :paid, :authorized ], do: :shipping_pending
+    after_transition  abandoned: :paid, do: :mark_split_time
+
+    after_transition  authorized: :cancelled, do: :void_authorized_transactions
+    after_transition  paid: :cancelled,       do: :void_captured_transactions
+
+    after_transition  any: [:cancelled, :refunded], do: :cancel_shipment
 
     event :transaction_authorized do
       transition abandoned: :authorized 
@@ -70,7 +73,7 @@ class Order < ActiveRecord::Base
       transition paid: :refunded
     end
 
-    state :authorized, :captured, :purchased, :paid, :refunded, :cancelled do
+    state all - [ :abandoned ] do
       validates :payment_method, presence: true
     end
   end
@@ -201,42 +204,21 @@ class Order < ActiveRecord::Base
     update_attributes!(splitable_paid_at: Time.zone.now.to_s(:long))
   end
 
+  def after_shipped
+    Mailer.shipping_notification(number).deliver
+    touch(:shipped_at)
+  end
+
   def send_email_notifications
     Mailer.order_notification(number).deliver
     AdminMailer.new_order_notification(number).deliver
   end
 
-  def after_authorized
-    send_email_notifications
-    shipping_pending
-  end
-
-  def after_captured
-    # so that others can overrite
-  end
-
-  def after_paid
-    # so that others can overrite
-  end
-
-  def after_purchased
-    send_email_notifications
-    shipping_pending
-    mark_split_time
-  end
-
-  def before_cancelled
+  def void_authorized_transactions
     transactions.authorized.active.each(&:void)
-    cancel_shipment
   end
 
-  def before_refunded
+  def void_captured_transactions
     transactions.captured.active.each(&:void)
-    cancel_shipment
-  end
-
-  def after_shipped
-    Mailer.shipping_notification(number).deliver
-    touch(:shipped_at)
   end
 end

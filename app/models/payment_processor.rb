@@ -1,36 +1,45 @@
 class PaymentProcessor
-  attr_accessor :order, :creditcard, :gateway_processor, :payment_method, :amount
 
-  def initialize(_amount, _creditcard, _order)
-    @amount = _amount
-    @creditcard = _creditcard
-    @order = _order
-    @payment_method = PaymentMethod.find_by_permalink!('authorize-net')
-    @gateway_processor = build_gateway_processor
+  attr_reader :order, :creditcard
+  delegate :valid?, to: :creditcard
+
+  def initialize(creditcard, order)
+    @order      = order
+    @creditcard = creditcard
   end
 
-  def purchase
-    handle_action(:purchase, :purchased)
+  def process
+    valid? ? send(default_creditcard_action) : false
   end
 
-  def authorize
-    handle_action(:authorize, :authorized)
-  end
+  private
 
-  def handle_action(action, status)
-    if gateway_processor.send(action)
-      order.send(status)
-      order.update_attributes!(payment_method: payment_method)
-    else
-      creditcard.errors.add(:base, 'Credit card was declined. Please try again! ')
+    def default_creditcard_action
+      Shop.first.default_creditcard_action
     end
-  end
 
-  def build_gateway_processor
-    GatewayProcessor.new(payment_method_permalink: 'authorize-net',
-                        amount: amount,
-                        creditcard: creditcard,
-                        order: order)
-  end
+    def purchase
+      handle_action(:purchase, :transaction_purchased)
+    end
+
+    def authorize
+      handle_action(:authorize, :transaction_authorized)
+    end
+
+    def handle_action(action, transition)
+      if gateway_processor.send(action)
+        order.update_attributes(payment_method: payment_method)
+        order.send(transition)
+      else
+        creditcard.errors.add(:base, 'Credit card was declined. Please try again! ')
+      end
+    end
+
+    def gateway_processor
+      GatewayProcessor.new(payment_method: payment_method, creditcard: creditcard, order: order)
+    end
+
+    def payment_method
+      PaymentMethod.find_by_permalink!('authorize-net')
+    end
 end
-

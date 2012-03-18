@@ -74,7 +74,7 @@ class PaymentMethod::Splitable < PaymentMethod
       index = i + 1
       data.merge!({
         "amount_#{index}"      => (item.price * 100).to_i,
-        "item_name_#{index}"   => item.title,
+        "item_name_#{index}"   => item.product_name,
         "quantity_#{index}"    => item.quantity,
         "url_#{index}"         => request.protocol + request.host_with_port + "/products/#{item.product_permalink}"
       })
