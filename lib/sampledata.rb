@@ -1,6 +1,16 @@
 class Sampledata
   attr_accessor :product1, :product2, :product3, :product4, :product5, :product6, :product7
 
+  def populate
+    load_products
+    load_shop
+    load_price_information
+    load_category_information
+    load_shipping_methods
+    load_products_desc
+    process_pictures
+  end
+
   def load_shop
       Shop.create!( name:           'nimbleShop',
                    theme:           'nootstrap',

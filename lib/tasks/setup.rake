@@ -6,21 +6,16 @@ task :setup => :environment do
   Rake::Task["db:reset"].invoke
   Rake::Task["db:seed"].invoke
 
-  sampledata = Sampledata.new
-  sampledata.load_products
-
   PaymentMethod.load_default!
-
-  sampledata.load_shop
-
-  sampledata.load_price_information
-  sampledata.load_category_information
-
   PaymentMethod.update_all(enabled: true)
 
-  sampledata.load_shipping_methods
+  Sampledata.new.populate
+end
 
-  sampledata.load_products_desc
-  sampledata.process_pictures
-
+desc "sets up enviroment from scratch"
+task :setup_from_scratch => :environment do
+  Rake::Task["db:drop"].invoke
+  Rake::Task["db:create"].invoke
+  Rake::Task["db:migrate"].invoke
+  Rake::Task["setup"].invoke
 end
