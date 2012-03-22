@@ -117,11 +117,14 @@ describe Order do
   describe "#transaction_purchased" do
     it {
       @order = create(:order_with_transaction)
+      ActionMailer::Base.deliveries.clear
       @order.transaction_purchased
 
       @order = Order.find(@order.id)
       @order.must_be(:paid?)
+      @order.must_be(:shipping_pending?)
       @order.splitable_paid_at.must_equal(@order.updated_at.to_s(:long))
+      ActionMailer::Base.deliveries.count.must_equal 2
     }
   end
 

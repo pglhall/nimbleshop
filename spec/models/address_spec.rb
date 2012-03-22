@@ -45,4 +45,10 @@ describe Address do
     end
   end
 
+  describe "#to_credit_card_attributes" do
+    it {
+      options = Address.new.to_credit_card_attributes
+      options.keys.must_have_same_elements [ "address1", "address2", :state, "zipcode", "first_name", "last_name"]
+    }
+  end
 end

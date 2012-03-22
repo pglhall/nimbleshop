@@ -20,6 +20,10 @@ class CreditcardTransaction < ActiveRecord::Base
     self.status == 'purchased'
   end
 
+  def voided?
+    self.status == 'voided'
+  end
+
   def active!
     update_attributes(active: true)
   end

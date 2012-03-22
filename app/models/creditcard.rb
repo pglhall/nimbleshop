@@ -9,13 +9,14 @@ class Creditcard < ActiveRecord::Base
                 :state, 
                 :zipcode
 
-  attr_accessible :masked_number, :cardtype, :expires_on
-
   alias :verification_value :cvv # ActiveMerchant needs this
+
+  has_many :transactions, class_name: 'CreditcardTransaction' 
+  has_many :orders,       through: :transactions
 
   before_validation :set_cardtype,              on: :create
 
-  before_validation :strip_non_numeric_values,  on: :create
+  before_validation :strip_non_numeric_values,  on: :create, if: :number
 
   validate :validation_by_active_merchant,      on: :create
 
@@ -27,16 +28,6 @@ class Creditcard < ActiveRecord::Base
 
   def verification_value?
     true # ActiveMerchant needs this
-  end
-
-  def self.build_for_payment_processing(params, order)
-    addr = order.final_billing_address
-    Creditcard.new(params[:creditcard].merge(address1: addr.address1,
-                                             address2: addr.address2,
-                                             first_name: addr.first_name,
-                                             last_name: addr.last_name,
-                                             state: 'Florida' || addr.state, #TODO
-                                             zipcode: addr.zipcode))
   end
 
   def month
@@ -63,7 +54,7 @@ class Creditcard < ActiveRecord::Base
   end
 
   def strip_non_numeric_values
-    self.number = self.number.gsub(/[^\d]/, '') if self.number
+    self.number = number.to_s.gsub(/[^\d]/, '')
   end
 
   def set_cardtype

@@ -19,7 +19,6 @@ gem 'thin'
 
 # to handle credit card payments
 gem 'activemerchant'
-gem 'binary_merchant', git: 'git://github.com/bigbinary/binary_merchant.git'
 
 # for uploading images
 gem 'carrierwave'

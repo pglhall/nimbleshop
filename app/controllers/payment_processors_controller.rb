@@ -46,25 +46,16 @@ class PaymentProcessorsController < ApplicationController
       order.update_attributes!(payment_method: payment_method)
       redirect_to payment_method.url(order)
     else
+      address_attrs = order.final_billing_address.to_card_attributes
+      @creditcard   = Creditcard.new(params[:creditcard].merge(adress_attrs)) 
 
-      @creditcard = Creditcard.build_for_payment_processing(params, order)
-
-      render action: 'new' and return unless @creditcard.valid?
-
-      pp = PaymentProcessor.new(order.total_amount, @creditcard, order)
-      case Shop.first.default_creditcard_action
-      when 'authorize'
-        pp.authorize
-      when 'purchase'
-        pp.purchase
-      end
-      if @creditcard.errors.any?
-        render(action: :new)
-      else
-        reset_order
-        redirect_to(paid_order_path(current_order))
+      unless PaymentProcessor.new(@creditcard, order).process 
+        render action: :new  and return
       end
 
+      reset_order
+
+      redirect_to paid_order_path(current_order) 
     end
   end
 

@@ -5,6 +5,7 @@ class PaymentMethod::AuthorizeNet < PaymentMethod
                             :authorize_net_company_name_on_creditcard_statement
 
   def gateway
+    set_mode
     ActiveMerchant::Billing::AuthorizeNetGateway.new(credentials)
   end
 

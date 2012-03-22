@@ -12,14 +12,14 @@ describe GatewayProcessor do
     transaction
   end
 
-  let(:order)       { create(:order)      }
+  let(:order)         { create(:order).tap { |t| t.stubs(:total_amount => 100) }  }
+  let(:authorize_net) { PaymentMethod.find_by_permalink('authorize-net')          }
 
   let(:gateway) do
     GatewayProcessor.new({
-      order:                    order, 
-      amount:                   1234,
-      creditcard:               creditcard,
-      payment_method_permalink: 'authorize-net'
+      order:          order, 
+      creditcard:     creditcard,
+      payment_method: authorize_net
     })
   end
 
@@ -44,7 +44,7 @@ describe GatewayProcessor do
         @transaction.order_id.must_equal        order.id
         @transaction.creditcard_id.must_equal   creditcard.id
         @transaction.transaction_gid.must_equal '2169881780'
-        @transaction.amount.must_equal          order.total_amount
+        @transaction.amount.must_equal          100
       }
     end
   end
@@ -63,7 +63,7 @@ describe GatewayProcessor do
         @transaction.order_id.must_equal        order.id
         @transaction.creditcard_id.must_equal   creditcard.id
         @transaction.transaction_gid.must_equal '2169919631'
-        @transaction.amount.must_equal order.total_amount
+        @transaction.amount.must_equal          100
       }
     end
 
@@ -89,8 +89,8 @@ describe GatewayProcessor do
 
         @captured.must_be(:captured?)
         @captured.must_be(:active?)
+        @captured.amount.must_equal 100
         @captured.transaction_gid.must_equal '2169881780'
-        @captured.amount.must_equal order.total_amount
       end
     end
 
@@ -105,6 +105,38 @@ describe GatewayProcessor do
 
       it 'should have right values' do
         @captured.must_be(:nil?)
+      end
+    end
+  end
+  describe '#void' do
+    describe "when credit card is valid" do
+      let(:creditcard)  { build(:creditcard)  }
+      before do
+        @authorized = playcasette('authorize.net/void-authorize')  { gateway.authorize }
+        @voided   = playcasette('authorize.net/void-success')    { gateway.void(@authorized) }
+      end
+
+      it 'should have right values' do
+        @authorized.reload.wont_be(:active?)
+
+        @voided.must_be(:voided?)
+        @voided.must_be(:active?)
+        @voided.amount.must_equal 100
+        @voided.transaction_gid.must_equal '2169944463'
+      end
+    end
+
+    describe "when credit card is invalid" do
+      let(:creditcard)  { build(:creditcard)  }
+
+      before do
+        @authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
+        creditcard.number = 2
+        @voided   = playcasette('authorize.net/void-failure')    { gateway.void(@authorized) }
+      end
+
+      it 'should have right values' do
+        @voided.must_be(:nil?)
       end
     end
   end
