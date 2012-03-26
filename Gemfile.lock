@@ -162,6 +162,11 @@ GEM
     guard-minitest (0.4.0)
       guard (~> 0.4)
     hashr (0.0.19)
+    heroku (2.22.0)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.1)
+      rest-client (~> 1.6.1)
+      rubyzip
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.1)
@@ -197,10 +202,14 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
+    netrc (0.7.1)
     newrelic_rpm (3.3.2)
     nokogiri (1.5.0)
     pg (0.13.1)
     polyglot (0.3.3)
+    push2heroku (0.0.2)
+      hashr (= 0.0.19)
+      heroku
     rack (1.4.1)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -227,6 +236,8 @@ GEM
     rb-fsevent (0.9.0)
     rdoc (3.12)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -320,6 +331,7 @@ DEPENDENCIES
   nested_form!
   newrelic_rpm
   pg
+  push2heroku (= 0.0.2)
   rails (= 3.2.1)
   rb-fsevent
   ruby-debug19

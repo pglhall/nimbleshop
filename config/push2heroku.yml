@@ -1,0 +1,18 @@
+common:
+  app_name: nimbleshop
+  config:
+    rack_env: staging
+    rails_env: staging
+    log_level: debug
+
+staging:
+
+production:
+  config:
+    rack_env: production
+    rails_env: production
+
+test:
+
+development:
+
