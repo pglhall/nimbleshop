@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  delegate :paypal_website_payments_standard, :authorize_net, :splitable, :to => Shop
+
+  def paypal_website_payments_standard_enabled?
+    paypal_website_payments_standard.try(:enabled)
+  end
+
+  def authorize_net_enabled?
+    authorize_net.try(:enabled)
+  end
+
+  def splitable_enabled?
+    splitable.try(:enabled)
+  end
+
   def product_main_picture(product, version)
     pic = product.picture
     image_tag(pic.picture_url(:medium_plus), alt: product.name)

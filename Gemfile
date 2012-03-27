@@ -19,6 +19,7 @@ gem 'thin'
 
 # to handle credit card payments
 gem 'activemerchant'
+gem 'money'
 
 # for uploading images
 gem 'carrierwave'

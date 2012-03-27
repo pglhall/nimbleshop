@@ -18,12 +18,6 @@
             </label>
           <% end %>
 
-          <% if paypal_website_payments_standard_enabled? %>
-            <label class='radio'>
-              <%= radio_button_tag 'payment_choice', 'paypal' %>
-              <%= image_tag('paypal.png') %>
-            </label>
-          <% end %>
 
           <% if authorize_net_enabled?  %>
             <label class='radio'>
@@ -44,6 +38,13 @@
     <% end %>
     </div>
   <% end %>
+  <div class='well'>
+    <% if paypal_website_payments_standard_enabled? %>
+      <%= render partial: 'paypal', locals: { order: current_order } %>
+    <% end %>
+  </div>
 </div>
 
+
 <%= render 'shared/order_summary' %>
+

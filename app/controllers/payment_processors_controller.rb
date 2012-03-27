@@ -3,7 +3,7 @@ class PaymentProcessorsController < ApplicationController
   theme :theme_resolver, only: [:new, :create]
 
   # TODO if Authorize.net is not used then there is no need to force_ssl
-  force_ssl :if => lambda { |controller|
+  force_ssl :if => lambda { |controller| 
     Rails.env.production? || Rails.env.staging?
   }
 
@@ -39,23 +39,15 @@ class PaymentProcessorsController < ApplicationController
       else
         redirect_to url
       end
-
-    when 'paypal'
-
-      payment_method = PaymentMethod::PaypalWebsitePaymentsStandard.first
-      order.update_attributes!(payment_method: payment_method)
-      redirect_to payment_method.url(order)
     else
-      address_attrs = order.final_billing_address.to_card_attributes
-      @creditcard   = Creditcard.new(params[:creditcard].merge(adress_attrs))
+      address_attrs = order.final_billing_address.to_credit_card_attributes
+      @creditcard   = Creditcard.new(params[:creditcard].merge(address_attrs))
 
       unless PaymentProcessor.new(@creditcard, order).process
         render action: :new  and return
       end
 
-      reset_order
-
-      redirect_to paid_order_path(current_order)
+      redirect_to paid_order_path(id: current_order, payment_method: :credit_card)
     end
   end
 

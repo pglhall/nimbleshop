@@ -1,0 +1,13 @@
+--- 
+link_groups_001: 
+  id: "1"
+  name: Shop by price
+  permalink: shop-by-price
+  created_at: 2012-04-05 01:42:00.853498
+  updated_at: 2012-04-05 01:42:00.853498
+link_groups_002: 
+  id: "2"
+  name: Shop by category
+  permalink: shop-by-category
+  created_at: 2012-04-05 01:42:01.033504
+  updated_at: 2012-04-05 01:42:01.033504

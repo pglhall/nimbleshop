@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_filter :verify_current_order,  only: [:edit_shipping_method, :update_shipping_method, :edit, :update]
   before_filter :set_shipping_method,   only: [:edit_shipping_method, :update_shipping_method]
+  before_filter :reset_order, only: [ :paid ]
 
   respond_to :html
 

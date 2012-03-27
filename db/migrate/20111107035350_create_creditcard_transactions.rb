@@ -18,7 +18,6 @@ class CreateCreditcardTransactions < ActiveRecord::Migration
       t.belongs_to :order,    null: false
       t.string     :status,   null: true
       t.decimal    :amount,   null: false, precision: 8, scale: 2
-      t.string     :invoice,  null: false
       t.string     :txn_id,   null: true
       t.string     :txn_type, null: true
     end

@@ -1,24 +1,24 @@
 class Creditcard < ActiveRecord::Base
 
-  attr_accessor :cvv, 
-                :number, 
-                :first_name, 
-                :last_name, 
-                :address1, 
-                :address2, 
-                :state, 
+  attr_accessor :cvv,
+                :number,
+                :first_name,
+                :last_name,
+                :address1,
+                :address2,
+                :state,
                 :zipcode
 
   alias :verification_value :cvv # ActiveMerchant needs this
 
-  has_many :transactions, class_name: 'CreditcardTransaction' 
+  has_many :transactions, class_name: 'CreditcardTransaction'
   has_many :orders,       through: :transactions
 
   before_validation :set_cardtype,              on: :create
 
   before_validation :strip_non_numeric_values,  on: :create, if: :number
 
-  validate :validation_by_active_merchant,      on: :create
+  validate  :validation_by_active_merchant, on: :create
 
   before_create :set_masked_number
 
@@ -31,11 +31,11 @@ class Creditcard < ActiveRecord::Base
   end
 
   def month
-    expires_on.strftime('%m').to_i
+    expires_on.try(:strftime, '%m').try(:to_i)
   end
 
   def year
-    expires_on.strftime('%Y').to_i
+    expires_on.try(:strftime, '%Y').try(:to_i)
   end
 
   private

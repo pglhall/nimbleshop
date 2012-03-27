@@ -37,7 +37,4 @@ class PaymentMethod < ActiveRecord::Base
       instance.save
     end
   end
-
-  private
-
 end

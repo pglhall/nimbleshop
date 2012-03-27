@@ -1,0 +1,19 @@
+--- 
+shops_001: 
+  id: "1"
+  name: nimbleShop
+  theme: nootstrap
+  time_zone: UTC
+  intercept_email: johnnie.walker@nimbleshop.com
+  from_email: support@nimbleshop.com
+  default_creditcard_action: authorize
+  process_credit_card_for_real: f
+  gateway: AuthorizeNet
+  phone_number: 800-456-7890
+  twitter_handle: nimbleshop
+  contact_email: johnnie.walker@nimbleshop.com
+  facebook_url: http://www.facebook.com/pages/NimbleSHOP/119319381517845
+  google_analytics_tracking_id: 
+  tax_percentage: "1.23"
+  created_at: 2012-04-05 01:42:00.726194
+  updated_at: 2012-04-05 01:42:00.726194

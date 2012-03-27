@@ -1,20 +1,20 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe "homepage_spec integration" do
+class HomepageIntegrationTest < ActionDispatch::IntegrationTest
 
-  before do
+  test "home page with link groups" do
     visit root_path
-  end
 
-  it "should render fine" do
-    page.has_content?('powered by').must_equal true
+    assert page.has_content?('powered by')
     assert page.has_content?('Shop by category')
   end
 
-  it "should render fine with link_group deleted" do
+  test "home page without link groups" do
     LinkGroup.delete_all
-    visit root_path
-    page.has_content?('powered by').must_equal true
-  end
 
+    visit root_path
+
+    assert page.has_content?('powered by')
+    assert !page.has_content?('Shop by category')
+  end
 end

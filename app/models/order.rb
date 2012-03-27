@@ -16,6 +16,7 @@ class Order < ActiveRecord::Base
   has_many    :shipments
   has_many    :line_items,   dependent:  :destroy
   has_many    :products,     through:    :line_items
+  has_many    :paypal_transactions, dependent:  :destroy
   has_many    :transactions, dependent:  :destroy, class_name: "CreditcardTransaction" do
     def primary
       first
@@ -54,15 +55,15 @@ class Order < ActiveRecord::Base
     after_transition  any: [:cancelled, :refunded], do: :cancel_shipment
 
     event :transaction_authorized do
-      transition abandoned: :authorized 
+      transition abandoned: :authorized
     end
 
     event :transaction_captured do
-      transition authorized: :paid 
+      transition authorized: :paid
     end
 
     event :transaction_purchased do
-      transition abandoned: :paid 
+      transition abandoned: :paid
     end
 
     event :transaction_cancelled do
@@ -133,8 +134,8 @@ class Order < ActiveRecord::Base
   def set_quantity(product_id, quantity)
     return unless line_item = line_item_of(product_id)
 
-    if quantity > 0 
-      line_item.update_attributes(quantity: quantity) 
+    if quantity > 0
+      line_item.update_attributes(quantity: quantity)
     else
       line_item.destroy
     end

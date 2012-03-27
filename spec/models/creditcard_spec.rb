@@ -1,12 +1,15 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe Creditcard do
-  describe "#validations" do
-    subject { build(:creditcard) }
-    it {
-      must validate_presence_of(:number)
-      must validate_presence_of(:first_name)
-      must validate_presence_of(:last_name)
-    }
+class CreditcardTest < ActiveSupport::TestCase
+
+  test "wont validate by active merchant if card is invalid" do
+    card = Creditcard.new
+    assert_nothing_raised { card.valid? }
+  end
+
+  test "validate by active merchant if card is valid" do
+    card = build(:creditcard)
+
+    assert card.valid?
   end
 end

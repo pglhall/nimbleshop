@@ -25,11 +25,13 @@ Nimbleshop::Application.routes.draw do
 
   resources :orders,    only: [:edit, :update] do
     member do
-      get 'paid'
+      get 'cancel'
       get 'edit_shipping_method'
       put 'update_shipping_method'
     end
   end
+
+  match 'orders/:id/:payment_method' => 'orders#paid', as: :paid_order
 
   resource  :feedback,  only: [:show] do
     collection do

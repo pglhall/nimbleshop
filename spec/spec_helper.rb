@@ -32,10 +32,16 @@ Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
 DatabaseCleaner.strategy = :truncation
 
 class MiniTest::Spec
-  include Factory::Syntax::Methods
+  include FactoryGirl::Syntax::Methods
   include ActiveMerchant::Billing
-  # Add methods to be used by all specs here...
-  include PrepareSpec
+
+  before :each do
+    DatabaseCleaner.clean
+    create(:shop)
+    create(:link_group, name: "Shop by category", permalink: 'shop-by-category')
+    create(:link_group, name: "Shop by price", permalink: 'shop-by-price')
+    PaymentMethod.load_default!
+  end
 end
 
 
@@ -64,7 +70,7 @@ end
 class HelperTest < MiniTest::Spec
   include ActiveSupport::Testing::SetupAndTeardown
   include ActionView::TestCase::Behavior
-  register_spec_type(/Helper$/, self)
+    register_spec_type(/Helper$/, self)
 end
 
 VCR.configure do |c|

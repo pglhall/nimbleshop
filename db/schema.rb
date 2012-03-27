@@ -142,22 +142,19 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   add_index "payment_methods", ["permalink"], :name => "index_payment_methods_on_permalink", :unique => true
 
   create_table "paypal_payment_notifications", :force => true do |t|
-    t.text     "params"
-    t.string   "order_number",   :null => false
-    t.string   "status",         :null => false
-    t.string   "transaction_id", :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.text     "raw_post"
+    t.string   "order_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "paypal_payment_notifications", ["order_number"], :name => "index_paypal_payment_notifications_on_order_number", :unique => true
+  add_index "paypal_payment_notifications", ["order_id"], :name => "index_paypal_payment_notifications_on_order_id", :unique => true
 
   create_table "paypal_transactions", :force => true do |t|
     t.text    "params"
     t.integer "order_id",                               :null => false
     t.string  "status"
     t.decimal "amount",   :precision => 8, :scale => 2, :null => false
-    t.string  "invoice",                                :null => false
     t.string  "txn_id"
     t.string  "txn_type"
   end
