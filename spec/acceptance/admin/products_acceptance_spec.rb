@@ -5,18 +5,13 @@ describe "admin integration" do
     Capybara.current_driver = :rack_test
   end
 
-  describe "visit new product page" do
-    it {
-      visit new_admin_product_path
-      page.has_content?("Add new product").must_equal true
-    }
-  end
-
   describe "create product" do
     describe "should create a new product" do
       it {
-        visit admin_products_path
+        visit admin_path
+        click_link 'Products'
         click_link 'add_new_product'
+        page.has_content?("Add new product").must_equal true
 
         fill_in 'Name', :with => 'the very wicked name for product'
         fill_in 'Description', :with => 'test desc for user'
@@ -32,7 +27,8 @@ describe "admin integration" do
 
     describe "should not create product with wrong params" do
       it {
-        visit admin_products_path
+        visit admin_path
+        click_link 'Products'
         click_link 'add_new_product'
         attach_file "Picture", "#{Rails.root}/app/assets/stylesheets/admin.css"
         click_button 'Submit'
@@ -59,7 +55,8 @@ describe "admin integration" do
   describe "should delete a product" do
     it {
       create(:product, name: 'the very wicked name for product')
-      visit admin_products_path
+      visit admin_path
+      click_link 'Products'
       click_link 'Delete'
       page.has_content?("Successfuly deleted").must_equal true
       page.has_content?('the very wicked name for product').must_equal false
@@ -72,7 +69,8 @@ describe "admin integration" do
     end
 
     it "should edit a product" do
-      visit admin_products_path
+      visit admin_path
+      click_link 'Products'
       click_link 'Edit'
 
       fill_in 'Name', :with => 'the very wicked name for product'
@@ -87,7 +85,8 @@ describe "admin integration" do
     end
 
     it "should not allow to save product with wrong params" do
-      visit admin_products_path
+      visit admin_path
+      click_link 'Products'
       click_link 'Edit'
 
       fill_in 'Name', :with => ''
@@ -108,7 +107,8 @@ describe "admin integration" do
   describe "show product" do
     it {
       create(:product, name: 'ipad', description: 'the description', price: 46.99)
-      visit admin_products_path
+      visit admin_path
+      click_link 'Products'
       click_link 'ipad'
 
       page.has_content?("ipad $46.99").must_equal true

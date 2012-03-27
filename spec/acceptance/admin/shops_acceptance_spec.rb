@@ -7,10 +7,11 @@ describe "admin integration" do
   end
 
   describe "edit shop" do
-    
+
     describe "good path" do
       it "should update the shop" do
-        visit edit_admin_shop_path
+        visit admin_path
+        click_link 'Shop configuration'
         page.has_content?('Shop configuration').must_equal true
         fill_in 'Name', with: 'Jack Daniels'
         fill_in 'Theme', with: 'my-awesome-theme'
@@ -29,7 +30,8 @@ describe "admin integration" do
 
     describe "wrong path" do
       it "should not update the shop" do
-        visit edit_admin_shop_path
+        visit admin_path
+        click_link 'Shop configuration'
         fill_in 'Name', with: ''
         fill_in 'Theme', with: ''
         fill_in 'Twitter handle', with: ''
@@ -42,7 +44,7 @@ describe "admin integration" do
         page.has_content?('From email is invalid').must_equal true
         page.has_content?('Intercept email is invalid').must_equal true
         page.has_content?("Name can't be blank").must_equal true
-        page.has_content?("Theme can't be blank").must_equal true 
+        page.has_content?("Theme can't be blank").must_equal true
 
         fill_in 'Contact email', with: 'te@'
         fill_in 'Facebook url', with: 'wrong url'
