@@ -1,8 +1,10 @@
 require 'spec_helper'
 
-describe "admin integration" do
+describe "payment_methods_acceptance_spec integration" do
+
   describe "payment methods" do
-    it "should allow to view, enable/disable and edit payment methods" do
+
+    it "show payment_methods" do
       visit admin_path
       click_link 'Payment methods'
 
@@ -12,9 +14,11 @@ describe "admin integration" do
       page.has_link?('Paypal website payments standard').must_equal false
 
       page.has_checked_field?('paypal-website-payments-standard').must_equal false
-      page.has_checked_field?('authorize-net').must_equal false
-      page.has_checked_field?('splitable').must_equal false
+    end
 
+    it "should allow to view, enable/disable and edit payment methods" do
+      visit admin_path
+      click_link 'Payment methods'
       check 'authorize-net'
 
       skip 'skip it since it is failing' do

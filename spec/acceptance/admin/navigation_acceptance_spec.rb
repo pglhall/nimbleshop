@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "navigation integration" do
   before do
-    @product_group = create(:product_group, name: "Nike Shoes")
-    @link_group    = create(:link_group, name: "Branded Shoes")
+    @product_group = create :product_group, name: "Nike Shoes"
+    @link_group    = create :link_group,    name: "Branded Shoes"
   end
 
   describe "add new navigation to link group" do
@@ -18,7 +18,7 @@ describe "navigation integration" do
 
   describe "delete navigation from link group" do
     before do
-      @nav = @link_group.navigations.create(product_group: @product_group) 
+      @nav = @link_group.navigations.create(product_group: @product_group)
       Capybara.current_driver =  :selenium
     end
 
