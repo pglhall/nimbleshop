@@ -4,6 +4,10 @@ common:
     rack_env: staging
     rails_env: staging
     log_level: debug
+    s3_access_key_id: 0R6QCF3V0RF98YB0TC02
+    s3_bucket_name: nimbleshopnet
+    s3_secret_access_key: cBvUcnMbci0H4QW4UxSNu3FZt1RsCc5jiKearC/y
+
 
 staging:
 
