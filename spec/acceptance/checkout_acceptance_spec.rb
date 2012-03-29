@@ -115,7 +115,6 @@ describe "checkout_spec integration" do
 
       click_button 'Submit'
 
-
       page.has_content?('Ground -- $3.99').must_equal true
       page.has_content?('Pick shipping method')
 
@@ -166,7 +165,6 @@ describe "checkout_spec integration" do
       assert current_path == edit_shipping_method_order_path(current_order)
     }
   end
-
 
   describe "delete a product and change the quantity in the cart" do
     it {
