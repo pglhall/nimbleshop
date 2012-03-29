@@ -15,7 +15,6 @@ describe "homepage_spec integration" do
     LinkGroup.delete_all
     visit root_path
     page.has_content?('powered by').must_equal true
-    page.must_have_content('Shop by category')
   end
 
 end
