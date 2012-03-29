@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe "shipping_zones_acceptance_spec integration" do
 
+  it "should create new shipping zone" do
+    visit "/admin"
+    click_link "Shipping zones"
+    click_link "Add new shipping zone"
+  end
+
   def assert_regions_created(count)
     bef = RegionalShippingZone.count
     yield
@@ -19,3 +25,4 @@ describe "shipping_zones_acceptance_spec integration" do
     }
   end
 end
+

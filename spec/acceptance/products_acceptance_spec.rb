@@ -14,10 +14,9 @@ describe "products_acceptance_spec integration" do
   end
 
   describe "show page" do
-    let(:product) { create(:product) }
+    let(:product) { create(:product, name: 'ipad') }
     it "should be at product show page" do
-      visit product_path(product)
-      #save_and_open_page
+      click_link 'ipad'
       page.has_content?('This is product description').must_equal true
     end
   end
@@ -30,7 +29,6 @@ describe "products_acceptance_spec integration" do
       click_link "main-image"
       click_link "product-title"
       page.has_content?('This is product description').must_equal true
-      #save_and_open_page
     end
   end
 

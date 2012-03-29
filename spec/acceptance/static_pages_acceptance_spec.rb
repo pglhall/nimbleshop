@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "static pages integration" do
+describe "static_pages_acceptance_spec integration" do
 
-  it "should be ok for good path" do
+  it "static pages" do
     visit root_path
 
     click_link 'About us'
