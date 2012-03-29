@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "admin integration" do
+describe "shops_acceptance_spec integration" do
 
   before do
     create(:shop)

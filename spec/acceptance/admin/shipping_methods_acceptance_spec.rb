@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Shipping Method integration" do
+describe "shipping_methods_acceptance_spec integration" do
 
   def create_shipping_zone(code)
     create(:country_shipping_zone, country_code: code)

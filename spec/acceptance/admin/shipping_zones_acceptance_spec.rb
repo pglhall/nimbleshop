@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Shipping zone integration" do
+describe "shipping_zones_acceptance_spec integration" do
 
   def assert_regions_created(count)
     bef = RegionalShippingZone.count

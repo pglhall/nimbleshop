@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "homepage integration" do
+describe "homepage_spec integration" do
 
   it "should be ok for good path" do
     visit root_path

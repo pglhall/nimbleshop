@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Product Groups integration" do
+describe "product_groups_acceptance_spec integration" do
 
   before do
     create(:price_group_condition)

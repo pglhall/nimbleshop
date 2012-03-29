@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "products integration" do
+describe "products_acceptance_spec integration" do
 
   it "index page" do
     visit root_path

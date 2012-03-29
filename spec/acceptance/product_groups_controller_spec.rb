@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "product group integration" do
+describe "product_groups_acceptance_spec integration" do
 
   def create_product_group(name, attrs)
     visit new_admin_product_group_path

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "admin integration" do
+describe "products_acceptance_spec integration" do
   before do
     Capybara.current_driver = :rack_test
   end

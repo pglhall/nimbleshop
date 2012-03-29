@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "checkout integration" do
+describe "checkout_spec integration" do
   include RegionalShippingMethodTestHelper
   include AddressSpecHelper
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "shipping zone integration" do
+describe "shipping_zones_accepttance_spec integration" do
   it "should create new shipping zone" do
     visit "/admin"
     click_link "Shipping zones"
