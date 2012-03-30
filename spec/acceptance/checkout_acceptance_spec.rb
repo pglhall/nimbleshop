@@ -12,6 +12,20 @@ describe "checkout_spec integration" do
     create(:payment_method, enabled: true)
   end
 
+  describe "when admin has not enabled any payment method then there should not be any error" do
+    it {
+      visit root_path
+      add_item_to_cart('Bracelet Set')
+      click_button 'Checkout'
+      fill_in 'Your email address', with: 'test@example.com'
+      fill_good_address
+      click_button 'Submit'
+      choose 'Ground'
+      click_button 'Submit'
+      assert page.has_content?('All payments are secure and encrypted.')
+    }
+  end
+
   describe "when current order expired" do
     before do
       visit root_path
@@ -38,7 +52,6 @@ describe "checkout_spec integration" do
 
 
   let(:current_order) { Order.last }
-
 
   describe "should be able to add one item to cart" do
     it {

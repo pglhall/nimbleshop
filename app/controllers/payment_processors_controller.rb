@@ -47,22 +47,22 @@ class PaymentProcessorsController < ApplicationController
       redirect_to payment_method.url(order)
     else
       address_attrs = order.final_billing_address.to_card_attributes
-      @creditcard   = Creditcard.new(params[:creditcard].merge(adress_attrs)) 
+      @creditcard   = Creditcard.new(params[:creditcard].merge(adress_attrs))
 
-      unless PaymentProcessor.new(@creditcard, order).process 
+      unless PaymentProcessor.new(@creditcard, order).process
         render action: :new  and return
       end
 
       reset_order
 
-      redirect_to paid_order_path(current_order) 
+      redirect_to paid_order_path(current_order)
     end
   end
 
   private
 
   def payment_method_url
-    return nil if PaymentMethod.enabled.count > 1
+    return nil if PaymentMethod.enabled.count != 1
 
     permalink = PaymentMethod.enabled.first.permalink
     return nil if permalink == 'authorize-net'
