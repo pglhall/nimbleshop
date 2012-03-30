@@ -4,6 +4,9 @@ class Admin::PaymentMethodsController < AdminController
 
   def index
     @page_title = 'Payment methods'
+    if PaymentMethod.enabled.count == 0
+      flash.now[:error] = 'You have not configured any payment method. User wil not be able to make payment'
+    end
   end
 
   def show

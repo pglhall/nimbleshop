@@ -61,10 +61,19 @@
         <div class="span9">
           <div class="row-fluid">
             <div class="span12">
-            <% if flash[:notice] %><div class='alert alert-success'><%= flash[:notice] %></div><% end %>
-            <p>
-              <%= yield %>
-            </p>
+              <% if flash[:notice] %>
+                <div class='alert alert-success'>
+                  <%= flash[:notice] %>
+                </div>
+              <% end %>
+              <% if flash[:error] %>
+                <div class='alert alert-error'>
+                  <%= flash[:error] %>
+                </div>
+              <% end %>
+              <p>
+                <%= yield %>
+              </p>
           </div>
           </div>
         </div>
