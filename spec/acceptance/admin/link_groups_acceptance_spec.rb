@@ -1,22 +1,36 @@
 require 'spec_helper'
 
-describe "navigation integration" do
+describe "link_groups_acceptance_spec integration" do
   before do
     @product_group = create :product_group, name: "Nike Shoes"
     @link_group    = create :link_group,    name: "Branded Shoes"
   end
 
-  describe "add new navigation to link group" do
+  describe "add a new link group" do
+    it {
+      visit admin_path
+      click_link 'Link groups'
+      click_link 'add_new_link_group'
+      fill_in 'link_group_name', with: 'Popular products'
+      click_button 'Submit'
+      page.must_have_content('Successfuly added')
+      page.must_have_cotent('Popular products')
+    }
+  end
+
+  describe "add new link" do
     it do
-      visit new_admin_link_group_navigation_path(@link_group)
+      visit admin_path
+      click_link 'Link groups'
+      refute page.has_content?('Nike Shoes')
+      click_link 'Add new link'
       select "Nike Shoes", from: 'Product Group'
       click_button "Add"
-
-      page.must_have_content('Successfully added')
+      page.must_have_content('Nike Shoes')
     end
   end
 
-  describe "delete navigation from link group" do
+  describe "delete link group" do
     before do
       @nav = @link_group.navigations.create(product_group: @product_group)
       Capybara.current_driver =  :selenium
