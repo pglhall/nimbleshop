@@ -14,7 +14,7 @@ describe "link_groups_acceptance_spec integration" do
       fill_in 'link_group_name', with: 'Popular products'
       click_button 'Submit'
       page.must_have_content('Successfuly added')
-      page.must_have_cotent('Popular products')
+      page.must_have_content('Popular products')
     }
   end
 
