@@ -8,7 +8,7 @@ describe "homepage_spec integration" do
 
   it "should render fine" do
     page.has_content?('powered by').must_equal true
-    page.must_have_content('Shop by category')
+    assert page.has_content?('Shop by category')
   end
 
   it "should render fine with link_group deleted" do

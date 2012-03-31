@@ -104,9 +104,6 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    capybara_minitest_spec (0.2.1.1)
-      capybara
-      minitest (~> 2.0)
     carrierwave (0.5.8)
       activesupport (~> 3.0)
     carrierwave-meta (0.0.3)
@@ -306,7 +303,6 @@ DEPENDENCIES
   admin_data (= 1.1.16)
   airbrake
   capybara
-  capybara_minitest_spec
   carmen!
   carrierwave
   carrierwave-meta

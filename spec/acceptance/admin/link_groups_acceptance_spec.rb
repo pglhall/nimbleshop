@@ -13,8 +13,8 @@ describe "link_groups_acceptance_spec integration" do
       click_link 'add_new_link_group'
       fill_in 'link_group_name', with: 'Popular products'
       click_button 'Submit'
-      page.must_have_content('Successfuly added')
-      page.must_have_content('Popular products')
+      assert page.has_content?('Successfuly added')
+      assert page.has_content?('Popular products')
     }
   end
 
@@ -26,7 +26,7 @@ describe "link_groups_acceptance_spec integration" do
       click_link 'Add new link'
       select "Nike Shoes", from: 'Product Group'
       click_button "Add"
-      page.must_have_content('Nike Shoes')
+      assert page.has_content?('Nike Shoes')
     end
   end
 
@@ -40,7 +40,7 @@ describe "link_groups_acceptance_spec integration" do
       visit admin_link_groups_path
       page.evaluate_script('window.confirm = function() { return true; }')
       find("a[href='#{admin_link_group_navigation_path(link_group_id: @link_group, id: @nav)}']").click
-      page.must_have_content('Successfully deleted')
+      assert page.has_content?('Successfully deleted')
     end
   end
 end

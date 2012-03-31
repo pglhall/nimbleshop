@@ -90,7 +90,6 @@ group :test do
   gem 'webmock'
   gem 'simplecov', :require => false
   gem 'capybara'
-  gem "capybara_minitest_spec"
   gem 'faker'
 
   gem 'minitest', '~> 2.10.1'

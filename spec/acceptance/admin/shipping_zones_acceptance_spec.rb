@@ -20,7 +20,7 @@ describe "shipping_zones_acceptance_spec integration" do
       assert_regions_created(13) do
         select 'Canada', :from => 'Country name'
         click_button('Submit')
-        page.must_have_content('Successfuly created')
+        assert page.has_content?('Successfuly created')
       end
     }
   end

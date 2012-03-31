@@ -19,7 +19,7 @@ describe "shipping_methods_acceptance_spec integration" do
       fill_in "shipping_method_base_price", with: "10"
       click_button('Submit')
 
-      page.must_have_content('Successfuly created')
+      assert page.has_content?('Successfuly created')
 
       assert_equal 58, ShippingZone.count - bef
     end
@@ -37,7 +37,7 @@ describe "shipping_methods_acceptance_spec integration" do
       fill_in "shipping_method_upper_price_limit", with: "40"
       click_button('Submit')
 
-      page.must_have_content('Successfuly updated')
+      assert page.has_content?('Successfuly updated')
     }
   end
 
@@ -54,7 +54,7 @@ describe "shipping_methods_acceptance_spec integration" do
     it "should by increment" do
       visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
      find("a[@rel='disable-#{state_zone.id} nofollow']").click
-     page.must_have_content('enable')
+     assert page.has_content?('enable')
     end
 
     after(:each) { Capybara.current_driver = :rack_test }
