@@ -11,7 +11,7 @@ describe "orders_acceptance_spec integration" do
       visit admin_path
       click_link 'Orders'
 
-      page.has_css?('h1.ns-page-title', text: 'Orders')
+      assert page.has_css?('h1.ns-page-title', text: 'Orders')
       click_link Order.first.number
       assert page.has_content?('Payment status abandoned')
     }
@@ -25,7 +25,7 @@ describe "orders_acceptance_spec integration" do
       visit admin_path
       click_link 'Orders'
 
-      page.has_css?('h1.ns-page-title', text: 'Orders')
+      assert page.has_css?('h1.ns-page-title', text: 'Orders')
       click_link order.number
       assert page.has_content?('Payment status abandoned')
     }

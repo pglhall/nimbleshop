@@ -69,6 +69,5 @@ describe "payment_methods_acceptance_spec integration" do
       page.has_link?('Paypal website payments standard').must_equal false
     end
 
-
   end
 end

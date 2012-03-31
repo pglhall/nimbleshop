@@ -15,6 +15,7 @@ describe "product_groups_acceptance_spec integration" do
       click_link 'add_new_product_group'
 
       fill_in 'Name', with: 'sweet candies'
+
       select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text,
                   :from => 'product_group_product_group_conditions_attributes_0_name')
 
@@ -57,7 +58,6 @@ describe "product_groups_acceptance_spec integration" do
         click_link 'Delete'
       end
       page.has_content?("name starts with 'awesome'").must_equal false
-
     }
   end
 
