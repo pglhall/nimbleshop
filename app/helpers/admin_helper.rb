@@ -1,4 +1,5 @@
 module AdminHelper
+
   ROUTE_MAP = {
       admin_products_path:        'admin/products',
       admin_custom_fields_path:   'admin/custom_fields',
@@ -7,7 +8,7 @@ module AdminHelper
       admin_payment_methods_path: 'admin/payment_methods',
       admin_shipping_zones_path:  ['admin/shipping_zones', 'admin/shipping_methods'],
       edit_admin_shop_path:       'admin/shops',
-      edit_admin_orders_path:     'admin/orders'
+      admin_orders_path:          'admin/orders'
   }
 
   def active?(path, current_controller)
