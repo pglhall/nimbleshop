@@ -17,7 +17,6 @@ describe AdminHelper do
       }
     end
 
-
     describe "admin_custom_fields_path" do
       it {
         helper.active?('admin_custom_fields_path', 'admin/custom_fields').must_equal true
@@ -63,8 +62,8 @@ describe AdminHelper do
 
     describe "edit_admin_orders_path" do
       it {
-        helper.active?('edit_admin_orders_path', 'admin/orders').must_equal true
-        helper.active?('edit_admin_orders_path', 'admin/products').must_equal false
+        assert helper.active?('admin_orders_path', 'admin/orders')
+        assert helper.active?('admin_orders_path', 'admin/products')
       }
     end
   end
