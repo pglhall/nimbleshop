@@ -3,10 +3,10 @@ require 'spec_helper'
 describe "products_acceptance_spec integration" do
 
   describe "show page" do
-    let(:product) { create(:product, name: 'ipad') }
+    let(:product) { create(:product, name: 'ipad', description: 'awesome ipad from Apple') }
     it {
-      click_link 'ipad'
-      page.has_content?('This is product description').must_equal true
+      visit product_path(product)
+      assert page.has_content?('awesome ipad from Apple')
     }
   end
 

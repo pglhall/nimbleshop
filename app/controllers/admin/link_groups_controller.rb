@@ -8,15 +8,17 @@ class Admin::LinkGroupsController < AdminController
   end
 
   def show
+    @page_title = @link_group.name
     render partial: 'link_group_title', locals: { link_group: @link_group }
   end
 
   def new
+    @page_title = 'new link group'
     @link_group = LinkGroup.new
   end
 
   def edit
-    render
+    @page_title = @link_group.name
   end
 
   def create

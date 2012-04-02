@@ -52,7 +52,7 @@ describe "shipping_methods_acceptance_spec integration" do
     before(:each) { Capybara.current_driver = :selenium }
 
     it "should by increment" do
-      visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
+     visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
      find("a[@rel='disable-#{state_zone.id} nofollow']").click
      assert page.has_content?('enable')
     end

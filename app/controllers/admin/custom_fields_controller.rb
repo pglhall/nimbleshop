@@ -3,15 +3,16 @@ class Admin::CustomFieldsController < AdminController
   before_filter :load_custom_field, only: [:show, :edit, :update, :destroy]
 
   def index
+    @page_title = 'custom fields'
     @custom_fields = CustomField.all
   end
 
   def show
-    render
+    @page_title = @custom_field.name
   end
 
   def edit
-    render
+    @page_title = @custom_field.name
   end
 
   def update
@@ -23,6 +24,7 @@ class Admin::CustomFieldsController < AdminController
   end
 
   def new
+    @page_title = 'new custom field'
     @custom_field = CustomField.new
   end
 

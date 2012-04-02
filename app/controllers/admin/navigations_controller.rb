@@ -1,7 +1,9 @@
 class Admin::NavigationsController < AdminController
+
   before_filter :load_link_group
 
   def new
+    @page_title = 'new navigation'
     @navigation = @link_group.navigations.new
   end
 
@@ -16,13 +18,14 @@ class Admin::NavigationsController < AdminController
   end
 
   def destroy
-    @navigation = @link_group.navigations.find_by_id(params[:id])
+    @navigation = @link_group.navigations.find_by_id!(params[:id])
     @navigation.destroy
 
     redirect_to [:admin, :link_groups], notice: "Successfully deleted"
   end
 
   private
+
     def load_link_group
       @link_group = LinkGroup.find_by_permalink!(params[:link_group_id])
     end

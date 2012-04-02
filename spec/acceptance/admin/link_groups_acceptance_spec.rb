@@ -36,11 +36,11 @@ describe "link_groups_acceptance_spec integration" do
       Capybara.current_driver =  :selenium
     end
 
-    it do
+    it {
       visit admin_link_groups_path
       page.evaluate_script('window.confirm = function() { return true; }')
       find("a[href='#{admin_link_group_navigation_path(link_group_id: @link_group, id: @nav)}']").click
       assert page.has_content?('Successfully deleted')
-    end
+    }
   end
 end

@@ -67,8 +67,8 @@ class Admin::ProductsController < AdminController
 
   private
 
-  def load_product!
-    @product = Product.find_by_permalink!(params[:id])
-  end
+    def load_product!
+      @product = Product.find_by_permalink!(params[:id])
+    end
 
 end

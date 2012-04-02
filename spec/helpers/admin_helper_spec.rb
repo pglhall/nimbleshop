@@ -63,7 +63,6 @@ describe AdminHelper do
     describe "edit_admin_orders_path" do
       it {
         assert helper.active?('admin_orders_path', 'admin/orders')
-        assert helper.active?('admin_orders_path', 'admin/products')
       }
     end
   end

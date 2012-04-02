@@ -70,8 +70,8 @@ describe "checkout_spec integration" do
       add_item_to_cart('Bracelet Set')
       visit root_path
       add_item_to_cart 'Necklace Set'
-      page.has_content?('2 Items').must_equal true
-      page.has_content?('$39').must_equal true
+      assert page.has_content?('2 Items')
+      assert page.has_content?('$39')
     }
   end
 
@@ -88,7 +88,7 @@ describe "checkout_spec integration" do
       fill_in "updates_#{p2.id}", with: '2'
 
       click_button 'Update'
-      page.has_content?('$128').must_equal true
+      assert page.has_content?('$128')
     }
   end
 
@@ -106,14 +106,14 @@ describe "checkout_spec integration" do
       complete_address_form('billing', billing_address)
       click_button 'Submit'
 
-      page.has_content?('$3.99').must_equal true
+      assert page.has_content?('$3.99')
       page.has_content?('Pick shipping method')
 
       # Biling address should not be same as shipping address
-      page.has_content?('Same as shipping address').must_equal false
+      refute page.has_content?('Same as shipping address')
 
-      page.has_content?(billing_address[:address1]).must_equal true
-      page.has_content?(billing_address[:city]).must_equal true
+      assert page.has_content?(billing_address[:address1])
+      assert page.has_content?(billing_address[:city])
     }
   end
 
@@ -128,14 +128,14 @@ describe "checkout_spec integration" do
 
       click_button 'Submit'
 
-      page.has_content?('Ground -- $3.99').must_equal true
-      page.has_content?('Pick shipping method')
+      assert page.has_content?('Ground -- $3.99')
+      assert page.has_content?('Pick shipping method')
 
       # Biling address should not be same as shipping address
-      page.has_content?('Same as shipping address').must_equal true
+      assert page.has_content?('Same as shipping address')
 
-      page.has_content?('$25.00').must_equal true
-      page.has_content?('Bracelet Set').must_equal true
+      assert page.has_content?('$25.00')
+      assert page.has_content?('Bracelet Set')
     }
   end
 
@@ -157,7 +157,7 @@ describe "checkout_spec integration" do
 
       check 'order_shipping_address_attributes_use_for_billing'
       click_button 'Submit'
-      page.has_content?('Same as shipping address').must_equal true
+      assert page.has_content?('Same as shipping address')
     }
   end
 
@@ -201,10 +201,10 @@ describe "checkout_spec integration" do
       fill_in "updates_#{p.id}", with: '10'
       click_button 'Update'
       assert page.has_content?('$250.00')
-      page.has_css?('table tr.shipping_cost')
+      assert page.has_css?('table tr.shipping_cost')
 
       click_button 'Checkout'
-      page.has_content?('Shipping information')
+      assert page.has_content?('Shipping information')
     }
   end
 
@@ -217,7 +217,7 @@ describe "checkout_spec integration" do
 
       fill_in 'Your email address', with: ''
       click_button 'Submit'
-      page.has_content?('Email is invalid').must_equal true
+      assert page.has_content?('Email is invalid')
 
       fill_in 'Your email address', with: 'test@example.com'
       fill_in 'First name', with: ''
@@ -230,14 +230,14 @@ describe "checkout_spec integration" do
       select  '', :from => 'State code'
       click_button 'Submit'
 
-      page.has_content?('Shipping address error !').must_equal true
+      assert page.has_content?('Shipping address error !')
       address_errors
 
       fill_good_address
       uncheck 'order_shipping_address_attributes_use_for_billing'
       click_button 'Submit'
 
-      page.has_content?('Billing address error !').must_equal true
+      assert page.has_content?('Billing address error !')
       address_errors
 
       check 'order_shipping_address_attributes_use_for_billing'
@@ -248,11 +248,11 @@ describe "checkout_spec integration" do
   private
 
   def address_errors
-    page.has_content?("First name can't be blank").must_equal true
-    page.has_content?("Last name can't be blank").must_equal true
-    page.has_content?("Address1 can't be blank").must_equal true
-    page.has_content?("Zipcode can't be blank").must_equal true
-    page.has_content?("City can't be blank").must_equal true
+    assert page.has_content?("First name can't be blank")
+    assert page.has_content?("Last name can't be blank")
+    assert page.has_content?("Address1 can't be blank")
+    assert page.has_content?("Zipcode can't be blank")
+    assert page.has_content?("City can't be blank")
   end
 
   def add_item_to_cart(name)

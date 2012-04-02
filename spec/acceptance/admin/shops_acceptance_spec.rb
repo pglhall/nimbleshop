@@ -24,7 +24,7 @@ describe "shops_acceptance_spec integration" do
         select(find(:xpath, "//*[@id='shop_time_zone']/option[2]").text, :from => 'shop_time_zone')
         click_button 'Submit'
 
-        page.has_content?('Shop was successfully updated').must_equal true
+        assert page.has_content?('Shop was successfully updated')
       end
     end
 
@@ -41,18 +41,17 @@ describe "shops_acceptance_spec integration" do
         fill_in 'From email', with: ''
         click_button 'Submit'
 
-        page.has_content?('From email is invalid').must_equal true
-        page.has_content?('Intercept email is invalid').must_equal true
-        page.has_content?("Name can't be blank").must_equal true
-        page.has_content?("Theme can't be blank").must_equal true
+        assert page.has_content?('From email is invalid')
+        assert page.has_content?('Intercept email is invalid')
+        assert page.has_content?("Name can't be blank")
+        assert page.has_content?("Theme can't be blank")
 
         fill_in 'Contact email', with: 'te@'
         fill_in 'Facebook url', with: 'wrong url'
         click_button 'Submit'
 
-        page.has_content?('Facebook url is invalid').must_equal true
-        page.has_content?('Contact email is invalid').must_equal true
-
+        assert page.has_content?('Facebook url is invalid')
+        assert page.has_content?('Contact email is invalid')
       end
     end
   end

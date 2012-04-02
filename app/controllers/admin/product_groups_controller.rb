@@ -8,7 +8,7 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def new
-    @page_title = 'New product groups'
+    @page_title = 'New product group'
     @product_group = ProductGroup.new
     @product_group.product_group_conditions.build
   end
@@ -23,7 +23,7 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def edit
-    @page_title = 'Edit product groups'
+    @page_title = "Edit #{@product_group.name}"
     @custom_fields = CustomField.order('name asc')
   end
 
@@ -42,8 +42,8 @@ class Admin::ProductGroupsController < AdminController
 
   private
 
-  def load_product_group
-    @product_group = ProductGroup.find_by_permalink!(params[:id])
-  end
+    def load_product_group
+      @product_group = ProductGroup.find_by_permalink!(params[:id])
+    end
 
 end
