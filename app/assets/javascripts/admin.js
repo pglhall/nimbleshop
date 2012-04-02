@@ -23,6 +23,7 @@
 //= require enable_disable_price_variant
 //= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
+//= require admin/products/edit
 
 
 $(function(){

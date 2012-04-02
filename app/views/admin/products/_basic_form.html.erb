@@ -1,5 +1,5 @@
 <div class='well'>
-  <%= nested_form_for([:admin, @product], html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+  <%= nested_form_for([:admin, @product], html: {multipart: true, class: 'nested-form form-horizontal'}) do |f| %>
 
     <% if @product.errors.any? %>
       <div class="alert alert-error">
@@ -64,29 +64,29 @@
         <% unless @product.new_record? %>
             <label class="control-label">Images</label>
             <div class='controls'>
-              <ul class="media-grid product_pictures">
+              <ul class="thumbnails product_pictures">
                 <% @product.pictures.each do |picture| %>
                   <li>
-                    <a href="#">
-                      <%= image_tag picture.picture_url(:medium) %>
-                    </a>
+                    <%= link_to image_tag(picture.picture_url(:medium)), '#', class: 'thumbnail' %>
+
                     <div class="actions">
-                      <a class="move" href="#">Move</a>
-                      <a class="delete" href="#">Delete</a>
+                      <%= link_to 'Move', '#', class: 'move' %>
+                      <%= link_to 'Delete', '#', class: 'delete' %>
                     </div>
                   </li>
                 <% end %>
               </ul>
+
+              <%= f.fields_for :pictures do |picture_form| %>
+                <%= picture_form.file_field :picture %>
+                <%= picture_form.link_to_remove 'X' %>
+              <% end %>
+              <%= f.link_to_add 'Add picture', :pictures %>
+
             </div>
         <% end %>
       </div><!-- /clearfix -->
 
-      <%= f.fields_for :pictures do |picture_form| %>
-        <%= picture_form.label :picture %>
-        <%= picture_form.file_field :picture %>
-        <%= picture_form.link_to_remove 'Remove picture' %>
-      <% end %>
-      <%= f.link_to_add 'Add picture', :pictures %>
     </fieldset>
 
     <div class="form-actions">
