@@ -6,6 +6,7 @@ development:
   pool: 5
   username: nsingh
   password: postgres
+  min_messages: warning
 
 staging:
   adapter: postgresql
@@ -15,6 +16,7 @@ staging:
   pool: 5
   username: nsingh
   password: postgres
+  min_messages: warning
 
 production:
   adapter: postgresql
@@ -24,6 +26,7 @@ production:
   pool: 5
   username: nsingh
   password: postgres
+  min_messages: warning
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -36,3 +39,4 @@ test:
   pool: 5
   username: nsingh
   password: postgres
+  min_messages: warning
