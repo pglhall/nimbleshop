@@ -14,3 +14,4 @@ public/uploads
 db/test.sqlite3-journal
 coverage/
 tags
+/.idea/
