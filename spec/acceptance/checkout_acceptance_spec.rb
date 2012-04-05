@@ -226,8 +226,8 @@ describe "checkout_spec integration" do
       fill_in 'Address2', with: ''
       fill_in 'City', with: ''
       fill_in 'Zipcode', with: ''
-      select  '', :from => 'Country code'
-      select  '', :from => 'State code'
+      select  '', :from => 'Country'
+      select  '', :from => 'State/Province'
       click_button 'Submit'
 
       assert page.has_content?('Shipping address error !')
