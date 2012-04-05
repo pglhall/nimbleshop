@@ -7,17 +7,14 @@
       <%= link_to(line_item.product_name, line_item.product) %>
       <%= display_variant_info(line_item) %>
     </strong>
-    <p>
-      <%= truncate(sanitize(line_item.description), length: 90) %>
-    </p>
   </td>
   <td><%= number_to_currency(line_item.product_price) %></td>
   <td>
     <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
-                                          id: "updates_#{line_item.product_id}", class: "quantity-field" %>
-  </td>
-  <td class="remove">
-    <%= link_to 'Remove', '#', class: 'remove-item', 'data-permalink' => line_item.product_id %>
+                                          id: "updates_#{line_item.product_id}", class: "quantity-field", style: "width:25px" %>
   </td>
   <td><strong><%= number_to_currency(line_item.price) %></strong></td>
+  <td class="remove">
+    <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
+  </td>
 </tr>

@@ -4,14 +4,14 @@
   <p id="empty">Your shopping cart is empty. <a href="/">Continue shopping...</a></p>
 <% else %>
   <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
-	  <table class='table table-zebra'>
+	  <table class='table table-zebra' style="width:800px;">
       <thead>
         <tr>
           <th colspan="2" class="start">Description</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Delete</th>
           <th>Total</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -21,22 +21,24 @@
 
         <% if current_order.shipping_method %>
           <tr class='shipping_cost'>
-            <td colspan='4'>&nbsp;</td>
+            <td colspan='3'>&nbsp;</td>
             <td> Shipping </td>
             <td><strong><%= number_to_currency(current_order.shipping_cost) %></strong></td>
+            <td>&nbsp;</td>
           </tr>
         <% end %>
 
         <% if current_order.tax %>
           <tr class='shipping_cost'>
-            <td colspan='4'>&nbsp;</td>
+            <td colspan='3'>&nbsp;</td>
             <td> Tax </td>
             <td><strong><%= number_to_currency(current_order.tax) %></strong></td>
+            <td>&nbsp;</td>
           </tr>
         <% end %>
 
         <tr>
-          <td colspan='3'>&nbsp;</td>
+          <td colspan='2'>&nbsp;</td>
           <td>
             <%= submit_tag 'Update', class: 'btn' %>
             <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
@@ -45,6 +47,7 @@
           <td style='font-size:120%;'>
             <strong><%= number_to_currency(current_order.total_amount) %></strong>
           </td>
+            <td>&nbsp;</td>
         </tr>
 
       </tbody>
