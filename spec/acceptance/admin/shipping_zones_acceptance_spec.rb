@@ -20,5 +20,6 @@ describe "shipping_zones_acceptance_spec integration" do
       end
     }
   end
+
 end
 

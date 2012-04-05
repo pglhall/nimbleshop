@@ -72,3 +72,9 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :webmock # or :fakeweb
 end
+
+
+
+# TODO
+# - write acceptance test for deleting a shipping zone
+#
