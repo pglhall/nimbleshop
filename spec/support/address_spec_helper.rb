@@ -17,8 +17,8 @@ module AddressSpecHelper
     fill_in 'Address1',       with: address[:address1]
     fill_in 'Address2',       with: 'Highway'
     fill_in 'City',           with: address[:city]
-    select  'United States',  from: 'Country code'
-    select  'Alabama',        from: 'State code'
+    select  'United States',  from: 'Country'
+    select  'Alabama',        from: 'State/Province'
     fill_in 'Zipcode',        with:  address[:zipcode]
   end
 end
