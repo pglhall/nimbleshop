@@ -32,7 +32,7 @@ describe "payment_methods_acceptance_spec integration" do
       fill_in 'paypal_website_payments_standard_notify_url', with: 'https://www.sandbox.paypal.net/cgi-bin/webscr?'
       click_button 'Submit'
 
-      skip "Subba will look into it" do
+      skip "Subba will look into this paypal spec issue" do
       assert page.has_content?('Successfuly updated')
       assert page.has_content?('seller@bigbinary.com')
       assert page.has_content?('http://example.com/paypal_return')

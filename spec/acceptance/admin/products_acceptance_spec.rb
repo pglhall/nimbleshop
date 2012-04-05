@@ -53,8 +53,6 @@ describe "products_acceptance_spec integration" do
         assert page.has_content?("Price is not a number")
         assert page.has_content?("Price can't be blank")
 
-
-
         fill_in 'Price', :with => 'wrong price'
         click_button 'Submit'
 

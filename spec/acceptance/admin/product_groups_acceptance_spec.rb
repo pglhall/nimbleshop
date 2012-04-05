@@ -8,7 +8,7 @@ describe "product_groups_acceptance_spec integration" do
     Capybara.current_driver = :selenium
   end
 
-  describe "add, edit and delet for product group" do
+  describe "add, edit and delete for product group" do
     it {
       visit admin_product_groups_path
       page.has_content?("Product groups").must_equal true
@@ -77,13 +77,13 @@ describe "product_groups_acceptance_spec integration" do
 
   private
 
-  def handle_js_confirm(accept=true)
-    page.execute_script "window.original_confirm_function = window.confirm"
-    page.execute_script "window.confirmMsg = null"
-    page.execute_script "window.confirm = function(msg) { window.confirmMsg = msg; return #{!!accept}; }"
-    yield
-  ensure
-    page.execute_script "window.confirm = window.original_confirm_function"
-  end
+    def handle_js_confirm(accept=true)
+      page.execute_script "window.original_confirm_function = window.confirm"
+      page.execute_script "window.confirmMsg = null"
+      page.execute_script "window.confirm = function(msg) { window.confirmMsg = msg; return #{!!accept}; }"
+      yield
+    ensure
+      page.execute_script "window.confirm = window.original_confirm_function"
+    end
 
 end

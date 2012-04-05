@@ -21,6 +21,7 @@ class Admin::ShippingMethodsController < AdminController
   end
 
   def new
+    @page_title = "Add new shipping method for #{@shipping_zone.name}"
     @shipping_method = @shipping_zone.shipping_methods.build
   end
 
@@ -64,7 +65,7 @@ class Admin::ShippingMethodsController < AdminController
   end
 
   def shipping_zone_param
-    params[:country_shipping_zone_id] || 
+    params[:country_shipping_zone_id] ||
       params[:regional_shipping_zone_id] ||
         params[:shipping_zone_id]
   end
