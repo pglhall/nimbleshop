@@ -26,6 +26,14 @@ GIT
       minitest (~> 2.0)
 
 GIT
+  remote: git://github.com/rails/strong_parameters.git
+  revision: 1e238a2170badcb9a5212e642220d7239246e9b4
+  specs:
+    strong_parameters (0.1.3)
+      actionpack (>= 3.2.0)
+      activemodel (>= 3.2.0)
+
+GIT
   remote: git://github.com/rawongithub/minitest-rails-shoulda.git
   revision: 2bd90c19c5be00aa1718a00293b6899223daf79f
   specs:
@@ -54,17 +62,17 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    actionmailer (3.2.1)
-      actionpack (= 3.2.1)
-      mail (~> 2.4.0)
-    actionpack (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
+    actionmailer (3.2.3)
+      actionpack (= 3.2.3)
+      mail (~> 2.4.4)
+    actionpack (3.2.3)
+      activemodel (= 3.2.3)
+      activesupport (= 3.2.3)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.1)
       rack (~> 1.4.0)
-      rack-cache (~> 1.1)
+      rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.2)
     activemerchant (1.17.0)
@@ -72,18 +80,18 @@ GEM
       braintree (>= 2.0.0)
       builder (>= 2.0.0)
       json (>= 1.5.1)
-    activemodel (3.2.1)
-      activesupport (= 3.2.1)
+    activemodel (3.2.3)
+      activesupport (= 3.2.3)
       builder (~> 3.0.0)
-    activerecord (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
-      arel (~> 3.0.0)
+    activerecord (3.2.3)
+      activemodel (= 3.2.3)
+      activesupport (= 3.2.3)
+      arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
-    activesupport (3.2.1)
+    activeresource (3.2.3)
+      activemodel (= 3.2.3)
+      activesupport (= 3.2.3)
+    activesupport (3.2.3)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
@@ -93,7 +101,7 @@ GEM
       activesupport
       builder
     archive-tar-minitar (0.5.2)
-    arel (3.0.0)
+    arel (3.0.2)
     braintree (2.13.4)
       builder (>= 2.0.0)
     builder (3.0.0)
@@ -166,8 +174,8 @@ GEM
       rubyzip
     hike (1.2.1)
     i18n (0.6.0)
-    journey (1.0.1)
-    json (1.6.5)
+    journey (1.0.3)
+    json (1.6.6)
     json_pure (1.6.5)
     launchy (2.0.5)
       addressable (~> 2.2.6)
@@ -180,12 +188,12 @@ GEM
     libv8 (3.3.10.4)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
-    mail (2.4.1)
+    mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     metaclass (0.0.1)
-    mime-types (1.17.2)
+    mime-types (1.18)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     minitest (2.10.1)
@@ -193,7 +201,7 @@ GEM
       minitest (>= 2.5.0)
     mocha (0.10.4)
       metaclass (~> 0.0.1)
-    multi_json (1.1.0)
+    multi_json (1.2.0)
     multipart-post (1.1.5)
     mustache (0.99.4)
     net-scp (1.0.4)
@@ -208,23 +216,23 @@ GEM
       hashr (= 0.0.19)
       heroku
     rack (1.4.1)
-    rack-cache (1.1)
+    rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.2.1)
-      actionmailer (= 3.2.1)
-      actionpack (= 3.2.1)
-      activerecord (= 3.2.1)
-      activeresource (= 3.2.1)
-      activesupport (= 3.2.1)
+    rails (3.2.3)
+      actionmailer (= 3.2.3)
+      actionpack (= 3.2.3)
+      activerecord (= 3.2.3)
+      activeresource (= 3.2.3)
+      activesupport (= 3.2.3)
       bundler (~> 1.0)
-      railties (= 3.2.1)
-    railties (3.2.1)
-      actionpack (= 3.2.1)
-      activesupport (= 3.2.1)
+      railties (= 3.2.3)
+    railties (3.2.3)
+      actionpack (= 3.2.3)
+      activesupport (= 3.2.3)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -283,7 +291,7 @@ GEM
       actionpack (>= 3.1)
       less-rails (~> 2.1.6)
       railties (>= 3.1)
-    tzinfo (0.3.31)
+    tzinfo (0.3.32)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
@@ -328,13 +336,14 @@ DEPENDENCIES
   newrelic_rpm
   pg
   push2heroku (= 0.0.2)
-  rails (= 3.2.1)
+  rails (= 3.2.3)
   rb-fsevent
   ruby-debug19
   sass-rails (~> 3.2.3)
   simplecov
   sqlite3
   state_machine
+  strong_parameters!
   themes_for_rails!
   thin
   twitter-bootstrap-rails

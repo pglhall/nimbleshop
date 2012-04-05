@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # standard rails stuff
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 gem 'will_paginate'
 gem 'pg'
 
@@ -45,6 +45,9 @@ gem 'mustache'
 
 # for validating email
 gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
+
+# for security
+gem 'strong_parameters', git: 'git://github.com/rails/strong_parameters.git'
 
 # for performance monitoring
 gem 'newrelic_rpm'
