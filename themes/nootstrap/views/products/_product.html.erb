@@ -1,13 +1,9 @@
-<ul class='thumbnails'>
-  <li class='span3 product_info'>
-    <p>
-      <%= link_to(product_main_picture(product, :medium_plus), product, class: 'thumbnail') %>
-    </p>
-
-    <p class='product'>
-      <span class='price'><%= number_to_currency(product.price) %></span>
-      <br />
-      <%= link_to(truncate(product.name, length: 30), product, title: product.name) %>
-    </p>
-  </li>
-</ul>
+<div class="thumbnail_container">
+  <%= link_to(product_main_picture(product, :medium_plus), product, class: '') %>
+   <div class="price">
+     <%= number_to_currency(product.price) %>
+   </div>
+   <div class="product_name">
+     <%= link_to(truncate(product.name, length: 30), product, title: product.name) %>
+   </div>
+</div>
