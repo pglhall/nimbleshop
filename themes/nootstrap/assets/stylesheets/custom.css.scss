@@ -129,22 +129,30 @@ table tr td .rhs {
 	padding-bottom: 5px;
 }
 
-	.thumbnail_container:hover{
-		border: 1px solid rgb(0, 136, 204);
-	}
+.thumbnail_container:hover {
+  border: 1px solid rgb(0, 136, 204);
+}
 
-	.thumbnail_container .price{
-	  color: #999;
-	}
+.thumbnail_container .price{
+  color: #999;
+}
 
-	.thumbnail_container .price, .thumbnail_container .product_name{
-		margin-left: 20px;
-	}
+.thumbnail_container .price, .thumbnail_container .product_name{
+  margin-left: 20px;
+}
 
-	.thumbnail_container > a{
-		display: block;
-		border-bottom: 1px solid rgb(221, 221, 221);
-		padding: 5px 5px 2px;
-		margin-bottom: 5px;
+.thumbnail_container > a{
+  display: block;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  padding: 5px 5px 2px;
+  margin-bottom: 5px;
+}
 
-	}
+.delete{
+	display: inline-block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	background: url("/assets/trash.gif") no-repeat transparent;
+	vertical-align: middle;
+}
