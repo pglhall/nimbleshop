@@ -39,14 +39,14 @@
       </div>
 
       <div class='control-group'>
-        <%= shipping_form.label :country_code, class: 'control-label' %>
+        <%= shipping_form.label :country_code, 'Country', class: 'control-label' %>
         <div class='controls'>
           <%= shipping_form.select :country_code, options_for_countries(countries), class: 'input-xlarge' %>
         </div>
       </div>
 
       <div class='control-group'>
-        <%= shipping_form.label :state_code, class: 'control-label' %>
+        <%= shipping_form.label :state_code, 'State/Province', class: 'control-label' %>
         <div class='controls'>
           <%= shipping_form.select :state_code, options_for_country(shipping_form.object.country_code), class: 'input-xlarge' %>
         </div>
