@@ -67,6 +67,7 @@ class PaymentMethod::Splitable < PaymentMethod
       api_secret:     order.splitable_api_secret,
       api_notify_url: api_notify_url,
       shipping:       (order.shipping_method.shipping_cost * 100).to_i,
+      description: 'See Splitable integrates nicely with nimbleShop',
       expires_in:     self.splitable_expires_in}
   end
 
