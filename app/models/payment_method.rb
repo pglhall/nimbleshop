@@ -28,7 +28,7 @@ class PaymentMethod < ActiveRecord::Base
 
       payment_klass = const_get(payment_method_name.to_s.classify)
 
-      instance = payment_klass.create!(attributes)
+      instance = payment_klass.new(attributes)
 
       preferences.each_pair do | preference, value |
         m = "#{payment_method_name}_#{preference}="

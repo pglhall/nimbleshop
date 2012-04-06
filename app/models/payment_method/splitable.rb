@@ -12,6 +12,8 @@ class PaymentMethod::Splitable < PaymentMethod
 
   attr_accessor :order, :request
 
+  validates_presence_of :splitable_api_key
+
   def process_request(order, request)
     self.order   = order
     self.request = request
