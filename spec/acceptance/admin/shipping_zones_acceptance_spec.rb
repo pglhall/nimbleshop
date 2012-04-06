@@ -11,7 +11,7 @@ describe "shipping_zones_acceptance_spec integration" do
       select 'Canada', :from => 'Country name'
       click_button('Submit')
       assert page.has_content?('Successfuly created')
-      assert_equal count, RegionalShippingZone.count - bef
+      assert_equal 13, RegionalShippingZone.count - bef
     }
   end
 
