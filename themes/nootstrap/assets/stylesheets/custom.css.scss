@@ -156,3 +156,127 @@ table tr td .rhs {
 	background: url("/assets/trash.gif") no-repeat transparent;
 	vertical-align: middle;
 }
+
+
+/*Responsibility classes from Bootstrap
+----------------------------------------------------------------------------------------------------------------------*/
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+.visible-phone {
+  display: none;
+}
+.visible-tablet {
+  display: none;
+}
+.visible-desktop {
+  display: block;
+}
+.hidden-phone {
+  display: block;
+}
+.hidden-tablet {
+  display: block;
+}
+.hidden-desktop {
+  display: none;
+}
+@media (max-width: 767px) {
+  .visible-phone {
+    display: block;
+  }
+  .hidden-phone {
+    display: none;
+  }
+  .hidden-desktop {
+    display: block;
+  }
+  .visible-desktop {
+    display: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .visible-tablet {
+    display: block;
+  }
+  .hidden-tablet {
+    display: none;
+  }
+  .hidden-desktop {
+    display: block;
+  }
+  .visible-desktop {
+    display: none;
+  }
+}
+
+/*Mobile cart
+----------------------------------------------------------------------------------------------------------------------*/
+
+@media (max-width: 979px) {
+	body#carts-show{
+		padding-top: 0px;
+	}
+}
+
+.mobile_item_list >h3{
+  margin: 0px;
+
+}
+
+.cart_item_mobile{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDDDDD;
+	margin-top: 10px;
+}
+
+div.mobile_item_list div:first-of-type{
+	margin-top: 0;
+}
+
+div.mobile_item_list div:last-of-type{
+  border-bottom: none;
+}
+
+.cart_item_mobile .remove-item{
+	background-image: none;
+	width: auto;
+	height: auto;
+	text-indent: 0;
+	display: block;	
+}
+
+.mobile_item_info{
+	margin-bottom: 5px;
+}
+
+.mobile_item_info h4{
+	font-weight: normal;
+}
+
+.mobile_item_info .quantity-field{
+	width: 25px;
+	margin-top: 5px;
+}
+
+.mobile_item_info h4 strong:before, .mobile_item_info h3 strong:before{
+  content: " "
+}
+
+.total{
+	border-top: 1px solid black;
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+
+.cart_item_mobile .total{
+  border-top: none;
+	padding-top: 0;
+	margin-bottom: 10px;
+}
+
+.total h4{
+	font-size: 16px;
+}
+
