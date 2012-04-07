@@ -16,21 +16,26 @@ class Shop < ActiveRecord::Base
     twitter_handle.blank? ? nil : "http://twitter.com/#{twitter_handle}"
   end
 
-  def self.authorize_net
-    PaymentMethod::AuthorizeNet.first
-  end
+  class<<self
 
-  def self.paypal_website_payments_standard
-    PaymentMethod::PaypalWebsitePaymentsStandard.first
-  end
+    def authorize_net
+      PaymentMethod::AuthorizeNet.first
+    end
 
-  def self.splitable
-    PaymentMethod::Splitable.first
+    def paypal_website_payments_standard
+      PaymentMethod::PaypalWebsitePaymentsStandard.first
+    end
+
+    def splitable
+      PaymentMethod::Splitable.first
+    end
+
+    alias_method :current, :first
   end
 
   private
 
-  def sanitize_twitter_handle
-    self.twitter_handle.gsub!(/^@/, '')
-  end
+    def sanitize_twitter_handle
+      self.twitter_handle.gsub!(/^@/, '')
+    end
 end
