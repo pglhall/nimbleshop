@@ -62,11 +62,12 @@ class PaymentMethod::Splitable < PaymentMethod
     api_notify_url = 'http://' + request.host_with_port + '/instant_payment_notifications/splitable'
 
     { api_key:        self.splitable_api_key,
-      total_amount:   (order.total_amount * 100).to_i,
+      total_amount:   (order.total_amount.round(2).to_f * 100).to_i,
       invoice:        order.number,
       api_secret:     order.splitable_api_secret,
       api_notify_url: api_notify_url,
-      shipping:       (order.shipping_method.shipping_cost * 100).to_i,
+      shipping:       (order.shipping_method.shipping_cost.round(2).to_f * 100).to_i,
+      tax:            (order.tax.round(2).to_f * 100).to_i,
       description: 'See Splitable integrates nicely with nimbleShop',
       expires_in:     self.splitable_expires_in}
   end
