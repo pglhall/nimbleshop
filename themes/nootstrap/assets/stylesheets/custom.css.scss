@@ -244,7 +244,7 @@ div.mobile_item_list div:last-of-type{
 	width: auto;
 	height: auto;
 	text-indent: 0;
-	display: block;	
+	display: block;
 }
 
 .mobile_item_info{
@@ -278,5 +278,30 @@ div.mobile_item_list div:last-of-type{
 
 .total h4{
 	font-size: 16px;
+}
+
+/*Sidebar style
+----------------------------------------------------------------------------------------------------------------------*/
+
+.sidebar_block{
+  border-radius: 5px;
+	border: 1px solid #DDDDDD;
+	padding: 10px;
+	background-color: #fafafa;
+	margin-bottom: 20px;
+}
+
+.sidebar_block h3{
+	font-weight: normal;
+	margin-bottom: 5px;
+	font-size: 16px;
+}
+
+.sidebar_block ul{
+	margin-left: 10px;
+}
+
+.sidebar_block li{
+	margin-bottom: 3px;
 }
 
