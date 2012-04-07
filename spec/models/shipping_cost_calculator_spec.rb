@@ -1,21 +1,18 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe ShippingCostCalculator do
+class SimpleTaxCalculatorTest < ActiveRecord::TestCase
+  test "shipping method is nil" do
+    order     = Order.new
+    calculator= ShippingCostCalculator.new(order)
 
-  describe "#shipping_cost" do
-    it "shipping method is nil" do
-      order     = Order.new
-      calculator= ShippingCostCalculator.new(order)
+    assert_equal 0, calculator.shipping_cost
+  end
 
-      calculator.shipping_cost.must_equal 0
-    end
+  test "shipping method is not nil" do
+    shipping  = mock(:shipping_cost => 3.99)
+    order     = mock(shipping_method: shipping)
+    calculator= ShippingCostCalculator.new(order)
 
-    it "shipping method is not nil" do
-      shipping  = mock(:shipping_cost => 3.99)
-      order     = mock(shipping_method: shipping)
-      calculator= ShippingCostCalculator.new(order)
-
-      calculator.shipping_cost.must_equal 3.99
-    end
+    assert_equal 3.99, calculator.shipping_cost
   end
 end
