@@ -1,11 +1,9 @@
 class SimpleTaxCalculator
-  def initialize(order, shop)
+  def initialize(order)
     @order = order
-    @shop  = shop
   end
 
   def tax
-    @order.price * @shop.tax_percentage * BigDecimal.new("0.01")
+    @order.price * Shop.first.tax_percentage * 0.01
   end
-
 end
