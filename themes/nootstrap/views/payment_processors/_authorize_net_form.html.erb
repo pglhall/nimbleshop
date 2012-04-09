@@ -8,11 +8,15 @@
   </div>
 <% end %>
 
+
+
 <fieldset>
   <div class='control-group'>
     <%= f.label :number, 'Credit card number', autocomplete: 'off', class: 'control-label' %>
     <div class='controls'>
       <%= f.text_field :number, class: 'input-xlarge focus' %>
+      &nbsp;
+      <%= link_to 'Help', '#authorizenetsandboxhelp', 'data-toggle' => "modal" %>
     </div>
   </div>
 
@@ -21,7 +25,7 @@
     <div class='controls'>
       <%= f.text_field :cvv %>
       &nbsp;
-      <%= link_to 'What is this?', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=p/acc/cvv_info-amex_pop-outside', target: '_blank' %>
+      <%= link_to 'What is this?', '#cvvhelp', 'data-toggle' => "modal" %>
     </div>
   </div>
 

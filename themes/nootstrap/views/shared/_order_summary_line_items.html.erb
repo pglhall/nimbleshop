@@ -18,28 +18,24 @@
         <div class='clear'></div>
     </tr>
   <% end %>
-  <% if current_order.tax %>
+
+  <% if params[:controller] == 'payment_processors' %>
     <tr>
       <td>
         <div class='lhs'>
-          Tax :
-		  <strong> 
-			  <%= number_to_currency(current_order.tax) %> 
-		  </strong>
+          Shipping : <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
+        </div>
+        <div class='clear'></div>
+    </tr>
+    <tr>
+      <td>
+        <div class='lhs'>
+          Tax : <strong> <%= number_to_currency(current_order.tax) %> </strong>
         </div>
         <div class='clear'></div>
     </tr>
   <% end %>
-  <% if current_order.shipping_method %>
-    <tr>
-      <td>
-        <div class='lhs'>
-          Shipping :
-          <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
-        </div>
-        <div class='clear'></div>
-    </tr>
-  <% end %>
+
   <tr>
     <td>
       <div class='lhs'>

@@ -19,24 +19,6 @@
           <%= render 'line_item', line_item: line_item %>
         <% end %>
 
-        <% if current_order.shipping_method %>
-          <tr class='shipping_cost'>
-            <td colspan='3'>&nbsp;</td>
-            <td> Shipping </td>
-            <td><strong><%= number_to_currency(current_order.shipping_cost) %></strong></td>
-            <td>&nbsp;</td>
-          </tr>
-        <% end %>
-
-        <% if current_order.tax %>
-          <tr class='shipping_cost'>
-            <td colspan='3'>&nbsp;</td>
-            <td> Tax </td>
-            <td><strong><%= number_to_currency(current_order.tax) %></strong></td>
-            <td>&nbsp;</td>
-          </tr>
-        <% end %>
-
         <tr>
           <td colspan='2'>&nbsp;</td>
           <td>
@@ -52,60 +34,52 @@
 
       </tbody>
     </table>
+
     <div class="row visible-phone mobile_cart">
       <div class="mobile_item_total">
         <h3>Order Total</h3>
-        <% if current_order.shipping_method %>
-         <div class="mobile_item_info">
-           <h4>Shipping Cost:<strong><%= number_to_currency(current_order.shipping_cost) %></strong></h4>
-         </div>
-        <% end %>
-        <% if current_order.tax %>
-          <div class="mobile_item_info">
-            <h4>Tax:<strong><%= number_to_currency(current_order.tax) %></strong></h4>
-          </div>
-          <% end %>
-          <div class="mobile_item_info total">
-            <h4>Cost:<strong><%= number_to_currency(current_order.total_amount) %></strong></h4>
-          </div>
-					<div class="mobile_item_info">
-						<%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
-					</div>
+
+        <div class="mobile_item_info total">
+          <h4>Cost:<strong><%= number_to_currency(current_order.price) %></strong></h4>
+        </div>
+        <div class="mobile_item_info">
+          <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
+        </div>
       </div>
 	    <div class="mobile_item_list">
 	      <h3>Your items</h3>
-	            <% @line_items.each do |line_item| %>
-	              <div class="cart_item_mobile">
-	                <div class="mobile_item_info">
-	                  <h3><%= link_to(line_item.product_name, line_item.product) %></h3>
-	                  <%= link_to(image_tag(line_item.picture_small, alt: line_item.product_name), line_item.product) %>
-	                  <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
-	                </div>
-	                <div class="mobile_item_info">
-	                  <h4>Description</h4>
-	                  <strong>
-	                    <%= display_variant_info(line_item) %>
-	                  </strong>
-	                </div>
-	                <div class="mobile_item_info">
-	                  <h4>Price: <strong><%= number_to_currency(line_item.product_price) %></strong></h4>
+          <% @line_items.each do |line_item| %>
+            <div class="cart_item_mobile">
+              <div class="mobile_item_info">
+                <h3><%= link_to(line_item.product_name, line_item.product) %></h3>
+                <%= link_to(image_tag(line_item.picture_small, alt: line_item.product_name), line_item.product) %>
+                <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
+              </div>
+              <div class="mobile_item_info">
+                <h4>Description</h4>
+                <strong>
+                  <%= display_variant_info(line_item) %>
+                </strong>
+              </div>
+              <div class="mobile_item_info">
+                <h4>Price: <strong><%= number_to_currency(line_item.product_price) %></strong></h4>
 
-	                </div>
-	                <div class="mobile_item_info">
-	                  <h4>Quantity</h4>
-	                  <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
-	                                                            id: "updates_#{line_item.product_id}", class: "quantity-field" %>
-	                </div>
-	                <div class="mobile_item_info total">
-	                  <h4>Item Total:<strong><%= number_to_currency(line_item.price) %></strong></h4>
-	                </div>
-	      					<div class="mobile_item_info">
-	      						<%= submit_tag 'Update', class: 'btn' %>
-	      					  <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
-	      					</div>
-	              </div>
-	            <% end %>
-	    </div>
+              </div>
+              <div class="mobile_item_info">
+                <h4>Quantity</h4>
+                <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
+                                                          id: "updates_#{line_item.product_id}", class: "quantity-field" %>
+              </div>
+              <div class="mobile_item_info total">
+                <h4>Item Total:<strong><%= number_to_currency(line_item.price) %></strong></h4>
+              </div>
+              <div class="mobile_item_info">
+                <%= submit_tag 'Update', class: 'btn' %>
+                <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+	      </div>
     </div>
   <% end %>
 <% end %>
