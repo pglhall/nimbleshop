@@ -1,6 +1,11 @@
 <% if !Rails.env.production? && authorize_net_enabled?  %>
-  <div class='alert alert-info' data-dismiss='alert'>
-    <a class="close" href="#">×</a>
+  <div id='authorizenetsandboxhelp' class='modal hide fade'>
+
+    <div class='modal-hader'>
+      <%= link_to 'x', '#', class: 'close', 'data-dismiss' => 'modal' %>
+      <h3>Authorize.net sandbox information</h3>
+    </div>
+
     <p> Here are the rules for paying using Authorize.net. </p>
     <ul>
       <li> Expiration date must be set to the present day or later. </li>
