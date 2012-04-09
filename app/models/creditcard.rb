@@ -18,13 +18,14 @@ class Creditcard < ActiveRecord::Base
 
   before_validation :strip_non_numeric_values,  on: :create, if: :number
 
-  validate  :validation_by_active_merchant, on: :create
 
   before_create :set_masked_number
 
   validates :number,      presence: true, on: :create
   validates :last_name,   presence: true, on: :create
   validates :first_name,  presence: true, on: :create
+
+  validate  :validation_by_active_merchant, on: :create
 
   def verification_value?
     true # ActiveMerchant needs this
@@ -62,8 +63,10 @@ class Creditcard < ActiveRecord::Base
   end
 
   def validation_by_active_merchant
-    to_active_merchant_credit_card.tap do | card |
-      propogate_active_merchant_errors(card) unless card.valid?
+    unless errors.any?
+      to_active_merchant_credit_card.tap do | card |
+        propogate_active_merchant_errors(card) unless card.valid?
+      end
     end
   end
 

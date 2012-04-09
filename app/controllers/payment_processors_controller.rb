@@ -3,9 +3,7 @@ class PaymentProcessorsController < ApplicationController
   theme :theme_resolver, only: [:new, :create]
 
   # TODO if Authorize.net is not used then there is no need to force_ssl
-  force_ssl :if => lambda { |controller| 
-    Rails.env.production? || Rails.env.staging?
-  }
+  force_ssl :if => lambda { |_| Rails.env.production? || Rails.env.staging? }
 
   def set_splitable_data
     order = current_order
@@ -42,7 +40,6 @@ class PaymentProcessorsController < ApplicationController
     else
       address_attrs = order.final_billing_address.to_credit_card_attributes
       @creditcard   = Creditcard.new(params[:creditcard].merge(address_attrs))
-
       unless PaymentProcessor.new(@creditcard, order).process
         render action: :new  and return
       end
