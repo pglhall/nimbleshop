@@ -70,6 +70,9 @@ gem 'fog'
 # for error notification
 gem "airbrake"
 
+# This gem vendors jquery fancybox for Rails 3.1 and greater. The files will be added to the asset pipeline and available for you to use.
+gem 'fancybox-rails'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

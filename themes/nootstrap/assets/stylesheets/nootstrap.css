@@ -5,5 +5,24 @@
  *
  *= require_self
  *= require themed_bootstrap_and_overrides
+ *= require fancybox
  *= require custom
 */
+
+img.thumbnail:hover {
+  border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+#products-index li.product_info, #product_groups-show li.product_info {
+  border: 1px solid #ddd;
+}
+
+#products-index li.product_info:hover, #product_groups-show li.product_info:hover {
+  border-color: #08c;
+}
