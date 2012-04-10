@@ -10,7 +10,7 @@ describe "products_acceptance_spec integration" do
       visit admin_path
       click_link 'Products'
       click_link 'add_new_product'
-      page.has_content?("Add new product").must_equal true
+      assert page.has_content?("Add new product")
 
       fill_in 'Name', :with => 'the very wicked name for product'
       fill_in 'Description', :with => 'test desc for user'
@@ -19,8 +19,8 @@ describe "products_acceptance_spec integration" do
     describe "should create a new product without image" do
       it {
         click_button 'Submit'
-        page.has_content?('Successfuly added').must_equal true
-        page.has_content?('the very wicked name for product').must_equal true
+        assert page.has_content?('Successfuly added')
+        assert page.has_content?('the very wicked name for product')
       }
     end
 
@@ -36,7 +36,7 @@ describe "products_acceptance_spec integration" do
 
           attach_file "Picture", "#{Rails.root}/spec/support/images/cookware.jpg"
           click_button 'Submit'
-          page.has_xpath?("//img[@alt='Small_cookware']").must_equal true
+          assert page.has_xpath?("//img[@alt='Small_cookware']")
         end
       }
     end
@@ -88,8 +88,8 @@ describe "products_acceptance_spec integration" do
       fill_in 'Price', :with => '45.99'
       click_button 'Submit'
 
-      page.has_content?('Successfuly updated').must_equal true
-      page.has_content?('the very wicked name for product').must_equal true
+      assert page.has_content?('Successfuly updated')
+      assert page.has_content?('the very wicked name for product')
     end
 
     it "should not allow to save product with wrong params" do

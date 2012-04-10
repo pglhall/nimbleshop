@@ -12,7 +12,7 @@ describe "shops_acceptance_spec integration" do
       it "should update the shop" do
         visit admin_path
         click_link 'Shop configuration'
-        page.has_content?('Shop configuration').must_equal true
+        assert page.has_content?('Shop configuration')
         fill_in 'Name', with: 'Jack Daniels'
         fill_in 'Theme', with: 'my-awesome-theme'
         fill_in 'Twitter handle', with: '@nimbleshop2'

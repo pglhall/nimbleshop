@@ -11,7 +11,7 @@ describe "product_groups_acceptance_spec integration" do
   describe "add, edit and delete for product group" do
     it {
       visit admin_product_groups_path
-      page.has_content?("Product groups").must_equal true
+      assert page.has_content?("Product groups")
       click_link 'add_new_product_group'
 
       fill_in 'Name', with: 'sweet candies'
@@ -36,8 +36,8 @@ describe "product_groups_acceptance_spec integration" do
 
       click_button 'Submit'
 
-      page.has_content?('Successfuly updated').must_equal true
-      page.has_content?("name contains 'candy' and name starts with 'sweet'").must_equal true
+      assert page.has_content?('Successfuly updated')
+      assert page.has_content?("name contains 'candy' and name starts with 'sweet'")
 
       click_link 'Edit'
 
@@ -50,14 +50,14 @@ describe "product_groups_acceptance_spec integration" do
       click_link 'Remove'
       click_button 'Submit'
 
-      page.has_content?('Successfuly updated').must_equal true
-      page.has_content?("name starts with 'awesome'").must_equal true
+      assert page.has_content?('Successfuly updated')
+      assert page.has_content?("name starts with 'awesome'")
 
 #      https://github.com/thoughtbot/capybara-webkit/issues/109
       handle_js_confirm do
         click_link 'Delete'
       end
-      page.has_content?("name starts with 'awesome'").must_equal false
+      refute page.has_content?("name starts with 'awesome'")
     }
   end
 
@@ -68,10 +68,10 @@ describe "product_groups_acceptance_spec integration" do
       fill_in 'Name', with: ''
       click_button 'Submit'
 
-      page.has_content?('Successfuly updated').must_equal false
-      page.has_content?("Product group conditions value is invalid").must_equal true
-      page.has_content?("Product group conditions value can't be blank").must_equal true
-      page.has_content?("Name can't be blank").must_equal true
+      refute page.has_content?('Successfuly updated')
+      assert page.has_content?("Product group conditions value is invalid")
+      assert page.has_content?("Product group conditions value can't be blank")
+      assert page.has_content?("Name can't be blank")
     }
   end
 

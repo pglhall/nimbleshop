@@ -13,7 +13,7 @@ describe "payment_methods_acceptance_spec integration" do
       click_link 'Payment methods'
 
       assert page.has_content?("You have not configured any payment method. User wil not be able to make payment")
-      assert page.has_content?('Setup payment method').must_equal true
+      assert page.has_content?('Setup payment method')
       refute page.has_link?('Authorize.net')
       refute page.has_link?('Splitable')
       refute page.has_link?('Paypal website payments standard')
