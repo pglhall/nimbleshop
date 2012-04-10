@@ -79,8 +79,3 @@ VCR.configure do |c|
   c.hook_into :webmock # or :fakeweb
 end
 
-
-
-# TODO
-# - write acceptance test for deleting a shipping zone
-#
