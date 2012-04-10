@@ -41,7 +41,6 @@ class PaypalIntegrationTest < ActionDispatch::IntegrationTest
   end
 
   test 'paypal variables' do
-    #debugger
     assert_equal page.find("#amount_1").value, "25.0"
     #assert_equal page.find("#amount_2").value, "14.0"
     assert_equal page.find("#handling_cart").value, "3.99"

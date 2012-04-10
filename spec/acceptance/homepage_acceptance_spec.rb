@@ -15,6 +15,6 @@ class HomepageIntegrationTest < ActionDispatch::IntegrationTest
     visit root_path
 
     assert page.has_content?('powered by')
-    assert !page.has_content?('Shop by category')
+    refute page.has_content?('Shop by category')
   end
 end
