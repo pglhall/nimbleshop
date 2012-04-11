@@ -57,21 +57,21 @@ class Admin::ShippingMethodsController < AdminController
 
   private
 
-  def load_shipping_method
-    @shipping_method = @shipping_zone.shipping_methods.find_by_id(params[:id])
-  end
+    def load_shipping_method
+      @shipping_method = @shipping_zone.shipping_methods.find_by_id(params[:id])
+    end
 
-  def load_shipping_zone
-    @shipping_zone = ShippingZone.find_by_permalink!(shipping_zone_param)
-  end
+    def load_shipping_zone
+      @shipping_zone = ShippingZone.find_by_permalink!(shipping_zone_param)
+    end
 
-  def shipping_zone_param
-    params[:country_shipping_zone_id] ||
-      params[:regional_shipping_zone_id] ||
-        params[:shipping_zone_id]
-  end
+    def shipping_zone_param
+      params[:country_shipping_zone_id] ||
+        params[:regional_shipping_zone_id] ||
+          params[:shipping_zone_id]
+    end
 
-  def render_shipping_method(shipping_method)
-    render_to_string(partial: "admin/shipping_methods/shipping_method", locals: { shipping_method: shipping_method })
-  end
+    def render_shipping_method(shipping_method)
+      render_to_string(partial: "admin/shipping_methods/shipping_method", locals: { shipping_method: shipping_method })
+    end
 end
