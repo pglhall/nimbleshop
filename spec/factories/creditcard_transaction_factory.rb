@@ -9,4 +9,3 @@ FactoryGirl.define do
     status 'authorized'
   end
 end
-
