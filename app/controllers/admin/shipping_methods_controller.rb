@@ -67,8 +67,8 @@ class Admin::ShippingMethodsController < AdminController
 
     def shipping_zone_param
       params[:country_shipping_zone_id] ||
-        params[:regional_shipping_zone_id] ||
-          params[:shipping_zone_id]
+      params[:regional_shipping_zone_id] ||
+      params[:shipping_zone_id]
     end
 
     def render_shipping_method(shipping_method)
