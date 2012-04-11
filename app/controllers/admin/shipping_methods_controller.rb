@@ -31,6 +31,7 @@ class Admin::ShippingMethodsController < AdminController
 
   def create
     @shipping_method = @shipping_zone.shipping_methods.build(params[:shipping_method])
+
     if @shipping_method.save
       redirect_to admin_shipping_zones_path, notice: t(:successfully_created)
     else
@@ -40,6 +41,7 @@ class Admin::ShippingMethodsController < AdminController
 
   def update
     @shipping_method = @shipping_zone.shipping_methods.find(params[:id])
+
     if @shipping_method.update_attributes(params[:shipping_method])
       redirect_to [:edit, :admin, @shipping_zone, @shipping_method], notice: t(:successfully_updated)
     else
