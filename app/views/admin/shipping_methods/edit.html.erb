@@ -5,7 +5,13 @@
 <%= render 'form' %>
 
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
+  <thead>
+    <th>State/Province name</th>
+    <th>Order amount</th>
+    <th>Change in shipping cost</th>
+    <th>&nbsp;</th>
+  </thead>
   <tbody>
     <%= render @shipping_method.regions %>
   </tbody>
