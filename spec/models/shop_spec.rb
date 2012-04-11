@@ -35,8 +35,6 @@ describe Shop do
 
       wont validate_presence_of(:facebook_url)
       wont validate_presence_of(:contact_email)
-      #must validate_presence_of(:from_email)
-      #must validate_presence_of(:intercept_email)
     }
   end
 end

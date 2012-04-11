@@ -9,13 +9,4 @@ class ProductIntegrationTest < ActionDispatch::IntegrationTest
     visit product_path(@product)
     assert page.has_content?('awesome ipad from Apple')
   end
-
-  test "all_pictures" do
-    picture = create(:picture, product: @product)
-    visit product_path(@product)
-
-    click_link "main-image"
-    click_link "product-title"
-    assert page.has_content?('awesome ipad from Apple')
-  end
 end

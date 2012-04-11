@@ -11,24 +11,24 @@ class PaypalPaymentNotificationTest < ActiveRecord::TestCase
   end
 
   test "should know order total" do
-    assert_equal @notification.amount, 11.23
+    assert_equal 11.23, @notification.amount
   end
 
   test "should know transaction id" do
-    assert_equal @notification.transaction_id, "48D08257JB6543456"
+    assert_equal "48D08257JB6543456", @notification.transaction_id
   end
 
   test "should know invoice id" do
-    assert_equal @notification.invoice, "3"
+    assert_equal "3", @notification.invoice
   end
 
   test "should know status" do
-    assert_equal @notification.status, 'Completed'
+    assert_equal 'Completed', @notification.status
   end
 
   test "should set the order_id" do
     @notification.save
-    assert_equal @notification.order_id, "3"
+    assert_equal "3", @notification.order_id
   end
 end
 

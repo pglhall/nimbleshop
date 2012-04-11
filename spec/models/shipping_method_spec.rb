@@ -3,7 +3,6 @@ require 'spec_helper'
 describe ShippingMethod do
   include RegionalShippingMethodTestHelper
 
-
   describe "regional" do
     describe "#validations" do
       subject { create_regional_shipping_method }
@@ -32,7 +31,6 @@ describe ShippingMethod do
       }
     end
   end
-
 
   describe "#scopes" do
     def with_regions(countries)
@@ -214,7 +212,6 @@ describe ShippingMethod do
 
   describe "of state type" do
     let(:shipping) { create_regional_shipping_method }
-
 
     describe "#shipping_price" do
       it "ignores base_price value" do

@@ -8,26 +8,21 @@ Nimbleshop::Application.routes.draw do
   resources :payment_processors
   resources :product_groups
   resources :pages,     only: :show
-  resource  :checkout, controller: 'checkout',  only: :show
+  resource  :checkout,  only: :show, controller: :checkout
+  resources :products,  only: [:index, :show]
 
   resources :instant_payment_notifications do
     collection do
-      post 'paypal'
-      post 'splitable'
-    end
-  end
-
-  resources :products,  only: [:index, :show] do
-    member do
-      get 'all_pictures'
+      post :paypal
+      post :splitable
     end
   end
 
   resources :orders,    only: [:edit, :update] do
     member do
-      get 'cancel'
-      get 'edit_shipping_method'
-      put 'update_shipping_method'
+      get :cancel
+      get :edit_shipping_method
+      put :update_shipping_method
     end
   end
 
@@ -35,13 +30,13 @@ Nimbleshop::Application.routes.draw do
 
   resource  :feedback,  only: [:show] do
     collection do
-      get 'splitable'
+      get :splitable
     end
   end
 
   resource :cart, only: [:show, :update] do
     member do
-      post 'add'
+      post :add
     end
   end
 
@@ -53,22 +48,27 @@ Nimbleshop::Application.routes.draw do
 
   # BEGINNING of Admin section ---------------------------------------------------
   namespace :admin do
+
+    resource  :shop, only: [:update, :edit]
+    resources :payment_methods
+    resources :product_groups
+    resources :custom_fields
+
     namespace :paymentmethod do
       resource :authorizedotnet
       resource :paypalwebsite_payments_standard
       resource :splitable
     end
-    resources :payment_methods
 
     resources :orders do
       resources :shipments, except: [:edit, :update]
     end
 
-    resources :country_shipping_zones, :controller => 'shipping_zones' do
+    resources :country_shipping_zones, controller: :shipping_zones do
       resources :shipping_methods
     end
 
-    resources :regional_shipping_zones, :controller => 'shipping_zones' do
+    resources :regional_shipping_zones, controller: :shipping_zones do
       resources :shipping_methods do
         member do
           put :update_offset
@@ -85,19 +85,15 @@ Nimbleshop::Application.routes.draw do
     resource  :payment_gateway
     resources :products do
       member do
-        put 'variants'
+        put :variants
       end
     end
-    resources :product_groups
-    resources :custom_fields
 
     resources :link_groups do
       resources :navigations, only: [:create, :new, :destroy] 
     end
 
-    resource  :shop, only: [:update, :edit]
   end
-
   # END of Admin section ---------------------------------------------------
 
 end

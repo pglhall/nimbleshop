@@ -9,7 +9,6 @@ describe PaymentProcessor do
   let(:order)       { create(:order)      }
   let(:processor) { PaymentProcessor.new(creditcard, order) }
 
-
   describe '#authorize' do
     before { Shop.first.update_attribute(:default_creditcard_action, 'authorize') }
     describe "when credit card is invalid" do
@@ -28,10 +27,10 @@ describe PaymentProcessor do
       end
       it  {
         order.must_be(:authorized?)
-        order.transactions.count.must_equal 1
+        assert_equal 1, order.transactions.count
         order.transactions.last.must_be(:active?)
         order.transactions.last.must_be(:authorized?)
-        order.payment_method.must_equal PaymentMethod.find_by_permalink('authorize-net')
+        assert_equal PaymentMethod.find_by_permalink('authorize-net'), order.payment_method
       }
     end
   end

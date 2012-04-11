@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  theme :theme_resolver,        only: [:index, :show, :all_pictures]
+  theme :theme_resolver,        only: [:index, :show]
 
   before_filter :no_page_title, only: [:all_prictures, :index]
 
@@ -18,15 +18,6 @@ class ProductsController < ApplicationController
     @product        = Product.find_by_permalink!(params[:id])
     @page_title     = @product.name
     @product_groups = ProductGroup.all
-
-    respond_with @product
-  end
-
-  def all_pictures
-    @no_top_bar = true
-    @no_footer  = true
-    @product    = Product.find_by_permalink!(params[:id])
-    @page_title = "all pictures for #{@product.name}"
 
     respond_with @product
   end
