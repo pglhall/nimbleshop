@@ -58,7 +58,7 @@ class Admin::ShippingMethodsController < AdminController
   private
 
     def load_shipping_method
-      @shipping_method = @shipping_zone.shipping_methods.find_by_id(params[:id])
+      @shipping_method = @shipping_zone.shipping_methods.find_by_id!(params[:id])
     end
 
     def load_shipping_zone
