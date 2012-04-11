@@ -201,10 +201,8 @@ describe "checkout_spec integration" do
       fill_in "updates_#{p.id}", with: '10'
       click_button 'Update'
       assert page.has_content?('$250.00')
-      assert page.has_css?('table tr.shipping_cost')
 
       click_button 'Checkout'
-      assert page.has_content?('Shipping information')
     }
   end
 
