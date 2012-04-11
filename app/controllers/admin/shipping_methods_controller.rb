@@ -26,6 +26,7 @@ class Admin::ShippingMethodsController < AdminController
   end
 
   def edit
+    @page_title = "Editing shipping methods for #{@shipping_method.name}"
   end
 
   def create
