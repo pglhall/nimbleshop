@@ -3,13 +3,14 @@ class Product < ActiveRecord::Base
   include BuildPermalink
 
   alias_attribute :title, :name
+  attr_accessor :pictures_order
 
   validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
 
   has_many :variations, dependent: :destroy, order: "variation_type asc"
   has_many :variants, dependent: :destroy
 
-  has_many :pictures
+  has_many :pictures, order: 'pictures.position'
 
   has_many :custom_field_answers, dependent: :destroy do
     def for(custom_field_name)
@@ -29,9 +30,9 @@ class Product < ActiveRecord::Base
 
   scope :with_prictures, includes: 'pictures'
 
-  scope :active,    where(status: 'active') 
-  scope :hidden,    where(status: 'hidden') 
-  scope :sold_out,  where(status: 'sold_out') 
+  scope :active,    where(status: 'active')
+  scope :hidden,    where(status: 'hidden')
+  scope :sold_out,  where(status: 'sold_out')
 
 
   validates_presence_of :name, :description, :price
@@ -104,5 +105,18 @@ class Product < ActiveRecord::Base
 
   def initialize_status
     self.status ||= 'active'
+  end
+
+  def pictures_order=(value)
+    return if value.empty?
+    orders = ActiveSupport::JSON.decode(value)
+    current_pictures = self.pictures
+
+    orders.each{|position, picture_id|
+      if picture_id.present?
+        pic = current_pictures.find{|x| x.id == picture_id.to_i }
+        pic.update_attribute(:position, position) if pic
+      end
+    }
   end
 end
