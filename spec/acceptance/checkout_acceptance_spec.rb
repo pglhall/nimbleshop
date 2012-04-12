@@ -12,6 +12,14 @@ describe "checkout_spec integration" do
     create(:payment_method, enabled: true)
   end
 
+  describe "after going all the way to checkout if buyer comes back to cart only line items amount should be shown" do
+    it {
+      visit root_path
+      add_item_to_cart('Bracelet Set')
+      click_button 'Checkout'
+    }
+  end
+
   describe "when admin has not enabled any payment method then there should not be any error" do
     it {
       visit root_path
@@ -22,7 +30,7 @@ describe "checkout_spec integration" do
       click_button 'Submit'
       choose 'Ground'
       click_button 'Submit'
-      assert page.has_content?('All payments are secure and encrypted.')
+      assert page.has_css?('.payment-security-notice', text: 'All payments are secure and encrypted')
     }
   end
 
@@ -49,7 +57,6 @@ describe "checkout_spec integration" do
       current_path.must_equal("/")
     end
   end
-
 
   let(:current_order) { Order.last }
 

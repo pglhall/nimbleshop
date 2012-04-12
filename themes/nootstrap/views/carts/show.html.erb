@@ -26,7 +26,7 @@
             <%= submit_tag 'Checkout', name: "checkout", class: 'btn btn-primary' %>
           </td>
           <td> Total: </td>
-          <td style='font-size:120%;'>
+          <td style='font-size:120%;' class='line-items-total'>
             <strong><%= number_to_currency(current_order.total_amount) %></strong>
           </td>
             <td>&nbsp;</td>
