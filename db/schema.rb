@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112071455) do
+ActiveRecord::Schema.define(:version => 20120412000145) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -183,8 +183,9 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "picture_large_height"
     t.string   "picture_large_plus_width"
     t.string   "picture_large_plus_height"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "position",                   :default => 0
   end
 
   create_table "preferences", :force => true do |t|

@@ -7,7 +7,9 @@
 // bootstrap-collapse file is needed so that twitter bootstrap can collapse top navigation and make it work on iphone
 //
 //= require jquery-1.7.1
+//= require jquery-ui-1.8.16
 //= require jquery-ujs
+//= require jquery-json
 //= require mustache
 //= require nested_form
 //= require jquery-form
