@@ -3,12 +3,13 @@ require 'test_helper'
 class SimpleTaxCalculatorTest < ActiveRecord::TestCase
 
   setup do
-    Shop.first.update_attribute(:tax_percentage, 5)
   end
 
   test "tax for the order" do
-    order = mock(price: 300)
+    order = create :order_with_line_items
+    Shop.first.update_attribute(:tax_percentage, 10)
 
-    assert_equal 15.0, SimpleTaxCalculator.new(order).tax
+    assert_equal 50.00, order.reload.line_items_total
+    assert_equal 5.0, SimpleTaxCalculator.new(order).tax
   end
 end

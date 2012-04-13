@@ -28,7 +28,7 @@ describe LineItem do
         @line_item = order.line_items.first
       end
       it 'should have the price of variant' do
-        order.price.must_equal 27
+        order.line_items_total.must_equal 27
         @line_item.price.must_equal 27
         @line_item.product_name.must_equal product.name
         @line_item.product_description.must_equal product.description

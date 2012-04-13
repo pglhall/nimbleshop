@@ -31,6 +31,8 @@ class OrdersController < ApplicationController
     respond_with(@order)
   end
 
+  # TODO find a better action name. Name of action is edit but it records
+  # the shipping information for order
   def edit
     @page_title = 'Shipping information'
     current_order.initialize_addresses
@@ -38,7 +40,7 @@ class OrdersController < ApplicationController
     # TODO add a new method on order so that following code could be
     #
     # current_order.shippable_countries
-    @countries = ShippingMethod.available_for_countries(current_order.price)
+    @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
 
     respond_with(current_order)
   end
@@ -47,7 +49,7 @@ class OrdersController < ApplicationController
     if current_order.update_attributes(params[:order].merge(validate_email: true))
       redirect_to edit_shipping_method_order_path(current_order)
     else
-      @countries = ShippingMethod.available_for_countries(current_order.price)
+      @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
       current_order.initialize_addresses
       render 'edit'
     end

@@ -7,13 +7,13 @@
           <%= link_to 'Edit', edit_order_path(current_order), title: 'Edit Shipping Address', id: 'edit_shipping_address' %>
         </small>
       </h3>
-      <address>
+      <address class='shipping-address'>
         <%= current_order.shipping_address.full_address_array.join('<br />').html_safe %>
       </address>
 
       <h3> Billing address </h3>
 
-      <address>
+      <address class='billing-address'>
       <% if current_order.shipping_address.use_for_billing %>
         <i>Same as shipping address</i>
       <% else %>

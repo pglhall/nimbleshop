@@ -114,7 +114,7 @@ class Order < ActiveRecord::Base
   end
 
   def available_shipping_methods
-    ShippingMethod.available_for(price, shipping_address)
+    ShippingMethod.available_for(line_items_total, shipping_address)
   end
 
   def item_count
@@ -145,12 +145,16 @@ class Order < ActiveRecord::Base
     set_quantity(product.id, 0)
   end
 
-  def price
+  def line_items_total
     line_items.map(&:price).reduce(:+) || 0
   end
 
+  def price
+    raise 'use method line_items_total'
+  end
+
   def total_amount
-    price + shipping_cost + tax
+    line_items_total + shipping_cost + tax
   end
 
   def to_param
@@ -184,42 +188,42 @@ class Order < ActiveRecord::Base
 
   private
 
-  def set_order_number
-    _number = Random.new.rand(11111111...99999999).to_s
-    while self.class.exists?(number: _number) do
+    def set_order_number
       _number = Random.new.rand(11111111...99999999).to_s
+      while self.class.exists?(number: _number) do
+        _number = Random.new.rand(11111111...99999999).to_s
+      end
+
+      self.number = _number
     end
 
-    self.number = _number
-  end
+    def tax_calculator
+      @_tax_calculator ||= SimpleTaxCalculator.new(self)
+    end
 
-  def tax_calculator
-    @_tax_calculator ||= SimpleTaxCalculator.new(self)
-  end
+    def shipping_cost_calculator
+      @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
+    end
 
-  def shipping_cost_calculator
-    @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
-  end
+    def mark_split_time
+      update_attributes!(splitable_paid_at: Time.zone.now.to_s(:long))
+    end
 
-  def mark_split_time
-    update_attributes!(splitable_paid_at: Time.zone.now.to_s(:long))
-  end
+    def after_shipped
+      Mailer.shipping_notification(number).deliver
+      touch(:shipped_at)
+    end
 
-  def after_shipped
-    Mailer.shipping_notification(number).deliver
-    touch(:shipped_at)
-  end
+    def send_email_notifications
+      Mailer.order_notification(number).deliver
+      AdminMailer.new_order_notification(number).deliver
+    end
 
-  def send_email_notifications
-    Mailer.order_notification(number).deliver
-    AdminMailer.new_order_notification(number).deliver
-  end
+    def void_authorized_transactions
+      transactions.authorized.active.each(&:void)
+    end
 
-  def void_authorized_transactions
-    transactions.authorized.active.each(&:void)
-  end
-
-  def void_captured_transactions
-    transactions.captured.active.each(&:void)
-  end
+    def void_captured_transactions
+      transactions.captured.active.each(&:void)
+    end
 end

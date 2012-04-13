@@ -22,15 +22,15 @@
   <% if params[:controller] == 'payment_processors' %>
     <tr>
       <td>
-        <div class='lhs'>
-          Shipping : <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
+        <div class='lhs order-shipping-cost-amount'>
+          Shipping: <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
         </div>
         <div class='clear'></div>
     </tr>
     <tr>
       <td>
-        <div class='lhs'>
-          Tax : <strong> <%= number_to_currency(current_order.tax) %> </strong>
+        <div class='lhs order-tax-amount'>
+          Tax: <strong> <%= number_to_currency(current_order.tax) %> </strong>
         </div>
         <div class='clear'></div>
     </tr>
@@ -38,8 +38,8 @@
 
   <tr>
     <td>
-      <div class='lhs'>
-        Total :
+      <div class='lhs order-total-amount'>
+        Total:
         <strong> <%= number_to_currency(current_order.total_amount) %> </strong>
       </div>
       <div class='clear'></div>

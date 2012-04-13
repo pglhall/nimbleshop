@@ -5,7 +5,7 @@ class SimpleTaxCalculator
   end
 
   def tax
-    (@order.price * tax_percentage * BigDecimal.new("0.01")).to_f.round(2)
+    (@order.line_items_total * tax_percentage * BigDecimal.new("0.01")).to_f.round(2)
   end
 
   private

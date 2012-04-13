@@ -37,3 +37,6 @@ class ActionDispatch::IntegrationTest
     Capybara.use_default_driver
   end
 end
+
+# Require ruby files in support dir.
+Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }

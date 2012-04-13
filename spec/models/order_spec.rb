@@ -55,7 +55,7 @@ describe Order do
 
     describe "#price" do
       it "no products" do
-        order.price.to_f.must_equal 0.0
+        order.line_items_total.to_f.must_equal 0.0
       end
 
       it "with products" do
@@ -63,7 +63,7 @@ describe Order do
         order.add(product2)
         order.set_quantity(product1.id, 3)
 
-        order.price.to_f.must_equal 60.0
+        order.line_items_total.to_f.must_equal 60.0
       end
     end
   end

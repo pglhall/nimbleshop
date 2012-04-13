@@ -265,7 +265,6 @@ div.mobile_item_list div:last-of-type{
 }
 
 .total{
-	border-top: 1px solid black;
 	padding-top: 5px;
 	margin-bottom: 5px;
 }
@@ -303,5 +302,65 @@ div.mobile_item_list div:last-of-type{
 
 .sidebar_block li{
 	margin-bottom: 3px;
+}
+
+/*Cart
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+#cartform .cart_header{
+	font-weight: bold;
+}
+
+#cartform hr{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 1px;
+	border-color:	#DDDDDD -moz-use-text-color #FFFFFF;
+}
+
+#cartform .cart_total .text{
+	text-align: right;
+	font-size: 16px;
+}
+
+#cartform .product_pictures img{
+	width: 60px;
+	height: 60px;
+}
+
+#cartform .description strong
+
+#cartform .description strong:empty {
+	display: none;
+}
+
+
+#cartform .cart_total .cost{
+	font-size: 16px;
+}
+
+@media (max-width: 496px) {
+	#cartform [class*="span"]{
+		margin-bottom: 10px;
+	}
+	#cartform hr{
+		margin-bottom: 10px;
+	}
+	#cartform h4{
+		margin-bottom: 5px;
+	}
+	
+	.item_name{
+		font-size: 16px;
+	}
+
+	.remove-item{
+		background-image: none;
+		width: auto;
+		height: auto;
+		text-indent: 0;
+		display: block;
+	}
 }
 
