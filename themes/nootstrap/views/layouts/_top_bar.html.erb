@@ -16,7 +16,7 @@
           <li><%= link_to 'Contact us', contact_us_path %></li>
         </ul>
         <p class='navbar-text pull-right cart_link'>
-          <%= link_to "#{items_count_in_cart} item(s)", '/cart' %>
+        <%= link_to pluralize(items_count_in_cart, 'item'), '/cart' %>
         </p>
       </div><!--/.nav-collapse -->
     </div>

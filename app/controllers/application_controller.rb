@@ -34,6 +34,8 @@ class ApplicationController < ActionController::Base
 
   def current_shop
     @shop ||= Shop.first
+    raise "shops table is empty" unless @shop
+    @shop
   end
 
   private
