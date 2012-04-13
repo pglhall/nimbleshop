@@ -397,3 +397,16 @@ div.mobile_item_list div:last-of-type{
 	margin-left: 0;
 	max-width: 100%;
 }
+
+/*Modal
+----------------------------------------------------------------------------------------------------------------------*/
+.modal_images{
+	overflow: hidden;
+}
+
+.modal_cvv_image{
+	width: 40%;
+	margin-right: 5%;
+	display: inline;
+	float: left;
+}
