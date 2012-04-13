@@ -23,6 +23,32 @@
   color: #005580;
 }
 
+.cart_link a{
+	color: #999;
+	line-height: 16px;
+	display: block;
+	margin-top: 10px;
+}
+
+.cart_link:hover a{
+	color: #005580;
+}
+
+.cart_link a:before{
+	content: "";
+	display: inline;
+	width: 16px;
+	height: 16px;
+	background-color: #FFF;
+	float: left;
+	background: url("/assets/cart.png") no-repeat transparent;
+	margin-right: 5px;
+}
+
+.cart_link:hover a:before{
+	background: url("/assets/cart_hover.png") no-repeat transparent;
+}
+
 
 #site-name {
   color: #005580;
