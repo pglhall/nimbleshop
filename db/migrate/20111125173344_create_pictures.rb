@@ -6,6 +6,7 @@ class CreatePictures < ActiveRecord::Migration
       t.string     :file_name
       t.string     :content_type
       t.string     :file_size
+      t.integer    :position,      default: 0
 
       t.string :picture_width
       t.string :picture_height

@@ -2,7 +2,7 @@ class Address < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :address1, :zipcode, :country_code, :city
 
-  @@credit_card_attributes = %w(address1 address2 zipcode first_name last_name)
+  CREDIT_CARD_ATTRIBUTES = %w(address1 address2 zipcode first_name last_name)
 
   belongs_to :order
 
@@ -29,7 +29,7 @@ class Address < ActiveRecord::Base
   end
 
   def to_credit_card_attributes
-    self.attributes.slice(*@@credit_card_attributes).merge(state: state_name)
+    self.attributes.slice(*CREDIT_CARD_ATTRIBUTES).merge('state' => state_name)
   end
 
   private

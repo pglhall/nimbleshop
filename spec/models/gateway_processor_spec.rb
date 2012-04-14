@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe GatewayProcessor do
+class GatewayProcessorTest <  ActiveRecord::TestCase
 
   def playcasette(casette)
     transaction = nil
@@ -12,132 +12,96 @@ describe GatewayProcessor do
     transaction
   end
 
-  let(:order)         { create(:order).tap { |t| t.stubs(:total_amount => 100) }  }
-  let(:authorize_net) { PaymentMethod.find_by_permalink('authorize-net')          }
-
-  let(:gateway) do
-    GatewayProcessor.new({
-      order:          order, 
-      creditcard:     creditcard,
-      payment_method: authorize_net
-    })
+  setup do
+    @order = create(:order).tap { |t| t.stubs(:total_amount => 100) }
+    @authorize_net = PaymentMethod.find_by_permalink('authorize-net')
   end
 
-  describe '#authorize' do
-    describe "when credit card is invalid" do
-      let(:creditcard)  { build(:creditcard, number: 2)  }
-      before do
-        @transaction = playcasette('authorize.net/authorize-failure') { gateway.authorize }
-      end
-      it  { @transaction.must_be(:nil?) }
-    end
-
-    describe "when credit card is invalid" do
-      let(:creditcard)  { build(:creditcard)  }
-      before do
-        @transaction = playcasette('authorize.net/authorize-success') { gateway.authorize }
-      end
-      it  {
-        @transaction.must_be(:active?)
-        @transaction.must_be(:authorized?)
-
-        @transaction.order_id.must_equal        order.id
-        @transaction.creditcard_id.must_equal   creditcard.id
-        @transaction.transaction_gid.must_equal '2169881780'
-        @transaction.amount.must_equal          100
-      }
-    end
+  test "authorization with invalid credit card" do
+    creditcard = build(:creditcard, number: 2)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    transaction = playcasette('authorize.net/authorize-failure') { gateway.authorize }
+    assert transaction.nil?
   end
 
-  describe '#purchase' do
-    describe "when credit card is valid" do
-      let(:creditcard)  { build(:creditcard)  }
-      before do
-        @transaction = playcasette('authorize.net/purchase-success') { gateway.purchase }
-      end
+  test "authorization with valid credit card" do
+    creditcard = build :creditcard
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    transaction = playcasette('authorize.net/authorize-success') { gateway.authorize }
 
-      it {
-        @transaction.must_be(:purchased?)
-        @transaction.must_be(:active?)
-
-        @transaction.order_id.must_equal        order.id
-        @transaction.creditcard_id.must_equal   creditcard.id
-        @transaction.transaction_gid.must_equal '2169919631'
-        @transaction.amount.must_equal          100
-      }
-    end
-
-    describe "when credit card is invalid" do
-      let(:creditcard)  { build(:creditcard, number: 2)  }
-      before do
-        @transaction = playcasette('authorize.net/purchase-failure') { gateway.purchase }
-      end
-      it { @transaction.must_be(:nil?) }
-    end
+    assert transaction.active?
+    assert transaction.authorized?
+    assert_equal @order, transaction.order
+    assert_equal creditcard, transaction.creditcard
+    assert_equal '2169881780', transaction.transaction_gid
+    assert_equal 100, transaction.amount
   end
 
-  describe '#capture' do
-    describe "when credit card is valid" do
-      let(:creditcard)  { build(:creditcard)  }
-      before do
-        @authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
-        @captured   = playcasette('authorize.net/capture-success')    { gateway.capture(@authorized) }
-      end
-
-      it 'should have right values' do
-        @authorized.reload.wont_be(:active?)
-
-        @captured.must_be(:captured?)
-        @captured.must_be(:active?)
-        @captured.amount.must_equal 100
-        @captured.transaction_gid.must_equal '2169881780'
-      end
-    end
-
-    describe "when credit card is invalid" do
-      let(:creditcard)  { build(:creditcard)  }
-
-      before do
-        @authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
-        creditcard.number = 2
-        @captured   = playcasette('authorize.net/capture-failure')    { gateway.capture(@authorized) }
-      end
-
-      it 'should have right values' do
-        @captured.must_be(:nil?)
-      end
-    end
+  test 'purchase with invalid credit card' do
+    creditcard =   build(:creditcard, number: 2)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    transaction = playcasette('authorize.net/purchase-failure') { gateway.purchase }
+    assert transaction.nil?
   end
-  describe '#void' do
-    describe "when credit card is valid" do
-      let(:creditcard)  { build(:creditcard)  }
-      before do
-        @authorized = playcasette('authorize.net/void-authorize')  { gateway.authorize }
-        @voided   = playcasette('authorize.net/void-success')    { gateway.void(@authorized) }
-      end
 
-      it 'should have right values' do
-        @authorized.reload.wont_be(:active?)
+  test 'purchase with valid credit card' do
+    creditcard = build :creditcard
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    transaction = playcasette('authorize.net/purchase-success') { gateway.purchase }
+    assert transaction.purchased?
+    assert transaction.active?
 
-        @voided.must_be(:voided?)
-        @voided.must_be(:active?)
-        @voided.amount.must_equal 100
-        @voided.transaction_gid.must_equal '2169944463'
-      end
-    end
-
-    describe "when credit card is invalid" do
-      let(:creditcard)  { build(:creditcard)  }
-
-      before do
-        @authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
-        creditcard.number = 2
-        @voided   = playcasette('authorize.net/void-failure')    { gateway.void(@authorized) }
-      end
-
-      it 'should have right values' do
-        @voided.must_be(:nil?)
-      end
-    end
+    assert_equal @order, transaction.order
+    assert_equal creditcard, transaction.creditcard
+    assert_equal '2169919631', transaction.transaction_gid
+    assert_equal 100, transaction.amount
   end
+
+  test "capture when credit card is valid" do
+    creditcard = build(:creditcard)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
+    captured   = playcasette('authorize.net/capture-success')    { gateway.capture(authorized) }
+
+    refute authorized.reload.active?
+    assert captured.captured?
+    assert captured.active?
+    assert_equal 100, captured.amount
+    assert_equal '2169881780', captured.transaction_gid
+  end
+
+  test "capture when credit card is invalid" do
+    creditcard = build(:creditcard)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
+    creditcard.number = 2
+    captured   = playcasette('authorize.net/capture-failure')    { gateway.capture(authorized) }
+
+    assert captured.nil?
+  end
+
+  test "void when credit card is invalid" do
+    creditcard =  build(:creditcard)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
+    creditcard.number = 2
+    voided   = playcasette('authorize.net/void-failure')    { gateway.void(authorized) }
+
+    assert voided.nil?
+  end
+
+  test "void when credit card is valid" do
+    creditcard = build(:creditcard)
+    gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
+    authorized = playcasette('authorize.net/void-authorize')  { gateway.authorize }
+    voided   = playcasette('authorize.net/void-success')    { gateway.void(authorized) }
+
+    refute authorized.reload.active?
+    assert voided.voided?
+    assert voided.active?
+    assert_equal 100, voided.amount
+    assert_equal '2169944463', voided.transaction_gid
+  end
+
 end
+

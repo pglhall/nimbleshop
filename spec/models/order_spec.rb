@@ -1,148 +1,121 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe Order do
-  describe "#final_billing_address" do
-    let(:order) do
-      Order.new(billing_address: billing, shipping_address: shipping)
-    end
+class OrderAddressTest < ActiveSupport::TestCase
 
-    describe "when shipping address is nil" do
-      let(:shipping)  { nil }
-      let(:billing)   { nil }
-
-      it { order.final_billing_address.must_equal nil }
-    end
-
-    describe "when shipping address used_for_billing" do
-      let(:shipping)  { ShippingAddress.new(use_for_billing: true) }
-      let(:billing)   { BillingAddress.new }
-
-      it { order.final_billing_address.must_equal shipping }
-    end
-
-    describe "shipping address is not used_for_billing" do
-      let(:shipping)  { ShippingAddress.new(use_for_billing: false) }
-      let(:billing)   { BillingAddress.new }
-
-      it { order.final_billing_address.must_equal billing }
-    end
+  test "shipping and billing address is nil" do
+    order = Order.new(billing_address: nil, shipping_address: nil)
+    assert_equal nil, order.final_billing_address
   end
 
-  describe "products" do
-    let(:order)     { create(:order) }
-    let(:product1)  { create(:product, price: 10) }
-    let(:product2)  { create(:product, price: 30) }
-    let(:line_item) { order.line_item_of(product1) }
-
-    it "#add" do
-      order.add(product1)
-      line_item.product.must_equal product1
-      line_item.quantity.must_equal 1
-    end
-
-    it "#remove" do
-      order.add(product1)
-      order.remove(product1)
-
-      line_item.must_equal nil
-    end
-
-    it "#set_quantity" do
-      order.add(product1)
-      order.set_quantity(product1, 20)
-      line_item.quantity.must_equal 20
-    end
-
-    describe "#price" do
-      it "no products" do
-        order.line_items_total.to_f.must_equal 0.0
-      end
-
-      it "with products" do
-        order.add(product1)
-        order.add(product2)
-        order.set_quantity(product1.id, 3)
-
-        order.line_items_total.to_f.must_equal 60.0
-      end
-    end
+  test "billing address is same as shipping address" do
+    shipping_address = ShippingAddress.new(use_for_billing: true)
+    order = Order.new(shipping_address: shipping_address, billing_address: BillingAddress.new)
+    assert_equal shipping_address, order.final_billing_address
   end
 
-  describe '#available_shipping_methods' do
-    it {
-      order = create(:order)
-      order.add(create(:product))
-      shipping_method = create(:country_shipping_method, base_price: 100, lower_price_limit: 1, upper_price_limit: 99999)
-      order.shipping_address = create(:shipping_address)
-      order.available_shipping_methods.size.must_equal 1
-    }
+  test "billing address is different from shipping address" do
+    shipping_address = ShippingAddress.new(use_for_billing: false)
+    billing_address = BillingAddress.new
+    order = Order.new(shipping_address: shipping_address, billing_address: billing_address)
+    assert_equal billing_address, order.final_billing_address
   end
 
-  describe "#transaction_authorized" do
-    before do
-      @order = create(:order)
-    end
+end
 
-    it "must verify payment method" do
-      @order.transaction_authorized
-
-      @order.errors[:payment_method].must_equal ["can't be blank"]
-      Order.find(@order.id).must_be(:abandoned?)
-    end
-
-    it "must update shipping state to pending" do
-      create(:creditcard_transaction, order: @order)
-      @order.update_attributes(payment_method: PaymentMethod::AuthorizeNet.first)
-
-      @order = Order.find(@order.id)
-      ActionMailer::Base.deliveries.clear
-      @order.transaction_authorized
-
-      @order = Order.find(@order.id)
-      @order.must_be(:authorized?)
-      @order.must_be(:shipping_pending?)
-      ActionMailer::Base.deliveries.count.must_equal 2
-    end
+class OrderTest < ActiveSupport::TestCase
+  setup do
+    @order = create :order
+    @product1 = create :product, price: 10
+    @product2 = create :product, price: 30
   end
 
-  describe "#transaction_captured" do
-    it {
-      @order = create(:authorized_order)
-      @order.transaction_captured
-
-      Order.find(@order.id).must_be(:paid?)
-    }
+  test "#add" do
+    @order.add(@product1)
+    assert_equal 1, @order.line_items.size
+    assert_equal 1, @order.line_items.first.quantity
   end
 
-  describe "#transaction_purchased" do
-    it {
-      @order = create(:order_with_transaction)
-      ActionMailer::Base.deliveries.clear
-      @order.transaction_purchased
-
-      @order = Order.find(@order.id)
-      @order.must_be(:paid?)
-      @order.must_be(:shipping_pending?)
-      @order.splitable_paid_at.must_equal(@order.updated_at.to_s(:long))
-      ActionMailer::Base.deliveries.count.must_equal 2
-    }
+  test "#remove" do
+    @order.add(@product1)
+    @order.remove(@product1)
+    assert @order.reload.line_items.empty?
+    assert_equal 0.0, @order.reload.line_items_total.to_f
   end
 
-  describe "#transaction_cancelled" do
-    it {
-      @order = create(:authorized_order)
-      @order.transaction_cancelled
-
-      Order.find(@order.id).must_be(:cancelled?)
-    }
+  test "#set_quantity" do
+    @order.add(@product1)
+    @order.set_quantity(@product1, 20)
+    assert_equal 20, @order.line_items.first.quantity
   end
 
-  describe "#transaction_refunded" do
-    it {
-      @order = create(:captured_order)
-      @order.transaction_refunded
-
-      Order.find(@order.id).must_be(:refunded?)
-    }
+  test "price when more items are in the order" do
+    @order.add(@product1)
+    @order.add(@product2)
+    @order.set_quantity(@product1.id, 3)
+    assert_equal 60.0, @order.line_items_total.to_f
   end
+
+  test "#available_shipping_methods" do
+    @order.add(create(:product))
+    shipping_method = create(:country_shipping_method, base_price: 100, lower_price_limit: 1, upper_price_limit: 99999)
+    @order.shipping_address = create(:shipping_address)
+    assert_equal 1, @order.available_shipping_methods.size
+  end
+end
+
+class OrderPaymentTest < ActiveSupport::TestCase
+  setup do
+    @order = create :order
+  end
+
+  test "payment_method is required" do
+    @order.transaction_authorized
+    assert_equal ["can't be blank"], @order.errors[:payment_method]
+    assert Order.find(@order.id).abandoned?
+  end
+
+   test "#transaction_authorized" do
+    create(:creditcard_transaction, order: @order)
+    @order.update_attributes(payment_method: PaymentMethod::AuthorizeNet.first)
+
+    @order = Order.find(@order.id)
+    ActionMailer::Base.deliveries.clear
+    @order.transaction_authorized
+
+    @order = Order.find(@order.id)
+    assert @order.authorized?
+    assert @order.shipping_pending?
+    assert_equal 2, ActionMailer::Base.deliveries.count
+  end
+
+   test "#transaction_captured" do
+    @order = create(:authorized_order)
+    @order.transaction_captured
+    assert Order.find(@order.id).paid?
+   end
+
+  test "#transaction_purchased" do
+    @order = create(:order_with_transaction)
+    ActionMailer::Base.deliveries.clear
+    @order.transaction_purchased
+
+    @order = Order.find(@order.id)
+    assert @order.paid?
+    assert @order.shipping_pending?
+    assert_equal @order.updated_at.to_s(:long), @order.splitable_paid_at
+    assert_equal 2, ActionMailer::Base.deliveries.count
+  end
+
+  test "#transaction_cancelled" do
+    @order = create(:authorized_order)
+    @order.transaction_cancelled
+    assert Order.find(@order.id).cancelled?
+  end
+
+  test "#transaction_refunded" do
+    @order = create(:captured_order)
+    @order.transaction_refunded
+    assert Order.find(@order.id).refunded?
+  end
+
 end

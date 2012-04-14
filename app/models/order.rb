@@ -132,7 +132,7 @@ class Order < ActiveRecord::Base
   end
 
   def set_quantity(product_id, quantity)
-    return unless line_item = line_item_of(product_id)
+    return unless line_item = line_item_for(product_id)
 
     if quantity > 0
       line_item.update_attributes(quantity: quantity)
@@ -162,11 +162,7 @@ class Order < ActiveRecord::Base
   end
 
   def final_billing_address
-    unless shipping_address.try(:use_for_billing)
-      return billing_address
-    end
-
-    shipping_address
+    (shipping_address && !shipping_address.use_for_billing) ? billing_address : shipping_address
   end
 
   def initialize_addresses
@@ -182,7 +178,7 @@ class Order < ActiveRecord::Base
       attributes['use_for_billing'] == "false"
   end
 
-  def line_item_of(product_id)
+  def line_item_for(product_id)
     line_items.find_by_product_id(product_id)
   end
 

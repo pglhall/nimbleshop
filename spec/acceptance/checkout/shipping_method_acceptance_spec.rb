@@ -20,15 +20,18 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     visit root_path
     add_item_to_cart('Bracelet Set')
     click_button 'Checkout'
+
     enter_valid_email_address
     enter_valid_shipping_address
     click_button 'Submit'
-    choose 'Ground'
+
+    choose 'Ground Shipping'
     click_button 'Submit'
 
     assert_equal 'Ground Shipping ( $3.99 )', find('.shipping-method').text
     click_link 'edit_shipping_method'
-    choose 'Express'
+
+    choose 'Express Shipping'
     click_button 'Submit'
 
     assert_equal 'Express Shipping ( $13.99 )', find('.shipping-method').text
