@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412000145) do
+ActiveRecord::Schema.define(:version => 20120112071455) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120412000145) do
     t.string   "file_name"
     t.string   "content_type"
     t.string   "file_size"
+    t.integer  "position",                   :default => 0
     t.string   "picture_width"
     t.string   "picture_height"
     t.string   "picture_tiny_width"
@@ -185,7 +186,6 @@ ActiveRecord::Schema.define(:version => 20120412000145) do
     t.string   "picture_large_plus_height"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
-    t.integer  "position",                   :default => 0
   end
 
   create_table "preferences", :force => true do |t|
