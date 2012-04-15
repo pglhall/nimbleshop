@@ -1,227 +1,189 @@
-require 'spec_helper'
+require "test_helper"
 
-describe ProductGroupCondition do
+class ProductGroupConditonTest < ActiveSupport::TestCase
 
-  it "should raise error on nil name" do
-    condition = ProductGroupCondition.new(operator: 'lt', value: 23)
+  test "operators for number" do
+    condition = build(:number_group_condition)
 
-    condition.wont_be(:valid?)
-    condition.errors[:name].wont_be(:empty?)
+    %w(lt gt lteq gteq).each do | operator |
+      condition.operator = operator
+      assert condition.valid?
+    end
+
+    %w(contains starts ends).each do | operator |
+      condition.operator = operator
+      refute condition.valid?
+      assert_equal ["is invalid"], condition.errors[:operator]
+    end
   end
 
-  it "should raise error on nil operator" do
-    condition = ProductGroupCondition.new(name: 'price', value: 23)
+  test "valid operators for text" do
+    condition = build(:text_group_condition)
 
-    condition.wont_be(:valid?)
-    condition.errors[:operator].wont_be(:empty?)
+    %w(contains starts ends eq).each do | operator |
+      condition.operator = operator
+      assert condition.valid?
+    end
+
+    %w(lt gt lteq gteq).each do | operator |
+      condition.operator = operator
+      refute condition.valid?
+    end
   end
 
-  it "should raise error on nil value" do
-    condition = ProductGroupCondition.new(name: 'price', operator: 'lt')
-    condition.wont_be(:valid?)
-    condition.errors[:value].wont_be(:empty?)
+  test "operators for date" do
+    condition = build(:date_group_condition)
+
+    %w(lt gt lteq gteq).each do | operator |
+      condition.operator = operator
+      assert condition.valid?
+    end
+
+    %w(contains starts ends).each do | operator |
+      condition.operator = operator
+      refute condition.valid?
+    end
+  end
+
+end
+
+
+class ProductGroupConditionNumber < ActiveSupport::TestCase
+  setup do
+    @condition = build(:number_group_condition)
+    @product_group = ProductGroup.new
+    @condition.value    = "4"
+    @product_group.product_group_conditions = [ @condition ]
+  end
+
+  test 'less than condition' do
+    @condition.operator = "lt"
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.0 AND "products"."status" = 'active'
+    }
+  end
+
+  test 'less than equal condition' do
+    @condition.operator = "lteq"
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.0 AND "products"."status" = 'active'
+    }
+  end
+
+  test 'greater than operation' do
+    @condition.operator = "gt"
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.0 AND "products"."status" = 'active'
+    }
+  end
+
+  test 'greater than equal condition' do
+    @condition.operator = "gteq"
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.0 AND "products"."status" = 'active'
+    }
+  end
+
+  test 'equal operation' do
+    @condition.operator = "eq"
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    search_sql.must_be_like %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.0 AND "products"."status" = 'active'
+    }
   end
 end
 
-describe ProductGroupCondition do
-  describe "of type text" do
-    let(:condition) { build(:text_group_condition) }
+class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
 
-    it "should raise unsupported operator for non text operators" do
-      %w(lt gt lteq gteq).each do | operator |
-        condition.operator = operator
-      condition.wont_be(:valid?)
-      condition.errors[:operator].must_equal ["is invalid"]
-      end
-    end
+  include DbifySqlHelper
 
-    it "should not raise unsupported operator for text operators" do
-      %w(contains starts ends eq).each do | operator |
-        condition.operator = operator
-      condition.must_be(:valid?)
-      end
-    end
+  setup do
+    @condition1 = build :number_group_condition
+    @condition2 = build :text_group_condition
+    @product_group = ProductGroup.new
+
+    @condition1.value  = "4.34"
+    @condition2.value  = "george"
   end
 
-  describe "of type date" do
-    let(:condition) { build(:date_group_condition) }
-
-    it "should raise unsupported operator for non text operators" do
-      %w(contains starts ends).each do | operator |
-        condition.operator = operator
-      condition.wont_be(:valid?)
-      condition.errors[:operator].must_equal ["is invalid"]
-      end
-    end
-
-    it "should not raise unsupported operator for date operators" do
-      %w(lt gt lteq gteq).each do | operator |
-        condition.operator = operator
-      condition.must_be(:valid?)
-      end
-    end
+  test "should handle less than operation and contains" do
+    @condition1.operator = "lt"
+    @condition2.operator = "contains"
+    @product_group.product_group_conditions = [ @condition1, @condition2 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE '%george%' AND "products"."status" = 'active'
+    }
+    search_sql.must_be_like dbify_sql(expected_sql)
   end
 
-  describe "of type number" do
-    let(:condition) { build(:number_group_condition) }
+  test "should handle less than equal operation and starts with" do
+    @condition1.operator = "lteq"
+    @condition2.operator = "starts"
+    @product_group.product_group_conditions = [ @condition1, @condition2 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
 
-    it "should raise error with non number value" do
-      condition.value = 'lt'
-      condition.wont_be(:valid?)
-      condition.errors[:value].must_equal ["is invalid"]
-    end
-
-    it "should raise unsupported operator for non text operators" do
-      %w(contains starts ends).each do | operator |
-        condition.operator = operator
-      condition.wont_be(:valid?)
-      condition.errors[:operator].must_equal ["is invalid"]
-      end
-    end
-
-    it "should not raise unsupported operators" do
-      %w(lt gt lteq gteq).each do | operator |
-        condition.operator = operator
-      condition.must_be(:valid?)
-      end
-    end
-
-    describe "#to_search_sql" do
-
-      let(:product_group) { ProductGroup.new }
-      let(:search_sql) {  product_group.product_group_conditions.to_search_sql }
-
-      before do
-        condition.value    = "4"
-        product_group.product_group_conditions = [ condition ]
-      end
-
-      it "should handle less than operation" do
-        condition.operator = "lt"
-
-        search_sql.must_be_like %{
-      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.0 AND "products"."status" = 'active'
-        }
-      end
-
-      it "should handle less than equal operation" do
-        condition.operator = "lteq"
-
-        search_sql.must_be_like %{
-      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.0 AND "products"."status" = 'active'
-        }
-      end
-
-      it "should handle greater than operation" do
-        condition.operator = "gt"
-        search_sql.must_be_like %{
-      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.0 AND "products"."status" = 'active'
-        }
-      end
-
-      it "should handle greater than equal  operation" do
-        condition.operator = "gteq"
-        search_sql.must_be_like %{
-      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.0 AND "products"."status" = 'active'
-        }
-      end
-
-      it "should handle equal operation" do
-        condition.operator = "eq"
-        search_sql.must_be_like %{
-      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.0 AND "products"."status" = 'active'
-        }
-      end
-    end
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."status" = 'active'
+    }
+    search_sql.must_be_like dbify_sql(expected_sql)
   end
 
-  describe "with multiple conditions" do
-    describe "#to_search_sql" do
-
-      let(:condition1) { build(:number_group_condition) }
-      let(:condition2) { build(:text_group_condition) }
-      let(:product_group) { ProductGroup.new }
-      let(:search_sql) {  product_group.product_group_conditions.to_search_sql }
-
-      before do
-        condition1.value  = "4.34"
-        condition2.value  = "george"
-        product_group.product_group_conditions = [ condition1, condition2 ]
-      end
-
-      it "should handle less than operation and contains" do
-        condition1.operator = "lt"
-        condition2.operator = "contains"
-
-        expected_sql = %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE '%george%' AND "products"."status" = 'active'
-        }
-
-        search_sql.must_be_like dbify_sql(expected_sql)
-      end
-
-      it "should handle less than equal operation and starts with" do
-        condition1.operator = "lteq"
-        condition2.operator = "starts"
-
-        expected_sql = %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."status" = 'active'
-        }
-
-        search_sql.must_be_like dbify_sql(expected_sql)
-      end
-
-      it "should handle greater than operation and ends with" do
-        condition1.operator = "gt"
-        condition2.operator = "ends"
-        expected_sql = %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" LIKE '%george' AND "products"."status" = 'active'
-        }
-
-        search_sql.must_be_like dbify_sql(expected_sql)
-      end
-
-      it "should handle greater than equal  operation" do
-        condition1.operator = "gteq"
-        condition2.operator = "eq"
-        expected_sql = %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
-        }
-
-        search_sql.must_be_like dbify_sql(expected_sql)
-      end
-
-      it "should handle equal operation and equal" do
-        condition1.operator = "eq"
-        condition2.operator = "eq"
-        expected_sql = %{
-          SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
-        }
-
-        search_sql.must_be_like dbify_sql(expected_sql)
-      end
-
-      describe "with price condition" do
-        let(:condition3) { create(:price_group_condition) }
-
-        before do
-          condition1.value  = "4.34"
-          condition2.value  = "george"
-          condition3.value  = "19.99"
-          condition1.operator = "lt"
-          condition2.operator = "starts"
-          condition3.operator = "gteq"
-          product_group.product_group_conditions = [ condition1, condition2, condition3 ]
-        end
-
-        it "should handle search" do
-          expected_sql = %{
-            SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."price" >= 19.99 AND "products"."status" = 'active'
-          }
-
-          search_sql.must_be_like dbify_sql(expected_sql)
-        end
-      end
-    end
+  test "should handle greater than operation and ends with" do
+    @condition1.operator = "gt"
+    @condition2.operator = "ends"
+    @product_group.product_group_conditions = [ @condition1, @condition2 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" LIKE '%george' AND "products"."status" = 'active'
+    }
+    search_sql.must_be_like dbify_sql(expected_sql)
   end
+
+  test "should handle greater than equal  operation" do
+    @condition1.operator = "gteq"
+    @condition2.operator = "eq"
+    @product_group.product_group_conditions = [ @condition1, @condition2 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
+    }
+
+    search_sql.must_be_like dbify_sql(expected_sql)
+  end
+
+  test "should handle equal operation and equal" do
+    @condition1.operator = "eq"
+    @condition2.operator = "eq"
+    @product_group.product_group_conditions = [ @condition1, @condition2 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
+    }
+
+    search_sql.must_be_like dbify_sql(expected_sql)
+  end
+
+  test "with price_group_condition search" do
+    @condition3 = create :price_group_condition
+    @condition1.value  = "4.34"
+    @condition2.value  = "george"
+    @condition3.value  = "19.99"
+    @condition1.operator = "lt"
+    @condition2.operator = "starts"
+    @condition3.operator = "gteq"
+    @product_group.product_group_conditions = [ @condition1, @condition2, @condition3 ]
+    search_sql = @product_group.product_group_conditions.to_search_sql
+
+    expected_sql = %{
+      SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."price" >= 19.99 AND "products"."status" = 'active'
+    }
+
+    search_sql.must_be_like dbify_sql(expected_sql)
+  end
+
 end

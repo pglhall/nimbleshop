@@ -35,7 +35,31 @@ end
 class PaypalPaymentNotificationWithOrderTest < ActiveRecord::TestCase
 
   def sample_params(order)
-    "mc_gross=#{order.total_amount}&invoice=#{order.number}&protection_eligibility=Ineligible&item_number1=&payer_id=UU9QTKRET6CCA&tax=#{order.tax.to_f.round(2)}&payment_date=19%3A37%3A16+Apr+03%2C+2012+PDT&payment_status=Completed&charset=windows-1252&mc_shipping=0.00&mc_handling=#{order.shipping_cost}&first_name=venkata&mc_fee=1.15&notify_version=3.4&custom=&payer_status=verified&business=pvdsub_1332777111_biz%40hotmail.com&num_cart_items=1&mc_handling1=0.00&verify_sign=AT2WTMewVr2cGzaANd7TRCes2yIEAgIJGpFFg7lq8gWKh4WA6sRvto21&payer_email=pvdsub_1332813592_per%40hotmail.com&mc_shipping1=0.00&tax1=0.00&txn_id=1FU42478V6164314U&payment_type=instant&last_name=pasupuleti&item_name1=Handmade+vibrant+bangles&receiver_email=pvdsub_1332777111_biz%40hotmail.com&payment_fee=1.15&quantity1=1&receiver_id=DT54LCN8WQM8S&txn_type=cart&mc_gross_1=#{order.line_items.first.product_price}&mc_currency=USD&residence_country=US&test_ipn=1&transaction_subject=Shopping+CartHandmade+vibrant+bangles&payment_gross=29.23&ipn_track_id=f00e3ee184c9d"
+    "mc_gross=#{order.total_amount}" +
+    "&invoice=#{order.number}" +
+    "&protection_eligibility=Ineligible" + 
+    "&item_number1="+
+    "&payer_id=UU9QTKRET6CCA"+
+    "&tax=#{order.tax.to_f.round(2)}"+
+    "&payment_date=19%3A37%3A16+Apr+03%2C+2012+PDT"+
+    "&payment_status=Completed"+
+    "&charset=windows-1252"+
+    "&mc_shipping=0.00"+
+    "&mc_handling=#{order.shipping_cost}"+
+    "&first_name=venkata"+
+    "&mc_fee=1.15"+
+    "&notify_version=3.4"+
+    "&custom="+
+    "&payer_status=verified"+
+    "&business=pvdsub_1332777111_biz%40hotmail.com"+
+    "&num_cart_items=1"+
+    "&mc_handling1=0.00"+
+    "&verify_sign=AT2WTMewVr2cGzaANd7TRCes2yIEAgIJGpFFg7lq8gWKh4WA6sRvto21"+
+    "&payer_email=pvdsub_1332813592_per%40hotmail.com&mc_shipping1=0.00&tax1=0.00&txn_id=1FU42478V6164314U&payment_type=instant&"+
+    "last_name=pasupuleti&item_name1=Handmade+vibrant+bangles&receiver_email=pvdsub_1332777111_biz%40hotmail.com&payment_fee=1.15"+
+    "&quantity1=1&receiver_id=DT54LCN8WQM8S&txn_type=cart&mc_gross_1=#{order.line_items.first.product_price}&mc_currency=USD"+
+    "&residence_country=US&test_ipn=1&transaction_subject=Shopping+CartHandmade+vibrant+bangles&payment_gross=29.23"+
+    "&ipn_track_id=f00e3ee184c9d"
   end
 
   def setup
