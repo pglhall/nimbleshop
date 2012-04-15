@@ -1,36 +1,27 @@
+require "test_helper"
+
+class ShippingMethodTest < ActiveSupport::TestCase
+  include RegionalShippingMethodTestHelper
+
+  test "validations" do
+    s = create(:country_shipping_method, higher_price_limit: 20)
+    s.lower_price_limit = 19
+    assert s.valid?
+
+    s.lower_price_limit = 20
+    refute s.valid?
+
+    s.lower_price_limit = 21
+    refute s.valid?
+  end
+
+end
+
+
 require 'spec_helper'
 
 describe ShippingMethod do
   include RegionalShippingMethodTestHelper
-
-  describe "regional" do
-    describe "#validations" do
-      subject { create_regional_shipping_method }
-
-      it  {
-        must validate_presence_of(:name)
-        wont validate_presence_of(:base_price)
-        #must validate_presence_of(:offset)
-        wont validate_presence_of(:lower_price_limit)
-        wont validate_presence_of(:higher_price_limit)
-      }
-    end
-  end
-
-  describe "country" do
-    describe "#validations" do
-      subject { create(:country_shipping_method, higher_price_limit: 20) }
-      it  {
-        must validate_presence_of(:name)
-        must validate_presence_of(:base_price)
-        wont validate_presence_of(:offset)
-        must validate_presence_of(:lower_price_limit)
-        must allow_value(19).for(:lower_price_limit)
-        wont allow_value(20).for(:lower_price_limit)
-        wont allow_value(21).for(:lower_price_limit)
-      }
-    end
-  end
 
   describe "#scopes" do
     def with_regions(countries)
