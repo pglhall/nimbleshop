@@ -5,7 +5,7 @@ http_interactions:
     uri: https://test.authorize.net/gateway/transact.dll
     body: 
       encoding: US-ASCII
-      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=PRIOR_AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_trans_id=2169881780&x_amount=0.03&x_test_request=FALSE
+      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=PRIOR_AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_trans_id=2171038291&x_amount=100.48&x_test_request=FALSE
     headers: 
       Content-Type: 
       - application/x-www-form-urlencoded
@@ -21,7 +21,7 @@ http_interactions:
       Connection: 
       - close
       Date: 
-      - Fri, 16 Mar 2012 03:09:10 GMT
+      - Tue, 17 Apr 2012 20:18:42 GMT
       Server: 
       - Microsoft-IIS/6.0
       X-Powered-By: 
@@ -29,10 +29,10 @@ http_interactions:
       Content-Type: 
       - text/html
       Content-Length: 
-      - "326"
+      - "328"
     body: 
       encoding: US-ASCII
-      string: $1$,$1$,$1$,$This transaction has been approved.$,$A9MXK0$,$P$,$2169881780$,$$,$$,$0.03$,$CC$,$prior_auth_capture$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$E8615B86F70EE142A16405A8213FD166$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
+      string: $1$,$1$,$1$,$This transaction has been approved.$,$YJZF64$,$P$,$2171038291$,$$,$$,$100.48$,$CC$,$prior_auth_capture$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$B0E0644972955ED62F678E2E1A52525F$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
     http_version: 
-  recorded_at: Fri, 16 Mar 2012 03:09:11 GMT
+  recorded_at: Tue, 17 Apr 2012 20:18:42 GMT
 recorded_with: VCR 2.0.0

@@ -157,6 +157,10 @@ class Order < ActiveRecord::Base
     line_items_total + shipping_cost + tax
   end
 
+  def total_amount_in_cents
+    total_amount.to_f.round(2) * 100
+  end
+
   def to_param
     number
   end
