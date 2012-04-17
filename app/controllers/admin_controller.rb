@@ -6,8 +6,8 @@ class AdminController < ApplicationController
 
   private
 
-  def set_timezone
-    Time.zone = current_shop.time_zone
-  end
+    def set_timezone
+      Time.zone = current_shop.time_zone
+    end
 
 end

@@ -47,8 +47,8 @@ class Admin::CustomFieldsController < AdminController
 
   private
 
-  def load_custom_field
-    @custom_field = CustomField.find(params[:id])
-  end
+    def load_custom_field
+      @custom_field = CustomField.find(params[:id])
+    end
 
 end

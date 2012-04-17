@@ -45,12 +45,12 @@ class Admin::LinkGroupsController < AdminController
 
   private
 
-  def load_link_groups
-    @link_groups = LinkGroup.order('name asc')
-  end
+    def load_link_groups
+      @link_groups = LinkGroup.order('name asc')
+    end
 
-  def load_link_group
-    @link_group = LinkGroup.find_by_permalink!(params[:id])
-  end
+    def load_link_group
+      @link_group = LinkGroup.find_by_permalink!(params[:id])
+    end
 
 end

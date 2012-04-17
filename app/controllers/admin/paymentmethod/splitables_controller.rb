@@ -22,8 +22,8 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
 
   private
 
-  def load_payment_method!
-    @payment_method = PaymentMethod.find_by_permalink!('splitable')
-  end
+    def load_payment_method!
+      @payment_method = PaymentMethod.find_by_permalink!('splitable')
+    end
 
 end

@@ -4,7 +4,6 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
 
   def show
     @page_title = 'paypal'
-    render
   end
 
   def edit
@@ -23,8 +22,8 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
 
   private
 
-  def load_payment_method
-    @payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')
-  end
+    def load_payment_method
+      @payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')
+    end
 
 end
