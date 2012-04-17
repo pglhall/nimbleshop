@@ -13,7 +13,7 @@ class GatewayProcessorTest <  ActiveRecord::TestCase
   end
 
   setup do
-    @order = create(:order).tap { |t| t.stubs(:total_amount => 100) }
+    @order = create(:order).tap { |t| t.stubs(:total_amount => 100.48) }
     @authorize_net = PaymentMethod.find_by_permalink('authorize-net')
   end
 
@@ -33,8 +33,8 @@ class GatewayProcessorTest <  ActiveRecord::TestCase
     assert transaction.authorized?
     assert_equal @order, transaction.order
     assert_equal creditcard, transaction.creditcard
-    assert_equal '2169881780', transaction.transaction_gid
-    assert_equal 100, transaction.amount
+    assert_equal 100.48, transaction.amount.to_f
+    assert_equal '2171038291', transaction.transaction_gid
   end
 
   test 'purchase with invalid credit card' do
@@ -53,21 +53,27 @@ class GatewayProcessorTest <  ActiveRecord::TestCase
 
     assert_equal @order, transaction.order
     assert_equal creditcard, transaction.creditcard
-    assert_equal '2169919631', transaction.transaction_gid
-    assert_equal 100, transaction.amount
+    assert_equal 100.48, transaction.amount
+    assert_equal '2171035458', transaction.transaction_gid
   end
 
   test "capture when credit card is valid" do
     creditcard = build(:creditcard)
     gateway = GatewayProcessor.new( order: @order, creditcard: creditcard, payment_method: @authorize_net )
-    authorized = playcasette('authorize.net/authorize-success')  { gateway.authorize }
-    captured   = playcasette('authorize.net/capture-success')    { gateway.capture(authorized) }
+
+    authorized = playcasette('authorize.net/authorize-success') do 
+      gateway.authorize
+    end
+
+    captured = playcasette('authorize.net/capture-success') do
+       gateway.capture(authorized)
+    end
 
     refute authorized.reload.active?
     assert captured.captured?
     assert captured.active?
-    assert_equal 100, captured.amount
-    assert_equal '2169881780', captured.transaction_gid
+    assert_equal 100.48, captured.amount
+    assert_equal '2171038291', captured.transaction_gid
   end
 
   test "capture when credit card is invalid" do
@@ -99,9 +105,8 @@ class GatewayProcessorTest <  ActiveRecord::TestCase
     refute authorized.reload.active?
     assert voided.voided?
     assert voided.active?
-    assert_equal 100, voided.amount
-    assert_equal '2169944463', voided.transaction_gid
+
+    assert_equal 100.48, voided.amount
+    assert_equal '2171038073', voided.transaction_gid
   end
-
 end
-

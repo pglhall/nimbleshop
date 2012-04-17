@@ -13,17 +13,17 @@ class GatewayProcessor
   end
 
   def purchase
-    response  = gateway.purchase(order.total_amount, creditcard)
+    response  = gateway.purchase(order.total_amount_in_cents, creditcard)
     save_cc_and_create_transaction_record!(response, 'purchased')
   end
 
   def authorize
-    response  = gateway.authorize(order.total_amount, creditcard)
+    response  = gateway.authorize(order.total_amount_in_cents, creditcard)
     save_cc_and_create_transaction_record!(response, 'authorized')
   end
 
   def capture(transaction)
-    response = gateway.capture(order.total_amount, transaction.transaction_gid, {})
+    response = gateway.capture(order.total_amount_in_cents, transaction.transaction_gid, {})
     update_transaction_record_and_add_another!(transaction, response, 'captured')
   end
 

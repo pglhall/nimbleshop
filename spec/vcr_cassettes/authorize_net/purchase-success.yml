@@ -5,7 +5,7 @@ http_interactions:
     uri: https://test.authorize.net/gateway/transact.dll
     body: 
       encoding: US-ASCII
-      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_invoice_num=&x_description=&x_card_num=4007000000027&x_card_code=123&x_exp_date=0313&x_first_name=Karlee&x_last_name=Brakus&x_amount=12.34&x_test_request=FALSE
+      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_invoice_num=&x_description=&x_card_num=4007000000027&x_card_code=123&x_exp_date=0413&x_first_name=Fabiola&x_last_name=Kutch&x_amount=100.48&x_test_request=FALSE
     headers: 
       Content-Type: 
       - application/x-www-form-urlencoded
@@ -21,7 +21,7 @@ http_interactions:
       Connection: 
       - close
       Date: 
-      - Fri, 16 Mar 2012 19:04:09 GMT
+      - Tue, 17 Apr 2012 18:42:42 GMT
       Server: 
       - Microsoft-IIS/6.0
       X-Powered-By: 
@@ -29,10 +29,10 @@ http_interactions:
       Content-Type: 
       - text/html
       Content-Length: 
-      - "335"
+      - "336"
     body: 
       encoding: US-ASCII
-      string: $1$,$1$,$1$,$This transaction has been approved.$,$O46PFC$,$Y$,$2169919631$,$$,$$,$12.34$,$CC$,$auth_capture$,$$,$Karlee$,$Brakus$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$B4E81ADEFC16F8CE1FCCC1A732D30A0F$,$P$,$2$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
+      string: $1$,$1$,$1$,$This transaction has been approved.$,$TVB3ZP$,$Y$,$2171035458$,$$,$$,$100.48$,$CC$,$auth_capture$,$$,$Fabiola$,$Kutch$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$46AE1EB5E11BD3CE2F75B3FECC22E956$,$P$,$2$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
     http_version: 
-  recorded_at: Fri, 16 Mar 2012 19:04:10 GMT
+  recorded_at: Tue, 17 Apr 2012 18:42:42 GMT
 recorded_with: VCR 2.0.0
