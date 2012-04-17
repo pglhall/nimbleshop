@@ -3,7 +3,7 @@
 <table class="table table-striped">
   <% @payment_method.settings.each do |key, value| %>
     <tr>
-      <td> <%= key %> : </td>
+      <td> <%= key.to_s.humanize %> : </td>
       <td> <%= value %> </td>
     </tr>
   <% end %>
