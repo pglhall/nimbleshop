@@ -12,6 +12,15 @@ GIT
     carmen (1.0.0.pre)
 
 GIT
+  remote: git://github.com/neerajdotname/push2heroku.git
+  revision: 278631a3f73ab748392784541d6071b06a4d44df
+  branch: lab
+  specs:
+    push2heroku (0.0.2)
+      hashr (= 0.0.19)
+      heroku
+
+GIT
   remote: git://github.com/neerajdotname/themes_for_rails.git
   revision: f3efda87d9902fad04501d36ed1dac05f4a862b4
   specs:
@@ -169,7 +178,7 @@ GEM
     guard-minitest (0.4.0)
       guard (~> 0.4)
     hashr (0.0.19)
-    heroku (2.24.0)
+    heroku (2.24.1)
       launchy (>= 0.3.2)
       netrc (~> 0.7.1)
       rest-client (~> 1.6.1)
@@ -211,13 +220,9 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
     netrc (0.7.1)
-    newrelic_rpm (3.3.2)
     nokogiri (1.5.0)
     pg (0.13.1)
     polyglot (0.3.3)
-    push2heroku (0.0.2)
-      hashr (= 0.0.19)
-      heroku
     rack (1.4.1)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -338,9 +343,8 @@ DEPENDENCIES
   money
   mustache
   nested_form!
-  newrelic_rpm
   pg
-  push2heroku (= 0.0.2)
+  push2heroku!
   rails (= 3.2.1)
   rb-fsevent
   ruby-debug19

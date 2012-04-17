@@ -3,7 +3,8 @@ task :setup => :environment do
 
  raise "this task should not be run in production" if Rails.env.production?
 
-  Rake::Task["db:reset"].invoke
+  Rake::Task["db:reset"].invoke unless Settings.using_heroku
+
   Rake::Task["db:seed"].invoke
 
   PaymentMethod.load_default!

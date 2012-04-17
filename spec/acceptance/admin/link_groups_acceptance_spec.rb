@@ -1,6 +1,5 @@
 require "test_helper"
 
-
 class LinkGroupsAcceptanceTest < ActionDispatch::IntegrationTest
 
   setup do

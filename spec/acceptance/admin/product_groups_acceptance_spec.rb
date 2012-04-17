@@ -1,89 +1,83 @@
-require 'spec_helper'
+require "test_helper"
 
-describe "product_groups_acceptance_spec integration" do
+class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
 
-  before do
+  def handle_js_confirm(accept=true)
+    page.execute_script "window.original_confirm_function = window.confirm"
+    page.execute_script "window.confirmMsg = null"
+    page.execute_script "window.confirm = function(msg) { window.confirmMsg = msg; return #{!!accept}; }"
+    yield
+  ensure
+    page.execute_script "window.confirm = window.original_confirm_function"
+  end
+
+  setup do
     create(:price_group_condition)
     create(:date_group_condition)
     Capybara.current_driver = :selenium
   end
 
-  describe "add, edit and delete for product group" do
-    it {
-      visit admin_product_groups_path
-      assert page.has_content?("Product groups")
-      click_link 'add_new_product_group'
+  test "validations" do
+    visit admin_product_groups_path
+    click_link 'add_new_product_group'
+    fill_in 'Name', with: ''
+    click_button 'Submit'
 
-      fill_in 'Name', with: 'sweet candies'
+    refute page.has_content?('Successfuly updated')
+    assert page.has_content?("Product group conditions value is invalid")
+    assert page.has_content?("Product group conditions value can't be blank")
+    assert page.has_content?("Name can't be blank")
+  end
 
-      select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text,
-                  :from => 'product_group_product_group_conditions_attributes_0_name')
+  test "add, edit and delete for product group" do
+    visit admin_product_groups_path
+    assert page.has_content?("Product groups")
+    click_link 'add_new_product_group'
 
-      select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='contains']").text,
-                  :from => 'product_group_product_group_conditions_attributes_0_operator')
+    fill_in 'Name', with: 'sweet candies'
 
-      fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'candy'
+    select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text,
+                :from => 'product_group_product_group_conditions_attributes_0_name')
 
-      click_link 'Add'
+    select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='contains']").text,
+                :from => 'product_group_product_group_conditions_attributes_0_operator')
 
-      select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_name']/option[@value='name']").text,
-                  :from => 'product_group_product_group_conditions_attributes_1_name')
+    fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'candy'
 
-      select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_operator']/option[@value='starts']").text,
-                  :from => 'product_group_product_group_conditions_attributes_1_operator')
+    click_link 'Add'
 
-      fill_in 'product_group_product_group_conditions_attributes_1_value', with: 'sweet'
+    select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_name']/option[@value='name']").text,
+                :from => 'product_group_product_group_conditions_attributes_1_name')
 
-      click_button 'Submit'
+    select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_operator']/option[@value='starts']").text,
+                :from => 'product_group_product_group_conditions_attributes_1_operator')
 
-      assert page.has_content?('Successfuly updated')
-      assert page.has_content?("name contains 'candy' and name starts with 'sweet'")
+    fill_in 'product_group_product_group_conditions_attributes_1_value', with: 'sweet'
 
-      click_link 'Edit'
+    click_button 'Submit'
 
-      fill_in 'Name', with: 'awesome candies'
-      fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'awesome'
+    assert page.has_content?('Successfuly updated')
+    assert page.has_content?("name contains 'candy' and name starts with 'sweet'")
 
-      select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text,
-                  :from => 'product_group_product_group_conditions_attributes_0_operator')
+    click_link 'Edit'
 
-      click_link 'Remove'
-      click_button 'Submit'
+    fill_in 'Name', with: 'awesome candies'
+    fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'awesome'
 
-      assert page.has_content?('Successfuly updated')
-      assert page.has_content?("name starts with 'awesome'")
+    select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text,
+                :from => 'product_group_product_group_conditions_attributes_0_operator')
+
+    click_link 'Remove'
+    click_button 'Submit'
+
+    assert page.has_content?('Successfuly updated')
+    assert page.has_content?("name starts with 'awesome'")
 
 #      https://github.com/thoughtbot/capybara-webkit/issues/109
-      handle_js_confirm do
-        click_link 'Delete'
-      end
-      refute page.has_content?("name starts with 'awesome'")
-    }
-  end
-
-  describe "with validation error" do
-    it {
-      visit admin_product_groups_path
-      click_link 'add_new_product_group'
-      fill_in 'Name', with: ''
-      click_button 'Submit'
-
-      refute page.has_content?('Successfuly updated')
-      assert page.has_content?("Product group conditions value is invalid")
-      assert page.has_content?("Product group conditions value can't be blank")
-      assert page.has_content?("Name can't be blank")
-    }
-  end
-
-  private
-
-    def handle_js_confirm(accept=true)
-      page.execute_script "window.original_confirm_function = window.confirm"
-      page.execute_script "window.confirmMsg = null"
-      page.execute_script "window.confirm = function(msg) { window.confirmMsg = msg; return #{!!accept}; }"
-      yield
-    ensure
-      page.execute_script "window.confirm = window.original_confirm_function"
+    handle_js_confirm do
+      click_link 'Delete'
     end
+    refute page.has_content?("name starts with 'awesome'")
+  end
 
 end

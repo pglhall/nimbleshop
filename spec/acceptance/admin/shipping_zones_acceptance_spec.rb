@@ -1,9 +1,8 @@
-require 'spec_helper'
+require 'test_helper'
 
-describe "shipping_zones_acceptance_spec integration" do
+class ShippingZonesAcceptanceTest < ActionDispatch::IntegrationTest
 
-  describe "create new shipping zone and should add state level shipping methods" do
-    it {
+  test "create new shipping zone and should add state level shipping methods" do
       visit admin_path
       click_link 'Shipping zones'
       click_link 'add_new_shipping_zone'
@@ -12,8 +11,6 @@ describe "shipping_zones_acceptance_spec integration" do
       click_button('Submit')
       assert page.has_content?('Successfuly created')
       assert_equal 13, RegionalShippingZone.count - bef
-    }
   end
 
 end
-

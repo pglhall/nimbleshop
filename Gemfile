@@ -50,9 +50,6 @@ gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 # for security
 gem 'strong_parameters', git: 'git://github.com/rails/strong_parameters.git'
 
-# for performance monitoring
-gem 'newrelic_rpm'
-
 # to make settings more flexible. Without hashr the code would be like this
 #  Settings.s3['bucket_name']
 # with hashr it becomes
@@ -86,7 +83,9 @@ group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
   gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
 
-  gem 'push2heroku', '= 0.0.2'
+  #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
+  gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
+
 end
 
 
@@ -103,7 +102,7 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
 
-  gem 'sqlite3' # capybara-webkit hangs if run with postgresql
+  gem 'sqlite3'
 
   # Colorize MiniTest output and show failing tests instantly
   gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'

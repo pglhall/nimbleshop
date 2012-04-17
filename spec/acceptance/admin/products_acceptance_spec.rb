@@ -33,7 +33,6 @@ describe "products_acceptance_spec integration" do
               %Q{"css" files, allowed types: ["jpg", "jpeg", "gif", "png"]}
         assert page.has_content?(msg)
 
-
           attach_file "Picture", "#{Rails.root}/spec/support/images/cookware.jpg"
           click_button 'Submit'
           assert page.has_xpath?("//img[@alt='Small_cookware']")

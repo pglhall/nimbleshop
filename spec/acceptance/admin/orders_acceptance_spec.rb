@@ -1,34 +1,31 @@
-require 'spec_helper'
+require "test_helper"
 
-describe "orders_acceptance_spec integration" do
+class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
-  describe "show order with no extra information" do
-    before do
-      order = build :order, email: nil, shipping_address: nil, shipping_method: nil
-      order.save(validate: false)
-    end
-    it {
-      visit admin_path
-      click_link 'Orders'
-
-      assert page.has_css?('h1.ns-page-title', text: 'Orders')
-      click_link Order.first.number
-      assert page.has_content?('Payment status abandoned')
-    }
+  setup do
+    order = build :order, email: nil, shipping_address: nil, shipping_method: nil
+    order.save(validate: false)
   end
 
-  describe "show order with line item and product is deleted" do
-    it {
-      order   =  create(:order_with_line_items)
-      order.line_items.first.product.destroy
+  test "payment status abandoned" do
+    visit admin_path
+    click_link 'Orders'
 
-      visit admin_path
-      click_link 'Orders'
+    assert page.has_css?('h1.ns-page-title', text: 'Orders')
+    click_link Order.first.number
+    assert page.has_content?('Payment status abandoned')
+  end
 
-      assert page.has_css?('h1.ns-page-title', text: 'Orders')
-      click_link order.number
-      assert page.has_content?('Payment status abandoned')
-    }
+  test "show order with line item and product is deleted" do
+    order  =  create :order_with_line_items
+    order.line_items.first.product.destroy
+
+    visit admin_path
+    click_link 'Orders'
+
+    assert page.has_css?('h1.ns-page-title', text: 'Orders')
+    click_link order.number
+    assert page.has_content?('Payment status abandoned')
   end
 
 end
