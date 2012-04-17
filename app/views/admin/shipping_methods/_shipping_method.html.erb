@@ -3,9 +3,6 @@
     <%= shipping_method.shipping_zone.name %> 
   </td>
   <td> 
-    <%= shipping_method_condition_in_english(shipping_method.parent) %> 
-  </td>
-  <td> 
     <% if shipping_method.active %>
       <%= link_to "+", update_offset_admin_regional_shipping_zone_shipping_method_path(:regional_shipping_zone_id => shipping_method.shipping_zone, :id => shipping_method.id, :offset => 0.10), method: :put, remote: true, class: 'update-shipping'  %>
       <%= number_to_currency(shipping_method.offset.to_f) %>

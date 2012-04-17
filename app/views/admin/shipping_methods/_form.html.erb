@@ -30,7 +30,7 @@
       This shipping method should be applied to orders with total amount of greater than
       <%= f.text_field :lower_price_limit, class: 'span1' %>
       and lower than
-      <%= f.text_field :upper_price_limit, class: 'span1', placeholder: 'infinity' %>
+      <%= f.text_field :upper_price_limit, class: 'span1', placeholder: '&#8734;'.html_safe %>
       .
     </fieldset>
 
