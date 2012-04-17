@@ -27,11 +27,20 @@
         </div>
       </div>
 
-      This shipping method should be applied to orders with total amount of greater than
-      <%= f.text_field :lower_price_limit, class: 'span1' %>
-      and lower than
-      <%= f.text_field :upper_price_limit, class: 'span1', placeholder: '&#8734;'.html_safe %>
-      .
+      <div class="control-group">
+        <%= f.label :lower_price_limit, 'Minimum order amount', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :lower_price_limit, class: 'span1' %> USD
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :upper_price_limit, 'Maximum order amount', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :upper_price_limit, class: 'span1', placeholder: '&#8734;'.html_safe %> USD
+        </div>
+      </div>
+
     </fieldset>
 
     <div class="form-actions">
