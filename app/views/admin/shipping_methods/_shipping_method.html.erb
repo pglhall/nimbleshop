@@ -7,13 +7,15 @@
       <%= link_to "+", update_offset_admin_regional_shipping_zone_shipping_method_path(:regional_shipping_zone_id => shipping_method.shipping_zone, :id => shipping_method.id, :offset => 0.10), method: :put, remote: true, class: 'update-shipping'  %>
       <%= number_to_currency(shipping_method.offset.to_f) %>
       <%= link_to "-", update_offset_admin_regional_shipping_zone_shipping_method_path(:regional_shipping_zone_id => shipping_method.shipping_zone, :id => shipping_method.id, :offset => -0.10), method: :put, remote: true, class: 'update-shipping'  %>
+    <% else %>
+      <%= link_to 'Shipping has been disabled', '#' %>
     <% end %>
   </td>
   <td>
     <% if shipping_method.active %>
-      <%= link_to 'disable', [ :disable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "disable-#{shipping_method.shipping_zone_id}"  %>
+      <%= link_to 'Disable', [ :disable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "disable-#{shipping_method.shipping_zone_id}"  %>
     <% else %>
-      <%= link_to 'enable', [ :enable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "enable-#{shipping_method.shipping_zone_id}"  %>
+      <%= link_to 'Enable', [ :enable, :admin, shipping_method.shipping_zone, shipping_method ], method: 'put', remote: true, class: 'update-shipping', rel: "enable-#{shipping_method.shipping_zone_id}"  %>
     <% end %>
   </td>
 </tr>
