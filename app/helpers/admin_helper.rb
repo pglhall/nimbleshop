@@ -4,9 +4,9 @@ module AdminHelper
       admin_products_path:        'admin/products',
       admin_custom_fields_path:   'admin/custom_fields',
       admin_product_groups_path:  'admin/product_groups',
-      admin_link_groups_path:     'admin/link_groups',
+      admin_link_groups_path:     [ 'admin/link_groups', 'admin/navigations' ],
       admin_payment_methods_path: 'admin/payment_methods',
-      admin_shipping_zones_path:  ['admin/shipping_zones', 'admin/shipping_methods'],
+      admin_shipping_zones_path:  [ 'admin/shipping_zones', 'admin/shipping_methods' ],
       edit_admin_shop_path:       'admin/shops',
       admin_orders_path:          'admin/orders'
   }
