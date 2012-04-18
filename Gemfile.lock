@@ -12,13 +12,6 @@ GIT
     carmen (1.0.0.pre)
 
 GIT
-  remote: git://github.com/lucasefe/themes_for_rails.git
-  revision: f4c027f22abe104eae53035bb6ef513875f3579f
-  specs:
-    themes_for_rails (0.5.0)
-      rails (>= 3.0.0)
-
-GIT
   remote: git://github.com/neerajdotname/push2heroku.git
   revision: 278631a3f73ab748392784541d6071b06a4d44df
   branch: lab
@@ -26,6 +19,13 @@ GIT
     push2heroku (0.0.2)
       hashr (= 0.0.19)
       heroku
+
+GIT
+  remote: git://github.com/neerajdotname/themes_for_rails.git
+  revision: f3efda87d9902fad04501d36ed1dac05f4a862b4
+  specs:
+    themes_for_rails (0.4.3)
+      rails (>= 3.0.0)
 
 GIT
   remote: git://github.com/nohupbrasil/minitest-colorize

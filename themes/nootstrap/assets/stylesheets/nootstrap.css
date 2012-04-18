@@ -4,9 +4,9 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require nootstrap/stylesheets/themed_bootstrap_and_overrides
+ *= require themed_bootstrap_and_overrides
  *= require fancybox
- *= require nootstrap/stylesheets/custom
+ *= require custom
 */
 
 img.thumbnail:hover {
