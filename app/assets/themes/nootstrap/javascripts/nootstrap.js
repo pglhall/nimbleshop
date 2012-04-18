@@ -8,14 +8,13 @@
 //= require jquery-ui-1.8.16
 //= require accounting
 //= require twitter/bootstrap
-//
-//= require shipping_address_same_as_billing_address
-//= require thumbnail
-//= require highlight_error_field
-//= require remove_item_from_cart
-//= require payment_method
-//= require variant
-//= require load_states
-//= require order
-//= require highlight_hovered_picture
 //= require fancybox
+//
+//= require nootstrap/javascripts/shipping_address_same_as_billing_address
+//= require nootstrap/javascripts/thumbnail
+//= require nootstrap/javascripts/remove_item_from_cart
+//= require nootstrap/javascripts/payment_method
+//= require nootstrap/javascripts/variant
+//= require nootstrap/javascripts/load_states
+//= require nootstrap/javascripts/order
+//= require nootstrap/javascripts/highlight_hovered_picture
