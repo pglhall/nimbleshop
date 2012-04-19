@@ -50,17 +50,17 @@ class PaymentProcessorsController < ApplicationController
 
   private
 
-  def payment_method_url
-    return nil if PaymentMethod.enabled.count != 1
+    def payment_method_url
+      return nil if PaymentMethod.enabled.count != 1
 
-    permalink = PaymentMethod.enabled.first.permalink
-    return nil if permalink == 'authorize-net'
-    case permalink
-    when 'splitable'
-      return PaymentMethod::Splitable.first.url(current_order, request)
-    when 'paypal-website-payments-standard'
-      return PaymentMethod::PaypalWebsitePaymentsStandard.first.url(current_order)
+      permalink = PaymentMethod.enabled.first.permalink
+      return nil if permalink == 'authorize-net'
+      case permalink
+      when 'splitable'
+        return PaymentMethod::Splitable.first.url(current_order, request)
+      when 'paypal-website-payments-standard'
+        return PaymentMethod::PaypalWebsitePaymentsStandard.first.url(current_order)
+      end
     end
-  end
 
 end

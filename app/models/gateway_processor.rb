@@ -34,41 +34,42 @@ class GatewayProcessor
 
   private
 
-  def update_transaction_record_and_add_another!(transaction, response, status)
-    if transaction_gid = extract_transaction_id(response)
-      transaction.inactive!
+    def update_transaction_record_and_add_another!(transaction, response, status)
+      if transaction_gid = extract_transaction_id(response)
+        transaction.inactive!
 
-      options = {
-        transaction_gid:  transaction_gid,
-        amount:           transaction.amount,
-        params:           response.params,
-        status:           status
-      }
+        options = {
+          transaction_gid:  transaction_gid,
+          amount:           transaction.amount,
+          params:           response.params,
+          status:           status
+        }
 
-      add_transaction(options)
+        add_transaction(options)
+      end
     end
-  end
 
-  def save_cc_and_create_transaction_record!(response, status)
-    if transaction_gid = extract_transaction_id(response)
-      creditcard.save
+    def save_cc_and_create_transaction_record!(response, status)
+      if transaction_gid = extract_transaction_id(response)
+        creditcard.save
 
-      options = {
-        transaction_gid:  transaction_gid,
-        amount:           order.total_amount,
-        params:           response.params,
-        status:           status
-      }
+        options = {
+          transaction_gid:  transaction_gid,
+          amount:           order.total_amount,
+          params:           response.params,
+          status:           status
+        }
 
-      add_transaction(options)
+        add_transaction(options)
+      end
     end
-  end
 
-  def extract_transaction_id(response)
-    payment_method.extract_transaction_id(response)
-  end
+    def extract_transaction_id(response)
+      payment_method.extract_transaction_id(response)
+    end
 
-  def add_transaction(options = {})
-    order.transactions.create(options.merge(active: true, creditcard: creditcard))
-  end
+    def add_transaction(options = {})
+      order.transactions.create(options.merge(active: true, creditcard: creditcard))
+    end
+
 end
