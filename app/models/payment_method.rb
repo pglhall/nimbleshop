@@ -1,10 +1,14 @@
 class PaymentMethod < ActiveRecord::Base
 
-  include BuildPermalink
+  include Permalink::Builder
 
   store :settings
 
   scope :enabled, where(enabled: true)
+
+  def use_ssl
+    settings[:use_ssl]
+  end
 
   def set_mode
     ActiveMerchant::Billing::Base.mode = :test
@@ -30,11 +34,16 @@ class PaymentMethod < ActiveRecord::Base
 
       instance = payment_klass.new(attributes)
 
-      preferences.each_pair do | preference, value |
-        m = "#{payment_method_name}_#{preference}="
-        instance.send(m, value)
+      preferences.each_pair do | attr, value |
+        instance.send("#{attr}=", value)
       end
+
       instance.save
     end
+  end
+
+
+  def self.partialize
+    name.gsub("PaymentMethod::","").underscore
   end
 end

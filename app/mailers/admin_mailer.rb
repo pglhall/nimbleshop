@@ -10,7 +10,7 @@ class AdminMailer < ActionMailer::Base
   def new_order_notification(order_number)
     @order = Order.find_by_number!(order_number)
     @shop = Shop.first
-    @payment_date = @order.payment_date
+    @payment_date = @order.paid_at
 
     mail_options = { to: @order.email, subject: "Order ##{order_number} was recently placed" }
 

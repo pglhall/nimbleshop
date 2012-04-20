@@ -41,7 +41,7 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
 
   test 'when credit card invalid' do
     click_button 'Submit'
-    assert page.has_content?("Number can't be blank")
+    assert page.has_content?("Credit card number is blank")
     skip "following two assertions should pass" do
       assert page.has_content?('Credit card number is required')
       assert page.has_content?('CVV number is required')

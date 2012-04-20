@@ -11,6 +11,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string     :checkout_status,    null: false, default: 'items_added_to_cart'
       t.datetime   :shipped_at,         null: true
       t.text       :settings
+      t.datetime   :paid_at,            null: true
 
       t.timestamps
     end

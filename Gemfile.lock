@@ -6,6 +6,15 @@ GIT
       activemodel
 
 GIT
+  remote: git://github.com/jalada/localtunnel.git
+  revision: 619dcaab6fe79aae0e2905b5dca2be1268c119ee
+  specs:
+    localtunnel (0.3.1)
+      json (>= 1.2.4)
+      net-ssh (>= 2.0.22)
+      net-ssh-gateway (>= 1.0.1)
+
+GIT
   remote: git://github.com/jim/carmen.git
   revision: 9057b5f5ca35f215a19a4a9a50195997e4cbb06c
   specs:
@@ -25,6 +34,12 @@ GIT
     push2heroku (0.0.2)
       hashr (= 0.0.19)
       heroku
+
+GIT
+  remote: git://github.com/nwise/custom_error_message.git
+  revision: d469cb6daa59aefe57f4bed72141a6632b15d41a
+  specs:
+    custom_error_message (0.1.0)
 
 GIT
   remote: git://github.com/rails/strong_parameters.git
@@ -79,6 +94,7 @@ GEM
     airbrake (3.0.9)
       activesupport
       builder
+    american_date (1.0.0)
     archive-tar-minitar (0.5.2)
     arel (3.0.0)
     braintree (2.13.4)
@@ -185,6 +201,8 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     netrc (0.7.1)
     nokogiri (1.5.0)
     pg (0.13.1)
@@ -282,11 +300,13 @@ PLATFORMS
 DEPENDENCIES
   activemerchant
   airbrake
+  american_date
   capybara
   carmen!
   carrierwave
   carrierwave-meta
   coffee-rails (~> 3.2.1)
+  custom_error_message!
   database_cleaner
   email_validator!
   factory_girl_rails
@@ -298,6 +318,7 @@ DEPENDENCIES
   guard-minitest
   hashr
   launchy
+  localtunnel!
   mini_magick
   mocha
   money

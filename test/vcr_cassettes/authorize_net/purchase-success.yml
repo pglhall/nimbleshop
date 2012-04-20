@@ -5,7 +5,7 @@ http_interactions:
     uri: https://test.authorize.net/gateway/transact.dll
     body: 
       encoding: US-ASCII
-      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_invoice_num=&x_description=&x_card_num=4007000000027&x_card_code=123&x_exp_date=0413&x_first_name=Fabiola&x_last_name=Kutch&x_amount=100.48&x_test_request=FALSE
+      string: x_version=3.1&x_login=26Daqx7Jtw7R&x_tran_key=66JWf57KKc82W9y6&x_relay_response=FALSE&x_type=AUTH_CAPTURE&x_delim_data=TRUE&x_delim_char=%2C&x_encap_char=%24&x_invoice_num=&x_description=&x_card_num=4007000000027&x_card_code=123&x_exp_date=0413&x_first_name=Elias&x_last_name=Goldner&x_amount=100.48&x_test_request=FALSE
     headers: 
       Content-Type: 
       - application/x-www-form-urlencoded
@@ -21,7 +21,7 @@ http_interactions:
       Connection: 
       - close
       Date: 
-      - Tue, 17 Apr 2012 18:42:42 GMT
+      - Sun, 22 Apr 2012 14:59:35 GMT
       Server: 
       - Microsoft-IIS/6.0
       X-Powered-By: 
@@ -32,7 +32,7 @@ http_interactions:
       - "336"
     body: 
       encoding: US-ASCII
-      string: $1$,$1$,$1$,$This transaction has been approved.$,$TVB3ZP$,$Y$,$2171035458$,$$,$$,$100.48$,$CC$,$auth_capture$,$$,$Fabiola$,$Kutch$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$46AE1EB5E11BD3CE2F75B3FECC22E956$,$P$,$2$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
+      string: $1$,$1$,$1$,$This transaction has been approved.$,$8XZB16$,$Y$,$2171213294$,$$,$$,$100.48$,$CC$,$auth_capture$,$$,$Elias$,$Goldner$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$B49F0B0B6E4EDB37B26F2618E8E3780A$,$P$,$2$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$XXXX0027$,$Visa$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$,$$
     http_version: 
-  recorded_at: Tue, 17 Apr 2012 18:42:42 GMT
+  recorded_at: Sun, 22 Apr 2012 14:59:36 GMT
 recorded_with: VCR 2.0.0

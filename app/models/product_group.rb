@@ -1,6 +1,6 @@
 class ProductGroup < ActiveRecord::Base
 
-  include BuildPermalink
+  include Permalink::Builder
 
   validates :name, presence: true
 

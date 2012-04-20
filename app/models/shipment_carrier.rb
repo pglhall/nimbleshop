@@ -1,3 +1,3 @@
 class ShipmentCarrier < ActiveRecord::Base
-  include BuildPermalink
+  include Permalink::Builder
 end

@@ -26,9 +26,8 @@ class PaymentProcessorsController < ApplicationController
 
     case params[:payment_choice]
     when 'splitable'
-      payment_method = PaymentMethod::Splitable.first
-      order.update_attributes!(payment_method: payment_method)
-      error, url = payment_method.process_request(order, request)
+      handler     = Payment::Handler::Splitable.new(order: order)
+      error, url  = handler.create_split(request: request)
 
       if error
         render text: error
@@ -36,13 +35,16 @@ class PaymentProcessorsController < ApplicationController
         redirect_to url
       end
     else
-      address_attrs = order.final_billing_address.to_credit_card_attributes
-      @creditcard   = Creditcard.new(params[:creditcard].merge(address_attrs))
-      unless PaymentProcessor.new(@creditcard, order).process
-        render action: :new  and return
-      end
+      address_attrs     = order.final_billing_address.to_credit_card_attributes
+      creditcard_attrs  = params[:creditcard].merge(address_attrs)
+      @creditcard       = Creditcard.new(creditcard_attrs)
+      handler           = Payment::Handler::AuthorizeNet.new(order)
 
-      redirect_to paid_order_path(id: current_order, payment_method: :credit_card)
+      if handler.send(Shop.first.default_creditcard_action, creditcard: @creditcard)
+        redirect_to paid_order_path(id: current_order, payment_method: :credit_card)
+      else
+        render action: :new
+      end
     end
   end
 

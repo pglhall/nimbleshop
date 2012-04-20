@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class PaymentProcessorHelperTest < ActionView::TestCase
+  setup do
+    File.open("#{Rails.root}/config/tunnel","w") do | out |
+      out.write('orange-hands.showoff.io')
+    end
+  end
 
   test "return_url for order" do
     order = Order.new

@@ -7,11 +7,11 @@ payment_methods_001:
   type: PaymentMethod::Splitable
   permalink: splitable
   settings: "--- \n\
-    :splitable_api_secret: edb5fd7b39652986\n\
-    :splitable_expires_in: 24\n\
-    :splitable_submission_url: https://www.splitable.com\n\
-    :splitable_logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png\n\
-    :splitable_api_key: edb5fd7b39652986\n"
+    :api_secret: edb5fd7b39652986\n\
+    :expires_in: 24\n\
+    :submission_url: https://www.splitable.com\n\
+    :logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png\n\
+    :api_key: edb5fd7b39652986\n"
   created_at: 2012-04-05 01:42:00.092168
   updated_at: 2012-04-05 01:42:00.095526
 payment_methods_002: 
@@ -22,9 +22,9 @@ payment_methods_002:
   type: PaymentMethod::AuthorizeNet
   permalink: authorize-net
   settings: "--- \n\
-    :authorize_net_login_id: 26Daqx7Jtw7R\n\
-    :authorize_net_transaction_key: 66JWf57KKc82W9y6\n\
-    :authorize_net_company_name_on_creditcard_statement: Nimbleshop LLC\n"
+    :login_id: 26Daqx7Jtw7R\n\
+    :transaction_key: 66JWf57KKc82W9y6\n\
+    :company_name_on_creditcard_statement: Nimbleshop LLC\n"
   created_at: 2012-04-05 01:42:00.113269
   updated_at: 2012-04-05 01:42:00.117875
 payment_methods_003: 
@@ -35,7 +35,7 @@ payment_methods_003:
   type: PaymentMethod::PaypalWebsitePaymentsStandard
   permalink: paypal-website-payments-standard
   settings: "--- \n\
-    :paypal_website_payments_standard_paymentaction: authorize\n\
-    :paypal_website_payments_standard_merchant_email: seller_1323037155_biz@bigbinary.com\n"
+    :paymentaction: authorize\n\
+    :merchant_email: seller_1323037155_biz@bigbinary.com\n"
   created_at: 2012-04-05 01:42:00.13064
   updated_at: 2012-04-05 01:42:00.133581

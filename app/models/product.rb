@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
 
-  include BuildPermalink
+  include Permalink::Builder
 
   alias_attribute :title, :name
   attr_accessor :pictures_order

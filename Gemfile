@@ -16,7 +16,8 @@ gem 'faraday'
 
 # heroku cedar stack needs it
 gem 'thin'
-
+gem 'american_date'
+gem 'custom_error_message',  git: 'git://github.com/nwise/custom_error_message.git'
 # to handle credit card payments
 gem 'activemerchant'
 gem 'money'
@@ -80,6 +81,7 @@ group :development, :test do
 
   gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
   #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
+  gem 'localtunnel',  git: 'git://github.com/jalada/localtunnel.git'
 end
 
 group :test do

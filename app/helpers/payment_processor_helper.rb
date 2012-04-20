@@ -4,24 +4,28 @@ module PaymentProcessorHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
   def notify_url
-    add_show_of_as_domain(paypal_instant_payment_notifications_path)
+    public_url_mapped_to_localhost(paypal_instant_payment_notifications_path)
   end
 
   def return_url(order)
-    add_show_of_as_domain(paid_order_path(id: order.number, payment_method: :paypal))
+    public_url_mapped_to_localhost(paid_order_path(id: order.number, payment_method: :paypal))
   end
 
   def cancel_url(order)
-    add_show_of_as_domain(cancel_order_path(id: order.number))
+    public_url_mapped_to_localhost(cancel_order_path(id: order.number))
   end
 
   private
 
-  def add_show_of_as_domain(url)
+  def public_url_mapped_to_localhost(url)
+    return url if Rails.env.production?
     path = []
 
-    unless Rails.env.production?
-      path << ["https://orange-hands.showoff.io"]
+    tunnel = "#{Rails.root}/config/tunnel"
+
+    if File.exists?(tunnel)
+      host = File.open(tunnel, "r").gets.sub("\n", "")
+      path << "https://#{host}"
     end
 
     path << url

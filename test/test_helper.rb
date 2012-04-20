@@ -17,16 +17,17 @@ end
 
 class ActiveSupport::TestCase
   include Factory::Syntax::Methods
-  self.fixture_path = "#{::Rails.root}/test/fixtures"
   self.use_transactional_fixtures = true
-  self.use_instantiated_fixtures = false
   fixtures :all
+
+  def playcasette(casette)
+    VCR.use_cassette(casette)  { yield }
+  end
 end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   self.use_transactional_fixtures = false
-  self.fixture_path = "#{::Rails.root}/test/fixtures"
 
   setup { DatabaseCleaner.start }
 

@@ -34,27 +34,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.datetime "updated_at",                        :null => false
   end
 
-  create_table "creditcard_transactions", :force => true do |t|
-    t.integer  "order_id",                                                        :null => false
-    t.string   "transaction_gid",                                                 :null => false
-    t.text     "params",                                                          :null => false
-    t.decimal  "amount",          :precision => 8, :scale => 2,                   :null => false
-    t.integer  "creditcard_id",                                                   :null => false
-    t.boolean  "active",                                        :default => true, :null => false
-    t.string   "status",                                                          :null => false
-    t.integer  "parent_id"
-    t.datetime "created_at",                                                      :null => false
-    t.datetime "updated_at",                                                      :null => false
-  end
-
-  create_table "creditcards", :force => true do |t|
-    t.string   "masked_number", :null => false
-    t.datetime "expires_on",    :null => false
-    t.string   "cardtype",      :null => false
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "custom_field_answers", :force => true do |t|
     t.integer  "product_id"
     t.integer  "custom_field_id"
@@ -122,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "checkout_status",    :default => "items_added_to_cart", :null => false
     t.datetime "shipped_at"
     t.text     "settings"
+    t.datetime "paid_at"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
   end
@@ -141,6 +121,18 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
 
   add_index "payment_methods", ["permalink"], :name => "index_payment_methods_on_permalink", :unique => true
 
+  create_table "payment_transactions", :force => true do |t|
+    t.integer  "order_id",        :null => false
+    t.string   "transaction_gid", :null => false
+    t.text     "params",          :null => false
+    t.boolean  "success",         :null => false
+    t.string   "operation",       :null => false
+    t.integer  "amount"
+    t.text     "additional_info"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "paypal_payment_notifications", :force => true do |t|
     t.text     "raw_post"
     t.string   "order_id",   :null => false
@@ -149,15 +141,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   end
 
   add_index "paypal_payment_notifications", ["order_id"], :name => "index_paypal_payment_notifications_on_order_id", :unique => true
-
-  create_table "paypal_transactions", :force => true do |t|
-    t.text    "params"
-    t.integer "order_id",                               :null => false
-    t.string  "status"
-    t.decimal "amount",   :precision => 8, :scale => 2, :null => false
-    t.string  "txn_id"
-    t.string  "txn_type"
-  end
 
   create_table "pictures", :force => true do |t|
     t.integer  "product_id"

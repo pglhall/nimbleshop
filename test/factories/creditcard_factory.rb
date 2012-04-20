@@ -8,7 +8,8 @@ FactoryGirl.define do
     last_name   { Faker::Name.last_name   } 
     address1    { Faker::Address.street_address } 
     zipcode     { Faker::Address.zip_code } 
-    expires_on  { 1.year.from_now }
+    month         5
+    year          2015
     state         'Florida'
 
     trait :visa do

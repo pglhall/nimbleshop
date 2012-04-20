@@ -1,6 +1,6 @@
 class ShippingZone < ActiveRecord::Base
 
-  include BuildPermalink
+  include Permalink::Builder
 
   has_many :shipping_methods, dependent: :destroy, conditions: { active: true }
 

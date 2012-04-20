@@ -1,4 +1,9 @@
-class Creditcard < ActiveRecord::Base
+class Creditcard
+  extend  ActiveModel::Naming
+  include ActiveModel::Conversion
+  include ActiveModel::Validations
+  extend  ActiveModel::Callbacks
+  include ActiveModel::Validations::Callbacks
 
   attr_accessor :cvv,
                 :number,
@@ -6,37 +11,37 @@ class Creditcard < ActiveRecord::Base
                 :last_name,
                 :address1,
                 :address2,
+                :cardtype,
+                :month,
+                :year,
                 :state,
                 :zipcode
 
   alias :verification_value :cvv # ActiveMerchant needs this
 
-  has_many :transactions, class_name: 'CreditcardTransaction'
-  has_many :orders,       through: :transactions
+  before_validation :set_cardtype
 
-  before_validation :set_cardtype,              on: :create
+  before_validation :strip_non_numeric_values, if: :number
 
-  before_validation :strip_non_numeric_values,  on: :create, if: :number
+  validates_presence_of :last_name, :first_name
 
+  validates_presence_of :number,  message: "^Credit card number is blank"
+  validates_presence_of :cvv,     message: "^CVV number is blank"
 
-  before_create :set_masked_number
+  validate  :validation_by_active_merchant, if: proc { |r| r.errors.empty? }
 
-  validates :number,      presence: true, on: :create
-  validates :last_name,   presence: true, on: :create
-  validates :first_name,  presence: true, on: :create
-
-  validate  :validation_by_active_merchant, on: :create
+  def initialize(attrs = {})
+    attrs.each do | name, value |
+      send("#{name}=", value)
+    end
+  end
 
   def verification_value?
     true # ActiveMerchant needs this
   end
 
-  def month
-    expires_on.try(:strftime, '%m').try(:to_i)
-  end
-
-  def year
-    expires_on.try(:strftime, '%Y').try(:to_i)
+  def persisted?
+    false
   end
 
   private
@@ -63,31 +68,22 @@ class Creditcard < ActiveRecord::Base
   end
 
   def validation_by_active_merchant
-    unless errors.any?
-      to_active_merchant_credit_card.tap do | card |
-        propogate_active_merchant_errors(card) unless card.valid?
+    amcard = to_active_merchant_creditcard
+
+    unless amcard.valid?
+      amcard.errors.full_messages.each do |message|
+        errors.add(:base, message)
       end
     end
+
+    amcard.errors.any?
   end
 
-  def to_active_merchant_credit_card
+  def to_active_merchant_creditcard
     options = {}
     add_user_data(options)
     add_credit_card_data(options)
 
     ActiveMerchant::Billing::CreditCard.new(options)
-  end
-
-  def propogate_active_merchant_errors(amcard)
-    amcard.errors.full_messages.each do |message|
-        # TODO make it i18n compatible
-        message.gsub!(/Number is required/,'Credit card number is required')
-        message.gsub!(/Verification value is required/, 'CVV number is required')
-      self.errors.add(:base, message)
-    end
-  end
-
-  def set_masked_number
-    self.masked_number = to_active_merchant_credit_card.display_number
   end
 end

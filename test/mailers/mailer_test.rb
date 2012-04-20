@@ -3,8 +3,6 @@ require "test_helper"
 class MailerTest < ActiveSupport::TestCase
   setup do
     @order = create(:order_with_line_items)
-    creditcard_transaction = build(:creditcard_transaction, order: @order)
-    creditcard_transaction.save(validate: false)
   end
 
   test "sends out order notification" do

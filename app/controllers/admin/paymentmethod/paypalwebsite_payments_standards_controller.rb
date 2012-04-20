@@ -21,9 +21,7 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
   private
 
     def post_params
-      params.slice(:paypal_website_payments_standard_merchant_email,
-                   :paypal_website_payments_standard_use_ssl,
-                   :paypal_website_payments_standard_paymentaction)
+      params.slice(:merchant_email, :standard_use_ssl, :paymentaction)
     end
 
     def load_payment_method

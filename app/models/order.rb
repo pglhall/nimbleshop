@@ -16,12 +16,7 @@ class Order < ActiveRecord::Base
   has_many    :shipments
   has_many    :line_items,   dependent:  :destroy
   has_many    :products,     through:    :line_items
-  has_many    :paypal_transactions, dependent:  :destroy
-  has_many    :transactions, dependent:  :destroy, class_name: "CreditcardTransaction" do
-    def primary
-      first
-    end
-  end
+  has_many    :payment_transactions, dependent:  :destroy
 
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
   accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
@@ -47,8 +42,6 @@ class Order < ActiveRecord::Base
   state_machine :payment_status, initial: :abandoned do
     after_transition  abandoned: [ :paid, :authorized ], do: :send_email_notifications
     after_transition  abandoned: [ :paid, :authorized ], do: :shipping_pending
-    after_transition  abandoned: :paid, do: :mark_split_time
-
     after_transition  authorized: :cancelled, do: :void_authorized_transactions
     after_transition  paid: :cancelled,       do: :void_captured_transactions
 
@@ -66,7 +59,7 @@ class Order < ActiveRecord::Base
       transition abandoned: :paid
     end
 
-    event :transaction_cancelled do
+    event :transaction_voided do
       transition authorized: :cancelled
     end
 
@@ -92,24 +85,6 @@ class Order < ActiveRecord::Base
 
     event :cancel_shipment do
       transition shipping_pending: :nothing_to_ship
-    end
-  end
-
-  def payment_date
-    case payment_method
-    when PaymentMethod::Splitable
-      splitable_paid_at
-    when PaymentMethod::AuthorizeNet
-      transactions.primary.created_at.to_s(:long)
-    end
-  end
-
-  def masked_creditcard_number
-    case payment_method
-    when PaymentMethod::Splitable
-      nil
-    when PaymentMethod::AuthorizeNet
-      transactions.primary.creditcard.masked_number
     end
   end
 
@@ -205,10 +180,6 @@ class Order < ActiveRecord::Base
       @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
     end
 
-    def mark_split_time
-      update_attributes!(splitable_paid_at: Time.zone.now.to_s(:long))
-    end
-
     def after_shipped
       Mailer.shipping_notification(number).deliver
       touch(:shipped_at)
@@ -220,10 +191,8 @@ class Order < ActiveRecord::Base
     end
 
     def void_authorized_transactions
-      transactions.authorized.active.each(&:void)
     end
 
     def void_captured_transactions
-      transactions.captured.active.each(&:void)
     end
 end

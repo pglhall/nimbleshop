@@ -21,10 +21,10 @@ class Admin::Paymentmethod::AuthorizedotnetsController < Admin::PaymentMethodsCo
   private
 
     def post_params
-      params.slice(:authorize_net_login_id, 
-                   :authorize_net_transaction_key,
-                   :authorize_net_use_ssl,
-                   :authorize_net_company_name_on_creditcard_statement )
+      params.slice(:login_id,
+                   :transaction_key,
+                   :use_ssl,
+                   :company_name_on_creditcard_statement )
     end
 
     def load_payment_method

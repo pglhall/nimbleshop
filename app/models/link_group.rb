@@ -1,6 +1,6 @@
 class LinkGroup < ActiveRecord::Base
 
-  include BuildPermalink
+  include Permalink::Builder
 
   has_many :navigations, dependent: :destroy
 
