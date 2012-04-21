@@ -36,9 +36,6 @@ gem 'mini_magick'
 # to manage states of payment_status and shipping_status
 gem 'state_machine'
 
-# visit /admin_data to manage data using browser
-gem 'admin_data', '= 1.1.16'
-
 # mustache.js
 #
 # Mustache is used to generate new product-group-condition
@@ -67,7 +64,7 @@ gem 'fog'
 # for error notification
 gem "airbrake"
 
-# This gem vendors jquery fancybox for Rails 3.1 and greater. The files will be added to the asset pipeline and available for you to use.
+# for displaying images of a product in facybox manner
 gem 'fancybox-rails'
 
 # Gems used only for assets and not required
@@ -108,7 +105,7 @@ group :test do
   gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 
   gem 'database_cleaner'
-  gem 'rb-fsevent'
+  gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
   gem 'factory_girl_rails'
   gem "launchy"
   gem "mocha", :require => false

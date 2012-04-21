@@ -104,8 +104,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
-    admin_data (1.1.16)
-      will_paginate (>= 3.0.0)
     airbrake (3.0.9)
       activesupport
       builder
@@ -316,7 +314,6 @@ PLATFORMS
 
 DEPENDENCIES
   activemerchant
-  admin_data (= 1.1.16)
   airbrake
   capybara
   carmen!
