@@ -27,7 +27,7 @@ class PaymentMethod::Splitable < PaymentMethod
     Rails.logger.info "response.body is #{response.body}"
 
     data = ActiveSupport::JSON.decode(response.body)
-    data['error'].blank? ? [nil, data['success']] : [data['error'], nil]
+    data['error'].blank? ? [nil, data['split_url']] : [data['error'], nil]
   end
 
   def validate_splitable_webhook(params)
