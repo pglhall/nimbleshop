@@ -48,11 +48,10 @@ gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
 gem 'strong_parameters', git: 'git://github.com/rails/strong_parameters.git'
 
 # to make settings more flexible. Without hashr the code would be like this
-#  Settings.s3['bucket_name']
-# with hashr it becomes
-#  Settings.s3.bucket_name
+#  Settings.s3['bucket_name']  .With hashr it becomes Settings.s3.bucket_name
 #
 #  I can't use open-struct because that does not list all the keys
+#
 gem 'hashr'
 
 # This gem maintains all the country codes and subregions for some of the countries
@@ -78,32 +77,35 @@ end
 
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
-  gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
 
   #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
   gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
-
 end
 
-
 group :test do
-  gem 'vcr'
-  gem 'webmock'
-  gem 'simplecov', :require => false
-  gem 'capybara'
-  gem 'faker'
+  gem 'sqlite3'
 
+  gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
   gem 'guard'
   gem 'guard-minitest'
 
-  gem 'sqlite3'
-
-  # Colorize MiniTest output and show failing tests instantly
-  gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
-
+  gem 'webmock'
+  gem 'simplecov', :require => false
+  gem 'capybara'
   gem 'database_cleaner'
-  gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
   gem 'factory_girl_rails'
   gem "launchy"
   gem "mocha", :require => false
+
+  # this gem makes it faster to find out when a file has changed. guard works faster with this gem
+  gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
+
+  # for fake data in testing
+  gem 'faker'
+
+  # for capture response from authorize.net
+  gem 'vcr'
+
+  # Colorize MiniTest output and show failing tests instantly
+  gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 end
