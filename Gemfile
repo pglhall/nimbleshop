@@ -93,9 +93,6 @@ group :test do
   gem 'capybara'
   gem 'faker'
 
-  gem 'minitest', '~> 2.10.1'
-  #gem "minitest-rails-shoulda", git: 'git://github.com/rawongithub/minitest-rails-shoulda.git'
-
   gem 'guard'
   gem 'guard-minitest'
 

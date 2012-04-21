@@ -320,7 +320,6 @@ DEPENDENCIES
   hashr
   launchy
   mini_magick
-  minitest (~> 2.10.1)
   minitest-colorize!
   minitest-rails!
   mocha
