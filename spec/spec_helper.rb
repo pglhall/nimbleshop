@@ -19,7 +19,7 @@ require "capybara/rails"
 require 'database_cleaner'
 require 'rails/test_help'
 require "minitest/rails"
-require 'minitest-rails-shoulda'
+#require 'minitest-rails-shoulda'
 require "mocha"
 require "active_support/testing/setup_and_teardown"
 require 'vcr'

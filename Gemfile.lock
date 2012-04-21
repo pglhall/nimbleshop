@@ -43,15 +43,6 @@ GIT
       activemodel (>= 3.2.0)
 
 GIT
-  remote: git://github.com/rawongithub/minitest-rails-shoulda.git
-  revision: 2bd90c19c5be00aa1718a00293b6899223daf79f
-  specs:
-    minitest-rails-shoulda (0.0.1)
-      minitest-matchers
-      minitest-rails
-      shoulda-matchers
-
-GIT
   remote: git://github.com/rawongithub/minitest-rails.git
   revision: 1287d6e83f0cf3229f4d9e42fec94914a1330caa
   branch: gemspec
@@ -205,8 +196,6 @@ GEM
     mini_magick (3.4)
       subexec (~> 0.2.1)
     minitest (2.10.1)
-    minitest-matchers (1.2.0)
-      minitest (>= 2.5.0)
     mocha (0.10.4)
       metaclass (~> 0.0.1)
     money (3.7.1)
@@ -271,7 +260,6 @@ GEM
       ffi (~> 1.0)
       multi_json (~> 1.0)
       rubyzip
-    shoulda-matchers (1.0.0)
     simplecov (0.4.2)
       simplecov-html (~> 0.4.4)
     simplecov-html (0.4.5)
@@ -335,7 +323,6 @@ DEPENDENCIES
   minitest (~> 2.10.1)
   minitest-colorize!
   minitest-rails!
-  minitest-rails-shoulda!
   mocha
   money
   mustache
