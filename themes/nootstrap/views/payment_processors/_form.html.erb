@@ -1,8 +1,10 @@
 <br />
+
 <div class='span7'>
   <div class='well'>
-    <%= render 'authorize_net_instructions' %>
-    <%= render 'what_is_cvv' %>
+
+    <%= render 'payment_processors/payment_methods/authorize_net/authorize_net_instructions' %>
+    <%= render 'payment_processors/payment_methods/authorize_net/what_is_cvv' %>
 
     <div class='alert alert-success payment-security-notice'>
       All payments are secure and encrypted. We never store your credit card information.
@@ -19,6 +21,12 @@
             </label>
           <% end %>
 
+          <% if paypal_website_payments_standard_enabled? %>
+            <label class='radio'>
+              <%= radio_button_tag 'payment_choice', 'paypal' %>
+              <%= image_tag('paypal.png') %>
+            </label>
+          <% end %>
 
           <% if authorize_net_enabled?  %>
             <label class='radio'>
@@ -35,17 +43,16 @@
       </div>
 
     <% if authorize_net_enabled? %>
-      <%= render 'authorize_net_form', f: f %>
+      <%= render 'payment_processors/payment_methods/authorize_net/authorize_net_form', f: f %>
     <% end %>
+
     </div>
   <% end %>
   <div class='well'>
     <% if paypal_website_payments_standard_enabled? %>
-      <%= render partial: 'paypal', locals: { order: current_order } %>
+      <%= render partial: 'payment_processors/payment_methods/paypal/paypal', locals: { order: current_order } %>
     <% end %>
   </div>
 </div>
 
-
 <%= render 'shared/order_summary' %>
-

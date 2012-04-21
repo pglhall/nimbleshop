@@ -1,7 +1,7 @@
 <%= payment_service_for order.id, Shop.paypal_website_payments_standard.paypal_website_payments_standard_merchant_email,
                              :amount => order.total_amount.round(2),
                              :service => :paypal,
-                             :html => { :id => 'payment-form' } do |service| %>
+                             :html => { :id => 'paypal-payment-form' } do |service| %>
 
   <% service.customer :email => order.email %>
 
@@ -18,5 +18,7 @@
   <% service.cancel_return_url  cancel_url(order) %>
 
   <!-- Display the payment button. --> 
+  <!-- 
   <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+  -->
 <% end %>
