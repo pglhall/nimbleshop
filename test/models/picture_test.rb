@@ -4,7 +4,7 @@ class PictureTest < ActiveSupport::TestCase
   test "attaching picture to a product" do
     product = create :product
     product.pictures.first.destroy
-    product.attach_picture('cookware.jpg', Rails.root.join('spec', 'support', 'images', 'cookware.jpg'))
+    product.attach_picture('cookware.jpg', Rails.root.join('test', 'support', 'images', 'cookware.jpg'))
     product = Product.unscoped.last
 
     assert_equal 1, product.pictures.size

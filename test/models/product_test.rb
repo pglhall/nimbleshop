@@ -35,13 +35,13 @@ class ProductStatusTest < ActiveSupport::TestCase
   end
 
   test "various status" do
-    Product.hidden.must_have_same_elements [ @product2, @product3 ]
-    Product.sold_out.must_have_same_elements  [ @product5 ]
+    assert_must_have_same_elements Product.hidden, [ @product2, @product3 ]
+    assert_must_have_same_elements  Product.sold_out, [ @product5 ]
   end
 
   test "active status" do
     skip "not sure why it is failing" do
-      Product.active.must_have_same_elements [ @product1, @product4 ]
+      assert_must_have_same_elements Product.active, [ @product1, @product4 ]
     end
   end
 
@@ -57,11 +57,11 @@ class ProductFindOrBuildForField < ActiveSupport::TestCase
 
   test "needs to build new answer" do
     @answer = @product.find_or_build_answer_for_field(@field2)
-    @answer.id.must_be_nil
+    assert_equal nil, @answer.id
   end
 
   test "needs to return exisitng answer" do
-    @product.find_or_build_answer_for_field(@field1).must_equal @answer
+    assert_equal @answer, @product.find_or_build_answer_for_field(@field1)
   end
 
 end

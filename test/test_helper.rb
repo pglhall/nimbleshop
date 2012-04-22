@@ -11,23 +11,22 @@ Capybara.default_wait_time  = 5
 
 VCR.configure do | c |
   c.ignore_hosts '127.0.0.1', 'localhost'
-  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.cassette_library_dir = 'test/vcr_cassettes'
   c.hook_into :webmock # or :fakeweb
 end
 
 class ActiveSupport::TestCase
   include Factory::Syntax::Methods
-  self.fixture_path = "#{::Rails.root}/spec/fixtures"
+  self.fixture_path = "#{::Rails.root}/test/fixtures"
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures = false
   fixtures :all
 end
 
-
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   self.use_transactional_fixtures = false
-  self.fixture_path = "#{::Rails.root}/spec/fixtures"
+  self.fixture_path = "#{::Rails.root}/test/fixtures"
 
   setup { DatabaseCleaner.start }
 
@@ -39,7 +38,7 @@ class ActionDispatch::IntegrationTest
 end
 
 # Require ruby files in support dir.
-Dir[File.expand_path('spec/support/*.rb')].each { |file| require file }
+Dir[File.expand_path('test/support/*.rb')].each { |file| require file }
 
 module RegionalShippingMethodTestHelper
   def create_regional_shipping_method

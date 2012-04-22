@@ -27,7 +27,7 @@ class LinkGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Nike Shoes')
   end
 
-  describe "delete link group" do
+  test "delete link group" do
     @nav = @link_group.navigations.create(product_group: @product_group)
     Capybara.current_driver =  :selenium
     visit admin_link_groups_path

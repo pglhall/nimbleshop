@@ -14,7 +14,6 @@ class ShippingMethodTest < ActiveSupport::TestCase
     s.lower_price_limit = 21
     refute s.valid?
   end
-
 end
 
 class ShippingMethodScopesTest < ActiveSupport::TestCase
@@ -58,7 +57,7 @@ class ShippingMethodScopesTest < ActiveSupport::TestCase
   end
 
   test "#available_countries" do
-    ShippingMethod.available_for_countries(1000).must_have_same_elements ['US', 'HK']
+    assert_must_have_same_elements ShippingMethod.available_for_countries(1000), ['US', 'HK']
   end
 end
 
@@ -68,40 +67,40 @@ class ShippingMethodMiscTest < ActiveSupport::TestCase
   test "making country level shipping method inactive should make children inactive - updating record" do
     shipping_method = create(:country_shipping_method)
     region = shipping_method.regions.first
-    region.active.must_equal true
+    assert region.active
     shipping_method.update_attributes!(active: false)
     region.reload
-    region.active.must_equal false
+    refute region.active
   end
 
   test "making country level shipping method inactive should make children inactive - creating record" do
     shipping_method = create(:country_shipping_method, active: false)
     region = shipping_method.regions.first
-    region.active.must_equal false
+    refute region.active
   end
 
   test "#enable! #disable!" do
     shipping = create(:country_shipping_method)
 
     shipping.enable!
-    shipping.must_be(:active)
+    assert shipping.active
 
     shipping.disable!
-    shipping.wont_be(:active)
+    refute shipping.active
   end
 
   test "of country - is not going to update" do
     shipment = ShippingMethod.new(base_price: 10)
     shipment.shipping_zone = CountryShippingZone.new
     shipment.update_offset(0.20)
-    shipment.offset.to_f.must_equal 0.0
+    assert_equal 0.0, shipment.offset.to_f
   end
-  
+
   test "#update_offset - of state - is going to increase by 0.20" do
     shipment = ShippingMethod.new(base_price: 10)
     shipment.shipping_zone = RegionalShippingZone.new
     shipment.update_offset(0.20)
-    shipment.offset.to_f.must_equal 0.20
+    assert_equal 0.20, shipment.offset.to_f
   end
 
   test "#update_offset - of state - is going to decreate by 0.20" do
@@ -109,87 +108,83 @@ class ShippingMethodMiscTest < ActiveSupport::TestCase
     shipment.shipping_zone = RegionalShippingZone.new
     shipment.offset = 0.80
     shipment.update_offset(-0.20)
-    shipment.offset.to_f.must_be_within_delta 0.60
+    assert_in_delta 0.60, shipment.offset.to_f
   end
 
   test "of country type - #shipping_price - ignores offset value" do
     shipping = build(:country_shipping_method)
     shipping.offset = 0.10
     shipping.base_price = 10
-    shipping.shipping_price.must_equal 10.0
+    assert_equal 10.0, shipping.shipping_price
   end
 
   test "of country type - on create #callbacks - creates all regional shipping zone records" do
     shipping = build(:country_shipping_method)
     shipping.save
-    shipping.regions.count.must_equal 57
+    assert_equal 57, shipping.regions.count
   end
 
-  describe "of state type - #shipping_price - ignores base_price value" do
+  test "of state type - #shipping_price - ignores base_price value" do
     shipping = create_regional_shipping_method
     shipping.parent.base_price = 10
     shipping.offset = 0.10
     shipping.base_price = 20
 
-    shipping.shipping_price.to_f.must_equal 10.10
+    assert_equal 10.10, shipping.shipping_price.to_f
   end
 
   test "of state type - on create #callbacks - does not create all regional shipping zone records" do
     shipping = create_regional_shipping_method
     shipping.save
-    shipping.regions.count.must_equal 0
+    assert_equal 0, shipping.regions.count
   end
 
 end
 
-require 'spec_helper'
-
-describe ShippingMethod do
+class A < ActiveSupport::TestCase
   include RegionalShippingMethodTestHelper
 
-  describe "#available_for" do
-    describe "with one shipping method" do
-      it {
-        shipping_method = create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51)
-        CountryShippingZone.count.must_equal 1
-        RegionalShippingZone.count.must_equal 57
-        shipping_method.shipping_zone.country_code.must_equal 'US'
+  setup do
+    CountryShippingZone.delete_all
+    RegionalShippingZone.delete_all
+  end
 
-        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
-        address.state_code.must_equal 'FL'
-        RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'}).must_equal 1
+  test "#available_for - with one shipping method" do
+    shipping_method = create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51)
+    assert_equal 1, CountryShippingZone.count
+    assert_equal 57, RegionalShippingZone.count
+    assert_equal 'US', shipping_method.shipping_zone.country_code
 
-        ShippingMethod.available_for(25, address).size.must_equal 1
-        ShippingMethod.available_for(200, address).size.must_equal 0
-      }
-    end
+    address = create(:shipping_address, state_code: 'FL', country_code: 'US')
+    assert_equal 'FL', address.state_code
+    assert_equal 1, RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'})
 
-    describe "with two shipping methods" do
-      it {
-        create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'General')
-        create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'Express')
-        RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'}).must_equal 2
+    assert_equal 1, ShippingMethod.available_for(25, address).size
+    assert_equal 0, ShippingMethod.available_for(200, address).size
+  end
 
-        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
-        ShippingMethod.available_for(25, address).size.must_equal 2
-        ShippingMethod.available_for(200, address).size.must_equal 0
-      }
-    end
-    describe "with two shipping methods and make one active" do
-      it {
-        s1 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, name: 'General')
-        s2 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, active: false, name: 'Express')
-        s1.active.must_equal true
-        s1.regions.each { |r| r.active.must_equal true }
+  test "#available_for - with two shipping methods" do
+    create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'General')
+    create(:country_shipping_method, lower_price_limit: 10, upper_price_limit: 51, name: 'Express')
+    assert_equal 2, RegionalShippingZone.count(conditions: {state_code: 'FL', country_code: 'US'})
 
-        s2.active.must_equal false
-        s2.regions.each { |r| r.active.must_equal false }
+    address = create(:shipping_address, state_code: 'FL', country_code: 'US')
+    assert_equal 2, ShippingMethod.available_for(25, address).size
+    assert_equal 0, ShippingMethod.available_for(200, address).size
+  end
 
-        address = create(:shipping_address, state_code: 'FL', country_code: 'US')
-        ShippingMethod.available_for(25, address).size.must_equal 1
-        ShippingMethod.available_for(200, address).size.must_equal 0
-      }
-    end
+  test "#available_for - with two shipping methods and make one active" do
+    s1 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, name: 'General')
+    s2 = create(:country_shipping_method, lower_price_limit: 1, upper_price_limit: 51, active: false, name: 'Express')
+    assert s1.active
+    s1.regions.each { |r| assert r.active }
+
+    refute s2.active
+    s2.regions.each { |r| refute r.active }
+
+    address = create(:shipping_address, state_code: 'FL', country_code: 'US')
+    assert_equal 1, ShippingMethod.available_for(25, address).size
+    assert_equal 0, ShippingMethod.available_for(200, address).size
   end
 
 end

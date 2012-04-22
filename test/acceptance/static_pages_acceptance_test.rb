@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'test_helper'
 
 class StaticPagesIntegrationTest < ActionDispatch::IntegrationTest
   test "static pages" do
@@ -9,6 +9,5 @@ class StaticPagesIntegrationTest < ActionDispatch::IntegrationTest
 
     click_link 'Contact us'
     assert page.has_content?('hello.nimbleshop@gmail.com')
-
   end
 end

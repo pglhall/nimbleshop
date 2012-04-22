@@ -24,7 +24,7 @@ class PaymentProcessorTest < ActiveSupport::TestCase
     processor = PaymentProcessor.new(creditcard, @order)
     playcasette('authorize.net/authorize-success') { processor.process }
     @order.reload
-    @order.must_be(:authorized?)
+    assert @order.authorized?
     assert_equal 1, @order.transactions.count
     assert @order.transactions.last.active?
     assert @order.transactions.last.authorized?
@@ -36,11 +36,11 @@ class PaymentProcessorTest < ActiveSupport::TestCase
     creditcard = build(:creditcard)
     processor = PaymentProcessor.new(creditcard, @order)
     playcasette('authorize.net/purchase-success') { processor.process }
-    @order.must_be(:paid?)
-    @order.transactions.count.must_equal 1
-    @order.transactions.last.must_be(:active?)
-    @order.transactions.last.must_be(:purchased?)
-    @order.payment_method.must_equal PaymentMethod.find_by_permalink('authorize-net')
+    assert @order.paid?
+    assert_equal 1, @order.transactions.count
+    assert @order.transactions.last.active?
+    assert @order.transactions.last.purchased?
+    assert_equal PaymentMethod.find_by_permalink('authorize-net'), @order.payment_method
   end
 
   test "purchase when credit card is invalid" do

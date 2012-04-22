@@ -8,11 +8,11 @@ class MailerTest < ActiveSupport::TestCase
   end
 
   test "sends out order notification" do
-    @order.line_items.count.must_equal 1
+    assert_equal 1, @order.line_items.count
     mail = Mailer.order_notification(@order.number)
-    mail.subject.must_equal "Order confirmation for order ##{@order.number}"
-    mail.to.must_equal ['john@nimbleshop.com']
-    mail.encoded.must_match /Here is receipt for your purchase/
+    assert_equal "Order confirmation for order ##{@order.number}", mail.subject
+    assert_equal ['john@nimbleshop.com'], mail.to
+    assert_match /Here is receipt for your purchase/, mail.encoded
   end
 
 end
