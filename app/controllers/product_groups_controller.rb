@@ -1,6 +1,9 @@
 class ProductGroupsController < ApplicationController
+
   theme         :theme_resolver,  only: [:show]
+
   before_filter :no_page_title,   only: [:show]
+
   respond_to    :html
 
   def show
@@ -10,4 +13,5 @@ class ProductGroupsController < ApplicationController
 
     respond_with(@produt_group)
   end
+
 end

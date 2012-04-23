@@ -73,10 +73,11 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Successfuly updated')
     assert page.has_content?("name starts with 'awesome'")
 
-#      https://github.com/thoughtbot/capybara-webkit/issues/109
+    #https://github.com/thoughtbot/capybara-webkit/issues/109
     handle_js_confirm do
       click_link 'Delete'
     end
+
     refute page.has_content?("name starts with 'awesome'")
   end
 

@@ -11,11 +11,18 @@ class Admin::Paymentmethod::PaypalwebsitePaymentsStandardsController < Admin::Pa
   end
 
   def update
-    @payment_method.update_attributes(params.slice(:paypal_website_payments_standard_merchant_email, :paypal_website_payments_standard_paymentaction))
-    redirect_to admin_paymentmethod_paypalwebsite_payments_standard_path, notice: 'Successfuly updated'
+    if @payment_method.update_attributes(post_params)
+      redirect_to admin_paymentmethod_paypalwebsite_payments_standard_path, notice: 'Successfuly updated'
+    else
+      render :edit
+    end
   end
 
   private
+
+    def post_params
+      params.slice(:paypal_website_payments_standard_merchant_email, :paypal_website_payments_standard_paymentaction)
+    end
 
     def load_payment_method
       @payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')

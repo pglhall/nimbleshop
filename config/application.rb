@@ -48,9 +48,6 @@ module Nimbleshop
     # do not use application for precompiling
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile += ['admin.css', 'admin.js']
-    config.assets.precompile += ['admin_data.css', 'admin_data.js']
-
     # TODO we should do not need to hardcode theme name
     config.assets.paths << "#{Rails.root}/themes/nootstrap/assets/stylesheets"
     config.assets.paths << "#{Rails.root}/themes/nootstrap/assets/javascripts"
@@ -62,10 +59,11 @@ module Nimbleshop
     config.assets.version = '1.0'
 
     config.generators do |g|
-      g.test_framework :mini_test, spec: false, fixture: false
+      g.test_framework :test_unit, fixture: false
 
       # do not generate a helper every time a controller is created
       g.helper = false
     end
+
   end
 end

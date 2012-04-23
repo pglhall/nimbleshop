@@ -21,4 +21,5 @@ class ProductsController < ApplicationController
 
     respond_with @product
   end
+
 end

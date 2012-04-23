@@ -85,7 +85,7 @@ end
 group :test do
   gem 'sqlite3'
 
-  gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
+  #gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
   gem 'guard'
   gem 'guard-minitest'
 
@@ -106,6 +106,7 @@ group :test do
   # for capture response from authorize.net
   gem 'vcr'
 
-  # Colorize MiniTest output and show failing tests instantly
-  gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
+  # Colorize MiniTest output and show failing tests instantly. It is here less for colorful
+  # outuput and more for instant test failure information
+  #gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 end

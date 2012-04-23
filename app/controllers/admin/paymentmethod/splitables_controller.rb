@@ -11,16 +11,18 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
   end
 
   def update
-    @payment_method.splitable_api_key        = params[:splitable_api_key]
-    @payment_method.splitable_api_secret     = params[:splitable_api_secret]
-    @payment_method.splitable_submission_url = params[:splitable_submission_url]
-    @payment_method.splitable_logo_url       = params[:splitable_logo_url]
-    @payment_method.splitable_expires_in     = params[:splitable_expires_in]
-    @payment_method.save
-    redirect_to admin_paymentmethod_splitable_path, notice: 'Successfuly updated'
+    if @payment_method.update_attributes(post_params)
+      redirect_to admin_paymentmethod_splitable_path, notice: 'Successfuly updated'
+    else
+      render :edit
+    end
   end
 
   private
+
+    def post_params
+      params.slice( :splitable_api_key, :splitable_api_secret, :splitable_submission_url, :splitable_logo_url, :splitable_expires_in )
+    end
 
     def load_payment_method!
       @payment_method = PaymentMethod.find_by_permalink!('splitable')

@@ -14,7 +14,7 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def create
-    @product_group = ProductGroup.new(params[:product_group])
+    @product_group = ProductGroup.new(post_params[:product_group])
     if @product_group.save
       redirect_to admin_product_groups_path, notice: t(:successfully_updated)
     else
@@ -28,7 +28,7 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def update
-    if @product_group.update_attributes(params[:product_group])
+    if @product_group.update_attributes(post_params[:product_group])
       redirect_to admin_product_groups_path, notice: t(:successfully_updated)
     else
       render 'edit'
@@ -41,6 +41,10 @@ class Admin::ProductGroupsController < AdminController
   end
 
   private
+
+    def post_params
+      params.permit(product_group: [:name, :product_group_conditions_attributes])
+    end
 
     def load_product_group
       @product_group = ProductGroup.find_by_permalink!(params[:id])

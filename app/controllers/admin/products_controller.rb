@@ -44,7 +44,7 @@ class Admin::ProductsController < AdminController
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = Product.new(post_params[:product])
     if @product.save
       redirect_to admin_products_url, notice: t(:successfully_added)
     else
@@ -53,7 +53,7 @@ class Admin::ProductsController < AdminController
   end
 
   def update
-    if @product.update_attributes(params[:product])
+    if @product.update_attributes(post_params[:product])
       redirect_to admin_products_path, notice: t(:successfully_updated)
     else
       render action: :edit
@@ -66,6 +66,10 @@ class Admin::ProductsController < AdminController
   end
 
   private
+
+    def post_params
+      params.permit(product: [ :name, :status, :description, :price, :new, :variants_enabled] )
+    end
 
     def load_product!
       @product = Product.find_by_permalink!(params[:id])
