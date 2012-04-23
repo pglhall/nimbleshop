@@ -98,7 +98,12 @@ group :test do
   gem "mocha", :require => false
 
   # this gem makes it faster to find out when a file has changed. guard works faster with this gem
-  gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
+  #
+  # Ideally the following gem definition should be as given below. However with that deployment
+  # of the code on heroku fails. So We are using the version with RUBY_PLATFORM code.
+  #
+  # gem 'rb-fsevent' if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent'
 
   # for fake data in testing
   gem 'faker'
