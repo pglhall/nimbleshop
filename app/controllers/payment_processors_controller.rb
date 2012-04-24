@@ -47,6 +47,7 @@ class PaymentProcessorsController < ApplicationController
   end
 
   def use_ssl
+    return false if Rails.env.test?
     PaymentMethod.enabled.find { |i| i.use_ssl == 'true' }
   end
 

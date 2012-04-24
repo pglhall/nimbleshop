@@ -47,4 +47,3 @@ class PaypalIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal page.find("#tax_cart").value, "0.31"
   end
 end
-
