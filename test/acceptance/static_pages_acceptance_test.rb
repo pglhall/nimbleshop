@@ -11,3 +11,5 @@ class StaticPagesIntegrationTest < ActionDispatch::IntegrationTest
     assert page.has_content?('hello.nimbleshop@gmail.com')
   end
 end
+
+

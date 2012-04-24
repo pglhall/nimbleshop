@@ -2,7 +2,7 @@
 
   <%= render 'products/breadcrumb' %>
 
-  <% if @show_carousel %>
+  <% if @show_carousel && @products.any? %>
     <%= render 'products/carousel' %>
   <% end %>
 
