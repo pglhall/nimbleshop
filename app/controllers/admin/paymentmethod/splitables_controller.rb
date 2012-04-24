@@ -21,7 +21,11 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
   private
 
     def post_params
-      params.slice( :splitable_api_key, :splitable_api_secret, :splitable_submission_url, :splitable_logo_url, :splitable_expires_in )
+      params.slice( :splitable_api_key,
+                    :splitable_api_secret,
+                    :splitable_submission_url,
+                    :splitable_logo_url,
+                    :splitable_expires_in )
     end
 
     def load_payment_method!

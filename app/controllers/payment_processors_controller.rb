@@ -2,8 +2,7 @@ class PaymentProcessorsController < ApplicationController
 
   theme :theme_resolver, only: [:new, :create]
 
-  # TODO if Authorize.net is not used then there is no need to force_ssl
-  force_ssl :if => lambda { |_| Rails.env.production? || Rails.env.staging? }
+  force_ssl :if => lambda { |controller| controller.use_ssl }
 
   def set_splitable_data
     order = current_order
@@ -47,6 +46,10 @@ class PaymentProcessorsController < ApplicationController
     end
   end
 
+  def use_ssl
+    PaymentMethod.enabled.find { |i| i.use_ssl == 'true' }
+  end
+
   private
 
     def payment_method_url
@@ -61,5 +64,6 @@ class PaymentProcessorsController < ApplicationController
         return PaymentMethod::PaypalWebsitePaymentsStandard.first.url(current_order)
       end
     end
+
 
 end

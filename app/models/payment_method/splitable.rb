@@ -8,11 +8,16 @@ class PaymentMethod::Splitable < PaymentMethod
                             :splitable_api_secret,
                             :splitable_submission_url,
                             :splitable_logo_url,
+                            :splitable_use_ssl,
                             :splitable_expires_in
 
   attr_accessor :order, :request
 
   validates_presence_of :splitable_api_key
+
+  def use_ssl
+    self.settings[ :splitable_use_ssl ]
+  end
 
   def process_request(order, request)
     self.order   = order
