@@ -19,3 +19,9 @@
 //= require order
 //= require highlight_hovered_picture
 //= require fancybox
+
+
+$('.carousel').carousel({
+  interval: 3000
+})
+

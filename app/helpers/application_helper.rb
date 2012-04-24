@@ -14,9 +14,9 @@ module ApplicationHelper
     splitable.try(:enabled)
   end
 
-  def product_main_picture(product, version)
+  def product_main_picture(product, version = :medium_plus)
     pic = product.picture
-    image_tag(pic.picture_url(:medium_plus), alt: product.name)
+    image_tag(pic.picture_url(version), alt: product.name)
   end
 
   def items_count_in_cart

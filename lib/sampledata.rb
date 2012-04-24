@@ -1,5 +1,6 @@
 class Sampledata
-  attr_accessor :product1, :product2, :product3, :product4, :product5, :product6, :product7
+
+  attr_accessor :products
 
   def populate
     load_products
@@ -27,47 +28,23 @@ class Sampledata
 
   def process_pictures
     puts "processing pictures. Might take a while ...."
-    process_picture('pic1_1.jpg', product1)
 
-    process_picture('pic2_1.jpeg', product2)
-    process_picture('pic2_2.jpeg', product2)
-
-    process_picture('pic3_1.jpg', product3)
-    process_picture('pic3_2.jpg', product3)
-
-    process_picture('pic4_1.jpg', product4)
-    process_picture('pic4_3.jpg', product4)
-
-    process_picture('pic5_1.jpeg', product5)
-    process_picture('pic5_2.jpeg', product5)
-    process_picture('pic5_3.jpeg', product5)
-
-    process_picture('pic6_1.jpg', product6)
-    process_picture('pic6_2.jpg', product6)
-    process_picture('pic6_3.jpg', product6)
-    process_picture('pic6_4.jpg', product6)
-    process_picture('pic6_5.jpg', product6)
-    process_picture('pic6_6.jpg', product6)
-    process_picture('pic6_7.jpg', product6)
-    process_picture('pic6_8.jpg', product6)
-    process_picture('pic6_9.jpg', product6)
-    process_picture('pic6_10.jpg', product6)
-    process_picture('pic6_11.jpg', product6)
-    process_picture('pic6_12.jpg', product6)
-    process_picture('pic6_13.jpg', product6)
-    process_picture('pic6_14.jpg', product6)
-    process_picture('pic6_15.jpg', product6)
-    process_picture('pic6_16.jpg', product6)
-    process_picture('pic6_17.jpg', product6)
-
-    process_picture('pic7_1.jpg', product7)
-    process_picture('pic7_2.jpg', product7)
-    process_picture('pic7_3.jpg', product7)
+    products.each_with_index do |product, index|
+      handle_pictures_for_product(product, "product#{index+1}")
+    end
   end
 
-  def process_picture(filename, product)
-    path = Rails.root.join('db', 'original_pictures', filename )
-    product.attach_picture(filename, path)
+  def handle_pictures_for_product(product, dirname)
+    pictures = Dir.glob(Rails.root.join('db', 'original_pictures', dirname, '*'))
+
+    pictures.sort.each do |filename|
+      attach_picture( filename, product)
+    end
+  end
+
+  def attach_picture(filename_with_extension, product)
+    path = Rails.root.join('db', 'original_pictures', filename_with_extension)
+    product.attach_picture(filename_with_extension, path)
   end
 
   def load_price_information
@@ -87,19 +64,21 @@ class Sampledata
 
   def load_category_information
     cf = CustomField.create!(name: 'category', field_type: 'text')
-    product1.custom_field_answers.create(custom_field: cf, value: 'art')
-    product2.custom_field_answers.create(custom_field: cf, value: 'fashion')
-    product3.custom_field_answers.create(custom_field: cf, value: 'rug')
-    product4.custom_field_answers.create(custom_field: cf, value: 'food')
-    product5.custom_field_answers.create(custom_field: cf, value: 'fashion')
-    product6.custom_field_answers.create(custom_field: cf, value: 'fashion')
-    product7.custom_field_answers.create(custom_field: cf, value: 'fashion')
+    products[0].custom_field_answers.create(custom_field: cf, value: 'art')
+    products[1].custom_field_answers.create(custom_field: cf, value: 'toy')
+    products[2].custom_field_answers.create(custom_field: cf, value: 'fashion')
+    products[3].custom_field_answers.create(custom_field: cf, value: 'food')
+    products[4].custom_field_answers.create(custom_field: cf, value: 'fashion')
+    products[5].custom_field_answers.create(custom_field: cf, value: 'fashion')
+    products[6].custom_field_answers.create(custom_field: cf, value: 'fashion')
+    products[7].custom_field_answers.create(custom_field: cf, value: 'toy')
+    products[8].custom_field_answers.create(custom_field: cf, value: 'fashion')
 
     pg_food = ProductGroup.create!(name: 'Food')
     pg_food.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'food')
 
-    pg_rug = ProductGroup.create!(name: 'Rug')
-    pg_rug.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'rug')
+    pg_toy = ProductGroup.create!(name: 'Toy')
+    pg_toy.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'toy')
 
     pg_art = ProductGroup.create!(name:  'Art')
     pg_art.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'art')
@@ -108,7 +87,7 @@ class Sampledata
     pg_fashion.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'fashion')
 
     link_group = LinkGroup.create!(name: 'Shop by category')
-    link_group.navigations.create(product_group: pg_rug)
+    link_group.navigations.create(product_group: pg_toy)
     link_group.navigations.create(product_group: pg_art)
     link_group.navigations.create(product_group: pg_food)
     link_group.navigations.create(product_group: pg_fashion)
@@ -135,34 +114,39 @@ class Sampledata
   end
 
   def load_products
-    self.product1 = Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd', status: 'active')
+    self.products = []
 
-    self.product2 = Product.create!( title: "Lovely orange belt", price: 47, description: 'tbd', status: 'active')
-    self.product3 = Product.create!( title: "Indian rug made with love", price: 78, description: 'tbd', status: 'active')
-    self.product4 = Product.create!( title: "Indian mangoes", price: 81, description: 'tbd', status: 'active')
-    self.product5 = Product.create!( title: "Simple tote bag", price: 107, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Barbies", price: 47, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Coin Bracelet", price: 78, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Indian mangoes", price: 81, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Simple bag", price: 107, description: 'tbd', status: 'active')
 
-    self.product6 = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
-    product6.update_attributes!(variants_enabled: true)
-    product6.variation1.update_attributes!(active: true)
-    product6.variation2.update_attributes!(active: true)
+    product = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
+    products << product
+    product.update_attributes!(variants_enabled: true)
+    product.variation1.update_attributes!(active: true)
+    product.variation2.update_attributes!(active: true)
 
-    product6.variants.create!(variation1_value: 'Pink',   variation2_value: 'Small',  price: 19)
-    product6.variants.create!(variation1_value: 'Yellow', variation2_value: 'Small',  price: 11)
-    product6.variants.create!(variation1_value: 'Blue',   variation2_value: 'Small',  price: 11)
-    product6.variants.create!(variation1_value: 'Orangy', variation2_value: 'Small',  price: 14)
+    product.variants.create!(variation1_value: 'Pink',   variation2_value: 'Small',  price: 19)
+    product.variants.create!(variation1_value: 'Yellow', variation2_value: 'Small',  price: 11)
+    product.variants.create!(variation1_value: 'Blue',   variation2_value: 'Small',  price: 11)
+    product.variants.create!(variation1_value: 'Orangy', variation2_value: 'Small',  price: 14)
 
-    product6.variants.create!(variation1_value: 'Pink',   variation2_value: 'Medium',  price: 39)
-    product6.variants.create!(variation1_value: 'Yellow', variation2_value: 'Medium',  price: 31)
-    product6.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
-    product6.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
+    product.variants.create!(variation1_value: 'Pink',   variation2_value: 'Medium',  price: 39)
+    product.variants.create!(variation1_value: 'Yellow', variation2_value: 'Medium',  price: 31)
+    product.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
+    product.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
 
-    self.product7 = Product.create!( title: "Colorful shoes", price: 141, description: 'tbd')
+    products << Product.create!( title: "Colorful shoes", price: 141, description: 'tbd')
+    products << Product.create!( title: "Cars", price: 141, description: 'tbd')
+    products << Product.create!( title: "Tea cups", price: 141, description: 'tbd')
   end
 
   def load_products_desc
+    descriptions = []
 
-    desc = "
+    desc_0 = %q{
       Year of Construction: 1631
       Completed In: 1653
       Time Taken: 22 years
@@ -177,48 +161,40 @@ class Sampledata
       Highlights: One of the Seven Wonders of the World; A UNESCO World Heritage Site
 
       Facts do not capture what Tajmahal is.
-    "
-    product1.update_attributes(description: desc)
+    }
+    descriptions << desc_0
 
-    desc = "Is belt a decorative item or a utilitarian item? \n
+    desc_1 = %q{
+      Barbies are lovely.
+    }
+    descriptions << desc_1
 
-    In the armed forces of Prussia, Tsarist Russia, and other Eastern European nations, it was common for officers to wear extremely tight, wide belts around the waist, on the outside of the uniform, both to support a saber as well as for aesthetic reasons. These tightly cinched belts served to draw in the waist and give the wearer a trim physique, emphasizing wide shoulders and a pouting chest.
-
-    This lovely orange is just what you need to make girls look at you instead of police officers.
-    "
-    product2.update_attributes(description: desc)
-
-    des = %q{
-        "Gorgeous gemstone cross necklace, choice of green snowflake #1, turquoise, orange jasper, amethyst, green snowflake #2, rose quartz and tiger eye.
-
-          Cross pendants are a very personal choice for the wearer. Whether you wear one as a display of your faith, to make a fashion statement, or just because you enjoy their beauty and elegance, we have a variety of gemstone cross pendants to suit virtually any taste or budget. Each pendant features beautifully set gemstones, positioned to enhance and embellish the pendant\xE2\x80\x99s attractiveness. From semi-precious to precious gemstones, bold colors to softly muted hues, the selection of embellished crosses here have something for everyone. Choose from settings in 14k white gold, 14k yellow gold, or sterling silver. Gemstones include jade, garnet, amethyst, pearls, sapphires, diamonds, rubies, emeralds, and more. We offer a variety of sizes, from small and understated, to bold and decorative. You are sure to find whatever you are looking for in this dazzling display of artistry and craftsmanship designed to meet the needs of any budget or preference."
+    desc_2 = %q{
+      Bracelet made from turqoise magnesite coin beads, smooth and sensual.
       }
-    product3.update_attributes(description: desc)
+    descriptions << desc_2
 
-    desc = %q{
-            The mango is the national fruit of India and Pakistan. It is also the national fruit in the Philippines. The mango tree is the national tree of Bangladesh.
+    desc_3 = %q{
+              The mango is the national fruit of India and Pakistan. It is also the national fruit in the Philippines. The mango tree is the national tree of Bangladesh.
 
-In Hinduism, the perfectly ripe mango is often held by Lord Ganesha as a symbol of attainment, regarding the devotees potential perfection. Mango blossoms are also used in the worship of the goddess Saraswati. No Telugu/Kannada new year's day called Ugadi passes without eating ugadi pacchadi made with mango pieces as one of the ingredients. In Tamil Brahmin homes mango is an ingredient in making vadai paruppu on Sri Rama Navami day (Lord Ram's Birth Day) and also in preparation of pachchadi on Tamil new year's day.
-The Jain goddess Ambika is traditionally represented as sitting under a mango tree.
+              In Hinduism, the perfectly ripe mango is often held by Lord Ganesha as a symbol of attainment, regarding the devotees potential perfection. 
+              Mango blossoms are also used in the worship of the goddess Saraswati. No Telugu/Kannada new year's day called Ugadi passes without eating 
+              ugadi pacchadi made with mango pieces as one of the ingredients. In Tamil Brahmin homes mango is an ingredient in making vadai paruppu on 
+              Sri Rama Navami day (Lord Ram's Birth Day) and also in preparation of pachchadi on Tamil new year's day.
+              The Jain goddess Ambika is traditionally represented as sitting under a mango tree.
 
-
-An image of Ambika under a mango tree in Cave of the Ellora Caves
-Mango leaves are used to decorate archways and doors in Indian houses and during weddings and celebrations like Ganesh Chaturthi. Mango motifs and paisleys are widely used in different Indian embroidery styles, and are found in Kashmiri shawls, Kanchipuram silk sarees, etc. Paisleys are also common to Iranian art, because of its pre-Islamic Zoroastrian past.
-
+              An image of Ambika under a mango tree in Cave of the Ellora Caves
+              Mango leaves are used to decorate archways and doors in Indian houses and during weddings and celebrations like Ganesh Chaturthi. 
+              Mango motifs and paisleys are widely used in different Indian embroidery styles, and are found in Kashmiri shawls, Kanchipuram silk sarees, etc. Paisleys are also common to Iranian art, because of its pre-Islamic Zoroastrian past.
     }
-    product4.update_attributes(description: desc)
+    descriptions << desc_3
 
-    desc = %q{
-      The term tote, meaning "to carry". This bag will let you carry items.
-
+    desc_4 = %q{
       It is also a simple design. Sometime just being simple makes you stand out. No need to have a bag that is screaming "save the earth". If you carry this bag then it means you stand for all that and much more.
-
-      No make use of this barry and "carry" items.
     }
-    product5.update_attributes(description: desc)
+    descriptions << desc_4
 
-
-    desc = %q{
+    desc_5 = %q{
 Bangles are part of traditional Indian jewelry. They are usually worn in pairs by women, one or more on each arm. Most Indian women prefer wearing either gold or glass bangles or combination of both. Inexpensive bangles made from plastic are slowly replacing those made by glass, but the ones made of glass are still preferred at traditional occasions such as marriages and on festivals.
 
 The designs range from simple to intricate handmade designs, often studded with precious and semi-precious stones such as diamonds, gems and pearls. Sets of expensive bangles made of gold and silver make a jingling sound. The imitation jewelry, tend to make a tinny sound when jingled.
@@ -226,14 +202,29 @@ The designs range from simple to intricate handmade designs, often studded with 
 It is tradition that the bride will try to wear as many small glass bangles as possible at her wedding and the honeymoon will end when the last bangle breaks.
 
     }
-    product6.update_attributes(description: desc)
+    descriptions << desc_5
 
-    desc = %q{
-      People of Rajasthan love color. Everything they use from top to bottom is colorful.
+    desc_6 = %q{
+      People of India love color. Everything they use from top to bottom is colorful.
 
       Lets talk about shoes. Making good looking shoes is an art they have perfected over centuries. Making a shoe takes the whole village. And the whole village participates in the business of making and selling quality colorful shoes.
     }
-    product7.update_attributes(description: desc)
+    descriptions << desc_6
+
+    desc_7 = %q{
+      Speedy cars.
+    }
+    descriptions << desc_7
+
+    desc_8 = %q{
+      "It's tea time. Grab your cup"
+    }
+    descriptions << desc_8
+
+    products.each_with_index do |product, i|
+      product.update_attributes!(description: descriptions[i])
+    end
+
   end
 
 end

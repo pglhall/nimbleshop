@@ -8,8 +8,9 @@ class ProductsController < ApplicationController
 
   def index
     @page_title     = 'All products'
-    @products       = Product.active.order(:name)
+    @products       = Product.active.order(:created_at)
     @product_groups = ProductGroup.all
+    @show_carousel = true
 
     respond_with @products
   end
