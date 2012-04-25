@@ -31,7 +31,8 @@ Nimbleshop::Application.routes.draw do
     end
   end
 
-  match 'orders/:id/:payment_method' => 'orders#paid', as: :paid_order
+  # TODO make it restful
+  get 'orders/:id/:payment_method' => 'orders#paid', as: :paid_order
 
   resource  :feedback,  only: [:show] do
     collection do
