@@ -78,8 +78,8 @@ end
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
 
-  #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
-  gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
+  gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
+  #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
 end
 
 group :test do

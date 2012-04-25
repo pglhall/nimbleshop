@@ -13,8 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/neerajdotname/push2heroku.git
-  revision: 278631a3f73ab748392784541d6071b06a4d44df
-  branch: lab
+  revision: a3a39894327e61ce8e61a7777876e39ca1b4e662
   specs:
     push2heroku (0.0.2)
       hashr (= 0.0.19)
@@ -148,7 +147,7 @@ GEM
     guard-minitest (0.5.0)
       guard (>= 0.4)
     hashr (0.0.19)
-    heroku (2.24.1)
+    heroku (2.25.0)
       launchy (>= 0.3.2)
       netrc (~> 0.7.1)
       rest-client (~> 1.6.1)
@@ -229,7 +228,7 @@ GEM
     ruby-hmac (0.4.0)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.6.1)
+    rubyzip (0.9.7)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
