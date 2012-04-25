@@ -21,7 +21,12 @@ Nimbleshop::Application.routes.draw do
   resources :orders,    only: [:edit, :update] do
     member do
       get :cancel
+
+      # TODO change the name to choose_shipping_method. current name edit_shipping_method suggests that we are editing shipping_method
+      # while we are editing order
       get :edit_shipping_method
+
+      # TODO change the name to something like  chosen_shipping_method
       put :update_shipping_method
     end
   end
