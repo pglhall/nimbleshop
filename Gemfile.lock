@@ -12,19 +12,19 @@ GIT
     carmen (1.0.0.pre)
 
 GIT
+  remote: git://github.com/lucasefe/themes_for_rails.git
+  revision: f4c027f22abe104eae53035bb6ef513875f3579f
+  specs:
+    themes_for_rails (0.5.0)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/neerajdotname/push2heroku.git
   revision: a3a39894327e61ce8e61a7777876e39ca1b4e662
   specs:
     push2heroku (0.0.2)
       hashr (= 0.0.19)
       heroku
-
-GIT
-  remote: git://github.com/neerajdotname/themes_for_rails.git
-  revision: f3efda87d9902fad04501d36ed1dac05f4a862b4
-  specs:
-    themes_for_rails (0.4.3)
-      rails (>= 3.0.0)
 
 GIT
   remote: git://github.com/rails/strong_parameters.git
