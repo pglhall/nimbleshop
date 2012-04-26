@@ -1,16 +1,22 @@
-<div id="myCarousel" class="carousel" >
-  <!-- Carousel items -->
+<div class="carousel" >
+
   <div class="carousel-inner">
     <div class="active item">
       <%= link_to(product_main_picture(@products.first, :carousel), @products.first) %>
+      <div class="carousel-caption">
+        <h4><%= @products.first.name %> <%= number_to_currency(@products.first.price) %></h4>
+      </div>
     </div>
     <% @products[1..-1].each do |product| %>
       <div class="item">
         <%= link_to(product_main_picture(product, :carousel), product) %>
+        <div class="carousel-caption">
+          <h4><%= product.name %> <%= number_to_currency(product.price) %></h4>
+        </div>
       </div>
-
     <% end %>
   </div>
+
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>

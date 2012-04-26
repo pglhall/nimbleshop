@@ -116,10 +116,10 @@ class Sampledata
   def load_products
     self.products = []
 
-    products << Product.create!( title: "Tajmahal - crown of palaces", price: 10, description: 'tbd', status: 'active')
-    products << Product.create!( title: "Barbies", price: 47, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Beautiful portrait of Tajmahal", price: 19, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Set of three barbies", price: 47, description: 'tbd', status: 'active')
     products << Product.create!( title: "Coin Bracelet", price: 78, description: 'tbd', status: 'active')
-    products << Product.create!( title: "Indian mangoes", price: 81, description: 'tbd', status: 'active')
+    products << Product.create!( title: "Indian mangoes basket", price: 81, description: 'tbd', status: 'active')
     products << Product.create!( title: "Simple bag", price: 107, description: 'tbd', status: 'active')
 
     product = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
@@ -138,9 +138,9 @@ class Sampledata
     product.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
     product.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
 
-    products << Product.create!( title: "Colorful shoes", price: 141, description: 'tbd')
-    products << Product.create!( title: "Cars", price: 141, description: 'tbd')
-    products << Product.create!( title: "Tea cups", price: 141, description: 'tbd')
+    products << Product.create!( title: "Colorful shoes", price: 191, description: 'tbd')
+    products << Product.create!( title: "Battery operated Mercedes SL 6V car in red", price: 111, description: 'tbd')
+    products << Product.create!( title: "Set of six tea cups", price: 41, description: 'tbd')
   end
 
   def load_products_desc

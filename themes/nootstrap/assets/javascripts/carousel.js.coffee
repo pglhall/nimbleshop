@@ -1,2 +1,2 @@
 $ ->
-  $('.carousel').carousel interval: 3000
+  $('.carousel').carousel(interval: 2500)

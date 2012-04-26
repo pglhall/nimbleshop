@@ -19,3 +19,4 @@
 //= require order
 //= require highlight_hovered_picture
 //= require fancybox
+//= require carousel
