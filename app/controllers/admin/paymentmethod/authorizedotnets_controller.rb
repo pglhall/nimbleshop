@@ -2,6 +2,8 @@ class Admin::Paymentmethod::AuthorizedotnetsController < Admin::PaymentMethodsCo
 
   before_filter :load_payment_method
 
+  layout 'payment_method'
+
   def show
     @page_title = 'authorize.net'
   end

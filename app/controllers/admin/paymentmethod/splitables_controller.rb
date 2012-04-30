@@ -2,6 +2,8 @@ class Admin::Paymentmethod::SplitablesController < Admin::PaymentMethodsControll
 
   before_filter :load_payment_method!
 
+  layout 'payment_method'
+
   def show
     @page_title = 'splitable'
   end

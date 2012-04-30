@@ -2,6 +2,11 @@ module ApplicationHelper
 
   delegate :paypal_website_payments_standard, :authorize_net, :splitable, :to => Shop
 
+  def parent_layout(layout)
+    @view_flow.set(:layout,output_buffer)
+    self.output_buffer = render(:file => "layouts/#{layout}")
+  end
+
   def paypal_website_payments_standard_enabled?
     paypal_website_payments_standard.try(:enabled)
   end
