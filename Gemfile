@@ -117,3 +117,7 @@ group :test do
   # outuput and more for instant test failure information
   #gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 end
+
+gem 'paypal_extension',          path: 'vendor/engines/paypal_extension'
+gem 'authorizedotnet_extension', path: 'vendor/engines/authorizedotnet_extension'
+gem 'splitable_extension',       path: 'vendor/engines/splitable_extension'

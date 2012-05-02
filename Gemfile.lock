@@ -55,6 +55,24 @@ GIT
   specs:
     nested_form (0.2.0)
 
+PATH
+  remote: vendor/engines/authorizedotnet_extension
+  specs:
+    authorizedotnet_extension (0.0.1)
+      rails (~> 3.2.1)
+
+PATH
+  remote: vendor/engines/paypal_extension
+  specs:
+    paypal_extension (0.0.1)
+      rails (~> 3.2.1)
+
+PATH
+  remote: vendor/engines/splitable_extension
+  specs:
+    splitable_extension (0.0.1)
+      rails (~> 3.2.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -301,6 +319,7 @@ DEPENDENCIES
   activemerchant
   airbrake
   american_date
+  authorizedotnet_extension!
   capybara
   carmen!
   carrierwave
@@ -324,6 +343,7 @@ DEPENDENCIES
   money
   mustache
   nested_form!
+  paypal_extension!
   pg
   push2heroku!
   rails (= 3.2.1)
@@ -331,6 +351,7 @@ DEPENDENCIES
   ruby-debug19
   sass-rails (~> 3.2.3)
   simplecov
+  splitable_extension!
   sqlite3
   state_machine
   strong_parameters!

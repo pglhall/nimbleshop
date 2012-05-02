@@ -1,5 +1,15 @@
 Nimbleshop::Application.routes.draw do
 
+  mount AuthorizedotnetExtension::Engine, at: '/admin/payment_methods/authorizedotnet_etension',
+                                          as: 'authorizedotnet_extension'
+
+  mount PaypalExtension::Engine,  at: '/admin/payment_methods/paypal_extension',
+                                  as: 'paypal_extension'
+
+  mount SplitableExtension::Engine,  at: '/admin/payment_methods/splitable_extension',
+                                     as: 'splitable_extension'
+
+
   themes_for_rails
 
   get "/pages/about-us",           to: "pages#about_us",   as: :about_us
@@ -59,12 +69,6 @@ Nimbleshop::Application.routes.draw do
     resources :payment_methods
     resources :product_groups
     resources :custom_fields
-
-    namespace :paymentmethod do
-      resource :authorizedotnet
-      resource :paypalwebsite_payments_standard
-      resource :splitable
-    end
 
     resources :orders do
       resources :shipments, except: [:edit, :update]
