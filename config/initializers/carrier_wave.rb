@@ -1,11 +1,4 @@
-if Rails.env.development? || Rails.env.test?
-
-  CarrierWave.configure do |config|
-    config.storage = :file
-    config.enable_processing = true
-  end
-
-elsif Rails.env.staging? || Rails.env.production?
+if Settings.use_s3
 
   CarrierWave.configure do |config|
     config.cache_dir = "#{Rails.root}/tmp/uploads"
@@ -15,17 +8,20 @@ elsif Rails.env.staging? || Rails.env.production?
     config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
     config.fog_public     = true
 
-
     config.fog_credentials = {
-        :provider               => 'AWS',
-        :aws_access_key_id      => Settings.s3.access_key_id,
-        :aws_secret_access_key  => Settings.s3.secret_access_key,
-        :region                 => 'us-east-1'
+        provider:               'AWS',
+        aws_access_key_id:      Settings.s3.access_key_id,
+        aws_secret_access_key:  Settings.s3.secret_access_key,
+        region:                 'us-east-1'
       }
   end
 
 else
 
-  raise "carrierwave is not configured for #{Rails.env}"
+  CarrierWave.configure do |config|
+    config.storage = :file
+    config.enable_processing = true
+  end
 
 end
+
