@@ -6,6 +6,8 @@ development:
   pool: 5
   username: nsingh
   password: postgres
+
+# http://robots.thoughtbot.com/post/20367239936/global-min-messages
   min_messages: warning
 
 staging:
