@@ -7,7 +7,7 @@ task :setup => :environment do
 
   Rake::Task["db:seed"].invoke
 
-  PaymentMethod.load_default!
+  PaymentMethod.load_seed_data!
   PaymentMethod.update_all(enabled: true)
 
   Sampledata.new.populate
