@@ -19,12 +19,14 @@ common:
     password: <%= ENV['MAILTRAPIO_PASSWORD'] || '7663e1f272637a4b' %>
 
 development:
+  use_s3: false
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   using_heroku: false
 
 test:
+  use_s3: false
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
@@ -35,14 +37,18 @@ test:
     transaction_key: 9r3pbH5bnKH29f7d
 
 staging:
+  use_s3: true
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.net
   using_heroku: true
   deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
+  cache_images: true
 
 production:
+  use_s3: true
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.com
   using_heroku: true
+  cache_images: true
