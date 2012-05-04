@@ -16,7 +16,7 @@ module SplitableExtension
     end
 
     def api_notify_url(request)
-      'http://' + request.host_with_port + '/instant_payment_notifications/splitable'
+      'http://' + request.host_with_port + 'admin/payment_methods/splitable_extension/splitable/notify'
     end
 
 

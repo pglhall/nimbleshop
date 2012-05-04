@@ -1,7 +1,22 @@
 module SplitableExtension
   class SplitablesController < ::Admin::PaymentMethodsController
 
-    before_filter :load_payment_method
+    protect_from_forgery except: [:notify]
+
+    before_filter :load_payment_method, except: [ :notify ]
+
+    def notify
+      Rails.logger.info "splitable callback received: #{params.to_yaml}"
+
+      handler = SplitableExtension::Billing.new(invoice: params[:invoice])
+
+      if handler.acknowledge(params)
+        render nothing: true
+      else
+        Rails.logger.info "webhook with data #{params.to_yaml} was rejected. error: #{handler.errors.join(',')}"
+        render "error: #{error}", status: 403
+      end
+    end
 
     def show
       @page_title = 'Splitable payment information'

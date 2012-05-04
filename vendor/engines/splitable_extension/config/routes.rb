@@ -1,3 +1,7 @@
 SplitableExtension::Engine.routes.draw do
-  resource :splitable
+  resource :splitable do
+    collection do
+      get :notify
+    end
+  end
 end

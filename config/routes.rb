@@ -21,13 +21,6 @@ Nimbleshop::Application.routes.draw do
   resource  :checkout,  only: :show, controller: :checkout
   resources :products,  only: [:index, :show]
 
-  resources :instant_payment_notifications do
-    collection do
-      post :paypal
-      post :splitable
-    end
-  end
-
   resources :orders,    only: [:edit, :update] do
     member do
       get :cancel
