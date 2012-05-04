@@ -11,9 +11,6 @@ gem 'pg'
 # gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
 #gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
 
-# splitable needs this to send POST request
-gem 'faraday'
-
 # heroku cedar stack needs it
 gem 'thin'
 gem 'american_date'

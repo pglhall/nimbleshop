@@ -1,4 +1,3 @@
-ActiveMerchant::Billing::Base.mode = :test
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
     module Integrations #:nodoc:

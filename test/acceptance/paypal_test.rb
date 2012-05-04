@@ -22,8 +22,8 @@ class PaypalIntegrationTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.current_driver = :selenium
 
-    paypal = PaymentMethod.find_by_permalink("paypal-website-payments-standard")
-    paypal.update_column(:enabled, true)
+    Shop.paypal_website_payments_standard.enable!
+
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
     create(:country_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)

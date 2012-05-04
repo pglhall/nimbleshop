@@ -38,7 +38,7 @@ class PaymentProcessorsController < ApplicationController
       address_attrs     = order.final_billing_address.to_credit_card_attributes
       creditcard_attrs  = params[:creditcard].merge(address_attrs)
       @creditcard       = Creditcard.new(creditcard_attrs)
-      handler           = Payment::Handler::AuthorizeNet.new(order)
+      handler           = AuthorizedotnetExtension::Billing.new(order)
 
       if handler.send(Shop.first.default_creditcard_action, creditcard: @creditcard)
         redirect_to paid_order_path(id: current_order, payment_method: :credit_card)

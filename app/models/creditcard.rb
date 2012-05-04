@@ -19,6 +19,8 @@ class Creditcard
 
   alias :verification_value :cvv # ActiveMerchant needs this
 
+  delegate :display_number, to: :to_active_merchant_creditcard
+
   before_validation :set_cardtype
 
   before_validation :strip_non_numeric_values, if: :number

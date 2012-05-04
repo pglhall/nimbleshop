@@ -21,12 +21,16 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
 
   setup do
     Capybara.current_driver = :selenium
+    paypal = Shop.paypal_website_payments_standard.enable!
 
-    paypal = PaymentMethod.find_by_permalink("paypal-website-payments-standard")
-    paypal.update_column(:enabled, true)
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
-    create(:country_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)
+
+    create(:country_shipping_method,  name: 'Ground',
+                                      base_price: 3.99,
+                                      lower_price_limit: 1,
+                                      upper_price_limit: 99999)
+
     create(:payment_method, enabled: true)
 
     visit root_path
@@ -42,11 +46,5 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
   test 'when credit card invalid' do
     click_button 'Submit'
     assert page.has_content?("Credit card number is blank")
-    skip "following two assertions should pass" do
-      assert page.has_content?('Credit card number is required')
-      assert page.has_content?('CVV number is required')
-    end
   end
 end
-
-

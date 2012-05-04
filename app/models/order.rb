@@ -40,32 +40,11 @@ class Order < ActiveRecord::Base
   # Similarly status 'paid' is only for a brief transition. Once an order is put in 'purchased' state then after_purchased is called and
   # this method sets the status as 'paid'.
   state_machine :payment_status, initial: :abandoned do
-    after_transition  abandoned: [ :paid, :authorized ], do: :send_email_notifications
-    after_transition  abandoned: [ :paid, :authorized ], do: :shipping_pending
-    after_transition  authorized: :cancelled, do: :void_authorized_transactions
-    after_transition  paid: :cancelled,       do: :void_captured_transactions
-
-    after_transition  any: [:cancelled, :refunded], do: :cancel_shipment
-
-    event :transaction_authorized do
-      transition abandoned: :authorized
-    end
-
-    event :transaction_captured do
-      transition authorized: :paid
-    end
-
-    event :transaction_purchased do
-      transition abandoned: :paid
-    end
-
-    event :transaction_voided do
-      transition authorized: :cancelled
-    end
-
-    event :transaction_refunded do
-      transition paid: :refunded
-    end
+    event(:authorize) { transition abandoned:   :authorized }
+    event(:kapture )  { transition authorized:  :paid       }
+    event(:purchase)  { transition abandoned:   :paid       }
+    event(:void)      { transition authorized:  :cancelled  }
+    event(:refund)    { transition paid:        :refunded   }
 
     state all - [ :abandoned ] do
       validates :payment_method, presence: true
@@ -85,6 +64,12 @@ class Order < ActiveRecord::Base
 
     event :cancel_shipment do
       transition shipping_pending: :nothing_to_ship
+    end
+  end
+
+  def mark_as_paid!
+    unless paid_at
+      touch(:paid_at)
     end
   end
 
@@ -183,16 +168,5 @@ class Order < ActiveRecord::Base
     def after_shipped
       Mailer.shipping_notification(number).deliver
       touch(:shipped_at)
-    end
-
-    def send_email_notifications
-      Mailer.order_notification(number).deliver
-      AdminMailer.new_order_notification(number).deliver
-    end
-
-    def void_authorized_transactions
-    end
-
-    def void_captured_transactions
     end
 end

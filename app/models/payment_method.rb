@@ -10,11 +10,12 @@ class PaymentMethod < ActiveRecord::Base
     settings[:use_ssl]
   end
 
-  def set_mode
-    ActiveMerchant::Billing::Base.mode = :test
-    if Rails.env.production? && Shop.first.process_credit_card_for_real?
-      ActiveMerchant::Billing::Base.mode = :production
-    end
+  def enable!
+    update_attribute(:enabled, true)
+  end
+
+  def disable!
+    update_attribute(:enabled, false)
   end
 
   def self.load_seed_data!
