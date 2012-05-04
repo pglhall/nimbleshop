@@ -34,7 +34,7 @@ class PaymentMethod < ActiveRecord::Base
 
       instance = payment_klass.new(attributes)
 
-      preferences.each_pair { | attr, value | instance.send("#{attr}=", value) }
+      value.each_pair { | attr, value | instance.send("#{attr}=", value) }
 
       instance.save
     end

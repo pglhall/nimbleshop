@@ -1,14 +1,14 @@
 if Settings.use_s3
 
-  bucket_name = Settings.s3.bucket_name
+  unless bucket_name = Settings.s3.bucket_name
+    msg = %Q{
+      This application's #{Rails.env} environment is configured to use amazon s3. 
+      However bucket_name to use is not specified.
+      Please check guide( link here) on how to configure application to use S3.
+    }
 
-  msg = %Q{
-    This application's #{Rails.env} environment is configured to use amazon s3. 
-    However bucket_name to use is not specified.
-    Please check guide( link here) on how to configure application to use S3.
-  }
-
-  raise msg
+    raise msg
+  end
 
   CarrierWave.configure do |config|
     config.cache_dir = "#{Rails.root}/tmp/uploads"
