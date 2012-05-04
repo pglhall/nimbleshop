@@ -41,7 +41,7 @@ class Order < ActiveRecord::Base
   # this method sets the status as 'paid'.
   state_machine :payment_status, initial: :abandoned do
     event(:authorize) { transition abandoned:   :authorized }
-    event(:kapture )  { transition authorized:  :paid       }
+    event(:kapture )  { transition authorized:  :paid       }  # capture is a method defined on kernel
     event(:purchase)  { transition abandoned:   :paid       }
     event(:void)      { transition authorized:  :cancelled  }
     event(:refund)    { transition paid:        :refunded   }
