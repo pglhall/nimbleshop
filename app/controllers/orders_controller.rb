@@ -8,12 +8,14 @@ class OrdersController < ApplicationController
 
   theme :theme_resolver
 
+  #this method is candidate to shipping_methods controller to not break REST
   def edit_shipping_method
     @page_title = 'Pick shipping method'
 
     respond_with(current_order)
   end
 
+  #this method is candidate to shipping_methods controller to not break REST
   def update_shipping_method
     if params[:order].present? && params[:order].keys.include?('shipping_method_id')
       current_order.update_attributes(shipping_method_id: params[:order][:shipping_method_id])
@@ -34,14 +36,12 @@ class OrdersController < ApplicationController
 
   # TODO find a better action name. Name of action is edit but it records
   # the shipping information for order
+  # pm: new ? :) <- from the REST point of view it is only simple builder
   def edit
     @page_title = 'Shipping information'
     current_order.initialize_addresses
 
-    # TODO add a new method on order so that following code could be
-    #
-    # current_order.shippable_countries
-    @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
+    @countries = current_order.shippable_countries
 
     respond_with(current_order)
   end
@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
     else
       @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
       current_order.initialize_addresses
-      render 'edit'
+      respond_with(current_order)
     end
   end
 

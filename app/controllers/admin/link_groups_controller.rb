@@ -3,22 +3,27 @@ class Admin::LinkGroupsController < AdminController
   before_filter :load_link_group,  only: [:show, :destroy, :edit, :update ]
   before_filter :load_link_groups, only: [:index, :create, :edit, :update ]
 
+  respond_to :html, :js
+
   def index
     @page_title = 'link groups'
+    respond_with @link_groups
   end
 
   def show
     @page_title = @link_group.name
-    render partial: 'link_group_title', locals: { link_group: @link_group }
+    respond_with @link_group
   end
 
   def new
     @page_title = 'new link group'
     @link_group = LinkGroup.new
+    respond_with @link_group
   end
 
   def edit
     @page_title = @link_group.name
+    respond_with @link_group
   end
 
   def create
@@ -26,7 +31,7 @@ class Admin::LinkGroupsController < AdminController
     if @link_group.save
       redirect_to admin_link_groups_url, notice: t(:successfully_added)
     else
-      render action: :new
+      respond_with @link_group
     end
   end
 
@@ -34,7 +39,7 @@ class Admin::LinkGroupsController < AdminController
       if @link_group.update_attributes(post_params[:link_group])
         redirect_to admin_link_groups_path, notice: t(:successfully_updated)
       else
-        render action: :edit
+        respond_with @link_group
       end
     end
 

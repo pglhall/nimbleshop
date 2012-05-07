@@ -2,6 +2,8 @@ class Admin::ProductsController < AdminController
 
   before_filter :load_product!, only: [:show, :edit, :update, :destroy, :variants ]
 
+  respond_to :html
+
   def variants
     # update variation name event if the variant data is invalid
     @product.update_variation_names(params)
@@ -23,11 +25,13 @@ class Admin::ProductsController < AdminController
   def index
     @page_title = 'Products'
     @products = Product.order(:id)
+    respond_with @products
   end
 
   def show
     @page_title = "Product - #{@product.name}"
     @product_groups = ProductGroup.contains_product(@product)
+    respond_with @products
   end
 
   def new
@@ -36,11 +40,13 @@ class Admin::ProductsController < AdminController
     @product = Product.new
     @product.pictures.build
     @product.find_or_build_all_answers
+    respond_with @product
   end
 
   def edit
     @page_title = 'Edit product'
     @product.find_or_build_all_answers
+    respond_with @products
   end
 
   def create
@@ -48,7 +54,7 @@ class Admin::ProductsController < AdminController
     if @product.save
       redirect_to admin_products_url, notice: t(:successfully_added)
     else
-      render action: :new
+      respond_with @product
     end
   end
 
@@ -56,7 +62,7 @@ class Admin::ProductsController < AdminController
     if @product.update_attributes(post_params[:product])
       redirect_to admin_products_path, notice: t(:successfully_updated)
     else
-      render action: :edit
+      respond_with @product
     end
   end
 

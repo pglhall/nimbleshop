@@ -2,15 +2,19 @@ class Admin::ProductGroupsController < AdminController
 
   before_filter :load_product_group, only: [:edit, :update, :destroy]
 
+  respond_to :html
+
   def index
     @page_title = 'Product groups'
     @product_groups = ProductGroup.order('name asc')
+    respond_with @product_groups
   end
 
   def new
     @page_title = 'New product group'
     @product_group = ProductGroup.new
     @product_group.product_group_conditions.build
+    respond_with @product_group
   end
 
   def create
@@ -18,26 +22,30 @@ class Admin::ProductGroupsController < AdminController
     if @product_group.save
       redirect_to admin_product_groups_path, notice: t(:successfully_updated)
     else
-      render 'new'
+      respond_with @product_group
     end
   end
 
   def edit
     @page_title = "Edit #{@product_group.name}"
     @custom_fields = CustomField.order('name asc')
+    respond_with @product_group
   end
 
   def update
     if @product_group.update_attributes(post_params[:product_group])
       redirect_to admin_product_groups_path, notice: t(:successfully_updated)
     else
-      render 'edit'
+      respond_with @product_group
     end
   end
 
   def destroy
-    @product_group.destroy
-    redirect_to admin_product_groups_path, notice: t(:successfully_deleted)
+    if @product_group.destroy
+      redirect_to admin_product_groups_path, notice: t(:successfully_deleted)
+    else
+      respond_with @product_group
+    end
   end
 
   private

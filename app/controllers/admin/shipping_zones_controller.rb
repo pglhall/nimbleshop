@@ -2,25 +2,30 @@ class Admin::ShippingZonesController < AdminController
 
   before_filter :load_shipping_zone, only: [:edit, :update, :destroy]
 
+  respond_to :html
+
   def index
     @page_title = 'shipping zone'
     @shipping_zones = CountryShippingZone.order('name asc')
+    respond_with @shipping_zones
   end
 
   def new
     @page_title = 'new shipping zone'
     @shipping_zone = ShippingZone.new
+    respond_with @shipping_zone
   end
 
   def edit
     @page_title = 'edit shipping zone'
+    respond_with @shipping_zone
   end
 
   def update
     if @shipping_zone.update_attributes(post_params[:shipping_zone])
       redirect_to admin_shipping_zones_path, notice: t(:successfully_updated)
     else
-      render action: :edit
+      respond_with @shipping_zone
     end
   end
 
@@ -29,7 +34,7 @@ class Admin::ShippingZonesController < AdminController
     if @shipping_zone.save
       redirect_to admin_shipping_zones_path, notice: t(:successfully_created)
     else
-      render action: :new
+      respond_with @shipping_zone
     end
   end
 

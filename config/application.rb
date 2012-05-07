@@ -1,4 +1,9 @@
 require File.expand_path('../boot', __FILE__)
+#issue described in detail here: http://www.ruby-forum.com/topic/1002689 last comment
+#rvm builds 1.9.2 with libyaml and it falls back to psych yaml parser
+#psych is not working good with carmen gem
+require 'yaml'
+YAML::ENGINE.yamler= 'syck'
 
 require 'rails/all'
 

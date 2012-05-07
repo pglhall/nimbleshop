@@ -148,6 +148,10 @@ class Order < ActiveRecord::Base
     line_items.find_by_product_id(product_id)
   end
 
+  def shippable_countries
+    ShippingMethod.available_for_countries(line_items_total)
+  end
+
   private
 
     def set_order_number

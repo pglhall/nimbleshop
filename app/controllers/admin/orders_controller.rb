@@ -1,8 +1,11 @@
 class Admin::OrdersController < AdminController
 
+  respond_to :html
+
   def index
     @page_title = 'Orders'
     @orders = Order.order('id desc')
+    respond_with @orders
   end
 
   def show
@@ -15,6 +18,7 @@ class Admin::OrdersController < AdminController
       @shipment = @order.shipments.build
       @shipment.notify_customer = 1
     end
+    respond_with @order
   end
 
 end
