@@ -4,6 +4,7 @@
 #
 common:
   airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>
+  google_analytics_tracking_id: <%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] || 'UA-19036601-7' %>
 
   s3:
     access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>

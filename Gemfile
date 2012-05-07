@@ -118,3 +118,6 @@ end
 gem 'paypal_extension',          path: 'vendor/engines/paypal_extension'
 gem 'authorizedotnet_extension', path: 'vendor/engines/authorizedotnet_extension'
 gem 'splitable_extension',       path: 'vendor/engines/splitable_extension'
+
+# to send event information to google analytics
+gem 'gabba'

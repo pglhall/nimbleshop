@@ -171,6 +171,7 @@ GEM
       nokogiri (>= 1.4.4)
       ruby-hmac
     formatador (0.2.1)
+    gabba (0.3.0)
     guard (1.0.1)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -327,6 +328,7 @@ DEPENDENCIES
   faker
   fancybox-rails
   fog
+  gabba
   guard
   guard-minitest
   hashr

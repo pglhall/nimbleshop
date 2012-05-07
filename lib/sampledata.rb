@@ -22,7 +22,7 @@ class Sampledata
                    from_email:      'support@nimbleshop.com',
                    gateway:         'AuthorizeNet',
                    tax_percentage: 1.23,
-                   google_analytics_tracking_id: ENV['GOOGLE_ANALYTICS_TRACKING_ID'],
+                   google_analytics_tracking_id: Settings.google_analytics_tracking_id,
                    facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
   end
 
