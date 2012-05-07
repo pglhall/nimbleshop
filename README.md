@@ -4,4 +4,4 @@
 
 # Documentation
 
-Documentation is available at [http://documentup.com/neerajdotname/nimbleshop_doc/](http://documentup.com/neerajdotname/nimbleshop_doc/) .
+Documentation is available at [http://documentup.com/neerajdotname/nimbleshop_doc/](https://github.com/bigbinary/nimbleshop_doc/wiki) .
