@@ -26,7 +26,7 @@ class PaymentProcessorsController < ApplicationController
 
     case params[:payment_choice]
     when 'splitable'
-      handler     = Payment::Handler::Splitable.new(order: order)
+      handler     = SplitableExtension::Billing.new(order: order)
       error, url  = handler.create_split(request: request)
 
       if error

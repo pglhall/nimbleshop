@@ -4,7 +4,7 @@ module PaymentProcessorHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
   def notify_url
-    public_url_mapped_to_localhost(paypal_instant_payment_notifications_path)
+    public_url_mapped_to_localhost('/admin/payment_methods/paypal_extension/paypal/notify')
   end
 
   def return_url(order)
