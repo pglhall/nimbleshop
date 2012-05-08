@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:number) { |t| "xxx#{t}" }
 
     trait :line_items do
-      after_create { | r | Factory.create(:line_item, order: r) }
+      after_create { | r | FactoryGirl.create(:line_item, order: r) }
     end
 
     factory :order_with_line_items,   traits: [:line_items]

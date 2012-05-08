@@ -16,7 +16,7 @@ VCR.configure do | c |
 end
 
 class ActiveSupport::TestCase
-  include Factory::Syntax::Methods
+  include FactoryGirl::Syntax::Methods
   self.use_transactional_fixtures = true
   fixtures :all
 

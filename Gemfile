@@ -91,6 +91,7 @@ group :test do
   gem 'webmock'
   gem 'simplecov', :require => false
   gem 'capybara'
+  gem 'selenium-webdriver', '~>2.21'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem "launchy"
