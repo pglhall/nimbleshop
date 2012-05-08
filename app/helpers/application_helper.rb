@@ -56,7 +56,11 @@ module ApplicationHelper
   end
 
   def unconfigured_shipping_zone_countries
+    ret = []
     existing = CountryShippingZone.all.map(&:country_code)
-    options_for_all_countries.reject { |_, t| existing.include?(t) }
+    options_for_all_countries.each do |_, x|
+      existing.include?(x) ? ret << [_, x, :disabled => :disabled] : ret << [_, x]
+    end
+    ret
   end
 end
