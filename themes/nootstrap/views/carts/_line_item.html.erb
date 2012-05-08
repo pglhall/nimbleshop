@@ -21,7 +21,7 @@
         Quantity
       </h4>
       <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
-                                                  id: "updates_#{line_item.product_id}", class: "quantity-field", style: "width:25px" %>
+                                                  id: "updates_#{line_item.product_id}", class: "quantity-field", :'data-behavior' => 'number-formatted' %>
     </div>
     <div class="span1">
       <h4 class="visible-phone">
