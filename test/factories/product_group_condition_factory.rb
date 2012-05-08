@@ -14,19 +14,19 @@ FactoryGirl.define do
     end
 
     trait :text_condition do
-      name  { Factory.create(:text_custom_field).id }
+      name  { FactoryGirl.create(:text_custom_field).id }
       operator 'starts'
       value 'george'
     end
 
     trait :number_condition do
-      name  { Factory.create(:number_custom_field).id }
+      name  { FactoryGirl.create(:number_custom_field).id }
       operator 'lt'
       value 43
     end
 
     trait :date_condition do
-      name  { Factory.create(:date_custom_field).id }
+      name  { FactoryGirl.create(:date_custom_field).id }
       operator 'gt'
       value { '1/1/2001' }
     end
