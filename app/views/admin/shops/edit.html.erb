@@ -86,7 +86,7 @@
       <div class="control-group">
         <%= f.label :tax_percentage,  class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :tax_percentage, class: 'span8' %>
+          <%= f.text_field :tax_percentage, class: 'span8', :'data-behavior' => 'number-formatted', :'data-behavior-precision' => 2 %>
         </div>
       </div>
 

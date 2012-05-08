@@ -20,3 +20,6 @@
 //= require highlight_hovered_picture
 //= require fancybox
 //= require carousel
+
+//= require class/formatNumber
+//= require class/formatPrice

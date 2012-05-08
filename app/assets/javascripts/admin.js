@@ -26,6 +26,8 @@
 //= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
 //= require admin/products/edit
+//= require class/formatNumber
+//= require class/formatPrice
 
 
 $(function(){

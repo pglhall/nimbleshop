@@ -23,21 +23,21 @@
       <div class="control-group">
         <%= f.label :base_price, 'Shipping cost', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :base_price, class: 'span1' %> USD
+          <%= f.text_field :base_price, class: 'span1', :'data-behavior' => 'price-formatted' %> USD
         </div>
       </div>
 
       <div class="control-group">
         <%= f.label :lower_price_limit, 'Minimum order amount', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :lower_price_limit, class: 'span1' %> USD
+          <%= f.text_field :lower_price_limit, class: 'span1', :'data-behavior' => 'price-formatted' %> USD
         </div>
       </div>
 
       <div class="control-group">
         <%= f.label :upper_price_limit, 'Maximum order amount', class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :upper_price_limit, class: 'span1', placeholder: '&#8734;'.html_safe %> USD
+          <%= f.text_field :upper_price_limit, class: 'span1', :'data-behavior' => 'price-formatted', placeholder: '&#8734;'.html_safe %> USD
         </div>
       </div>
 
