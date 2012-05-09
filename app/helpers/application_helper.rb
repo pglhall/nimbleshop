@@ -64,7 +64,7 @@ module ApplicationHelper
   end
 
   def countries_shipping_zone_codes
-    CountryShippingZone.all.map(&:country_code)
+    CountryShippingZone.pluck(:country_code)
   end
 
   def disabled_shipping_zone_countries
