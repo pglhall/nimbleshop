@@ -55,8 +55,24 @@ module ApplicationHelper
     country_codes.map {|t| [ Carmen::Country.coded(t).name, t ] }
   end
 
-  def unconfigured_shipping_zone_countries
-    existing = CountryShippingZone.all.map(&:country_code)
-    options_for_all_countries.reject { |_, t| existing.include?(t) }
+  def countries_without_shipping_zone
+    options_for_all_countries.reject { |_, t| countries_shipping_zone_codes.include?(t) }
   end
+
+  def countries_with_shipping_zone
+    options_for_all_countries.select { |_, t| countries_shipping_zone_codes.include?(t)}
+  end
+
+  def countries_shipping_zone_codes
+    CountryShippingZone.all.map(&:country_code)
+  end
+
+  def disabled_shipping_zone_countries
+    countries_with_shipping_zone.inject([]) { |result, element| result << [element[0], element[1], {disabled: :disabled}]}
+  end
+
+  def unconfigured_shipping_zone_countries
+    (disabled_shipping_zone_countries + countries_without_shipping_zone).sort
+  end
+
 end
