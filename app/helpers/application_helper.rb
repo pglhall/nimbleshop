@@ -56,14 +56,14 @@ module ApplicationHelper
   end
 
   def countries_without_shipping_zone
-    options_for_all_countries.reject { |_, t| countries_shipping_zone_codes.include?(t) }
+    options_for_all_countries.reject { |_, t| country_codes_for_country_shipping_zone.include?(t) }
   end
 
   def countries_with_shipping_zone
-    options_for_all_countries.select { |_, t| countries_shipping_zone_codes.include?(t)}
+    options_for_all_countries.select { |_, t| country_codes_for_country_shipping_zone.include?(t)}
   end
 
-  def countries_shipping_zone_codes
+  def country_codes_for_country_shipping_zone
     CountryShippingZone.pluck(:country_code)
   end
 
