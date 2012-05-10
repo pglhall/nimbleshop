@@ -6,15 +6,15 @@ gem 'will_paginate'
 gem 'pg'
 
 # to support various themes
-#
- gem 'themes_for_rails', git: 'git://github.com/lucasefe/themes_for_rails.git'
-# gem 'themes_for_rails',  path:'/Users/nsingh/dev/personal/themes_for_rails'
-#gem 'themes_for_rails',  git: 'git://github.com/neerajdotname/themes_for_rails.git'
+gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
 
 # heroku cedar stack needs it
 gem 'thin'
 gem 'american_date'
-gem 'custom_error_message',  git: 'git://github.com/nwise/custom_error_message.git'
+
+gem 'custom_error_message',  github: 'nwise/custom_error_message'
+
+
 # to handle credit card payments
 gem 'activemerchant'
 gem 'money'
@@ -26,7 +26,7 @@ gem 'carrierwave'
 gem 'carrierwave-meta'
 
 # for having nested items. order has billing_address and shipping_address nested
-gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
+gem 'nested_form', github: 'ryanb/nested_form'
 
 # for creating thumbnails for images
 gem 'mini_magick'
@@ -40,10 +40,10 @@ gem 'state_machine'
 gem 'mustache'
 
 # for validating email
-gem 'email_validator', git: "git://github.com/bigbinary/email_validator.git"
+gem 'email_validator', github: "bigbinary/email_validator"
 
 # for security
-gem 'strong_parameters', git: 'git://github.com/rails/strong_parameters.git'
+gem 'strong_parameters', github: 'rails/strong_parameters'
 
 # to make settings more flexible. Without hashr the code would be like this
 #  Settings.s3['bucket_name']  .With hashr it becomes Settings.s3.bucket_name
@@ -53,7 +53,7 @@ gem 'strong_parameters', git: 'git://github.com/rails/strong_parameters.git'
 gem 'hashr'
 
 # This gem maintains all the country codes and subregions for some of the countries
-gem 'carmen', git: 'git://github.com/jim/carmen.git'
+gem 'carmen', github: 'jim/carmen'
 
 # for uploading pictures to s3 using carrierwave
 gem 'fog'
@@ -76,26 +76,24 @@ end
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
 
-  gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git'
-  #gem 'push2heroku', git: 'git://github.com/neerajdotname/push2heroku.git', branch: 'lab'
-  gem 'localtunnel',  git: 'git://github.com/jalada/localtunnel.git'
+  gem 'push2heroku', github: 'neerajdotname/push2heroku'
+  gem 'localtunnel',  github: 'jalada/localtunnel'
 end
 
 group :test do
   gem 'sqlite3'
 
-  #gem 'minitest-rails', git: 'git://github.com/rawongithub/minitest-rails.git', branch: 'gemspec'
   gem 'guard'
   gem 'guard-minitest'
 
   gem 'webmock'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
   gem 'capybara'
   gem 'selenium-webdriver', '~>2.21'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem "launchy"
-  gem "mocha", :require => false
+  gem "mocha", require: false
 
   # this gem makes it faster to find out when a file has changed. guard works faster with this gem
   #
@@ -110,15 +108,12 @@ group :test do
 
   # for capture response from authorize.net
   gem 'vcr'
-
-  # Colorize MiniTest output and show failing tests instantly. It is here less for colorful
-  # outuput and more for instant test failure information
-  #gem 'minitest-colorize', git: 'git://github.com/nohupbrasil/minitest-colorize'
 end
+
+# to send event information to google analytics
+gem 'gabba'
 
 gem 'paypal_extension',          path: 'vendor/engines/paypal_extension'
 gem 'authorizedotnet_extension', path: 'vendor/engines/authorizedotnet_extension'
 gem 'splitable_extension',       path: 'vendor/engines/splitable_extension'
 
-# to send event information to google analytics
-gem 'gabba'
