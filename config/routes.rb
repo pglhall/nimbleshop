@@ -1,6 +1,6 @@
 Nimbleshop::Application.routes.draw do
 
-  mount AuthorizedotnetExtension::Engine, at: '/admin/payment_methods/authorizedotnet_etension',
+  mount AuthorizedotnetExtension::Engine, at: '/admin/payment_methods/authorizedotnet_extension',
                                           as: 'authorizedotnet_extension'
 
   mount PaypalExtension::Engine,  at: '/admin/payment_methods/paypal_extension',
