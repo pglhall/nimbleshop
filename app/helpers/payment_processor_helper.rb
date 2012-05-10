@@ -18,6 +18,9 @@ module PaymentProcessorHelper
   private
 
   def public_url_mapped_to_localhost(url)
+    #TODO rather than assuming that only in production one wants to return url
+    #make it configurable using application.yml
+    #
     return url if Rails.env.production?
     path = []
 

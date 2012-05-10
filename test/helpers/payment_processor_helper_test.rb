@@ -2,29 +2,29 @@ require 'test_helper'
 
 class PaymentProcessorHelperTest < ActionView::TestCase
   setup do
+    @base_public_url =  'orange-hands.showoff.io'
+
     File.open("#{Rails.root}/config/tunnel","w") do | out |
-      out.write('orange-hands.showoff.io')
+      out.write(@base_public_url)
     end
   end
 
   test "return_url for order" do
     order = Order.new
     order.number = 23
-    expected = 'https://orange-hands.showoff.io/orders/23/paypal'
 
-    assert_equal return_url(order), expected
+    assert_equal "https://#{@base_public_url}/orders/23/paypal", return_url(order)
   end
 
   test "cancel_url for order" do
     order = Order.new
     order.number = 23
-    expected = 'https://orange-hands.showoff.io/orders/23/cancel'
 
-    assert_equal cancel_url(order), expected
+    assert_equal "https://#{@base_public_url}/orders/23/cancel", cancel_url(order)
   end
 
   test "notify_url for paypal ipn" do
-    expected = 'https://orange-hands.showoff.io/instant_payment_notifications/paypal'
-    assert_equal notify_url, expected
+    assert_equal "https://#{@base_public_url}/admin/payment_methods/paypal_extension/paypal/notify", notify_url
   end
+
 end
