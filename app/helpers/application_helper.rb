@@ -11,10 +11,12 @@ module ApplicationHelper
     paypal_website_payments_standard.try(:enabled)
   end
 
+  # TODO move this method to PaymentMethod
   def authorize_net_enabled?
     authorize_net.try(:enabled)
   end
 
+  # TODO move this method to PaymentMethod
   def splitable_enabled?
     splitable.try(:enabled)
   end
