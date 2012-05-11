@@ -24,7 +24,8 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in 'Login', with: '9r3pbDFGDFoihj29f7d'
     click_button 'Submit'
 
-    assert page.has_content?('Successfuly updated')
+    assert page.has_content?('Authorize.net record was successfuly updated')
     assert page.has_content?('9r3pbDFGDFoihj29f7d')
   end
 end
+
