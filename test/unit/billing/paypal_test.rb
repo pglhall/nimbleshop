@@ -15,7 +15,7 @@ module Billing
       end
 
       test "when authorize success" do
-        processor = PaypalExtension::Billing.new(raw_post: raw_post(@order.id, @order.total_amount))
+        processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.id, @order.total_amount))
         playcasette('paypal/authorize-success') do
           assert_equal processor.authorize, true
         end
@@ -32,7 +32,7 @@ module Billing
       end
 
       test "when authorize fails with invalid credit card number" do
-        processor = PaypalExtension::Billing.new(raw_post: raw_post(@order.id, 10.48))
+        processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.id, 10.48))
         assert_equal processor.authorize, false
         assert_nil @order.payment_method
       end

@@ -6,7 +6,7 @@
           <h2> Payment status <%= display_payment_status(@order) %> </h2>
         </td>
       </tr>
-      <% if PaymentMethod::Splitable === @order.payment_method %>
+      <% if NimbleshopSplitable::Splitable === @order.payment_method %>
         <tr>
           <td colspan='3'>
               Payment method: <%= @order.payment_method.name %> <br />

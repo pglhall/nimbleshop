@@ -4,7 +4,7 @@ module PaymentProcessorHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
   def notify_url
-    public_url_mapped_to_localhost('/admin/payment_methods/paypal_extension/paypal/notify')
+    public_url_mapped_to_localhost('/admin/payment_methods/nimbleshop_paypalwp/paypalwp/notify')
   end
 
   def return_url(order)

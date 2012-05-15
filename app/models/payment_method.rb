@@ -31,7 +31,17 @@ class PaymentMethod < ActiveRecord::Base
         description: value.delete(:description)
       }
 
-      payment_klass = const_get(payment_method_name.to_s.classify)
+      case payment_method_name.to_s
+      when 'authorize_net'
+        payment_klass = ::NimbleshopAuthorizedotnet::Authorizedotnet
+      when 'paypalwp'
+        payment_klass = ::NimbleshopPaypalwp::Paypalwp
+      when 'splitable'
+        payment_klass = ::NimbleshopSplitable::Splitable
+      else
+        raise payment_method_name.to_s + ' boom' 
+        payment_klass = const_get(payment_method_name.to_s.classify)
+      end
 
       instance = payment_klass.new(attributes)
 

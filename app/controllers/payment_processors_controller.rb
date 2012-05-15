@@ -26,7 +26,7 @@ class PaymentProcessorsController < ApplicationController
 
     case params[:payment_choice]
     when 'splitable'
-      handler     = SplitableExtension::Billing.new(order: order)
+      handler     = NimbleshopSplitable::Billing.new(order: order)
       error, url  = handler.create_split(request: request)
 
       if error
@@ -38,9 +38,10 @@ class PaymentProcessorsController < ApplicationController
       address_attrs     = order.final_billing_address.to_credit_card_attributes
       creditcard_attrs  = params[:creditcard].merge(address_attrs)
       @creditcard       = Creditcard.new(creditcard_attrs)
-      handler           = AuthorizedotnetExtension::Billing.new(order)
+      handler           = NimbleshopAuthorizedotnet::Billing.new(order)
 
-      if handler.send(Shop.first.default_creditcard_action, creditcard: @creditcard)
+      a = Shop.first.default_creditcard_action
+      if handler.send(a, creditcard: @creditcard)
         redirect_to paid_order_path(id: current_order, payment_method: :credit_card)
       else
         render action: :new
@@ -55,18 +56,17 @@ class PaymentProcessorsController < ApplicationController
 
   private
 
-    def payment_method_url
-      return nil if PaymentMethod.enabled.count != 1
+  def payment_method_url
+    return nil if PaymentMethod.enabled.count != 1
 
-      permalink = PaymentMethod.enabled.first.permalink
-      return nil if permalink == 'authorize-net'
-      case permalink
-      when 'splitable'
-        return PaymentMethod::Splitable.first.url(current_order, request)
-      when 'paypal-website-payments-standard'
-        return PaymentMethod::PaypalWebsitePaymentsStandard.first.url(current_order)
-      end
+    permalink = PaymentMethod.enabled.first.permalink
+    return nil if permalink == 'authorize-net'
+    case permalink
+    when 'splitable'
+      return NimbleshopSplitable::Splitable.first.url(current_order, request)
+    when 'paypal-website-payments-standard'
+      return PaypalExtension::PaypalWebsitePaymentsStandard.first.url(current_order)
     end
-
+  end
 
 end

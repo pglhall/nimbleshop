@@ -1,13 +1,13 @@
 Nimbleshop::Application.routes.draw do
 
-  mount AuthorizedotnetExtension::Engine, at: '/admin/payment_methods/authorizedotnet_extension',
-                                          as: 'authorizedotnet_extension'
+  mount NimbleshopAuthorizedotnet::Engine, at: '/admin/payment_methods/nimbleshop_authorizedotnet',
+                                           as: 'nimbleshop_authorizedotnet'
 
-  mount PaypalExtension::Engine,  at: '/admin/payment_methods/paypal_extension',
-                                  as: 'paypal_extension'
+  mount NimbleshopPaypalwp::Engine,        at: '/admin/payment_methods/nimbleshop_paypalwp',
+                                           as: 'nimbleshop_paypalwp'
 
-  mount SplitableExtension::Engine,  at: '/admin/payment_methods/splitable_extension',
-                                     as: 'splitable_extension'
+  mount NimbleshopSplitable::Engine,       at: '/admin/payment_methods/nimbleshop_splitable',
+                                           as: 'nimbleshop_splitable'
 
 
   themes_for_rails

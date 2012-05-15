@@ -48,3 +48,4 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Credit card number is blank")
   end
 end
+

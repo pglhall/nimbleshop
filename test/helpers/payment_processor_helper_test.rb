@@ -24,7 +24,7 @@ class PaymentProcessorHelperTest < ActionView::TestCase
   end
 
   test "notify_url for paypal ipn" do
-    assert_equal "https://#{@base_public_url}/admin/payment_methods/paypal_extension/paypal/notify", notify_url
+    assert_equal "https://#{@base_public_url}/admin/payment_methods/nimbleshop_paypalwp/paypalwp/notify", notify_url
   end
 
 end

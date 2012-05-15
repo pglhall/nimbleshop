@@ -21,21 +21,21 @@ class Admin::PaymentMethodsController < AdminController
 
     redirect_to case @payment_method.permalink
                   when 'splitable'
-                    splitable_extension.splitable_path
+                    nimbleshop_splitable.splitable_path
 
                   when 'authorize-net'
-                    authorizedotnet_extension.authorizedotnet_path
+                    nimbleshop_authorizedotnet.authorizedotnet_path
 
                   when 'paypal-website-payments-standard'
-                    paypal_extension.paypal_path
+                    nimbleshop_paypalwp.paypal_path
                 end
   end
 
   private
 
-    def load_payment_methods
-      @payment_methods = PaymentMethod.order('name asc')
-      @enabled_payment_methods = PaymentMethod.where(enabled: true)
-    end
+  def load_payment_methods
+    @payment_methods = PaymentMethod.order('name asc')
+    @enabled_payment_methods = PaymentMethod.where(enabled: true)
+  end
 
 end

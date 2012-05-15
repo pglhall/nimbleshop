@@ -3,15 +3,13 @@ module Billing
 
     extend ActiveModel::Callbacks
 
-    define_model_callbacks  :transaction,
-      :authorize,
-      :capture,
-      :purchase,
-      :refund,
-      :void
+    define_model_callbacks  :transaction, :authorize,
+                                          :capture,
+                                          :purchase,
+                                          :refund,
+                                          :void
 
     before_transaction :set_active_merchant_mode
-
 
     def capture(options = {})
       execute(:capture, options)

@@ -1,6 +1,8 @@
-PaymentMethod::Splitable
-PaymentMethod::PaypalWebsitePaymentsStandard
-PaymentMethod::AuthorizeNet
+NimbleshopSplitable::Splitable
+
+NimbleshopPaypalwp::Paypalwp
+
+NimbleshopSplitable::Splitable
 
 Address
 

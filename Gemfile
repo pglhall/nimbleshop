@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # standard rails stuff
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 gem 'will_paginate'
 gem 'pg'
 
@@ -113,7 +113,7 @@ end
 # to send event information to google analytics
 gem 'gabba'
 
-gem 'paypal_extension',          path: 'vendor/engines/paypal_extension'
-gem 'authorizedotnet_extension', path: 'vendor/engines/authorizedotnet_extension'
-gem 'splitable_extension',       path: 'vendor/engines/splitable_extension'
+gem 'nimbleshop_paypalwp',        path: 'vendor/engines/nimbleshop_paypalwp'
+gem 'nimbleshop_authorizedotnet', path: 'vendor/engines/nimbleshop_authorizedotnet'
+gem 'nimbleshop_splitable',       path: 'vendor/engines/nimbleshop_splitable'
 
