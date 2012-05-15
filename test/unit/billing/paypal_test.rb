@@ -27,7 +27,7 @@ module Billing
         assert_equal transaction.success, true
         assert_equal true, @order.authorized?
         assert_equal "April 01, 2012 at 08:46 pm", @order.paid_at.to_s(:long)
-        assert_equal Shop.paypal_website_payments_standard, @order.payment_method
+        assert_equal NimbleshopPaypalwp::Paypalwp.first, @order.payment_method
         assert_equal transaction.amount, @order.total_amount_in_cents
       end
 

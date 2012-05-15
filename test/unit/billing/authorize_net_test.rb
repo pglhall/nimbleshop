@@ -18,15 +18,15 @@ module Billing
       @order.reload
 
       transaction = @order.payment_transactions.last
-      assert_equal transaction.operation, 'authorized'
-      assert_equal transaction.success, true
-      assert_equal Shop.authorize_net, @order.payment_method
+      assert_equal 'authorized', transaction.operation
+      assert_equal true, transaction.success
+      assert_equal NimbleshopAuthorizedotnet::Authorizedotnet.first, @order.payment_method
       assert       @order.authorized?
     end
 
     test "when authorize fails with invalid credit card number" do
       creditcard = build(:creditcard, number: nil)
-      assert_equal @processor.authorize(creditcard: creditcard), false
+      assert_equal false, @processor.authorize(creditcard: creditcard)
 
       @order.reload
 
@@ -46,8 +46,8 @@ module Billing
 
       transaction = @order.payment_transactions.last
 
-      assert_equal  transaction.success, false
-      assert_equal  transaction.operation, 'authorized'
+      assert_equal  false, transaction.success
+      assert_equal  'authorized', transaction.operation
       assert_nil    @order.payment_method
       assert        @order.abandoned?
     end
@@ -55,7 +55,7 @@ module Billing
 
   class AuthorizeNetCaptureTest < ActiveRecord::TestCase
     setup do
-      @order     = create(:order, payment_method: Shop.authorize_net)
+      @order     = create(:order, payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
       @order.stubs(:total_amount).returns(100.48)
       @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
       creditcard = build(:creditcard)
@@ -63,7 +63,6 @@ module Billing
       playcasette('authorize.net/authorize-success') do
         @processor.authorize(creditcard: creditcard)
       end
-
 
       @tsx_id = @order.payment_transactions.last.transaction_gid
     end
@@ -77,8 +76,8 @@ module Billing
 
       @order.reload
       transaction = @order.payment_transactions.last
-      assert_equal  transaction.operation, 'captured'
-      assert_equal  transaction.success, true
+      assert_equal  'captured', transaction.operation
+      assert_equal  true, transaction.success
       assert        @order.paid?
     end
 
@@ -93,8 +92,8 @@ module Billing
 
       transaction = @order.payment_transactions.last
 
-      assert_equal transaction.success, false
-      assert_equal transaction.operation, 'captured'
+      assert_equal false, transaction.success
+      assert_equal 'captured', transaction.operation
       assert       @order.authorized?
     end
   end
@@ -127,7 +126,7 @@ module Billing
 
       assert_equal  'refunded', transaction.operation
       assert_equal  true, transaction.success
-      assert_equal  Shop.authorize_net, @order.payment_method
+      assert_equal  NimbleshopAuthorizedotnet::Authorizedotnet.first, @order.payment_method
       assert        @order.refunded?
     end
 
@@ -170,7 +169,7 @@ module Billing
 
       assert_equal  'voided', transaction.operation
       assert_equal  true, transaction.success
-      assert_equal  Shop.authorize_net, @order.payment_method
+      assert_equal  NimbleshopAuthorizedotnet::Authorizedotnet.first, @order.payment_method
       assert        @order.cancelled?
     end
 
@@ -205,14 +204,14 @@ module Billing
       @order.reload
 
       transaction = @order.payment_transactions.last
-      assert_equal  transaction.operation, 'purchased'
-      assert_equal  transaction.success, true
+      assert_equal  'purchased', transaction.operation
+      assert_equal  true, transaction.success
       assert        @order.paid?
     end
 
     test "when purchase fails with invalid credit card number" do
       creditcard = build(:creditcard, number: nil)
-      assert_equal @processor.purchase(creditcard: creditcard), false
+      assert_equal false, @processor.purchase(creditcard: creditcard)
 
       transaction = @order.payment_transactions.last
 
@@ -228,8 +227,8 @@ module Billing
 
       transaction = @order.payment_transactions.last
 
-      assert_equal transaction.success, false
-      assert_equal transaction.operation, 'purchased'
+      assert_equal false, transaction.success
+      assert_equal 'purchased', transaction.operation
       assert       @order.abandoned?
     end
   end

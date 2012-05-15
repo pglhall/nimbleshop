@@ -1,8 +1,8 @@
 class PaymentMethod < ActiveRecord::Base
 
-  include Permalink::Builder
-
   store :settings
+
+  include Permalink::Builder
 
   scope :enabled, where(enabled: true)
 
@@ -25,23 +25,14 @@ class PaymentMethod < ActiveRecord::Base
 
     payment_data = ConfigLoader.new('payment.yml').load
 
-    payment_data.each_pair do | payment_method_name, value |
+    payment_data.each_pair do | permalink, value |
       attributes = {
         name: value.delete(:name),
         description: value.delete(:description)
       }
 
-      case payment_method_name.to_s
-      when 'authorize_net'
-        payment_klass = ::NimbleshopAuthorizedotnet::Authorizedotnet
-      when 'paypalwp'
-        payment_klass = ::NimbleshopPaypalwp::Paypalwp
-      when 'splitable'
-        payment_klass = ::NimbleshopSplitable::Splitable
-      else
-        raise payment_method_name.to_s + ' boom' 
-        payment_klass = const_get(payment_method_name.to_s.classify)
-      end
+      k = permalink.capitalize
+      payment_klass = "::Nimbleshop#{k}::#{k}".constantize
 
       instance = payment_klass.new(attributes)
 
@@ -50,7 +41,6 @@ class PaymentMethod < ActiveRecord::Base
       instance.save
     end
   end
-
 
   def self.partialize
     name.gsub("PaymentMethod::","").underscore

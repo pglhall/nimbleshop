@@ -9,7 +9,7 @@
           <%= image_tag current_theme_image_path('amex.png'),       alt: 'amex' %>
           <%= image_tag current_theme_image_path('discover.png'),   alt: 'discover' %>
 
-          <% if splitable_enabled? %>
+          <% if NimbleshopSplitable::Splitable.first.enabled? %>
             <%= image_tag current_theme_image_path('splitable.png'), alt: 'splitable' %>
           <% end %>
       </div>

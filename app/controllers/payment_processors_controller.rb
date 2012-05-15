@@ -11,14 +11,8 @@ class PaymentProcessorsController < ApplicationController
   end
 
   def new
-    # If there is only one payment method enabled and that payment method
-    # splitable or paypal then just redirect to that page
-    if url = payment_method_url
-      redirect_to url
-    else
-      @page_title = 'Make payment'
-      @creditcard = Creditcard.new
-    end
+    @page_title = 'Make payment'
+    @creditcard = Creditcard.new
   end
 
   def create
@@ -52,21 +46,6 @@ class PaymentProcessorsController < ApplicationController
   def use_ssl
     return false if Rails.env.test?
     PaymentMethod.enabled.find { |i| i.use_ssl == 'true' }
-  end
-
-  private
-
-  def payment_method_url
-    return nil if PaymentMethod.enabled.count != 1
-
-    permalink = PaymentMethod.enabled.first.permalink
-    return nil if permalink == 'authorize-net'
-    case permalink
-    when 'splitable'
-      return NimbleshopSplitable::Splitable.first.url(current_order, request)
-    when 'paypal-website-payments-standard'
-      return PaypalExtension::PaypalWebsitePaymentsStandard.first.url(current_order)
-    end
   end
 
 end

@@ -2,10 +2,6 @@ module NimbleshopSplitable
   class Client
     include ActiveMerchant::PostsData
 
-    def self.instance
-      new(Shop.splitable)
-    end
-
     class_attribute :live_url, :test_url
     self.live_url = 'https://www.splitable.com/api/splits'
     self.test_url = 'https://www.splitable-draft.com/api/splits'

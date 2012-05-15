@@ -22,7 +22,7 @@ class PaypalIntegrationTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.current_driver = :selenium
 
-    Shop.paypal_website_payments_standard.enable!
+    NimbleshopPaypalwp::Paypalwp.first.enable!
 
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)

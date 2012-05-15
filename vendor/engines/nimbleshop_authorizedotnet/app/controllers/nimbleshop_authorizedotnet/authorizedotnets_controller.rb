@@ -26,13 +26,13 @@ module NimbleshopAuthorizedotnet
 
     private
 
-      def post_params
-          params.slice(:login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement )
-      end
+    def post_params
+        params.slice(:login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement )
+    end
 
-      def load_payment_method
-        @payment_method = PaymentMethod.find_by_permalink!('authorize-net')
-      end
+    def load_payment_method
+      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
+    end
 
   end
 end

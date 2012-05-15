@@ -21,7 +21,7 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
 
   setup do
     Capybara.current_driver = :selenium
-    paypal = Shop.paypal_website_payments_standard.enable!
+    paypal = NimbleshopPaypalwp::Paypalwp.first.enable!
 
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
@@ -31,6 +31,7 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
                                       lower_price_limit: 1,
                                       upper_price_limit: 99999)
 
+    #assert_equal 'tbd', PaymentMethod.all.inspect
     create(:payment_method, enabled: true)
 
     visit root_path

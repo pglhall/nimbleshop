@@ -8,7 +8,7 @@ module NimbleshopPaypalwp
     def notify
       handler = PaypalExtension::Billing.new(raw_post: request.raw_post)
       handler.authorize
-      render :nothing => true
+      render nothing: true
     end
 
     def show
@@ -39,7 +39,7 @@ module NimbleshopPaypalwp
     end
 
     def load_payment_method
-      @payment_method = PaymentMethod.find_by_permalink!('paypal-website-payments-standard')
+      @payment_method = NimbleshopPaypalwp::Paypalwp.first
     end
 
   end

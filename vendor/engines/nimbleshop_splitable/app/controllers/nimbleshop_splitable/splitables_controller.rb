@@ -3,7 +3,7 @@ module NimbleshopSplitable
 
     protect_from_forgery except: [:notify]
 
-    before_filter :load_payment_method, except: [ :notify ]
+    before_filter :load_payment_method
 
     def notify
       Rails.logger.info "splitable callback received: #{params.to_yaml}"
@@ -41,13 +41,13 @@ module NimbleshopSplitable
 
     private
 
-      def post_params
-        params.slice( :api_key, :api_secret, :submission_url, :logo_url, :expires_in )
-      end
+    def post_params
+      params.slice( :api_key, :api_secret, :submission_url, :logo_url, :expires_in )
+    end
 
-      def load_payment_method
-        @payment_method = PaymentMethod.find_by_permalink!('splitable')
-      end
+    def load_payment_method
+      @payment_method = NimbleshopSplitable::Splitable.first
+    end
 
   end
 end

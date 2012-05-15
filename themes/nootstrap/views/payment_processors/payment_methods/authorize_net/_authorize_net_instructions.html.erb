@@ -1,4 +1,4 @@
-<% if !Rails.env.production? && authorize_net_enabled?  %>
+<% if !Rails.env.production? && NimbleshopAuthorizedotnet::Authorizedotnet.first.enabled?  %>
   <div id='authorizenetsandboxhelp' class='modal hide fade'>
 
     <div class='modal-header'>

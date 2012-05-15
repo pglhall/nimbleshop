@@ -1,24 +1,8 @@
 module ApplicationHelper
 
-  delegate :paypal_website_payments_standard, :authorize_net, :splitable, :to => Shop
-
   def parent_layout(layout)
     @view_flow.set(:layout,output_buffer)
     self.output_buffer = render(:file => "layouts/#{layout}")
-  end
-
-  def paypal_website_payments_standard_enabled?
-    paypal_website_payments_standard.try(:enabled)
-  end
-
-  # TODO move this method to PaymentMethod
-  def authorize_net_enabled?
-    authorize_net.try(:enabled)
-  end
-
-  # TODO move this method to PaymentMethod
-  def splitable_enabled?
-    splitable.try(:enabled)
   end
 
   # returns nil if the product does not have a main picture

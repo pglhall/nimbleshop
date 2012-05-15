@@ -27,7 +27,7 @@ module NimbleshopAuthorizedotnet
       add_to_order(response, 'authorized', card_number: creditcard.display_number)
 
       if succeded
-        order.update_attributes(payment_method: Shop.authorize_net)
+        order.update_attributes(payment_method: ::NimbleshopAuthorizedotnet::Authorizedotnet.first)
         order.authorize
       end
 
@@ -48,7 +48,7 @@ module NimbleshopAuthorizedotnet
       add_to_order(response, 'purchased', card_number: creditcard.display_number)
 
       if succeded
-        order.update_attributes(payment_method: Shop.authorize_net)
+        order.update_attributes(payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
         order.purchase
       end
 

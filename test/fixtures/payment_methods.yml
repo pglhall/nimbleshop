@@ -20,7 +20,7 @@ payment_methods_002:
   name: Authorize.net
   description: <p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>
   type: NimbleshopAuthorizedotnet::Authorizedotnet
-  permalink: authorize-net
+  permalink: authorizedotnet
   settings: "--- \n\
     :login_id: 26Daqx7Jtw7R\n\
     :transaction_key: 66JWf57KKc82W9y6\n\
@@ -33,7 +33,7 @@ payment_methods_003:
   name: Paypal website payments standard
   description: <p> Paypal website payments standard is a payment solution provided by paypal which allows merchant to accept credit card and paypal payments.  There is no monthly fee and no setup fee by paypal for this account.  </p> <p> <a href='https://merchant.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=merchant/wp_standard&nav=2.1.0'> more information </a> </p>
   type: NimbleshopPaypalwp::Paypalwp
-  permalink: paypal-website-payments-standard
+  permalink: paypalwp
   settings: "--- \n\
     :paymentaction: authorize\n\
     :merchant_email: seller_1323037155_biz@bigbinary.com\n"

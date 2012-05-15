@@ -4,7 +4,7 @@ module NimbleshopSplitable
     attr_reader :errors, :order
 
     def client
-      Client.instance
+      Client.new(NimbleshopSplitable::Splitable.first)
     end
 
     def initialize(options = {})
@@ -66,7 +66,7 @@ module NimbleshopSplitable
 
     def do_purchase(options = {})
       add_to_order(options, 'purchased')
-      order.update_attributes(payment_method: Shop.splitable)
+      order.update_attributes(payment_method: NimbleshopSplitable::Splitable.first)
       order.purchase
 
       true
@@ -74,7 +74,7 @@ module NimbleshopSplitable
 
     def do_void(options = {})
       add_to_order(options, 'voided')
-      order.update_attributes(payment_method: Shop.splitable)
+      order.update_attributes(payment_method: NimbleshopSplitable::Splitable.first)
       order.void
 
       true

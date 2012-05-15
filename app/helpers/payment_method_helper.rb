@@ -11,12 +11,12 @@ module PaymentMethodHelper
                 options = (params[:controller] == 'nimbleshop_splitable/splitables') ? { 'class' => 'active' } : {}
                 nimbleshop_splitable.splitable_path
 
-              when 'authorize-net'
+              when 'authorizedotnet'
                 options = (params[:controller] == 'nimbleshop_authorizedotnet/authorizedotnets') ? { 'class' => 'active' } : {}
                 nimbleshop_authorizedotnet.authorizedotnet_path
 
-              when 'paypal-website-payments-standard'
-                options = (params[:controller] == 'nimbleshop_paypalwp/paypals') ? { 'class' => 'active' } : {}
+              when 'paypalwp'
+                options = (params[:controller] == 'nimbleshop_paypalwp/paypalwps') ? { 'class' => 'active' } : {}
                 nimbleshop_paypalwp.paypalwp_path
             end
 

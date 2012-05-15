@@ -14,7 +14,7 @@ module NimbleshopPaypalwp
       add_to_order('captured', success: succeded)
 
       if succeded
-        order.update_attributes(paid_at: paid_at, payment_method: Shop.paypal_website_payments_standard)
+        order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.kapture
       end
 
@@ -26,7 +26,7 @@ module NimbleshopPaypalwp
       add_to_order('authorized', success: succeded)
 
       if succeded
-        order.update_attributes(paid_at: paid_at, payment_method: Shop.paypal_website_payments_standard)
+        order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.authorize
       end
 
@@ -42,7 +42,7 @@ module NimbleshopPaypalwp
 
       if succeded
         order.update_attributes(paid_at: @paypal_ipn.received_at,
-                                payment_method: Shop.paypal_website_payments_standard)
+                                payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.purchase
       end
 
