@@ -28,7 +28,8 @@ module PaymentProcessorHelper
 
     if File.exists?(tunnel)
       host = File.open(tunnel, "r").gets.sub("\n", "")
-      path << "https://#{host}"
+      protocol = NimbleshopPaypalwp::Paypalwp.first.use_ssl ? 'https' : 'http'
+      path << "#{protocol}://#{host}"
     end
 
     path << url
