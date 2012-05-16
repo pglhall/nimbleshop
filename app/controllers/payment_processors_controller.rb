@@ -4,12 +4,6 @@ class PaymentProcessorsController < ApplicationController
 
   force_ssl :if => lambda { |controller| controller.use_ssl }
 
-  def set_splitable_data
-    order = current_order
-    product = order.line_items.first.product
-    api_notify_url = request.protocol + request.host_with_port + '/payment_notifications/splitable'
-  end
-
   def new
     @page_title = 'Make payment'
     @creditcard = Creditcard.new
