@@ -1,4 +1,7 @@
+require 'active_merchant/billing/integrations/action_view_helper'
+
 module PaymentMethodHelper
+  include ActiveMerchant::Billing::Integrations::ActionViewHelper
   def build_payment_method_tabs
     result = []
 

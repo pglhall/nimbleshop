@@ -48,11 +48,14 @@
 
     </div>
   <% end %>
+
   <div class='well'>
     <% if NimbleshopPaypalwp::Paypalwp.first.enabled? %>
-      <%= render partial: 'payment_processors/payment_methods/paypal/paypal', locals: { order: current_order } %>
+      <%#= render partial: 'payment_processors/payment_methods/paypal/paypal', locals: { order: current_order } %>
+      <%= nimbleshop_paypalwp_stringified_form(current_order) %>
     <% end %>
   </div>
+
 </div>
 
 <%= render 'shared/order_summary' %>
