@@ -1,3 +1,8 @@
+<label class='radio'>
+  <%= radio_button_tag 'payment_choice', 'paypal' %>
+  <%= image_tag('paypal.png') %>
+</label>
+
 <%= payment_service_for order.id, NimbleshopPaypalwp::Paypalwp.first.merchant_email,
                              :amount => order.total_amount.round(2),
                              :service => :paypal,

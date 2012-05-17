@@ -26,7 +26,8 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
-    def nimbleshop_paypalwp_stringified_form(order)
+    def nimbleshop_paypalwp_stringified_form(f, order)
+      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/paypalwps/form', locals: {order: order}
     end
 

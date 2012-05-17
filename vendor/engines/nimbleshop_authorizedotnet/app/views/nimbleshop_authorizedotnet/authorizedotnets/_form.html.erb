@@ -1,3 +1,14 @@
+<label class='radio'>
+  <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
+  <label for='payment_choice'>
+    <%= image_tag('visa.png') %>
+    <%= image_tag('mastercard.png') %>
+    <%= image_tag('amex.png') %>
+    <%= image_tag('discover.png') %>
+  </label>
+</label>
+
+
 <% if @creditcard.errors.any? %>
   <div class="alert alert-error">
     <ul>
@@ -38,3 +49,6 @@
 <div class="form-actions">
   <%= f.submit 'Submit', class: 'btn btn-primary' %>
 </div>
+
+<%= render '/nimbleshop_authorizedotnet/authorizedotnets/authorize_net_instructions' %>
+<%= render '/nimbleshop_authorizedotnet/authorizedotnets/what_is_cvv' %>
