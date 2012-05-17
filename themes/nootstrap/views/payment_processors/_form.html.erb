@@ -7,6 +7,8 @@
       All payments are secure and encrypted. We never store your credit card information.
     </div>
 
+    <%= nimbleshop_paypalwp_stringified_pre_form(current_order) %>
+
     <%= form_for @creditcard, url: payment_processors_path, html: {class: 'form-horizontal'} do |f| %>
 
       <div class='control-group'>

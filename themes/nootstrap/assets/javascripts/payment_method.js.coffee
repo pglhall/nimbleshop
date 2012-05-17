@@ -2,8 +2,9 @@ $ ->
   $("input:radio").change ->
     $this = $(this)
     val = $this.val()
-    form = $this.closest("form")
     if val is "splitable"
-      form.submit()
-    else $("form#paypal-payment-form").submit()  if val is "paypal"
+      $this.closest("form").submit()
+    else if val is "paypal"
+      alert $("form#paypal-payment-form").length
+      $("form#paypal-payment-form").submit()
 

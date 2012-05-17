@@ -26,6 +26,11 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
+    def nimbleshop_paypalwp_stringified_pre_form(order)
+      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
+      render partial: '/nimbleshop_paypalwp/paypalwps/pre_form', locals: {order: order}
+    end
+
     def nimbleshop_paypalwp_stringified_form(f, order)
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/paypalwps/form', locals: {order: order}
@@ -40,7 +45,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_cancel_url(order)
-      Localhost2PublicUrl.url(cancel_order_path(id: order.number))
+      Localhost2PublicUrl.url(new_payment_processor_path)
     end
 
   end

@@ -1,0 +1,24 @@
+<%= payment_service_for order.id, NimbleshopPaypalwp::Paypalwp.first.merchant_email,
+                             :amount => order.total_amount.round(2),
+                             :service => :paypal,
+                             :html => { :id => 'paypal-payment-form' } do |service| %>
+
+  <% service.customer :email => order.email %>
+
+  <% service.billing_address order.final_billing_address.attributes.slice(:city, :address1,:address2, :state, :country,:zip) %>
+
+  <% service.paymentaction NimbleshopPaypalwp::Paypalwp.first.paymentaction %>
+  <% service.invoice      order.number %>
+  <% service.line_items   order.line_items %>
+  <% service.shipping     order.shipping_cost.to_f.round(2) %>
+  <% service.tax          order.tax.to_f.round(2) %>
+
+  <% service.notify_url         nimbleshop_paypalwp_notify_url %>
+  <% service.return_url         nimbleshop_paypalwp_return_url(order) %>
+  <% service.cancel_return_url  nimbleshop_paypalwp_cancel_url(order) %>
+
+  <!-- Display the payment button. --> 
+  <!-- 
+  <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+  -->
+<% end %>
