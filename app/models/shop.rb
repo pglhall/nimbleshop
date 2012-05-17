@@ -20,19 +20,6 @@ class Shop < ActiveRecord::Base
     twitter_handle.blank? ? nil : "http://twitter.com/#{twitter_handle}"
   end
 
-  def self.authorizedotnet
-    raise 'do not use this method'
-    ::NimbleshopAuthorizedotnet::Authorizedotnet.first
-  end
-
-  def self.paypalwp
-    ::NimbleshopPaypalwp::Paypalwp.first
-  end
-
-  def self.splitable
-    ::NimbleshopSplitable::Splitable.first
-  end
-
   private
 
   def sanitize_twitter_handle
