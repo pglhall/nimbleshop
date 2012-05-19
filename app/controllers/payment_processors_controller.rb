@@ -6,7 +6,9 @@ class PaymentProcessorsController < ApplicationController
 
   def new
     @page_title = 'Make payment'
+    @page_sub_title = 'All payments are secure and encrypted. We never store your credit card information.'
     @creditcard = Creditcard.new
+    render text: 'No payment method is enabled. Please enable atleast one payment method.' if PaymentMethod.enabled.count == 0
   end
 
   def create
@@ -30,7 +32,7 @@ class PaymentProcessorsController < ApplicationController
 
       a = Shop.first.default_creditcard_action
       if handler.send(a, creditcard: @creditcard)
-        redirect_to paid_order_path(id: current_order, payment_method: :credit_card)
+        redirect_to current_order
       else
         render action: :new
       end

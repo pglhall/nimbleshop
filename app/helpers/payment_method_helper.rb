@@ -2,6 +2,13 @@ require 'active_merchant/billing/integrations/action_view_helper'
 
 module PaymentMethodHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
+
+  # NimbleshopAuthorizedotnet::Authorizedotnet => authorizedotnet
+  def order_confirmation_filename(order)
+    order.payment_method.class.name.demodulize.underscore
+  end
+
+
   def build_payment_method_tabs
     result = []
 
@@ -28,4 +35,27 @@ module PaymentMethodHelper
 
     result.join.html_safe
   end
+
+  # returns public url for a given localhost url
+  def localhost2public_url(url, protocol)
+    #TODO rather than assuming that only in production one wants to return url
+    #make it configurable using application.yml
+    return url if Rails.env.production?
+
+    path = []
+
+    tunnel = "#{Rails.root}/config/tunnel"
+
+    if File.exists?(tunnel)
+      host = File.open(tunnel, "r").gets.sub("\n", "")
+      path << "#{protocol}://#{host}"
+    else
+      raise "File  #{Rails.root.join('config', 'tunnel').expand_path} is missing"
+    end
+
+    path << url
+
+    path.join('')
+  end
+
 end

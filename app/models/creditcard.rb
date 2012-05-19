@@ -6,6 +6,7 @@ class Creditcard
   include ActiveModel::Validations::Callbacks
 
   attr_accessor :cvv,
+                :expires_on,
                 :number,
                 :first_name,
                 :last_name,
@@ -32,7 +33,10 @@ class Creditcard
 
   validate  :validation_by_active_merchant, if: proc { |r| r.errors.empty? }
 
+
   def initialize(attrs = {})
+    sanitize_month_and_year(attrs)
+
     attrs.each do | name, value |
       send("#{name}=", value)
     end
@@ -88,4 +92,15 @@ class Creditcard
 
     ActiveMerchant::Billing::CreditCard.new(options)
   end
+
+  private
+
+  def sanitize_month_and_year(attrs)
+    month = attrs.delete("expires_on(2i)")
+    year =  attrs.delete("expires_on(1i)")
+    day = attrs.delete("expires_on(3i)")
+    attrs.reverse_merge!(month: month)
+    attrs.reverse_merge!(year: year)
+  end
+
 end

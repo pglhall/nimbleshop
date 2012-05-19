@@ -22,18 +22,16 @@
 
 <fieldset>
   <div class='control-group'>
-    <%= f.label :number, 'Credit card number', autocomplete: 'off', class: 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :number, class: 'input-xlarge focus' %>
+      <%= f.text_field :number, class: 'input-xlarge focus', placeholder: 'Credit card number' %>
       &nbsp;
-      <%= link_to 'Help', '#authorizenetsandboxhelp', 'data-toggle' => "modal" %>
+      <%= link_to 'Valid number', '#authorizenetsandboxhelp', 'data-toggle' => "modal" %>
     </div>
   </div>
 
   <div class='control-group'>
-    <%= f.label :cvv, 'CVV number', autocomplete: 'off', class: 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :cvv %>
+      <%= f.text_field :cvv, placeholder: 'CVV', autocomplete: 'off' %>
       &nbsp;
       <%= link_to 'What is this?', '#cvvhelp', 'data-toggle' => "modal" %>
     </div>
@@ -42,7 +40,7 @@
   <div class='control-group'>
     <%= f.label :expires_on, 'Expiration date', class: 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :month,  size: 2 %>/<%= f.text_field :year,   size: 4 %>
+      <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
     </div>
   </div>
 </fieldset>

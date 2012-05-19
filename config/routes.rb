@@ -21,7 +21,7 @@ Nimbleshop::Application.routes.draw do
   resource  :checkout,  only: :show, controller: :checkout
   resources :products,  only: [:index, :show]
 
-  resources :orders,    only: [:edit, :update] do
+  resources :orders,    only: [:show, :edit, :update] do
     member do
       get :cancel
 
@@ -33,9 +33,6 @@ Nimbleshop::Application.routes.draw do
       put :update_shipping_method
     end
   end
-
-  # TODO make it restful
-  get 'orders/:id/:payment_method' => 'orders#paid', as: :paid_order
 
   resource  :feedback,  only: [:show] do
     collection do

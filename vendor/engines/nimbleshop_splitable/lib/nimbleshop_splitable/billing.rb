@@ -34,8 +34,8 @@ module NimbleshopSplitable
       end
     end
 
-
     private
+
     def resolve_payment_kind(payment_status)
       payment_status == 'paid' ? 'purchase' : 'void'
     end

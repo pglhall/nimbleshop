@@ -1,20 +1,19 @@
+<style>
+  #authorizenetsandboxhelp li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+</style>
+
 <% if !Rails.env.production? && NimbleshopAuthorizedotnet::Authorizedotnet.first.enabled?  %>
   <div id='authorizenetsandboxhelp' class='modal hide fade'>
 
     <div class='modal-header'>
       <%= link_to 'x', '#', class: 'close', 'data-dismiss' => 'modal' %>
-      <h3>Authorize.net sandbox information</h3>
+      <h3>Valid credit card numbers in Authorize.net Test mode</h3>
     </div>
     <div class="modal-body">
-      <p> Here are the rules for paying using Authorize.net. </p>
-      <ul>
-        <li> Expiration date must be set to the present day or later. </li>
-        <li> Security code for American express must be 4 digits. For all others use 3 digits. </li>
-      </ul>
-
-      <br />
-
-      <p>Here are the valid credit card numbers as prescribed by Authorize.net .</p>
+      <p> The application is running Authorize.net in <strong>Test</strong> mode. You cannot make real payment. Here are the valid credit card numbers in test mode. </p>
 
       <ul>
         <li> Visa: 4007000000027 </li>
@@ -24,14 +23,17 @@
         <li> JCB: 3088000000000017 </li>
         <li> Diners Club/ Carte Blanche: 38000000000006 </li>
       </ul>
+      <br />
+      <ul>
+        <li> Expiration date must be set to the present day or later. </li>
+        <li> Security code for American express must be any 4 digits. For all others use any 3 digits. </li>
+      </ul>
     </div>
     <div class="modal-footer">
       <p>
         <%= link_to 'More information', '' %> .
         <small>
-          <strong>
-            This message never appears in production environment .
-          </strong>
+          This message never appears when Authorize.net is running in production mode .
         </small>
       </p>
     </div>

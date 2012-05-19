@@ -1,4 +1,5 @@
-module CheckoutSpecHelper
+module CheckoutTestHelper
+
   def add_item_to_cart(name)
     click_link name
     click_button 'Add to cart'

@@ -5,6 +5,10 @@ module NimbleshopAuthorizedotnet
 
     before_filter :load_payment_method
 
+    def make_payment
+
+    end
+
     def show
       @page_title = 'Authorize.net payment information'
       respond_to do |format|

@@ -2,7 +2,7 @@ require "test_helper"
 
 class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
-  include ::CheckoutSpecHelper
+  include ::CheckoutTestHelper
 
   def sanitize(text)
     text.gsub(/\W/, ' ').gsub(/\s+/, ' ')

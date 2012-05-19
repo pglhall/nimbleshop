@@ -3,7 +3,7 @@ require "test_helper"
 class CartAcceptanceTest < ActionDispatch::IntegrationTest
 
   include ::ShippingMethodSpecHelper
-  include ::CheckoutSpecHelper
+  include ::CheckoutTestHelper
 
   setup do
     Capybara.current_driver = :selenium
@@ -69,8 +69,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     click_button 'Submit'
     choose 'Ground'
     click_button 'Submit'
-    msg = 'All payments are secure and encrypted. We never store your credit card information.'
-    assert_equal msg, find('.payment-security-notice').text
+    assert page.has_content?('No payment method is enabled')
   end
 
   test "should be able to add 2 items to cart and title should be reflect that" do
@@ -86,7 +85,7 @@ end
 class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
 
   include ::ShippingMethodSpecHelper
-  include ::CheckoutSpecHelper
+  include ::CheckoutTestHelper
 
   setup do
     create(:product, name: 'Bracelet Set', price: 25)
