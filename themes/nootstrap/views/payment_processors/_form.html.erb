@@ -2,13 +2,12 @@
 
 <div class='span7'>
   <div class='well'>
-    <%= nimbleshop_paypalwp_stringified_pre_form(current_order) %>
 
       <div class='control-group'>
         <div class='controls'>
-          <%#= nimbleshop_splitable_stringified_form(f, current_order) %>
-          <%#= nimbleshop_paypalwp_stringified_form(f, current_order) %>
-          <%= nimbleshop_authorizedotnet_stringified_form(current_order) %>
+          <%= nimbleshop_splitable_payment_form(current_order) %>
+          <%= nimbleshop_paypalwp_payment_form(current_order) %>
+          <%= nimbleshop_authorizedotnet_payment_form(current_order) %>
         </div>
       </div>
 

@@ -22,3 +22,8 @@
   <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
   -->
 <% end %>
+
+<label class='radio'>
+  <%= radio_button_tag 'payment_choice', 'paypal' %>
+  <%= image_tag('paypal.png') %>
+</label>

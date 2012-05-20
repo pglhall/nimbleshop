@@ -2,12 +2,13 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
-    def nimbleshop_paypalwp_stringified_pre_form(order)
+    def nimbleshop_paypalwp_payment_form(order)
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
-      render partial: '/nimbleshop_paypalwp/paypalwps/pre_form', locals: { order: order }
+      render partial: '/nimbleshop_paypalwp/payments/new', locals: { order: order }
     end
 
-    def nimbleshop_paypalwp_stringified_form(f, order)
+    def nimbleshop_paypalwp_admin_form(order)
+      raise 'boom'
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/paypalwps/form', locals: { order: order }
     end

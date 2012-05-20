@@ -4,4 +4,5 @@ NimbleshopSplitable::Engine.routes.draw do
       get :notify
     end
   end
+  resource :payment
 end
