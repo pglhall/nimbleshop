@@ -11,6 +11,23 @@
     <div style='clear:both;'></div>
   </div>
 
-  <%= render '/admin/payment_methods/show_attributes' %>
+  <table class="table table-striped">
+    <tr>
+      <td> Login id : </td>
+      <td> <%= @payment_method.login_id %> </td>
+    </tr>
+    <tr>
+      <td> Transaction key : </td>
+      <td> <%= @payment_method.transaction_key %> </td>
+    </tr>
+    <tr>
+      <td> Company name on credit card statement : </td>
+      <td> <%= @payment_method.company_name_on_creditcard_statement %> </td>
+    </tr>
+    <tr>
+      <td> Use SSL : </td>
+      <td> <%= @payment_method.use_ssl == 'true' ? 'true' : 'false' %> </td>
+    </tr>
+  </table>
 
 </div>

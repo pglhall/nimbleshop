@@ -11,5 +11,22 @@
     <div style='clear:both;'></div>
   </div>
 
-  <%= render '/admin/payment_methods/show_attributes' %>
+  <table class="table table-striped">
+    <tr>
+      <td> Api key : </td>
+      <td> <%= @payment_method.api_key %> </td>
+    </tr>
+    <tr>
+      <td> Api secret: </td>
+      <td> <%= @payment_method.api_secret %> </td>
+    </tr>
+    <tr>
+      <td> Submission url: </td>
+      <td> <%= @payment_method.submission_url %> </td>
+    </tr>
+    <tr>
+      <td> Expires in: </td>
+      <td> <%= @payment_method.expires_in %> </td>
+    </tr>
+  </table>
 </div>

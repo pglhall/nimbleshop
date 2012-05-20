@@ -6,8 +6,10 @@ class PaymentMethod < ActiveRecord::Base
 
   scope :enabled, where(enabled: true)
 
+  # By default payment_method does not require that application must use SSL. 
+  # Individual payment method should override this method.
   def use_ssl
-    settings[:use_ssl]
+    false
   end
 
   def enable!

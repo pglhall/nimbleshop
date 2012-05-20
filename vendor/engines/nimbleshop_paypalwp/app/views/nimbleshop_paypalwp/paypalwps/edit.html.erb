@@ -20,7 +20,18 @@
 
   <%= form_tag('/admin/payment_methods/nimbleshop_paypalwp/paypalwp', method: :put, class: 'form-horizontal') do %>
     <fieldset>
-      <%= render '/admin/payment_methods/edit_attributes' %>
+      <div class="control-group">
+        <%= label_tag :merchant_email, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :merchant_email, @payment_method.merchant_email, class: 'span6' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= label_tag :paymentaction, 'Default payment action', class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :paymentaction, @payment_method.paymentaction, class: 'span6' %>
+        </div>
+      </div>
     </fieldset>
     <div class="form-actions">
       <%= submit_tag('Submit', class: 'btn btn-primary') %>

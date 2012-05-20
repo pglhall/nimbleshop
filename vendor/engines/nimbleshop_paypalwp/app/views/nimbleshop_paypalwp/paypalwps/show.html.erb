@@ -11,5 +11,14 @@
     <div style='clear:both;'></div>
   </div>
 
-  <%= render '/admin/payment_methods/show_attributes' %>
+  <table class="table table-striped">
+    <tr>
+      <td> Merchant email: </td>
+      <td> <%= @payment_method.merchant_email %> </td>
+    </tr>
+    <tr>
+      <td> Default payment action: </td>
+      <td> <%= @payment_method.paymentaction %> </td>
+    </tr>
+  </table>
 </div>

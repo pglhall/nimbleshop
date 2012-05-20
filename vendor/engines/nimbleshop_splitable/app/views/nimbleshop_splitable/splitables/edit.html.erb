@@ -18,10 +18,41 @@
     <div style='clear:both;'></div>
   </div>
 
+  <br/>
+
   <%= form_tag('/admin/payment_methods/nimbleshop_splitable/splitable', method: :put, class: 'form-horizontal') do %>
     <fieldset>
-      <%= render '/admin/payment_methods/edit_attributes' %>
+
+      <div class="control-group">
+        <%= label_tag :api_key, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :api_key, @payment_method.api_key, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag :api_secret, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :api_secret, @payment_method.api_secret, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag :submission_url, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :submission_url, @payment_method.submission_url, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag :expires_in, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :expires_in, @payment_method.expires_in, class: 'span6' %>
+        </div>
+      </div>
+
     </fieldset>
+
     <div class="form-actions">
       <%= submit_tag('Submit', class: 'btn btn-primary') %>
       &nbsp;
