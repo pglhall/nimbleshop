@@ -73,12 +73,12 @@ class Admin::ProductsController < AdminController
 
   private
 
-    def post_params
-      params.permit(product: [ :name, :status, :description, :price, :new, :variants_enabled, :pictures_order] )
-    end
+  def post_params
+    params.permit(product: [ :name, :status, :description, :price, :new, :variants_enabled, :pictures_order] )
+  end
 
-    def load_product!
-      @product = Product.find_by_permalink!(params[:id])
-    end
+  def load_product!
+    @product = Product.find_by_permalink!(params[:id])
+  end
 
 end

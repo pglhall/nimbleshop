@@ -21,20 +21,20 @@
   <%= form_for @payment_method, url: paypalwp_path, html: {class: 'form-horizontal'} do |f| %>
     <fieldset>
       <div class="control-group">
-        <%= label_tag :merchant_email, nil, class: 'control-label' %>
+        <%= f.label :merchant_email, nil, class: 'control-label' %>
         <div class="controls">
-          <%= text_field_tag :merchant_email, @payment_method.merchant_email, class: 'span6' %>
+          <%= f.text_field :merchant_email, class: 'span6' %>
         </div>
       </div>
       <div class="control-group">
-        <%= label_tag :paymentaction, 'Default payment action', class: 'control-label' %>
+        <%= f.label :paymentaction, 'Default payment action', class: 'control-label' %>
         <div class="controls">
-          <%= text_field_tag :paymentaction, @payment_method.paymentaction, class: 'span6' %>
+          <%= f.text_field :paymentaction, class: 'span6' %>
         </div>
       </div>
     </fieldset>
     <div class="form-actions">
-      <%= submit_tag('Submit', class: 'btn btn-primary') %>
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
       &nbsp;
       <%= link_to t(:cancel), nimbleshop_paypalwp.paypalwp_path, class: 'btn' %>
     </div>

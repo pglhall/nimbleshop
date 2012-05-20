@@ -21,7 +21,7 @@ module NimbleshopAuthorizedotnet
     end
 
    def update
-      if @payment_method.update_attributes(post_params)
+      if @payment_method.update_attributes(post_params[:authorizedotnet])
         redirect_to authorizedotnet_path , notice: 'Authorize.net record was successfuly updated'
       else
         render :edit
@@ -31,7 +31,7 @@ module NimbleshopAuthorizedotnet
     private
 
     def post_params
-        params.slice(:login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement )
+        params.permit(authorizedotnet: [:login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement])
     end
 
     def load_payment_method

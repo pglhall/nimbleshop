@@ -31,7 +31,7 @@ module NimbleshopSplitable
 
     def update
       respond_to do |format|
-        if @payment_method.update_attributes(post_params)
+        if @payment_method.update_attributes(post_params[:splitable])
           format.html { redirect_to splitable_path, notice: 'Splitable record was successfully updated' }
         else
           format.html { render action: "edit" }
@@ -42,7 +42,7 @@ module NimbleshopSplitable
     private
 
     def post_params
-      params.slice( :api_key, :api_secret, :submission_url, :logo_url, :expires_in )
+      params.permit(splitable: [ :api_key, :api_secret, :submission_url, :logo_url, :expires_in] )
     end
 
     def load_payment_method

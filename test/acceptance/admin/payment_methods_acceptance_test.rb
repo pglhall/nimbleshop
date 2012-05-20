@@ -22,7 +22,7 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'Authorize.net'
 
     click_link 'Edit Configuration Info'
-    fill_in 'Login', with: '9r3pbDFGDFoihj29f7d'
+    fill_in 'authorizedotnet_login_id', with: '9r3pbDFGDFoihj29f7d'
     click_button 'Submit'
 
     assert page.has_content?('Authorize.net record was successfuly updated')
@@ -35,7 +35,7 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'Paypal website payments standard'
 
     click_link 'Edit Configuration Info'
-    fill_in 'merchant_email', with: 'sarah@example.com'
+    fill_in 'paypalwp_merchant_email', with: 'sarah@example.com'
     click_button 'Submit'
 
     assert page.has_content?('Paypal record was successfully updated')
@@ -48,11 +48,10 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'Splitable'
 
     click_link 'Edit Configuration Info'
-    fill_in 'api_key', with: 'qwerty'
+    fill_in 'splitable_api_key', with: 'qwerty'
     click_button 'Submit'
 
     assert page.has_content?('Splitable record was successfully updated')
     assert page.has_content?('qwerty')
   end
 end
-

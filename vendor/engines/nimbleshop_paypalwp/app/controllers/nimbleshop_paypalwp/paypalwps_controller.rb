@@ -24,7 +24,7 @@ module NimbleshopPaypalwp
 
     def update
       respond_to do |format|
-        if @payment_method.update_attributes(post_params)
+        if @payment_method.update_attributes(post_params[:paypalwp])
           format.html { redirect_to paypalwp_path, notice: 'Paypal record was successfully updated' }
         else
           format.html { render action: "edit" }
@@ -35,7 +35,7 @@ module NimbleshopPaypalwp
     private
 
     def post_params
-      params.slice(:merchant_email, :standard_use_ssl, :paymentaction)
+      params.permit(paypalwp: [:merchant_email, :standard_use_ssl, :paymentaction])
     end
 
     def load_payment_method
