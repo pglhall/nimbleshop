@@ -31,7 +31,6 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
                                       lower_price_limit: 1,
                                       upper_price_limit: 99999)
 
-    #assert_equal 'tbd', PaymentMethod.all.inspect
     create(:payment_method, enabled: true)
 
     visit root_path

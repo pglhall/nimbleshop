@@ -20,9 +20,8 @@
 
   <br/>
 
-  <%= form_tag('/admin/payment_methods/nimbleshop_splitable/splitable', method: :put, class: 'form-horizontal') do %>
+  <%= form_for @payment_method, url: splitable_path, html: {class: 'form-horizontal'} do |f| %>
     <fieldset>
-
       <div class="control-group">
         <%= label_tag :api_key, nil, class: 'control-label' %>
         <div class="controls">

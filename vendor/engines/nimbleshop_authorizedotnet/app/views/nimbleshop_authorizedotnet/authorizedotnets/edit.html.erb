@@ -20,7 +20,7 @@
 
   <br />
 
-  <%= form_tag('/admin/payment_methods/nimbleshop_authorizedotnet/authorizedotnet', method: :put, class: 'form-horizontal') do %>
+  <%= form_for @payment_method, url: authorizedotnet_path, html: { class: 'form-horizontal' } do |f| %>
     <fieldset>
       <div class="control-group">
         <%= label_tag :login_id, nil, class: 'control-label' %>

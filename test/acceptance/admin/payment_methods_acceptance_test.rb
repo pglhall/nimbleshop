@@ -1,7 +1,8 @@
 require "test_helper"
 
 class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
-  test "show payment_methods" do
+
+  test "payment_methods when no payment method is configured" do
     PaymentMethod.delete_all
     visit admin_path
     click_link 'Payment methods'
@@ -15,7 +16,7 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     refute page.has_checked_field?('paypal-website-payments-standard')
   end
 
-  test "manages authorize.net" do
+  test "manage authorize.net" do
     visit admin_path
     click_link 'Payment methods'
     click_link 'Authorize.net'
@@ -26,6 +27,32 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
 
     assert page.has_content?('Authorize.net record was successfuly updated')
     assert page.has_content?('9r3pbDFGDFoihj29f7d')
+  end
+
+  test "manage paypal" do
+    visit admin_path
+    click_link 'Payment methods'
+    click_link 'Paypal website payments standard'
+
+    click_link 'Edit Configuration Info'
+    fill_in 'merchant_email', with: 'sarah@example.com'
+    click_button 'Submit'
+
+    assert page.has_content?('Paypal record was successfully updated')
+    assert page.has_content?('sarah@example.com')
+  end
+
+  test "manage splitable" do
+    visit admin_path
+    click_link 'Payment methods'
+    click_link 'Splitable'
+
+    click_link 'Edit Configuration Info'
+    fill_in 'api_key', with: 'qwerty'
+    click_button 'Submit'
+
+    assert page.has_content?('Splitable record was successfully updated')
+    assert page.has_content?('qwerty')
   end
 end
 
