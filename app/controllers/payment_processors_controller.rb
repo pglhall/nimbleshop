@@ -12,6 +12,7 @@ class PaymentProcessorsController < ApplicationController
   end
 
   def create
+    raise 'booooom'
     order = current_order
 
     case params[:payment_choice]

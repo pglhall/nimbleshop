@@ -26,6 +26,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
     <%= csrf_meta_tag %>
+    <%= javascript_include_tag 'nootstrap' %>
+    <%=  yield :js %>
   </head>
 
   <body id=<%=body_id%>>
@@ -54,9 +56,6 @@
 
     </div> <!-- /container -->
 
-    <%= javascript_include_tag 'nootstrap' %>
-
-    <%=  yield :js %>
   </body>
 </html>
 

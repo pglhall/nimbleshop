@@ -1,3 +1,4 @@
+<% order = Order.find_by_id(session[:order_id]) %>
 <%= payment_service_for order.id, NimbleshopPaypalwp::Paypalwp.first.merchant_email,
                              :amount => order.total_amount.round(2),
                              :service => :paypal,
@@ -27,3 +28,18 @@
   <%= radio_button_tag 'payment_choice', 'paypal' %>
   <%= image_tag('paypal.png') %>
 </label>
+
+<script>
+  $(function() {
+    $("input#payment_choice_paypal:radio").change(function() {
+      var $this, val;
+      $this = $(this);
+      val = $this.val();
+
+      if (val === "paypal") {
+        $("form#paypal-payment-form").submit();
+      }
+
+    });
+  });
+</script>

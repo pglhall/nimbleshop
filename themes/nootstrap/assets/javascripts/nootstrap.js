@@ -13,7 +13,6 @@
 //= require thumbnail
 //= require highlight_error_field
 //= require remove_item_from_cart
-//= require payment_method
 //= require variant
 //= require load_states
 //= require order
