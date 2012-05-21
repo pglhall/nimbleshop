@@ -14,13 +14,13 @@ if Rails.env.production? || (Rails.env.staging? && Settings.deliver_email_for_re
 
 elsif Rails.env.development? || Rails.env.staging?
 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    user_name:      Settings.mailtrapio.username || "nimbleshop",
-    password:       Settings.mailtrapio.password || "7663e1f272637a4b",
-    address:        "mailtrap.io",
-    port:           2525,
-    authentication: :plain }
+  #ActionMailer::Base.delivery_method = :smtp
+  #ActionMailer::Base.smtp_settings = {
+    #user_name:      Settings.mailtrapio.username || "nimbleshop",
+    #password:       Settings.mailtrapio.password || "7663e1f272637a4b",
+    #address:        "mailtrap.io",
+    #port:           2525,
+    #authentication: :plain }
 
 end
 

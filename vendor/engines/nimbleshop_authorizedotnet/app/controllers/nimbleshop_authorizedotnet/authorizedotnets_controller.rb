@@ -1,13 +1,8 @@
 #TODO add respond_to
-
 module NimbleshopAuthorizedotnet
   class AuthorizedotnetsController < ::Admin::PaymentMethodsController
 
     before_filter :load_payment_method
-
-    def make_payment
-
-    end
 
     def show
       @page_title = 'Authorize.net payment information'

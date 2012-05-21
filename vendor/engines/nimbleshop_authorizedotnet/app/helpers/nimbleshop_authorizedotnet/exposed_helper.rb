@@ -1,9 +1,9 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
-    def nimbleshop_authorizedotnet_stringified_form(f, order)
+    def nimbleshop_authorizedotnet_payment_form(order)
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first.enabled?
-      render partial: '/nimbleshop_authorizedotnet/authorizedotnets/form', locals: {order: order, f: f}
+      render partial: '/nimbleshop_authorizedotnet/payments/new', locals: {order: order}
     end
 
   end
