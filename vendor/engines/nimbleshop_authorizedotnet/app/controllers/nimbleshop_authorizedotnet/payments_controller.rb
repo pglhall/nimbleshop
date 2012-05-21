@@ -11,11 +11,22 @@ module NimbleshopAuthorizedotnet
 
       default_action = Shop.first.default_creditcard_action
       if handler.send(default_action, creditcard: creditcard)
-        redirect_to main_app.order_path(order)
+        @url = main_app.order_path(order)
       else
-        raise creditcard.errors.full_messages.inspect if 
-        render action: :new
+        @error = creditcard.errors.full_messages.first
       end
+
+      respond_to do |format|
+        format.js do
+          if @url
+            render js: "window.location='#{@url}'"
+          else 
+            render js: "alert('#{@error}')"
+          end
+        end
+      end
+
+
     end
 
   end
