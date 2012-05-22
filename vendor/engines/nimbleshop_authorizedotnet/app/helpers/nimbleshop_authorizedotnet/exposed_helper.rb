@@ -6,5 +6,9 @@ module NimbleshopAuthorizedotnet
       render partial: '/nimbleshop_authorizedotnet/payments/new', locals: {order: order}
     end
 
+    def nimbleshop_authorizedotnet_mini_image
+      image_tag('authorize_net_logo.png', width: 200)
+    end
+
   end
 end

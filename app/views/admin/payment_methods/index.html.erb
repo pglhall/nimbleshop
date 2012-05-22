@@ -11,13 +11,7 @@
         </td>
         <td>
           <h3>
-            <% if payment_method.permalink == 'authorizedotnet' %>
-              <%= image_tag('authorize_net_logo.png') %>
-            <% elsif payment_method.permalink == 'paypalwp' %>
-              <%= image_tag('paypal_logo.png', width: '200') %>
-            <% elsif payment_method.permalink == 'splitable' %>
-              <%= image_tag('splitable_logo.png', width: '200') %>
-            <% end %>
+            <%= self.send("nimbleshop_#{payment_method.demodulized_underscore}_mini_image") %>
           </h3>
         </td>
         <td>

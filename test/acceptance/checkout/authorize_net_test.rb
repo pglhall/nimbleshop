@@ -44,8 +44,8 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
   end
 
   test 'when credit card invalid' do
-    click_button 'Submit'
     skip 'credit card invalid message is using alert' do
+      click_button 'Submit'
       assert page.has_content?("Credit card number is blank")
     end
   end

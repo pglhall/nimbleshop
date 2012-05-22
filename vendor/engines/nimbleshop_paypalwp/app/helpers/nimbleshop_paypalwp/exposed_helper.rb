@@ -2,6 +2,10 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
+    def nimbleshop_paypalwp_mini_image
+      image_tag('paypal_logo.png', width: 200)
+    end
+
     def nimbleshop_paypalwp_payment_form(order)
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/payments/new', locals: { order: order }

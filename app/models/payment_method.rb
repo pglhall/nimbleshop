@@ -12,6 +12,10 @@ class PaymentMethod < ActiveRecord::Base
     false
   end
 
+  def demodulized_underscore
+    self.class.name.demodulize.underscore
+  end
+
   def enable!
     update_attribute(:enabled, true)
   end

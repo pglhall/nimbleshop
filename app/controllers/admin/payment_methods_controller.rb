@@ -7,7 +7,7 @@ class Admin::PaymentMethodsController < AdminController
   def index
     @page_title = 'Payment methods'
     if PaymentMethod.enabled.count == 0
-      flash.now[:error] = 'You have not configured any payment method. User wil not be able to make payment'
+      flash.now[:error] = 'You have not enabled any payment method. User wil not be able to make payment'
     end
     render layout: 'payment_method'
   end
@@ -17,18 +17,24 @@ class Admin::PaymentMethodsController < AdminController
 
     enabled = params[:enabled]  ? true : false
     @payment_method.update_attributes(enabled: enabled)
-    redirect_to admin_payment_methods_path && return unless enabled
+
+    unless enabled
+      redirect_to admin_payment_methods_path
+      return
+    end
 
     redirect_to case @payment_method.permalink
                   when 'splitable'
                     nimbleshop_splitable.splitable_path
 
-                  when 'authorize-net'
+                  when 'authorizedotnet'
                     nimbleshop_authorizedotnet.authorizedotnet_path
 
-                  when 'paypal-website-payments-standard'
-                    nimbleshop_paypalwp.paypal_path
-                end
+                  when 'paypalwp'
+                    nimbleshop_paypalwp.paypalwp_path
+                  else
+                     raise "#{@payment_method.permalink} is wrong"
+                  end
   end
 
   private

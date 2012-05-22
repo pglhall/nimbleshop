@@ -6,5 +6,9 @@ module NimbleshopSplitable
       render partial: '/nimbleshop_splitable/payments/new', locals: {order: order}
     end
 
+    def nimbleshop_splitable_mini_image
+      image_tag('splitable_logo.png', width: 200)
+    end
+
   end
 end
