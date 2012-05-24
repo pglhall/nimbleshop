@@ -74,7 +74,7 @@ class Admin::ProductsController < AdminController
   private
 
   def post_params
-    params.permit(product: [ :name, :status, :description, :price, :new, :variants_enabled, :pictures_order] )
+    params.permit(product: [ :picture_attributes, :name, :status, :description, :price, :new, :variants_enabled, :pictures_order] )
   end
 
   def load_product!
