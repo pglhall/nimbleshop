@@ -21,5 +21,5 @@
 //= require fancybox
 //= require carousel
 
-//= require class/formatNumber
-//= require class/formatPrice
+//= require utils/formatNumber
+//= require utils/formatPrice
