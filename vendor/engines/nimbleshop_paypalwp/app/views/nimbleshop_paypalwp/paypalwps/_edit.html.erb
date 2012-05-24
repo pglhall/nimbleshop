@@ -1,0 +1,22 @@
+<div style='padding:10px; border:1px solid blue;'>
+
+  <h4>Paypal websites payment standard</h4>
+  <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-paypalwp-payment-method-edit" %>
+
+  <%= link_to 'Delete', '' %>
+  <%= nimbleshop_paypalwp_mini_image %>
+
+  <%= render partial: '/nimbleshop_paypalwp/paypalwps/form' %>
+</div>
+
+<script>
+  $(function(){
+
+    $('#nimbleshop-paypalwp-edit').toggle(function(){
+      $('#nimbleshop-paypalwp-form-well').show(); 
+    }, function(){
+      $('#nimbleshop-paypalwp-form-well').hide(); 
+    });
+
+  })
+</script>

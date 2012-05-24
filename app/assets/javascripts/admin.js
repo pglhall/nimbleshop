@@ -28,8 +28,4 @@
 //= require admin/products/edit
 //= require class/formatNumber
 //= require class/formatPrice
-
-
-$(function(){
-  $('.autoresize').autoResize({maxHeight: 300});
-});
+//= require lab

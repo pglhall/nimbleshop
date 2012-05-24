@@ -1,23 +1,4 @@
-<table class='table table-striped'>
-  <tbody>
-    <% @payment_methods.each do |payment_method| %>
-      <tr>
-        <td>
-          <h3>
-            <%= form_tag("/admin/payment_methods/#{payment_method.id}", :method => :put) do %>
-              <%= check_box_tag 'enabled', '1', payment_method.enabled, class: 'submittable', id: payment_method.permalink %>
-            <% end %>
-          </h3>
-        </td>
-        <td>
-          <h3>
-            <%= self.send("nimbleshop_#{payment_method.demodulized_underscore}_mini_image") %>
-          </h3>
-        </td>
-        <td>
-          <%= raw payment_method.description %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @payment_methods.each do |payment_method| %>
+  <%= nimbleshop_crud_form(payment_method) %>
+  <br />
+<% end %>

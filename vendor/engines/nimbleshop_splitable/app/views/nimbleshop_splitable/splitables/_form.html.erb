@@ -1,26 +1,11 @@
-<div class='well'>
+<div class='well nimbleshop-payment-method-form-well' style='display:none;'>
 
-  <% if @payment_method.errors.any? %>
-    <div class="alert alert-error">
-      <p> <%= t(:error_bang) %> </p>
-      <ul>
-        <% @payment_method.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_for NimbleshopSplitable::Splitable.first,  url: '/admin/payment_methods/nimbleshop_splitable/splitable',
+                                                      remote: true,
+                                                      html: { method: 'put',
+                                                              id: 'nimbleshop-splitable-form',
+                                                              class: 'nimbleshop-payment-method-form form-horizontal'} do |f| %>
 
-  <div>
-    <div style='float:left;'>
-      <%= image_tag('splitable_logo.png') %>
-    </div>
-    <div style='clear:both;'></div>
-  </div>
-
-  <br/>
-
-  <%= form_for @payment_method, url: splitable_path, html: {class: 'form-horizontal'} do |f| %>
     <fieldset>
       <div class="control-group">
         <%= f.label :api_key, nil, class: 'control-label' %>
@@ -55,8 +40,7 @@
     <div class="form-actions">
       <%= f.submit('Submit', class: 'btn btn-primary') %>
       &nbsp;
-      <%= link_to t(:cancel), nimbleshop_splitable.splitable_path, class: 'btn' %>
+      <%= link_to t(:cancel), nimbleshop_splitable.splitable_path, class: 'cancel btn' %>
     </div>
   <% end %>
-
 </div>

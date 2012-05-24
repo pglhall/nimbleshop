@@ -1,26 +1,11 @@
-<div class='well'>
+<div class='well nimbleshop-payment-method-form-well' style='display:none;'>
 
-  <% if @payment_method.errors.any? %>
-    <div class="alert alert-error">
-      <p> <%= t(:error_bang) %> </p>
-      <ul>
-        <% @payment_method.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_for NimbleshopAuthorizedotnet::Authorizedotnet.first,  url: '/admin/payment_methods/nimbleshop_authorizedotnet/authorizedotnet',
+                                                      remote: true,
+                                                      html: { method: 'put',
+                                                              id: 'nimbleshop-authorizedotnet-form',
+                                                              class: 'nimbleshop-payment-method-form form-horizontal'} do |f| %>
 
-  <div>
-    <div style='float:left;'>
-      <%= image_tag('authorize_net_logo.png') %>
-    </div>
-    <div style='clear:both;'></div>
-  </div>
-
-  <br />
-
-  <%= form_for @payment_method, url: authorizedotnet_path, html: { class: 'form-horizontal' } do |f| %>
     <fieldset>
       <div class="control-group">
         <%= f.label :login_id, nil, class: 'control-label' %>
@@ -45,7 +30,7 @@
     <div class="form-actions">
       <%= f.submit('Submit', class: 'btn btn-primary') %>
       &nbsp;
-      <%= link_to t(:cancel), nimbleshop_authorizedotnet.authorizedotnet_path, class: 'btn' %>
+      <%= link_to t(:cancel), nimbleshop_authorizedotnet.authorizedotnet_path, class: 'cancel btn' %>
     </div>
   <% end %>
 

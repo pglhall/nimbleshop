@@ -18,23 +18,17 @@ module NimbleshopSplitable
       end
     end
 
-    def show
-      @page_title = 'Splitable payment information'
-      respond_to do |format|
-        format.html # show.html.erb
-      end
-    end
-
-    def edit
-      @page_title = 'Edit Splitable payment information'
-    end
-
     def update
       respond_to do |format|
         if @payment_method.update_attributes(post_params[:splitable])
-          format.html { redirect_to splitable_path, notice: 'Splitable record was successfully updated' }
+          format.js  {
+            flash[:notice] = "Splitable record was successfully updated"
+            render js: "window.location = '/admin/payment_methods'"
+          }
         else
-          format.html { render action: "edit" }
+          msg =  @payment_method.errors.full_messages.first
+          error =  %Q[alert("#{msg}")]
+          format.js { render js: error }
         end
       end
     end

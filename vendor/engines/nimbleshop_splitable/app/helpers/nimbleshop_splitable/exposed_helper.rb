@@ -6,8 +6,13 @@ module NimbleshopSplitable
       render partial: '/nimbleshop_splitable/payments/new', locals: {order: order}
     end
 
+    def nimbleshop_splitable_crud_form
+      return unless NimbleshopSplitable::Splitable.first.enabled?
+      render partial: '/nimbleshop_splitable/splitables/edit'
+    end
+
     def nimbleshop_splitable_mini_image
-      image_tag('splitable_logo.png', width: 200)
+      image_tag('splitable_logo.png', width: 140)
     end
 
   end

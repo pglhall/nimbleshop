@@ -2,6 +2,11 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
+    def nimbleshop_paypalwp_crud_form
+      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
+      render partial: '/nimbleshop_paypalwp/paypalwps/edit'
+    end
+
     def nimbleshop_paypalwp_mini_image
       image_tag('paypal_logo.png', width: 200)
     end

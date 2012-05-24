@@ -4,22 +4,18 @@ module NimbleshopAuthorizedotnet
 
     before_filter :load_payment_method
 
-    def show
-      @page_title = 'Authorize.net payment information'
-      respond_to do |format|
-        format.html # show.html.erb
-      end
-    end
-
-    def edit
-      @page_title = 'Edit Authorize.net payment information'
-    end
-
    def update
-      if @payment_method.update_attributes(post_params[:authorizedotnet])
-        redirect_to authorizedotnet_path , notice: 'Authorize.net record was successfuly updated'
-      else
-        render :edit
+      respond_to do |format|
+        if @payment_method.update_attributes(post_params[:authorizedotnet])
+          format.js  {
+            flash[:notice] = "Authorize.net record was successfully updated"
+            render js: "window.location = '/admin/payment_methods'"
+          }
+        else
+          msg =  @payment_method.errors.full_messages.first
+          error =  %Q[alert("#{msg}")]
+          format.js { render js: error }
+        end
       end
     end
 
