@@ -5,7 +5,6 @@ class CartsController < ApplicationController
   respond_to :html
 
   def show
-    @page_title = 'Your cart'
     @line_items = current_order.blank? ? [] : current_order.line_items(include: :product).order('id')
     respond_with @line_items
   end

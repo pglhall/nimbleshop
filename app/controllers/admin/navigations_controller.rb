@@ -1,9 +1,11 @@
+#
+# This controller is used to add and delete a link to a link group.
+#
 class Admin::NavigationsController < AdminController
 
   before_filter :load_link_group
 
   def new
-    @page_title = 'new navigation'
     @navigation = @link_group.navigations.new
   end
 
@@ -26,7 +28,8 @@ class Admin::NavigationsController < AdminController
 
   private
 
-    def load_link_group
-      @link_group = LinkGroup.find_by_permalink!(params[:link_group_id])
-    end
+  def load_link_group
+    @link_group = LinkGroup.find_by_permalink!(params[:link_group_id])
+  end
+
 end

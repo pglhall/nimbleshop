@@ -3,14 +3,12 @@ class Admin::OrdersController < AdminController
   respond_to :html
 
   def index
-    @page_title = 'Orders'
     @orders = Order.order('id desc')
     respond_with @orders
   end
 
   def show
     @order = Order.find_by_number!(params[:id])
-    @page_title = "Order # #{@order.number}"
 
     if @order.shipments.any?
       @shipment = @order.shipments.first

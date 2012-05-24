@@ -8,7 +8,7 @@ class PaymentMethod < ActiveRecord::Base
 
   # By default payment_method does not require that application must use SSL. 
   # Individual payment method should override this method.
-  def use_ssl
+  def use_ssl?
     false
   end
 

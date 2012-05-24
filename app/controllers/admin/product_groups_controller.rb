@@ -5,13 +5,11 @@ class Admin::ProductGroupsController < AdminController
   respond_to :html
 
   def index
-    @page_title = 'Product groups'
     @product_groups = ProductGroup.order('name asc')
     respond_with @product_groups
   end
 
   def new
-    @page_title = 'New product group'
     @product_group = ProductGroup.new
     @product_group.product_group_conditions.build
     respond_with @product_group
@@ -27,7 +25,6 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def edit
-    @page_title = "Edit #{@product_group.name}"
     @custom_fields = CustomField.order('name asc')
     respond_with @product_group
   end
@@ -50,12 +47,12 @@ class Admin::ProductGroupsController < AdminController
 
   private
 
-    def post_params
-      params.permit(product_group: [:name, :product_group_conditions_attributes])
-    end
+  def post_params
+    params.permit(product_group: [:name, :product_group_conditions_attributes])
+  end
 
-    def load_product_group
-      @product_group = ProductGroup.find_by_permalink!(params[:id])
-    end
+  def load_product_group
+    @product_group = ProductGroup.find_by_permalink!(params[:id])
+  end
 
 end

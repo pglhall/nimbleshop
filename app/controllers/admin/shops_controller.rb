@@ -3,7 +3,6 @@ class Admin::ShopsController < AdminController
   respond_to :html
 
   def edit
-    @page_title = 'shop configuration'
     respond_with(:admin, current_shop)
   end
 

@@ -5,18 +5,11 @@ class Admin::CustomFieldsController < AdminController
   respond_to :html
 
   def index
-    @page_title = 'custom fields'
     @custom_fields = CustomField.all
     respond_with @custom_fields
   end
 
-  def show
-    @page_title = @custom_field.name
-    respond_with @custom_field
-  end
-
   def edit
-    @page_title = @custom_field.name
     respond_with @custom_field
   end
 
@@ -29,7 +22,6 @@ class Admin::CustomFieldsController < AdminController
   end
 
   def new
-    @page_title = 'new custom field'
     @custom_field = CustomField.new
     respond_with @custom_field
   end
@@ -53,8 +45,8 @@ class Admin::CustomFieldsController < AdminController
 
   private
 
-    def load_custom_field
-      @custom_field = CustomField.find(params[:id])
-    end
+  def load_custom_field
+    @custom_field = CustomField.find(params[:id])
+  end
 
 end

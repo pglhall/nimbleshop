@@ -6,23 +6,15 @@ class Admin::LinkGroupsController < AdminController
   respond_to :html, :js
 
   def index
-    @page_title = 'link groups'
     respond_with @link_groups
   end
 
-  def show
-    @page_title = @link_group.name
-    respond_with @link_group
-  end
-
   def new
-    @page_title = 'new link group'
     @link_group = LinkGroup.new
     respond_with @link_group
   end
 
   def edit
-    @page_title = @link_group.name
     respond_with @link_group
   end
 
@@ -50,16 +42,16 @@ class Admin::LinkGroupsController < AdminController
 
   private
 
-    def post_params
-      params.permit(link_group: [:name])
-    end
+  def post_params
+    params.permit(link_group: [:name])
+  end
 
-    def load_link_groups
-      @link_groups = LinkGroup.order('name asc')
-    end
+  def load_link_groups
+    @link_groups = LinkGroup.order('name asc')
+  end
 
-    def load_link_group
-      @link_group = LinkGroup.find_by_permalink!(params[:id])
-    end
+  def load_link_group
+    @link_group = LinkGroup.find_by_permalink!(params[:id])
+  end
 
 end

@@ -5,19 +5,16 @@ class Admin::ShippingZonesController < AdminController
   respond_to :html
 
   def index
-    @page_title = 'shipping zone'
     @shipping_zones = CountryShippingZone.order('name asc')
     respond_with @shipping_zones
   end
 
   def new
-    @page_title = 'new shipping zone'
     @shipping_zone = ShippingZone.new
     respond_with @shipping_zone
   end
 
   def edit
-    @page_title = 'edit shipping zone'
     respond_with @shipping_zone
   end
 
@@ -48,13 +45,12 @@ class Admin::ShippingZonesController < AdminController
 
   private
 
-    def post_params
-      params.permit(shipping_zone: [ :name, :country_code, :state_code, :country_shipping_zone_id])
-      #params[:shipping_zone]
-    end
+  def post_params
+    params.permit(shipping_zone: [ :name, :country_code, :state_code, :country_shipping_zone_id])
+  end
 
-    def load_shipping_zone
-      @shipping_zone = ShippingZone.find_by_permalink!(params[:id])
-    end
+  def load_shipping_zone
+    @shipping_zone = ShippingZone.find_by_permalink!(params[:id])
+  end
 
 end
