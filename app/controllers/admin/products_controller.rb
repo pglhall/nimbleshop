@@ -60,7 +60,7 @@ class Admin::ProductsController < AdminController
 
   def update
     if @product.update_attributes(post_params[:product])
-      redirect_to admin_products_path, notice: t(:successfully_updated)
+      redirect_to edit_admin_product_path(@product), notice: t(:successfully_updated)
     else
       respond_with @product
     end
