@@ -17,7 +17,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "shipping_method_base_price", with: "10"
     click_button('Submit')
 
-    assert page.has_content?('Successfuly created')
+    assert page.has_content?('Successfully created')
     assert_equal 58, ShippingZone.count - bef
   end
 
@@ -28,7 +28,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "shipping_method_upper_price_limit", with: "40"
     click_button('Submit')
 
-    assert page.has_content?('Successfuly updated')
+    assert page.has_content?('Successfully updated')
   end
 
   test "disbale state shipping zone" do

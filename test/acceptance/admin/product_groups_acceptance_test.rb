@@ -23,7 +23,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in 'Name', with: ''
     click_button 'Submit'
 
-    refute page.has_content?('Successfuly updated')
+    refute page.has_content?('Successfully updated')
     assert page.has_content?("Product group conditions value is invalid")
     assert page.has_content?("Product group conditions value can't be blank")
     assert page.has_content?("Name can't be blank")
@@ -56,7 +56,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
 
     click_button 'Submit'
 
-    assert page.has_content?('Successfuly updated')
+    assert page.has_content?('Successfully updated')
     assert page.has_content?("name contains 'candy' and name starts with 'sweet'")
 
     click_link 'Edit'
@@ -70,7 +70,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'Remove'
     click_button 'Submit'
 
-    assert page.has_content?('Successfuly updated')
+    assert page.has_content?('Successfully updated')
     assert page.has_content?("name starts with 'awesome'")
 
     #https://github.com/thoughtbot/capybara-webkit/issues/109

@@ -16,7 +16,7 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
 
   test "should create a new product without image" do
     click_button 'Submit'
-    assert page.has_content?('Successfuly added')
+    assert page.has_content?('Successfully added')
     assert page.has_content?('the very wicked name for product')
   end
 
@@ -56,7 +56,7 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
     visit admin_path
     click_link 'Products'
     click_link 'Delete'
-    assert page.has_content?("Successfuly deleted")
+    assert page.has_content?("Successfully deleted")
     refute page.has_content?('ipad99')
   end
 
@@ -79,7 +79,7 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     fill_in 'Price', :with => '45.99'
     click_button 'Submit'
 
-    assert page.has_content?('Successfuly updated')
+    assert page.has_content?('Successfully updated')
     assert page.has_content?('the very wicked name for product')
   end
 

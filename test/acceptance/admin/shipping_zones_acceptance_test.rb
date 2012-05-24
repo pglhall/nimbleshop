@@ -9,7 +9,7 @@ class ShippingZonesAcceptanceTest < ActionDispatch::IntegrationTest
       bef = RegionalShippingZone.count
       select 'Canada', :from => 'Country name'
       click_button('Submit')
-      assert page.has_content?('Successfuly created')
+      assert page.has_content?('Successfully created')
       assert_equal 13, RegionalShippingZone.count - bef
   end
 

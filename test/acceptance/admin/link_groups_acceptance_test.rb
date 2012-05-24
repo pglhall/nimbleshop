@@ -13,7 +13,7 @@ class LinkGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'add_new_link_group'
     fill_in 'link_group_name', with: 'Popular products'
     click_button 'Submit'
-    assert page.has_content?('Successfuly added')
+    assert page.has_content?('Successfully added')
     assert page.has_content?('Popular products')
   end
 

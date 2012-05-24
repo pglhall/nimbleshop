@@ -10,10 +10,10 @@ en:
   paypal_image_alt: 'Make payments with PayPal'
   credit_card_declined_message: 'Credit card was declined. Please try again.'
 
-  successfully_added: 'Successfuly added'
-  successfully_created: 'Successfuly created'
-  successfully_updated: 'Successfuly updated'
-  successfully_deleted: 'Successfuly deleted'
+  successfully_added: 'Successfully added'
+  successfully_created: 'Successfully created'
+  successfully_updated: 'Successfully updated'
+  successfully_deleted: 'Successfully deleted'
   could_not_delete:     'Could not delete'
 
   delete_confirmation_for_shipping_method: 'Do you really want to delete the shipping method ?'
@@ -38,6 +38,7 @@ en:
   link_groups: 'Link groups'
   add_new_link_group: 'Add new link group'
   delete_confirmation_for_link_group: 'Do you really want to delete the link group ?'
+  delete_confirmation_for_link: 'Do you really want to delete the link ?'
 
   edit_product_group: 'Edit product group'
   product_groups: 'Product groups'
