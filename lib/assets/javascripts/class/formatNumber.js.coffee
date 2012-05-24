@@ -3,7 +3,7 @@
 jQuery ->
   $('[data-behavior~=number-formatted]').on 'focus blur paste change', ()->
 
-    precision = $(this).data('behavior-precision');
+    precision = $(this).data('behavior-precision')
     if precision is undefined
       precision = accounting.settings.number.precision
 
