@@ -17,7 +17,6 @@ Nimbleshop::Application.routes.draw do
 
   resources :payment_processors
   resources :product_groups
-  resource  :checkout,  only: :show, controller: :checkout
   resources :products,  only: [:index, :show]
 
   resources :orders,    only: [:show, :edit, :update] do
