@@ -8,7 +8,7 @@
         </small>
       </h3>
       <address class='shipping-address'>
-        <%= current_order.shipping_address.full_address_array.join('<br />').html_safe %>
+        <%= display_address(current_order.shipping_address) %>
       </address>
 
       <h3> Billing address </h3>
@@ -17,7 +17,7 @@
       <% if current_order.shipping_address.use_for_billing %>
         <i>Same as shipping address</i>
       <% else %>
-        <%= current_order.billing_address.full_address_array.join('<br />').html_safe %>
+        <%= display_address(current_order.billing_address) %>
       <% end %>
       </address>
 

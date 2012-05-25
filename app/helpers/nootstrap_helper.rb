@@ -9,4 +9,8 @@ module NootstrapHelper
     "[#{line_item.variant_info}]"
   end
 
+  def display_address(address)
+    address.full_address_array.map { |i| html_escape(i) }.join('<br />').html_safe
+  end
+
 end
