@@ -2,7 +2,6 @@ class CustomFieldAnswer
   module Field
     extend ActiveSupport::Concern
 
-
     def custom_field=(custom_field)
       set_custom_field(custom_field)
 

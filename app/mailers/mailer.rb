@@ -20,7 +20,7 @@ class Mailer < ActionMailer::Base
     # is a bit difficult in test. should be fixed soon
     @payment_date = @order.created_at.to_s(:long) || @order.paid_at.to_s(:long)
 
-    mail_options = {:to => @order.email, :subject => subject}
+    mail_options = {to: @order.email, subject: subject}
     mail(mail_options)
   end
 
@@ -28,7 +28,7 @@ class Mailer < ActionMailer::Base
     subject = "Items for order ##{order_number} have been shipped"
     @order = Order.find_by_number!(order_number)
 
-    mail_options = {:to => @order.email, :subject => subject}
+    mail_options = {to: @order.email, subject: subject}
     mail(mail_options)
   end
 

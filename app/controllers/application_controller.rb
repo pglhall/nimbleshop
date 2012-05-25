@@ -23,10 +23,12 @@ class ApplicationController < ActionController::Base
   end
 
   def load_early
+    # FIXME why is this needed
     Address
   end
 
   def set_shop
+    # TODO these instances are not needed by all the controllers
     @link_groups          = LinkGroup.all
     @product_groups       = ProductGroup.all
     @main_nav_link_group  = LinkGroup.last
@@ -40,7 +42,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def no_page_title
-      @do_not_use_page_title = true
-    end
+  def no_page_title
+    @do_not_use_page_title = true
+  end
+
 end

@@ -1,3 +1,4 @@
+# FIXME who uses it
 class FeedbacksController < ApplicationController
 
   theme :theme_resolver, only: [:show]

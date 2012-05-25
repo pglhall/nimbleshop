@@ -24,7 +24,6 @@ module Search
     after_initialize  :prepare_instance
   end
 
-
   def name=(val)
     val = val.try(:to_s)
     if super(val)
