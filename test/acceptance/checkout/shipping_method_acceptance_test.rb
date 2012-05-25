@@ -16,6 +16,21 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     create(:country_shipping_method, name: 'Express Shipping', base_price: 13.99, lower_price_limit: 1, upper_price_limit: 99999)
   end
 
+  test "shipping method is required" do
+    visit root_path
+    add_item_to_cart('Bracelet Set')
+    click_button 'Checkout'
+
+    enter_valid_email_address
+    enter_valid_shipping_address
+    click_button 'Submit'
+
+    # Submit without choosing a shipping method
+    click_button 'Submit'
+
+    assert page.has_content?('Please select a shipping method')
+  end
+
   test "ability to change shipping method" do
     visit root_path
     add_item_to_cart('Bracelet Set')
