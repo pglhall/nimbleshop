@@ -1,5 +1,3 @@
-Nimbleshop::Application.routes.draw do
-
   themes_for_rails
 
   get "/pages/about-us",           to: "pages#about_us",   as: :about_us
@@ -36,7 +34,3 @@ Nimbleshop::Application.routes.draw do
 
   get "/paypal_return",   to: "paypal_return#handle"
 
-  root :to => "products#index"
-
-
-end

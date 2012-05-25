@@ -1,6 +1,3 @@
-Nimbleshop::Application.routes.draw do
-
-  # BEGINNING of Admin section ---------------------------------------------------
   get "/admin",           to: "admin/main#index"
   namespace :admin do
 
@@ -43,6 +40,3 @@ Nimbleshop::Application.routes.draw do
     end
 
   end
-  # END of Admin section ---------------------------------------------------
-
-end

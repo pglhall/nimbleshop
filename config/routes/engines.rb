@@ -1,5 +1,3 @@
-Nimbleshop::Application.routes.draw do
-
   mount NimbleshopAuthorizedotnet::Engine, at: '/admin/payment_methods/nimbleshop_authorizedotnet',
                                            as: 'nimbleshop_authorizedotnet'
 
@@ -8,5 +6,3 @@ Nimbleshop::Application.routes.draw do
 
   mount NimbleshopSplitable::Engine,       at: '/admin/payment_methods/nimbleshop_splitable',
                                            as: 'nimbleshop_splitable'
-
-end

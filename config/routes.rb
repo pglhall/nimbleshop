@@ -1,3 +1,13 @@
-require_relative 'routes/front_end'
-require_relative 'routes/admin'
-require_relative 'routes/engines'
+class ActionDispatch::Routing::Mapper
+  def draw(routes_name)
+    instance_eval(File.read(Rails.root.join("config/routes/#{routes_name}.rb")))
+  end
+end
+
+Nimbleshop::Application.routes.draw do
+  draw :admin
+  draw :front_end
+  draw :engines
+
+  root :to => "products#index"
+end
