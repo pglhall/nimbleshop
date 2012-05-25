@@ -28,6 +28,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "shipping_method_upper_price_limit", with: "40"
     click_button('Submit')
 
+
     assert page.has_content?('Successfully updated')
   end
 

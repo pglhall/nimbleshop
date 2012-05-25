@@ -1,21 +1,42 @@
-<%= form_for([@current_order, @shipping_method]) do |f| %>
+<% page_title 'Pick shipping method' %>
+<br />
+<div class='span7 well'>
+  <%= form_for(current_order , url: order_shipping_method_path(current_order),
+                              html: {class: 'form-horizontal'}) do |f| %>
 
-  <div class='clearfix'>
-    <div class='input'>
-      <div class='inputs-list'>
+
+    <% if current_order.errors.any? %>
+      <div class="alert alert-error">
+        <ul>
+          <li> <%= current_order.errors.full_messages.first %></li>
+        </ul>
+      </div>
+    <% end %>
+
+	<% if @shipping_methods.any? %>
+    <div class='control-group'>
+      <div class='controls'>
         <% @shipping_methods.each do |shipping_method| %>
-          <li>
-            <label>
-              <%= f.radio_button :shipping_method_id, shipping_method.id %>
-              <%= f.label :shipping_method_id, shipping_method.name + ' -- ' + number_to_currency(shipping_method.shipping_price.to_s) %>
-            </label>
-          </li>
+          <label class='radio'>
+            <%= f.radio_button :shipping_method_id, shipping_method.id %>
+            <%= shipping_method.name + ' -- ' + number_to_currency(shipping_method.shipping_price) %>
+          </label>
         <% end %>
       </div>
     </div>
-  </div>
 
-  <div class="actions">
-    <%= f.submit 'Submit', class: 'btn primary' %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    </div>
+	<% else %>
+		<div class="well" style="margin-top:20px;text-align: center;">
+			<h4>  unable to complete your order (no shipping method available)</h4>
+			<%= link_to "Edit Shipping Address", [:edit, current_order]%>
+		</div>
+
+    <% end %>
+
+  <% end %>
+</div>
+
+<%= render 'shared/order_summary' %>

@@ -4,6 +4,12 @@ class CartsController < ApplicationController
 
   respond_to :html
 
+  # this is mostly used for development purpose
+  def reset
+    reset_session
+    redirect_to root_url
+  end
+
   def show
     @line_items = current_order.blank? ? [] : current_order.line_items(include: :product).order('id')
     respond_with @line_items
@@ -25,7 +31,7 @@ class CartsController < ApplicationController
 
   def update
     if params[:checkout]
-      redirect_to edit_order_url(current_order)
+      redirect_to new_order_shipping_address_path(current_order)
     else
       params[:updates].each do |product_id, quantity|
         current_order.set_quantity(product_id, quantity.to_i)
