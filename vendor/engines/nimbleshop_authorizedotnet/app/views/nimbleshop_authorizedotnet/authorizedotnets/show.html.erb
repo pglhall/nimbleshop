@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <td> Use SSL : </td>
-      <td> <%= @payment_method.use_ssl == 'true' ? 'true' : 'false' %> </td>
+      <td> <%= @payment_method.use_ssl? ? 'true' : 'false' %> </td>
     </tr>
   </table>
 
