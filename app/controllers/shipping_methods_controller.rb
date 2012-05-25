@@ -2,10 +2,10 @@ class ShippingMethodsController < ApplicationController
 
   theme :theme_resolver
 
-  before_filter :verify_current_order
+  before_filter :verify_current_order, :load_shipping_methods
 
   def new
-    @shipping_methods = Array.wrap(current_order.available_shipping_methods)
+    render
   end
 
   def update
@@ -14,7 +14,7 @@ class ShippingMethodsController < ApplicationController
       redirect_to  new_payment_processor_path
     else
       current_order.errors.add(:base, 'Please select a shipping method')
-      render 'edit_shipping_method'
+      render action: :new
     end
   end
 
@@ -22,6 +22,10 @@ class ShippingMethodsController < ApplicationController
     unless current_order
       redirect_to root_path
     end
+  end
+
+  def load_shipping_methods
+    @shipping_methods = Array.wrap(current_order.available_shipping_methods)
   end
 
 end

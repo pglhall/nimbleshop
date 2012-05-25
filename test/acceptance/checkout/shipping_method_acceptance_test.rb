@@ -36,4 +36,5 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
     assert_equal 'Express Shipping ( $13.99 )', find('.shipping-method').text
   end
+
 end
