@@ -1,4 +1,4 @@
-class ShippingMethodsController < ApplicationController
+class Checkout::ShippingMethodsController < ApplicationController
 
   theme :theme_resolver
 

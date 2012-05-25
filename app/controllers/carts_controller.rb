@@ -31,7 +31,7 @@ class CartsController < ApplicationController
 
   def update
     if params[:checkout]
-      redirect_to new_order_shipping_address_path(current_order)
+      redirect_to new_order_checkout_shipping_address_path(current_order)
     else
       params[:updates].each do |product_id, quantity|
         current_order.set_quantity(product_id, quantity.to_i)

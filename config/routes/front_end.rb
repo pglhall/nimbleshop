@@ -9,8 +9,10 @@
   resources :products,  only: [:index, :show]
 
   resources :orders,    only: [:show, :edit, :update] do
-    resource :shipping_address
-    resource :shipping_method
+    namespace :checkout do
+      resource :shipping_address
+      resource :shipping_method
+    end
     member do
       get :cancel
     end

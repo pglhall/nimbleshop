@@ -1,7 +1,7 @@
 <% page_title 'Pick shipping method' %>
 <br />
 <div class='span7 well'>
-  <%= form_for(current_order , url: order_shipping_method_path(current_order),
+  <%= form_for(current_order , url: order_checkout_shipping_method_path(current_order),
                               html: {class: 'form-horizontal'}) do |f| %>
 
 
