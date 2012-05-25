@@ -44,12 +44,12 @@ Nimbleshop::Application.routes.draw do
     end
   end
 
-  get "/admin",           to: "admin/main#index"
   get "/paypal_return",   to: "paypal_return#handle"
 
   root :to => "products#index"
 
   # BEGINNING of Admin section ---------------------------------------------------
+  get "/admin",           to: "admin/main#index"
   namespace :admin do
 
     resource  :shop, only: [:update, :edit]
