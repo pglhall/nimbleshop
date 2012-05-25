@@ -17,7 +17,6 @@ Nimbleshop::Application.routes.draw do
 
   resources :payment_processors
   resources :product_groups
-  resources :pages,     only: :show
   resource  :checkout,  only: :show, controller: :checkout
   resources :products,  only: [:index, :show]
 
@@ -47,7 +46,6 @@ Nimbleshop::Application.routes.draw do
   end
 
   get "/admin",           to: "admin/main#index"
-  get "/reset",           to: "admin/main#reset"
   get "/paypal_return",   to: "paypal_return#handle"
 
   root :to => "products#index"
