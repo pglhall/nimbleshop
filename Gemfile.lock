@@ -29,11 +29,11 @@ GIT
 
 GIT
   remote: git://github.com/neerajdotname/push2heroku.git
-  revision: 3b7b1710b4ea03b21e745f3e3eded4d171030603
+  revision: 8a5cf4622a5c45ab073576ebc1d83d60ad454932
   specs:
     push2heroku (0.0.2)
       hashr (= 0.0.19)
-      heroku
+      heroku (= 2.25.0)
 
 GIT
   remote: git://github.com/nwise/custom_error_message.git
@@ -184,14 +184,11 @@ GEM
     guard-minitest (0.5.0)
       guard (>= 0.4)
     hashr (0.0.19)
-    heroku (2.26.0)
-      heroku-api (~> 0.2.0)
+    heroku (2.25.0)
       launchy (>= 0.3.2)
-      netrc (~> 0.7.2)
+      netrc (~> 0.7.1)
       rest-client (~> 1.6.1)
       rubyzip
-    heroku-api (0.2.0)
-      excon (~> 0.13.3)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
