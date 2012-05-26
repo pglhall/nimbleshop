@@ -15,7 +15,6 @@ module NimbleshopSplitable
       'http://' + request.host_with_port + 'admin/payment_methods/nimbleshop_splitable/splitable/notify'
     end
 
-
     def create(order, request)
       params = build_params(order, request)
 

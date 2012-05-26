@@ -6,7 +6,8 @@ module ActiveMerchant #:nodoc:
 
           def initialize(order, account, options = {})
             super
-            # indecate we are using thirdparty shopping cart
+
+            # indicates we are using thirdparty shopping cart
             add_field('cmd', '_cart')
             add_field('upload', '1')
 
@@ -17,7 +18,7 @@ module ActiveMerchant #:nodoc:
             add_field('bn', application_id.to_s.slice(0,32)) unless application_id.blank?
           end
 
-          # pass the shipping cost for whole cart
+          # pass the shipping cost for the whole cart
           mapping :shipping,  'handling_cart'
           mapping :tax,       'tax_cart'
 

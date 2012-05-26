@@ -11,7 +11,7 @@ module NimbleshopSplitable
 
       unless @order = options[:order]
         invoice = options[:invoice].try(:to_s)
-        @order   = Order.find_by_number(invoice)
+        @order   = Order.find_by_number!(invoice)
       end
 
       @errors = []

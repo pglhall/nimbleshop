@@ -1,5 +1,6 @@
 module NimbleshopSplitable
   class Engine < ::Rails::Engine
+
     isolate_namespace NimbleshopSplitable
 
     config.to_prepare do

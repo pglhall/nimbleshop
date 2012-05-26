@@ -13,6 +13,8 @@ module NimbleshopAuthorizedotnet
 
     private
 
+    # TODO method should return an array with all errors
+    # if the array size is zero then it means no error
     def do_authorize(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:creditcard)

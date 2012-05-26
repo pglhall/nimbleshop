@@ -1,5 +1,6 @@
 module NimbleshopAuthorizedotnet
   class Engine < ::Rails::Engine
+
     isolate_namespace NimbleshopAuthorizedotnet
 
     config.to_prepare do

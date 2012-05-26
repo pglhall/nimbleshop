@@ -9,53 +9,53 @@ module NimbleshopPaypalwp
 
     private
 
-    def do_capture(options={})
-      succeded = amount_match?
-      add_to_order('captured', success: succeded)
+    def do_capture(options = {})
+      success = amount_match?
+      record_transaction('captured', success: success)
 
-      if succeded
+      if success
         order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.kapture
       end
 
-      succeded
+      success
     end
 
-    def do_authorize(options={})
-      succeded = amount_match?
-      add_to_order('authorized', success: succeded)
+    def do_authorize(options = {})
+      success = amount_match?
+      record_transaction('authorized', success: success)
 
-      if succeded
+      if success
         order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.authorize
       end
 
-      succeded
+      success
     end
 
-    def do_void(options={})
+    def do_void(options = {})
     end
 
-    def do_purchase(options={})
-      succeded = amount_match?
-      add_to_order('purchased', success: succeded)
+    def do_purchase(options = {})
+      success = amount_match?
+      record_transaction('purchased', success: success)
 
-      if succeded
+      if success
         order.update_attributes(paid_at: @paypal_ipn.received_at,
                                 payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.purchase
       end
 
-      succeded
+      success
     end
 
     def paypal_ipn(raw_post)
       ActiveMerchant::Billing::Integrations::Paypal::Notification.new(raw_post)
     end
 
-    def add_to_order(operation, options = {})
+    def record_transaction(operation, options = {})
       order.payment_transactions.create(options.merge(amount: @paypal_ipn.amount.cents,
-                                                      params: { :ipn => @paypal_ipn.raw },
+                                                      params: { ipn: @paypal_ipn.raw },
                                                       transaction_gid: @paypal_ipn.transaction_id,
                                                       operation: operation))
 
@@ -65,6 +65,7 @@ module NimbleshopPaypalwp
       @paypal_ipn.amount.cents == order.total_amount_in_cents
     end
 
+    # TODO where is it being used ??
     def acknowledge
       @paypal_ipn.acknowledge
     end
