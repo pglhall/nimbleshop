@@ -1,8 +1,6 @@
-<script type="text/javascript" charset="utf-8">
-    //<![CDATA[
-		window.countryStateCodes = <%= grouped_options_for_country_state_codes.to_json.html_safe %>;
-    // ]]>
-</script>
+<%= javascript_tag do %>
+  window.countryStateCodes = <%= grouped_options_for_country_state_codes.to_json.html_safe %>;
+<% end %>
 
 <div class='span7'>
   <%= form_for(current_order, url: order_checkout_shipping_address_path(current_order), html: {class: 'form-horizontal'}) do |f| %>
