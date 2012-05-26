@@ -22,16 +22,14 @@ module NimbleshopAuthorizedotnet
       return false unless valid_card?(creditcard)
 
       response = client.authorize(order.total_amount_in_cents, creditcard)
-      succeded = response.success?
+      record_transaction(response, 'authorized', card_number: creditcard.display_number)
 
-      add_to_order(response, 'authorized', card_number: creditcard.display_number)
-
-      if succeded
-        order.update_attributes(payment_method: ::NimbleshopAuthorizedotnet::Authorizedotnet.first)
-        order.authorize
+      response.success?.tap do |success|
+        if success
+          order.update_attributes(payment_method: ::NimbleshopAuthorizedotnet::Authorizedotnet.first)
+          order.authorize
+        end
       end
-
-      succeded
     end
 
     def do_purchase(options = {})
@@ -43,16 +41,14 @@ module NimbleshopAuthorizedotnet
       return false unless valid_card?(creditcard)
 
       response = client.purchase(order.total_amount_in_cents, creditcard)
-      succeded = response.success?
+      record_transaction(response, 'purchased', card_number: creditcard.display_number)
 
-      add_to_order(response, 'purchased', card_number: creditcard.display_number)
-
-      if succeded
-        order.update_attributes(payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
-        order.purchase
+      response.success?.tap do |success|
+        if success
+          order.update_attributes(payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
+          order.purchase
+        end
       end
-
-      succeded
     end
 
     def do_capture(options = {})
@@ -61,60 +57,53 @@ module NimbleshopAuthorizedotnet
       tsx_id = options[:transaction_gid]
 
       response = client.capture(order.total_amount_in_cents, tsx_id, {})
-      add_to_order(response, 'captured')
+      record_transaction(response, 'captured')
 
-      succeded = response.success?
-
-      if succeded
-        order.kapture
+      response.success?.tap do |success|
+        order.kapture if success
       end
-
-      succeded
     end
 
+    # TODO How to ensure that the database operation after the transaction with Authorize.net
+    # is indeed done
     def do_void(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
-      tsx_id = options[:transaction_gid]
+      transactiong_id = options[:transaction_gid]
 
-      response = client.void(tsx_id, {})
-      add_to_order(response, 'voided')
+      response = client.void(transactiong_id, {})
+      record_transaction(response, 'voided')
 
-      succeded = response.success?
-
-      if succeded
-        order.void
+      response.success?.tap do |success|
+        order.void if success
       end
-
-      succeded
     end
 
     def do_refund(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid, :card_number)
-      tsx_id      = options[:transaction_gid]
+
+      transaction_gid      = options[:transaction_gid]
       card_number = options[:card_number]
 
-      response = client.refund(order.total_amount_in_cents, tsx_id, card_number: card_number)
-      add_to_order(response, 'refunded')
+      response = client.refund(order.total_amount_in_cents, transactiong_id, card_number: card_number)
+      record_transaction(response, 'refunded')
 
-      succeded = response.success?
-
-      if succeded
-        order.refund
+      response.success?.tap do |success|
+        order.refund if success
       end
 
-      succeded
     end
 
-    def add_to_order(response, operation, additional_options = {})
+    def record_transaction(response, operation, additional_options = {})
       options = { operation:          operation,
                   params:             response.params,
                   success:            response.success?,
                   additional_info:    additional_options,
-                  transaction_gid:    response.authorization }
+                  transaction_gid:    response.authorization } # TODO is the transaction_gid  response.authorization. will it be
+                                                               # response.capture in case of capture
 
-      if response.success?
+      if response.success? # How about recording amount in failure case too. success key keeps track of which one was success and which one is failure
         options.update(amount: order.total_amount_in_cents)
       end
 

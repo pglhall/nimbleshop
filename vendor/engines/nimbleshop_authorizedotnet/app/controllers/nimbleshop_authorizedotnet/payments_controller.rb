@@ -1,4 +1,3 @@
-#TODO add respond_to
 module NimbleshopAuthorizedotnet
   class PaymentsController < ::Admin::PaymentMethodsController
 
@@ -14,6 +13,7 @@ module NimbleshopAuthorizedotnet
         @url = main_app.order_path(order)
       else
         @error = creditcard.errors.full_messages.first
+        Rails.logger.info "Error: #{@error}"
       end
 
       respond_to do |format|
