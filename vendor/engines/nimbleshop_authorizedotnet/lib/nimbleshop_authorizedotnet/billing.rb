@@ -71,9 +71,9 @@ module NimbleshopAuthorizedotnet
     def do_void(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
-      transactiong_id = options[:transaction_gid]
+      transaction_gid = options[:transaction_gid]
 
-      response = client.void(transactiong_id, {})
+      response = client.void(transaction_gid, {})
       record_transaction(response, 'voided')
 
       response.success?.tap do |success|
@@ -88,7 +88,7 @@ module NimbleshopAuthorizedotnet
       transaction_gid      = options[:transaction_gid]
       card_number = options[:card_number]
 
-      response = client.refund(order.total_amount_in_cents, transactiong_id, card_number: card_number)
+      response = client.refund(order.total_amount_in_cents, transaction_gid, card_number: card_number)
       record_transaction(response, 'refunded')
 
       response.success?.tap do |success|
