@@ -36,7 +36,7 @@ class AuthorizeNetTest < ActionDispatch::IntegrationTest
     visit root_path
     add_item_to_cart('Bracelet Set')
     click_button 'Checkout'
-    fill_in 'Your email address', with: 'test@example.com'
+    fill_in 'order_email', with: 'test@example.com'
     fill_good_address
     click_button 'Submit'
     choose 'Ground'
