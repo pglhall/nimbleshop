@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StaticPagesIntegrationTest < ActionDispatch::IntegrationTest
+class StaticPagesAcceptanceTest < ActionDispatch::IntegrationTest
   test "static pages" do
     visit root_path
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ProductIntegrationTest < ActionDispatch::IntegrationTest
+class ProductAcceptanceTest < ActionDispatch::IntegrationTest
   setup do
     @product = create(:product, name: 'ipad', description: 'awesome ipad from Apple')
   end

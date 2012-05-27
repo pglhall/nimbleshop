@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HomepageIntegrationTest < ActionDispatch::IntegrationTest
+class HomepageAcceptanceTest < ActionDispatch::IntegrationTest
 
   test "home page with link groups" do
     visit root_path

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AuthorizeNetTest < ActionDispatch::IntegrationTest
+class AuthorizeNetAcceptanceTest < ActionDispatch::IntegrationTest
 
   def add_item_to_cart(name)
     click_link name
