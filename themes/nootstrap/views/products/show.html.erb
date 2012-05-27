@@ -6,11 +6,9 @@
     <ul class="thumbnails unstyled item_pics">
       <% @product.pictures.each_with_index do |picture, indx| %>
         <li style="<%= 'display:none' if indx != 0 %>">
-          <%= link_to(image_tag(picture.picture_url(:large),
-                                alt: @product.name),
-                      picture.picture_url(:large_plus),
-                      class: 'thumbnail fancybox',
-                      rel:   'gallery1') %>
+          <%= link_to(image_tag(picture.picture_url(:large), alt: @product.name), picture.picture_url(:large_plus),
+                                                                                    class: 'thumbnail fancybox',
+                                                                                    rel:   'gallery1') %>
 
         </li>
       <% end %>
@@ -25,11 +23,8 @@
               <% if picture.blank? %>
                 &nbsp;
               <% else %>
-                <%= image_tag picture.picture_url(:small),
-                              alt:                  @product.name,
-                              class:                'thumb thumbnail' %>
+                <%= image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb thumbnail' %>
               <% end %>
-
             </td>
           <% end %>
         </tr>
