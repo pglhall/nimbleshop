@@ -2,6 +2,22 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
+    def update_service_with_attributes(service, order)
+      service.customer email: order.email
+
+      service.billing_address order.final_billing_address.attributes.slice(:city, :address1,:address2, :state, :country,:zip)
+
+      service.paymentaction NimbleshopPaypalwp::Paypalwp.first.paymentaction
+      service.invoice      order.number
+      service.line_items   order.line_items
+      service.shipping     order.shipping_cost.to_f.round(2)
+      service.tax          order.tax.to_f.round(2)
+
+      service.notify_url         nimbleshop_paypalwp_notify_url
+      service.return_url         nimbleshop_paypalwp_return_url(order)
+      service.cancel_return_url  nimbleshop_paypalwp_cancel_url(order)
+    end
+
     def nimbleshop_paypalwp_crud_form
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/paypalwps/edit'
