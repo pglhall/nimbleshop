@@ -17,7 +17,7 @@
   <%= image_tag('paypal.png') %>
 </label>
 
-<script>
+<%= javascript_tag do %>
   $(function() {
     $("input#payment_choice_paypal:radio").change(function() {
       var $this, val;
@@ -30,4 +30,4 @@
 
     });
   });
-</script>
+<% end %>
