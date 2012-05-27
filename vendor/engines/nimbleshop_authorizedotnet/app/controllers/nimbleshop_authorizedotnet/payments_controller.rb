@@ -16,7 +16,7 @@ module NimbleshopAuthorizedotnet
       else
         error = creditcard.errors.full_messages.first
         Rails.logger.info "Error: #{error}"
-        @output = "alert('#{@error}')"
+        @output = "alert('#{error}')"
       end
 
       respond_to do |format|
