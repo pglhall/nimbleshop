@@ -28,6 +28,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_payment_form(order)
+       ActiveMerchant::Billing::Base.integration_mode = Rails.env.production? ? :production : :test
       return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
       render partial: '/nimbleshop_paypalwp/payments/new', locals: { order: order }
     end
