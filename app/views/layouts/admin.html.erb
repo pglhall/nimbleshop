@@ -46,7 +46,7 @@
               <li><%= link_to 'Go to shop →', main_app.root_url %></li>
             </ul>
             <p class="navbar-text pull-right">Logged in as <a href="#">Neeraj Singh</a></p>
-          </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
     </div>
@@ -55,9 +55,11 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
+
         <div class="span3">
           <%= render 'layouts/sidebar' %>
-        </div><!--/span-->
+        </div>
+
         <div class="span9">
           <div class="row-fluid">
             <div class="span12">
@@ -77,13 +79,13 @@
           </div>
           </div>
         </div>
-      </div><!--/row-->
+      </div>
 
       <hr>
 
       <%= render '/layouts/footer' %>
 
-    </div><!--/.fluid-container-->
+    </div>
 
   </body>
 </html>

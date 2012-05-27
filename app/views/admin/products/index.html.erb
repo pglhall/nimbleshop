@@ -15,17 +15,15 @@
     <% @products.each do |product| %>
       <tr>
         <td>
-            <% if product.picture %>
-              <%= link_to image_tag(product.picture.picture_url(:small)), admin_product_path(product) %>
-            <% end %>
+          <% if product.picture %>
+            <%= link_to image_tag(product.picture.picture_url(:small)), admin_product_path(product) %>
+          <% end %>
         </td>
         <td><%= link_to product.name, admin_product_path(product) %></td>
         <td>
           <%= link_to 'Edit', edit_admin_product_path(product), title: 'Edit' %>
           |
-          <%= link_to t(:delete), [:admin, product], confirm: t(:delete_confirmation_for_product), method: 'delete', title: 'Delete',
-              class: 'delete'
-          %>
+          <%= link_to t(:delete), [:admin, product], confirm: t(:delete_confirmation_for_product), method: 'delete', title: 'Delete', class: 'delete' %>
         </td>
         </td>
       </tr>
