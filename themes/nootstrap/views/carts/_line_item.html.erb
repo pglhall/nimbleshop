@@ -7,26 +7,22 @@
     </div>
     <div class="span2 description">
       <strong class="item_name"><%= link_to(line_item.product_name, line_item.product) %></strong>
-      <br>
+      <br />
       <strong><%= display_variant_info(line_item) %></strong>
     </div>
     <div class="span1">
-      <h4 class="visible-phone">
-	      Item Price
-      </h4>
+      <h4 class="visible-phone"> Item Price </h4>
       <%= number_to_currency(line_item.product_price) %>
     </div>
     <div class="span1">
-      <h4 class="visible-phone">
-        Quantity
-      </h4>
+      <h4 class="visible-phone"> Quantity </h4>
       <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
-                                                  id: "updates_#{line_item.product_id}", class: "quantity-field", :'data-behavior' => 'number-formatted' %>
+                                                                                          id: "updates_#{line_item.product_id}",
+                                                                                          class: "quantity-field",
+                                                                                          'data-behavior' => 'number-formatted' %>
     </div>
     <div class="span1">
-      <h4 class="visible-phone">
-        Total price
-      </h4>
+      <h4 class="visible-phone"> Total price </h4>
       <strong><%= number_to_currency(line_item.price) %></strong>
     </div>
     <div class="span1 remove">
