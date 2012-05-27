@@ -1,6 +1,10 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
+    def nimbleshop_authorizedotnet_payment_info_for_buyer(order)
+      render partial: '/nimbleshop_authorizedotnet/payments/payment_info_for_buyer', locals: { order: order }
+    end
+
     def nimbleshop_authorizedotnet_payment_form(order)
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first.enabled?
       render partial: '/nimbleshop_authorizedotnet/payments/new', locals: {order: order}

@@ -10,6 +10,6 @@
       Your order number is #<strong><%= @order.number %></strong>. Please note down this number and use this order
       number in case you need to contact us.
     </li>
-    <%= render order_confirmation_filename(@order) %>
+    <%= payment_info_for_buyer(@order) %>
   </ul>
 </div>

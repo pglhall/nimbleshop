@@ -3,8 +3,9 @@ require 'active_merchant/billing/integrations/action_view_helper'
 module PaymentMethodHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
-  def order_confirmation_filename(order)
-    order.payment_method.demodulized_underscore
+  def payment_info_for_buyer(order)
+    name = order.payment_method.demodulized_underscore
+    self.send("nimbleshop_#{name}_payment_info_for_buyer", order)
   end
 
   def nimbleshop_crud_form(payment_method)
