@@ -13,6 +13,11 @@ module NimbleshopAuthorizedotnet
 
     private
 
+    def set_active_merchant_mode
+      record = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      ActiveMerchant::Billing::Base.mode = record.mode.to_sym
+    end
+
     # TODO method should return an array with all errors
     # if the array size is zero then it means no error
     def do_authorize(options = {})
