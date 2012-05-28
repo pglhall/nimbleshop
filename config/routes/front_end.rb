@@ -29,6 +29,3 @@
       post :add
     end
   end
-
-  get "/paypal_return",   to: "paypal_return#handle"
-
