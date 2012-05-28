@@ -1,10 +1,14 @@
-#TODO add respond_to
 module NimbleshopAuthorizedotnet
+
   class AuthorizedotnetsController < ::Admin::PaymentMethodsController
 
     before_filter :load_payment_method
 
-   def update
+    def edit
+      render
+    end
+
+    def update
       respond_to do |format|
         if @payment_method.update_attributes(post_params[:authorizedotnet])
           format.js  {
@@ -22,7 +26,7 @@ module NimbleshopAuthorizedotnet
     private
 
     def post_params
-        params.permit(authorizedotnet: [:login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement])
+      params.permit(authorizedotnet: [:mode, :login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement])
     end
 
     def load_payment_method
@@ -30,4 +34,5 @@ module NimbleshopAuthorizedotnet
     end
 
   end
+
 end
