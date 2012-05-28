@@ -6,6 +6,6 @@ FactoryGirl.define do
 
     # When a product is created through admin interface then carrierwave creates a record for each product
     # even if no picture is uploaded
-    after_create { |product| product.pictures.create }
+    after(:create) { |product| product.pictures.create }
   end
 end
