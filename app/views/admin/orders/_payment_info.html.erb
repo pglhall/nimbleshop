@@ -20,7 +20,7 @@
           <% if @order.final_billing_address.present? %>
             <h4> Billing address</h4>
             <p>
-              <address> <%= @order.final_billing_address.full_address_array.join('<br />').html_safe %> </address>
+              <address> <%= display_address(@order.final_billing_address) %> </address>
             </p>
           <% end %>
         </td>
