@@ -42,12 +42,9 @@ module Billing
     end
 
     def set_active_merchant_mode
-      mode = production? ? :production : :test
+      mode = Rails.env.production? ? :production : :test
       ActiveMerchant::Billing::Base.mode = mode
     end
 
-    def production?
-      Rails.env.production? && Shop.first.process_credit_card_for_real?
-    end
   end
 end
