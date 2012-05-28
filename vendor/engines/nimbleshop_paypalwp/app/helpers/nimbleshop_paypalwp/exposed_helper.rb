@@ -48,7 +48,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_cancel_url(order)
-      localhost2public_url( new_payment_processor_path, nimbleshop_paypalwp_protocol )
+      localhost2public_url( new_order_checkout_payment_path(order), nimbleshop_paypalwp_protocol )
     end
 
     def nimbleshop_paypalwp_protocol

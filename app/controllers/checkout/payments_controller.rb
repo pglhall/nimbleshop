@@ -1,4 +1,4 @@
-class PaymentProcessorsController < ApplicationController
+class Checkout::PaymentsController < ApplicationController
 
   theme :theme_resolver, only: [:new, :create]
 
