@@ -6,14 +6,12 @@
           <h2> Payment status <%= display_payment_status(@order) %> </h2>
         </td>
       </tr>
-      <% if NimbleshopSplitable::Splitable === @order.payment_method %>
-        <tr>
-          <td colspan='3'>
-              Payment method: <%= @order.payment_method.name %> <br />
-              Transaction Id: <%= @order.splitable_transaction_number %>
-          </td>
-        </tr>
-      <% end %>
+
+      <tr>
+        <td colspan='3'>
+            Payment method: <%= @order.payment_method.name %> <br />
+        </td>
+      </tr>
 
       <%= render partial: @order.payment_transactions,  as: :transaction  %>
 
