@@ -7,9 +7,9 @@
 
       <div class='control-group'>
         <div class='controls'>
-          <%= nimbleshop_splitable_payment_form(current_order) %>
-          <%= nimbleshop_paypalwp_payment_form(current_order) %>
-          <%= nimbleshop_authorizedotnet_payment_form(current_order) %>
+          <% PaymentMethod.order('name desc').each do |payment_method| %>
+            <%= self.send("nimbleshop_#{payment_method.demodulized_underscore}_payment_form", current_order) %>
+          <% end %>
         </div>
       </div>
 
