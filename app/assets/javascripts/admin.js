@@ -24,4 +24,5 @@
 //= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
 //= require admin/products/edit
+//= require fadeout_success
 //= require lab
