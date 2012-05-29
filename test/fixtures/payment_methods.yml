@@ -23,6 +23,7 @@ payment_methods_002:
   permalink: authorizedotnet
   settings: "--- \n\
     :login_id: 26Daqx7Jtw7R\n\
+    :mode: test\n\
     :transaction_key: 66JWf57KKc82W9y6\n\
     :company_name_on_creditcard_statement: Nimbleshop LLC\n"
   created_at: 2012-04-05 01:42:00.113269
