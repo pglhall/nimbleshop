@@ -2,47 +2,33 @@ require "test_helper"
 
 class PaypalAcceptanceTest < ActionDispatch::IntegrationTest
 
-  def add_item_to_cart(name)
-    click_link name
-    click_button 'Add to cart'
-  end
-
-  def fill_good_address
-    address = build(:shipping_address)
-    fill_in 'First name',     with: address[:first_name]
-    fill_in 'Last name',      with: address[:last_name]
-    fill_in 'Address1',       with: address[:address1]
-    fill_in 'Address2',       with: 'Highway'
-    fill_in 'City',           with: address[:city]
-    select  'United States',  from: 'Country'
-    select  'Alabama',        from: 'State'
-    fill_in 'Zipcode',        with:  address[:zipcode]
-  end
+  include ::ShippingMethodSpecHelper
+  include ::CheckoutTestHelper
 
   setup do
     Capybara.current_driver = :selenium
-
-    NimbleshopPaypalwp::Paypalwp.first.enable!
-
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
-    create(:country_shipping_method, name: 'Ground', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)
-    create(:payment_method, enabled: true)
-
-    visit root_path
-    add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
-    fill_in 'Your email address', with: 'test@example.com'
-    fill_good_address
-    click_button 'Submit'
-    choose 'Ground'
-    click_button 'Submit'
-
+    create_regional_shipping_method
   end
 
   test 'paypal variables' do
+    visit root_path
+    add_item_to_cart('Bracelet Set')
+    assert_equal "Total: $25.00", find('.line-items-total').text
+
+    click_button 'Checkout'
+
+    enter_valid_email_address
+    enter_valid_shipping_address
+
+    click_button 'Submit'
+
+    choose 'Ground'
+    click_button 'Submit'
+
+    assert_equal 'Total: $29.30', find('.order-total-amount').text
     assert_equal page.find("#amount_1").value, "25.0"
-    #assert_equal page.find("#amount_2").value, "14.0"
     assert_equal page.find("#handling_cart").value, "3.99"
     assert_equal page.find("#tax_cart").value, "0.31"
   end
