@@ -9,6 +9,11 @@ module NimbleshopPaypalwp
 
     private
 
+    def set_active_merchant_mode
+      record = NimbleshopPaypalwp::Paypalwp.first
+      ActiveMerchant::Billing::Base.mode = record.mode.to_sym
+    end
+
     def do_capture(options = {})
       success = amount_match?
       record_transaction('captured', success: success)
