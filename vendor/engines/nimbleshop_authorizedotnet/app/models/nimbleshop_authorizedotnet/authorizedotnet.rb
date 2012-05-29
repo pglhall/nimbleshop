@@ -1,7 +1,7 @@
 module NimbleshopAuthorizedotnet
   class Authorizedotnet < PaymentMethod
 
-    store_accessor :settings, :login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement, :mode
+    store_accessor :settings, :login_id, :transaction_key, :company_name_on_creditcard_statement, :mode
 
     before_save :set_mode
 

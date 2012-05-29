@@ -52,7 +52,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_protocol
-      NimbleshopPaypalwp::Paypalwp.first.use_ssl? ? 'https' : 'http'
+      NimbleshopPaypalwp::Paypalwp.first.mode == 'production' ? 'https' : 'http'
     end
 
   end

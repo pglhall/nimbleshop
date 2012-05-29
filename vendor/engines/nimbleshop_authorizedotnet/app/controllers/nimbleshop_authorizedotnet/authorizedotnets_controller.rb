@@ -26,7 +26,7 @@ module NimbleshopAuthorizedotnet
     private
 
     def post_params
-      params.permit(authorizedotnet: [:mode, :login_id, :transaction_key, :use_ssl, :company_name_on_creditcard_statement])
+      params.permit(authorizedotnet: [:mode, :login_id, :transaction_key, :company_name_on_creditcard_statement])
     end
 
     def load_payment_method
