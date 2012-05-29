@@ -7,11 +7,13 @@
         </td>
       </tr>
 
-      <tr>
-        <td colspan='3'>
+      <% if @order.payment_method %>
+        <tr>
+          <td colspan='3'>
             Payment method: <%= @order.payment_method.name %> <br />
-        </td>
-      </tr>
+          </td>
+        </tr>
+      <% end %>
 
       <%= render partial: @order.payment_transactions,  as: :transaction  %>
 
