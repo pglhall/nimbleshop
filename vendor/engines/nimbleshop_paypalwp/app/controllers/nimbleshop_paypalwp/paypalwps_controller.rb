@@ -29,7 +29,7 @@ module NimbleshopPaypalwp
     private
 
     def post_params
-      params.permit(paypalwp: [:merchant_email, :standard_use_ssl, :paymentaction])
+      params.permit(paypalwp: [:merchant_email, :standard_use_ssl, :paymentaction, :mode])
     end
 
     def load_payment_method

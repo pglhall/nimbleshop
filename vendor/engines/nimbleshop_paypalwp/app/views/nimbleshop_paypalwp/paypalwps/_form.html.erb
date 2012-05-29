@@ -8,19 +8,31 @@
 
 
     <fieldset>
+
       <div class="control-group">
         <%= f.label :merchant_email, nil, class: 'control-label' %>
         <div class="controls">
           <%= f.text_field :merchant_email, class: 'span6' %>
         </div>
       </div>
+
       <div class="control-group">
         <%= f.label :paymentaction, 'Default payment action', class: 'control-label' %>
         <div class="controls">
           <%= f.text_field :paymentaction, class: 'span6' %>
         </div>
       </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <label class='checkbox'>
+            <%= f.check_box :mode, {}, 'test', 'production' %> Enable sandbox mode
+          </label>
+        </div>
+      </div>
+
     </fieldset>
+
     <div class="form-actions">
       <%= f.submit('Submit', class: 'btn btn-primary') %>
       &nbsp;
