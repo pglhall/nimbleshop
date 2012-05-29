@@ -13,9 +13,10 @@
             Payment method: <%= @order.payment_method.name %> <br />
           </td>
         </tr>
+
+        <%= render partial: @order.payment_transactions,  as: :transaction  %>
       <% end %>
 
-      <%= render partial: @order.payment_transactions,  as: :transaction  %>
 
       <tr>
         <td colspan='3'>
