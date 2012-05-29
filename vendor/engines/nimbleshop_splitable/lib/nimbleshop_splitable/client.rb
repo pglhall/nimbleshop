@@ -22,8 +22,13 @@ module NimbleshopSplitable
       params[:api_notify_url] = api_notify_url(request)
       params[:expires_in]     = @expires_in
 
+      unless Rails.env.production?
+        Rails.logger.info "params to be posted: #{params.inspect}"
+      end
+
       url     = test? ? self.test_url : self.live_url
       params  = params.collect { |key, value| "#{key}=#{CGI.escape(value.to_s)}" }.join("&")
+
 
       ssl_post(url, params)
     end
