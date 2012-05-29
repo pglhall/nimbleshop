@@ -7,7 +7,7 @@
                                                                                                    class: 'form-horizontal' } do |f| %>
 <% end %>
 
-<script>
+<%= javascript_tag do %>
   $(function() {
     $("input#payment_choice_splitable:radio").change(function() {
       var $this, val;
@@ -20,4 +20,4 @@
 
     });
   });
-</script>
+<% end %>
