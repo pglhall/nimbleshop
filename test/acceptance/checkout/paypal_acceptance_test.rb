@@ -28,8 +28,8 @@ class PaypalAcceptanceTest < ActionDispatch::IntegrationTest
     click_button 'Submit'
 
     assert_equal 'Total: $29.30', find('.order-total-amount').text
-    assert_equal page.find("#amount_1").value, "25.0"
-    assert_equal page.find("#handling_cart").value, "3.99"
-    assert_equal page.find("#tax_cart").value, "0.31"
+    assert_equal "25.0", page.find("#amount_1").value
+    assert_equal "3.99", page.find("#handling_cart").value
+    assert_equal "0.31", page.find("#tax_cart").value
   end
 end

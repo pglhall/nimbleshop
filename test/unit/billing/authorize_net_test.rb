@@ -12,7 +12,7 @@ module Billing
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
-        assert_equal @processor.authorize(creditcard: creditcard), true
+        assert_equal true, @processor.authorize(creditcard: creditcard)
       end
 
       @order.reload
@@ -39,7 +39,7 @@ module Billing
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/authorize-failure') do
-        assert_equal @processor.authorize(creditcard: creditcard), false
+        assert_equal false, @processor.authorize(creditcard: creditcard)
       end
 
       @order.reload
@@ -106,7 +106,7 @@ module Billing
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do
-        assert_equal @processor.purchase(creditcard: creditcard), true
+        assert_equal true, @processor.purchase(creditcard: creditcard)
       end
 
       assert @order.reload.paid?
@@ -153,7 +153,7 @@ module Billing
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
-        assert_equal @processor.authorize(creditcard: creditcard), true
+        assert_equal true, @processor.authorize(creditcard: creditcard)
       end
 
       @tsx_id = @order.payment_transactions.last.transaction_gid
@@ -198,7 +198,7 @@ module Billing
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do
-        assert_equal @processor.purchase(creditcard: creditcard), true
+        assert_equal true, @processor.purchase(creditcard: creditcard)
       end
 
       @order.reload
@@ -222,7 +222,7 @@ module Billing
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/purchase-failure') do
-        assert_equal @processor.purchase(creditcard: creditcard), false
+        assert_equal false, @processor.purchase(creditcard: creditcard)
       end
 
       transaction = @order.payment_transactions.last

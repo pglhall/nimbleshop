@@ -17,14 +17,14 @@ module Billing
       test "when authorize success" do
         processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.number, @order.total_amount))
         playcasette('paypal/authorize-success') do
-          assert_equal processor.authorize, true
+          assert_equal true, processor.authorize
         end
 
         @order.reload
 
         transaction = @order.payment_transactions.last
-        assert_equal transaction.operation, 'authorized'
-        assert_equal transaction.success, true
+        assert_equal 'authorized', transaction.operation
+        assert_equal true, transaction.success
         assert_equal true, @order.authorized?
         assert_equal "April 01, 2012 at 08:46 pm", @order.paid_at.to_s(:long)
         assert_equal NimbleshopPaypalwp::Paypalwp.first, @order.payment_method
@@ -33,7 +33,7 @@ module Billing
 
       test "when authorize fails with invalid credit card number" do
         processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.number, 10.48))
-        assert_equal processor.authorize, false
+        assert_equal false, processor.authorize
         assert_nil @order.payment_method
       end
     end
