@@ -5,12 +5,8 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   include ::ShippingMethodSpecHelper
   include ::CheckoutTestHelper
 
-  def sanitize(text)
-    text.gsub(/\W/, ' ').gsub(/\s+/, ' ')
-  end
-
   setup do
-    Capybara.current_driver = :selenium
+    Capybara.current_driver = :rack_test
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
     create_regional_shipping_method
@@ -25,8 +21,8 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
     enter_valid_shipping_address
     click_button 'Submit'
 
-    assert_equal "Neeaj Singh 100 N Miami Ave Suite 500 Miami Florida 33333 United States", sanitize(find('.shipping-address').text)
-    assert_equal "Same as shipping address", sanitize(find('.billing-address').text)
+    assert_sanitized_equal "Neeaj Singh 100 N Miami Ave Suite 500 Miami Florida 33333 United States", find('.shipping-address').text
+    assert_sanitized_equal "Same as shipping address", find('.billing-address').text
   end
 
   test "Billing address is not same as shipping address" do
@@ -93,5 +89,5 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
     click_button 'Submit'
     assert page.has_content?("Pick shipping method")
   end
-
 end
+

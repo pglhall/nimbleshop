@@ -43,13 +43,13 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     choose 'Ground Shipping'
     click_button 'Submit'
 
-    assert_equal 'Ground Shipping ( $3.99 )', find('.shipping-method').text
+    assert_sanitized_equal 'Ground Shipping ( $3.99 )', find('.shipping-method').text
     click_link 'edit_shipping_method'
 
     choose 'Express Shipping'
     click_button 'Submit'
 
-    assert_equal 'Express Shipping ( $13.99 )', find('.shipping-method').text
+    assert_sanitized_equal 'Express Shipping ( $13.99 )', find('.shipping-method').text
   end
 
 end

@@ -1,6 +1,8 @@
 module M
-  def assert_must_be_like a, other
-    assert_equal a.gsub(/\s+/, ' ').strip, other.gsub(/\s+/, ' ').strip
+  def assert_sanitized_equal a, other
+    _a = a.gsub(/\W/, ' ').gsub(/\s/, '').strip
+    _other = other.gsub(/\W/, ' ').gsub(/\s/, '').strip
+    assert_equal _a, _other
   end
 
   def assert_must_have_same_elements obj1, obj2
