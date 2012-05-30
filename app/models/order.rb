@@ -155,25 +155,26 @@ class Order < ActiveRecord::Base
 
   private
 
-    def set_order_number
+  def set_order_number
+    _number = Random.new.rand(11111111...99999999).to_s
+    while self.class.exists?(number: _number) do
       _number = Random.new.rand(11111111...99999999).to_s
-      while self.class.exists?(number: _number) do
-        _number = Random.new.rand(11111111...99999999).to_s
-      end
-
-      self.number = _number
     end
 
-    def tax_calculator
-      @_tax_calculator ||= SimpleTaxCalculator.new(self)
-    end
+    self.number = _number
+  end
 
-    def shipping_cost_calculator
-      @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
-    end
+  def tax_calculator
+    @_tax_calculator ||= SimpleTaxCalculator.new(self)
+  end
 
-    def after_shipped
-      Mailer.shipping_notification(number).deliver
-      touch(:shipped_at)
-    end
+  def shipping_cost_calculator
+    @_shipping_cost_calculator ||= ShippingCostCalculator.new(self)
+  end
+
+  def after_shipped
+    Mailer.shipping_notification(number).deliver
+    touch(:shipped_at)
+  end
+
 end
