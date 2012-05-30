@@ -20,14 +20,16 @@ task :ipn_callback => :environment do
   base_url = 'http://localhost:3000'
   endpoint = base_url + '/admin/payment_methods/nimbleshop_paypalwp/paypalwp/notify'
 
+  amt =  (Order.find_by_number(order_number).total_amount_in_cents.to_i)/100.00
   params = {
      "invoice"=>"#{order_number}",
-     "mc_gross"=>"223.35",
+     "mc_gross"=>"#{amt}",
+     "payment_gross"=>"#{amt}",
+
      "tax"=>"2.35",
      "mc_shipping"=>"0.00",
      "mc_handling"=>"30.00",
      "mc_gross_1"=>"191.00",
-     "payment_gross"=>"223.35",
 
      "protection_eligibility"=>"Ineligible", 
      "item_number1"=>"", 
