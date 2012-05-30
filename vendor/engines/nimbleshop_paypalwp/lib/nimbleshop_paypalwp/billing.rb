@@ -4,7 +4,7 @@ module NimbleshopPaypalwp
 
     def initialize(options = {})
       @paypal_ipn = paypal_ipn(options[:raw_post])
-      @order = Order.find(@paypal_ipn.invoice)
+      @order = Order.find_by_number!(@paypal_ipn.invoice)
     end
 
     private
