@@ -4,12 +4,8 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
   include ::CheckoutTestHelper
 
-  def sanitize(text)
-    text.gsub(/\W/, ' ').gsub(/\s+/, ' ')
-  end
-
   setup do
-    Capybara.current_driver = :selenium
+    Capybara.current_driver = :rack_test
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
     create(:country_shipping_method, name: 'Ground Shipping', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)
@@ -28,7 +24,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     # Submit without choosing a shipping method
     click_button 'Submit'
 
-    assert page.has_content?('Please select a shipping method')
+    assert page.has_content? 'Please select a shipping method'
   end
 
   test "ability to change shipping method" do
@@ -43,13 +39,13 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     choose 'Ground Shipping'
     click_button 'Submit'
 
-    assert_equal 'Ground Shipping ( $3.99 )', find('.shipping-method').text
+    assert page.has_content? 'Ground Shipping ( $3.99 )'
     click_link 'edit_shipping_method'
 
     choose 'Express Shipping'
     click_button 'Submit'
 
-    assert_equal 'Express Shipping ( $13.99 )', find('.shipping-method').text
+    assert page.has_content? 'Express Shipping ( $13.99 )'
   end
 
 end

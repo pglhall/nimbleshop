@@ -37,6 +37,7 @@ payment_methods_003:
   permalink: paypalwp
   settings: "--- \n\
     :paymentaction: authorize\n\
+    :mode: test\n\
     :merchant_email: seller_1323037155_biz@bigbinary.com\n"
   created_at: 2012-04-05 01:42:00.13064
   updated_at: 2012-04-05 01:42:00.133581
