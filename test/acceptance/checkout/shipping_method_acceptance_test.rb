@@ -4,10 +4,6 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
   include ::CheckoutTestHelper
 
-  def sanitize(text)
-    text.gsub(/\W/, ' ').gsub(/\s+/, ' ')
-  end
-
   setup do
     Capybara.current_driver = :selenium
     create(:product, name: 'Bracelet Set', price: 25)

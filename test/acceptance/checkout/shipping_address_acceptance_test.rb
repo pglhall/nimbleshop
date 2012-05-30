@@ -6,7 +6,6 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   include ::CheckoutTestHelper
 
   setup do
-    Capybara.current_driver = :rack_test
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
     create_regional_shipping_method

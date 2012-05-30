@@ -6,7 +6,6 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
   include ::CheckoutTestHelper
 
   setup do
-    Capybara.current_driver = :selenium
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
     create_regional_shipping_method
@@ -27,10 +26,10 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     choose 'Ground'
     click_button 'Submit'
 
-    assert_equal 'Total: $29.30', find('.order-total-amount').text
+    assert_sanitized_equal 'Total: $29.30', find('.order-total-amount').text
     click_link 'edit_cart'
 
-    assert_equal "Total: $25.00", find('.line-items-total').text
+    assert_sanitized_equal "Total: $25.00", find('.line-items-total').text
   end
 
   test "should be able to change the quantity even if product is deleted" do
@@ -41,7 +40,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "updates_#{p.id}", with: '10'
     p.destroy
     click_button 'Update'
-    assert_equal "Total: $250.00", find('.line-items-total').text.chomp.strip
+    assert_sanitized_equal "Total: $250.00", find('.line-items-total').text
   end
 
   test "should be able to increase the quantities of items in the cart" do
