@@ -15,7 +15,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
   test "after going all the way to checkout if buyer comes back to cart only line items amount should be shown" do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    assert_equal "Total: $25.00", find('.line-items-total').text
+    assert_equal "Total: $25.00", find('.line-items-total').text.chomp.strip
 
     click_button 'Checkout'
 
@@ -41,7 +41,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "updates_#{p.id}", with: '10'
     p.destroy
     click_button 'Update'
-    assert_equal "Total: $250.00", find('.line-items-total').text
+    assert_equal "Total: $250.00", find('.line-items-total').text.chomp.strip
   end
 
   test "should be able to increase the quantities of items in the cart" do
