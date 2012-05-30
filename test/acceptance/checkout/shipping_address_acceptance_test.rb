@@ -15,7 +15,7 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
     visit root_path
     add_item_to_cart('Bracelet Set')
     click_button 'Checkout'
-    assert page.has_content?('Shipping information')
+    assert page.has_content?('Shipping address')
     enter_valid_email_address
     enter_valid_shipping_address
     click_button 'Submit'
@@ -28,7 +28,6 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
     visit root_path
     add_item_to_cart('Bracelet Set')
     click_button 'Checkout'
-    assert page.has_content?('Shipping information')
     enter_valid_email_address
     enter_valid_shipping_address
     uncheck 'order_shipping_address_attributes_use_for_billing'
