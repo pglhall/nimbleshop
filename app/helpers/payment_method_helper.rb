@@ -17,9 +17,9 @@ module PaymentMethodHelper
   def localhost2public_url(url, protocol)
     #TODO rather than assuming that only in production one wants to return url
     #make it configurable using application.yml
-    return url if Rails.env.production?
+    return url if Rails.env.production? || Rails.env.test?
 
-    tunnel = "#{Rails.root}/config/tunnel"
+    tunnel = Rails.root.join('config', 'tunnel')
     raise "File  #{Rails.root.join('config', 'tunnel').expand_path} is missing" unless File.exists?(tunnel)
 
     path = []
