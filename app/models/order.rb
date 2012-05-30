@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   has_many    :payment_transactions, dependent:  :destroy
 
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
-  accepts_nested_attributes_for :billing_address,  reject_if: :billing_disabled?, allow_destroy: true
+  accepts_nested_attributes_for :billing_address,  reject_if: :billing_address_same_as_shipping?  , allow_destroy: true
 
   delegate :tax,            to: :tax_calculator
   delegate :shipping_cost,  to: :shipping_cost_calculator
@@ -139,9 +139,10 @@ class Order < ActiveRecord::Base
     billing_address || build_billing_address(country_code: "US")
   end
 
-  def billing_disabled?(attributes)
-    attributes['use_for_billing'].blank? ||
-      attributes['use_for_billing'] == "false"
+  def billing_address_same_as_shipping?(attributes)
+    tmp = attributes['use_for_billing'].blank? || attributes['use_for_billing'] == "false"
+    debugger
+    tmp
   end
 
   def line_item_for(product_id)
