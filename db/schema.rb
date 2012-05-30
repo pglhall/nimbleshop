@@ -16,22 +16,22 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "addresses", :force => true do |t|
     t.string   "type"
     t.integer  "order_id"
-    t.string   "first_name",                         :null => false
+    t.string   "first_name",                        :null => false
     t.string   "last_name"
     t.string   "company"
-    t.string   "address1",                           :null => false
+    t.string   "address1",                          :null => false
     t.string   "address2"
-    t.string   "city",                               :null => false
+    t.string   "city",                              :null => false
     t.string   "zipcode"
-    t.string   "country_name",                       :null => false
-    t.string   "country_code",                       :null => false
-    t.string   "state_name",                         :null => false
+    t.string   "country_name",                      :null => false
+    t.string   "country_code",                      :null => false
+    t.string   "state_name",                        :null => false
     t.string   "state_code"
     t.string   "phone"
     t.string   "fax"
-    t.boolean  "use_for_billing", :default => false, :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "use_for_billing", :default => true, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "custom_field_answers", :force => true do |t|
