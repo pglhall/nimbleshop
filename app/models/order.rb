@@ -132,11 +132,8 @@ class Order < ActiveRecord::Base
   end
 
   def initialize_addresses
-    unless shipping_address
-      build_shipping_address(country_code: "US", use_for_billing: true)
-    end
-
-    billing_address || build_billing_address(country_code: "US")
+    shipping_address || build_shipping_address(country_code: "US", use_for_billing: true)
+    billing_address || build_billing_address(country_code: "US", use_for_billing: false)
   end
 
   def billing_address_same_as_shipping?(attributes)
