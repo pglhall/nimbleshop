@@ -24,18 +24,17 @@ module Billing
       assert       @order.authorized?
     end
 
-    test "when authorize fails with invalid credit card number" do
+    test "authorization fails when credit card number is not entered" do
       creditcard = build(:creditcard, number: nil)
       assert_equal false, @processor.authorize(creditcard: creditcard)
 
       @order.reload
 
-      assert_nil    @order.payment_transactions.last
       assert_nil    @order.payment_method
       assert        @order.abandoned?
     end
 
-    test "when authorize fails with bogus credit card" do
+    test "authorization fails with invalid credit card number" do
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/authorize-failure') do
@@ -44,10 +43,6 @@ module Billing
 
       @order.reload
 
-      transaction = @order.payment_transactions.last
-
-      assert_equal  false, transaction.success
-      assert_equal  'authorized', transaction.operation
       assert_nil    @order.payment_method
       assert        @order.abandoned?
     end
@@ -209,16 +204,17 @@ module Billing
       assert        @order.paid?
     end
 
-    test "when purchase fails with invalid credit card number" do
+    test "purchase fails when credit card number is not entered " do
       creditcard = build(:creditcard, number: nil)
-      assert_equal false, @processor.purchase(creditcard: creditcard)
 
-      transaction = @order.payment_transactions.last
+      playcasette('authorize.net/purchase-failure') do
+        assert_equal false, @processor.purchase(creditcard: creditcard)
+      end
 
-      assert_nil transaction
+      assert       @order.abandoned?
     end
 
-    test "when purchase fails with bogus credit card" do
+    test "purchase fails when invalid credit card number is entered" do
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/purchase-failure') do
