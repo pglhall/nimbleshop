@@ -1,4 +1,9 @@
 module M
+
+  def assert_must_be_like a, other
+    assert_equal a.gsub(/\s+/, ' ').strip, other.gsub(/\s+/, ' ').strip
+  end
+
   def assert_sanitized_equal a, other
     _a = a.gsub(/\W/, ' ').gsub(/\s/, '').strip
     _other = other.gsub(/\W/, ' ').gsub(/\s/, '').strip
