@@ -4,8 +4,9 @@ module PaymentMethodHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
   def payment_info_for_buyer(order)
-    name = order.payment_method.demodulized_underscore
-    self.send("nimbleshop_#{name}_payment_info_for_buyer", order)
+    if m = order.payment_method
+      self.send("nimbleshop_#{m.demodulized_underscore}_payment_info_for_buyer", order)
+    end
   end
 
   def nimbleshop_crud_form(payment_method)
@@ -22,7 +23,6 @@ module PaymentMethodHelper
     raise "File  #{Rails.root.join('config', 'tunnel').expand_path} is missing" unless File.exists?(tunnel)
 
     path = []
-
 
     host = File.open(tunnel, "r").gets.sub("\n", "")
     path << "#{protocol}://#{host}"
