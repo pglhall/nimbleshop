@@ -1,12 +1,12 @@
 module NimbleshopPaypalwp
   class PaypalwpsController < ::Admin::PaymentMethodsController
 
-    protect_from_forgery except: [ :notify ]
+    protect_from_forgery except: :notify
 
-    before_filter :load_payment_method, except: [ :notify ]
+    before_filter :load_payment_method, except: :notify
 
     def notify
-      handler = PaypalExtension::Billing.new(raw_post: request.raw_post)
+      handler = NimbleshopPaypalwp::Billing.new(raw_post: request.raw_post)
       handler.authorize
       render nothing: true
     end
