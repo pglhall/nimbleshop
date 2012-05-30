@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   # to allow extensions to keep data
   store :settings
 
-  attr_accessor   :validate_email
+  attr_accessor   :validate_email, :billing_address_same_as_shipping
   attr_protected  :number
 
   belongs_to  :user
@@ -136,9 +136,8 @@ class Order < ActiveRecord::Base
     billing_address || build_billing_address(country_code: "US", use_for_billing: false)
   end
 
-  def billing_address_same_as_shipping?(attributes)
-    tmp = attributes['use_for_billing'].blank? || attributes['use_for_billing'] == "false"
-    tmp
+  def billing_address_same_as_shipping?
+    billing_address_same_as_shipping
   end
 
   def line_item_for(product_id)
