@@ -141,7 +141,6 @@ class Order < ActiveRecord::Base
 
   def billing_address_same_as_shipping?(attributes)
     tmp = attributes['use_for_billing'].blank? || attributes['use_for_billing'] == "false"
-    debugger
     tmp
   end
 
