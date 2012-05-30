@@ -41,8 +41,7 @@ module NimbleshopPaypalwp
       record_transaction('purchased', success: success)
 
       if success
-        order.update_attributes(paid_at: @paypal_ipn.received_at,
-                                payment_method: NimbleshopPaypalwp::Paypalwp.first)
+        order.update_attributes(paid_at: @paypal_ipn.received_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
         order.purchase
       end
 

@@ -7,7 +7,16 @@ module NimbleshopPaypalwp
 
     def notify
       handler = NimbleshopPaypalwp::Billing.new(raw_post: request.raw_post)
-      handler.authorize
+      order = handler.order
+
+      unless order.paid?
+        # it is required otherwise order.authorize fails
+        handler.order.update_attribute(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
+
+        # IPN can send notification multiple times
+        handler.purchase
+      end
+
       render nothing: true
     end
 
