@@ -12,11 +12,3 @@ task :setup => :environment do
 
   Sampledata.new.populate
 end
-
-desc "sets up enviroment from scratch"
-task :setup_from_scratch => :environment do
-  Rake::Task["db:drop"].invoke
-  Rake::Task["db:create"].invoke
-  Rake::Task["db:migrate"].invoke
-  Rake::Task["setup"].invoke
-end
