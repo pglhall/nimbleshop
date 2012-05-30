@@ -37,8 +37,8 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
 
     click_button 'Submit'
 
-    assert_equal "Neeaj Singh 100 N Miami Ave Suite 500 Miami Florida 33333 United States", sanitize(find('.shipping-address').text)
-    assert_equal "Neil Singh 100 N Pines Ave Suite 400 Pembroke Pines Florida 33332 United States", sanitize(find('.billing-address').text)
+    assert_sanitized_equal "Neeaj Singh 100 N Miami Ave Suite 500 Miami Florida 33333 United States", find('.shipping-address').text
+    assert_sanitized_equal "Neil Singh 100 N Pines Ave Suite 400 Pembroke Pines Florida 33332 United States", find('.billing-address').text
   end
 
   test 'editing shipping address' do
