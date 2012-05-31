@@ -17,7 +17,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in "shipping_method_base_price", with: "10"
     click_button('Submit')
 
-    assert page.has_content?('Successfully created')
+    assert_sanitized_equal 'Ground Shipping', find('table tr td').text
     assert_equal 58, ShippingZone.count - bef
   end
 
