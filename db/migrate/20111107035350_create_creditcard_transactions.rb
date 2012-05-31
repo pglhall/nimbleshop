@@ -7,7 +7,7 @@ class CreateCreditcardTransactions < ActiveRecord::Migration
       t.boolean     :success,         null: false
       t.string      :operation,       null: false
       t.integer     :amount
-      t.text        :additional_info
+      t.text        :metadata
 
       t.timestamps
     end

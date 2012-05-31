@@ -113,7 +113,7 @@ module Billing
 
       playcasette('authorize.net/refund-success') do
         assert_equal true, @processor.refund(transaction_gid:   @transaction.transaction_gid,
-                                             card_number:       @transaction.additional_info[:card_number])
+                                             card_number:       @transaction.metadata[:card_number])
       end
 
       @order.reload

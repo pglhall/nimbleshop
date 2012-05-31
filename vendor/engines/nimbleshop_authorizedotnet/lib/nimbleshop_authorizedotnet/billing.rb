@@ -106,7 +106,7 @@ module NimbleshopAuthorizedotnet
       options = { operation:          operation,
                   params:             response.params,
                   success:            response.success?,
-                  additional_info:    additional_options,
+                  metadata:           additional_options,
                   transaction_gid:    response.authorization } # TODO is the transaction_gid  response.authorization. will it be
                                                                # response.capture in case of capture
 

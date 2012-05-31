@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.boolean  "success",         :null => false
     t.string   "operation",       :null => false
     t.integer  "amount"
-    t.text     "additional_info"
+    t.text     "metadata"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
