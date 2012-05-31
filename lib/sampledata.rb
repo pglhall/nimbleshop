@@ -124,19 +124,7 @@ class Sampledata
 
     product = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
     products << product
-    product.update_attributes!(variants_enabled: true)
-    product.variation1.update_attributes!(active: true)
-    product.variation2.update_attributes!(active: true)
 
-    product.variants.create!(variation1_value: 'Pink',   variation2_value: 'Small',  price: 19)
-    product.variants.create!(variation1_value: 'Yellow', variation2_value: 'Small',  price: 11)
-    product.variants.create!(variation1_value: 'Blue',   variation2_value: 'Small',  price: 11)
-    product.variants.create!(variation1_value: 'Orangy', variation2_value: 'Small',  price: 14)
-
-    product.variants.create!(variation1_value: 'Pink',   variation2_value: 'Medium',  price: 39)
-    product.variants.create!(variation1_value: 'Yellow', variation2_value: 'Medium',  price: 31)
-    product.variants.create!(variation1_value: 'Blue',   variation2_value: 'Medium',  price: 31)
-    product.variants.create!(variation1_value: 'Orangy', variation2_value: 'Medium',  price: 34)
 
     products << Product.create!( title: "Colorful shoes", price: 191, description: 'tbd')
     products << Product.create!( title: "Battery operated Mercedes SL 6V car in red", price: 111, description: 'tbd')

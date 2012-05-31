@@ -29,11 +29,7 @@
     end
 
     resource  :payment_gateway
-    resources :products do
-      member do
-        put :variants
-      end
-    end
+    resources :products
 
     resources :link_groups do
       resources :navigations, only: [:create, :new, :destroy] 

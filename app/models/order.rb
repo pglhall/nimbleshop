@@ -81,11 +81,9 @@ class Order < ActiveRecord::Base
     line_items.count
   end
 
-  def add(product, variant = nil)
+  def add(product)
     ActiveSupport::Notifications.instrument("orders.add", product.id) do
       options = { product_id: product.id }
-
-      options.update(variant_id: variant.id) if variant
 
       unless line_items.where(options).any?
         line_items.create(options.merge(quantity: 1))

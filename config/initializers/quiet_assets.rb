@@ -2,7 +2,7 @@
 # Following code will make the log less noisy by supressing log messages from assets.
 # Given below is an example that will no longer appear because of code in this file
 #
-# Started GET "/assets/ajaxify-price-variant-form.js?body=1" for 127.0.0.1 at 2012-03-29 17:39:21 -0400
+# Started GET "/assets/ajaxify-form.js?body=1" for 127.0.0.1 at 2012-03-29 17:39:21 -0400
 # 0485e9d68ec9e33b34e32653efd5b61c] [127.0.0.1]
 #
 if Rails.env.development? && false

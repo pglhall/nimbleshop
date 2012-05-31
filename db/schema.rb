@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112071455) do
+ActiveRecord::Schema.define(:version => 20120105234553) do
 
   create_table "addresses", :force => true do |t|
     t.string   "type"
@@ -55,8 +55,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   create_table "line_items", :force => true do |t|
     t.integer  "order_id",                                          :null => false
     t.integer  "product_id",                                        :null => false
-    t.integer  "variant_id"
-    t.string   "variant_info"
     t.integer  "quantity",                                          :null => false
     t.string   "product_name",                                      :null => false
     t.text     "product_description"
@@ -204,15 +202,14 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
   add_index "product_groups", ["permalink"], :name => "index_product_groups_on_permalink", :unique => true
 
   create_table "products", :force => true do |t|
-    t.string   "name",                                                                 :null => false
-    t.string   "status",                                         :default => "active", :null => false
+    t.string   "name",                                                            :null => false
+    t.string   "status",                                    :default => "active", :null => false
     t.text     "description"
-    t.decimal  "price",            :precision => 8, :scale => 2,                       :null => false
-    t.boolean  "new",                                            :default => false,    :null => false
-    t.boolean  "variants_enabled",                               :default => false,    :null => false
-    t.string   "permalink",                                                            :null => false
-    t.datetime "created_at",                                                           :null => false
-    t.datetime "updated_at",                                                           :null => false
+    t.decimal  "price",       :precision => 8, :scale => 2,                       :null => false
+    t.boolean  "new",                                       :default => false,    :null => false
+    t.string   "permalink",                                                       :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
   end
 
   add_index "products", ["permalink"], :name => "index_products_on_permalink", :unique => true
@@ -277,29 +274,6 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.decimal  "tax_percentage",               :precision => 4, :scale => 2, :default => 0.0,         :null => false
     t.datetime "created_at",                                                                          :null => false
     t.datetime "updated_at",                                                                          :null => false
-  end
-
-  create_table "variants", :force => true do |t|
-    t.integer  "product_id"
-    t.string   "variation1_value"
-    t.string   "variation1_parameterized",                               :default => ""
-    t.string   "variation2_value"
-    t.string   "variation2_parameterized",                               :default => ""
-    t.string   "variation3_value"
-    t.string   "variation3_parameterized",                               :default => ""
-    t.decimal  "price",                    :precision => 8, :scale => 2,                 :null => false
-    t.datetime "created_at",                                                             :null => false
-    t.datetime "updated_at",                                                             :null => false
-  end
-
-  create_table "variations", :force => true do |t|
-    t.integer  "product_id"
-    t.string   "name",                              :null => false
-    t.text     "content"
-    t.text     "variation_type",                    :null => false
-    t.boolean  "active",         :default => false, :null => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
   end
 
 end

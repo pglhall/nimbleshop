@@ -40,19 +40,6 @@
 
       <div id="product-show-variant-price-data" data-fields="<%= @product.variant_price_data.to_json %>">
 
-        <% if @product.variations.active.any? %>
-          <div class='variants'>
-            <% @product.variations.active.each do |variation| %>
-              <%= variation.label %>
-              <%= select_tag("#{variation.variation_type}_value", options_for_select(variation.content_for_select_options)) %>
-              <br/>
-              <br/>
-            <% end %>
-            <br/>
-            <br/>
-          </div>
-        <% end %>
-
         <input type="hidden" name="permalink" value="<%= @product.permalink %>"/>
 
         <div id="buy" class="clear">

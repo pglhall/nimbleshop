@@ -15,7 +15,6 @@
 //= require thumbnail
 //= require highlight_error_field
 //= require remove_item_from_cart
-//= require variant
 //= require load_states
 //= require order
 //= require highlight_hovered_picture

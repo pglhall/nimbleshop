@@ -1,26 +1,8 @@
 class Admin::ProductsController < AdminController
 
-  before_filter :load_product!, only: [:show, :edit, :update, :destroy, :variants ]
+  before_filter :load_product!, only: [:show, :edit, :update, :destroy ]
 
   respond_to :html
-
-  def variants
-    # update variation name event if the variant data is invalid
-    @product.update_variation_names(params)
-    Product.transaction do
-      @result = @product.update_attributes(params[:product])
-    end
-
-    respond_to do |format|
-      format.js do
-        if @result
-          render json: {success: 'done'}
-        else
-          render json: {error: @product.errors.full_messages}
-        end
-      end
-    end
-  end
 
   def index
     @products = Product.order(:id)
@@ -70,7 +52,7 @@ class Admin::ProductsController < AdminController
   private
 
   def post_params
-    params.permit(product: [ :picture_attributes, :name, :status, :description, :price, :new, :variants_enabled, :pictures_order] )
+    params.permit(product: [ :picture_attributes, :name, :status, :description, :price, :new, :pictures_order] )
   end
 
   def load_product!

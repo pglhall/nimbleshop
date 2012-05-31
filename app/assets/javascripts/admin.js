@@ -19,8 +19,6 @@
 //= require enable_payment_method
 //= require product-group-condition
 //= require shipit
-//= require ajaxify-price-variant-form
-//= require enable_disable_price_variant
 //= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
 //= require admin/products/edit

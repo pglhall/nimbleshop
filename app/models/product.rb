@@ -8,7 +8,6 @@ class Product < ActiveRecord::Base
   validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
 
   has_many :variations, dependent: :destroy, order: "variation_type asc"
-  has_many :variants, dependent: :destroy
 
   has_many :pictures, order: 'pictures.position'
 
@@ -19,8 +18,6 @@ class Product < ActiveRecord::Base
       where(['custom_field_answers.custom_field_id = ?', custom_field.id]).limit(1).try(:first)
     end
   end
-
-  accepts_nested_attributes_for :variants, allow_destroy: true
 
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
@@ -93,14 +90,6 @@ class Product < ActiveRecord::Base
     self.variations.create!(variation_type: 'variation1', name: 'Color')
     self.variations.create!(variation_type: 'variation2', name: 'Size')
     self.variations.create!(variation_type: 'variation3', name: 'Material')
-  end
-
-  def variant_price_data
-    temp = variants.map do |v|
-      k = [v.variation1_parameterized, v.variation2_parameterized, v.variation3_parameterized].compact.join('')
-      [k, v.price.round(2).to_f]
-    end.flatten
-    Hash[*temp]
   end
 
   def initialize_status
