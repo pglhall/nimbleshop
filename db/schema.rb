@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "product_name",                                      :null => false
     t.text     "product_description"
     t.decimal  "product_price",       :precision => 8, :scale => 2, :null => false
-    t.text     "settings"
+    t.text     "metadata"
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
   end
@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.string   "shipping_status",    :default => "nothing_to_ship",     :null => false
     t.string   "checkout_status",    :default => "items_added_to_cart", :null => false
     t.datetime "shipped_at"
-    t.text     "settings"
     t.datetime "paid_at"
+    t.text     "metadata"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
   end
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 20120112071455) do
     t.text     "description"
     t.string   "type"
     t.string   "permalink",                      :null => false
-    t.text     "settings"
+    t.text     "metadata"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end

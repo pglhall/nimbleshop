@@ -1,6 +1,6 @@
 class PaymentMethod < ActiveRecord::Base
 
-  store :settings
+  store :metadata
 
   include Permalink::Builder
 

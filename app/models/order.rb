@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 
-  # to allow extensions to keep data
-  store :settings
+  # to allow extensions to store any type of information
+  store :metadata
 
   attr_accessor   :validate_email, :billing_address_same_as_shipping
   attr_protected  :number

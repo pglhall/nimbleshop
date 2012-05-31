@@ -9,7 +9,7 @@ class CreateLineItems < ActiveRecord::Migration
       t.string     :product_name,       null: false
       t.text       :product_description
       t.decimal    :product_price,      null: false, precision: 8, scale: 2
-      t.text       :settings
+      t.text       :metadata
 
       t.timestamps
     end

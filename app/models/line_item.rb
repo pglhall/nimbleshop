@@ -6,7 +6,7 @@ class LineItem < ActiveRecord::Base
   # instead used the attributes copied from product to line_item
   belongs_to :product
 
-  store :settings, accessors: [ :picture_tiny,      :picture_small,      :picture_medium,      :picture_large,
+  store :metadata, accessors: [ :picture_tiny,      :picture_small,      :picture_medium,      :picture_large,
                                 :picture_tiny_plus, :picture_small_plus, :picture_medium_plus, :picture_large_plus,
                                 :product_permalink ]
 

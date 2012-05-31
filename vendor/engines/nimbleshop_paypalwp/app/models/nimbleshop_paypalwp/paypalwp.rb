@@ -1,6 +1,7 @@
 module NimbleshopPaypalwp
   class Paypalwp < PaymentMethod
-    store_accessor  :settings, :merchant_email, :paymentaction, :mode
+
+    store_accessor  :metadata, :merchant_email, :paymentaction, :mode
 
     before_save :set_mode
 
@@ -11,5 +12,6 @@ module NimbleshopPaypalwp
     def set_mode
       self.mode ||= 'test'
     end
+
   end
 end
