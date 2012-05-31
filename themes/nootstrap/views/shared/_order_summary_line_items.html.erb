@@ -5,9 +5,6 @@
         <div class='lhs'>
           <%= truncate(line_item.product_name, length: 75) %>
           <p>
-            <i><%= display_variant_info(line_item) %> </i>
-          </p>
-          <p>
             <%= line_item.quantity %> x <%= number_to_currency(line_item.product_price) %> =
             <strong> <%= number_to_currency(line_item.price) %> </strong>
           </p>

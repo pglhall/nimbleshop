@@ -7,8 +7,6 @@ class Product < ActiveRecord::Base
 
   validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
 
-  has_many :variations, dependent: :destroy, order: "variation_type asc"
-
   has_many :pictures, order: 'pictures.position'
 
   has_many :custom_field_answers, dependent: :destroy do
@@ -34,27 +32,6 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :name, :description, :price
   validates_numericality_of :price
-
-  after_create :create_variation_records
-
-  def variation1
-    self.variations.find_by_variation_type('variation1')
-  end
-  def variation2
-    self.variations.find_by_variation_type('variation2')
-  end
-  def variation3
-    self.variations.find_by_variation_type('variation3')
-  end
-
-  def update_variation_names(params)
-    %w(variation1 variation2 variation3).each do |v|
-      key = "#{v}_value".intern
-      if params[key].present?
-        self.variations.find_by_variation_type(v).update_attributes(name: params[key])
-      end
-    end
-  end
 
   def picture
     pictures.first
@@ -84,12 +61,6 @@ class Product < ActiveRecord::Base
 
   def find_or_build_all_answers
     CustomField.all.each { |f| find_or_build_answer_for_field(f) }
-  end
-
-  def create_variation_records
-    self.variations.create!(variation_type: 'variation1', name: 'Color')
-    self.variations.create!(variation_type: 'variation2', name: 'Size')
-    self.variations.create!(variation_type: 'variation3', name: 'Material')
   end
 
   def initialize_status

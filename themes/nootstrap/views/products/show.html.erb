@@ -38,8 +38,6 @@
     <h2 id='product-price'><%= number_to_currency(@product.price) %></h2>
     <%= form_tag('/cart/add', method: 'post') do %>
 
-      <div id="product-show-variant-price-data" data-fields="<%= @product.variant_price_data.to_json %>">
-
         <input type="hidden" name="permalink" value="<%= @product.permalink %>"/>
 
         <div id="buy" class="clear">
