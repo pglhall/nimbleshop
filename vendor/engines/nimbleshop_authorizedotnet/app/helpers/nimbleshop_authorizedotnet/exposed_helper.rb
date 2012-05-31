@@ -1,6 +1,11 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
+    def nimbleshop_authorizedotnet_order_payment_icon(order)
+      cardtype = order.payment_transactions.last.metadata[:cardtype]
+      image_tag("#{cardtype}.png")
+    end
+
     def nimbleshop_authorizedotnet_payment_info_for_buyer(order)
       render partial: '/nimbleshop_authorizedotnet/payments/payment_info_for_buyer', locals: { order: order }
     end

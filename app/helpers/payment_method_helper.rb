@@ -3,6 +3,13 @@ require 'active_merchant/billing/integrations/action_view_helper'
 module PaymentMethodHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
+  def order_payment_icon(order)
+    if pm = order.payment_method
+      m = "nimbleshop_#{pm.demodulized_underscore}_order_payment_icon"
+      self.send(m , order) if self.respond_to?(m.intern)
+    end
+  end
+  
   def payment_info_for_buyer(order)
     if pm = order.payment_method
       m = "nimbleshop_#{pm.demodulized_underscore}_payment_info_for_buyer"
