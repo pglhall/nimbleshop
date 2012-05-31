@@ -29,7 +29,7 @@ module NimbleshopAuthorizedotnet
       return false unless valid_card?(creditcard)
 
       response = client.authorize(order.total_amount_in_cents, creditcard)
-      record_transaction(response, 'authorized', card_number: creditcard.display_number, card_type: creditcard.cardtype)
+      record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       response.success?.tap do |success|
         if success
@@ -48,7 +48,7 @@ module NimbleshopAuthorizedotnet
       return false unless valid_card?(creditcard)
 
       response = client.purchase(order.total_amount_in_cents, creditcard)
-      record_transaction(response, 'purchased', card_number: creditcard.display_number, card_type: creditcard.cardtype)
+      record_transaction(response, 'purchased', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       response.success?.tap do |success|
         if success
