@@ -1,8 +1,8 @@
-  mount NimbleshopAuthorizedotnet::Engine, at: '/admin/payment_methods/nimbleshop_authorizedotnet',
+  mount NimbleshopAuthorizedotnet::Engine, at: '/nimbleshop_authorizedotnet',
                                            as: 'nimbleshop_authorizedotnet'
 
-  mount NimbleshopPaypalwp::Engine,        at: '/admin/payment_methods/nimbleshop_paypalwp',
+  mount NimbleshopPaypalwp::Engine,        at: '/nimbleshop_paypalwp',
                                            as: 'nimbleshop_paypalwp'
 
-  mount NimbleshopSplitable::Engine,       at: '/admin/payment_methods/nimbleshop_splitable',
+  mount NimbleshopSplitable::Engine,       at: '/nimbleshop_splitable',
                                            as: 'nimbleshop_splitable'
