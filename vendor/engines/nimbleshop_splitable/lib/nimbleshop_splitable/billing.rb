@@ -1,7 +1,7 @@
 module NimbleshopSplitable
   class Billing < ::Billing::Base
 
-    attr_reader :errors, :order
+    attr_reader :errors, :order, :payment_method
 
     def client
       Client.new(NimbleshopSplitable::Splitable.first)
@@ -15,6 +15,7 @@ module NimbleshopSplitable
       end
 
       @errors = []
+      @payment_method = NimbleshopSplitable::Splitable.first
     end
 
     def create_split(options = {})
@@ -66,7 +67,7 @@ module NimbleshopSplitable
 
     def do_purchase(options = {})
       add_to_order(options, 'purchased')
-      order.update_attributes(payment_method: NimbleshopSplitable::Splitable.first)
+      order.update_attributes(payment_method: payment_method)
       order.purchase
 
       true
@@ -74,7 +75,7 @@ module NimbleshopSplitable
 
     def do_void(options = {})
       add_to_order(options, 'voided')
-      order.update_attributes(payment_method: NimbleshopSplitable::Splitable.first)
+      order.update_attributes(payment_method: payment_method)
       order.void
 
       true
