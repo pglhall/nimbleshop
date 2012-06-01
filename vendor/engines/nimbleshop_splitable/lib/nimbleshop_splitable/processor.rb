@@ -13,7 +13,7 @@ module NimbleshopSplitable
     end
 
     def api_notify_url(request)
-      'http://' + request.host_with_port + '/admin/payment_methods/nimbleshop_splitable/splitable/notify'
+      'http://' + request.host_with_port + '/nimbleshop_splitable/splitable/notify'
     end
 
     def create(order, request)
