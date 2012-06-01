@@ -2,6 +2,10 @@ module NimbleshopPaypalwp
 
   module ExposedHelper
 
+    def nimbleshop_paypalwp_icon_for_order_payment(order)
+      nimbleshop_paypalwp_mini_image
+    end
+
     def update_service_with_attributes(service, order)
       service.customer email: order.email
 
