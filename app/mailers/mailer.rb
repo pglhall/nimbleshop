@@ -27,6 +27,7 @@ class Mailer < ActionMailer::Base
   def shipping_notification(order_number)
     subject = "Items for order ##{order_number} have been shipped"
     @order = Order.find_by_number!(order_number)
+    @shipment = @order.shipments.first
 
     mail_options = {to: @order.email, subject: subject}
     mail(mail_options)

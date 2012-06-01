@@ -66,4 +66,12 @@ module AdminHelper
     image_tag url, options
   end
 
+  def shipment_info(shipment)
+    if shipment.tracking_number.present?
+      link_to shipment.name + ' #' + shipment.tracking_number, shipment.tracking_url
+    else
+      shipment.name
+    end
+  end
+
 end

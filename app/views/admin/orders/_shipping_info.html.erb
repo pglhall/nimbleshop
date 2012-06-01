@@ -18,7 +18,7 @@
             <% elsif @order.shipped? %>
               Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
               via
-              <%= link_to @shipment.name + ' #' + @shipment.tracking_number, @shipment.tracking_url %>
+              <%= shipment_info(@shipment) %>
             <% end %>
 
             <div id='ship_items_action_box'>

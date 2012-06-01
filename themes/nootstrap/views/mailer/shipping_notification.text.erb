@@ -2,11 +2,17 @@ Hi <%= @order.final_billing_address.name%> ,
 
 All items regarding order #<%= @order.number %> have been shipped.
 
+<% if @shipment.tracking_number.present? %>
 Items have been shipped using <%= @order.shipments.first.shipment_carrier.name %> and the tracking number is <%= @order.shipments.first.tracking_number %>. Use the URL given below to track your shipment.
 
-<%= @order.shipments.first.tracking_url %>
+<%= @shipment.tracking_url %>
 
 Sometimes it takes upto 12 hours for a tracking number to show up in the system.
+
+<% else %>
+Items have been shipped using <%= @shipment.shipment_carrier.name %> .
+<% end %>
+
 
 Items are being shipped to the following address:
 
