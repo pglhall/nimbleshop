@@ -36,7 +36,7 @@ module NimbleshopSplitable
     private
 
     def post_params
-      params.permit(splitable: [ :api_key, :api_secret, :expires_in] )
+      params.permit(splitable: [ :api_key, :api_secret, :expires_in, :mode] )
     end
 
     def load_payment_method
