@@ -34,9 +34,7 @@ gem 'mini_magick'
 # to manage states of payment_status and shipping_status
 gem 'state_machine'
 
-# mustache.js
-#
-# Mustache is used to generate new product-group-condition
+# mustache.js. It is used to generate new product-group-condition
 gem 'mustache'
 
 # for validating email
