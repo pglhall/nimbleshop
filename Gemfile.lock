@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/bigbinary/admin_data.git
+  revision: b4ecedd51561980e75c0bc4f13b5198a6311514d
+  branch: asset_pipeline
+  specs:
+    admin_data (1.2.1)
+      rails (~> 3.2)
+      will_paginate
+
+GIT
   remote: git://github.com/bigbinary/email_validator.git
   revision: 9bff984da3a7f7dad08f229aa486c7976b9b2107
   specs:
@@ -326,6 +335,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemerchant
+  admin_data!
   airbrake
   american_date
   capybara

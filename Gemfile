@@ -74,8 +74,9 @@ end
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
 
-  gem 'push2heroku', github: 'neerajdotname/push2heroku'
+  gem 'push2heroku',  github: 'neerajdotname/push2heroku'
   gem 'localtunnel',  github: 'jalada/localtunnel'
+  gem 'admin_data',   github: 'bigbinary/admin_data', branch: :asset_pipeline
 end
 
 group :test do
