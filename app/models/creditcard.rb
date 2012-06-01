@@ -22,17 +22,16 @@ class Creditcard
 
   delegate :display_number, to: :to_active_merchant_creditcard
 
-  before_validation :set_cardtype
-
   before_validation :strip_non_numeric_values, if: :number
 
   validates_presence_of :last_name, :first_name
 
-  validates_presence_of :number,  message: "^Credit card number is blank"
-  validates_presence_of :cvv,     message: "^CVV number is blank"
+  validates_presence_of :number,  message: "^Please enter credit card number"
+  validates_numericality_of :number, message: "^Please check the credit card number you entered"
+  validates_presence_of :cvv,     message: "^Please enter CVV"
 
+  validate  :validation_of_cardtype, if: proc { |r| r.errors.empty? }
   validate  :validation_by_active_merchant, if: proc { |r| r.errors.empty? }
-
 
   def initialize(attrs = {})
     sanitize_month_and_year(attrs)
@@ -66,11 +65,15 @@ class Creditcard
   end
 
   def strip_non_numeric_values
-    self.number = number.to_s.gsub(/[^\d]/, '')
+    self.number = number.to_s.gsub('-', '').strip
   end
 
-  def set_cardtype
-    self.cardtype = ActiveMerchant::Billing::CreditCard.type?(number)
+  def validation_of_cardtype
+    if cardtype = ActiveMerchant::Billing::CreditCard.type?(number)
+      self.cardtype = cardtype
+    else
+      self.errors.add(:base, 'Please check credit card number. It does not seem right.')
+    end
   end
 
   def validation_by_active_merchant
