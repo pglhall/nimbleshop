@@ -1,5 +1,5 @@
 module NimbleshopAuthorizedotnet
-  module Processor
+  module Gateway
     def self.instance
       record = NimbleshopAuthorizedotnet::Authorizedotnet.first
 

@@ -1,5 +1,5 @@
 module NimbleshopSplitable
-  class Processor
+  class Gateway
     include ActiveMerchant::PostsData
 
     class_attribute :live_url, :test_url

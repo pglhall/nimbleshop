@@ -4,9 +4,9 @@ class OrderAcceptanceTest < ActionDispatch::IntegrationTest
 
   setup do
     @order = create(:order)
-    processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+    gateway = NimbleshopAuthorizedotnet::Billing.new(@order)
     playcasette('authorize.net/authorize-success') do
-      processor.authorize(creditcard: build(:creditcard))
+      gateway.authorize(creditcard: build(:creditcard))
     end
   end
 

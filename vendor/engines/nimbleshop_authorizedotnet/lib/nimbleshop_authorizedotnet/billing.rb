@@ -3,8 +3,8 @@ module NimbleshopAuthorizedotnet
 
     attr_reader :order, :payment_method
 
-    def processor
-      ::NimbleshopAuthorizedotnet::Processor.instance
+    def gateway
+      ::NimbleshopAuthorizedotnet::Gateway.instance
     end
 
     def initialize(order)
@@ -28,7 +28,7 @@ module NimbleshopAuthorizedotnet
 
       return false unless valid_card?(creditcard)
 
-      response = processor.authorize(order.total_amount_in_cents, creditcard)
+      response = gateway.authorize(order.total_amount_in_cents, creditcard)
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       response.success?.tap do |success|
@@ -47,7 +47,7 @@ module NimbleshopAuthorizedotnet
 
       return false unless valid_card?(creditcard)
 
-      response = processor.purchase(order.total_amount_in_cents, creditcard)
+      response = gateway.purchase(order.total_amount_in_cents, creditcard)
       record_transaction(response, 'purchased', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       response.success?.tap do |success|
@@ -63,7 +63,7 @@ module NimbleshopAuthorizedotnet
       options.assert_valid_keys(:transaction_gid)
       tsx_id = options[:transaction_gid]
 
-      response = processor.capture(order.total_amount_in_cents, tsx_id, {})
+      response = gateway.capture(order.total_amount_in_cents, tsx_id, {})
       record_transaction(response, 'captured')
 
       response.success?.tap do |success|
@@ -78,7 +78,7 @@ module NimbleshopAuthorizedotnet
       options.assert_valid_keys(:transaction_gid)
       transaction_gid = options[:transaction_gid]
 
-      response = processor.void(transaction_gid, {})
+      response = gateway.void(transaction_gid, {})
       record_transaction(response, 'voided')
 
       response.success?.tap do |success|
@@ -93,7 +93,7 @@ module NimbleshopAuthorizedotnet
       transaction_gid      = options[:transaction_gid]
       card_number = options[:card_number]
 
-      response = processor.refund(order.total_amount_in_cents, transaction_gid, card_number: card_number)
+      response = gateway.refund(order.total_amount_in_cents, transaction_gid, card_number: card_number)
       record_transaction(response, 'refunded')
 
       response.success?.tap do |success|
