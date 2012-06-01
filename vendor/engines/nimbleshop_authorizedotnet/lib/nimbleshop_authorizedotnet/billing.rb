@@ -1,7 +1,7 @@
 module NimbleshopAuthorizedotnet
   class Billing < Billing::Base
 
-    attr_reader :order
+    attr_reader :order, :payment_method
 
     def client
       NimbleshopAuthorizedotnet::Client.instance
@@ -9,13 +9,13 @@ module NimbleshopAuthorizedotnet
 
     def initialize(order)
       @order = order
+      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
     end
 
     private
 
     def set_active_merchant_mode
-      record = NimbleshopAuthorizedotnet::Authorizedotnet.first
-      ActiveMerchant::Billing::Base.mode = record.mode.to_sym
+      ActiveMerchant::Billing::Base.mode = payment_method.mode.to_sym
     end
 
     # TODO method should return an array with all errors
@@ -33,7 +33,7 @@ module NimbleshopAuthorizedotnet
 
       response.success?.tap do |success|
         if success
-          order.update_attributes(payment_method: ::NimbleshopAuthorizedotnet::Authorizedotnet.first)
+          order.update_attributes(payment_method: payment_method)
           order.authorize
         end
       end
@@ -52,7 +52,7 @@ module NimbleshopAuthorizedotnet
 
       response.success?.tap do |success|
         if success
-          order.update_attributes(payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
+          order.update_attributes(payment_method: payment_method)
           order.purchase
         end
       end
