@@ -47,19 +47,11 @@ class Order < ActiveRecord::Base
   end
 
   state_machine :shipping_status, initial: :nothing_to_ship do
-    after_transition :on => :shipped, do:  :after_shipped
+    after_transition on: :shipped, do: :after_shipped
 
-    event :shipping_pending do
-      transition nothing_to_ship: :shipping_pending
-    end
-
-    event :shipped do
-      transition shipping_pending: :shipped
-    end
-
-    event :cancel_shipment do
-      transition shipping_pending: :nothing_to_ship
-    end
+    event(:shipping_pending) { transition nothing_to_ship: :shipping_pending }
+    event(:shipped)          { transition shipping_pending: :shipped         }
+    event(:cancel_shipment)  { transition shipping_pending: :nothing_to_ship }
   end
 
   def mark_as_paid!
