@@ -1,10 +1,12 @@
 module NimbleshopPaypalwp
   class Billing < Billing::Base
-    attr_reader :order
+
+    attr_reader :order, :payment_method
 
     def initialize(options = {})
       @paypal_ipn = paypal_ipn(options[:raw_post])
       @order = Order.find_by_number!(@paypal_ipn.invoice)
+      @payment_method = NimbleshopPaypalwp::Paypalwp.first
     end
 
     private
@@ -14,7 +16,7 @@ module NimbleshopPaypalwp
       record_transaction('captured', success: success)
 
       if success
-        order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
+        order.update_attributes(paid_at: paid_at, payment_method: payment_method)
         order.kapture
       end
 
@@ -26,7 +28,7 @@ module NimbleshopPaypalwp
       record_transaction('authorized', success: success)
 
       if success
-        order.update_attributes(paid_at: paid_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
+        order.update_attributes(paid_at: paid_at, payment_method: payment_method)
         order.authorize
       end
 
@@ -41,7 +43,7 @@ module NimbleshopPaypalwp
       record_transaction('purchased', success: success)
 
       if success
-        order.update_attributes(paid_at: @paypal_ipn.received_at, payment_method: NimbleshopPaypalwp::Paypalwp.first)
+        order.update_attributes(paid_at: @paypal_ipn.received_at, payment_method: payment_method)
         order.purchase
       end
 
