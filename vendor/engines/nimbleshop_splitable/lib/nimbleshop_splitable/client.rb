@@ -18,7 +18,7 @@ module NimbleshopSplitable
     def create(order, request)
       params = build_params(order, request)
 
-      params[:api_key]        = api_key
+      params[:api_key]        = @api_key
       params[:api_notify_url] = api_notify_url(request)
       params[:expires_in]     = @expires_in
 
@@ -28,7 +28,6 @@ module NimbleshopSplitable
 
       url     = test? ? self.test_url : self.live_url
       params  = params.collect { |key, value| "#{key}=#{CGI.escape(value.to_s)}" }.join("&")
-
 
       ssl_post(url, params)
     end
@@ -65,10 +64,6 @@ module NimbleshopSplitable
         "quantity_#{index}"   => item.quantity,
         "url_#{index}"        => product_url(item, request)
       }
-    end
-
-    def api_key
-      test? ? '92746e4d66cb8993' : @api_key
     end
 
     def test?
