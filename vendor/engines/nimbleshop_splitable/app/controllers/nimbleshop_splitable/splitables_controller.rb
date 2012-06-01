@@ -33,6 +33,19 @@ module NimbleshopSplitable
       end
     end
 
+    def destroy
+      respond_to do |format|
+        if @payment_method.destroy
+          format.js {
+            flash[:notice] = "Splitable record was successfully deleted"
+            render js: "window.location = '/admin/payment_methods'"
+          }
+        else
+          format.js { render js: 'Splitable record could not be deleted. Please try again later.' }
+        end
+      end
+    end
+
     private
 
     def post_params

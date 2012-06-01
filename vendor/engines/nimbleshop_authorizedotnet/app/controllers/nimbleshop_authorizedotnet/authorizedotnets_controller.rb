@@ -19,6 +19,19 @@ module NimbleshopAuthorizedotnet
       end
     end
 
+    def destroy
+      respond_to do |format|
+        if @payment_method.destroy
+          format.js {
+            flash[:notice] = "Authorize.net record was successfully deleted"
+            render js: "window.location = '/admin/payment_methods'"
+          }
+        else
+          format.js { render js: 'Authorize.net record could not be deleted. Please try again later.' }
+        end
+      end
+    end
+
     private
 
     def post_params

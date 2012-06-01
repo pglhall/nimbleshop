@@ -4,7 +4,8 @@
 
   <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-splitable-payment-method-edit" %>
 
-  <%= link_to 'Delete', '' %>
+  <%= link_to 'Delete', nimbleshop_splitable.splitable_path, confirm: 'Do you really want to delete Authorize.net payment method', method: :delete, remote: true %>
+
   <%= nimbleshop_splitable_mini_image %>
 
   <%= render partial: '/nimbleshop_splitable/splitables/form' %>

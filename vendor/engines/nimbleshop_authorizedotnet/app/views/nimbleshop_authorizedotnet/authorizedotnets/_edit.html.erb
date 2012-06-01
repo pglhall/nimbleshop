@@ -2,7 +2,9 @@
   <h4>Authorize.net</h4>
 
   <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-authorizedotnet-payment-method-edit" %>
-  <%= link_to 'Delete', '' %>
+
+  <%= link_to 'Delete', nimbleshop_authorizedotnet.authorizedotnet_path, confirm: 'Do you really want to delete Authorize.net payment method', method: :delete, remote: true %>
+
   <%= nimbleshop_authorizedotnet_mini_image %>
 
   <%= render partial: '/nimbleshop_authorizedotnet/authorizedotnets/form' %>
