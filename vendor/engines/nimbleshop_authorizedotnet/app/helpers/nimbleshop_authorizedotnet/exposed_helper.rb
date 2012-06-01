@@ -3,7 +3,7 @@ module NimbleshopAuthorizedotnet
 
     def nimbleshop_authorizedotnet_order_payment_icon(order)
       cardtype = order.payment_transactions.last.metadata[:cardtype]
-      image_tag("#{cardtype}.png")
+      image_tag("engines/nimbleshop_authorizedotnet/#{cardtype}.png")
     end
 
     def nimbleshop_authorizedotnet_payment_info_for_buyer(order)
