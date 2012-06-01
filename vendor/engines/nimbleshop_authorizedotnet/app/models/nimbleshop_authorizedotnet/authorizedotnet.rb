@@ -11,6 +11,10 @@ module NimbleshopAuthorizedotnet
       { login: login_id, password: transaction_key }
     end
 
+    def use_ssl?
+      self.ssl == 'enabled'
+    end
+
     private
 
     def set_mode
