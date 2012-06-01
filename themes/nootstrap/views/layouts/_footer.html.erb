@@ -3,15 +3,9 @@
   <footer>
     <div class='row'>
       <div class='span6'>
-          <%= image_tag current_theme_image_path('paypal.png'),     alt: 'paypal' %>
-          <%= image_tag current_theme_image_path('visa.png'),       alt: 'visa' %>
-          <%= image_tag current_theme_image_path('mastercard.png'), alt: 'mastercard' %>
-          <%= image_tag current_theme_image_path('amex.png'),       alt: 'amex' %>
-          <%= image_tag current_theme_image_path('discover.png'),   alt: 'discover' %>
-
-          <% if NimbleshopSplitable::Splitable.first.try(:enabled?) %>
-            <%= image_tag current_theme_image_path('splitable.png'), alt: 'splitable' %>
-          <% end %>
+        <% available_payment_options_icons.each do |i| %>
+          <%= i %>
+        <% end %>
       </div>
       <div class='span4'>
 

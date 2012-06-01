@@ -1,13 +1,18 @@
 module NimbleshopSplitable
   module ExposedHelper
 
+    def nimbleshop_splitable_available_payment_options_icons
+      return unless NimbleshopSplitable::Splitable.first
+      image_tag 'splitable.png', alt: 'splitable icon'
+    end
+
     def nimbleshop_splitable_payment_form(order)
-      return unless NimbleshopSplitable::Splitable.first.enabled?
+      return unless NimbleshopSplitable::Splitable.first
       render partial: '/nimbleshop_splitable/payments/new', locals: {order: order}
     end
 
     def nimbleshop_splitable_crud_form
-      return unless NimbleshopSplitable::Splitable.first.enabled?
+      return unless NimbleshopSplitable::Splitable.first
       render partial: '/nimbleshop_splitable/splitables/edit'
     end
 
