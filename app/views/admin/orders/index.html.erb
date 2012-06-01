@@ -22,6 +22,7 @@
         <td> <%= number_to_currency(order.total_amount) %> </td>
         <td>
           <%= display_payment_status(order) %>
+          &nbsp;
           <%= order_payment_icon(order) %>
         </td>
         <td><%= order.created_at.to_s(:long) %></td>
