@@ -20,17 +20,17 @@ class Creditcard
 
   alias :verification_value :cvv # ActiveMerchant needs this
 
-  delegate :display_number, to: :to_active_merchant_creditcard
+  delegate :display_number, to: :active_merchant_creditcard
 
   before_validation :strip_non_numeric_values, if: :number
 
   validates_presence_of :last_name, :first_name
 
-  validates_presence_of :number,  message: "^Please enter credit card number"
+  validates_presence_of :number,     message: "^Please enter credit card number"
   validates_numericality_of :number, message: "^Please check the credit card number you entered"
-  validates_presence_of :cvv,     message: "^Please enter CVV"
+  validates_presence_of :cvv,        message: "^Please enter CVV"
 
-  validate  :validation_of_cardtype, if: proc { |r| r.errors.empty? }
+  validate  :validation_of_cardtype,        if: proc { |r| r.errors.empty? }
   validate  :validation_by_active_merchant, if: proc { |r| r.errors.empty? }
 
   def initialize(attrs = {})
@@ -77,7 +77,7 @@ class Creditcard
   end
 
   def validation_by_active_merchant
-    amcard = to_active_merchant_creditcard
+    amcard = active_merchant_creditcard
 
     unless amcard.valid?
       amcard.errors.full_messages.each do |message|
@@ -88,15 +88,13 @@ class Creditcard
     amcard.errors.any?
   end
 
-  def to_active_merchant_creditcard
+  def active_merchant_creditcard
     options = {}
     add_user_data(options)
     add_credit_card_data(options)
 
     ActiveMerchant::Billing::CreditCard.new(options)
   end
-
-  private
 
   def sanitize_month_and_year(attrs)
     month = attrs.delete("expires_on(2i)")
