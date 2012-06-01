@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(:version => 20120105234553) do
   add_index "shipment_carriers", ["permalink"], :name => "index_shipment_carriers_on_permalink", :unique => true
 
   create_table "shipments", :force => true do |t|
-    t.string   "tracking_number",     :null => false
+    t.string   "tracking_number"
     t.integer  "shipment_carrier_id", :null => false
     t.integer  "order_id",            :null => false
     t.datetime "created_at",          :null => false

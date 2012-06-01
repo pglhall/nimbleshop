@@ -1,7 +1,7 @@
 class CreateShipments < ActiveRecord::Migration
   def change
     create_table :shipments do |t|
-      t.string :tracking_number,         null: false
+      t.string :tracking_number,         null: true
       t.belongs_to :shipment_carrier,    null: false
       t.belongs_to :order,               null: false
 
