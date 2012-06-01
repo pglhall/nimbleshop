@@ -9,7 +9,6 @@ payment_methods_001:
   metadata: "--- \n\
     :api_secret: edb5fd7b39652986\n\
     :expires_in: 24\n\
-    :submission_url: https://www.splitable.com\n\
     :logo_url: http://edibleapple.com/wp-content/uploads/2009/04/silver-apple-logo.png\n\
     :api_key: edb5fd7b39652986\n"
   created_at: 2012-04-05 01:42:00.092168
