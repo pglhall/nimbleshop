@@ -9,6 +9,7 @@ module NimbleshopSplitable
     def initialize(splitable)
       @api_key        = splitable.api_key
       @expires_in     = splitable.expires_in
+      @mode           = splitable.mode
     end
 
     def api_notify_url(request)
@@ -67,7 +68,7 @@ module NimbleshopSplitable
     end
 
     def test?
-      ActiveMerchant::Billing::Base.mode == :test
+      @mode == 'test'
     end
   end
 end
