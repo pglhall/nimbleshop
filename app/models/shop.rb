@@ -2,9 +2,7 @@ class Shop < ActiveRecord::Base
 
   before_validation :sanitize_twitter_handle, if: :twitter_handle
 
-  validates :contact_email,   email: true, allow_blank: true
   validates :from_email,      email: true, allow_blank: false
-  validates :intercept_email, email: true, allow_blank: false
 
   validates_format_of :facebook_url, :with => URI::regexp, allow_blank: true
 
