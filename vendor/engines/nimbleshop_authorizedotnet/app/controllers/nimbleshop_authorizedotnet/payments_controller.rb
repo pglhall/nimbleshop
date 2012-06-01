@@ -14,7 +14,7 @@ module NimbleshopAuthorizedotnet
         url = main_app.order_path(order)
         @output = "window.location='#{url}'"
       else
-        error = creditcard.errors.full_messages.first
+        error = processor.errors.first
         Rails.logger.info "Error: #{error}"
         @output = "alert('#{error}')"
       end

@@ -1,13 +1,14 @@
 module NimbleshopAuthorizedotnet
   class Processor < Processor::Base
 
-    attr_reader :order, :payment_method
+    attr_reader :order, :payment_method, :errors
 
     def gateway
       ::NimbleshopAuthorizedotnet::Gateway.instance
     end
 
     def initialize(order)
+      @errors = []
       @order = order
       @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
     end
@@ -18,15 +19,16 @@ module NimbleshopAuthorizedotnet
       ActiveMerchant::Billing::Base.mode = payment_method.mode.to_sym
     end
 
-    # TODO method should return an array with all errors
-    # if the array size is zero then it means no error
     def do_authorize(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:creditcard)
 
       creditcard = options[:creditcard]
 
-      return false unless valid_card?(creditcard)
+      unless valid_card?(creditcard)
+        @errors.push(*creditcard.errors.full_messages)
+        return false
+      end
 
       response = gateway.authorize(order.total_amount_in_cents, creditcard)
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
@@ -35,6 +37,8 @@ module NimbleshopAuthorizedotnet
         if success
           order.update_attributes(payment_method: payment_method)
           order.authorize
+        else
+          @errors << 'Credit card was declined. Please try again!'
         end
       end
     end
