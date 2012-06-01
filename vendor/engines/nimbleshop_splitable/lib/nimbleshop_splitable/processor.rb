@@ -1,5 +1,5 @@
 module NimbleshopSplitable
-  class Billing < ::Billing::Base
+  class Processor < ::Processor::Base
 
     attr_reader :errors, :order, :payment_method
 

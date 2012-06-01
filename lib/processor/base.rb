@@ -1,4 +1,4 @@
-module Billing
+module Processor
   class Base
 
     extend ActiveModel::Callbacks

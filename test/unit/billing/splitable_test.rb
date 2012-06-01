@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Billing
+module Processor
   class SpllitableCreateTest < ActiveRecord::TestCase
     setup do
       @product = create(:product, price: 10)
@@ -10,7 +10,7 @@ module Billing
 
     test "when successful" do
       @order.add(@product)
-      processor = NimbleshopSplitable::Billing.new(order: @order)
+      processor = NimbleshopSplitable::Processor.new(order: @order)
 
       expected  = "https://nimbleshop.splitable-draft.com/cws/0a0722b80ce3b662039884060ca49aaa7a1bb4135ea92fa47dc8"
 
@@ -22,7 +22,7 @@ module Billing
     end
 
     test "when failed" do
-      processor = NimbleshopSplitable::Billing.new(order: @order)
+      processor = NimbleshopSplitable::Processor.new(order: @order)
 
       playcasette('splitable/split-draft-create-failure') do
         error, split_url = processor.create_split(request: @request)
@@ -49,7 +49,7 @@ module Billing
 
     test "when transaction is paid" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Billing.new(invoice: options[:invoice])
+      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
 
       handler.acknowledge(options)
@@ -76,7 +76,7 @@ module Billing
 
     test "when transaction is cancelled" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Billing.new(invoice: options[:invoice])
+      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
       assert handler.acknowledge(options)
       transaction = @order.payment_transactions.last
@@ -87,7 +87,7 @@ module Billing
 
     test "when unknown order is used" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Billing.new(invoice: '123')
+      handler = NimbleshopSplitable::Processor.new(invoice: '123')
 
       assert_equal false, handler.acknowledge(options)
       assert_equal ["Unknown invoice number"], handler.errors
@@ -95,7 +95,7 @@ module Billing
 
     test "when payment_status is blank" do
       options = callback_params(@order).merge(payment_status: nil)
-      handler = NimbleshopSplitable::Billing.new(invoice: options[:invoice])
+      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
       assert_equal false, handler.acknowledge(options)
       assert_equal ["Parameter payment_status is blank"], handler.errors

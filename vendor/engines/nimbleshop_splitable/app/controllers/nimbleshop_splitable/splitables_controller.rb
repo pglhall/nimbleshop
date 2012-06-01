@@ -8,7 +8,7 @@ module NimbleshopSplitable
     def notify
       Rails.logger.info "splitable callback received: #{params.to_yaml}"
 
-      handler = NimbleshopSplitable::Billing.new(invoice: params[:invoice])
+      handler = NimbleshopSplitable::Processor.new(invoice: params[:invoice])
 
       if handler.acknowledge(params)
         render nothing: true

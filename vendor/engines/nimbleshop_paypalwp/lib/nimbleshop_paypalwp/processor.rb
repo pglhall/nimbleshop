@@ -1,5 +1,5 @@
 module NimbleshopPaypalwp
-  class Billing < Billing::Base
+  class Processor < Processor::Base
 
     attr_reader :order, :payment_method
 

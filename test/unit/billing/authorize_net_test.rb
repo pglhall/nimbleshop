@@ -1,11 +1,11 @@
 require 'test_helper'
 
-module Billing
+module Processor
   class NimbleshopAuthorizeNetAuthorizeTest < ActiveRecord::TestCase
     setup do
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
     test "when authorize success" do
@@ -52,7 +52,7 @@ module Billing
     setup do
       @order     = create(:order, payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -97,7 +97,7 @@ module Billing
     setup do
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do
@@ -144,7 +144,7 @@ module Billing
     setup do
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -186,7 +186,7 @@ module Billing
     setup do
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Billing.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
     test "when purchase success" do

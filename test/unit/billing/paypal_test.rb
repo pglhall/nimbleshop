@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Billing
+module Processor
     class PaypalAuthorizeTest < ActiveRecord::TestCase
       def raw1
         "mc_gross=152.73&invoice=54145619&protection_eligibility=Ineligible&item_number1=&payer_id=Q96HQCW3NMN8A&tax=1.73&payment_date=19%3A48%3A59+Apr+22%2C+2012+PDT&payment_status=Completed&charset=windows-1252&mc_shipping=0.00&mc_handling=10.00&first_name=buyer&mc_fee=4.73&notify_version=3.4&custom=&payer_status=verified&business=seller_1323037155_biz%40bigbinary.com&num_cart_items=1&mc_handling1=0.00&verify_sign=AAmQuqWvZCTtQW5vSunjl6MYb9xfACAPVvn0EpIPnon.Cyn5sYgI-bZB&payer_email=nimble_1333550340_per%40hotmail.com&mc_shipping1=0.00&tax1=0.00&txn_id=2LY704674J0179216&payment_type=instant&last_name=again&item_name1=Colorful+shoes&receiver_email=seller_1323037155_biz%40bigbinary.com&payment_fee=4.73&quantity1=1&receiver_id=EULE94DW3YTH4&txn_type=cart&mc_gross_1=141.00&mc_currency=USD&residence_country=US&test_ipn=1&transaction_subject=Shopping+CartColorful+shoes&payment_gross=152.73&ipn_track_id=72a7efbc940b7"
@@ -15,7 +15,7 @@ module Billing
       end
 
       test "when authorize success" do
-        processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.number, @order.total_amount))
+        processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, @order.total_amount))
         playcasette('paypal/authorize-success') do
           assert_equal true, processor.authorize
         end
@@ -32,7 +32,7 @@ module Billing
       end
 
       test "when authorize fails with invalid credit card number" do
-        processor = NimbleshopPaypalwp::Billing.new(raw_post: raw_post(@order.number, 10.48))
+        processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, 10.48))
         assert_equal false, processor.authorize
         assert_nil @order.payment_method
       end

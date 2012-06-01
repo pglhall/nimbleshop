@@ -6,7 +6,7 @@ module NimbleshopPaypalwp
     before_filter :load_payment_method, except: :notify
 
     def notify
-      handler = NimbleshopPaypalwp::Billing.new(raw_post: request.raw_post)
+      handler = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
       order = handler.order
 
       unless order.paid?

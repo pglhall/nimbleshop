@@ -6,7 +6,7 @@ module NimbleshopAuthorizedotnet
       address_attrs     = order.final_billing_address.to_credit_card_attributes
       creditcard_attrs  = params[:creditcard].merge(address_attrs)
       creditcard        = Creditcard.new(creditcard_attrs)
-      handler           = NimbleshopAuthorizedotnet::Billing.new(order)
+      handler           = NimbleshopAuthorizedotnet::Processor.new(order)
 
       default_action = Shop.first.default_creditcard_action
 
