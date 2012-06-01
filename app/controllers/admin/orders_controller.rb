@@ -2,6 +2,13 @@ class Admin::OrdersController < AdminController
 
   respond_to :html
 
+  def capture_payment
+    @order = Order.find_by_number!(params[:id])
+    @order.kapture!
+    flash[:notice] = "Amount was successfully captured"
+    redirect_to admin_order_path(@order)
+  end
+
   def index
     @orders = Order.order('id desc')
     respond_with @orders

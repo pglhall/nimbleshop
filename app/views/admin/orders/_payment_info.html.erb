@@ -4,6 +4,9 @@
       <tr>
         <td colspan='3'>
           <h2> Payment status <%= display_payment_status(@order) %> </h2>
+          <% if @order.authorized? %>
+            <%= link_to 'Capture payment', capture_payment_admin_order_path(@order), method: :put %>
+          <% end %>
         </td>
       </tr>
 

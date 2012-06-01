@@ -13,6 +13,9 @@
 
     resources :orders do
       resources :shipments,      except: [:edit, :update]
+      member do
+        put :capture_payment
+      end
     end
 
     resources :country_shipping_zones, controller: :shipping_zones do
