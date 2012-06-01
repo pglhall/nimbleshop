@@ -4,10 +4,6 @@ module NimbleshopAuthorizedotnet
 
     before_filter :load_payment_method
 
-    def edit
-      render
-    end
-
     def update
       respond_to do |format|
         if @payment_method.update_attributes(post_params[:authorizedotnet])
