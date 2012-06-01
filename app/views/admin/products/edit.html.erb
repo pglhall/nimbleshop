@@ -6,3 +6,21 @@
 </div>
 
 <%= render 'form' %>
+
+<% if @product_groups.any? %>
+  <div>
+    <p> This product belongs to following product groups: </p>
+    <ul>
+      <% @product_groups.each do |pg| %>
+        <li>
+          <h3>
+            <%= pg.name %>
+            <small>
+              <%= pg.summarize %>
+            </small>
+          </h3>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

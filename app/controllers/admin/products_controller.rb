@@ -1,16 +1,11 @@
 class Admin::ProductsController < AdminController
 
-  before_filter :load_product!, only: [:show, :edit, :update, :destroy ]
+  before_filter :load_product!, only: [:edit, :update, :destroy ]
 
   respond_to :html
 
   def index
     @products = Product.order(:id)
-    respond_with @products
-  end
-
-  def show
-    @product_groups = ProductGroup.contains_product(@product)
     respond_with @products
   end
 
@@ -23,6 +18,7 @@ class Admin::ProductsController < AdminController
   end
 
   def edit
+    @product_groups = ProductGroup.contains_product(@product)
     @product.find_or_build_all_answers
     respond_with @products
   end

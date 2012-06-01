@@ -7,7 +7,7 @@
     resource  :payment_gateway
     resources :payment_methods
 
-    resources :products
+    resources :products,        except: [:show]
     resources :product_groups
     resources :custom_fields
 

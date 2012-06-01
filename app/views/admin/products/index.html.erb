@@ -19,7 +19,7 @@
             <%= link_to image_tag(product.picture.picture_url(:small)), admin_product_path(product) %>
           <% end %>
         </td>
-        <td><%= link_to product.name, admin_product_path(product) %></td>
+        <td><%= link_to product.name, edit_admin_product_path(product) %></td>
         <td>
           <%= link_to 'Edit', edit_admin_product_path(product), title: 'Edit' %>
           |
