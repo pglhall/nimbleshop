@@ -34,11 +34,6 @@ class Order < ActiveRecord::Base
 
   before_create :set_order_number
 
-  # captured and purchased statues are only for a brief transition. Once a transaction is captured then after_cpatured is called and
-  # there after doing a bunch of things the status changes to 'paid'.
-  #
-  # Similarly status 'paid' is only for a brief transition. Once an order is put in 'purchased' state then after_purchased is called and
-  # this method sets the status as 'paid'.
   state_machine :payment_status, initial: :abandoned do
     event(:authorize) { transition abandoned:   :authorized }
     event(:kapture )  { transition authorized:  :paid       }  # capture is a method defined on kernel
