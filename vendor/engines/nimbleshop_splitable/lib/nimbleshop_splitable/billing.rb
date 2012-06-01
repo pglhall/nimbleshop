@@ -3,8 +3,8 @@ module NimbleshopSplitable
 
     attr_reader :errors, :order, :payment_method
 
-    def client
-      Client.new(NimbleshopSplitable::Splitable.first)
+    def processor
+      ::NimbleshopSplitable::Processor.new(NimbleshopSplitable::Splitable.first)
     end
 
     def initialize(options = {})
@@ -22,7 +22,7 @@ module NimbleshopSplitable
       options.symbolize_keys!
       options.assert_valid_keys(:request)
 
-      response = client.create(order, options[:request])
+      response = processor.create(order, options[:request])
       json = ActiveSupport::JSON.decode(response)
       json.values_at('error','split_url')
     end

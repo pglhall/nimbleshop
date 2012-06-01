@@ -1,5 +1,5 @@
 module NimbleshopSplitable
-  class Client
+  class Processor
     include ActiveMerchant::PostsData
 
     class_attribute :live_url, :test_url
