@@ -23,7 +23,7 @@
         <td>
           <%= display_payment_status(order) %>
           &nbsp;
-          <%= order_payment_icon(order) %>
+          <%= icon_for_order_payment(order) %>
         </td>
         <td><%= order.created_at.to_s(:long) %></td>
         <td><%= display_shipping_status(order) %></td>

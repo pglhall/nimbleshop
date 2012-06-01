@@ -1,7 +1,7 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
-    def nimbleshop_authorizedotnet_order_payment_icon(order)
+    def nimbleshop_authorizedotnet_icon_for_order_payment(order)
       cardtype = order.payment_transactions.last.metadata[:cardtype]
       image_tag("engines/nimbleshop_authorizedotnet/#{cardtype}.png")
     end
