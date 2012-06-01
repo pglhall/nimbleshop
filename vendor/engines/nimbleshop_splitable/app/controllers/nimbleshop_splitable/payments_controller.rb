@@ -3,9 +3,9 @@ module NimbleshopSplitable
   class PaymentsController < ::Admin::PaymentMethodsController
 
     def create
-      order = Order.find_by_id(session[:order_id])
-      handler     = NimbleshopSplitable::Processor.new(order: order)
-      error, url  = handler.create_split(request: request)
+      order       = Order.find_by_id(session[:order_id])
+      processor   = NimbleshopSplitable::Processor.new(order: order)
+      error, url  = processor.create_split(request: request)
 
       if error
         render text: error

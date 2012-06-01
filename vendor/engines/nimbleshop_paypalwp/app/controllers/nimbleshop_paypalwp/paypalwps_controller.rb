@@ -6,15 +6,15 @@ module NimbleshopPaypalwp
     before_filter :load_payment_method, except: :notify
 
     def notify
-      handler = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
-      order = handler.order
+      processor = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
+      order = processor.order
 
       unless order.paid?
         # it is required otherwise order.authorize fails
-        handler.order.update_attribute(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
+        processor.order.update_attribute(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
 
         # IPN can send notification multiple times
-        handler.purchase
+        processor.purchase
       end
 
       render nothing: true

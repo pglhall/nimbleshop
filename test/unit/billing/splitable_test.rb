@@ -49,10 +49,10 @@ module Processor
 
     test "when transaction is paid" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
+      processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
 
-      handler.acknowledge(options)
+      processor.acknowledge(options)
       transaction = @order.payment_transactions.last
 
       assert_equal 'purchased',       transaction.operation
@@ -76,9 +76,9 @@ module Processor
 
     test "when transaction is cancelled" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
+      processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
-      assert handler.acknowledge(options)
+      assert processor.acknowledge(options)
       transaction = @order.payment_transactions.last
 
       assert_equal 'voided',          transaction.operation
@@ -87,18 +87,18 @@ module Processor
 
     test "when unknown order is used" do
       options = callback_params(@order)
-      handler = NimbleshopSplitable::Processor.new(invoice: '123')
+      processor = NimbleshopSplitable::Processor.new(invoice: '123')
 
-      assert_equal false, handler.acknowledge(options)
-      assert_equal ["Unknown invoice number"], handler.errors
+      assert_equal false, processor.acknowledge(options)
+      assert_equal ["Unknown invoice number"], processor.errors
     end
 
     test "when payment_status is blank" do
       options = callback_params(@order).merge(payment_status: nil)
-      handler = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
+      processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
-      assert_equal false, handler.acknowledge(options)
-      assert_equal ["Parameter payment_status is blank"], handler.errors
+      assert_equal false, processor.acknowledge(options)
+      assert_equal ["Parameter payment_status is blank"], processor.errors
     end
   end
 end

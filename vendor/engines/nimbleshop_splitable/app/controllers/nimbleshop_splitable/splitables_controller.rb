@@ -8,12 +8,12 @@ module NimbleshopSplitable
     def notify
       Rails.logger.info "splitable callback received: #{params.to_yaml}"
 
-      handler = NimbleshopSplitable::Processor.new(invoice: params[:invoice])
+      processor = NimbleshopSplitable::Processor.new(invoice: params[:invoice])
 
-      if handler.acknowledge(params)
+      if processor.acknowledge(params)
         render nothing: true
       else
-        Rails.logger.info "webhook with data #{params.to_yaml} was rejected. error: #{handler.errors.join(',')}"
+        Rails.logger.info "webhook with data #{params.to_yaml} was rejected. error: #{processor.errors.join(',')}"
         render "error: #{error}", status: 403
       end
     end
