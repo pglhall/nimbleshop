@@ -28,7 +28,7 @@ module AdminHelper
 
   def display_payment_status(order)
     css_klass = order.payment_status == 'paid' ? 'label-success' : 'label-info'
-    %Q{<span class="label #{css_klass}"> #{order.payment_status} </span>}.html_safe
+    %Q{<span class="label #{css_klass}"> #{order.payment_status.titleize.upcase} </span>}.html_safe
   end
 
   def display_shipping_status(order)
@@ -40,7 +40,7 @@ module AdminHelper
                 when 'shipping_pending'
                   'label-important'
                 end
-    %Q{<span class="label #{css_klass}"> #{order.shipping_status} </span>}.html_safe
+    %Q{<span class="label #{css_klass}"> #{order.shipping_status.titleize.upcase} </span>}.html_safe
   end
 
   def creditcard_logo_for(creditcard)
