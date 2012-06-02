@@ -7,14 +7,6 @@ common:
     permalink: splitable
     description: <p> Splitable helps split the cost of product with friends and family.  </p> <p> <a href="http://splitable.com"> more information </a> </p>
 
-  authorizedotnet:
-    login_id: <%= ENV['AUTHORIZE_NET_LOGIN_ID'] || '26Daqx7Jtw7R' %>
-    transaction_key: <%= ENV['AUTHORIZE_NET_TRANSACTION_KEY'] || '66JWf57KKc82W9y6' %>
-    company_name_on_creditcard_statement: Nimbleshop LLC
-    name: Authorize.net
-    permalink: authorizedotnet
-    description: <p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>
-
   paypalwp:
     name: Paypal website payments standard
     permalink: paypalwp
