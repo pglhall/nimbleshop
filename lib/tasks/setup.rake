@@ -7,8 +7,10 @@ task :setup => :environment do
 
   Rake::Task["db:seed"].invoke
 
-  PaymentMethod.load_seed_data!
-  PaymentMethod.update_all(enabled: true)
-
   Sampledata.new.populate
+
+  Rake::Task["nimbleshop_splitable:load_record"].invoke
+  Rake::Task["nimbleshop_paypalwp:load_record"].invoke
+  Rake::Task["nimbleshop_authorizedotnet:load_record"].invoke
+
 end
