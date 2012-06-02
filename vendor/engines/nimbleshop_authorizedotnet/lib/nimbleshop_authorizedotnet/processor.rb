@@ -33,13 +33,12 @@ module NimbleshopAuthorizedotnet
       response = gateway.authorize(order.total_amount_in_cents, creditcard)
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
-      response.success?.tap do |success|
-        if success
-          order.update_attributes(payment_method: payment_method)
-          order.authorize
-        else
-          @errors << 'Credit card was declined. Please try again!'
-        end
+      if response.success?
+        order.update_attributes(payment_method: payment_method)
+        order.authorize
+      else
+        @errors << 'Credit card was declined. Please try again!'
+        return false
       end
     end
 
@@ -49,16 +48,20 @@ module NimbleshopAuthorizedotnet
 
       creditcard = options[:creditcard]
 
-      return false unless valid_card?(creditcard)
+      unless valid_card?(creditcard)
+        @errors.push(*creditcard.errors.full_messages)
+        return false
+      end
 
       response = gateway.purchase(order.total_amount_in_cents, creditcard)
       record_transaction(response, 'purchased', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
-      response.success?.tap do |success|
-        if success
-          order.update_attributes(payment_method: payment_method)
-          order.purchase
-        end
+      if response.success?
+        order.update_attributes(payment_method: payment_method)
+        order.purchase
+      else
+        @errors << 'Credit card was declined. Please try again!'
+        return false
       end
     end
 
@@ -70,8 +73,11 @@ module NimbleshopAuthorizedotnet
       response = gateway.capture(order.total_amount_in_cents, tsx_id, {})
       record_transaction(response, 'captured')
 
-      response.success?.tap do |success|
-        order.kapture if success
+      if response.success?
+        order.kapture
+      else
+        @errors << "Capture failed"
+        false
       end
     end
 

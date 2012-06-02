@@ -27,6 +27,7 @@ module Processor
     test "authorization fails when credit card number is not entered" do
       creditcard = build(:creditcard, number: nil)
       assert_equal false, @processor.authorize(creditcard: creditcard)
+      assert_equal 'Please enter credit card number', @processor.errors.first
 
       @order.reload
 
@@ -39,6 +40,7 @@ module Processor
 
       playcasette('authorize.net/authorize-failure') do
         assert_equal false, @processor.authorize(creditcard: creditcard)
+        assert_equal 'Credit card was declined. Please try again!', @processor.errors.first
       end
 
       @order.reload
@@ -81,6 +83,7 @@ module Processor
 
       playcasette('authorize.net/capture-failure') do
         assert_equal false, @processor.capture(transaction_gid: @tsx_id)
+        assert_equal 'Capture failed', @processor.errors.first
       end
 
       @order.reload
@@ -209,6 +212,7 @@ module Processor
 
       playcasette('authorize.net/purchase-failure') do
         assert_equal false, @processor.purchase(creditcard: creditcard)
+        assert_equal 'Please enter credit card number', @processor.errors.first
       end
 
       assert       @order.abandoned?
@@ -219,6 +223,7 @@ module Processor
 
       playcasette('authorize.net/purchase-failure') do
         assert_equal false, @processor.purchase(creditcard: creditcard)
+        assert_equal 'Credit card was declined. Please try again!', @processor.errors.first
       end
 
       transaction = @order.payment_transactions.last
