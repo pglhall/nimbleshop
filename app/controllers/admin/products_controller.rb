@@ -26,7 +26,7 @@ class Admin::ProductsController < AdminController
   def create
     @product = Product.new(post_params[:product])
     if @product.save
-      redirect_to admin_products_url, notice: t(:successfully_added)
+      redirect_to edit_admin_product_path(@product), notice: t(:successfully_added)
     else
       respond_with @product
     end
