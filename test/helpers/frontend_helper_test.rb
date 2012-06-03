@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class NootstrapHelperTest < ActiveRecord::TestCase
+class FrontendHelperTest < ActiveRecord::TestCase
 
   def helper
     Class.new(ActionView::Base) do
-      include NootstrapHelper
+      include FrontendHelper
     end.new
   end
 

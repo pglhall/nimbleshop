@@ -1,4 +1,4 @@
-module NootstrapHelper
+module FrontendHelper
 
   def body_id
     "#{params[:controller]}-#{params[:action]}".parameterize
