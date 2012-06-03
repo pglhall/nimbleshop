@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :load_early, :set_shop
+  before_filter :load_early
   helper_method :current_order, :current_shop
 
   protected
@@ -25,13 +25,6 @@ class ApplicationController < ActionController::Base
   def load_early
     # FIXME why is this needed
     Address
-  end
-
-  def set_shop
-    # TODO these instances are not needed by all the controllers
-    #@link_groups          = LinkGroup.all
-    #@product_groups       = ProductGroup.all
-    #@main_nav_link_group  = LinkGroup.last
   end
 
   def current_shop
