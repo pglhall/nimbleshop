@@ -104,8 +104,6 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     click_link 'Products'
     click_link 'ipad'
 
-    assert page.has_content?("ipad $46.99")
-    assert page.has_content?("the description")
+    assert page.has_content?("Edit product")
   end
-
 end

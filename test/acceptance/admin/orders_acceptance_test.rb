@@ -12,7 +12,7 @@ class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
     click_link Order.first.number
     assert page.has_content?('Authorize.net')
-    assert page.has_content?('Payment status authorized')
+    assert page.has_content?('Payment status AUTHORIZED')
   end
 
   test "payment status abandoned" do
@@ -24,7 +24,7 @@ class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
     assert page.has_css?('h1.ns-page-title', text: 'Orders')
     click_link Order.first.number
-    assert page.has_content?('Payment status abandoned')
+    assert page.has_content?('Payment status ABANDONED')
   end
 
   test "show order with line item and product is deleted" do
@@ -39,7 +39,7 @@ class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
     assert page.has_css?('h1.ns-page-title', text: 'Orders')
     click_link order.number
-    assert page.has_content?('Payment status abandoned')
+    assert page.has_content?('Payment status ABANDONED')
   end
 
 end
