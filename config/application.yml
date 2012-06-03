@@ -6,6 +6,9 @@ common:
   airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>
   google_analytics_tracking_id: <%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] || 'UA-19036601-7' %>
 
+  # this is used for IPN notification and other places where extenal serivce cannot ping localhost
+  use_localhost2public_url: true
+
   authorizedotnet:
     login_id: <%= ENV['AUTHORIZE_NET_LOGIN_ID'] || '26Daqx7Jtw7R' %>
     transaction_key: <%= ENV['AUTHORIZE_NET_TRANSACTION_KEY'] || '66JWf57KKc82W9y6' %>
@@ -57,3 +60,4 @@ production:
   bare_url_with_port: nimbleshop.com
   using_heroku: true
   cache_images: true
+  use_localhost2public_url: false
