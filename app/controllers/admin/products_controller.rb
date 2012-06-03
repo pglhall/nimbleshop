@@ -33,6 +33,7 @@ class Admin::ProductsController < AdminController
   end
 
   def update
+    @product_groups = ProductGroup.contains_product(@product)
     if @product.update_attributes(post_params[:product])
       redirect_to edit_admin_product_path(@product), notice: t(:successfully_updated)
     else

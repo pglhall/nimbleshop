@@ -29,9 +29,9 @@ class ApplicationController < ActionController::Base
 
   def set_shop
     # TODO these instances are not needed by all the controllers
-    @link_groups          = LinkGroup.all
-    @product_groups       = ProductGroup.all
-    @main_nav_link_group  = LinkGroup.last
+    #@link_groups          = LinkGroup.all
+    #@product_groups       = ProductGroup.all
+    #@main_nav_link_group  = LinkGroup.last
   end
 
   def current_shop
