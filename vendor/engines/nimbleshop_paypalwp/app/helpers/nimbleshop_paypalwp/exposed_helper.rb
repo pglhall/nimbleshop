@@ -49,7 +49,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_notify_url
-      localhost2public_url( '/admin/payment_methods/nimbleshop_paypalwp/paypalwp/notify', nimbleshop_paypalwp_protocol )
+      localhost2public_url( '/nimbleshop_paypalwp/paypalwp/notify', nimbleshop_paypalwp_protocol )
     end
 
     def nimbleshop_paypalwp_return_url(order)

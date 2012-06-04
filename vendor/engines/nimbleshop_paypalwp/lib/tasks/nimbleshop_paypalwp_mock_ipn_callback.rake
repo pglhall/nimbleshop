@@ -18,7 +18,7 @@ task :ipn_callback => :environment do
   end
 
   base_url = 'http://localhost:3000'
-  endpoint = base_url + '/admin/payment_methods/nimbleshop_paypalwp/paypalwp/notify'
+  endpoint = base_url + '/nimbleshop_paypalwp/paypalwp/notify'
 
   amt =  (Order.find_by_number(order_number).total_amount_in_cents.to_i)/100.00
   params = {
@@ -72,5 +72,5 @@ task :ipn_callback => :environment do
     response = Net::HTTP.post_form(uri, params)
 
 end
-
+end
 
