@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def current_shop
     @shop ||= Shop.first
-    raise "shops table is empty" unless @shop
+    raise "The database base is empty. Please run bundle exec rake setup first." unless @shop
     @shop
   end
 
