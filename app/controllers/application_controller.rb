@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     @current_order ||= begin
       return nil if session[:order_id].blank?
       order = Order.find_by_id(session[:order_id])
-      order.blank? ? reset_order : order
+      (order.blank? || !order.abandoned?) ? reset_order : order
     end
   end
 

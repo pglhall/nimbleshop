@@ -1,4 +1,5 @@
 desc 'load paypal record'
+
 namespace :nimbleshop_paypalwp do
   task :load_record => :environment do
 
