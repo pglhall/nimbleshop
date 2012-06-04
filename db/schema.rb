@@ -107,14 +107,13 @@ ActiveRecord::Schema.define(:version => 20120105234553) do
   add_index "orders", ["number"], :name => "index_orders_on_number", :unique => true
 
   create_table "payment_methods", :force => true do |t|
-    t.boolean  "enabled",     :default => false
     t.string   "name"
     t.text     "description"
     t.string   "type"
-    t.string   "permalink",                      :null => false
+    t.string   "permalink",   :null => false
     t.text     "metadata"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "payment_methods", ["permalink"], :name => "index_payment_methods_on_permalink", :unique => true

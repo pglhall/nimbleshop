@@ -58,7 +58,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('$128')
   end
 
-  test "when admin has not enabled any payment method then there should not be any error" do
+  test "when admin has not setup any payment method then there should not be any error" do
     PaymentMethod.delete_all
     visit root_path
     add_item_to_cart('Bracelet Set')
@@ -68,7 +68,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     click_button 'Submit'
     choose 'Ground'
     click_button 'Submit'
-    assert page.has_content?('No payment method is enabled')
+    assert page.has_content?('No payment method is setup')
   end
 
   test "should be able to add 2 items to cart and title should be reflect that" do

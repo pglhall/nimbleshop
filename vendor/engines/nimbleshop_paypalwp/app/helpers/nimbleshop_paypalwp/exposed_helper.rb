@@ -28,7 +28,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_crud_form
-      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
+      return unless NimbleshopPaypalwp::Paypalwp.first
       render partial: '/nimbleshop_paypalwp/paypalwps/edit'
     end
 
@@ -38,13 +38,13 @@ module NimbleshopPaypalwp
 
     def nimbleshop_paypalwp_payment_form(order)
        ActiveMerchant::Billing::Base.integration_mode = Rails.env.production? ? :production : :test
-      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
+      return unless NimbleshopPaypalwp::Paypalwp.first
       render partial: '/nimbleshop_paypalwp/payments/new', locals: { order: order }
     end
 
     def nimbleshop_paypalwp_admin_form(order)
       raise 'boom'
-      return unless NimbleshopPaypalwp::Paypalwp.first.enabled?
+      return unless NimbleshopPaypalwp::Paypalwp.first
       render partial: '/nimbleshop_paypalwp/paypalwps/form', locals: { order: order }
     end
 

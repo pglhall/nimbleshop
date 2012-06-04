@@ -7,7 +7,7 @@ class PaymentMethodsAcceptanceTest < ActionDispatch::IntegrationTest
     visit admin_path
     click_link 'Payment methods'
 
-    assert page.has_content?("You have not enabled any payment method. User wil not be able to make payment")
+    assert page.has_content?("You have not setup any payment method. User wil not be able to make payment")
   end
 
 end
