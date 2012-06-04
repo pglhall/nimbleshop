@@ -10,7 +10,9 @@
 #
 
 desc "sends IPN callback"
-task :ipn_callback => :environment do
+
+namespace :nimbleshop_paypalwp do
+task :mock_ipn_callback => :environment do
 
   unless order_number = ENV['order_number']
     puts "Usage: rake ipn_callcak order_number=xxxxxxx"
