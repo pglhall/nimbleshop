@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(:version => 20120105234553) do
 
   create_table "shops", :force => true do |t|
     t.string   "name",                                                                                :null => false
-    t.string   "theme",                                                      :default => "nootstrap", :null => false
+    t.string   "theme",                                                      :default => "simply",    :null => false
     t.string   "time_zone",                                                  :default => "UTC",       :null => false
     t.string   "from_email",                                                                          :null => false
     t.string   "default_creditcard_action",                                  :default => "authorize", :null => false

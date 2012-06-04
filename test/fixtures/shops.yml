@@ -2,7 +2,7 @@
 shops_001: 
   id: "1"
   name: nimbleShop
-  theme: nootstrap
+  theme: simply
   time_zone: UTC
   from_email: support@nimbleshop.com
   default_creditcard_action: authorize

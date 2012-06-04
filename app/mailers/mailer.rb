@@ -1,7 +1,7 @@
 class Mailer < ActionMailer::Base
   helper :frontend
 
-  default :theme => "nootstrap"
+  default :theme => "simply"
 
   layout 'email'
 

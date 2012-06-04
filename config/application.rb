@@ -56,10 +56,10 @@ module Nimbleshop
     config.assets.precompile += ['admin.css', 'admin.js']
 
     # TODO we should do not need to hardcode theme name
-    config.assets.paths << "#{Rails.root}/themes/nootstrap/assets/stylesheets"
-    config.assets.paths << "#{Rails.root}/themes/nootstrap/assets/javascripts"
-    config.assets.paths << "#{Rails.root}/themes/nootstrap/assets/images"
-    config.assets.precompile += ['nootstrap.css', 'nootstrap.js']
+    config.assets.paths << "#{Rails.root}/themes/simply/assets/stylesheets"
+    config.assets.paths << "#{Rails.root}/themes/simply/assets/javascripts"
+    config.assets.paths << "#{Rails.root}/themes/simply/assets/images"
+    config.assets.precompile += ['simply.css', 'simply.js']
 
 
     # Version of your assets, change this if you want to expire all your assets

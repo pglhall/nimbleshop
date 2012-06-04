@@ -14,7 +14,6 @@ class Sampledata
 
   def load_shop
       Shop.create!( name:           'nimbleShop',
-                   theme:           'nootstrap',
                    phone_number:    '800-456-7890',
                    twitter_handle:  '@nimbleshop',
                    from_email:      'support@nimbleshop.com',
