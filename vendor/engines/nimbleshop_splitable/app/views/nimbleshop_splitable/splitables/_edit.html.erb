@@ -1,13 +1,29 @@
-<div style='padding:10px; border:1px solid blue;'>
+<div class='payment-method-engine-well'>
 
-  <h4> Splitable </h4>
+   <div>
+    <h2> Splitable </h2>
+    <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-splitable-payment-method-edit" %>
+    <%= link_to 'Delete', nimbleshop_splitable.splitable_path,  confirm: 'Do you really want to delete Authorize.net payment method',
+                                                                class: 'nimbleshop-payment-method-delete',
+                                                                method: :delete,
+                                                                remote: true %>
+    <%= nimbleshop_splitable_mini_image %>
+    <div class='clear'></div>
+  </div>
 
-  <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-splitable-payment-method-edit" %>
-
-  <%= link_to 'Delete', nimbleshop_splitable.splitable_path, confirm: 'Do you really want to delete Authorize.net payment method', method: :delete, remote: true %>
-
-  <%= nimbleshop_splitable_mini_image %>
 
   <%= render partial: '/nimbleshop_splitable/splitables/form' %>
 
 </div>
+
+<script>
+  $(function(){
+
+    $('#nimbleshop-splitable-payment-method-edit').toggle(function(){
+      $('#nimbleshop-splitable-form-well').show(); 
+    }, function(){
+      $('#nimbleshop-splitable-form-well').hide(); 
+    });
+
+  })
+</script>

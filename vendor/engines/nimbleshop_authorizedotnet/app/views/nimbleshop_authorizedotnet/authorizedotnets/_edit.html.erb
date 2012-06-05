@@ -1,11 +1,15 @@
-<div style='padding:10px; border:1px solid blue;'>
-  <h4>Authorize.net</h4>
+<div class='payment-method-engine-well'>
 
-  <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-authorizedotnet-payment-method-edit" %>
+  <div>
+    <h2>Authorize.net</h2>
+    <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-authorizedotnet-payment-method-edit" %>
+    <%= link_to 'Delete', nimbleshop_authorizedotnet.authorizedotnet_path, confirm: 'Do you really want to delete Authorize.net payment method', method: :delete, remote: true %>
 
-  <%= link_to 'Delete', nimbleshop_authorizedotnet.authorizedotnet_path, confirm: 'Do you really want to delete Authorize.net payment method', method: :delete, remote: true %>
+    <%= nimbleshop_authorizedotnet_mini_image %>
 
-  <%= nimbleshop_authorizedotnet_mini_image %>
+    <div class='clear'></div>
+  </div>
+
 
   <%= render partial: '/nimbleshop_authorizedotnet/authorizedotnets/form' %>
 </div>
@@ -13,7 +17,7 @@
 <script>
   $(function(){
 
-    $('#nimbleshop-authorizedotnet-edit').toggle(function(){
+    $('#nimbleshop-authorizedotnet-payment-method-edit').toggle(function(){
       $('#nimbleshop-authorizedotnet-form-well').show(); 
     }, function(){
       $('#nimbleshop-authorizedotnet-form-well').hide(); 
