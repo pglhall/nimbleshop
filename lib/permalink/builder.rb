@@ -8,7 +8,7 @@
 #   build_permalink allow_nil: true
 # end
 #
-# build_permalink line is needed only if you are passing parameter otheriwise that line can be omitted
+# build_permalink line is needed only if you are passing parameter otherwise that line can be omitted
 #
 module Permalink
   module Builder
