@@ -51,7 +51,7 @@ module NimbleshopPaypalwp
     private
 
     def post_params
-      params.permit(paypalwp: [:merchant_email, :paymentaction, :mode])
+      params.permit(paypalwp: [:merchant_email, :mode])
     end
 
     def load_payment_method

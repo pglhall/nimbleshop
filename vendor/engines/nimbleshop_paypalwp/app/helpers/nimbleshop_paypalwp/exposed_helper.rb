@@ -16,7 +16,6 @@ module NimbleshopPaypalwp
 
       service.billing_address order.final_billing_address.attributes.slice(:city, :address1,:address2, :state, :country,:zip)
 
-      service.paymentaction NimbleshopPaypalwp::Paypalwp.first.paymentaction
       service.invoice      order.number
       service.line_items   order.line_items
       service.shipping     order.shipping_cost.to_f.round(2)

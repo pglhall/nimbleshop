@@ -1,7 +1,7 @@
 module NimbleshopPaypalwp
   class Paypalwp < PaymentMethod
 
-    store_accessor  :metadata, :merchant_email, :paymentaction, :mode
+    store_accessor  :metadata, :merchant_email, :mode
 
     before_save :set_mode
 
