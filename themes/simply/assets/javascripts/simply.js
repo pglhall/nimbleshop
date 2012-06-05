@@ -18,6 +18,3 @@
 //= require load_states
 //= require order
 //= require highlight_hovered_picture
-
-//= require carousel
-

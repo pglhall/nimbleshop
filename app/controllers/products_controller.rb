@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
     @page_title     = 'All products'
     @products       = Product.active.order(:created_at)
     @product_groups = ProductGroup.all
-    @show_carousel = true
     @link_groups          = LinkGroup.all
     @product_groups       = ProductGroup.all
     @main_nav_link_group  = LinkGroup.last
