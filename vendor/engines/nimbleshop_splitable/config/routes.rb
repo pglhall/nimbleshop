@@ -1,7 +1,7 @@
 NimbleshopSplitable::Engine.routes.draw do
   resource :splitable do
     collection do
-      get :notify
+      post :notify
     end
   end
   resource :payment

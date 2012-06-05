@@ -13,7 +13,7 @@ module NimbleshopSplitable
     end
 
     def api_notify_url(request)
-      'http://' + request.host_with_port + '/nimbleshop_splitable/splitable/notify'
+      Util.localhost2public_url( '/nimbleshop_splitable/splitable/notify', 'http' )
     end
 
     def create(order, request)

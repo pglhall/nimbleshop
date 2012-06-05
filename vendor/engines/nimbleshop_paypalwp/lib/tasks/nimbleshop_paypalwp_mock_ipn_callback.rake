@@ -1,12 +1,11 @@
-# This is a rake task that simulates what IPN will send
-#  Following rake task posts that was posted by IPN for following purchase
+# This is a rake task that simulates what IPN will POST.
+# It posts what was posted by IPN for following purchase.
 #
 #  Colorful shoes - $191.00
 #  Quantity - 1
 #  Tax - $2.35
 # Shipping and handling - $30.00
 # Total - $223.35
-#
 #
 
 desc "sends IPN callback"
