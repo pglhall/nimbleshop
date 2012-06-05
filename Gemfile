@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # standard rails stuff
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.5'
 gem 'will_paginate'
 gem 'pg'
 
