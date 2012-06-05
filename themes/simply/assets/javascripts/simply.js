@@ -17,4 +17,3 @@
 //= require remove_item_from_cart
 //= require load_states
 //= require order
-//= require highlight_hovered_picture
