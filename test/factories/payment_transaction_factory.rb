@@ -17,7 +17,7 @@ FactoryGirl.define do
           card_code: "P" }
       end
       metadata do
-        { card_number: 'XXXX-XXXX-XXXX-0027' }
+        { card_number: 'XXXX-XXXX-XXXX-0027', cardtype: 'visaa' }
       end
     end
 
