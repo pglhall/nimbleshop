@@ -8,7 +8,7 @@ module Processor
       @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
-    test "when authorize success" do
+    test "when authorization succeeds" do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -64,7 +64,7 @@ module Processor
       @tsx_id = @order.payment_transactions.last.transaction_gid
     end
 
-    test "when capture success" do
+    test "when capture succeeds" do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/capture-success') do
@@ -112,7 +112,7 @@ module Processor
       @transaction = @order.payment_transactions.last
     end
 
-    test "when refund success" do
+    test "when refund succeeds" do
 
       playcasette('authorize.net/refund-success') do
         assert_equal true, @processor.refund(transaction_gid:   @transaction.transaction_gid,
@@ -157,7 +157,7 @@ module Processor
       @tsx_id = @order.payment_transactions.last.transaction_gid
     end
 
-    test "when capture success" do
+    test "when capture succeeds" do
       playcasette('authorize.net/void-success') do
         assert_equal true, @processor.void(transaction_gid: @tsx_id)
       end
@@ -192,7 +192,7 @@ module Processor
       @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
-    test "when purchase success" do
+    test "when purchase succeeds" do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do

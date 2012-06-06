@@ -102,5 +102,3 @@ module Processor
     end
   end
 end
-
-
