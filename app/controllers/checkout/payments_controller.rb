@@ -2,6 +2,8 @@ class Checkout::PaymentsController < ApplicationController
 
   theme :theme_resolver, only: [:new, :create]
 
+  before_filter :verify_current_order
+
   force_ssl if: :ssl_configured?
 
   def new

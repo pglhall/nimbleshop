@@ -34,3 +34,13 @@
   margin-left:6px;
   margin-right:10px;
 }
+
+.navbar .nav > li > a {
+  color: #c4c4c4;
+  color: #bababa;
+  color: #bebebe;
+}
+
+.navbar .nav > li > a.go-to-shop {
+  color: #BCFC3D;
+}

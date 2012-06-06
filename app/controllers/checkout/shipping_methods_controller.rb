@@ -18,12 +18,6 @@ class Checkout::ShippingMethodsController < ApplicationController
     end
   end
 
-  def verify_current_order
-    unless current_order
-      redirect_to root_path
-    end
-  end
-
   def load_shipping_methods
     @shipping_methods = Array.wrap(current_order.available_shipping_methods)
   end

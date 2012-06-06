@@ -16,10 +16,6 @@
     <style type="text/css">
       body {
         padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
       }
     </style>
 
@@ -33,7 +29,7 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
+        <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -41,26 +37,37 @@
           </a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="/admin">Admin</a></li>
+              <%= admin_sidebar( "Admin" ,            main_app.admin_path, 'admin_path') %>
+              <%= admin_sidebar('Orders',             main_app.admin_orders_path,          'admin_orders_path') %>
+              <%= admin_sidebar('Products',           main_app.admin_products_path,        'admin_products_path') %>
+              <%= admin_sidebar('Custom fields',      main_app.admin_custom_fields_path,   'admin_custom_fields_path') %>
+              <%= admin_sidebar('Product groups',     main_app.admin_product_groups_path,  'admin_product_groups_path') %>
+              <%= admin_sidebar('Link groups',        main_app.admin_link_groups_path,     'admin_link_groups_path') %>
+              <%= admin_sidebar('Shipping zones',     main_app.admin_shipping_zones_path,  'admin_shipping_zones_path') %>
+              <%= admin_sidebar('Payment methods',    main_app.admin_payment_methods_path, 'admin_payment_methods_path') %>
+              <%= admin_sidebar('Shop configuration', main_app.edit_admin_shop_path,       'edit_admin_shop_path') %>
+            </ul>
+            <ul class='nav pull-right'>
               <li><a href="http://documentup.com/neerajdotname/nimbleshop_doc">Documentation</a></li>
-              <li><%= link_to 'Go to shop →', main_app.root_url %></li>
+              <li>
+                <%= link_to 'Go to shop →', main_app.root_url, class: 'go-to-shop' %> 
+              </li>
             </ul>
           </div>
+
         </div>
       </div>
     </div>
 
-
-
-    <div class="container-fluid">
-      <div class="row-fluid">
+    <div class="container">
+      <div class="row">
 
         <div class="span3">
           <%= render 'layouts/sidebar' %>
         </div>
 
         <div class="span9">
-          <div class="row-fluid">
+          <div class="row">
             <div class="span12">
               <% if flash[:notice] %>
                 <div class='alert alert-success'>

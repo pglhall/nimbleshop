@@ -33,4 +33,10 @@ class ApplicationController < ActionController::Base
     @do_not_use_page_title = true
   end
 
+  def verify_current_order
+    unless current_order
+      redirect_to root_path
+    end
+  end
+
 end

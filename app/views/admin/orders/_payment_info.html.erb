@@ -1,37 +1,23 @@
 <div class='row'>
-  <div class='span10 alert alert-info'>
-    <table class='table'>
-      <tr>
-        <td colspan='3'>
-          <h2> Payment status <%= display_payment_status(@order) %> </h2>
-          <% if @order.authorized? %>
-            <%= link_to 'Capture payment', capture_payment_admin_order_path(@order), method: :put %>
-          <% end %>
-        </td>
-      </tr>
+  <div class='span5'>
+    <h2> Payment status <%= display_payment_status(@order) %> </h2>
+    <% if @order.authorized? %>
+      <%= link_to 'Capture payment', capture_payment_admin_order_path(@order), method: :put %>
+    <% end %>
 
-      <% if @order.payment_method %>
-        <tr>
-          <td colspan='3'>
-            Payment method: <%= @order.payment_method.name %> <br />
-          </td>
-        </tr>
+    <% if @order.payment_method %>
+      <p>
+        Payment method: <%= @order.payment_method.name %> <br />
+        <%= order_show_extra_info(@order) %>
+      </p>
+    <% end %>
 
-        <%= render partial: @order.payment_transactions,  as: :transaction  %>
-      <% end %>
-
-
-      <tr>
-        <td colspan='3'>
-          <% if @order.final_billing_address.present? %>
-            <h4> Billing address</h4>
-            <p>
-              <address> <%= display_address(@order.final_billing_address) %> </address>
-            </p>
-          <% end %>
-        </td>
-      </tr>
-    </table>
+    <% if @order.final_billing_address.present? %>
+      <h4> Billing address</h4>
+      <p>
+        <address> <%= display_address(@order.final_billing_address) %> </address>
+      </p>
+    <% end %>
 
   </div>
 </div>

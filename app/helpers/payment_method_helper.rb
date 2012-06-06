@@ -3,6 +3,13 @@ require 'active_merchant/billing/integrations/action_view_helper'
 module PaymentMethodHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
+  def order_show_extra_info(order)
+    if pm = order.payment_method
+      m = engineized_name(pm, :order_show_extra_info)
+      self.send(m, order) if self.respond_to?(m)
+    end
+  end
+
   def engineized_name(payment_method, method_name)
     "nimbleshop_#{payment_method.demodulized_underscore}_#{method_name}".intern
   end

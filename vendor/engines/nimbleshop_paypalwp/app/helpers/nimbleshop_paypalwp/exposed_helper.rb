@@ -1,6 +1,10 @@
 module NimbleshopPaypalwp
-
   module ExposedHelper
+
+    def nimbleshop_paypalwp_order_show_extra_info(order)
+      return unless NimbleshopPaypalwp::Paypalwp.first
+      render partial: '/nimbleshop_paypalwp/paypalwps/order_show_extra_info', locals: { order: order }
+    end
 
     def nimbleshop_paypalwp_available_payment_options_icons
       return unless NimbleshopPaypalwp::Paypalwp.first

@@ -1,6 +1,11 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
+    def nimbleshop_authorizedotnet_order_show_extra_info(order)
+      return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
+      render partial: '/nimbleshop_authorizedotnet/payments/order_show_extra_info', locals: { order: order }
+    end
+
     def nimbleshop_authorizedotnet_available_payment_options_icons
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
       %w(visa mastercard discover american_express).map { |i| image_tag("engines/nimbleshop_authorizedotnet/#{i}.png") }

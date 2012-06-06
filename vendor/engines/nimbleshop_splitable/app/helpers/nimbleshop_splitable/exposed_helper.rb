@@ -20,6 +20,10 @@ module NimbleshopSplitable
       image_tag('splitable.png')
     end
 
+    def nimbleshop_splitable_logo
+      image_tag('splitable_logo.png')
+    end
+
     def nimbleshop_splitable_icon_for_order_payment(order)
       nimbleshop_splitable_mini_image
     end
