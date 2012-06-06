@@ -17,6 +17,7 @@ gem 'thin'
 
 gem 'american_date'
 
+# to override default error message that comes with validates_presence_of etla.
 gem 'custom_error_message',  github: 'nwise/custom_error_message'
 
 
