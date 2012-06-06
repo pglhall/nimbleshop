@@ -6,9 +6,8 @@ class CreateShops < ActiveRecord::Migration
       t.string :description,                  null: true
       t.string :theme,                        null: false, default: 'simply'
       t.string :time_zone,                    null: false, default: 'UTC'
-      t.string :from_email,                   null:false
-      t.string :default_creditcard_action,    null:false,  default: 'authorize'
-      t.string :gateway
+      t.string :from_email,                   null: false
+      t.string :default_creditcard_action,    null: false, default: 'authorize'
       t.string :phone_number
       t.string :twitter_handle
       t.string :facebook_url

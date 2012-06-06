@@ -280,7 +280,6 @@ ActiveRecord::Schema.define(:version => 20120606165355) do
     t.string   "time_zone",                                                  :default => "UTC",       :null => false
     t.string   "from_email",                                                                          :null => false
     t.string   "default_creditcard_action",                                  :default => "authorize", :null => false
-    t.string   "gateway"
     t.string   "phone_number"
     t.string   "twitter_handle"
     t.string   "facebook_url"
