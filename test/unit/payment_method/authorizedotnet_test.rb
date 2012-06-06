@@ -5,7 +5,6 @@ class PaymentMethodAuthorizeNetTest < ActiveSupport::TestCase
   test "validations" do
     pm = NimbleshopAuthorizedotnet::Authorizedotnet.new(name: 'Authorize.net', description: 'this is description')
     refute pm.valid?
-    assert_equal 3, pm.errors.size
     expected = ["Company name on creditcard statement can't be blank", "Login can't be blank", "Transaction key can't be blank"]
     assert_equal expected, pm.errors.full_messages.sort
   end
