@@ -37,6 +37,20 @@
       </div>
 
       <div class="control-group">
+        <%= f.label :author_name, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :author_name, class: 'span8' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :description, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :description, class: 'span8' %>
+        </div>
+      </div>
+
+      <div class="control-group">
         <%= f.label :time_zone, class: 'control-label' %>
         <div class="controls">
           <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s %>

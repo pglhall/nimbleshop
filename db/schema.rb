@@ -274,6 +274,8 @@ ActiveRecord::Schema.define(:version => 20120606165355) do
 
   create_table "shops", :force => true do |t|
     t.string   "name",                                                                                :null => false
+    t.string   "author_name"
+    t.string   "description"
     t.string   "theme",                                                      :default => "simply",    :null => false
     t.string   "time_zone",                                                  :default => "UTC",       :null => false
     t.string   "from_email",                                                                          :null => false

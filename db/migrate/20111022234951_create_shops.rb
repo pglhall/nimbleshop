@@ -2,6 +2,8 @@ class CreateShops < ActiveRecord::Migration
   def change
     create_table :shops do |t|
       t.string :name,                         null: false
+      t.string :author_name,                  null: true
+      t.string :description,                  null: true
       t.string :theme,                        null: false, default: 'simply'
       t.string :time_zone,                    null: false, default: 'UTC'
       t.string :from_email,                   null:false
