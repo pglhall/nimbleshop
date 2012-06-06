@@ -1,4 +1,4 @@
-class SimpleTaxCalculator
+class TaxCalculator
 
   def initialize(order)
     @order = order
@@ -9,7 +9,9 @@ class SimpleTaxCalculator
   end
 
   private
-    def tax_percentage
-      Shop.first.tax_percentage
-    end
+
+  def tax_percentage
+    Shop.first.tax_percentage
+  end
+
 end

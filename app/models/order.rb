@@ -145,7 +145,7 @@ class Order < ActiveRecord::Base
   end
 
   def tax_calculator
-    @_tax_calculator ||= SimpleTaxCalculator.new(self)
+    @_tax_calculator ||= TaxCalculator.new(self)
   end
 
   def shipping_cost_calculator

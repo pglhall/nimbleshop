@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SimpleTaxCalculatorTest < ActiveRecord::TestCase
+class TaxCalculatorTest < ActiveRecord::TestCase
   test "shipping method is nil" do
     order     = Order.new
     calculator= ShippingCostCalculator.new(order)
