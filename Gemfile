@@ -23,7 +23,6 @@ gem 'custom_error_message',  github: 'nwise/custom_error_message'
 
 # to handle credit card payments
 gem 'activemerchant'
-gem 'money'
 
 # for uploading images
 gem 'carrierwave'
