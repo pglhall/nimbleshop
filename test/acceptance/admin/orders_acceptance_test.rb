@@ -3,9 +3,7 @@ require "test_helper"
 class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
   test "paid using authorize.net" do
-    payment_transaction = PaymentTransaction.find_by_id(1)
     order = create(:order_paid_using_authorizedotnet, payment_status: 'authorized')
-    payment_transaction.update_attribute(:order_id, order.id)
 
     visit admin_path
     click_link 'Orders'

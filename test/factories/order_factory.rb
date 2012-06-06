@@ -15,7 +15,11 @@ FactoryGirl.define do
 
     factory :order_with_line_items,   traits: [:line_items]
 
-    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet]
+    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet] do |order|
+      order.after_create do |o|
+        create :payment_transaction_with_authorizedotnet, order: o
+      end
+    end
 
   end
 end

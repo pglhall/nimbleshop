@@ -29,6 +29,11 @@ class OrderTest < ActiveSupport::TestCase
     @product2 = create :product, price: 30
   end
 
+  test "factory" do
+    order = create :order_paid_using_authorizedotnet
+    assert_equal 1, order.payment_transactions.size
+  end
+
   test "#add" do
     @order.add(@product1)
     assert_equal 1, @order.line_items.size
