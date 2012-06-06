@@ -3,7 +3,7 @@ module NimbleshopPaypalwp
 
     def nimbleshop_paypalwp_order_show_extra_info(order)
       return unless NimbleshopPaypalwp::Paypalwp.first
-      render partial: '/nimbleshop_paypalwp/paypalwps/order_show_extra_info', locals: { order: order }
+      render partial: '/nimbleshop_paypalwp/payments/order_show_extra_info', locals: { transaction: order.payment_transactions.last }
     end
 
     def nimbleshop_paypalwp_available_payment_options_icons

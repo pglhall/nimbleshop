@@ -21,7 +21,15 @@ FactoryGirl.define do
       end
     end
 
+    trait :paypalwp do
+      transaction_gid "42826554YH061931A"
+      success 't'
+      operation 'purchased'
+      amount 14237
+    end
+
     factory :payment_transaction_with_authorizedotnet,   traits: [ :authorizedotnet ]
+    factory :payment_transaction_with_paypalwp,          traits: [ :paypalwp ]
 
   end
 end

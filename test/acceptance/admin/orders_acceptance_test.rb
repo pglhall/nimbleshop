@@ -2,13 +2,23 @@ require "test_helper"
 
 class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
+  test "paid using paypalwp" do
+    order = create(:order_paid_using_paypalwp, payment_status: 'paid')
+
+    visit admin_path
+    click_link 'Orders'
+
+    click_link order.number
+    assert page.has_content?('Paypal website payments standard')
+  end
+
   test "paid using authorize.net" do
     order = create(:order_paid_using_authorizedotnet, payment_status: 'authorized')
 
     visit admin_path
     click_link 'Orders'
 
-    click_link Order.first.number
+    click_link order.number
     assert page.has_content?('Authorize.net')
     assert page.has_content?('Payment status AUTHORIZED')
   end
