@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OrderAcceptanceTest < ActionDispatch::IntegrationTest
+class PaymentConfirmationAcceptanceTest < ActionDispatch::IntegrationTest
 
   setup do
     @order = create :order_paid_using_authorizedotnet
