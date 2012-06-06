@@ -20,7 +20,6 @@ gem 'american_date'
 # to override default error message that comes with validates_presence_of etla.
 gem 'custom_error_message',  github: 'nwise/custom_error_message'
 
-
 # to handle credit card payments
 gem 'activemerchant'
 
@@ -119,8 +118,7 @@ end
 gem 'gabba'
 
 # for background processing of jobs
-gem 'delayed_job_active_record', '= 0.3.2'
-gem 'delayed_job', '= 3.0.1'
+gem 'delayed_job_active_record'
 
 # to see how many background jobs are yet to be processed
 gem "delayed_job_admin"
