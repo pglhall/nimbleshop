@@ -1,7 +1,7 @@
-desc "sets up environment"
+desc "sets up data for nimbleshop application"
 task :setup => :environment do
 
- #raise "this task should not be run in production" if Rails.env.production?
+  #raise "this task should not be run in production" if Rails.env.production?
 
   Rake::Task["db:reset"].invoke unless Settings.using_heroku
 
