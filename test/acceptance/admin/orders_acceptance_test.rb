@@ -2,6 +2,17 @@ require "test_helper"
 
 class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
+  test "paid using splitable" do
+    order = create(:order_paid_using_splitable, payment_status: 'paid')
+
+    visit admin_path
+    click_link 'Orders'
+
+    click_link order.number
+    save_and_open_page
+    assert page.has_content?('Splitable')
+  end
+
   test "paid using paypalwp" do
     order = create(:order_paid_using_paypalwp, payment_status: 'paid')
 

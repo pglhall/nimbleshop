@@ -9,20 +9,23 @@ FactoryGirl.define do
       after(:create) { | r | FactoryGirl.create(:line_item, order: r) }
     end
 
-    trait :authorizedotnet do
-      payment_method_id 2
+    trait :splitable do
+      payment_method_id 1
     end
 
     trait :paypalwp do
+      payment_method_id 2
+    end
+
+    trait :authorizedotnet do
       payment_method_id 3
     end
 
-
     factory :order_with_line_items,   traits: [:line_items]
 
-    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet] do |order|
+    factory :order_paid_using_splitable,   traits: [:splitable] do |order|
       order.after_create do |o|
-        create :payment_transaction_with_authorizedotnet, order: o
+        create :payment_transaction_with_splitable, order: o
       end
     end
 
@@ -32,7 +35,11 @@ FactoryGirl.define do
       end
     end
 
-
+    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet] do |order|
+      order.after_create do |o|
+        create :payment_transaction_with_authorizedotnet, order: o
+      end
+    end
 
   end
 end
