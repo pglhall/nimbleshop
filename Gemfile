@@ -15,6 +15,7 @@ gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
 # heroku cedar stack needs it
 gem 'thin'
 
+# ruby 1.9 does not parse dates formatted in american style correclty. This gem fixes that.
 gem 'american_date'
 
 # to override default error message that comes with validates_presence_of etla.
