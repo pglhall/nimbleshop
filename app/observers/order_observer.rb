@@ -24,8 +24,8 @@ class OrderObserver < ActiveRecord::Observer
   private
 
   def send_email_notifications(order)
-    Mailer.order_notification(order.number).deliver
-    AdminMailer.new_order_notification(order.number).deliver
+    Mailer.delay.order_notification(order.number)
+    AdminMailer.delay.new_order_notification(order.number)
   end
 
 end

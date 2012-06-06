@@ -14,6 +14,7 @@ gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
 
 # heroku cedar stack needs it
 gem 'thin'
+
 gem 'american_date'
 
 gem 'custom_error_message',  github: 'nwise/custom_error_message'
@@ -116,6 +117,13 @@ end
 
 # to send event information to google analytics
 gem 'gabba'
+
+# for background processing of jobs
+gem 'delayed_job_active_record', '= 0.3.2'
+gem 'delayed_job', '= 3.0.1'
+
+# to see how many background jobs are yet to be processed
+gem "delayed_job_admin"
 
 gem 'nimbleshop_paypalwp',        path: 'vendor/engines/nimbleshop_paypalwp'
 gem 'nimbleshop_authorizedotnet', path: 'vendor/engines/nimbleshop_authorizedotnet'

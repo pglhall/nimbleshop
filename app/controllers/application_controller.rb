@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
     @shop
   end
 
+  def delayed_job_admin_authentication
+    return true if Rails.env.development? || Rails.env.test?
+  end
+  
+
   private
 
   def no_page_title
