@@ -21,4 +21,5 @@
 //= require admin/products/edit
 //= require fadeout_success
 //= require autoresize
+//= require twitter_bootstrap
 //= require lab
