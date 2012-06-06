@@ -1,10 +1,15 @@
 $ ->
+
+  # work around the nested form ugliness
   $(".nested-form .fields").hide()
+
+  # deleting a picture
   $(".product_pictures .actions .delete").on "click", ->
     $("#delete_picture_" + $(this).attr("data-action-id")).trigger "click"
     $(this).parent().parent().hide "fast"
     false
 
+  # making picutures sortable
   $(".product_pictures").sortable(update: (e, ui) ->
     orders = {}
     $(".product_pictures li").each (index, el) ->

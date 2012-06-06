@@ -47,7 +47,7 @@ class Admin::LinkGroupsController < AdminController
   end
 
   def load_link_groups
-    @link_groups = LinkGroup.order('name asc')
+    @link_groups = LinkGroup.order('id desc')
   end
 
   def load_link_group

@@ -12,7 +12,7 @@
 # abcd                     | 0.00
 #
 
-jQuery ->
+$ ->
   $('[data-behavior~=price-formatted]').on 'focus blur paste change', ()->
 
     # do not want comma in cases like 1,234.89

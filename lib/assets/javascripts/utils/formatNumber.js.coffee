@@ -12,7 +12,7 @@
 # abcd                   | 0.00
 #
 
-jQuery ->
+$ ->
   $('[data-behavior~=number-formatted]').on 'focus blur paste change', ()->
 
     precision = $(this).data('behavior-precision')

@@ -14,13 +14,11 @@
 //= require utils/formatNumber
 //= require utils/formatPrice
 
-
-//= require highlight_error_field
-//= require enable_payment_method
+//= require payment_method
 //= require product-group-condition
 //= require shipit
-//= require ajaxify-link-groups
 //= require admin/shipping_methods/edit
 //= require admin/products/edit
 //= require fadeout_success
+//= require autoresize
 //= require lab
