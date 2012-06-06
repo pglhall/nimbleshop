@@ -68,7 +68,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     click_button 'Submit'
     choose 'Ground'
     click_button 'Submit'
-    assert page.has_content?('No payment method is setup')
+    assert page.has_content?('No payment method has been setup. Please setup atleast one payment method.')
   end
 
   test "should be able to add 2 items to cart and title should be reflect that" do
