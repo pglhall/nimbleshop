@@ -3,7 +3,7 @@ module NimbleshopAuthorizedotnet
 
     def nimbleshop_authorizedotnet_order_show_extra_info(order)
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
-      render partial: '/nimbleshop_authorizedotnet/payments/order_show_extra_info', locals: { order: order }
+      render partial: '/nimbleshop_authorizedotnet/payments/order_show_extra_info', locals: { transaction: order.payment_transactions.last }
     end
 
     def nimbleshop_authorizedotnet_available_payment_options_icons
