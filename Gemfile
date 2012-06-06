@@ -86,7 +86,6 @@ end
 group :test do
   gem 'sqlite3'
 
-  gem 'guard'
   gem 'guard-minitest'
 
   gem 'webmock'
