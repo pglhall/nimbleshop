@@ -41,6 +41,7 @@ module Processor
       end
     end
 
+    # this method can be overriden by individual payment method
     def set_active_merchant_mode
       mode = Rails.env.production? ? :production : :test
       ActiveMerchant::Billing::Base.mode = mode
