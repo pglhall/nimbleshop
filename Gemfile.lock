@@ -369,6 +369,7 @@ DEPENDENCIES
   localtunnel!
   mini_magick
   mocha
+  money
   mustache
   nested_form!
   nimbleshop_authorizedotnet!

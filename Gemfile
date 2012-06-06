@@ -113,6 +113,10 @@ group :test do
 
   # vcr uses webmock
   gem 'webmock'
+
+  # PaypalAuthorizeTest needs this gem
+  gem 'money'
+
 end
 
 # to send event information to google analytics
