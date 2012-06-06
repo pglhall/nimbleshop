@@ -34,12 +34,16 @@ class Order < ActiveRecord::Base
 
   before_create :set_order_number
 
+  # goes into pending state when sold using cash on delivery but not yet paid
+  # capture is a method defined on kernel
   state_machine :payment_status, initial: :abandoned do
     event(:authorize) { transition abandoned:   :authorized }
-    event(:kapture )  { transition authorized:  :paid       }  # capture is a method defined on kernel
-    event(:purchase)  { transition abandoned:   :paid       }
-    event(:void)      { transition authorized:  :cancelled  }
+    event(:pending)   { transition abandoned:   :pending    }
+    event(:kapture )  { transition authorized:  :paid       }
     event(:refund)    { transition paid:        :refunded   }
+
+    event(:purchase)  { transition [:abandoned,  :pending] =>  :paid       }
+    event(:void)      { transition [:authorized, :pending] =>  :cancelled  }
 
     state all - [ :abandoned ] do
       validates :payment_method, presence: true

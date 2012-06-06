@@ -24,7 +24,12 @@ module NimbleshopSplitable
 
       response = gateway.create(order, options[:request])
       json = ActiveSupport::JSON.decode(response)
-      json.values_at('error','split_url')
+      result = json.values_at('error','split_url')
+      if result.last
+        order.update_attributes(payment_method: payment_method)
+        order.pending
+      end
+      result
     end
 
     def acknowledge(params = {})
@@ -68,7 +73,7 @@ module NimbleshopSplitable
     def do_purchase(options = {})
       add_to_order(options, 'purchased')
       order.update_attributes(payment_method: payment_method)
-      order.purchase
+      order.purchase!
 
       true
     end
@@ -76,7 +81,7 @@ module NimbleshopSplitable
     def do_void(options = {})
       add_to_order(options, 'voided')
       order.update_attributes(payment_method: payment_method)
-      order.void
+      order.void!
 
       true
     end

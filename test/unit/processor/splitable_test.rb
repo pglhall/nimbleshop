@@ -18,6 +18,8 @@ module Processor
         error, split_url = processor.create_split(request: @request)
         assert_nil   error, "must be have no errors"
         assert_equal expected, split_url
+        assert_equal NimbleshopSplitable::Splitable.first, @order.payment_method
+        assert       @order.pending?
       end
     end
 
@@ -48,6 +50,13 @@ module Processor
     end
 
     test "when transaction is paid" do
+      processor = NimbleshopSplitable::Processor.new(order: @order)
+      playcasette('splitable/split-draft-create-success') do
+        processor.create_split(request: @request)
+      end
+
+      assert @order.pending?
+
       options = callback_params(@order)
       processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
@@ -57,6 +66,8 @@ module Processor
 
       assert_equal 'purchased',       transaction.operation
       assert_equal '852973493383974', transaction.transaction_gid
+      @order.reload
+      assert @order.paid?
     end
   end
 
@@ -75,17 +86,25 @@ module Processor
     end
 
     test "when transaction is cancelled" do
+      processor = NimbleshopSplitable::Processor.new(order: @order)
+      playcasette('splitable/split-draft-create-success') do
+        processor.create_split(request: @request)
+      end
+
+      assert @order.pending?
+
       options = callback_params(@order)
       processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
-
       assert processor.acknowledge(options)
       transaction = @order.payment_transactions.last
 
       assert_equal 'voided',          transaction.operation
       assert_equal '852973493383974', transaction.transaction_gid
+      @order.reload
+      assert @order.cancelled?
     end
 
-    test "when unknown order is used" do
+    test "when an invalid order number is used" do
       options = callback_params(@order)
       processor = NimbleshopSplitable::Processor.new(invoice: '123')
 
