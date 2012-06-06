@@ -9,7 +9,6 @@ class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
     click_link 'Orders'
 
     click_link order.number
-    save_and_open_page
     assert page.has_content?('Splitable')
   end
 

@@ -351,7 +351,6 @@ DEPENDENCIES
   fancybox-rails
   fog
   gabba
-  guard
   guard-minitest
   hashr
   launchy

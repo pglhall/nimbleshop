@@ -88,13 +88,14 @@ group :test do
 
   gem 'guard-minitest'
 
-  gem 'webmock'
+
   gem 'simplecov', require: false
   gem 'capybara'
   gem 'selenium-webdriver', '~>2.21'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem "launchy"
+
   gem "mocha", require: false
 
   # this gem makes it faster to find out when a file has changed. guard works faster with this gem
@@ -110,6 +111,9 @@ group :test do
 
   # for capture response from payment gateways like Authorize.net
   gem 'vcr'
+
+  # vcr uses webmock
+  gem 'webmock'
 end
 
 # to send event information to google analytics
