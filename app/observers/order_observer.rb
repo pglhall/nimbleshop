@@ -1,6 +1,5 @@
-# TODO move it to observers directory
-#
 class OrderObserver < ActiveRecord::Observer
+
   def after_purchase(order, transition)
     send_email_notifications(order)
     order.mark_as_paid!
