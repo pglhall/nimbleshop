@@ -1,6 +1,6 @@
 # nimbleSHOP
 
-[nimbleShop](http://www.nimbleshop.com) is an open source eCommerce platform built on Ruby on Rails.
+[nimbleShop](http://www.nimbleshop.com) is an open source e-commerce platform built on Ruby on Rails.
 
 # Documentation
 

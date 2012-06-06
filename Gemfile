@@ -2,7 +2,11 @@ source 'http://rubygems.org'
 
 # standard rails stuff
 gem 'rails', '3.2.5'
+
+# for pagination
 gem 'will_paginate'
+
+# for postgresql
 gem 'pg'
 
 # to support various themes
@@ -105,7 +109,7 @@ group :test do
   # for fake data in testing
   gem 'faker'
 
-  # for capture response from authorize.net
+  # for capture response from payment gateways like Authorize.net
   gem 'vcr'
 end
 
