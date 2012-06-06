@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration
       t.belongs_to :payment_method,     null: true
       t.string     :email,              null: true
       t.string     :status,             null: false, default: 'open'
-      t.string     :payment_status,     null: false, default: 'abandoned_early'
+      t.string     :payment_status,     null: false, default: 'abandoned'
       t.string     :shipping_status,    null: false, default: 'nothing_to_ship'
       t.string     :checkout_status,    null: false, default: 'items_added_to_cart'
       t.datetime   :shipped_at,         null: true

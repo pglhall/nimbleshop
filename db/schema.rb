@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20120606165355) do
     t.integer  "payment_method_id"
     t.string   "email"
     t.string   "status",             :default => "open",                :null => false
-    t.string   "payment_status",     :default => "abandoned_early",     :null => false
+    t.string   "payment_status",     :default => "abandoned",           :null => false
     t.string   "shipping_status",    :default => "nothing_to_ship",     :null => false
     t.string   "checkout_status",    :default => "items_added_to_cart", :null => false
     t.datetime "shipped_at"
