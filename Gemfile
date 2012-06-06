@@ -88,8 +88,6 @@ group :test do
 
   gem 'guard-minitest'
 
-
-  gem 'simplecov', require: false
   gem 'capybara'
   gem 'selenium-webdriver', '~>2.21'
   gem 'database_cleaner'
