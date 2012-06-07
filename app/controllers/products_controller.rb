@@ -7,12 +7,9 @@ class ProductsController < ApplicationController
   respond_to :html
 
   def index
-    @page_title     = 'All products'
-    @products       = Product.active.order(:created_at)
-    @product_groups = ProductGroup.all
+    @products             = Product.active.order(:created_at)
     @link_groups          = LinkGroup.all
     @product_groups       = ProductGroup.all
-    @main_nav_link_group  = LinkGroup.last
 
     respond_with @products
   end
