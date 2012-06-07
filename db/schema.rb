@@ -146,15 +146,6 @@ ActiveRecord::Schema.define(:version => 20120606165355) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "paypal_payment_notifications", :force => true do |t|
-    t.text     "raw_post"
-    t.string   "order_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "paypal_payment_notifications", ["order_id"], :name => "index_paypal_payment_notifications_on_order_id", :unique => true
-
   create_table "pictures", :force => true do |t|
     t.integer  "product_id"
     t.string   "picture"
