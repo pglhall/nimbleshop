@@ -1,5 +1,4 @@
 require 'yaml'
-require "#{Rails.root}/lib/config_loader"
 
 class ConfigLoader
   attr_reader :filename
