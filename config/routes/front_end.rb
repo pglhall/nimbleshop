@@ -18,12 +18,6 @@
     end
   end
 
-  resource  :feedback,  only: [:show] do
-    collection do
-      get :splitable
-    end
-  end
-
   resource :cart, only: [:show, :update] do
     member do
       post :add
