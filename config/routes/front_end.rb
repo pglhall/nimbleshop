@@ -4,7 +4,7 @@
   get "/pages/about-us",           to: "pages#about_us",   as: :about_us
   get "/pages/contact-us",         to: "pages#contact_us", as: :contact_us
 
-  resources :product_groups
+  resources :product_groups, only: [:show]
   resources :products,  only: [:index, :show]
 
   resources :orders,  only: [:show, :edit, :update] do
