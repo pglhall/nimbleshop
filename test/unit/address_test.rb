@@ -15,13 +15,13 @@ class AddressTest < ActiveRecord::TestCase
 
   test "state code is required" do
     address = build(:address, country_code: 'BR', state_code: nil, state_name: nil)
-    address.valid?
+    refute address.valid?
     assert_equal "State code is required", address.errors.full_messages.first
   end
 
   test "state code must be valid" do
     address = build(:address, country_code: 'BR', state_code: 'XX')
-    address.valid?
+    refute address.valid?
     assert_equal "State code XX is not a valid state", address.errors.full_messages.first
   end
 
