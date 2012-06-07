@@ -13,7 +13,6 @@
 
 //= require shipping_address_same_as_billing_address
 //= require thumbnail
-//= require highlight_error_field
 //= require remove_item_from_cart
 //= require load_states
 //= require order
