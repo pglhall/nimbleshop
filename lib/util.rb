@@ -19,4 +19,22 @@ class Util
     path.join('')
   end
 
+  # The output is something like
+  # ["Timor-Leste", "TL"], ["Turkmenistan", "TM"], ["Tunisia", "TN"], ["Tonga", "TO"], .......
+  def self.countries_list_with_name_and_code
+    Carmen::Country.all.map { |t| [t.name, t.alpha_2_code] }
+  end
+
+  def self.countries_without_shipping_zone
+    Util.countries_list_with_name_and_code.reject { |_, t| CountryShippingZone.all_country_codes.include?(t) }
+  end
+
+  def self.disabled_shipping_zone_countries
+    countries_with_shipping_zone.inject([]) { |result, element| result << [element[0], element[1], {disabled: :disabled}]}
+  end
+
+  def self.unconfigured_shipping_zone_countries
+    (Util.disabled_shipping_zone_countries + Util.countries_without_shipping_zone).sort
+  end
+
 end

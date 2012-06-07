@@ -12,6 +12,10 @@ class CountryShippingZone < ShippingZone
     Carmen::Country.coded(country_code)
   end
 
+  def self.all_country_codes
+    CountryShippingZone.pluck(:country_code)
+  end
+
   private
 
   def code_validity
@@ -22,9 +26,7 @@ class CountryShippingZone < ShippingZone
 
   def create_regions
     country.subregions.each do | region |
-      regional_shipping_zones.create({
-        state_code: region.code, country_code: country_code 
-      })
+      regional_shipping_zones.create({ state_code: region.code, country_code: country_code })
     end
   end
 

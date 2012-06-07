@@ -13,11 +13,6 @@ module ApplicationHelper
     %|#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}|
   end
 
-  # should be private
-  def options_for_all_countries
-    Carmen::Country.all.map { |t| [t.name, t.alpha_2_code] }
-  end
-
   def grouped_options_for_country_state_codes
     Carmen::Country.all.inject({}) do |h, country|
       h[country.alpha_2_code] = country.subregions.map do |r|
@@ -27,17 +22,8 @@ module ApplicationHelper
     end
   end
 
-  # private
-  def countries_without_shipping_zone
-    options_for_all_countries.reject { |_, t| country_codes_for_country_shipping_zone.include?(t) }
-  end
-
   def countries_with_shipping_zone
-    options_for_all_countries.select { |_, t| country_codes_for_country_shipping_zone.include?(t)}
-  end
-
-  def country_codes_for_country_shipping_zone
-    CountryShippingZone.pluck(:country_code)
+    Util.countries_list_with_name_and_code.select { |_, t| CountryShippingZone.all_country_codes.include?(t)}
   end
 
 end
