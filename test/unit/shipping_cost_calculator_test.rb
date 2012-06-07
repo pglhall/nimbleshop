@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class TaxCalculatorTest < ActiveRecord::TestCase
+class ShippingCostCalculatorTest < ActiveRecord::TestCase
+
   test "shipping method is nil" do
     order     = Order.new
     calculator= ShippingCostCalculator.new(order)
@@ -9,10 +10,10 @@ class TaxCalculatorTest < ActiveRecord::TestCase
   end
 
   test "shipping method is not nil" do
-    shipping  = mock(:shipping_cost => 3.99)
-    order     = mock(shipping_method: shipping)
+    shipping_method  = build :country_shipping_method
+    order     = build :order, shipping_method: shipping_method
     calculator= ShippingCostCalculator.new(order)
 
-    assert_equal 3.99, calculator.shipping_cost
+    assert_equal 2.99, calculator.shipping_cost.round(2).to_f
   end
 end
