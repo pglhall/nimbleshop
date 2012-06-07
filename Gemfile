@@ -114,10 +114,13 @@ group :test do
   # vcr uses webmock
   gem 'webmock'
 
-  # PaypalAuthorizeTest needs this gem
-  gem 'money'
-
 end
+
+# TODO this dependecy should be pushed to nimbleshop_paypalwp
+#
+# this gem is needed to handle the instant payment notification from paypal. In particular following
+# ActiveMerchant::Billing::Integrations::Notification::Money class uses it .
+gem 'money'
 
 # to send event information to google analytics
 gem 'gabba'
