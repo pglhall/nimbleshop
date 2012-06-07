@@ -47,16 +47,16 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 0.0, @order.reload.line_items_total.to_f
   end
 
-  test "#set_quantity" do
+  test "#update_quantity" do
     @order.add(@product1)
-    @order.set_quantity(@product1, 20)
+    @order.update_quantity({@product1.id => 20})
     assert_equal 20, @order.line_items.first.quantity
   end
 
-  test "price when more items are in the order" do
+  test "#update_quantity when order has 2 items" do
     @order.add(@product1)
     @order.add(@product2)
-    @order.set_quantity(@product1.id, 3)
+    @order.update_quantity({@product1.id => 3})
     assert_equal 60.0, @order.line_items_total.to_f
   end
 
