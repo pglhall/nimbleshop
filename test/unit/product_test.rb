@@ -2,20 +2,13 @@ require "test_helper"
 
 class ProductTest < ActiveSupport::TestCase
 
-  test "sets status as active" do
+  test "validate status" do
     assert_equal 'active', Product.new.status
-  end
-
-  test "wont update status" do
     assert_equal 'hidden', Product.new(status: 'hidden').status
   end
 
   test 'should create a default picture record' do
     assert_equal 1, create(:product).pictures.size
-  end
-
-  test " alias title" do
-    assert_equal 'welcome', Product.new(name: 'welcome').title
   end
 
   test "#to_param" do
@@ -35,13 +28,13 @@ class ProductStatusTest < ActiveSupport::TestCase
   end
 
   test "various status" do
-    assert_must_have_same_elements Product.hidden, [ @product2, @product3 ]
-    assert_must_have_same_elements  Product.sold_out, [ @product5 ]
+    assert_must_have_same_elements [ @product2, @product3 ], Product.hidden
+    assert_must_have_same_elements  [ @product5 ], Product.sold_out
   end
 
   test "active status" do
     skip "not sure why it is failing" do
-      assert_must_have_same_elements Product.active, [ @product1, @product4 ]
+      assert_must_have_same_elements [ @product1, @product4 ], Product.active
     end
   end
 
@@ -65,5 +58,3 @@ class ProductFindOrBuildForField < ActiveSupport::TestCase
   end
 
 end
-
-
