@@ -13,9 +13,6 @@
       resource :shipping_method
       resource :payment
     end
-    member do
-      get :cancel
-    end
   end
 
   resource :cart, only: [:show, :update] do
