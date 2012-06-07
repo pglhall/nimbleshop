@@ -13,9 +13,9 @@ module Search
 
     attr_accessor :index
 
-    delegate  :where, 
-      :valid_value_data_type?, 
-      :valid_operator?, 
+    delegate  :where,
+      :valid_value_data_type?,
+      :valid_operator?,
       :to => :query_strategy
 
     validate  :validate_value_data_type
@@ -32,9 +32,7 @@ module Search
   end
 
   def summary
-    I18n.t(self.operator.to_sym, {
-      field: localized_name, value: self.value
-    })
+    I18n.t(self.operator.to_sym, { field: localized_name, value: self.value })
   end
 
   private

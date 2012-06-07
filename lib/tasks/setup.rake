@@ -7,7 +7,7 @@ task :setup => :environment do
 
   Rake::Task["db:seed"].invoke
 
-  Sampledata.new.populate
+  Sampledata::Data.new.populate
 
   Rake::Task["nimbleshop_splitable:load_record"].invoke
   Rake::Task["nimbleshop_paypalwp:load_record"].invoke
