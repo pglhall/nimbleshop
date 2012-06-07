@@ -1,5 +1,13 @@
 module AdminHelper
 
+  def unconfigured_shipping_zone_countries
+    (disabled_shipping_zone_countries + countries_without_shipping_zone).sort
+  end
+
+  def disabled_shipping_zone_countries
+    countries_with_shipping_zone.inject([]) { |result, element| result << [element[0], element[1], {disabled: :disabled}]}
+  end
+
   ROUTE_MAP = {
       admin_products_path:        'admin/products',
       admin_custom_fields_path:   'admin/custom_fields',
