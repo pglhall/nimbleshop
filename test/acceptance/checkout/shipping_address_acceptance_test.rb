@@ -14,7 +14,7 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   test "Billing address is same as shipping address" do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
     assert page.has_content?('Shipping address')
     enter_valid_email_address
     enter_valid_shipping_address
@@ -27,7 +27,7 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   test "Billing address is not same as shipping address" do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
     enter_valid_email_address
     enter_valid_shipping_address
     uncheck 'order_shipping_address_attributes_use_for_billing'
@@ -42,7 +42,7 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   test 'editing shipping address' do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
     enter_valid_email_address
     enter_valid_shipping_address
     click_button 'Submit'
@@ -57,7 +57,7 @@ class ShippingAddressAcceptanceTest < ActionDispatch::IntegrationTest
   test 'shipping_address validations' do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
 
     click_button 'Submit'
     assert page.has_content?('Email is invalid')

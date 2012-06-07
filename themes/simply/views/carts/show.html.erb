@@ -23,12 +23,12 @@
     <div class="cart_total row">
       <div class="span2">
         <%= submit_tag 'Update', class: 'btn' %>
-        <%= link_to 'Checkout', checkingout_cart_path, class: 'btn btn-primary' %>
+        <%= link_to 'Checkout', checkingout_cart_path, class: 'btn btn-primary', id: 'checkout' %>
       </div>
       <div class="span2 offset2 text line-items-total">
         Total: <strong><%= number_to_currency(current_order.line_items_total) %></strong>
       </div>
     </div>
-    <% end %>
   <% end %>
+<% end %>
 

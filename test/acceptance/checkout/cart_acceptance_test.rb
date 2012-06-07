@@ -16,7 +16,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     add_item_to_cart('Bracelet Set')
     assert_equal "Total: $25.00", find('.line-items-total').text.chomp.strip
 
-    click_button 'Checkout'
+    click_link 'Checkout'
 
     enter_valid_email_address
     enter_valid_shipping_address
@@ -62,7 +62,7 @@ class CartAcceptanceTest < ActionDispatch::IntegrationTest
     PaymentMethod.delete_all
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
     enter_valid_email_address
     enter_valid_shipping_address
     click_button 'Submit'
@@ -94,7 +94,7 @@ class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
   test 'on cart page' do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
     Order.last.destroy
     click_link 'edit_cart'
     assert page.has_content?('powered by')
@@ -104,7 +104,7 @@ class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
     visit root_path
     add_item_to_cart('Bracelet Set')
     assert page.has_css?('.line-items-total', text: '$25.00')
-    click_button 'Checkout'
+    click_link 'Checkout'
     Order.last.destroy
     visit current_path
     assert page.has_content?('powered by')

@@ -15,7 +15,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
   test "shipping method is required" do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
 
     enter_valid_email_address
     enter_valid_shipping_address
@@ -30,7 +30,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
   test "ability to change shipping method" do
     visit root_path
     add_item_to_cart('Bracelet Set')
-    click_button 'Checkout'
+    click_link 'Checkout'
 
     enter_valid_email_address
     enter_valid_shipping_address

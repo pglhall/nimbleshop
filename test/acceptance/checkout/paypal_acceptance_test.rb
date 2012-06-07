@@ -16,7 +16,7 @@ class PaypalAcceptanceTest < ActionDispatch::IntegrationTest
     add_item_to_cart('Bracelet Set')
     assert_sanitized_equal "Total: $25.00", find('.line-items-total').text
 
-    click_button 'Checkout'
+    click_link 'Checkout'
 
     enter_valid_email_address
     enter_valid_shipping_address

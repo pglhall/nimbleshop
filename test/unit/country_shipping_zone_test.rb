@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class CountryShippingZoneTest < ActiveRecord::TestCase
+
   test "assigns name from carmen" do
     assert_equal "United States", create(:country_shipping_zone).name
   end
@@ -12,4 +13,5 @@ class CountryShippingZoneTest < ActiveRecord::TestCase
       create(:country_shipping_zone, country_code: 'CA')
     end
   end
+
 end
