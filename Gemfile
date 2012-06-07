@@ -88,6 +88,7 @@ group :test do
   gem 'sqlite3'
 
   gem 'guard-minitest'
+  gem 'guard', '= 1.0.3'
 
   gem 'capybara'
   gem 'selenium-webdriver', '~>2.21'

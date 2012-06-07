@@ -195,8 +195,8 @@ GEM
       ruby-hmac
     formatador (0.2.3)
     gabba (0.3.0)
-    guard (1.1.1)
-      listen (>= 0.4.2)
+    guard (1.0.3)
+      ffi (>= 0.5.0)
       thor (>= 0.14.6)
     guard-minitest (0.5.0)
       guard (>= 0.4)
@@ -222,10 +222,6 @@ GEM
       addressable
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
-    listen (0.4.3)
-      rb-fchange (~> 0.0.5)
-      rb-fsevent (~> 0.9.1)
-      rb-inotify (~> 0.8.8)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -273,11 +269,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
-    rb-fchange (0.0.5)
-      ffi
     rb-fsevent (0.9.1)
-    rb-inotify (0.8.8)
-      ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     rest-client (1.6.7)
@@ -363,6 +355,7 @@ DEPENDENCIES
   fancybox-rails
   fog
   gabba
+  guard (= 1.0.3)
   guard-minitest
   hashr
   launchy
