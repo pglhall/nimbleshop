@@ -25,6 +25,12 @@ class LineItem < ActiveRecord::Base
     self.product_price * self.quantity
   end
 
+  # update quantity count. If count is zero then delete the line_item .
+  def update_quantity(count)
+    count = count.to_i
+    (count > 0) ? self.update_attributes(quantity: count) : self.destroy
+  end
+
   private
 
   def copy_product_attributes

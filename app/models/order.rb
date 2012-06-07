@@ -82,18 +82,16 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def set_quantity(product_id, quantity)
-    return unless line_item = line_item_for(product_id)
-
-    if quantity > 0
-      line_item.update_attributes(quantity: quantity)
-    else
-      line_item.destroy
+  def update_quantity(data = {})
+    data.each do |product_id, quantity|
+      if line_item = line_item_for(product_id)
+        line_item.update_quantity(quantity)
+      end
     end
   end
 
   def remove(product)
-    set_quantity(product.id, 0)
+    update_quantity({product.id => 0})
   end
 
   def line_items_total

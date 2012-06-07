@@ -27,9 +27,7 @@ class CartsController < ApplicationController
   end
 
   def update
-    params[:updates].each do |product_id, quantity|
-      current_order.set_quantity(product_id, quantity.to_i)
-    end
+    current_order.update_quantity(params[:updates])
     redirect_to cart_url
   end
 
