@@ -22,15 +22,15 @@ class CartsController < ApplicationController
     redirect_to cart_url
   end
 
+  def checkingout
+    redirect_to new_order_checkout_shipping_address_path(current_order)
+  end
+
   def update
-    if params[:checkout]
-      redirect_to new_order_checkout_shipping_address_path(current_order)
-    else
-      params[:updates].each do |product_id, quantity|
-        current_order.set_quantity(product_id, quantity.to_i)
-      end
-      redirect_to cart_url
+    params[:updates].each do |product_id, quantity|
+      current_order.set_quantity(product_id, quantity.to_i)
     end
+    redirect_to cart_url
   end
 
 end

@@ -18,5 +18,6 @@
   resource :cart, only: [:show, :update] do
     member do
       post :add
+      get :checkingout
     end
   end
