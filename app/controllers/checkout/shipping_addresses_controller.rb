@@ -17,7 +17,7 @@ class Checkout::ShippingAddressesController < ApplicationController
     end
 
     if current_order.update_attributes(params[:order].merge(validate_email: true))
-      redirect_to new_order_checkout_shipping_method_path(current_order)
+      redirect_to new_checkout_shipping_method_path
     else
       @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
       current_order.initialize_addresses

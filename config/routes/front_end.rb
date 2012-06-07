@@ -8,12 +8,12 @@
   resources :product_groups, only: [:show]
   resources :products,  only: [:index, :show]
 
-  resources :orders,  only: [:show, :edit, :update] do
-    namespace :checkout do
-      resource :shipping_address
-      resource :shipping_method
-      resource :payment
-    end
+  resources :orders,  only: :show
+
+  namespace :checkout do
+    resource :shipping_address
+    resource :shipping_method
+    resource :payment
   end
 
   resource :cart, only: [:show, :update] do

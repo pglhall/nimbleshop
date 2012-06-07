@@ -23,7 +23,7 @@ class CartsController < ApplicationController
   end
 
   def checkingout
-    redirect_to new_order_checkout_shipping_address_path(current_order)
+    redirect_to new_checkout_shipping_address_path
   end
 
   def update

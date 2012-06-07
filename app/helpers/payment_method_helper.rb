@@ -23,7 +23,7 @@ module PaymentMethodHelper
 
   def payment_info_for_buyer(order)
     if pm = order.payment_method
-      call_engineized_method(pm, :payment_info_for_buyer)
+      call_engineized_method(pm, :payment_info_for_buyer, order)
     end
   end
 
@@ -35,9 +35,15 @@ module PaymentMethodHelper
     "nimbleshop_#{payment_method.demodulized_underscore}_#{method_name}".intern
   end
 
-  def call_engineized_method(payment_method, method_name)
-    ethod_name_in_engine = engineized_name(payment_method, method_name)
-    self.send(m) if self.respond_to?(m)
+  def call_engineized_method(payment_method, method_name, *args)
+    method_name_in_engine = engineized_name(payment_method, method_name)
+    if self.respond_to?(method_name_in_engine)
+      if args.any?
+        self.send(method_name_in_engine, *args)
+      else
+        self.send(method_name_in_engine)
+      end
+    end
   end
 
 end
