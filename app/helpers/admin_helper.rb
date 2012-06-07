@@ -11,15 +11,15 @@ module AdminHelper
       admin_orders_path:          'admin/orders'
   }
 
-  def active?(path, current_controller)
+  def admin_topbar_active?(path, current_controller)
     Array.wrap(ROUTE_MAP[path.to_sym]).include?(current_controller)
   end
 
-  def admin_sidebar(label, path, identifier)
+  def admin_topbar(label, path, identifier)
 
     html_options = {}
 
-    if active?(identifier, params[:controller])
+    if admin_topbar_active?(identifier, params[:controller])
       html_options['class'] = 'active'
     end
 
