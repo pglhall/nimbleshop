@@ -348,11 +348,6 @@ div.mobile_item_list div:last-of-type{
 	border-color:	#DDDDDD -moz-use-text-color #FFFFFF;
 }
 
-#cartform .cart_total .text{
-	text-align: right;
-	font-size: 16px;
-}
-
 #cartform .product_pictures img{
 	width: 60px;
 	height: 60px;
@@ -364,10 +359,6 @@ div.mobile_item_list div:last-of-type{
 	display: none;
 }
 
-
-#cartform .cart_total .cost{
-	font-size: 16px;
-}
 
 @media (max-width: 496px) {
 	#cartform [class*="span"]{
