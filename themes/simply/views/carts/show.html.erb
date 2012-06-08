@@ -10,10 +10,11 @@
   <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
 
     <div class="cart_header row hidden-phone">
-      <span class="span3">Description</span>
-      <span class="span1">Price</span>
-      <span class="span1">Quantity</span>
-      <span class="span1">Total</span>
+      <span class="span6">Description</span>
+      <span class="span2">Price</span>
+      <span class="span2">Quantity</span>
+      <span class="span2">Total</span>
+      <hr class="span12">
     </div>
 
     <div class="row">
@@ -22,21 +23,26 @@
       <% end %>
     </div>
 
-    <br />
-    <hr />
-
     <div class="row">
-      <div class="line-items-total">
+      <div class='span8'>&nbsp;</div>
+      <div class='span2'>
+        <%= submit_tag 'Update', class: 'btn' %>
+      </div>
+      <div class="line-items-total span2">
         Total: <strong><%= number_to_currency(current_order.line_items_total) %></strong>
       </div>
-      <hr />
     </div>
 
     <div class="row">
-        <%= submit_tag 'Update', class: 'btn' %>
+      <div class='span8'>&nbsp;</div>
+      <div class='span2'>
+        <br />
         <%= link_to 'Continue shopping', root_url %>
-        or
+      </div>
+      <div class='span2'>
+        <br />
         <%= link_to 'Checkout →', checkingout_cart_path, class: 'btn btn-primary', id: 'checkout' %>
+      </div>
     </div>
 
 

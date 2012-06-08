@@ -1,32 +1,36 @@
-<hr class="span6">
 
 <div class="span12">
   <div class="single_item row">
-    <div class="span1 product_pictures">
+    <div class="span2 product_pictures">
       <%= link_to(image_tag(line_item.picture_small, alt: line_item.product_name), line_item.product) %>
     </div>
-    <div class="span2 description">
+    <div class="span4 description">
       <strong class="item_name"><%= link_to(line_item.product_name, line_item.product) %></strong>
+      <br />
+      <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
     </div>
 
-    <div class="span1">
+    <div class="span2">
       <h4 class="visible-phone"> Item Price </h4>
       <%= number_to_currency(line_item.product_price) %>
     </div>
 
-    <div class="span1">
+    <div class="span2">
       <h4 class="visible-phone"> Quantity </h4>
       <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, style: 'width:20px;',
                                                                                           id: "updates_#{line_item.product_id}",
                                                                                           class: "quantity-field",
                                                                                           'data-behavior' => 'number-formatted' %>
     </div>
-    <div class="span1">
+    <div class="span2">
       <h4 class="visible-phone"> Total price </h4>
       <strong><%= number_to_currency(line_item.price) %></strong>
     </div>
-    <div class="span1 remove">
-      <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
+    <div class="span2 remove">
     </div>
   </div>
 </div>
+
+<div class='span12'>&nbsp;</div>
+
+<hr class='span12' />
