@@ -4,6 +4,6 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require admin_bootstrap_and_overrides
- *= require admin_custom
+ *= require bootstrap_and_overrides
+ *= require custom
 */
