@@ -1,4 +1,5 @@
 class Shipment < ActiveRecord::Base
+
   attr_accessor :notify_customer
 
   belongs_to :shipment_carrier

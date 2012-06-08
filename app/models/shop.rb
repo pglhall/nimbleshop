@@ -4,7 +4,7 @@ class Shop < ActiveRecord::Base
 
   validates :from_email,      email: true, allow_blank: false
 
-  validates_format_of :facebook_url, :with => URI::regexp, allow_blank: true
+  validates_format_of :facebook_url, with: URI::regexp, allow_blank: true
 
   validates_presence_of :name, :theme, :time_zone, :default_creditcard_action
   validates_inclusion_of :default_creditcard_action,  in: %W( authorize purchase )

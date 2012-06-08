@@ -21,4 +21,5 @@ class RegionalShippingZone < ShippingZone
     country = country_shipping_zone.country
     self.name = country.subregions.coded(state_code).name
   end
+
 end

@@ -4,7 +4,7 @@ class PaymentMethod < ActiveRecord::Base
 
   include Permalink::Builder
 
-  # By default payment_method does not require that application must use SSL. 
+  # By default payment_method does not require that application must use SSL.
   # Individual payment method should override this method.
   def use_ssl?
     false

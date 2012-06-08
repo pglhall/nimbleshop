@@ -5,4 +5,5 @@ class ShippingZone < ActiveRecord::Base
   has_many :shipping_methods, dependent: :destroy, conditions: { active: true }
 
   belongs_to :country_shipping_zone
+
 end

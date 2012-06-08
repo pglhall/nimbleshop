@@ -3,9 +3,10 @@ class Product < ActiveRecord::Base
   include Permalink::Builder
 
   alias_attribute :title, :name
+
   attr_accessor :pictures_order
 
-  validates :status, inclusion: { :in => %w(active hidden sold_out) }, presence: true
+  validates :status, inclusion: { in: %w(active hidden sold_out) }, presence: true
 
   has_many :pictures, order: 'pictures.position'
 
@@ -37,10 +38,11 @@ class Product < ActiveRecord::Base
     pictures.first
   end
 
-  # Input is full path to the picture.
+  # path is full path to the picture.
   #
   # Rails.root.join('db', 'original_pictures', filename )
   #
+  # This method is used only in development and test to attach a picture.
   def attach_picture(filename, path)
     img = File.open(path) {|i| i.read}
     encoded_img = Base64.encode64 img
@@ -69,12 +71,12 @@ class Product < ActiveRecord::Base
 
   def pictures_order=(value)
     return if value.empty?
-    orders = ActiveSupport::JSON.decode(value)
+    ordered_pictures = ActiveSupport::JSON.decode(value)
     current_pictures = self.pictures
 
-    orders.each{|position, picture_id|
+    ordered_pictures.each{|position, picture_id|
       if picture_id.present?
-        pic = current_pictures.find{|x| x.id == picture_id.to_i }
+        pic = current_pictures.find { |x| x.id == picture_id.to_i }
         pic.update_attribute(:position, position) if pic
       end
     }

@@ -15,27 +15,27 @@ class ShippingMethod < ActiveRecord::Base
 
   scope :active, where(active: true)
 
-  scope :atleast, lambda { |r| 
+  scope :atleast, lambda { |r|
     where('shipping_methods.lower_price_limit <= ?', r)
   }
 
-  scope :atmost,  lambda { |r| 
+  scope :atmost,  lambda { |r|
     where('shipping_methods.upper_price_limit is null or shipping_methods.upper_price_limit >= ?', r)
   }
 
   scope :in_price_range,  lambda { |r| atleast(r).atmost(r) }
 
-  scope :in_country, lambda { | code | 
+  scope :in_country, lambda { | code |
     joins(:shipping_zone).where(shipping_zones: { country_code: code })
   }
 
   def self.in_state(state_code, country_code)
     where({
-      shipping_zones: { 
-        state_code: state_code, 
-          country_shipping_zones_shipping_zones: { 
+      shipping_zones: {
+        state_code: state_code,
+          country_shipping_zones_shipping_zones: {
             country_code: country_code
-        } 
+        }
       }
     }).joins(shipping_zone: :country_shipping_zone)
   end
@@ -95,8 +95,12 @@ class ShippingMethod < ActiveRecord::Base
 
   def create_regional_shipping_methods
     shipping_zone.regional_shipping_zones.each do |t|
-      options = {shipping_zone: t, name: name, lower_price_limit: lower_price_limit,
-                 upper_price_limit: upper_price_limit}
+      options = { shipping_zone: t, 
+                  name: name, 
+                  lower_price_limit: lower_price_limit,
+                  upper_price_limit: upper_price_limit }
+
+      # TODO does it have to be false. why not use unless
       if self.active == false
         options.merge!(active: false)
       end
@@ -106,8 +110,10 @@ class ShippingMethod < ActiveRecord::Base
   end
 
   def set_regions_inactive
+      # TODO does it have to be false. why not use unless
     if self.persisted? && self.active_changed? && active == false
       regions.each { |region| region.update_attributes!(active: false) }
     end
   end
+
 end

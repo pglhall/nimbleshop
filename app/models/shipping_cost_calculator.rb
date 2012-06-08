@@ -1,4 +1,5 @@
 class ShippingCostCalculator
+
   def initialize(order)
     @order = order
   end
@@ -6,4 +7,5 @@ class ShippingCostCalculator
   def shipping_cost
     @order.shipping_method.try(:shipping_cost) || 0.0
   end
+
 end
