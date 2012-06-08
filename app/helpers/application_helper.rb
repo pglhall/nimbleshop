@@ -22,8 +22,5 @@ module ApplicationHelper
     end
   end
 
-  def countries_with_shipping_zone
-    Util.countries_list_with_name_and_code.select { |_, t| CountryShippingZone.all_country_codes.include?(t)}
-  end
 
 end

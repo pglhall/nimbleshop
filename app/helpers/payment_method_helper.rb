@@ -5,7 +5,7 @@ module PaymentMethodHelper
 
   def order_show_extra_info(order)
     if pm = order.payment_method
-      call_engineized_method(pm, :order_show_extra_info)
+      call_engineized_method(pm, :order_show_extra_info, order)
     end
   end
 
@@ -17,7 +17,7 @@ module PaymentMethodHelper
 
   def icon_for_order_payment(order)
     if pm = order.payment_method
-      call_engineized_method(pm,:icon_for_order_payment)
+      call_engineized_method(pm,:icon_for_order_payment, order)
     end
   end
 

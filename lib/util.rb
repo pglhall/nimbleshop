@@ -37,4 +37,8 @@ class Util
     (Util.disabled_shipping_zone_countries + Util.countries_without_shipping_zone).sort
   end
 
+  def self.countries_with_shipping_zone
+    Util.countries_list_with_name_and_code.select { |_, t| CountryShippingZone.all_country_codes.include?(t)}
+  end
+
 end
