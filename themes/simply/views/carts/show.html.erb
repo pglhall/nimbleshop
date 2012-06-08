@@ -8,27 +8,36 @@
   </p>
 <% else %>
   <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
+
     <div class="cart_header row hidden-phone">
       <span class="span3">Description</span>
       <span class="span1">Price</span>
       <span class="span1">Quantity</span>
       <span class="span1">Total</span>
     </div>
-    <div class="cart_items row">
+
+    <div class="row">
       <% @line_items.each do |line_item| %>
         <%= render 'line_item', line_item: line_item %>
       <% end %>
-      <hr class="span6" />
     </div>
-    <div class="cart_total row">
-      <div class="span2">
-        <%= submit_tag 'Update', class: 'btn' %>
-        <%= link_to 'Checkout', checkingout_cart_path, class: 'btn btn-primary', id: 'checkout' %>
-      </div>
-      <div class="span2 offset2 text line-items-total">
+
+    <br />
+    <hr />
+
+    <div class="row">
         Total: <strong><%= number_to_currency(current_order.line_items_total) %></strong>
-      </div>
+      <hr />
     </div>
+
+    <div class="row">
+        <%= submit_tag 'Update', class: 'btn' %>
+        <%= link_to 'Continue shopping', root_url %>
+        or
+        <%= link_to 'Checkout →', checkingout_cart_path, class: 'btn btn-primary', id: 'checkout' %>
+    </div>
+
+
   <% end %>
 <% end %>
 
