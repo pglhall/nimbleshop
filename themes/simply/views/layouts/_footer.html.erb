@@ -1,5 +1,6 @@
 <% unless @no_footer %>
-  <hr>
+  <hr />
+
   <footer>
     <div class='row'>
       <div class='span6'>
@@ -7,34 +8,25 @@
           <%= i %>
         <% end %>
       </div>
-      <div class='span4'>
 
+      <div class='span4'>
         <div>
-        <% if current_shop.twitter_handle.present? %>
-          <div style='float:left;width:80px;'> <%= render 'layouts/twitter' %> </div>
-        <% end %>
-        <div style='clear:both;'></div>
+          <% if current_shop.twitter_handle.present? %>
+            <div style='float:left;width:80px;'> 
+              <%= render 'layouts/twitter' %> 
+            </div>
+          <% end %>
+          <div style='clear:both;'></div>
         </div>
       </div>
+
       <div class='span2 powered_by'>
         powered by <%= link_to 'nimbleShop', 'http://www.nimbleshop.com' %>
       </div>
+
     </div>
     </p>
   </footer>
 <% end %>
 
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= current_shop.google_analytics_tracking_id %>' ]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+<%= render 'layouts/google_analytics' %>

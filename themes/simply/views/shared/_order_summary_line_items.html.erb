@@ -16,22 +16,7 @@
     </tr>
   <% end %>
 
-  <% if params[:controller] == 'checkout/payments' %>
-    <tr>
-      <td>
-        <div class='lhs order-shipping-cost-amount'>
-          Shipping: <strong> <%= number_to_currency(current_order.shipping_method.shipping_cost) %> </strong>
-        </div>
-        <div class='clear'></div>
-    </tr>
-    <tr>
-      <td>
-        <div class='lhs order-tax-amount'>
-          Tax: <strong> <%= number_to_currency(current_order.tax) %> </strong>
-        </div>
-        <div class='clear'></div>
-    </tr>
-  <% end %>
+  <%= render 'shipping_and_tax_info' %>
 
   <tr>
     <td>

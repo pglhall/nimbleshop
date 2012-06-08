@@ -4,6 +4,7 @@
 
   <div class='span6'>
     <ul class="thumbnails unstyled item_pics">
+
       <% @product.pictures.each_with_index do |picture, indx| %>
         <li style="<%= 'display:none' if indx != 0 %>">
           <%= link_to(image_tag(picture.picture_url(:large), alt: @product.name), picture.picture_url(:large_plus),
@@ -31,25 +32,26 @@
       <% end %>
     </table>
 
-    <%= link_to 'Continue shopping ...', root_url %>
+    <%= link_to 'Continue shopping ...', root_url, title: 'Homepage' %>
   </div>
 
   <div class='span6'>
+
     <h2 id='product-price'><%= number_to_currency(@product.price) %></h2>
+
     <%= form_tag('/cart/add', method: 'post') do %>
 
-        <input type="hidden" name="permalink" value="<%= @product.permalink %>"/>
+      <%= hidden_field_tag :permalink, @product.permalink %>
 
-        <div id="buy" class="clear">
-          <%= submit_tag 'Add to cart', class: 'btn btn-primary', id: 'add-to-cart' %>
-        </div>
+      <div id="buy" class="clear">
+        <%= submit_tag 'Add to cart', class: 'btn btn-primary', id: 'add-to-cart' %>
+      </div>
     <% end %>
 
     <h4 id='product-description'>Description</h4>
 
     <div id='product-description-content'>
       <%= simple_format(@product.description) %>
-    </div>
     </div>
   </div>
 

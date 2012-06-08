@@ -1,12 +1,13 @@
 <% page_title 'your cart' %>
+
 <% @page_sub_title = pluralize(items_count_in_cart, 'Item') %>
 
 <% if items_count_in_cart == 0 %>
-  <p id="empty">
-    Your shopping cart is empty.
-    <%= link_to 'Continue shopping ...', root_url %>
-  </p>
+
+  <%= render 'empty_cart' %>
+
 <% else %>
+
   <%= form_tag('/cart', method: :put, name: 'cartform', id: 'cartform') do %>
 
     <div class="cart_header row hidden-phone">

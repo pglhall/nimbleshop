@@ -1,6 +1,9 @@
 <div class='well'>
+
   <%= f.fields_for :shipping_address do |shipping_form| %>
+
     <h3>Shipping address</h3>
+
     <br />
 
       <div class='control-group'>
@@ -68,4 +71,5 @@
 
     <%= shipping_form.check_box :use_for_billing %> Use this address as billing address too
   <% end %>
+
 </div>

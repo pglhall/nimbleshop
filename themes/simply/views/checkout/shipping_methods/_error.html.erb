@@ -1,0 +1,9 @@
+<% if current_order.errors.any? %>
+
+  <div class="alert alert-error">
+    <ul>
+      <li> <%= current_order.errors.full_messages.first %></li>
+    </ul>
+  </div>
+
+<% end %>

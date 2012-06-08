@@ -11,15 +11,14 @@
 
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to 'Home', root_path %></li>
-          <li><%= link_to 'About us', about_us_path %></li>
-          <li><%= link_to 'Contact us', contact_us_path %></li>
+          <li><%= link_to 'Home', root_path, title: 'Homepage' %></li>
+          <li><%= link_to 'About us', about_us_path, title: 'about us' %></li>
+          <li><%= link_to 'Contact us', contact_us_path, title: 'contact us' %></li>
         </ul>
         <p class='navbar-text pull-right cart_link'>
-        <%= link_to pluralize(items_count_in_cart, 'item'), cart_path, id: 'cart' %>
+          <%= link_to pluralize(items_count_in_cart, 'item'), cart_path, id: 'cart', title: 'cart' %>
         </p>
       </div>
     </div>
   </div>
 </div>
-
