@@ -117,14 +117,14 @@ module Sampledata
       products << Product.create!( title: "Set of three barbies", price: 47, description: 'tbd', status: 'active')
       products << Product.create!( title: "Coin Bracelet", price: 78, description: 'tbd', status: 'active')
       products << Product.create!( title: "Indian mangoes basket", price: 81, description: 'tbd', status: 'active')
-      products << Product.create!( title: "Simple bag", price: 107, description: 'tbd', status: 'active')
+      products << Product.create!( title: "Simple and elegant bag", price: 107, description: 'tbd', status: 'active')
 
       product = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
       products << product
 
 
       products << Product.create!( title: "Colorful shoes", price: 191, description: 'tbd')
-      products << Product.create!( title: "Battery operated Mercedes SL 6V car in red", price: 111, description: 'tbd')
+      products << Product.create!( title: "TAG Heuer Aquaracer 500M Ceramic Watch", price: 3000, description: 'tbd')
       products << Product.create!( title: "Set of six tea cups", price: 41, description: 'tbd')
     end
 
@@ -175,7 +175,12 @@ module Sampledata
       descriptions << desc_3
 
       desc_4 = %q{
-        It is also a simple design. Sometime just being simple makes you stand out. No need to have a bag that is screaming "save the earth". If you carry this bag then it means you stand for all that and much more.
+        Stylish bag in indigo color. How could you say no to this. 
+
+        It is just the perfect size also. It has enough space to carry ipad, magazine, cosmetic stuff and othe accessories.
+
+        Length: 32cm(12.60 inches)
+        Width: 19cm(7.48 inches)
       }
       descriptions << desc_4
 
@@ -197,7 +202,17 @@ module Sampledata
       descriptions << desc_6
 
       desc_7 = %q{
-        Speedy cars.
+        Swiss label, TAG Heuer's Aquaracer 500M Ceramic watch embodies perfection, style and clean look.
+
+        It has ceramic bezel and has the case is 41mm, significantly smaller than the 43mm out-going model. The case has been given softer curvier lines to
+        create a more classic look.
+
+        Following models are available:
+
+        - Blue dial, blue ceramic bezel, steel
+        - Black dial, black ceramic bezel, steel
+        - Blue & gold, steel
+        - full black, ceramic bezel, titanium carbide case
       }
       descriptions << desc_7
 
