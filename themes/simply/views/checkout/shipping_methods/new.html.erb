@@ -9,7 +9,7 @@
     <%= render 'error' %>
 
     <% if @shipping_methods.any? %>
-      <%= render 'shipping_methods' %>
+      <%= render 'shipping_methods', f: f %>
     <% else %>
       <%= render 'no_shipping_method' %>
     <% end %>
