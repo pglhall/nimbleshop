@@ -8,13 +8,15 @@
     <div class="span2 description">
       <strong class="item_name"><%= link_to(line_item.product_name, line_item.product) %></strong>
     </div>
+
     <div class="span1">
       <h4 class="visible-phone"> Item Price </h4>
       <%= number_to_currency(line_item.product_price) %>
     </div>
+
     <div class="span1">
       <h4 class="visible-phone"> Quantity </h4>
-      <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, size: 2,
+      <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, style: 'width:20px;',
                                                                                           id: "updates_#{line_item.product_id}",
                                                                                           class: "quantity-field",
                                                                                           'data-behavior' => 'number-formatted' %>
