@@ -17,3 +17,4 @@ tags
 /.idea/
 config/tunnel
 config/push2heroku.yml
+doc/output
