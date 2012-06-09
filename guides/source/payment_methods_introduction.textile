@@ -1,0 +1,11 @@
+h2. Payment methods
+
+endprologue.
+
+h3. Support for three payment methods
+
+nimbleShop out of the box supports Authorize.net, PayPal and Splitable .
+
+h3. How to accept credit cards online
+
+In order to accept credit cards online, shop owners need to have a merchant account. "Read this ebook":http://ebooks.bigbinary.com/blog/home to understand how credit card works and what exactly is a merchant account.

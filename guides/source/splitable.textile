@@ -1,0 +1,5 @@
+h2. Splitable
+
+endprologue.
+
+"Splitable":http://www.splitable.com is the easiest way to split the cost of anything with anyone. It has "a friendly API":http://documentup.com/splitable/splitable_doc .

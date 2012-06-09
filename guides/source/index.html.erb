@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+nimbleShop docs
+<% end %>
+
+<% content_for :header_section do %>
+<%= render 'welcome' %>
+<% end %>
+
+            <% ['L', 'R'].each do |position| %>
+              <dl class="<%= position %>">
+              <% docs_for_menu(position).each do |section| %>
+                <dt><%= section['name'] %></dt>
+                <% finished_documents(section['documents']).each do |document| %>
+                <dd><a href="<%= document['url'] %>"><%= document['name'] %></a></dd>
+                <% end %>
+              <% end %>
+              </dl>
+            <% end %>
+
+

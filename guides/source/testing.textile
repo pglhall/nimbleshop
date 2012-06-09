@@ -1,0 +1,45 @@
+h2. Testing nimbleShop applications
+
+endprologue.
+
+h3. Running tests in nimbleShop application
+
+nimbleShop uses testing framework provided by Ruby on Rails. If you are not familiar with testing philosophy of Rails then you should read "this execellent guide":http://guides.rubyonrails.org/testing.html .
+
+In order to run all the tests execute following command
+
+<shell>
+rake
+</shell>
+
+If you are developing nimbleShop and you want to run tests as you make changes then execute following command
+
+<shell>
+guard
+</shell>
+
+If you are not familiar with  "guard":https://github.com/guard/guard then watch "this episode":http://railscasts.com/episodes/264-guard of Railscasts to get familiar with it.
+
+When guard starts it waits for user to make changes to the file. If you want guard to execute all the tests then hit <strong>shift + enter</strong> .
+
+h3. How to run a single test
+
+If you want to run tests for one single file then execute following command
+
+<shell>
+bundle exec ruby -I test  test/unit/product_test.rb
+</shell>
+
+h3. Installing firefox for selenium tests
+
+
+nimbleShop uses selenium for acceptance tests. I found that firefox 11 does not play well with selenium. So here are the steps to follow to get selenium tests running on your machine
+
+* If you are using firefox 11 then uninstall it .
+* Download (but do not install) firefox 10 from "http://dl.dropbox.com/u/7468116/Firefox%2010.0.dmg":http://dl.dropbox.com/u/7468116/Firefox%2010.0.dmg .
+* Now turn off internet connection .
+* Install firefox 10 .
+* Open firefox and go to preferences > Advanced > Update . Check the radio button "Never check for updates". Close preference panel .
+* Turn internet on .
+* Now run tests for selenium .
+

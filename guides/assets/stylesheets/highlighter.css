@@ -1,0 +1,21 @@
+div.code_container {
+  background: black;
+  background: pink;
+  background: black;
+  padding: 10px 10px 10px 15px;
+}
+
+.syntaxhighlighter .line.alt1, .syntaxhighlighter .line.alt2 {
+  background-color: black !important;
+  background-color: pink !important;
+  background-color: black !important;
+  color: #fff;
+}
+
+.syntaxhighlighter .plain,  .syntaxhighlighter .plain a {
+  color: #fff !important;
+}
+
+.syntaxhighlighter a, .syntaxhighlighter div, .syntaxhighlighter code, .syntaxhighlighter table, .syntaxhighlighter table td, .syntaxhighlighter table tr, .syntaxhighlighter table tbody, .syntaxhighlighter table thead, .syntaxhighlighter table caption, .syntaxhighlighter textarea {
+  font-family: Menlo, Monaco, sans-serif !important;
+}

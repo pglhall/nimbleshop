@@ -1,0 +1,34 @@
+h2. Getting Started with nimbleShop
+
+endprologue.
+
+h3. What is nimbleShop?
+
+nimbleShop is a "free and open source":http://en.wikipedia.org/wiki/Free_and_open_source e-commerce framework based on "Ruby on Rails":http://rubyonrails.org/.
+
+h4. Installing nimbleShop
+
+In order to get started with nimbleShop you need to have
+
+* ruby 1.9.2+
+* rails 3.2.x
+
+nimbleShop is not yet a gem. So you need to clone the git repository to get started.
+
+<shell>
+git clone git://github.com/bigbinary/nimbleshop.git
+</shell>
+
+h4. Setting up development environment
+
+<shell>
+cp config/database.yml.sqlite3.example config/database.yml
+bundle install
+bundle exec rake db:create
+bundle exec rake setup
+bundle exec rails server
+</shell>
+
+Now visit "http://localhost:3000":http:localhost:3000 and you should see a store.
+
+Access admin section by visiting "http://localhost:3000/admin":http://localhost:3000/admin . 

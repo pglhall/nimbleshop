@@ -1,0 +1,44 @@
+h2. Tools
+
+endprologue.
+
+h3. Google analytics
+
+nimbleShop has built in support for google analytics.
+
+Register for google analytics and enter the google tracking id in the admin panel. Google analytics has extra support for ecommerce applications. However you need to enable it. Follow the steps given below to enable ecommerce tracking in your google analytics account.
+
+!https://img.skitch.com/20120504-jwic5j5pb2pxunu57byw6tdbd2.jpg(ecommerce tracking in google analytics)!
+
+h3. Sending email in nimbleShop
+
+h4.  mailtrap.io in development environment
+
+In development environment nimbleShop sends emails  to "mailtrap.io":http://mailtrap.io/ . _mailtrap.io_ is a free service. 
+
+After signing up for this service open +config/application.yml+ and look for +mailtrapio+. Change +xxxxx+ for +username+ with the username value given by mailtrap.io . Similarly update the value for +password+ for mailtrap.io.
+
+h4. sendgrid in staging and production environment
+
+In staging and production environment nimbleShop actually delivers emails using "sendgrid":http://sendgrid.com .
+
+
+h3. Tools
+
+"responsive.is":http://responsive.is/nimbleshop.net -  How responsive is your design .
+
+"Design seeds":http://design-seeds.com - Finding right color combination is hard. This site can help.
+
+"cambelt.co":http://cambelt.co -  Create a place holder image which is not boring. You can choose the text, background color and much more.
+
+"lorempixel.com":http://lorempixel.com -  Find real world place holder image of any size. Images available in color and in black and white.
+
+"mattkersley.com":http://mattkersley.com/responsive - Easily test how responsive your design is for various sizes.
+
+"dillinger.io":http://dillinger.io - Dillinger is a cloud-enabled HTML5 Markdown editor. Type some Markdown text in the left window See the HTML in the right . Magic .
+
+"www.browserstack.com":http://www.browserstack.com - Live Web-Based Cross Browser Testing
+
+"www.webpagetest.org":http://www.webpagetest.org - Test a website's performance .
+
+"localtunnel":http://progrium.com/localtunnel - The easiest way to share localhost web servers to the rest of the world

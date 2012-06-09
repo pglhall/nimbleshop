@@ -1,0 +1,69 @@
+h2. Paypal website payments standard
+
+endprologue.
+
+Paypal offers a lot of products. nimbleShop has built-in support for "Paypal website payments standard":https://merchant.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=merchant/wp_standard . Paypal website payments standard has following attractive features:
+
+* Buyer can pay using their Paypal account or they can pay using their credit card.
+* Buyer does not need to have paypal account to pay using credit card. This feature is very compelling. It means users who do not have a paypal account even they can make payment using their credit card.
+* There is no setup fee.
+* There is no monthly fee.
+
+h3. Using paypal sandbox
+
+nimbleShop comes with Paypal settings that you can directly use to test your application. We do not want to make actual
+payment for real in order to test integration with Paypal. Paypal offers +sandbox+ account where we can test the integration
+of our application with Paypal without making payment for real.
+
+However using sandbox involves a few steps. Given below are the steps needed to make payment. 
+
+
+* Start rails server at port 3000 by executing +rails server+ .
+* Open another terminal. Go to the nimbleShop project directory and execute +bundle exec localtunnel -k ~/.ssh/id_rsa.pub 3000+ . Sometimes you might get message +[Error] Unable to register tunnel. Perhaps service is down?+. It means localtunnel is not working and you will not be able to test Instant Payment Notification ( IPN ). However you can still test making payment part .
+* Visit "https://developer.paypal.com":https://developer.paypal.com and login with email +neeraj.cmu@gmail.com+ and password +welcome1+ .
+* Visit the nimbleshop application and add a few products to your cart .
+* When you come to checkout page then select Paypal .
+* You are presented with a page to login .
+* Login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
+* Go ahead and make the payment .
+* Now click on +Test Accounts+ and then click on +Enter Sandbox Test Site+ .
+!https://img.skitch.com/20120420-pxbr29f3hcm68xr3buik2tty8j.jpg!
+* In the +Sandbox Test Site+ login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
+* Click on "History" and you should see transaction details.
+![screenshot](https://img.skitch.com/20120420-qni9fsfp93d6bq65mp2fdneue6.jpg)
+
+In order for others to follow the steps mentioned please do not change the password .
+
+h3. Setup paypal sandbox
+
+In order to test integration of your store with Paypal it is highly recommended that you sign up for test account as given below.
+
+* Visit "https://developer.paypal.com":https://developer.paypal.com .
+* Sign up for a new account .
+* Check your email and click on the linke in the email to activate your account .
+* Now visit "https://developer.paypal.com":https://developer.paypal.com and login with your email and password .
+* Click on +preconfigure account+ .
+!https://img.skitch.com/20120419-tstbh9n36r5erq6iyjrs8ri2tc.jpg!
+* Create a buyer account by choosing +Buyer account+. Enter the password as +welcome1+  . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+!https://img.skitch.com/20120419-kgaba21nsw46ufwdny94dqn9de.jpg!
+* Next create a seller account by choosing +Seller account+. Enter the password as +welcome1+ . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+!https://img.skitch.com/20120419-xi5ysn669fiahc32sj17iu3att.jpg!
+* Now we have all the accounts configured to start making actual payment
+!https://img.skitch.com/20120419-fjypknce719377h3chbbag4p74.jpg!
+
+h3. Instant payment notification in paypal
+
+Here is the "Paypal order management integration guide":https://cms.paypal.com/cms_content/en_US/files/developer/PP_OrderMgmt_IntegrationGuide.pdf .
+
+If you are using Paypal web payment standard then paypal sends an instant payment notification when someone purchases anything from your store using Paypal.
+
+In local development environment when you use +localhost:3000+ then paypal cannot send the Instant Payment notification to +localhost:3000+. You need a public address .
+
+"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server. 
+
+* +gem install localtunnel+ .
+* Start your application using +rails server+ .
+* On another terminal `cd nimbleshop` and then execute command +localtunnel -k ~/.ssh/id_rsa.pub 3000+ .
+* In the root directory of nimbleshop there is a file called +localtunner_callback+. localtunnel gem executes localtunnel_callback with the current host name after creating the tunnel.
+* localtunnel_callback writes the host into config/tunnel.
+* nimbleshop reads config/tunnel in development mode to construct paypal notification url.

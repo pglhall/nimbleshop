@@ -1,0 +1,19 @@
+h2. Contributing to nimbleShop
+
+endprologue.
+
+h3. Reporting an Issue
+
+nimbleShop uses "GitHub Issue Tracking":https://github.com/bigbinary/nimbleshop/issues to track issues (primarily bugs and contributions of new code). If you've found a bug in nimbleShop, this is the place to start. You'll need to create a (free) GitHub account in order to submit an issue, to comment on them or to create pull requests.
+
+h4. Special Treatment for Security Issues
+
+Please do not report security vulnerabilities with public GitHub issue reports. Please send an email to security@nimbleshop.org .
+
+h3. Contributing to Documentation
+
+NOTE: To help our CI servers you can add [ci skip] to your documentation commit message to skip build on that commit. Please remember to use it for commits containing only documentation changes.
+
+h3.  How to contribute
+
+You are encouraged to "read this":http://www.igvita.com/2011/12/19/dont-push-your-pull-requests .

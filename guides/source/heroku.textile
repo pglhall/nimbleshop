@@ -1,0 +1,152 @@
+h2. Heroku
+
+endprologue.
+
+h3. Heroku pros and cons
+
+Heroku is a great service to deploy and run Ruby on Rails applications.  
+
+nimbleShop has taken extra steps to ensure that deploying nimbleShop on heroku is smooth. nimbleShop will provide and support step by step guides on deploying nimbleShop applications on heroku.
+
+It does not mean that nimbleShop applications will not run on rackspace or other hosting providers. All it means that nimbelShop will not have a step by step guide for rackspace or linode. But you should still be able to deploy your application on other hosting providers.
+
+Now lets look at some of the features/cons which are most discussed.
+
+h4. Dyno Idling
+
+One of the biggest complaints about heroku is that using free account means your users will have a slower web experience. That happens because of dyno idling .
+
+> Apps that have only 1 web dyno will be idled out after a period of inactivity. The web dyno will be shut down. When a request comes in to an idled app your web dyno will be automatically spun back up, causing a few second delay for this first request. Subsequent requests will perform normally.  Apps that have more than 1 web dyno are never idled out. Workers dynos are never idled out.
+
+
+Note that dyno idling never happens if you have a paid dyno which costs $35 per month.
+
+h4. Avoiding dyno idling
+
+So now the obvious question is what are the ways of avoiding dyno idling. Stackoverflow has [a good answer](http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling) on this topic.
+
+h4. Free https account
+
+During the testing stages you can use https://myapp.heroku.com . This is great for testing your application before going and purchaing SSL certificate.
+
+> SSL can be turned on for any .heroku.com domain by enabling the Piggyback SSL. An app specific SSL certificate is not required for Piggyback SSL. The *.heroku.com wildcard SSL certificate is used for all apps.
+
+h4. Unicorn on heroku
+
+If you are using heroku then you might be interested in [this](http://blog.railsonfire.com/2012/05/06/Unicorn-on-Heroku.html) article which discusses how to get performance boost by running unicorn on heroku. Just to be clear we have not used this technique ourselves.
+
+h3. Setting up staging environment on heroku
+
+Getting your application up and running on heroku is easy. Here is what I recommend.
+
+For the purpose of this discussion let's assume that I want a store at `www.trishil.com` . So I would deploy two applications
+heroku. One for staging and one for prouduction. Then application names would be `trishil-staging` and `trishil-production`.
+
+First lets get started with deploying the application on `trishil-staging` .
+
+h4. Step1
+
+Create a staging branch
+
+```
+git checkout -b staging
+```
+
+h4. Step2
+
+Ensure you have latest version of heroku gem.
+
+```
+gem install heroku
+gem update heroku
+```
+
+h4. Step 3
+
+Create a remote named hstaging . Here `hstaging` stand for `heroku staging`. This name can be anything. I do not want this name to be `staging` because sometimes it confuses people about which `staging` I am talking about. Also notice that we will be using [cedar stack](http://devcenter.heroku.com/articles/cedar) .
+
+```
+heroku create indichai-staging --remote hstaging --stack cedar
+```
+
+h4. Step 4 
+
+Push code to heroku.  Next command might seem a bit confusing. This command is pushing the local staging branch to heroku’s hstaging branch.
+
+```
+git push hstaging staging:master
+```
+
+h4. Step 5
+
+Set the Rails environment to staging
+
+```
+heroku config:add RACK_ENV=staging  --app indichai-staging
+heroku config:add RAILS_ENV=staging --app indichai-staging
+```
+
+h4. Step 6
+
+Set airbrake api key
+
+```
+heroku config:add AIRBRAKE_API_KEY=xxxxx --app indichai-staging
+```
+
+h4. Step 7
+
+Setup ssl. Heroku provides free ssl for any `.heroku.com` domain. In this case we can turn on ssl for `http://indichai-staging.heroku.com` .
+
+```
+heroku addons:add ssl:piggyback --app indichai-staging
+```
+
+h4. Step 8
+
+Since this is staging environment I setup the log level to `debug` to get more information about the application.
+
+```
+heroku config:add LOG_LEVEL=DEBUG --app indichai-staging
+```
+
+h4. Step 9
+
+If you use [SendGrid](http://sendgrid.com) to send emails then if you want emails to go out for real in staging environment then execute following commands
+
+```
+heroku config:add DELIVER_EMAIL_FOR_REAL_IN_STAGING=true --app indichai-staging
+heroku config:add SENDGRID_USERNAME=xxxx --app indichai-staging
+heroku config:add SENDGRID_PASSWORD=xxxx --app indichai-staging
+heroku config:add SENDGRID_DOMAIN=xxxxxx --app indichai-staging
+```
+
+h4. Step 10
+
+Create bucket for AWS S3. Login at [AWS Management Console](https://console.aws.amazon.com/s3/home) and create a bucket. The bucket name could be anything like indichai-staging . It is recommended that you do not have a dot in the bucket name. Next configure aws s3 settings in the application.
+
+```
+heroku config:add S3_ACCESS_KEY_ID=xxxxxxxxxxxxxx --app indichai-staging
+heroku config:add S3_SECRET_ACCESS_KEY=xxxxxxxxxx --app indichai-staging
+heroku config:add S3_BUCKET_NAME=xxxxxxxxxxxxxxxx --app indichai-staging
+```
+
+h4. Step 11
+
+Run migrations
+
+```
+heroku run rake db:migrate --app indichai-staging
+```
+
+h4. Step 12
+
+Configure store with default settings and load products
+
+```
+heroku run rake setup_development --app indichai-staging
+```
+
+h4. Step 13
+
+Visit staging site at http://indichai-staging.herokuapp.com 

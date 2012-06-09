@@ -1,0 +1,34 @@
+h2. Authorize.net
+
+endprologue.
+
+"Authorize.net":http://www.authorize.net  is a payment gateway service provider allowing merchants to accept credit card and electronic checks payments. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.
+
+h3. Sandbox account
+
+Authorize.net provides "sandbox account":https://developer.authorize.net/testaccount which can be used to test the application before the application goes live. nimbleShop comes with Authorize.net sandbox account credentials so you do not have to get your own sandbox account. However if you want to login at Authorize.net and see the transaction details for yourself then you should get your own sandbox account.
+
+h4. How to get sandbox account
+
+* Visit  "Authorize.net development center":https://developer.authorize.net/testaccount to get sandbox account. Select +account type+ as +Card Not Present+.
+* Vist "Admin section for Authorize.net":http://localhost:3000/admin/paymentmethod/authorizedotnet/edit and update +login_id+ and +transaction_key+ with the value obtained from above step.
+
+h4. Valid credit card numbers in sandbox
+
+During the test mode actual credit card numbers are declined. This is to prevent one from actually being charged for real when it was just meant for testing. In the test mode use following credit card numbers.
+
+
+|Credit card type|Number|
+|Visa|4007000000027|
+|Second Visa card|4012888818888|
+|American Express|370000000000002|
+|Discover|6011000000000012|
+|JCB|3088000000000017|
+|Diners Club/ Carte Blanche|38000000000006|
+
+* Expiration date must be set to the present day or later.
+* Security code for American express must be 4 digits. For all others use 3 digits.
+
+h4. Checking transactions in sandbox account
+
+Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials. Click on +Unsettled Transactions+ to see transaction details.
