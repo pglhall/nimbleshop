@@ -4,46 +4,40 @@
     -
       name: Getting Started with nimbleShop
       url: getting_started.html
-      description: Everything you need to know to install nimblesShop and create your store.
 -
   name: Payment methods
   documents:
     -
       name: Introduction
       url: payment_methods_introduction.html
-      description: This guide covers how you can use Active Record migrations to alter your database in a structured and organized manner.
     -
       name: Authorize.net
       url: authorizedotnet.html
-      description: This guide covers how you can use Active Record migrations to alter your database in a structured and organized manner.
     -
       name: Paypal web payments standard
       url: paypalwp.html
-      description: This guide covers how you can use Active Record validations and callbacks.
     -
       name: Splitable
       url: splitable.html
-      description: This guide covers all the associations provided by Active Record.
     -
       name: Cash on delivery
       url: cod.html
-      description: This guide covers the database query interface provided by Active Record.
 
 -
   name: Digging Deeper
   documents:
     -
+      name: Store arbitrary data in metadata column 
+      url: metadata_column.html
+    -
       name: Testing nimbleShop application
       url: testing.html
-      description: This is a rather comprehensive guide to doing both unit and functional tests in Rails. It covers everything from 'What is a test?' to the testing APIs. Enjoy.
 -
   name: Extending nimbleShop
   documents:
     -
       name: Tools
       url: tools.html
-      description: This guide covers how to build a plugin to extend the functionality of Rails.
     -
       name: Contributing to nimbleShop
       url: contributing_to_nimbleshop.html
-      description: Rails is not 'somebody else's framework.' This guide covers a variety of ways that you can get involved in the ongoing development of Rails.

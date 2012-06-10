@@ -1,0 +1,11 @@
+h2. Storing arbitrary data in metadata column
+
+endprologue.
+
+h3. metadata column
+
+All the tables in nimbleShop have a column called +metadata+. This column can be used to store any arbitrary data. 
+
+Look at +Authorizedotnet.rb+ model in the engine to see an example of how nimbleShop itself is using +metadata+ to store data specific to Authorize.net record.
+
+Methods "store":http://api.rubyonrails.org/classes/ActiveRecord/Store.html and +store_accessor+ play nicely with metadata column. Look at "this commit":https://github.com/rails/rails/commit/85b64f98d100d37b3a232c315daa10fad37dccdc to learn more about these methods.
