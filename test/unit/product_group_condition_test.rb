@@ -152,7 +152,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
     expected_sql = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
     }
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
   test "should handle equal operation and equal" do
@@ -164,7 +164,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.34 AND "answers1"."value" LIKE 'george' AND "products"."status" = 'active'
     }
 
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
   test "with price_group_condition search" do
@@ -182,7 +182,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."price" >= 19.99 AND "products"."status" = 'active'
     }
 
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
 end
