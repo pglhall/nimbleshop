@@ -58,42 +58,42 @@ class ProductGroupConditionNumber < ActiveSupport::TestCase
 
   test 'less than condition' do
     @condition.operator = "lt"
-    search_sql = @product_group.product_group_conditions.to_search_sql
-    assert_must_be_like search_sql, %{
+    expected =  %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.0 AND "products"."status" = 'active'
     }
+    assert_must_be_like expected, @product_group.product_group_conditions.to_search_sql
   end
 
   test 'less than equal condition' do
     @condition.operator = "lteq"
-    search_sql = @product_group.product_group_conditions.to_search_sql
-    assert_must_be_like search_sql, %{
+    expected =  %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.0 AND "products"."status" = 'active'
     }
+    assert_must_be_like expected, @product_group.product_group_conditions.to_search_sql
   end
 
   test 'greater than operation' do
     @condition.operator = "gt"
-    search_sql = @product_group.product_group_conditions.to_search_sql
-    assert_must_be_like search_sql, %{
+    expected = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.0 AND "products"."status" = 'active'
     }
+    assert_must_be_like expected, @product_group.product_group_conditions.to_search_sql
   end
 
   test 'greater than equal condition' do
     @condition.operator = "gteq"
-    search_sql = @product_group.product_group_conditions.to_search_sql
-    assert_must_be_like search_sql, %{
+    expected  = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" >= 4.0 AND "products"."status" = 'active'
     }
+    assert_must_be_like expected, @product_group.product_group_conditions.to_search_sql
   end
 
   test 'equal operation' do
     @condition.operator = "eq"
-    search_sql = @product_group.product_group_conditions.to_search_sql
-    assert_must_be_like search_sql, %{
+    expected  = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" WHERE "answers0"."number_value" = 4.0 AND "products"."status" = 'active'
     }
+    assert_must_be_like expected, @product_group.product_group_conditions.to_search_sql
   end
 end
 
@@ -118,7 +118,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
     expected_sql = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" < 4.34 AND "answers1"."value" LIKE '%george%' AND "products"."status" = 'active'
     }
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
   test "should handle less than equal operation and starts with" do
@@ -130,7 +130,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
     expected_sql = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" <= 4.34 AND "answers1"."value" LIKE 'george%' AND "products"."status" = 'active'
     }
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
   test "should handle greater than operation and ends with" do
@@ -141,7 +141,7 @@ class ProductGroupConditionWithMultipleConditions < ActiveSupport::TestCase
     expected_sql = %{
       SELECT products.* FROM "products" INNER JOIN "custom_field_answers" "answers0" ON "answers0"."product_id" = "products"."id" INNER JOIN "custom_field_answers" "answers1" ON "answers1"."product_id" = "products"."id" WHERE "answers0"."number_value" > 4.34 AND "answers1"."value" LIKE '%george' AND "products"."status" = 'active'
     }
-    assert_must_be_like search_sql, dbify_sql(expected_sql)
+    assert_must_be_like dbify_sql(expected_sql), search_sql
   end
 
   test "should handle greater than equal  operation" do

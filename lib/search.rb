@@ -5,7 +5,7 @@ require 'search/text_field'
 require 'search/number_field'
 require 'search/date_field'
 
-module Search  
+module Search
   extend ActiveSupport::Concern
 
   included do
