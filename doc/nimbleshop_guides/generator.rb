@@ -220,7 +220,7 @@ module NimbleshopGuides
       header = $1
 
       header =~ /h2\.(.*)/
-      page_title = "Ruby on Rails Guides: #{$1.strip}"
+      page_title = "nimbleShop documentation: #{$1.strip}"
 
       header = textile(header)
 
