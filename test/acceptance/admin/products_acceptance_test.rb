@@ -19,18 +19,6 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('the very wicked name for product')
   end
 
-  test "should create a new product with image" do
-    skip "it is hard to get to the file element to test uploading of picture" do
-      attach_file "Picture", "#{Rails.root}/app/assets/stylesheets/admin.css"
-      msg = %Q{Pictures picture You are not allowed to upload css" files, allowed types: ["jpg", "jpeg", "gif", "png"]}
-      assert page.has_content?(msg)
-
-      attach_file "Picture", "#{Rails.root}/test/support/images/cookware.jpg"
-      click_button 'Submit'
-      assert page.has_xpath?("//img[@alt='Small_cookware']")
-    end
-  end
-
   test "should not create product with wrong params" do
     visit admin_path
     click_link 'Products'
