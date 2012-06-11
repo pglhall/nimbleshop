@@ -69,6 +69,7 @@ module Search
   end
 
   def custom_field?
-    name.try(:match, /\A[+-]?\d+?\Z/).present?
+    # for a custom field the name column contains the primary key of the custom_fields table
+    name.try(:match, /\A\d+?\Z/).present?
   end
 end
