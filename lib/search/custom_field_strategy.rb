@@ -9,8 +9,10 @@ module Search
     end
 
     def target_table
-      @_target_table = CustomFieldAnswer.arel_table.alias("answers#{index}") unless @_target_table
-      @_target_table
+      unless @_target
+        @_target =CustomFieldAnswer.arel_table.alias("answers#{index}")
+      end
+      @_target
     end
 
     def custom_field
