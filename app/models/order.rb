@@ -101,10 +101,6 @@ class Order < ActiveRecord::Base
     end.round(2).to_f
   end
 
-  def price
-    raise 'use method line_items_total'
-  end
-
   def total_amount
     line_items_total + shipping_cost + tax
   end
