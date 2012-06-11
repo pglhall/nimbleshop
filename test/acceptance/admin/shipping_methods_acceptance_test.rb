@@ -40,7 +40,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
     shipping_zone = create_shipping_zone("US")
     state_zone = shipping_zone.regional_shipping_zones[0]
-    shipping_method = create(:country_shipping_method, :shipping_zone => shipping_zone)
+    shipping_method = create(:country_shipping_method, shipping_zone: shipping_zone)
     visit edit_admin_shipping_zone_shipping_method_path(shipping_zone, shipping_method)
 
     find("a[@rel='disable-#{state_zone.id} nofollow']").click
@@ -55,7 +55,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
 
     shipping_zone = create_shipping_zone("US")
     state_zone = shipping_zone.regional_shipping_zones[0]
-    shipping_method = create(:country_shipping_method, :shipping_zone => shipping_zone)
+    shipping_method = create(:country_shipping_method, shipping_zone: shipping_zone)
 
     visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
     find("a[@rel='disable-#{state_zone.id} nofollow']").click

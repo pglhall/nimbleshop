@@ -61,7 +61,7 @@ module AdminHelper
 
   def gravatar_for(email, options = {})
     return if email.blank?
-    options = {:alt => 'avatar', :class => 'avatar', :size => 50}.merge! options
+    options = {alt: 'avatar', class: 'avatar', size: 50}.merge! options
     id = Digest::MD5::hexdigest(email.strip.downcase)
     url = 'http://www.gravatar.com/avatar/' + id + '.jpg?d=mm&s=' + options[:size].to_s
     options.delete :size

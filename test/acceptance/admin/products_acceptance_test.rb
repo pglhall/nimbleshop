@@ -8,9 +8,9 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
     click_link 'add_new_product'
     assert page.has_content?("Add new product")
 
-    fill_in 'Name', :with => 'the very wicked name for product'
-    fill_in 'Description', :with => 'test desc for user'
-    fill_in 'Price', :with => '45.99'
+    fill_in 'Name', with: 'the very wicked name for product'
+    fill_in 'Description', with: 'test desc for user'
+    fill_in 'Price', with: '45.99'
   end
 
   test "should create a new product without image" do
@@ -71,9 +71,9 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     click_link 'Products'
     click_link 'Edit'
 
-    fill_in 'Name', :with => 'the very wicked name for product'
-    fill_in 'Description', :with => 'test desc for user'
-    fill_in 'Price', :with => '45.99'
+    fill_in 'Name', with: 'the very wicked name for product'
+    fill_in 'Description', with: 'test desc for user'
+    fill_in 'Price', with: '45.99'
     click_button 'Submit'
 
     assert page.has_content?('Successfully updated')
@@ -85,9 +85,9 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     click_link 'Products'
     click_link 'Edit'
 
-    fill_in 'Name', :with => ''
-    fill_in 'Description', :with => ''
-    fill_in 'Price', :with => 'wrong price'
+    fill_in 'Name', with: ''
+    fill_in 'Description', with: ''
+    fill_in 'Price', with: 'wrong price'
     click_button 'Submit'
 
     assert page.has_content?("Name can't be blank")

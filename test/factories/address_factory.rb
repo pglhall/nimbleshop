@@ -20,12 +20,12 @@ FactoryGirl.define do
 
     zipcode     { Faker::Address.zip_code } 
 
-    factory :address,               class: Address,         :parent => :base_address, traits: [:good]
-    factory :shipping_address,      class: ShippingAddress, :parent => :base_address, traits: [:good], aliases: [:good_shipping_address]
+    factory :address,               class: Address,         parent: :base_address, traits: [:good]
+    factory :shipping_address,      class: ShippingAddress, parent: :base_address, traits: [:good], aliases: [:good_shipping_address]
 
-    factory :billing_address,       class: BillingAddress,  :parent => :base_address, traits: [:good], aliases: [:good_billing_address]
+    factory :billing_address,       class: BillingAddress,  parent: :base_address, traits: [:good], aliases: [:good_billing_address]
 
-    factory :bad_shipping_address,  class: ShippingAddress, :parent => :base_address, traits: [:bad] 
-    factory :bad_billing_address,   class: BillingAddress,  :parent => :base_address, traits: [:bad] 
+    factory :bad_shipping_address,  class: ShippingAddress, parent: :base_address, traits: [:bad] 
+    factory :bad_billing_address,   class: BillingAddress,  parent: :base_address, traits: [:bad] 
   end
 end

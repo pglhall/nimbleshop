@@ -16,7 +16,7 @@ class ShopsAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in 'Facebook url', with: 'http://www.facebook.com/pages/NimbleSHOP/119319381517845'
     fill_in 'From email', with: 'shop@nimbleshop.com'
     choose 'Authorize and capture the credit card for the total amount of the order .'
-    select(find(:xpath, "//*[@id='shop_time_zone']/option[2]").text, :from => 'shop_time_zone')
+    select(find(:xpath, "//*[@id='shop_time_zone']/option[2]").text, from: 'shop_time_zone')
     click_button 'Submit'
 
     assert page.has_content?('Shop was successfully updated')

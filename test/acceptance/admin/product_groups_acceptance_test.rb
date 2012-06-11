@@ -37,20 +37,20 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in 'Name', with: 'sweet candies'
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text,
-                :from => 'product_group_product_group_conditions_attributes_0_name')
+                from: 'product_group_product_group_conditions_attributes_0_name')
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='contains']").text,
-                :from => 'product_group_product_group_conditions_attributes_0_operator')
+                from: 'product_group_product_group_conditions_attributes_0_operator')
 
     fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'candy'
 
     click_link 'Add'
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_name']/option[@value='name']").text,
-                :from => 'product_group_product_group_conditions_attributes_1_name')
+                from: 'product_group_product_group_conditions_attributes_1_name')
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_1_operator']/option[@value='starts']").text,
-                :from => 'product_group_product_group_conditions_attributes_1_operator')
+                from: 'product_group_product_group_conditions_attributes_1_operator')
 
     fill_in 'product_group_product_group_conditions_attributes_1_value', with: 'sweet'
 
@@ -65,7 +65,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'awesome'
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text,
-                :from => 'product_group_product_group_conditions_attributes_0_operator')
+                from: 'product_group_product_group_conditions_attributes_0_operator')
 
     click_link 'Remove'
     click_button 'Submit'

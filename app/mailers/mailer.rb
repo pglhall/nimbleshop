@@ -1,11 +1,11 @@
 class Mailer < ActionMailer::Base
   helper :frontend
 
-  default :theme => "simply"
+  default theme: "simply"
 
   layout 'email'
 
-  default :from => lambda { Shop.first.from_email }
+  default from: lambda { Shop.first.from_email }
   default_url_options[:host] = Settings.host_for_email
   default_url_options[:protocol] = 'http'
 
