@@ -64,7 +64,7 @@ module Search
     @field_handler = klass.new(self)
   end
 
-  def arel_field
+  def query_field
     target_table.send(:[], query_column)
   end
 

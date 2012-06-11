@@ -1,6 +1,6 @@
 module Search
   class TextField < BaseField
-    delegate :matches, to: :arel_field
+    delegate :matches, to: :query_field
 
     def contains(val)
       matches("%#{val}%")

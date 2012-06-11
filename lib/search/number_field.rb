@@ -1,6 +1,6 @@
 module Search
   class NumberField < BaseField
-    delegate :eq, :lt, :gt, :lteq, :gteq, :to => :arel_field
+    delegate :eq, :lt, :gt, :lteq, :gteq, to: :query_field
 
     def valid_value_data_type?
       value && value.to_s.try(:match, /\A[+-]?\d+?(\.\d+)?\Z/).present?

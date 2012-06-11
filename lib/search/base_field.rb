@@ -1,7 +1,7 @@
 module Search
   class BaseField
     attr_accessor :condition
-    delegate :arel_field, :value, to: :condition
+    delegate :query_field, :value, to: :condition
 
     def initialize(condition)
       self.condition = condition
