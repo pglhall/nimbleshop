@@ -4,8 +4,11 @@ class TaxCalculator
     @order = order
   end
 
+  # Returns tax amount in float
   def tax
-    (@order.line_items_total * tax_percentage * BigDecimal.new("0.01")).to_f.round(2)
+    amount = BigDecimal(@order.line_items_total.to_s)
+
+    (amount * BigDecimal(tax_percentage.to_s) * BigDecimal.new("0.01")).round(2).to_f
   end
 
   private
