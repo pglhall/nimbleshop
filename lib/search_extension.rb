@@ -30,11 +30,11 @@ module SearchExtension
   end
 
   def handle_joins
-    inject(Product.arel_table) { | p, condition | condition.join(p) }
+    reduce(Product.arel_table) { | p, condition | condition.join(p) }
   end
 
   def handle_where_conditions
-    inject(nil) { | p, condition | condition.where(p) }
+    reduce(nil) { | p, condition | condition.where(p) }
   end
 
   def filter_on_active(search)

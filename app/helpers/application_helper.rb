@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def grouped_options_for_country_state_codes
-    Carmen::Country.all.inject({}) do |h, country|
+    Carmen::Country.all.reduce({}) do |h, country|
       h[country.alpha_2_code] = country.subregions.map do |r|
         [r.name, r.code]
       end

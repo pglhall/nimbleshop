@@ -35,7 +35,7 @@ class Util
   end
 
   def self.disabled_shipping_zone_countries
-    countries_with_shipping_zone.inject([]) { |result, element| result << [element[0], element[1], {disabled: :disabled}]}
+    countries_with_shipping_zone.reduce([]) { |result, element| result << [element[0], element[1], {disabled: :disabled}]}
   end
 
   def self.unconfigured_shipping_zone_countries
