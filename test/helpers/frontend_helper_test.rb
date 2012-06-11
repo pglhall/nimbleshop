@@ -9,7 +9,7 @@ class FrontendHelperTest < ActiveRecord::TestCase
   end
 
   test "display_address" do
-    addr = create(:address, address1: "<script>alert('hi')</script>")
+    addr = create :address, address1: "<script>alert('hi')</script>"
     output = helper.display_address(addr)
     refute output.include?('<script>')
   end
