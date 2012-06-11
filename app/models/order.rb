@@ -94,8 +94,11 @@ class Order < ActiveRecord::Base
     update_quantity({product.id => 0})
   end
 
+  # Returns the total price of all line items in float.
   def line_items_total
-    line_items.map(&:price).reduce(:+) || 0
+    line_items.inject(BigDecimal('0')) do |sum, line_item|
+      sum + BigDecimal(line_item.price.to_s)
+    end.round(2).to_f
   end
 
   def price
