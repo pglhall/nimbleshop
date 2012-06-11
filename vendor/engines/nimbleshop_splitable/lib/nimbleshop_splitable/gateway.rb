@@ -43,8 +43,8 @@ module NimbleshopSplitable
     def add_order_data(params, order)
       params[:total_amount] = order.total_amount_in_cents
       params[:invoice]      = order.number
-      params[:shipping]     = (order.shipping_method.shipping_cost.round(2).to_f * 100).to_i
-      params[:tax]          = (order.tax.round(2).to_f * 100).to_i
+      params[:shipping]     = Util.in_cents(ShippingCostCalculator.new(order).shipping_cost)
+      params[:tax]          = Util.in_cents(TaxCalculator.new(order).tax)
       params[:description]  = 'See Splitable integrates nicely with nimbleShop'
     end
 

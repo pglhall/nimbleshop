@@ -1,5 +1,10 @@
 class Util
 
+  # Converts the amount in cents and returns an integer.
+  def self.in_cents(amount)
+    (BigDecimal(amount.to_s) * 100).round(0).to_i
+  end
+
   # returns public url for a given localhost url
   #
   # Usage: localhost2public_url ( '/nimbleshop_paypal/notify', 'http' )
