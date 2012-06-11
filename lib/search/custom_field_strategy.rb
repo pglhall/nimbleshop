@@ -16,7 +16,7 @@ module Search
     end
 
     def custom_field
-      @_field ||= CustomField.find(self.name)
+      @_custom_field ||= CustomField.find(self.name)
     end
 
     def query_column
