@@ -28,11 +28,11 @@ class LinkGroupsAcceptanceTest < ActionDispatch::IntegrationTest
   end
 
   test "delete link group" do
-    @nav = @link_group.navigations.create(product_group: @product_group)
+    nav = @link_group.navigations.create(product_group: @product_group)
     Capybara.current_driver =  :selenium
     visit admin_link_groups_path
     page.evaluate_script('window.confirm = function() { return true; }')
-    find("a[href='#{admin_link_group_navigation_path(link_group_id: @link_group, id: @nav)}']").click
+    find("a[href='#{admin_link_group_navigation_path(link_group_id: @link_group, id: nav)}']").click
     assert page.has_content?('Successfully deleted')
   end
 

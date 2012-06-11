@@ -3,7 +3,6 @@ require "test_helper"
 class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
 
   setup do
-    Capybara.current_driver = :rack_test
     visit admin_path
     click_link 'Products'
     click_link 'add_new_product'
@@ -23,11 +22,10 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
   test "should create a new product with image" do
     skip "it is hard to get to the file element to test uploading of picture" do
       attach_file "Picture", "#{Rails.root}/app/assets/stylesheets/admin.css"
-      msg = %Q{Pictures picture You are not allowed to upload } <<
-            %Q{"css" files, allowed types: ["jpg", "jpeg", "gif", "png"]}
+      msg = %Q{Pictures picture You are not allowed to upload css" files, allowed types: ["jpg", "jpeg", "gif", "png"]}
       assert page.has_content?(msg)
 
-      attach_file "Picture", "#{Rails.root}/spec/support/images/cookware.jpg"
+      attach_file "Picture", "#{Rails.root}/test/support/images/cookware.jpg"
       click_button 'Submit'
       assert page.has_xpath?("//img[@alt='Small_cookware']")
     end
@@ -44,7 +42,7 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Price is not a number")
     assert page.has_content?("Price can't be blank")
 
-    fill_in 'Price', :with => 'wrong price'
+    fill_in 'Price', with: 'wrong price'
     click_button 'Submit'
 
     assert page.has_content?("Price is not a number")
@@ -65,7 +63,6 @@ end
 class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
 
   setup do
-    Capybara.current_driver = :rack_test
     create(:product, name: 'test')
   end
 
