@@ -5,10 +5,8 @@ module Search
     end
 
     def target_table
-      unless @_target
-        @_target = Product.arel_table
-      end
-      @_target
+      @_target = Product.arel_table unless @_target_table
+      @_target_table
     end
 
     def query_column
