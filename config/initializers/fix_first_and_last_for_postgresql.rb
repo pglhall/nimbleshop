@@ -1,3 +1,4 @@
+# FIXME
 class ActiveRecord::Base
 
   def self.first
