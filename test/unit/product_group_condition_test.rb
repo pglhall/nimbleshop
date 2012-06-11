@@ -2,7 +2,7 @@ require "test_helper"
 
 class ProductGroupConditonTest < ActiveSupport::TestCase
 
-  test "operators for number" do
+  test "valid operators for number" do
     condition = build(:number_group_condition)
 
     %w(lt gt lteq gteq).each do | operator |
@@ -31,7 +31,7 @@ class ProductGroupConditonTest < ActiveSupport::TestCase
     end
   end
 
-  test "operators for date" do
+  test "valid operators for date" do
     condition = build(:date_group_condition)
 
     %w(lt gt lteq gteq).each do | operator |

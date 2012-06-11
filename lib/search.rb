@@ -9,14 +9,18 @@ module Search
   extend ActiveSupport::Concern
 
   included do
-    attr_reader :query_column, :query_strategy
 
+    # query_column is the value of name column in product_group_condition for core fields.
+    # For custom fields this value will be overridden
+    attr_reader :query_column
+
+    # field_handler could be TextField, NumberField or any other field handler.
+    attr_reader :field_handler
+
+    # index is used by custom_field_strategy
     attr_accessor :index
 
-    delegate  :where,
-      :valid_value_data_type?,
-      :valid_operator?,
-      :to => :query_strategy
+    delegate  :where, :valid_value_data_type?, :valid_operator?, to: :field_handler
 
     validate  :validate_value_data_type
     validate  :validate_operator
@@ -31,6 +35,7 @@ module Search
     end
   end
 
+  # TODO not sure if it is needed
   def summary
     I18n.t(self.operator.to_sym, { field: localized_name, value: self.value })
   end
@@ -38,29 +43,25 @@ module Search
   private
 
   def validate_operator
-    unless valid_operator?(operator)
-      self.errors.add(:operator, :invalid)
-    end
+    self.errors.add(:operator, :invalid) unless valid_operator?(operator)
   end
 
   def validate_value_data_type
-    unless valid_value_data_type?
-      self.errors.add(:value, :invalid)
-    end
-  end
-
-  def set_join_module
-    extend(custom_field? ? CustomFieldStrategy : CoreFieldStrategy)
+    self.errors.add(:value, :invalid) unless valid_value_data_type?
   end
 
   def prepare_instance
-    set_join_module
-    set_where_module
+    set_strategy
+    set_field_handler
   end
 
-  def set_where_module
+  def set_strategy
+    extend(custom_field? ? CustomFieldStrategy : CoreFieldStrategy)
+  end
+
+  def set_field_handler
     klass = Search.const_get("#{field_type.classify}Field")
-    @query_strategy = klass.new(self)
+    @field_handler = klass.new(self)
   end
 
   def arel_field

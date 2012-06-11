@@ -29,7 +29,7 @@ require 'test_helper' do
   end
 
 
-  test "should return products using equality operator" do
+  test "returns products using equality operator" do
     group = create(:product_group)
     condition = group.product_group_conditions.build(name: @text.id)
 
@@ -47,11 +47,11 @@ require 'test_helper' do
     assert_equal [ @p4 ], group.products
   end
 
-  test "should return products using starts with operator" do
+  test "returns products using starts with operator" do
     group = create(:product_group)
     condition = group.product_group_conditions.build(name: @text.id)
-
     condition.operator = 'starts'
+
     condition.value = 'george'
     assert_equal [ @p1, @p2 ], group.products
 
@@ -65,11 +65,11 @@ require 'test_helper' do
     assert_equal [ @p2 ], group.products
   end
 
-  test "should return products using ends with operator" do
+  test "returns products using ends with operator" do
     group = create(:product_group)
     condition = group.product_group_conditions.build(name: @text.id)
-
     condition.operator = 'ends'
+
     condition.value = 'murphy'
     assert_equal [ @p2 ], group.products
 
@@ -80,22 +80,22 @@ require 'test_helper' do
     assert_equal [ @p4 ], group.products
   end
 
-    test "should show results to equality operator" do
-      group     = create(:product_group)
-      condition = group.product_group_conditions.create(name: @number.id.to_s, operator: 'eq', value: 23)
+  test "show results to equality operator" do
+    group     = create(:product_group)
+    condition = group.product_group_conditions.create(name: @number.id.to_s, operator: 'eq', value: 23)
 
-      assert_equal [ @p1 ], group.products
-      condition.value = 73
-      assert_equal [ @p2 ], group.products
-    end
+    assert_equal [ @p1 ], group.products
+    condition.value = 73
+    assert_equal [ @p2 ], group.products
+  end
 
-    test "should return products with multiple vlaues" do
-      group     = create(:product_group)
-      group.product_group_conditions.create(name: @number.id.to_s, operator: 'lt', value: 25)
-      group.product_group_conditions.create(name: @text.id.to_s, operator: 'starts', value: 'george')
+  test "returs products with multiple vlaues" do
+    group     = create(:product_group)
+    group.product_group_conditions.create(name: @number.id.to_s, operator: 'lt', value: 25)
+    group.product_group_conditions.create(name: @text.id.to_s, operator: 'starts', value: 'george')
 
-      assert_equal [ @p1 ], group.products
-    end
+    assert_equal [ @p1 ], group.products
+  end
 end
 
 
