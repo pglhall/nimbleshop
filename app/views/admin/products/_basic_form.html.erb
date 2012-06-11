@@ -42,9 +42,6 @@
         <%= f.label :description, 'Description', class: 'control-label' %>
         <div class="controls">
           <%= f.text_area :description, class: 'span8 autoresize', rows: 5 %>
-          <p class="help-block">
-            Html tags is allowed.
-          </p>
         </div>
       </div>
 
@@ -56,8 +53,7 @@
       </div>
 
       <% @product.custom_field_answers.each do | answer | %>
-        <%= render :partial => '/admin/products/custom_field_answer',
-                          :locals => { :f => f, :answer => answer } %>
+        <%= render :partial => '/admin/products/custom_field_answer', :locals => { :f => f, :answer => answer } %>
       <% end %>
 
       <div class="control-group">
