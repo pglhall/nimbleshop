@@ -10,7 +10,7 @@ module CheckoutTestHelper
   end
 
   def enter_valid_shipping_address
-    {first_name: 'Neeaj', 
+    {first_name: 'Neeaj',
      last_name: 'Singh', 
      address1: '100 N. Miami Ave', 
      address2: 'Suite #500',

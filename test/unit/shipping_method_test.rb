@@ -57,7 +57,7 @@ class ShippingMethodScopesTest < ActiveSupport::TestCase
   end
 
   test "#available_countries" do
-    assert_must_have_same_elements ShippingMethod.available_for_countries(1000), ['US', 'HK']
+    assert_sorted_equal ShippingMethod.available_for_countries(1000).sort, ['US', 'HK'].sort
   end
 end
 

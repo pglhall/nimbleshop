@@ -28,14 +28,12 @@ class ProductStatusTest < ActiveSupport::TestCase
   end
 
   test "various status" do
-    assert_must_have_same_elements [ @product2, @product3 ], Product.hidden
-    assert_must_have_same_elements  [ @product5 ], Product.sold_out
+    assert_must_have_same_records [ @product2, @product3 ], Product.hidden
+    assert_must_have_same_records  [ @product5 ], Product.sold_out
   end
 
   test "active status" do
-    skip "not sure why it is failing" do
-      assert_must_have_same_elements [ @product1, @product4 ], Product.active
-    end
+    assert_must_have_same_records [ @product1, @product4 ], Product.active
   end
 
 end

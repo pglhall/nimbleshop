@@ -1,21 +1,21 @@
 module M
 
-  def assert_must_be_like a, other
-    assert_equal a.gsub(/\s+/, ' ').strip, other.gsub(/\s+/, ' ').strip
+  def assert_must_be_like a, b
+    assert_equal a.gsub(/\s+/, ' ').strip, b.gsub(/\s+/, ' ').strip
   end
 
-  def assert_sanitized_equal a, other
-    _a = a.gsub(/\W/, ' ').gsub(/\s/, '').strip
-    _other = other.gsub(/\W/, ' ').gsub(/\s/, '').strip
-    assert_equal _a, _other
+  def assert_sanitized_equal a, b
+    a1 = a.gsub(/\W/, ' ').gsub(/\s/, '').strip
+    b2 = b.gsub(/\W/, ' ').gsub(/\s/, '').strip
+    assert_equal a1, b2
   end
 
-  def assert_must_have_same_elements obj1, obj2
-    a1 = obj1
-    a2 = obj2
-    a1h = a1.reduce({}) { |h,e| h[e] = a1.select { |i| i == e }.size; h }
-    a2h = a2.reduce({}) { |h,e| h[e] = a2.select { |i| i == e }.size; h }
-    assert_equal a1h, a2h
+  def assert_sorted_equal a, b
+    assert_equal a.sort, b.sort
+  end
+
+  def assert_must_have_same_records a, b
+    assert_sorted_equal a.map(&:id), b.map(&:id)
   end
 end
 
