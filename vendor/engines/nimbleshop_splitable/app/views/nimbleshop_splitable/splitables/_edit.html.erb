@@ -3,10 +3,12 @@
    <div>
     <h2> Splitable </h2>
     <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-splitable-payment-method-edit" %>
-    <%= link_to 'Delete', nimbleshop_splitable.splitable_path,  confirm: 'Do you really want to delete Authorize.net payment method',
+    <%= link_to nimbleshop_splitable.splitable_path,  confirm: 'Do you really want to delete Authorize.net payment method',
                                                                 class: 'nimbleshop-payment-method-delete',
                                                                 method: :delete,
-                                                                remote: true %>
+                                                                remote: true do %>
+        <i class='icon-remove icon-white'></i>
+    <% end %>
     <%= nimbleshop_splitable_logo %>
     <div class='clear'></div>
   </div>

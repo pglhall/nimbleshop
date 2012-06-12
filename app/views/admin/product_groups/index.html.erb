@@ -19,8 +19,9 @@
         <td>
           <%= link_to t(:edit), edit_admin_product_group_path(product_group), title: 'Edit' %>
           |
-          <%= link_to t(:delete), [:admin, product_group], confirm: t(:delete_confirmation_for_product_group),
-                                                                          method: 'delete', class: 'delete', title: 'Delete' %>
+          <%= link_to [:admin, product_group], confirm: t(:delete_confirmation_for_product_group), method: 'delete', class: 'delete', title: 'Delete' do %>
+            <i class="icon-remove icon-white"></i>
+          <% end %>
         </td>
         </td>
       </tr>
