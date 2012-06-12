@@ -1,9 +1,11 @@
 
 //= require jquery-1.7.1
 //= require jquery-ui-1.8.16
-//= require accounting
-//= require twitter/bootstrap
 //= require jquery-ujs
+//= require accounting
+
+/* bootstrap must be after jquery-ujs */
+//= require twitter/bootstrap 
 
 // loaded using fancybox-rails gem
 //= require fancybox
