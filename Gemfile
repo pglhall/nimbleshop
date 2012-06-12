@@ -77,7 +77,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'ruby-debug19', require: 'ruby-debug'
+  gem 'debugger'#, require: 'ruby-debug'
 
   gem 'push2heroku',  github: 'neerajdotname/push2heroku'
   gem 'localtunnel',  github: 'jalada/localtunnel'
