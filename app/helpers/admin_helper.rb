@@ -1,7 +1,5 @@
 module AdminHelper
 
-
-
   ROUTE_MAP = {
       admin_products_path:        'admin/products',
       admin_custom_fields_path:   'admin/custom_fields',
@@ -61,7 +59,7 @@ module AdminHelper
 
   def gravatar_for(email, options = {})
     return if email.blank?
-    options = {alt: 'avatar', class: 'avatar', size: 50}.merge! options
+    options = { alt: 'avatar', class: 'avatar', size: 50 }.merge! options
     id = Digest::MD5::hexdigest(email.strip.downcase)
     url = 'http://www.gravatar.com/avatar/' + id + '.jpg?d=mm&s=' + options[:size].to_s
     options.delete :size
@@ -74,6 +72,12 @@ module AdminHelper
     else
       shipment.name
     end
+  end
+
+  def delete_icon
+    %Q{
+      <i class='icon-remove icon-black'></i>
+    }.html_safe
   end
 
 end

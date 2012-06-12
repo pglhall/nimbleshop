@@ -21,7 +21,7 @@
           <%= link_to t(:edit), edit_admin_custom_field_path(custom_field), title: 'Edit' %>
           |
           <%= link_to [:admin, custom_field], confirm: t(:delete_confirmation_for_custom_field), method: 'delete', class: 'delete', title: 'Delete' do %>
-            <i class="icon-remove icon-white"></i>
+            <%= delete_icon %>
           <% end %>
         </td>
         </td>
