@@ -1,3 +1,7 @@
+h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 #complete p.button {
   margin: 10px 0 10px 0;
 }
@@ -168,12 +172,19 @@ table tr td .rhs {
 }
 
 .delete{
-	display: inline-block;
-	text-indent: -9999px;
-	width: 10px;
-	height: 11px;
-	background: url("/assets/trash.gif") no-repeat transparent;
-	vertical-align: middle;
+	/*display: inline-block;*/
+	/*text-indent: -9999px;*/
+	/*width: 10px;*/
+	/*height: 11px;*/
+	/*background: url("/assets/trash.gif") no-repeat transparent;*/
+	/*vertical-align: middle;*/
+  font-size: 9px;
+  color: #999;
+}
+
+a.delete:hover {
+  color: #999;
+  font-size: 9px;
 }
 
 
