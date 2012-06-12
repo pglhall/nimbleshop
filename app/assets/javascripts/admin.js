@@ -21,5 +21,6 @@
 //= require admin/products/edit
 //= require fadeout_success
 //= require autoresize
-//= require twitter_bootstrap
+//= require loading_state_for_buttons
 //= require lab
+
