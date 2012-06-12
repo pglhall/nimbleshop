@@ -44,9 +44,10 @@
       <%= hidden_field_tag :permalink, @product.permalink %>
 
       <div id="buy" class="clear">
-        <%= submit_tag 'Add to cart', class: 'btn btn-primary', id: 'add-to-cart' %>
+        <%= submit_tag 'Add to cart', class: 'btn btn-primary', id: 'add-to-cart', 'data-loading-text' => 'adding..' %>
       </div>
     <% end %>
+
 
     <h4 id='product-description'>Description</h4>
 

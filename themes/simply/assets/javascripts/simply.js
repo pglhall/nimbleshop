@@ -18,3 +18,5 @@
 //= require remove_item_from_cart
 //= require load_states
 //= require order
+//= require loading_for_buttons
+
