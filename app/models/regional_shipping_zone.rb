@@ -13,7 +13,7 @@ class RegionalShippingZone < ShippingZone
   def code_validity
     country = country_shipping_zone.country
     unless country.subregions.coded(state_code)
-      self.errors.add(:state_code, "#{state_code} is an invalid regional code for country #{country.name}")
+      errors.add(:state_code, "#{state_code} is an invalid regional code for country #{country.name}")
     end
   end
 

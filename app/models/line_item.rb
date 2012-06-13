@@ -22,13 +22,13 @@ class LineItem < ActiveRecord::Base
   alias_attribute :description, :product_description
 
   def price
-    self.product_price * self.quantity
+    product_price * quantity
   end
 
   # update quantity count. If count is zero then delete the line_item .
   def update_quantity(count)
     count = count.to_i
-    (count > 0) ? self.update_attributes(quantity: count) : self.destroy
+    (count > 0) ? update_attributes(quantity: count) : destroy
   end
 
   private
@@ -40,7 +40,7 @@ class LineItem < ActiveRecord::Base
     self.product_permalink   = product.permalink
 
     %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |size|
-      self.send("picture_#{size}=", product.picture.picture_url(size.intern))
+      send("picture_#{size}=", product.picture.picture_url(size.intern))
     end
   end
 end

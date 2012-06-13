@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
 
   validates :status, inclusion: { in: %w(active hidden sold_out) }, presence: true
 
-  has_many :pictures, order: 'pictures.position', dependent: :destroy
+  has_many :pictures, order: 'pictures.position'
 
   has_many :custom_field_answers, dependent: :destroy
 
@@ -48,8 +48,8 @@ class Product < ActiveRecord::Base
   end
 
   def find_or_build_answer_for_field(field)
-    self.custom_field_answers.detect {|t| t.custom_field_id.to_s == field.id.to_s } ||
-      self.custom_field_answers.build(custom_field_id: field.id)
+    custom_field_answers.detect {|t| t.custom_field_id.to_s == field.id.to_s } ||
+      custom_field_answers.build(custom_field_id: field.id)
   end
 
   def find_or_build_all_answers
@@ -60,7 +60,7 @@ class Product < ActiveRecord::Base
   def pictures_order=(value)
     return if value.empty?
     ordered_pictures = ActiveSupport::JSON.decode(value)
-    current_pictures = self.pictures
+    current_pictures = pictures
 
     ordered_pictures.each{|position, picture_id|
       if picture_id.present?

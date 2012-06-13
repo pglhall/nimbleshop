@@ -8,11 +8,11 @@ class Picture < ActiveRecord::Base
 
   %w(tiny tiny_plus small small_plus medium medium_plus large large_plus carousel).each do |version|
     define_method :"#{version}_height" do
-      self.picture.send(version).height
+      picture.send(version).height
     end
 
     define_method :"#{version}_width" do
-      self.picture.send(version).width
+      picture.send(version).width
     end
   end
 
