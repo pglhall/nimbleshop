@@ -43,3 +43,8 @@
 .navbar .nav > li > a.go-to-shop:hover {
   text-decoration:underline;
 }
+
+
+#product-group-edit-form .condition {
+  margin: 9px 0;
+}
