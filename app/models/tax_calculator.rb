@@ -1,5 +1,4 @@
 class TaxCalculator
-
   def initialize(order)
     @order = order
   end
@@ -13,8 +12,7 @@ class TaxCalculator
 
   private
 
-  def tax_percentage
-    Shop.first.tax_percentage
-  end
-
+    def tax_percentage
+      Shop.first.tax_percentage
+    end
 end

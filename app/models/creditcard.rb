@@ -72,7 +72,7 @@ class Creditcard
     if cardtype = ActiveMerchant::Billing::CreditCard.type?(number)
       self.cardtype = cardtype
     else
-      self.errors.add(:base, 'Please check credit card number. It does not seem right.')
+      errors.add(:base, 'Please check credit card number. It does not seem right.')
     end
   end
 

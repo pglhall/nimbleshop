@@ -29,7 +29,7 @@ class Address < ActiveRecord::Base
   end
 
   def to_credit_card_attributes
-    self.attributes.slice(*CREDIT_CARD_ATTRIBUTES).merge('state' => state_name)
+    attributes.slice(*CREDIT_CARD_ATTRIBUTES).merge('state' => state_name)
   end
 
   private
@@ -38,7 +38,7 @@ class Address < ActiveRecord::Base
     if country = Carmen::Country.coded(country_code)
       self.country_name = country.name
     else
-      self.errors.add(:country_code, "#{country_code} is not a valid country code")
+      errors.add(:country_code, "#{country_code} is not a valid country code")
     end
   end
 
@@ -48,15 +48,15 @@ class Address < ActiveRecord::Base
 
     if country.subregions?
       if state_code.blank?
-        self.errors.add(:state_code, "is required")
+        errors.add(:state_code, "is required")
       elsif state = country.subregions.coded(state_code)
         self.state_name = state.name
       else
-        self.errors.add(:state_code, "#{state_code} is not a valid state")
+        errors.add(:state_code, "#{state_code} is not a valid state")
       end
     else
       if state_name.blank?
-        self.errors.add(:state_name, "#{state_name} is required")
+        errors.add(:state_name, "#{state_name} is required")
       end
     end
   end

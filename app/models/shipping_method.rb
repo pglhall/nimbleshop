@@ -101,7 +101,7 @@ class ShippingMethod < ActiveRecord::Base
                   upper_price_limit: upper_price_limit }
 
       # TODO does it have to be false. why not use unless
-      if self.active == false
+      if active == false
         options.merge!(active: false)
       end
 
@@ -111,7 +111,7 @@ class ShippingMethod < ActiveRecord::Base
 
   def set_regions_inactive
       # TODO does it have to be false. why not use unless
-    if self.persisted? && self.active_changed? && active == false
+    if persisted? && active_changed? && active == false
       regions.each { |region| region.update_attributes!(active: false) }
     end
   end

@@ -20,7 +20,7 @@ class CountryShippingZone < ShippingZone
 
   def code_validity
     unless country
-      self.errors.add(:country_code, "is invalid")
+      errors.add(:country_code, "is invalid")
     end
   end
 

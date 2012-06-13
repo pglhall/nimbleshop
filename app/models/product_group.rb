@@ -60,9 +60,6 @@ class ProductGroup < ActiveRecord::Base
 
    # list of all product groups containing input product
   def self.contains_product(product)
-    self.all.select do |product_group|
-      product_group.exists?(product)
-    end
+    all.select { | product_group | product_group.exists?(product) }
   end
-
 end

@@ -20,8 +20,7 @@ class Shop < ActiveRecord::Base
 
   private
 
-  def sanitize_twitter_handle
-    self.twitter_handle.gsub!(/^@/, '')
-  end
-
+    def sanitize_twitter_handle
+      twitter_handle.gsub!(/^@/, '')
+    end
 end
