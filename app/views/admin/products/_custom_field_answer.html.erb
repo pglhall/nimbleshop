@@ -1,5 +1,5 @@
 <%= f.fields_for :custom_field_answers, answer do | field | %>
-  <div class="control-group">
+  <div class="control-group custom-fields">
     <%= field.label :value, answer.custom_field.name.titleize, class: 'control-label' %>
     <%= field.hidden_field :custom_field_id %>
     <div class="controls">
