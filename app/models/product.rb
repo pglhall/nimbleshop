@@ -8,17 +8,11 @@ class Product < ActiveRecord::Base
 
   validates :status, inclusion: { in: %w(active hidden sold_out) }, presence: true
 
-  has_many :pictures, order: 'pictures.position'
+  has_many :pictures, order: 'pictures.position', dependent: :destroy
 
-  has_many :custom_field_answers, dependent: :destroy do
-    def for(custom_field_name)
-      # TODO this one is causing one extra query. Look into removing it
-      custom_field = CustomField.find_by_name(custom_field_name)
-      where(['custom_field_answers.custom_field_id = ?', custom_field.id]).limit(1).try(:first)
-    end
-  end
+  has_many :custom_field_answers, dependent: :destroy
 
-  accepts_nested_attributes_for :pictures, allow_destroy: true
+  accepts_nested_attributes_for :pictures, allow_destroy: true, reject_if: proc { |r| r[:picture].blank? }
 
   accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
 
@@ -32,6 +26,7 @@ class Product < ActiveRecord::Base
 
 
   validates_presence_of :name, :description, :price
+
   validates_numericality_of :price
 
   def picture
@@ -52,10 +47,6 @@ class Product < ActiveRecord::Base
     p.save
   end
 
-  def custom_field_value_for(custom_field_name)
-    self.custom_field_answers.for(custom_field_name).value
-  end
-
   def find_or_build_answer_for_field(field)
     self.custom_field_answers.detect {|t| t.custom_field_id.to_s == field.id.to_s } ||
       self.custom_field_answers.build(custom_field_id: field.id)
@@ -65,9 +56,6 @@ class Product < ActiveRecord::Base
     CustomField.all.each { |f| find_or_build_answer_for_field(f) }
   end
 
-  def initialize_status
-    self.status ||= 'active'
-  end
 
   def pictures_order=(value)
     return if value.empty?
@@ -80,5 +68,9 @@ class Product < ActiveRecord::Base
         pic.update_attribute(:position, position) if pic
       end
     }
+  end
+
+  def initialize_status
+    self.status ||= 'active'
   end
 end
