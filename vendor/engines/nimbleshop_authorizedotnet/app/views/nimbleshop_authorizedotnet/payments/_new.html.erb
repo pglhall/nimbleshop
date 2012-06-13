@@ -1,3 +1,5 @@
+<br />
+<p>
 <label class='radio'>
   <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
   <label for='payment_choice'>
@@ -7,6 +9,7 @@
     <%= image_tag('discover.png') %>
   </label>
 </label>
+</p>
 
 <%= form_for @creditcard, url: nimbleshop_authorizedotnet.payment_path, remote: true, html: { id: 'authorizedotnet-payment-form', class: 'form-horizontal' } do |f| %>
   <div class='nimbleshop_authorizedotnet_umbrella'>
@@ -40,9 +43,15 @@
       </div>
 
       <div class='control-group'>
-        <%= f.label :expires_on, 'Expiration date', class: 'control-label' %>
+        <p style='padding-left:160px;'>
+        Expiration date
+        </p>
         <div class='controls'>
-          <%= f.date_select :expires_on, discard_day: true, start_year: Date.today.year, end_year: (Date.today.year + 10), add_month_numbers: true, order: [:day, :month, :year] %>
+          <%= f.date_select :expires_on,  discard_day: true, 
+            start_year: Date.today.year, 
+            end_year: (Date.today.year + 10), 
+            add_month_numbers: true, 
+            order: [:day, :month, :year] %>
         </div>
       </div>
     </fieldset>
@@ -56,3 +65,11 @@
   <%= render '/nimbleshop_authorizedotnet/payments/what_is_cvv' %>
 <% end %>
 
+<style>
+  #creditcard_expires_on_2i{
+    width: 130px;
+  }
+  #creditcard_expires_on_1i {
+    width: 100px;
+  }
+</style>
