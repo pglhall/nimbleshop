@@ -4,31 +4,32 @@ module Sampledata
     attr_accessor :products
 
     def populate
-      load_products
       load_shop
-      load_price_information
-      load_category_information
       load_shipping_methods
-      load_products_desc
-      process_pictures
+      load_product_group_for_price
+      load_product_group_for_category
+
+      load_tag_watch
+      load_iphone_cover
+      load_turquoise_bracelet
+      load_bag
+      load_tajmahal
+      load_chronograph_watch
+      load_mangoes
+      load_bangles
+      load_shoes
     end
+
+    private
 
     def load_shop
-        Shop.create!( name:           'nimbleShop',
-                     phone_number:    '800-456-7890',
-                     twitter_handle:  '@nimbleshop',
-                     from_email:      'support@nimbleshop.com',
-                     tax_percentage: 1.23,
-                     google_analytics_tracking_id: Settings.google_analytics_tracking_id,
-                     facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
-    end
-
-    def process_pictures
-      puts "processing pictures. Might take a while ...."
-
-      products.each_with_index do |product, index|
-        handle_pictures_for_product(product, "product#{index+1}")
-      end
+      Shop.create!( name:           'nimbleShop',
+                   phone_number:    '800-456-7890',
+                   twitter_handle:  '@nimbleshop',
+                   from_email:      'support@nimbleshop.com',
+                   tax_percentage: 1.23,
+                   google_analytics_tracking_id: Settings.google_analytics_tracking_id,
+                   facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
     end
 
     def handle_pictures_for_product(product, dirname)
@@ -44,7 +45,7 @@ module Sampledata
       product.attach_picture(filename_with_extension, path)
     end
 
-    def load_price_information
+    def load_product_group_for_price
       pg_lt_50 = ProductGroup.create!(name: '< $50')
       pg_lt_50.product_group_conditions.create(name: 'price', operator: 'lt', value: 50)
       pg_between_50_100 = ProductGroup.create!(name: '$50 - $100')
@@ -59,17 +60,8 @@ module Sampledata
       Navigation.create!(link_group: link_group, product_group: pg_gt_100)
     end
 
-    def load_category_information
+    def load_product_group_for_category
       cf = CustomField.create!(name: 'category', field_type: 'text')
-      products[0].custom_field_answers.create(custom_field: cf, value: 'art')
-      products[1].custom_field_answers.create(custom_field: cf, value: 'toy')
-      products[2].custom_field_answers.create(custom_field: cf, value: 'fashion')
-      products[3].custom_field_answers.create(custom_field: cf, value: 'food')
-      products[4].custom_field_answers.create(custom_field: cf, value: 'fashion')
-      products[5].custom_field_answers.create(custom_field: cf, value: 'fashion')
-      products[6].custom_field_answers.create(custom_field: cf, value: 'fashion')
-      products[7].custom_field_answers.create(custom_field: cf, value: 'toy')
-      products[8].custom_field_answers.create(custom_field: cf, value: 'fashion')
 
       pg_food = ProductGroup.create!(name: 'Food')
       pg_food.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'food')
@@ -84,7 +76,6 @@ module Sampledata
       pg_fashion.product_group_conditions.create(name: cf.id, operator: 'eq', value: 'fashion')
 
       link_group = LinkGroup.create!(name: 'Shop by category')
-      link_group.navigations.create(product_group: pg_toy)
       link_group.navigations.create(product_group: pg_art)
       link_group.navigations.create(product_group: pg_food)
       link_group.navigations.create(product_group: pg_fashion)
@@ -97,41 +88,11 @@ module Sampledata
 
       ShippingMethod.create!(name: 'Express shipping', base_price: 30, shipping_zone_id: sz.id,
                              lower_price_limit: 10, upper_price_limit: 999999)
-
-      return
-      ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
-                             lower_price_limit: 10, upper_price_limit: 20)
-      ShippingMethod.create!(name: 'Ground shipping', base_price: 20, shipping_zone_id: sz.id,
-                             lower_price_limit: 20)
-
-      ShippingMethod.create!(name: 'Express shipping', base_price: 15, shipping_zone_id: sz.id,
-                             lower_price_limit: 10, upper_price_limit: 20)
-      ShippingMethod.create!(name: 'Express shipping', base_price: 25, shipping_zone_id: sz.id,
-                             lower_price_limit: 20)
     end
 
-    def load_products
-      self.products = []
-
-      products << Product.create!( title: "Beautiful portrait of Tajmahal", price: 19, description: 'tbd', status: 'active')
-      products << Product.create!( title: "Set of three barbies", price: 47, description: 'tbd', status: 'active')
-      products << Product.create!( title: "Coin Bracelet", price: 78, description: 'tbd', status: 'active')
-      products << Product.create!( title: "Indian mangoes basket", price: 81, description: 'tbd', status: 'active')
-      products << Product.create!( title: "Simple and elegant bag", price: 107, description: 'tbd', status: 'active')
-
-      product = Product.create!( title: "Handmade bangles", price: 11, description: 'tbd', status: 'active')
-      products << product
-
-
-      products << Product.create!( title: "Colorful shoes", price: 191, description: 'tbd')
-      products << Product.create!( title: "TAG Heuer Aquaracer 500M Ceramic Watch", price: 3000, description: 'tbd')
-      products << Product.create!( title: "Set of six tea cups", price: 41, description: 'tbd')
-    end
-
-    def load_products_desc
-      descriptions = []
-
-      desc_0 = %q{
+    def load_tajmahal
+      print '.'
+      desc = %q{
         Year of construction: 1631
         Completed in: 1653
         Time taken: 22 years
@@ -147,61 +108,104 @@ module Sampledata
 
         Facts do not capture what Tajmahal is.
       }
-      descriptions << desc_0
+      product = Product.create!( title: "Beautiful portrait of Tajmahal", price: 19, description: desc)
+      handle_pictures_for_product(product, "product1")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'art')
+    end
 
-      desc_1 = %q{
-        Barbies are lovely.
+    def load_chronograph_watch
+      print '.'
+      desc = %q{
+        Chronograph sport watch from Guess
+
+        Chronograph: Stopwatch function, 24 Hour/Intl. time
+        43/43/13 
+        Brushed + Polished Ionic Black case
+        Red + Black dial
+        Brushed + Polished Ionic Black Steel bracelet 
+        100 M/330 FT Water resistant
       }
-      descriptions << desc_1
+      product = Product.create!( title: "chronograph sport watch from Guess", price: 219, description: desc)
+      handle_pictures_for_product(product, "product2")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_2 = %q{
-        Bracelet made from turqoise magnesite coin beads, smooth and sensual.
+    def load_turquoise_bracelet
+      print '.'
+      desc = %q{
+        Simple, modern, stylish, easy to wear bracelet ! 
+
+        For a scale reference please see the photos with the bracelet worn.
+
+        For a custom color bracelet send me a message and I will see what colors are available for your bracelet.
+
+        The strap of the bracelet can also be customized in any color you would like. 
+
+        All items come to you beautifully packaged and ready for gift giving.
+
+        Note that real colors may slightly differ from their appearance on your display.
         }
-      descriptions << desc_2
+      product = Product.create!( title: "Turquoise bracelet", price: 89, description: desc)
+      handle_pictures_for_product(product, "product3")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_3 = %q{
-                The mango is the national fruit of India and Pakistan. It is also the national fruit in the Philippines. The mango tree is the national tree of Bangladesh.
+    def load_mangoes
+      print '.'
+      desc = %q{
+        The mango is the national fruit of India and Pakistan. It is also the national fruit in the Philippines. The mango tree is the national tree of Bangladesh.
 
-                In Hinduism, the perfectly ripe mango is often held by Lord Ganesha as a symbol of attainment, regarding the devotees potential perfection. 
-                Mango blossoms are also used in the worship of the goddess Saraswati. No Telugu/Kannada new year's day called Ugadi passes without eating 
-                ugadi pacchadi made with mango pieces as one of the ingredients. In Tamil Brahmin homes mango is an ingredient in making vadai paruppu on 
-                Sri Rama Navami day (Lord Ram's Birth Day) and also in preparation of pachchadi on Tamil new year's day.
-                The Jain goddess Ambika is traditionally represented as sitting under a mango tree.
-
-                An image of Ambika under a mango tree in Cave of the Ellora Caves
-                Mango leaves are used to decorate archways and doors in Indian houses and during weddings and celebrations like Ganesh Chaturthi. 
-                Mango motifs and paisleys are widely used in different Indian embroidery styles, and are found in Kashmiri shawls, Kanchipuram silk sarees, etc. Paisleys are also common to Iranian art, because of its pre-Islamic Zoroastrian past.
+        Mango leaves are used to decorate archways and doors in Indian houses and during weddings and celebrations.
       }
-      descriptions << desc_3
+      product = Product.create!( title: "A basket of Indian mangoes", price: 17, description: desc)
+      handle_pictures_for_product(product, "product4")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'food')
+    end
 
-      desc_4 = %q{
-        Stylish bag in indigo color. How could you say no to this. 
+    def load_bag
+      print '.'
+      desc = %q{
+        Stylish bag in indigo color. How could you say no to this.
 
         It is just the perfect size also. It has enough space to carry ipad, magazine, cosmetic stuff and othe accessories.
 
         Length: 32cm(12.60 inches)
         Width: 19cm(7.48 inches)
       }
-      descriptions << desc_4
+      product = Product.create!( title: "A simple and elegant bag", price: 107, description: desc)
+      handle_pictures_for_product(product, "product5")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_5 = %q{
-  Bangles are part of traditional Indian jewelry. They are usually worn in pairs by women, one or more on each arm. Most Indian women prefer wearing either gold or glass bangles or combination of both. Inexpensive bangles made from plastic are slowly replacing those made by glass, but the ones made of glass are still preferred at traditional occasions such as marriages and on festivals.
+    def load_bangles
+      print '.'
+      desc = %q{
+        Bangles are part of traditional Indian jewelry. They are usually worn in pairs by women, one or more on each arm. Most Indian women prefer wearing either gold or glass bangles or combination of both. Inexpensive bangles made from plastic are slowly replacing those made by glass, but the ones made of glass are still preferred at traditional occasions such as marriages and on festivals.
 
-  The designs range from simple to intricate handmade designs, often studded with precious and semi-precious stones such as diamonds, gems and pearls. Sets of expensive bangles made of gold and silver make a jingling sound. The imitation jewelry, tend to make a tinny sound when jingled.
+        The designs range from simple to intricate handmade designs, often studded with precious and semi-precious stones such as diamonds, gems and pearls. Sets of expensive bangles made of gold and silver make a jingling sound. The imitation jewelry, tend to make a tinny sound when jingled.
 
-  It is tradition that the bride will try to wear as many small glass bangles as possible at her wedding and the honeymoon will end when the last bangle breaks.
-
+        It is tradition that the bride will try to wear as many small glass bangles as possible at her wedding and the honeymoon will end when the last bangle breaks.
       }
-      descriptions << desc_5
+      product = Product.create!( title: "Handmade bangles", price: 11, description: desc)
+      handle_pictures_for_product(product, "product6")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_6 = %q{
+    def load_shoes
+      print '.'
+      desc = %q{
         People of India love color. Everything they use from top to bottom is colorful.
 
         Lets talk about shoes. Making good looking shoes is an art they have perfected over centuries. Making a shoe takes the whole village. And the whole village participates in the business of making and selling quality colorful shoes.
       }
-      descriptions << desc_6
+      product = Product.create!( title: "Colorful shoes", price: 191, description: desc)
+      handle_pictures_for_product(product, "product7")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_7 = %q{
+    def load_tag_watch
+      p '.'
+      desc = %q{
         Swiss label, TAG Heuer's Aquaracer 500M Ceramic watch embodies perfection, style and clean look.
 
         It has ceramic bezel and has the case is 41mm, significantly smaller than the 43mm out-going model. The case has been given softer curvier lines to
@@ -214,17 +218,22 @@ module Sampledata
         - Blue & gold, steel
         - full black, ceramic bezel, titanium carbide case
       }
-      descriptions << desc_7
+      product = Product.create!( title: "TAG Heuer Aquaracer 500M Ceramic Watch", price: 3000, description: desc)
+      handle_pictures_for_product(product, "product8")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
+    end
 
-      desc_8 = %q{
-        "It's tea time. Grab your cup"
+    def load_iphone_cover
+      p '.'
+      desc = %q{
+        This is a hard case is for your iPhone 4. Fits both AT&T & Verizon models of the iPhone 4. The case has a wood like appearance. 
+        It is not actual wood. It will protect it from scractches while also bringing it to life with some color! 
+
+        It does not interfere with any buttons. It is available in many different colors. If you have a specific color in my then contact me.
       }
-      descriptions << desc_8
-
-      products.each_with_index do |product, i|
-        product.update_attributes!(description: descriptions[i])
-      end
-
+      product = Product.create!( title: "Hard wood case for iphone", price: 7.95, description: desc)
+      handle_pictures_for_product(product, "product9")
+      product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
     end
 
   end
