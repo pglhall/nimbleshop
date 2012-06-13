@@ -88,7 +88,7 @@
     </fieldset>
 
     <div class="form-actions">
-      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      <%= f.submit 'Submit', class: 'btn btn-primary', 'data-loading-text' => 'processing ...' %>
       &nbsp;
       <%= link_to t(:cancel), admin_products_path, class: 'btn' %>
     </div>
