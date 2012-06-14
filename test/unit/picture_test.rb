@@ -1,19 +1,24 @@
 require 'test_helper'
 
 class PictureTest < ActiveSupport::TestCase
+  test "should fail to save without file" do
+    product = create :product
+
+    assert_no_difference 'Picture.count' do
+      product.pictures.create
+    end
+  end
+
   test "attaching picture to a product" do
     product = create :product
-    product.pictures.first.destroy
-    product.attach_picture('cookware.jpg', Rails.root.join('test', 'support', 'images', 'cookware.jpg'))
-    product = Product.unscoped.last
 
-    assert_equal 1, product.pictures.size
+    assert_difference 'product.pictures(true).size' do
+      product.attach_picture('cookware.jpg', Rails.root.join('test', 'support', 'images', 'cookware.jpg'))
+    end
 
-    #when product is destroyed then picture should not be deleted
-    assert_equal 1, Picture.count
-
-    product.destroy
-    assert_equal 1, Picture.count
+    assert_no_difference 'Picture.count' do
+      product.destroy
+    end
   end
 end
 
