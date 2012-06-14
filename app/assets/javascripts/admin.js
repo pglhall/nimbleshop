@@ -22,5 +22,3 @@
 //= require fadeout_success
 //= require autoresize
 //= require loading_state_for_buttons
-//= require lab
-
