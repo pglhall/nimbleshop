@@ -92,3 +92,4 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     assert page.has_content?("Edit product")
   end
 end
+

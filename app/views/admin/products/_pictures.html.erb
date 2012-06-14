@@ -1,0 +1,33 @@
+<div class="control-group">
+  <% if @product.persisted? %>
+    <label class="control-label">Pictures</label>
+
+    <div class='controls'>
+      <ul class="thumbnails product_pictures">
+        <% @product.pictures.each do |picture| %>
+          <%= content_tag_for(:li, picture, "data-id" => picture.id) do %>
+            <%= link_to image_tag(picture.picture_url(:medium)), '#', class: 'thumbnail' %>
+
+            <div class="actions">
+              <%= link_to '#', class: 'move' do %>
+                <i class='icon-move icon-white'></i>
+              <% end %>
+              <%= link_to '#', class: 'delete', "data-action-id" => picture.id do %>
+                <i class='icon-remove icon-white'></i>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :pictures_order, id: 'product_pictures_order' %>
+
+  <%= f.fields_for :pictures do |picture_form| %>
+    <%= picture_form.file_field :picture %>
+    <%= picture_form.link_to_remove 'X', id: "delete_picture_#{picture_form.object.id}" %>
+  <% end %>
+
+  <%= f.link_to_add 'Add picture', :pictures %>
+</div>
