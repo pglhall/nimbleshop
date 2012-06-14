@@ -14,7 +14,6 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
   setup do
     create(:price_group_condition)
     create(:date_group_condition)
-    Capybara.current_driver = :selenium
   end
 
   test "validations" do
@@ -30,6 +29,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
   end
 
   test "add, edit and delete for product group" do
+    Capybara.current_driver = :selenium
     visit admin_product_groups_path
     assert page.has_content?("Product groups")
     click_link 'add_new_product_group'
