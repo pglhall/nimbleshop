@@ -12,11 +12,10 @@
 
 //= require utils/formatNumber
 //= require utils/formatPrice
+//= require loading_state_for_buttons
 
 //= require shipping_address_same_as_billing_address
 //= require thumbnail
 //= require remove_item_from_cart
 //= require load_states
 //= require order
-//= require loading_for_buttons
-

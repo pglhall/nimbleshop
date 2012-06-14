@@ -13,6 +13,7 @@
 //= require utils/focus
 //= require utils/formatNumber
 //= require utils/formatPrice
+//= require loading_state_for_buttons
 
 //= require payment_method
 //= require product-group-condition
@@ -21,4 +22,3 @@
 //= require admin/products/edit
 //= require fadeout_success
 //= require autoresize
-//= require loading_state_for_buttons
