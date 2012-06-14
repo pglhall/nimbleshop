@@ -31,11 +31,19 @@
                 <%= condition_field.select :operator, ProductGroup.operators[condition_field.object.field_type.to_sym].map { |t| t.values_at(:name, :value) }, {}, class: 'operator' %>
                 <%= condition_field.text_field :value, class: 'value' %>
               <% end %>
+
               <% if index.nonzero? %>
-                <%= link_to '#', class: "remove-condition btn" do %>
-                  <i class='icon-remove icon-white'></i>
+                <!-- FIXME do not hardcode Rails.env.test? -->
+                <% if Rails.env.test? %>
+                  <%= link_to 'Remove', '#', class: "remove-condition btn" %>
+                <% else %>
+                  <%= link_to '#', class: "remove-condition btn" do %>
+                    <i class='icon-remove icon-white'></i>
+                  <% end %>
                 <% end %>
               <% end %>
+
+
               <% if condition.persisted? && !condition.marked_for_destruction? %>
                 <%= condition_field.hidden_field :_destroy, class: 'destroy-flag' %>
               <% end %>

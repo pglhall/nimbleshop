@@ -61,12 +61,14 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
 
     click_link 'Edit'
 
-    fill_in 'Name', with: 'awesome candies'
+    fill_in 'Product group name', with: 'awesome candies'
     fill_in 'product_group_product_group_conditions_attributes_0_value', with: 'awesome'
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text,
                 from: 'product_group_product_group_conditions_attributes_0_operator')
 
+    save_and_open_page
+    #page.all(:xpath, "//a[@class='remove-condition']").first.click
     click_link 'Remove'
     click_button 'Submit'
 
@@ -82,3 +84,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
   end
 
 end
+
+
+
+
