@@ -20,7 +20,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
   test "validations" do
     visit admin_product_groups_path
     click_link 'add_new_product_group'
-    fill_in 'Name', with: ''
+    fill_in 'Product group name', with: ''
     click_button 'Submit'
 
     refute page.has_content?('Successfully updated')
@@ -34,7 +34,7 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Product groups")
     click_link 'add_new_product_group'
 
-    fill_in 'Name', with: 'sweet candies'
+    fill_in 'Product group name', with: 'sweet candies'
 
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_name']/option[@value='name']").text,
                 from: 'product_group_product_group_conditions_attributes_0_name')
