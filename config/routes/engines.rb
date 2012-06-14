@@ -6,5 +6,3 @@
 
   mount NimbleshopSplitable::Engine,       at: '/nimbleshop_splitable',
                                            as: 'nimbleshop_splitable'
-
-  mount AdminData::Engine => "/admin_data"
