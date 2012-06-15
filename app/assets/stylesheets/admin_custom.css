@@ -21,6 +21,18 @@
 }
 .payment-method-engine-well img {
   float:right;
+  width: 200px;
+}
+
+.payment-method-engine-well .edit_link{
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.payment-method-engine-well .edit_link .nimbleshop-payment-method-edit{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .nimbleshop-payment-method-edit {
