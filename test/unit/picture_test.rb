@@ -12,8 +12,8 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test "attaching picture to a product" do
+    product = create :product
     assert_difference 'product.pictures(true).size' do
-      product = create :product
       product.attach_picture('cookware.jpg', Rails.root.join('test', 'support', 'images', 'cookware.jpg'))
     end
   end
