@@ -36,6 +36,9 @@
   name: Extending nimbleShop
   documents:
     -
+      name: How localtunnel works
+      url: how_localtunnel_works.html
+    -
       name: Tools
       url: tools.html
     -

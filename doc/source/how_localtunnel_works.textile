@@ -1,0 +1,37 @@
+h2. How localtunnel works
+
+endprologue.
+
+h3. Tell me again what is the problem
+
+Third party sites like paypal need to invoke callback to the application. In the production environment there is a fixed url where callbacks can be sent. However when you are developing the server runs on  localhost and paypal and other sites cannot send callback to localhost.
+
+
+h3. What is localtunnel
+
+localtunnel exposes your localserver to the external world by providing you with a url that you can share wit the rest of the world. As I am writing this article I ran
+
+<shell>
+rails server
+rake nimbleshop:localtunnel
+</shell>
+
+and this is the output I got
+
+<shell>
+This localtunnel service is brought to you by Twilio.
+Port 3000 is now publicly accessible from http://4f6t.localtunnel.com .
+</shell>
+
+So in this case my localserver was given a unique url and I can pass that url to paypal and other services.
+
+h3. How does nimbleshop know the url that is given by localtunnel
+
+Look at "this code":https://github.com/neerajdotname/localtunnel/blob/master/lib/localtunnel/tunnel.rb#L50 . When a publicly accessible url is assigned then the script inbokes a file called +.localtunnel_callback+. This is a script file that puts the publicly accessible url at +config/.tunnel+.
+
+Here is the content of +.localtunnel_callback+ file.
+
+<shell>
+#!/bin/sh
+echo $1 > config/.tunnel
+</shell>
