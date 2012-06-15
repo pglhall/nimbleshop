@@ -122,9 +122,6 @@ end
 # ActiveMerchant::Billing::Integrations::Notification::Money class uses it .
 gem 'money'
 
-# to send event information to google analytics
-gem 'gabba'
-
 # for background processing of jobs
 gem 'delayed_job_active_record'
 

@@ -73,12 +73,9 @@ class Order < ActiveRecord::Base
   end
 
   def add(product)
-    ActiveSupport::Notifications.instrument("orders.add", product.id) do
-      options = { product_id: product.id }
-
-      if line_items.where(options).empty?
-        line_items.create(options.merge(quantity: 1))
-      end
+    options = { product_id: product.id }
+    if line_items.where(options).empty?
+      line_items.create(options.merge(quantity: 1))
     end
   end
 
