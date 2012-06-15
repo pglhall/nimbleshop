@@ -12,7 +12,7 @@ class Util
   def self.localhost2public_url(url, protocol)
     return url unless Settings.use_localhost2public_url
 
-    tunnel = Rails.root.join('config', 'tunnel')
+    tunnel = Rails.root.join('config', '.tunnel')
     return Settings.default_localhost2public_url unless File.exists?(tunnel)
 
     path = []
