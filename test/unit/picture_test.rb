@@ -17,10 +17,13 @@ class PictureTest < ActiveSupport::TestCase
     assert_difference 'product.pictures(true).size' do
       product.attach_picture('cookware.jpg', Rails.root.join('test', 'support', 'images', 'cookware.jpg'))
     end
+  end
 
+  test 'deleting product should not delete picture' do
     assert_no_difference 'Picture.count' do
       product.destroy
     end
   end
+
 end
 
