@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PictureTest < ActiveSupport::TestCase
-  test "should fail to save without file" do
+  test "should not save without file" do
     product = create :product
 
     assert_no_difference 'Picture.count' do
