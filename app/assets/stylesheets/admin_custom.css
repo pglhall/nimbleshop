@@ -70,3 +70,12 @@
   margin-left: 10px;
   margin-top: 6px;
 }
+
+.control-group a{
+  line-height: 26px;
+  float: left;
+}
+
+.control-group a:before{
+  content: '\0000a0';
+}
