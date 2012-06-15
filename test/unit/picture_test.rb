@@ -19,8 +19,8 @@ class PictureTest < ActiveSupport::TestCase
   end
 
   test 'deleting product should not delete picture' do
+    product = create :product
     assert_no_difference 'Picture.count' do
-      product = create :product
       product.destroy
     end
   end
