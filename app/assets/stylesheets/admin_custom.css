@@ -21,6 +21,18 @@
 }
 .payment-method-engine-well img {
   float:right;
+  width: 200px;
+}
+
+.payment-method-engine-well .edit_link{
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.payment-method-engine-well .edit_link .nimbleshop-payment-method-edit{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .nimbleshop-payment-method-edit {
@@ -47,4 +59,26 @@
 
 #product-group-edit-form .condition {
   margin: 9px 0;
+}
+
+.link_group_name,
+.link_group_edit{
+  float: left;
+}
+
+.link_group_edit{
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
+.control-group a{
+  line-height: 26px;
+  float: left;
+  text-decoration: none;
+  color: #000;
+  padding: 0 1px;
+}
+
+.control-group a:before{
+  content: '\0000a0';
 }

@@ -22,3 +22,4 @@
 //= require admin/products/edit
 //= require fadeout_success
 //= require autoresize
+//= require show_help_on_hover

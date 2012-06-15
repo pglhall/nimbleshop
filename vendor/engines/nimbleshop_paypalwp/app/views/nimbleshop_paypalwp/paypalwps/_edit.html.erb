@@ -2,11 +2,13 @@
 
    <div>
     <h2>Paypal websites payment standard</h2>
-    <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-paypalwp-payment-method-edit" %>
-    <%= link_to nimbleshop_paypalwp.paypalwp_path, class: 'nimbleshop-payment-method-delete', 
-                                                    confirm: 'Do you really want to delete Paypal payment method', method: :delete, remote: true do %>
-        <i class='icon-remove icon-white'></i>
-    <% end %>
+    <div class="edit_link">
+      <%= link_to 'Edit', '#', class: "nimbleshop-payment-method-edit", id: "nimbleshop-paypalwp-payment-method-edit" %>
+      <%= link_to nimbleshop_paypalwp.paypalwp_path, class: 'nimbleshop-payment-method-delete',
+                                                      confirm: 'Do you really want to delete Paypal payment method', method: :delete, remote: true do %>
+          <i class='icon-remove icon-white'></i>
+      <% end %>
+    </div>
 
     <%= nimbleshop_paypalwp_mini_image %>
 
