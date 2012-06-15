@@ -13,7 +13,7 @@ class Util
     return url unless Settings.use_localhost2public_url
 
     tunnel = Rails.root.join('config', 'tunnel')
-    raise "File  #{Rails.root.join('config', 'tunnel').expand_path} is missing" unless File.exists?(tunnel)
+    return Settings.default_localhost2public_url unless File.exists?(tunnel)
 
     path = []
 
