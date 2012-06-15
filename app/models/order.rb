@@ -134,12 +134,12 @@ class Order < ActiveRecord::Base
   private
 
   def set_order_number
-    _number = Random.new.rand(11111111...99999999).to_s
-    while self.class.exists?(number: _number) do
-      _number = Random.new.rand(11111111...99999999).to_s
+    num = Random.new.rand(11111111...99999999).to_s
+    while self.class.exists?(number: num) do
+      num = Random.new.rand(11111111...99999999).to_s
     end
 
-    self.number = _number
+    self.number = num
   end
 
   def tax_calculator
