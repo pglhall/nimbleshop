@@ -23,7 +23,7 @@ Note that dyno idling never happens if you have a paid dyno which costs $35 per 
 
 h4. Avoiding dyno idling
 
-So now the obvious question is what are the ways of avoiding dyno idling. Stackoverflow has [a good answer](http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling) on this topic.
+So now the obvious question is what are the ways of avoiding dyno idling. Stackoverflow has "a good answer":http://stackoverflow.com/questions/5480337/easy-way-to-prevent-heroku-idling on this topic.
 
 h4. Free https account
 
@@ -33,7 +33,7 @@ During the testing stages you can use https://myapp.heroku.com . This is great f
 
 h4. Unicorn on heroku
 
-If you are using heroku then you might be interested in [this](http://blog.railsonfire.com/2012/05/06/Unicorn-on-Heroku.html) article which discusses how to get performance boost by running unicorn on heroku. Just to be clear we have not used this technique ourselves.
+If you are using heroku then you might be interested in "this":http://blog.railsonfire.com/2012/05/06/Unicorn-on-Heroku.html article which discusses how to get performance boost by running unicorn on heroku. Just to be clear we have not used this technique ourselves.
 
 h3. Setting up staging environment on heroku
 
@@ -44,109 +44,107 @@ heroku. One for staging and one for prouduction. Then application names would be
 
 First lets get started with deploying the application on `trishil-staging` .
 
-h4. Step1
+h4. Create staging branch
 
-Create a staging branch
-
-```
+<shell>
 git checkout -b staging
-```
+</shell>
 
-h4. Step2
+h4. Latest version of heroku gem
 
 Ensure you have latest version of heroku gem.
 
-```
+<shell>
 gem install heroku
 gem update heroku
-```
+</shell>
 
-h4. Step 3
+h4. Create hstaging remote
 
-Create a remote named hstaging . Here `hstaging` stand for `heroku staging`. This name can be anything. I do not want this name to be `staging` because sometimes it confuses people about which `staging` I am talking about. Also notice that we will be using [cedar stack](http://devcenter.heroku.com/articles/cedar) .
+Create a remote named hstaging . Here +hstaging+ stand for +heroku staging+. This name can be anything. I do not want this name to be +staging+ because sometimes it confuses people about which +staging+ I am talking about. Also notice that we will be using "cedar stack":http://devcenter.heroku.com/articles/cedar .
 
-```
+<shell>
 heroku create indichai-staging --remote hstaging --stack cedar
-```
+</shell>
 
-h4. Step 4 
+h4. Push code to heroku
 
-Push code to heroku.  Next command might seem a bit confusing. This command is pushing the local staging branch to heroku’s hstaging branch.
+Next command might seem a bit confusing. This command is pushing the local staging branch to heroku’s hstaging branch.
 
-```
+<shell>
 git push hstaging staging:master
-```
+</shell>
 
-h4. Step 5
+h4. Set Rails environment to staging
 
-Set the Rails environment to staging
+Set the Rails environment to staging by executing following commands.
 
-```
+<shell>
 heroku config:add RACK_ENV=staging  --app indichai-staging
 heroku config:add RAILS_ENV=staging --app indichai-staging
-```
+</shell>
 
-h4. Step 6
+h4. Set airbrake api key
 
-Set airbrake api key
+Set airbrake api key by executing following command.
 
-```
+<shell>
 heroku config:add AIRBRAKE_API_KEY=xxxxx --app indichai-staging
-```
+</shell>
 
-h4. Step 7
+h4. Setup ssl
 
-Setup ssl. Heroku provides free ssl for any `.heroku.com` domain. In this case we can turn on ssl for `http://indichai-staging.heroku.com` .
+Heroku provides free ssl for any `.heroku.com` domain. In this case we can turn on ssl for `http://indichai-staging.heroku.com` .
 
-```
+<shell>
 heroku addons:add ssl:piggyback --app indichai-staging
-```
+</shell>
 
-h4. Step 8
+h4. Set log level to debug
 
-Since this is staging environment I setup the log level to `debug` to get more information about the application.
+Since this is staging environment I setup the log level to +debug+ to get more information about the application.
 
-```
+<shell>
 heroku config:add LOG_LEVEL=DEBUG --app indichai-staging
-```
+</shell>
 
-h4. Step 9
+h4. Setup sendgrid
 
-If you use [SendGrid](http://sendgrid.com) to send emails then if you want emails to go out for real in staging environment then execute following commands
+If you use "SendGrid":http://sendgrid.com to send emails then if you want emails to go out for real in staging environment then execute following commands
 
-```
+<shell>
 heroku config:add DELIVER_EMAIL_FOR_REAL_IN_STAGING=true --app indichai-staging
 heroku config:add SENDGRID_USERNAME=xxxx --app indichai-staging
 heroku config:add SENDGRID_PASSWORD=xxxx --app indichai-staging
 heroku config:add SENDGRID_DOMAIN=xxxxxx --app indichai-staging
-```
+</shell>
 
-h4. Step 10
+h4. Setup s3
 
-Create bucket for AWS S3. Login at [AWS Management Console](https://console.aws.amazon.com/s3/home) and create a bucket. The bucket name could be anything like indichai-staging . It is recommended that you do not have a dot in the bucket name. Next configure aws s3 settings in the application.
+Create bucket for AWS S3. Login at "AWS Management Console":https://console.aws.amazon.com/s3/home and create a bucket. The bucket name could be anything like indichai-staging . It is recommended that you do not have a dot in the bucket name. Next configure aws s3 settings in the application.
 
-```
+<shell>
 heroku config:add S3_ACCESS_KEY_ID=xxxxxxxxxxxxxx --app indichai-staging
 heroku config:add S3_SECRET_ACCESS_KEY=xxxxxxxxxx --app indichai-staging
 heroku config:add S3_BUCKET_NAME=xxxxxxxxxxxxxxxx --app indichai-staging
-```
+</shell>
 
-h4. Step 11
+h4. Run migrations
 
-Run migrations
+Run migrations by executing following command.
 
-```
+<shell>
 heroku run rake db:migrate --app indichai-staging
-```
+</shell>
 
-h4. Step 12
+h4. Run setup
 
-Configure store with default settings and load products
+Configure store with default settings and load products by executing following command.
 
-```
+<shell>
 heroku run rake setup_development --app indichai-staging
-```
+</shell>
 
-h4. Step 13
+h4. Visting site
 
-Visit staging site at http://indichai-staging.herokuapp.com 
+Visit staging site at "http://indichai-staging.herokuapp.com":http://indichai-staging.herokuapp.com .

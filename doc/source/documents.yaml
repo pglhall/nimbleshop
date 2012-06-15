@@ -24,6 +24,12 @@
       url: cod.html
 
 -
+  name: Deployment
+  documents:
+    -
+      name: Deploying on heroku
+      url: heroku.html
+-
   name: Digging Deeper
   documents:
     -
