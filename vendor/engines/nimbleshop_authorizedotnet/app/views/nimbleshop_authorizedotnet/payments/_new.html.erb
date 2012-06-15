@@ -73,3 +73,17 @@
     width: 100px;
   }
 </style>
+<script>
+$(document).ready(function(){
+
+  $('#authorizedotnet-payment-form')
+    .bind("ajax:beforeSend", function(evt, xhr, settings){
+      var $btn = $('#authorizedotnet-payment-form').find('.btn-primary');
+      $btn.attr('value', 'processing ...').attr('disabled', 'disabled');
+    })
+    .bind("ajax:complete", function(evt, data, status, xhr){
+      var $btn = $('#authorizedotnet-payment-form').find('.btn-primary');
+      $btn.attr('value', 'Submit').removeAttr('disabled');
+    })
+});
+</script>
