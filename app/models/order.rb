@@ -103,7 +103,7 @@ class Order < ActiveRecord::Base
   end
 
   def total_amount_in_cents
-    total_amount.to_f.round(2) * 100
+    Util.in_cents(total_amount)
   end
 
   def to_param
