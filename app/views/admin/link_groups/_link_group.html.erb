@@ -4,10 +4,10 @@
       <tr>
         <th colspan='3'>
           <div>
-            <div style='float:left;'>
+            <div class='link_group_name'>
               <h3><%= link_group.name %></h3>
             </div>
-            <div style='float:left;margin-left:10px;'>
+            <div class='link_group_edit'>
               <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
               |
               <%= link_to [:admin, link_group], class: 'delete', confirm: t(:delete_confirmation_for_link_group), method: 'delete', title: 'Delete' do %>

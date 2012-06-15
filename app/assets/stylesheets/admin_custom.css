@@ -48,3 +48,13 @@
 #product-group-edit-form .condition {
   margin: 9px 0;
 }
+
+.link_group_name,
+.link_group_edit{
+  float: left;
+}
+
+.link_group_edit{
+  margin-left: 10px;
+  margin-top: 6px;
+}
