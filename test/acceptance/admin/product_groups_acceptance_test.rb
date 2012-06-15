@@ -67,7 +67,6 @@ class ProductGroupsAcceptanceTest < ActionDispatch::IntegrationTest
     select(find(:xpath, "//*[@id='product_group_product_group_conditions_attributes_0_operator']/option[@value='starts']").text,
                 from: 'product_group_product_group_conditions_attributes_0_operator')
 
-    save_and_open_page
     #page.all(:xpath, "//a[@class='remove-condition']").first.click
     click_link 'Remove'
     click_button 'Submit'
