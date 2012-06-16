@@ -1,5 +1,8 @@
+require 'active_merchant/billing/integrations/action_view_helper'
+
 module NimbleshopPaypalwp
   module ExposedHelper
+    include ActiveMerchant::Billing::Integrations::ActionViewHelper
 
     def nimbleshop_paypalwp_small_image
       image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon'
