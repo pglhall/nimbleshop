@@ -60,19 +60,19 @@ PATH
   remote: vendor/engines/nimbleshop_authorizedotnet
   specs:
     nimbleshop_authorizedotnet (0.0.1)
-      rails (~> 3.2.3)
+      activemerchant
 
 PATH
   remote: vendor/engines/nimbleshop_paypalwp
   specs:
     nimbleshop_paypalwp (0.0.1)
-      rails (~> 3.2.3)
+      activemerchant
 
 PATH
   remote: vendor/engines/nimbleshop_splitable
   specs:
     nimbleshop_splitable (0.0.1)
-      rails (~> 3.2.3)
+      activemerchant
 
 GEM
   remote: http://rubygems.org/

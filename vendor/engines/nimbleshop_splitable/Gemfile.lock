@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nimbleshop_paypalwp (0.0.1)
+    nimbleshop_splitable (0.0.1)
       activemerchant
 
 GEM
@@ -34,4 +34,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nimbleshop_paypalwp!
+  nimbleshop_splitable!
