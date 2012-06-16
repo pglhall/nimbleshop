@@ -3,6 +3,33 @@
   _gaq.push(['_setAccount', '<%= current_shop.google_analytics_tracking_id %>' ]);
   _gaq.push(['_trackPageview']);
 
+  <% if params[:controller] == 'checkout/payments' %>
+
+_gaq.push(['_addTrans',
+    '<%= current_order.number %>',           // order ID - required
+    'trishil',  // affiliation or store name
+    '<%= current_order.line_items_total %>',          // total - required
+    '<%= current_order.tax %>',           // tax
+    '<%= current_order.shipping_method.shipping_cost%>',              // shipping
+    '<%= current_order.shipping_address.city %>',       // city
+    '<%= current_order.shipping_address.state_name%>',     // state or province
+    'USA'             // country
+  ]);
+    
+<% current_order.line_items.each do |line_item| %>
+_gaq.push(['_addItem',
+    '<%= current_order.number %>',           // order ID - required
+    '<%= line_item.product.permalink %>',           // SKU/code - required
+    '<%= line_item.product.name %>',        // product name
+    'Green Medium',   // category or variation
+    '<%= line_item.product_price %>',          // unit price - required
+    '<%= line_item.quantity %>'               // quantity - required
+  ]);
+<% end %>
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+  <% end %>
+
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
