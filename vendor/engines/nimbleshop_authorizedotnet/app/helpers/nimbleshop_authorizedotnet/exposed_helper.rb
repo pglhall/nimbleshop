@@ -1,6 +1,14 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
+    def nimbleshop_authorizedotne_small_image
+      image_tag "engines/nimbleshop_authorizedotnet/authorizedotnet_small.png", alt: 'authorizedotnet icon'
+    end
+
+    def nimbleshop_authorizedotnet_big_image
+      image_tag "engines/nimbleshop_authorizedotnet/authorizedotnet_big.png", alt: 'authorizedotnet logo'
+    end
+
     def nimbleshop_authorizedotnet_order_show_extra_info(order)
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
       render partial: '/nimbleshop_authorizedotnet/payments/order_show_extra_info', locals: { transaction: order.payment_transactions.last }
@@ -30,10 +38,6 @@ module NimbleshopAuthorizedotnet
     def nimbleshop_authorizedotnet_crud_form
       return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
       render partial: '/nimbleshop_authorizedotnet/authorizedotnets/edit'
-    end
-
-    def nimbleshop_authorizedotnet_mini_image
-      image_tag('authorize_net_logo.png', width: 200, alt: 'Authorize.net logo')
     end
 
   end
