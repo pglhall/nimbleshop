@@ -9,6 +9,13 @@ class Admin::OrdersController < AdminController
     redirect_to admin_order_path(@order)
   end
 
+  def purchase_payment
+    @order = Order.find_by_number!(params[:id])
+    @order.purchase!
+    flash[:notice] = "Amount was successfully paid"
+    redirect_to admin_order_path(@order)
+  end
+
   def index
     @orders = Order.order('id desc')
     respond_with @orders

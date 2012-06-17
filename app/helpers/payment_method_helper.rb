@@ -1,7 +1,10 @@
-require 'active_merchant/billing/integrations/action_view_helper'
-
 module PaymentMethodHelper
-  include ActiveMerchant::Billing::Integrations::ActionViewHelper
+
+  def next_payment_processing_action(order)
+    if pm = order.payment_method
+      call_engineized_method(pm, :next_payment_processing_action, order)
+    end
+  end
 
   def order_show_extra_info(order)
     if pm = order.payment_method

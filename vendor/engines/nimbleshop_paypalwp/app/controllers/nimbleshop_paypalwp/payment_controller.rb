@@ -1,10 +1,6 @@
-#TODO add respond_to
+# TODO this file is not needed
 module NimbleshopPaypalwp
   class PaymentsController < ::Admin::PaymentMethodsController
-
-    def create
-      render text: 'paid'
-    end
 
   end
 end

@@ -9,3 +9,7 @@ Creating an online shop is easy. Just [get started](http://nimbleshop.org/gettin
 # Documentation
 
 Documentation is available at [http://nimbleshop.org/docsindex](http://nimbleshop.org/docsindex) .
+
+# License
+
+nimbleShop uses MIT license.

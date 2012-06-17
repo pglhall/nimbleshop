@@ -1,5 +1,16 @@
+require 'active_merchant/billing/integrations/action_view_helper'
+
 module NimbleshopPaypalwp
   module ExposedHelper
+    include ActiveMerchant::Billing::Integrations::ActionViewHelper
+
+    def nimbleshop_paypalwp_small_image
+      image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon'
+    end
+
+    def nimbleshop_paypalwp_big_image
+      image_tag "engines/nimbleshop_paypalwp/paypal_big.png", alt: 'paypal logo'
+    end
 
     def nimbleshop_paypalwp_order_show_extra_info(order)
       return unless NimbleshopPaypalwp::Paypalwp.first
@@ -8,11 +19,11 @@ module NimbleshopPaypalwp
 
     def nimbleshop_paypalwp_available_payment_options_icons
       return unless NimbleshopPaypalwp::Paypalwp.first
-      image_tag 'paypal.png', alt: 'paypal icon'
+      image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon'
     end
 
     def nimbleshop_paypalwp_icon_for_order_payment(order)
-      image_tag('paypal.png')
+      image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon'
     end
 
     def update_service_with_attributes(service, order)
@@ -35,20 +46,10 @@ module NimbleshopPaypalwp
       render partial: '/nimbleshop_paypalwp/paypalwps/edit'
     end
 
-    def nimbleshop_paypalwp_mini_image
-      image_tag('paypal_logo.png', width: 200)
-    end
-
     def nimbleshop_paypalwp_payment_form(order)
        ActiveMerchant::Billing::Base.integration_mode = Rails.env.production? ? :production : :test
       return unless NimbleshopPaypalwp::Paypalwp.first
       render partial: '/nimbleshop_paypalwp/payments/new', locals: { order: order }
-    end
-
-    def nimbleshop_paypalwp_admin_form(order)
-      raise 'boom'
-      return unless NimbleshopPaypalwp::Paypalwp.first
-      render partial: '/nimbleshop_paypalwp/paypalwps/form', locals: { order: order }
     end
 
     def nimbleshop_paypalwp_notify_url
