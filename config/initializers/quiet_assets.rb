@@ -5,7 +5,7 @@
 # Started GET "/assets/ajaxify-form.js?body=1" for 127.0.0.1 at 2012-03-29 17:39:21 -0400
 # 0485e9d68ec9e33b34e32653efd5b61c] [127.0.0.1]
 #
-if Rails.env.development? # && false
+if Rails.env.development?  && false
 
   Rails.application.assets.logger = Logger.new('/dev/null')
   Rails::Rack::Logger.class_eval do

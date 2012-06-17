@@ -131,4 +131,5 @@ gem "delayed_job_admin"
 gem 'nimbleshop_paypalwp',        path: 'vendor/engines/nimbleshop_paypalwp'
 gem 'nimbleshop_authorizedotnet', path: 'vendor/engines/nimbleshop_authorizedotnet'
 gem 'nimbleshop_splitable',       path: 'vendor/engines/nimbleshop_splitable'
+gem 'nimbleshop_cod',             path: 'vendor/engines/nimbleshop_cod'
 

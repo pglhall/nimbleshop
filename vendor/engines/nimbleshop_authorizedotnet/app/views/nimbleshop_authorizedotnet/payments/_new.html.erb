@@ -1,14 +1,15 @@
 <br />
+
 <p>
-<label class='radio'>
-  <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
-  <label for='payment_choice'>
-    <%= image_tag('visa.png') %>
-    <%= image_tag('mastercard.png') %>
-    <%= image_tag('amex.png') %>
-    <%= image_tag('discover.png') %>
+  <label class='radio'>
+    <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
+    <label for='payment_choice'>
+      <%= image_tag('visa.png') %>
+      <%= image_tag('mastercard.png') %>
+      <%= image_tag('amex.png') %>
+      <%= image_tag('discover.png') %>
+    </label>
   </label>
-</label>
 </p>
 
 <%= form_for @creditcard, url: nimbleshop_authorizedotnet.payment_path, remote: true, html: { id: 'authorizedotnet-payment-form', class: 'form-horizontal' } do |f| %>

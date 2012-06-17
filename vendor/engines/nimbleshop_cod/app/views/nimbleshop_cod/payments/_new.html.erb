@@ -1,0 +1,23 @@
+<label class='radio'>
+  <%= radio_button_tag 'payment_choice', 'cod' %>
+  <%= nimbleshop_cod_small_image %>
+</label>
+
+<%= form_for NimbleshopCod::Cod.new, url: nimbleshop_cod.payment_path,  html: { id: 'splitable-payment-form', class: 'form-horizontal' } do |f| %>
+<% end %>
+
+<%= javascript_tag do %>
+  $(function() {
+    $("input#payment_choice_cod:radio").change(function() {
+      var $this, val;
+      $this = $(this);
+      val = $this.val();
+      alert(val);
+
+      if (val === "cod") {
+        $("form#splitable-payment-form").submit();
+      }
+
+    });
+  });
+<% end %>

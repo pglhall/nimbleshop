@@ -63,6 +63,11 @@ PATH
       activemerchant
 
 PATH
+  remote: vendor/engines/nimbleshop_cod
+  specs:
+    nimbleshop_cod (0.0.1)
+
+PATH
   remote: vendor/engines/nimbleshop_paypalwp
   specs:
     nimbleshop_paypalwp (0.0.1)
@@ -349,6 +354,7 @@ DEPENDENCIES
   mustache
   nested_form!
   nimbleshop_authorizedotnet!
+  nimbleshop_cod!
   nimbleshop_paypalwp!
   nimbleshop_splitable!
   pg

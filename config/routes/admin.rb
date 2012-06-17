@@ -15,6 +15,7 @@
       resources :shipments,      except: [:edit, :update]
       member do
         put :capture_payment
+        put :purchase_payment
       end
     end
 

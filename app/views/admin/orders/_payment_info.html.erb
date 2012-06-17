@@ -1,9 +1,8 @@
 <div class='row'>
   <div class='span5'>
     <h2> Payment status <%= display_payment_status(@order) %> </h2>
-    <% if @order.authorized? %>
-      <%= link_to 'Capture payment', capture_payment_admin_order_path(@order), method: :put %>
-    <% end %>
+
+    <%= next_payment_processing_action(@order) %>
 
     <% if @order.payment_method %>
       <p>

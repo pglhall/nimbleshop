@@ -6,3 +6,6 @@
 
   mount NimbleshopSplitable::Engine,       at: '/nimbleshop_splitable',
                                            as: 'nimbleshop_splitable'
+
+  mount NimbleshopCod::Engine,             at: '/nimbleshop_cod',
+                                           as: 'nimbleshop_cod'

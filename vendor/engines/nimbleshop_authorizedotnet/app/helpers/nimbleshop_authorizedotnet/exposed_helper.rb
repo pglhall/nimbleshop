@@ -1,7 +1,13 @@
 module NimbleshopAuthorizedotnet
   module ExposedHelper
 
-    def nimbleshop_authorizedotne_small_image
+    def nimbleshop_authorizedotnet_next_payment_processing_action(order)
+      if order.authorized?
+        link_to 'Capture payment', capture_payment_admin_order_path(order), method: :put, class: 'btn btn-success'
+      end
+    end
+
+    def nimbleshop_authorizedotnet_small_image
       image_tag "engines/nimbleshop_authorizedotnet/authorizedotnet_small.png", alt: 'authorizedotnet icon'
     end
 
