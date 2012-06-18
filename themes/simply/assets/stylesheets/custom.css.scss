@@ -389,6 +389,16 @@ div.mobile_item_list div:last-of-type {
 	}
 }
 
+#checkout-payments-new h1:before{
+  content: " ";
+  background: url("/assets/lock.png") no-repeat scroll 0 0 transparent;
+  width: 18px;
+  height: 24px;
+  display: inline-block;
+  margin-right: -5px;
+}
+
+
 /*Item page
 ----------------------------------------------------------------------------------------------------------------------*/
 
@@ -419,3 +429,6 @@ div.mobile_item_list div:last-of-type {
 #cart-empty {
   margin-top: 20px;
 }
+
+
+
