@@ -17,19 +17,38 @@ of our application with Paypal without making payment for real.
 
 However using sandbox involves a few steps. Given below are the steps needed to make payment. 
 
+<shell>
+bundle exec rails server
+</shell>
 
-* Start rails server at port 3000 by executing +rails server+ .
-* Open another terminal. Go to the nimbleShop project directory and execute +bundle exec localtunnel -k ~/.ssh/id_rsa.pub 3000+ . Sometimes you might get message +[Error] Unable to register tunnel. Perhaps service is down?+. It means localtunnel is not working and you will not be able to test Instant Payment Notification ( IPN ). However you can still test making payment part .
-* Visit "https://developer.paypal.com":https://developer.paypal.com and login with email +neeraj.cmu@gmail.com+ and password +welcome1+ .
-* Visit the nimbleshop application and add a few products to your cart .
-* When you come to checkout page then select Paypal .
-* You are presented with a page to login .
-* Login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
-* Go ahead and make the payment .
-* Now click on +Test Accounts+ and then click on +Enter Sandbox Test Site+ .
+Open another terminal. Go to the nimbleShop project directory and
+execute following command.
+
+<shell>
+bundle exec localtunnel -k ~/.ssh/id_rsa.pub 3000
+</shell>
+
+Sometimes you might get message +[Error] Unable to register tunnel. Perhaps service is down?+. It means localtunnel is not working and you will not be able to test Instant Payment Notification ( IPN ). However you can still test making payment part .
+
+
+Visit "https://developer.paypal.com":https://developer.paypal.com and login with email +neeraj.cmu@gmail.com+ and password +welcome1+ .
+
+Visit the nimbleshop application and add a few products to your cart .
+
+When you come to checkout page then select Paypal .
+
+You are presented with a page to login .
+
+Login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
+
+Go ahead and make the payment .
+
+Now click on +Test Accounts+ and then click on +Enter Sandbox Test Site+ .
 !https://img.skitch.com/20120420-pxbr29f3hcm68xr3buik2tty8j.jpg!
-* In the +Sandbox Test Site+ login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
-* Click on "History" and you should see transaction details.
+
+In the +Sandbox Test Site+ login with email +mary_1334795925_per@gmail.com+ and password +welcome1+ .
+
+Click on "History" and you should see transaction details.
 ![screenshot](https://img.skitch.com/20120420-qni9fsfp93d6bq65mp2fdneue6.jpg)
 
 In order for others to follow the steps mentioned please do not change the password .
