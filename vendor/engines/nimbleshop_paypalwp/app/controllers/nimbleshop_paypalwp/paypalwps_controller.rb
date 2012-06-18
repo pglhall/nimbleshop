@@ -11,7 +11,7 @@ module NimbleshopPaypalwp
 
       unless order.paid?
         # it is required otherwise order.authorize fails
-        processor.order.update_attribute(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
+        processor.order.update_column(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
 
         # IPN can send notification multiple times
         processor.purchase
