@@ -26,31 +26,34 @@ h1 {
   color: #fff;
 }
 
-.cart_link a{
-	color: #fff;
-	line-height: 16px;
-	display: block;
-	margin-top: 10px;
+.cart_link{
+  background: url("/assets/cart.png") no-repeat scroll 0 0 transparent;
+  position: relative;
+  width: 23px;
+  height: 17px;
+  margin-top: 10px;
+  span{
+    color: white;
+    background-color: #78C042;
+    display: inline-block;
+    font-size: 10px;
+    line-height: 1;
+    padding: 1px 2px;
+    position: absolute;
+    right: -3px;
+    text-align: center;
+    top: -4px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: -1px 1px 1px #666666;
+    box-shadow: -1px 1px 1px #666666;
+  }
 }
 
-.cart_link:hover a{
-	color: #005580;
-}
 
-.cart_link a:before {
-	content: "";
-	display: inline;
-	width: 16px;
-	height: 16px;
-	background-color: #FFF;
-	float: left;
-	background: url("/assets/cart.png") no-repeat transparent;
-	margin-right: 5px;
-}
 
-.cart_link:hover a:before {
-	background: url("/assets/cart_hover.png") no-repeat transparent;
-}
+
+
 
 
 #site-name {
