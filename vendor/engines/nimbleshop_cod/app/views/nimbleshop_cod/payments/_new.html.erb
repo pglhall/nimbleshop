@@ -3,7 +3,7 @@
   <%= nimbleshop_cod_small_image %>
 </label>
 
-<%= form_for NimbleshopCod::Cod.new, url: nimbleshop_cod.payment_path,  html: { id: 'splitable-payment-form', class: 'form-horizontal' } do |f| %>
+<%= form_for NimbleshopCod::Cod.new, url: nimbleshop_cod.payment_path,  html: { id: 'cod-payment-form', class: 'form-horizontal' } do |f| %>
 <% end %>
 
 <%= javascript_tag do %>
@@ -12,10 +12,9 @@
       var $this, val;
       $this = $(this);
       val = $this.val();
-      alert(val);
 
       if (val === "cod") {
-        $("form#splitable-payment-form").submit();
+        $("form#cod-payment-form").submit();
       }
 
     });
