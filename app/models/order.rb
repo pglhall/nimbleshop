@@ -59,9 +59,7 @@ class Order < ActiveRecord::Base
   end
 
   def mark_as_paid!
-    unless paid_at
-      touch(:paid_at)
-    end
+    touch(:paid_at) unless paid_at
   end
 
   def available_shipping_methods
