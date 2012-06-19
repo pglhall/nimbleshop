@@ -204,7 +204,7 @@ module Sampledata
     end
 
     def load_tag_watch
-      p '.'
+      print '.'
       desc = %q{
         Swiss label, TAG Heuer's Aquaracer 500M Ceramic watch embodies perfection, style and clean look.
 
@@ -224,7 +224,7 @@ module Sampledata
     end
 
     def load_iphone_cover
-      p '.'
+      print '.'
       desc = %q{
         This is a hard case is for your iPhone 4. Fits both AT&T & Verizon models of the iPhone 4. The case has a wood like appearance. 
         It is not actual wood. It will protect it from scractches while also bringing it to life with some color! 
