@@ -14,4 +14,6 @@ task :setup => :environment do
   Rake::Task["nimbleshop_authorizedotnet:load_record"].invoke
   Rake::Task["nimbleshop_cod:load_record"].invoke
 
+  puts ""
+  puts '**** shop is ready with sample data ****'
 end

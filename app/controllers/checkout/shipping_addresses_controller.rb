@@ -7,6 +7,9 @@ class Checkout::ShippingAddressesController < ApplicationController
   def new
     current_order.initialize_addresses
     @countries = current_order.shippable_countries
+    if @countries.blank?
+      render text: "Shipping options are not configured for this order. Please contact shop administrator"
+    end
   end
 
   def update

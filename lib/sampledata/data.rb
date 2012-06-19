@@ -84,7 +84,7 @@ module Sampledata
     def load_shipping_methods
       sz = CountryShippingZone.create!(country_code: 'US')
       ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
-                             lower_price_limit: 10, upper_price_limit: 999999)
+                             lower_price_limit: 0, upper_price_limit: 999999)
 
       ShippingMethod.create!(name: 'Express shipping', base_price: 30, shipping_zone_id: sz.id,
                              lower_price_limit: 10, upper_price_limit: 999999)
@@ -204,7 +204,7 @@ module Sampledata
     end
 
     def load_tag_watch
-      p '.'
+      print '.'
       desc = %q{
         Swiss label, TAG Heuer's Aquaracer 500M Ceramic watch embodies perfection, style and clean look.
 
@@ -224,7 +224,7 @@ module Sampledata
     end
 
     def load_iphone_cover
-      p '.'
+      print '.'
       desc = %q{
         This is a hard case is for your iPhone 4. Fits both AT&T & Verizon models of the iPhone 4. The case has a wood like appearance. 
         It is not actual wood. It will protect it from scractches while also bringing it to life with some color! 
