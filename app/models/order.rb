@@ -35,16 +35,17 @@ class Order < ActiveRecord::Base
 
   # Look at order_observer to see all the callbacks.
   #
-  # capture is a method defined on kernel hence kapture is used here.
+  # capture is a method defined on kernel by Rails hence kapture is used .
   #
   # An order goes into pending state when it is paid for using 'Cash on delivery'
   state_machine :payment_status, initial: :abandoned do
+
     event(:authorize) { transition abandoned:   :authorized }
     event(:pending)   { transition abandoned:   :pending    }
-    event(:kapture )  { transition authorized:  :paid       }
-    event(:refund)    { transition paid:        :refunded   }
+    event(:kapture )  { transition authorized:  :purchased  }
+    event(:refund)    { transition purchased:   :refunded   }
 
-    event(:purchase)  { transition [:abandoned,  :pending] =>  :paid       }
+    event(:purchase)  { transition [:abandoned,  :pending] =>  :purchased  }
     event(:void)      { transition [:authorized, :pending] =>  :cancelled  }
 
     state all - [ :abandoned ] do
@@ -60,8 +61,8 @@ class Order < ActiveRecord::Base
     event(:cancel_shipment)  { transition shipping_pending: :nothing_to_ship }
   end
 
-  def mark_as_paid!
-    touch(:paid_at) unless paid_at
+  def mark_as_purchased!
+    touch(:purchased_at) unless purchased_at
   end
 
   def available_shipping_methods

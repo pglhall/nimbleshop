@@ -75,7 +75,7 @@ module Processor
       transaction = @order.payment_transactions.last
       assert_equal  'captured', transaction.operation
       assert_equal  true, transaction.success
-      assert        @order.paid?
+      assert        @order.purchased?
     end
 
     test "when capture fails" do
@@ -107,7 +107,7 @@ module Processor
         assert_equal true, @processor.purchase(creditcard: creditcard)
       end
 
-      assert @order.reload.paid?
+      assert @order.reload.purchased?
 
       @transaction = @order.payment_transactions.last
     end
@@ -204,7 +204,7 @@ module Processor
       transaction = @order.payment_transactions.last
       assert_equal  'purchased', transaction.operation
       assert_equal  true, transaction.success
-      assert        @order.paid?
+      assert        @order.purchased?
     end
 
     test "purchase fails when credit card number is not entered " do

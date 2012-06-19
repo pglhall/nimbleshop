@@ -3,7 +3,7 @@ class OrderObserver < ActiveRecord::Observer
   # TODO send_email_notification is a very generic name
   def after_purchase(order, transition)
     send_email_notifications(order)
-    order.mark_as_paid!
+    order.mark_as_purchased!
     order.shipping_pending
     ActiveSupport::Notifications.instrument("order.purchased", order.number)
   end
@@ -11,7 +11,7 @@ class OrderObserver < ActiveRecord::Observer
   # TODO send_email_notification is a very generic name
   def after_authorize(order, transition)
     send_email_notifications(order)
-    order.mark_as_paid!
+    order.mark_as_purchased!
     order.shipping_pending
   end
 

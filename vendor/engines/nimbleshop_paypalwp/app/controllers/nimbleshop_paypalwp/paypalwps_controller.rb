@@ -9,7 +9,7 @@ module NimbleshopPaypalwp
       processor = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
       order = processor.order
 
-      unless order.paid?
+      unless order.purchased?
         # it is required otherwise order.authorize fails
         processor.order.update_column(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
 
