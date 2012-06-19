@@ -68,6 +68,15 @@
         <%= shipping_form.text_field :zipcode, class: 'input-xlarge' %>
       </div>
     </div>
-  <%= shipping_form.check_box :use_for_billing %> Use this address as billing address too
+
+    <div class='control-group'>
+      <div class='controls'>
+        <label class='checkbox'>
+          <%= shipping_form.check_box :use_for_billing %> 
+          Use this address as billing address too
+        </label>
+      </div>
+    </div>
+
   <% end %>
 </div>
