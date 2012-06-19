@@ -65,7 +65,7 @@ class Product < ActiveRecord::Base
     ordered_pictures.each{|position, picture_id|
       if picture_id.present?
         pic = current_pictures.find { |x| x.id == picture_id.to_i }
-        pic.update_attribute(:position, position) if pic
+        pic.update_column(:position, position) if pic
       end
     }
   end

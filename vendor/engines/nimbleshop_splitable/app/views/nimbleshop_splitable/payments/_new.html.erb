@@ -1,6 +1,6 @@
 <label class='radio'>
   <%= radio_button_tag 'payment_choice', 'splitable' %>
-  <%= nimbleshop_splitable_small_image %>
+  <%= nimbleshop_splitable_big_image(height: '20px') %>
 </label>
 
 <%= form_for NimbleshopSplitable::Splitable.new, url: nimbleshop_splitable.payment_path, html: { id: 'splitable-payment-form', 

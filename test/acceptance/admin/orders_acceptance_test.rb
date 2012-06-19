@@ -3,7 +3,7 @@ require "test_helper"
 class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
 
   test "paid using splitable" do
-    order = create(:order_paid_using_splitable, payment_status: 'paid')
+    order = create(:order_paid_using_splitable, payment_status: 'purchased')
 
     visit admin_path
     click_link 'Orders'
@@ -13,7 +13,7 @@ class OrdersAcceptanceTest <  ActionDispatch::IntegrationTest
   end
 
   test "paid using paypalwp" do
-    order = create(:order_paid_using_paypalwp, payment_status: 'paid')
+    order = create(:order_paid_using_paypalwp, payment_status: 'purchased')
 
     visit admin_path
     click_link 'Orders'

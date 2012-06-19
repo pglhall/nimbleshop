@@ -26,7 +26,7 @@ module Processor
       assert_equal 'authorized', transaction.operation
       assert_equal true, transaction.success
       assert_equal true, @order.authorized?
-      assert_equal "April 01, 2012 at 08:46 pm", @order.paid_at.to_s(:long)
+      assert_equal "April 01, 2012 at 08:46 pm", @order.purchased_at.to_s(:long)
       assert_equal NimbleshopPaypalwp::Paypalwp.first, @order.payment_method
       assert_equal transaction.amount, @order.total_amount_in_cents
     end

@@ -31,18 +31,21 @@ class Order < ActiveRecord::Base
   validates_inclusion_of :status,          in: %W( open closed )
   validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided )
 
-
   before_create :set_order_number
 
-  # goes into pending state when sold using cash on delivery but not yet paid
-  # capture is a method defined on kernel
+  # Look at order_observer to see all the callbacks.
+  #
+  # capture is a method defined on kernel by Rails hence kapture is used .
+  #
+  # An order goes into pending state when it is paid for using 'Cash on delivery'
   state_machine :payment_status, initial: :abandoned do
+
     event(:authorize) { transition abandoned:   :authorized }
     event(:pending)   { transition abandoned:   :pending    }
-    event(:kapture )  { transition authorized:  :paid       }
-    event(:refund)    { transition paid:        :refunded   }
+    event(:kapture )  { transition authorized:  :purchased  }
+    event(:refund)    { transition purchased:   :refunded   }
 
-    event(:purchase)  { transition [:abandoned,  :pending] =>  :paid       }
+    event(:purchase)  { transition [:abandoned,  :pending] =>  :purchased  }
     event(:void)      { transition [:authorized, :pending] =>  :cancelled  }
 
     state all - [ :abandoned ] do
@@ -58,10 +61,8 @@ class Order < ActiveRecord::Base
     event(:cancel_shipment)  { transition shipping_pending: :nothing_to_ship }
   end
 
-  def mark_as_paid!
-    unless paid_at
-      touch(:paid_at)
-    end
+  def mark_as_purchased!
+    touch(:purchased_at) unless purchased_at
   end
 
   def available_shipping_methods

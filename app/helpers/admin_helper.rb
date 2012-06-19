@@ -27,7 +27,7 @@ module AdminHelper
   end
 
   def display_payment_status(order)
-    css_klass = order.payment_status == 'paid' ? 'label-success' : 'label-info'
+    css_klass = order.payment_status == 'purchased' ? 'label-success' : 'label-info'
     %Q{<span class="label #{css_klass}"> #{order.payment_status.titleize.upcase} </span>}.html_safe
   end
 

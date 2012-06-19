@@ -16,7 +16,7 @@ module NimbleshopPaypalwp
       record_transaction('captured', success: success)
 
       if success
-        order.update_attributes(paid_at: paid_at, payment_method: payment_method)
+        order.update_attributes(purchased_at: purchased_at, payment_method: payment_method)
         order.kapture
       end
 
@@ -28,7 +28,7 @@ module NimbleshopPaypalwp
       record_transaction('authorized', success: success)
 
       if success
-        order.update_attributes(paid_at: paid_at, payment_method: payment_method)
+        order.update_attributes(purchased_at: purchased_at, payment_method: payment_method)
         order.authorize
       end
 
@@ -43,7 +43,7 @@ module NimbleshopPaypalwp
       record_transaction('purchased', success: success)
 
       if success
-        order.update_attributes(paid_at: @paypal_ipn.received_at, payment_method: payment_method)
+        order.update_attributes(purchased_at: @paypal_ipn.received_at, payment_method: payment_method)
         order.purchase
       end
 
@@ -71,7 +71,7 @@ module NimbleshopPaypalwp
       @paypal_ipn.acknowledge
     end
 
-    def paid_at
+    def purchased_at
       Time.strptime(@paypal_ipn.params['payment_date'], "%H:%M:%S %b %d, %Y %z")
     end
   end
