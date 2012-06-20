@@ -37,6 +37,9 @@ class ShippingMethod < ActiveRecord::Base
   end
 
   before_create :create_regional_shipping_methods, if: :country_level?
+
+  # TODO megpha add comment here to explain why every time before saving
+  # all the regions are being set to inactive state
   before_save   :set_regions_inactive, if: :country_level?
 
   belongs_to  :parent,  class_name: 'ShippingMethod', foreign_key: 'parent_id'

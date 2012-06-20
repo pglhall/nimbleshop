@@ -13,11 +13,7 @@ class Mailer < ActionMailer::Base
     subject = "Order confirmation for order ##{order_number}"
     @order = Order.find_by_number!(order_number)
 
-    # TODO ideally I should be able to use current_shop below
     @shop = Shop.first
-
-    # TODO ideally it should be the other way round gut creating creditcard_transaction record
-    # is a bit difficult in test. should be fixed soon
     @payment_date = @order.created_at.to_s(:long) || @order.purchased_at.to_s(:long)
 
     mail_options = {to: @order.email, subject: subject}
