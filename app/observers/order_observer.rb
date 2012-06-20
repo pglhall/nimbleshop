@@ -27,11 +27,21 @@ class OrderObserver < ActiveRecord::Observer
   def after_authorize(order, transition)
     Mailer.delay.order_notification_to_buyer(order.number)
     AdminMailer.delay.new_order_notification(order.number)
+
     order.mark_as_purchased!
     order.shipping_pending
   end
 
   def after_kapture(order, transition)
+  end
+
+  def after_pending(order, transition)
+    if order.payment_method.is_a? NimbleshopCod::Cod
+      Mailer.delay.order_notification_to_buyer(order.number)
+      AdminMailer.delay.new_order_notification(order.number)
+    end
+
+    order.shipping_pending
   end
 
   def after_void(order, transition)
