@@ -1,6 +1,5 @@
-#TODO add respond_to
 module NimbleshopCod
-  class PaymentsController < ::Admin::PaymentMethodsController
+  class PaymentsController
 
     def create
       order       = Order.find_by_id(session[:order_id])
