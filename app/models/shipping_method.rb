@@ -99,11 +99,7 @@ class ShippingMethod < ActiveRecord::Base
                   lower_price_limit: lower_price_limit,
                   upper_price_limit: upper_price_limit }
 
-      # TODO does it have to be false. why not use unless
-      if active == false
-        options.merge!(active: false)
-      end
-
+      options.merge!(active: false) unless active
       regions.build(options)
     end
   end

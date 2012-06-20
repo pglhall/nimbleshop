@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(:version => 20120606165355) do
     t.decimal  "upper_price_limit", :precision => 8, :scale => 2
     t.decimal  "base_price",        :precision => 8, :scale => 2
     t.decimal  "offset",            :precision => 8, :scale => 2, :default => 0.0
-    t.boolean  "active",                                          :default => true
+    t.boolean  "active",                                          :default => true, :null => false
     t.integer  "parent_id"
     t.datetime "created_at",                                                        :null => false
     t.datetime "updated_at",                                                        :null => false

@@ -7,7 +7,7 @@ class CreateShippingMethods < ActiveRecord::Migration
       t.decimal :upper_price_limit, precision: 8, scale: 2
       t.decimal :base_price,        precision: 8, scale: 2
       t.decimal :offset,            precision: 8, scale: 2, default: 0
-      t.boolean :active,            default: true
+      t.boolean :active,            null: false, default: true
       t.integer :parent_id
 
       t.timestamps
