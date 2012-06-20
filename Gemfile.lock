@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/bigbinary/nimbleshop_google_analytics.git
-  revision: 4c604c2029439bd5dc41e62ce74a7c76b80ade62
+  revision: 1a9998a2371c0f1306abbec03cbe7bfad17ffde3
   specs:
     nimbleshop_google_analytics (0.0.1)
       gabba
