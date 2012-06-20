@@ -92,7 +92,7 @@ body {
 	}
 
 #topNav {
-	padding: 1em 0;
+	padding: 0;
 	color: #565656;
 	background: #222;
 }
@@ -510,8 +510,32 @@ p, #mainCol ul li {
 
 #topNav {
   background: #3F9FD9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+  height:40px;
 }
+
 #topNav a {
-  color: #fff;
+  color: #F5F5F5;
+  display: inline-block;
   font-family: sans-serif;
+   padding: 9px 10px 11px;
+   text-decoration: none;
+   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+   line-height: 19px;
+   font-size: 13px;
 }
+
+#topNav a.brand{ 
+  background: url(../images/logo.png) no-repeat 0 7px;
+  width:100px;
+  height: 22px;
+  text-indent:-9999px;
+}
+#topNav a:hover {
+  color: #FFF;
+}
+
+#topNav a.active{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
