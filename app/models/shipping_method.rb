@@ -31,12 +31,8 @@ class ShippingMethod < ActiveRecord::Base
 
   def self.in_state(state_code, country_code)
     where({
-      shipping_zones: {
-        state_code: state_code,
-          country_shipping_zones_shipping_zones: {
-            country_code: country_code
-        }
-      }
+      shipping_zones: { state_code: state_code },
+      country_shipping_zones_shipping_zones: { country_code: country_code }
     }).joins(shipping_zone: :country_shipping_zone)
   end
 
@@ -49,7 +45,7 @@ class ShippingMethod < ActiveRecord::Base
   # return shipping methods available to the given address for the given amount
   def self.available_for(amount, address)
     if address.state_code
-      in_state(address.state_code, address.country_code)  
+      in_state(address.state_code, address.country_code)
     else
       in_country(address.country_code)
     end.active.in_price_range(amount)

@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # standard rails stuff
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.6'
 
 # for pagination
 gem 'will_paginate'
