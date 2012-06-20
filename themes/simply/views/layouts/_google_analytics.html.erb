@@ -3,7 +3,7 @@
   _gaq.push(['_setAccount', '<%= current_shop.google_analytics_tracking_id %>' ]);
   _gaq.push(['_trackPageview']);
 
-  <% if params[:controller] == 'checkout/payments' %>
+  <% if false && (params[:controller] == 'checkout/payments') %>
 
 _gaq.push(['_addTrans',
     '<%= current_order.number %>',           // order ID - required
