@@ -1,6 +1,6 @@
 <label class='radio'>
   <%= radio_button_tag 'payment_choice', 'cod' %>
-  <%= nimbleshop_cod_small_image %>
+  Cash on delivery
 </label>
 
 <%= form_for NimbleshopCod::Cod.new, url: nimbleshop_cod.payment_path,  html: { id: 'cod-payment-form', class: 'form-horizontal' } do |f| %>
