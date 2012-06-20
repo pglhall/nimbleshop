@@ -1,4 +1,3 @@
-#TODO add respond_to
 module NimbleshopSplitable
   class PaymentsController < ::ApplicationController
 
@@ -7,10 +6,10 @@ module NimbleshopSplitable
       processor   = NimbleshopSplitable::Processor.new(order: order)
       error, url  = processor.create_split(request: request)
 
-      if error
-        render text: error
-      else
-        redirect_to url
+      respond_to do |format|
+        format.html do
+          error ?  render(text: error) : redirect_to(url)
+        end
       end
     end
 
