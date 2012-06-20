@@ -128,8 +128,9 @@ gem 'delayed_job_active_record'
 # to see how many background jobs are yet to be processed
 gem "delayed_job_admin"
 
-gem 'nimbleshop_paypalwp',        path: 'vendor/engines/nimbleshop_paypalwp'
-gem 'nimbleshop_authorizedotnet', path: 'vendor/engines/nimbleshop_authorizedotnet'
-gem 'nimbleshop_splitable',       path: 'vendor/engines/nimbleshop_splitable'
-gem 'nimbleshop_cod',             path: 'vendor/engines/nimbleshop_cod'
+gem 'nimbleshop_paypalwp',         path: 'vendor/engines/nimbleshop_paypalwp'
+gem 'nimbleshop_authorizedotnet',  path: 'vendor/engines/nimbleshop_authorizedotnet'
+gem 'nimbleshop_splitable',        path: 'vendor/engines/nimbleshop_splitable'
+gem 'nimbleshop_cod',              path: 'vendor/engines/nimbleshop_cod'
 
+gem 'nimbleshop-google-analytics', github: 'bigbinary/nimbleshop_google_analytics'
