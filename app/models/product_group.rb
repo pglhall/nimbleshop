@@ -13,8 +13,7 @@ class ProductGroup < ActiveRecord::Base
   accepts_nested_attributes_for :product_group_conditions, allow_destroy: true
 
   # determines if the given product exists in the product group
-  # TODO do not override method from ActiveRecord
-  def exists?(product)
+  def contains?(product)
     products.include?(product)
   end
 
@@ -60,6 +59,6 @@ class ProductGroup < ActiveRecord::Base
 
    # list of all product groups containing input product
   def self.contains_product(product)
-    all.select { | product_group | product_group.exists?(product) }
+    all.select { | product_group | product_group.contains?(product) }
   end
 end
