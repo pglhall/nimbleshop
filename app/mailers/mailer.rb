@@ -9,7 +9,7 @@ class Mailer < ActionMailer::Base
   default_url_options[:host] = Settings.host_for_email
   default_url_options[:protocol] = 'http'
 
-  def order_notification(order_number)
+  def order_notification_to_buyer(order_number)
     subject = "Order confirmation for order ##{order_number}"
     @order = Order.find_by_number!(order_number)
 
