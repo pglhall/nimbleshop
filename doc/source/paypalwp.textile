@@ -25,11 +25,10 @@ Open another terminal. Go to the nimbleShop project directory and
 execute following command.
 
 <shell>
-bundle exec localtunnel -k ~/.ssh/id_rsa.pub 3000
+rake nimbleshop:localtunnel
 </shell>
 
 Sometimes you might get message +[Error] Unable to register tunnel. Perhaps service is down?+. It means localtunnel is not working and you will not be able to test Instant Payment Notification ( IPN ). However you can still test making payment part .
-
 
 Visit "https://developer.paypal.com":https://developer.paypal.com and login with email +neeraj.cmu@gmail.com+ and password +welcome1+ .
 
@@ -57,17 +56,28 @@ h3. Setup paypal sandbox
 
 In order to test integration of your store with Paypal it is highly recommended that you sign up for test account as given below.
 
-* Visit "https://developer.paypal.com":https://developer.paypal.com .
-* Sign up for a new account .
-* Check your email and click on the linke in the email to activate your account .
-* Now visit "https://developer.paypal.com":https://developer.paypal.com and login with your email and password .
-* Click on +preconfigure account+ .
+Visit "https://developer.paypal.com":https://developer.paypal.com .
+
+Sign up for a new account .
+
+Check your email and click on the linke in the email to activate your account .
+
+Now visit "https://developer.paypal.com":https://developer.paypal.com and login with your email and password .
+
+Click on +preconfigure account+ .
+
 !https://img.skitch.com/20120419-tstbh9n36r5erq6iyjrs8ri2tc.jpg!
-* Create a buyer account by choosing +Buyer account+. Enter the password as +welcome1+  . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+
+Create a buyer account by choosing +Buyer account+. Enter the password as +welcome1+  . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+
 !https://img.skitch.com/20120419-kgaba21nsw46ufwdny94dqn9de.jpg!
-* Next create a seller account by choosing +Seller account+. Enter the password as +welcome1+ . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+
+Next create a seller account by choosing +Seller account+. Enter the password as +welcome1+ . Enter email but do not worry about the value. The exact email value will be changed by paypal and you will get to see the changed email address.
+
 !https://img.skitch.com/20120419-xi5ysn669fiahc32sj17iu3att.jpg!
-* Now we have all the accounts configured to start making actual payment
+
+Now we have all the accounts configured to start making actual payment
+
 !https://img.skitch.com/20120419-fjypknce719377h3chbbag4p74.jpg!
 
 h3. Instant payment notification in paypal
@@ -80,9 +90,20 @@ In local development environment when you use +localhost:3000+ then paypal canno
 
 "localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server. 
 
-* +gem install localtunnel+ .
-* Start your application using +rails server+ .
-* On another terminal `cd nimbleshop` and then execute command +localtunnel -k ~/.ssh/id_rsa.pub 3000+ .
-* In the root directory of nimbleshop there is a file called +localtunner_callback+. localtunnel gem executes localtunnel_callback with the current host name after creating the tunnel.
-* localtunnel_callback writes the host into config/tunnel.
-* nimbleshop reads config/tunnel in development mode to construct paypal notification url.
+<shell>
+gem install localtunnel+ .
+</shell>
+
+Start your application using +rails server+ .
+
+On another terminal
+
+<shell>
+rake nimbleshop:localtunnel
+</shell>
+
+In the root directory of nimbleshop there is a file called +localtunner_callback+. localtunnel gem executes localtunnel_callback with the current host name after creating the tunnel.
+
+localtunnel_callback writes the host into config/tunnel.
+
+nimbleshop reads config/tunnel in development mode to construct paypal notification url.

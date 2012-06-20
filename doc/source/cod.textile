@@ -2,4 +2,7 @@ h2. Cash on delivery
 
 endprologue.
 
-Cash on delivery is coming up in nimbleShop.
+Cash on delivery is a way to accept cash payment. When buyer pays using
+"Cash on delivery" then payment status is changed to +pending+. Later
+when buyer actually makes cash payment then admin can change the payment
+status from +pending+ to +purchased+.
