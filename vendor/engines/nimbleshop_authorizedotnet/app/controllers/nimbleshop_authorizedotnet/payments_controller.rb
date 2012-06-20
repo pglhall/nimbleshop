@@ -1,5 +1,5 @@
 module NimbleshopAuthorizedotnet
-  class PaymentsController
+  class PaymentsController < ::ApplicationController
 
     def create
       order             =  Order.find_by_id(session[:order_id])
