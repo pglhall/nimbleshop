@@ -48,7 +48,11 @@ h1 {
     -webkit-box-shadow: -1px 1px 1px #666666;
     box-shadow: -1px 1px 1px #666666;
   }
+  &:hover{
+    background: url("/assets/cart_hover.png") no-repeat scroll 0 0 transparent;
+  }
 }
+
 
 
 
