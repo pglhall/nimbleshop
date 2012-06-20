@@ -91,6 +91,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'debugger'
   gem 'push2heroku',  github: 'neerajdotname/push2heroku'
   gem 'localtunnel',  github: 'jalada/localtunnel'
