@@ -52,7 +52,7 @@ module Nimbleshop
 
     config.assets.precompile += ['admin.css', 'admin.js']
 
-    # TODO we should do not need to hardcode theme name
+    # FIXME we should do not need to hardcode theme name
     config.assets.paths << "#{Rails.root}/themes/simply/assets/stylesheets"
     config.assets.paths << "#{Rails.root}/themes/simply/assets/javascripts"
     config.assets.paths << "#{Rails.root}/themes/simply/assets/images"

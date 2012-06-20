@@ -16,7 +16,7 @@ module Search
     end
 
     def field_type
-      # TODO why special treatment to :price field
+      # TODO megpha why special treatment to :price field
       if query_column == :price
         'number'
       else

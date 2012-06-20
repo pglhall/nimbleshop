@@ -6,7 +6,7 @@ class CreateShippingZones < ActiveRecord::Migration
       t.string  :country_code
       t.string  :state_code
 
-      # TODO it should be not nullable. It is a hack being added
+      # TODO megpha it should be not nullable. It is a hack being added
       # by Neeraj because migration to rails 3.2 is failing
       t.string  :type,          null: true
 

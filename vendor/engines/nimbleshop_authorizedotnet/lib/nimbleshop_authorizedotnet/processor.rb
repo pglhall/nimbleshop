@@ -81,8 +81,6 @@ module NimbleshopAuthorizedotnet
       end
     end
 
-    # TODO How to ensure that the database operation after the transaction with Authorize.net
-    # is indeed done
     def do_void(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
@@ -117,10 +115,10 @@ module NimbleshopAuthorizedotnet
                   params:             response.params,
                   success:            response.success?,
                   metadata:           additional_options,
-                  transaction_gid:    response.authorization } # TODO is the transaction_gid  response.authorization. will it be
-                                                               # response.capture in case of capture
+                  transaction_gid:    response.authorization } # TODO megpha Is the transaction_gid  always response.authorization even for capture operation?
+                                                               # this  method is called after capturing operation too 
 
-      if response.success? # How about recording amount in failure case too. success key keeps track of which one was success and which one is failure
+      if response.success?
         options.update(amount: order.total_amount_in_cents)
       end
 

@@ -66,7 +66,7 @@ module NimbleshopPaypalwp
       @paypal_ipn.amount.cents == order.total_amount_in_cents
     end
 
-    # TODO where is it being used ??
+    # TODO megpha where is it being used ??
     def acknowledge
       @paypal_ipn.acknowledge
     end

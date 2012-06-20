@@ -35,7 +35,7 @@ module Search
     end
   end
 
-  # TODO not sure if it is needed
+  # TODO megpha not sure if it is needed
   def summary
     I18n.t(self.operator.to_sym, { field: localized_name, value: self.value })
   end
