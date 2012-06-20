@@ -7,14 +7,6 @@ module NimbleshopCod
       end
     end
 
-    def nimbleshop_cod_small_image
-      image_tag "engines/nimbleshop_cod/cod_small.png", alt: 'cod icon'
-    end
-
-    def nimbleshop_cod_big_image
-      image_tag "engines/nimbleshop_cod/cod_big.png", alt: 'cod logo'
-    end
-
     def nimbleshop_cod_available_payment_options_icons
       return nil # do not display any payment option icon for cash on delivery
     end
@@ -27,10 +19,6 @@ module NimbleshopCod
     def nimbleshop_cod_crud_form
       return unless NimbleshopCod::Cod.first
       render partial: '/nimbleshop_cod/cods/edit'
-    end
-
-    def nimbleshop_cod_icon_for_order_payment(order)
-      nimbleshop_cod_small_image
     end
 
   end
