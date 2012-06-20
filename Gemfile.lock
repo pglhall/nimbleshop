@@ -253,7 +253,6 @@ GEM
       net-ssh (>= 1.99.1)
     netrc (0.7.4)
     nokogiri (1.5.3)
-    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -368,7 +367,6 @@ DEPENDENCIES
   nimbleshop_google_analytics!
   nimbleshop_paypalwp!
   nimbleshop_splitable!
-  pg
   push2heroku!
   rails (= 3.2.6)
   rb-fsevent

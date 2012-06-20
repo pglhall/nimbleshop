@@ -6,14 +6,8 @@ gem 'rails', '3.2.6'
 # for pagination
 gem 'will_paginate'
 
-# for postgresql
-gem 'pg'
-
 # to support various themes
 gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
-
-# heroku cedar stack needs it
-gem 'thin'
 
 # ruby 1.9 does not parse dates formatted in american style correclty. This gem fixes that.
 gem 'american_date'
@@ -21,7 +15,10 @@ gem 'american_date'
 # to override default error message that comes with validates_presence_of etla.
 gem 'custom_error_message',  github: 'nwise/custom_error_message'
 
-# to handle credit card payments
+# to manage states of payment_status and shipping_status
+gem 'state_machine'
+
+# to handle payments
 gem 'activemerchant'
 
 # for uploading images
@@ -30,14 +27,14 @@ gem 'carrierwave'
 # for storing image properties like height, width,size etc. It adds those info for thumbnails too
 gem 'carrierwave-meta'
 
+# for uploading pictures to s3 using carrierwave
+gem 'fog'
+
 # for having nested items. order has billing_address and shipping_address nested
 gem 'nested_form', github: 'ryanb/nested_form'
 
 # for creating thumbnails for images
 gem 'mini_magick'
-
-# to manage states of payment_status and shipping_status
-gem 'state_machine'
 
 # mustache.js. It is used to generate new product-group-condition
 gem 'mustache'
@@ -58,17 +55,34 @@ gem 'hashr'
 # This gem maintains all the country codes and subregions for some of the countries
 gem 'carmen', github: 'jim/carmen'
 
-# for uploading pictures to s3 using carrierwave
-gem 'fog'
+# for displaying images of a product in facybox manner
+gem 'fancybox-rails'
+
 
 # for error notification
 gem "airbrake"
 
-# for displaying images of a product in facybox manner
-gem 'fancybox-rails'
+# TODO this dependecy should be pushed to nimbleshop_paypalwp
+#
+# this gem is needed to handle the instant payment notification from paypal. In particular following
+# ActiveMerchant::Billing::Integrations::Notification::Money class uses it .
+gem 'money'
 
-# Gems used only for assets and not required
-# in production environments by default.
+# for background processing of jobs
+gem 'delayed_job_active_record'
+
+# to see how many background jobs are yet to be processed
+gem "delayed_job_admin"
+
+# heroku cedar stack needs it
+gem 'thin'
+
+
+# for postgresql
+# gem 'pg'
+
+
+# Gems used only for assets and not required in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -77,8 +91,7 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'debugger'#, require: 'ruby-debug'
-
+  gem 'debugger'
   gem 'push2heroku',  github: 'neerajdotname/push2heroku'
   gem 'localtunnel',  github: 'jalada/localtunnel'
 end
@@ -116,17 +129,6 @@ group :test do
 
 end
 
-# TODO this dependecy should be pushed to nimbleshop_paypalwp
-#
-# this gem is needed to handle the instant payment notification from paypal. In particular following
-# ActiveMerchant::Billing::Integrations::Notification::Money class uses it .
-gem 'money'
-
-# for background processing of jobs
-gem 'delayed_job_active_record'
-
-# to see how many background jobs are yet to be processed
-gem "delayed_job_admin"
 
 gem 'nimbleshop_paypalwp',         path: 'vendor/engines/nimbleshop_paypalwp'
 gem 'nimbleshop_authorizedotnet',  path: 'vendor/engines/nimbleshop_authorizedotnet'
