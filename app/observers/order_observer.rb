@@ -5,7 +5,7 @@ class OrderObserver < ActiveRecord::Observer
     send_email_notifications(order)
     order.mark_as_purchased!
     order.shipping_pending
-    ActiveSupport::Notifications.instrument("order.purchased", order.number)
+    ActiveSupport::Notifications.instrument("order.purchased", { order_number: order.number } )
   end
 
   # TODO send_email_notification is a very generic name
