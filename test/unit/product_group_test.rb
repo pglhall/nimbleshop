@@ -28,6 +28,13 @@ require 'test_helper' do
     @p5.custom_field_answers.create(custom_field: @date, value: '6/7/2010')
   end
 
+  test '.fields' do
+    expected = [{"id"=>"name", "name"=>"Name", "field_type"=>"text"}, 
+                {"id"=>"price", "name"=>"Price", "field_type"=>"number"},
+                {"id"=>1, "name"=>"category", "field_type"=>"text"}]
+
+    assert_equal expected, ProductGroup.fields
+  end
 
   test "returns products using equality operator" do
     group = create(:product_group)
