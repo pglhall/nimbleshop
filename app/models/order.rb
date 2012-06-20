@@ -152,7 +152,7 @@ class Order < ActiveRecord::Base
   end
 
   def after_shipped
-    Mailer.delay.shipping_notification(number)
+    Mailer.delay.shipment_notification_to_buyer(number)
     touch(:shipped_at)
   end
 
