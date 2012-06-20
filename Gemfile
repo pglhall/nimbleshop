@@ -133,4 +133,4 @@ gem 'nimbleshop_authorizedotnet',  path: 'vendor/engines/nimbleshop_authorizedot
 gem 'nimbleshop_splitable',        path: 'vendor/engines/nimbleshop_splitable'
 gem 'nimbleshop_cod',              path: 'vendor/engines/nimbleshop_cod'
 
-gem 'nimbleshop-google-analytics', github: 'bigbinary/nimbleshop_google_analytics'
+gem 'nimbleshop_google_analytics', github: 'bigbinary/nimbleshop_google_analytics'

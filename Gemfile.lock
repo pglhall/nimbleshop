@@ -7,9 +7,9 @@ GIT
 
 GIT
   remote: git://github.com/bigbinary/nimbleshop_google_analytics.git
-  revision: 89f71a6e36302428f8b8eb993499dc4fac8d4434
+  revision: f47aeb571484d2ac4c855e92cb0b3f4e22caee23
   specs:
-    nimbleshop-google-analytics (0.0.1)
+    nimbleshop_google_analytics (0.0.1)
       gabba
       net-http-spy
 
@@ -363,9 +363,9 @@ DEPENDENCIES
   money
   mustache
   nested_form!
-  nimbleshop-google-analytics!
   nimbleshop_authorizedotnet!
   nimbleshop_cod!
+  nimbleshop_google_analytics!
   nimbleshop_paypalwp!
   nimbleshop_splitable!
   pg
