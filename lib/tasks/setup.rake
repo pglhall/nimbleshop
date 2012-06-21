@@ -1,4 +1,4 @@
-desc "sets up data for nimbleshop application"
+desc "sets up database for nimbleshop application"
 task :setup => :environment do
 
   #raise "this task should not be run in production" if Rails.env.production?
