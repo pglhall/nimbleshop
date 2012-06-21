@@ -62,7 +62,8 @@ class OrderTest < ActiveSupport::TestCase
 
   test "#available_shipping_methods" do
     @order.add(create(:product))
-    shipping_method = create(:country_shipping_method, base_price: 100, lower_price_limit: 1, upper_price_limit: 99999)
+    assert_equal 1, @order.available_shipping_methods.size
+    assert_equal 58, ShippingMethod.count
     @order.shipping_address = create(:shipping_address)
     assert_equal 1, @order.available_shipping_methods.size
   end
