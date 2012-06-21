@@ -26,8 +26,7 @@ class Order < ActiveRecord::Base
 
   validates :email, email: true, if: :validate_email
 
-  # cancelled is when third party service like Splitable sends a webhook stating that order has been cancelled
-  validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped partially_shipped shipping_pending cancelled )
+  validates_inclusion_of :shipping_status, in: %W( nothing_to_ship shipped shipping_pending cancelled )
   validates_inclusion_of :status,          in: %W( open closed )
   validates_inclusion_of :checkout_status, in: %W( items_added_to_cart billing_address_provided shipping_method_provided )
 
