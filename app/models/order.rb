@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
     event(:refund)    { transition purchased:   :refunded   }
 
     event(:purchase)  { transition [:abandoned,  :pending] =>  :purchased  }
-    event(:void)      { transition [:authorized, :pending] =>  :cancelled  }
+    event(:void)      { transition [:authorized, :pending] =>  :voided     }
 
     state all - [ :abandoned ] do
       validates :payment_method, presence: true

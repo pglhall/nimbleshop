@@ -168,7 +168,7 @@ module Processor
       assert_equal  'voided', transaction.operation
       assert_equal  true, transaction.success
       assert_equal  NimbleshopAuthorizedotnet::Authorizedotnet.first, @order.payment_method
-      assert        @order.cancelled?
+      assert        @order.voided?
     end
 
     test "when capture fails" do

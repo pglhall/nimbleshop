@@ -101,7 +101,7 @@ module Processor
       assert_equal 'voided',          transaction.operation
       assert_equal '852973493383974', transaction.transaction_gid
       @order.reload
-      assert @order.cancelled?
+      assert @order.voided?
     end
 
     test "when an invalid order number is used" do
