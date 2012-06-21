@@ -89,6 +89,7 @@ class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
   setup do
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
+    create(:country_shipping_method)
   end
 
   test 'on cart page' do

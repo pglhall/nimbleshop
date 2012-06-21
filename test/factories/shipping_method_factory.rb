@@ -5,8 +5,8 @@ FactoryGirl.define do
 
     trait :country do
       association :shipping_zone, factory: :country_shipping_zone
-      lower_price_limit  10
-      upper_price_limit  20
+      lower_price_limit  0
+      upper_price_limit  9999999
       base_price    2.99
     end
 
