@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:number) { |t| "xxx#{t}" }
 
     trait :line_items do
-      after(:create) { | r | FactoryGirl.create(:line_item, order: r) }
+      after(:create) { |order| FactoryGirl.create(:line_item, order: order) }
     end
 
     trait :splitable do
@@ -19,6 +19,10 @@ FactoryGirl.define do
 
     trait :authorizedotnet do
       payment_method_id 3
+    end
+
+    trait :shipment do
+      after(:create) { |order| FactoryGirl.create(:shipment, order: order) }
     end
 
     factory :order_with_line_items,   traits: [:line_items]
@@ -35,7 +39,7 @@ FactoryGirl.define do
       end
     end
 
-    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet] do |order|
+    factory :order_paid_using_authorizedotnet,   traits: [:authorizedotnet, :shipment] do |order|
       order.after(:create) do |o|
         create :payment_transaction_with_authorizedotnet, order: o
       end
