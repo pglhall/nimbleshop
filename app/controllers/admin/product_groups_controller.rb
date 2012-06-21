@@ -16,11 +16,17 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def create
-    @product_group = ProductGroup.new(post_params[:product_group])
-    if @product_group.save
-      redirect_to admin_product_groups_path, notice: t(:successfully_updated)
-    else
-      respond_with @product_group
+    respond_to do |format|
+      format.html do
+
+        @product_group = ProductGroup.new(post_params[:product_group])
+        if @product_group.save
+          redirect_to admin_product_groups_path, notice: t(:successfully_updated)
+        else
+          render action: 'new'
+        end
+
+      end
     end
   end
 
@@ -30,10 +36,16 @@ class Admin::ProductGroupsController < AdminController
   end
 
   def update
-    if @product_group.update_attributes(post_params[:product_group])
-      redirect_to admin_product_groups_path, notice: t(:successfully_updated)
-    else
-      respond_with @product_group
+    respond_to do |format|
+      format.html do
+
+        if @product_group.update_attributes(post_params[:product_group])
+          redirect_to admin_product_groups_path, notice: t(:successfully_updated)
+        else
+          render action: 'edit'
+        end
+
+      end
     end
   end
 

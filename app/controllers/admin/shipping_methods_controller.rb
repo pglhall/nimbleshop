@@ -3,6 +3,8 @@ class Admin::ShippingMethodsController < AdminController
   before_filter :load_shipping_zone
   before_filter :load_shipping_method, except: [:new, :create, :enable]
 
+  respond_to :html
+
   def update_offset
     @shipping_method.update_offset(params[:offset])
     render json: { html:  render_shipping_method(@shipping_method) }
@@ -22,29 +24,41 @@ class Admin::ShippingMethodsController < AdminController
 
   def new
     @shipping_method = @shipping_zone.shipping_methods.build
+    respond_with @shipping_method
   end
 
   def edit
-    render
+    respond_with @shipping_method
   end
 
   def create
-    @shipping_method = @shipping_zone.shipping_methods.build(params[:shipping_method])
+    respond_to do |format|
+      format.html do
 
-    if @shipping_method.save
-      redirect_to admin_shipping_zones_path, notice: t(:successfully_created)
-    else
-      render action: :new
+        @shipping_method = @shipping_zone.shipping_methods.build(params[:shipping_method])
+        if @shipping_method.save
+          redirect_to admin_shipping_zones_path, notice: t(:successfully_created)
+        else
+          render action: :new
+        end
+
+      end
     end
   end
 
   def update
-    @shipping_method = @shipping_zone.shipping_methods.find(params[:id])
+    respond_to do |format|
+      format.html do
 
-    if @shipping_method.update_attributes(params[:shipping_method])
-      redirect_to [:edit, :admin, @shipping_zone, @shipping_method], notice: t(:successfully_updated)
-    else
-      render action: :new
+        @shipping_method = @shipping_zone.shipping_methods.find(params[:id])
+
+        if @shipping_method.update_attributes(params[:shipping_method])
+          redirect_to [:edit, :admin, @shipping_zone, @shipping_method], notice: t(:successfully_updated)
+        else
+          render action: :new
+        end
+
+      end
     end
   end
 

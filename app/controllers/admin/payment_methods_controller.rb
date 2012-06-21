@@ -5,10 +5,16 @@ class Admin::PaymentMethodsController < AdminController
   layout 'payment_method'
 
   def index
-    if PaymentMethod.count == 0
-      flash.now[:error] = 'You have not setup any payment method. User wil not be able to make payment'
+    respond_to do |format|
+      format.html do
+
+        if PaymentMethod.count == 0
+          flash.now[:error] = 'You have not setup any payment method. User wil not be able to make payment'
+        end
+        render layout: 'payment_method'
+
+      end
     end
-    render layout: 'payment_method'
   end
 
   private

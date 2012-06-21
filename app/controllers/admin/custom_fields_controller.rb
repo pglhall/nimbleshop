@@ -36,10 +36,14 @@ class Admin::CustomFieldsController < AdminController
   end
 
   def destroy
-    if @custom_field.destroy
-      redirect_to admin_custom_fields_path, notice: t(:successfully_deleted)
-    else
-      redirect_to admin_custom_fields_path, error: t(:could_not_delete)
+    respond_to do |format|
+      format.html do
+        if @custom_field.destroy
+          redirect_to admin_custom_fields_path, notice: t(:successfully_deleted)
+        else
+          redirect_to admin_custom_fields_path, error: t(:could_not_delete)
+        end
+      end
     end
   end
 

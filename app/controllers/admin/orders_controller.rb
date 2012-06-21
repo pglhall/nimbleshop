@@ -3,17 +3,27 @@ class Admin::OrdersController < AdminController
   respond_to :html
 
   def capture_payment
-    @order = Order.find_by_number!(params[:id])
-    @order.kapture!
-    flash[:notice] = "Amount was successfully captured"
-    redirect_to admin_order_path(@order)
+    respond_to do |format|
+      format.html do
+
+        @order = Order.find_by_number!(params[:id])
+        @order.kapture!
+        redirect_to admin_order_path(@order), notice: "Amount was successfully captured"
+
+      end
+    end
   end
 
   def purchase_payment
-    @order = Order.find_by_number!(params[:id])
-    @order.purchase!
-    flash[:notice] = "Amount was successfully paid"
-    redirect_to admin_order_path(@order)
+    respond_to do |format|
+      format.html do
+
+        @order = Order.find_by_number!(params[:id])
+        @order.purchase!
+        redirect_to admin_order_path(@order), notice: "Amount was successfully paid"
+
+      end
+    end
   end
 
   def index
@@ -30,6 +40,7 @@ class Admin::OrdersController < AdminController
       @shipment = @order.shipments.build
       @shipment.notify_customer = 1
     end
+
     respond_with @order
   end
 

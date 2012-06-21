@@ -24,20 +24,32 @@ class Admin::ProductsController < AdminController
   end
 
   def create
-    @product = Product.new(post_params[:product])
-    if @product.save
-      redirect_to edit_admin_product_path(@product), notice: t(:successfully_added)
-    else
-      respond_with @product
+    respond_to do |format|
+      format.html do
+
+        @product = Product.new(post_params[:product])
+        if @product.save
+          redirect_to edit_admin_product_path(@product), notice: t(:successfully_added)
+        else
+          render action: 'new'
+        end
+
+      end
     end
   end
 
   def update
-    @product_groups = ProductGroup.contains_product(@product)
-    if @product.update_attributes(post_params[:product])
-      redirect_to edit_admin_product_path(@product), notice: t(:successfully_updated)
-    else
-      respond_with @product
+    respond_to do |format|
+      format.html do
+
+        @product_groups = ProductGroup.contains_product(@product)
+        if @product.update_attributes(post_params[:product])
+          redirect_to edit_admin_product_path(@product), notice: t(:successfully_updated)
+        else
+          respond_with @product
+        end
+
+      end
     end
   end
 

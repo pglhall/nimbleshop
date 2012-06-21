@@ -5,25 +5,39 @@ class Admin::NavigationsController < AdminController
 
   before_filter :load_link_group
 
+  respond_to :html
+
   def new
     @navigation = @link_group.navigations.new
+    respond_with @navigation
   end
 
   def create
-    @navigation = @link_group.navigations.build(params[:navigation])
+    respond_to do |format|
+      format.html do
 
-    if @navigation.save
-      redirect_to [:admin, :link_groups], notice: "Successfully added"
-    else
-      render :new, error: "Failed to add"
+        @navigation = @link_group.navigations.build(params[:navigation])
+
+        if @navigation.save
+          redirect_to [:admin, :link_groups], notice: "Successfully added"
+        else
+          render :new, error: "Failed to add"
+        end
+
+      end
     end
   end
 
   def destroy
-    @navigation = @link_group.navigations.find_by_id!(params[:id])
-    @navigation.destroy
+    respond_to do |format|
+      format.html do
 
-    redirect_to [:admin, :link_groups], notice: "Successfully deleted"
+        @navigation = @link_group.navigations.find_by_id!(params[:id])
+        @navigation.destroy
+        redirect_to [:admin, :link_groups], notice: "Successfully deleted"
+
+      end
+    end
   end
 
   private

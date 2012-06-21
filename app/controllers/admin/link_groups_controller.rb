@@ -19,25 +19,44 @@ class Admin::LinkGroupsController < AdminController
   end
 
   def create
-  	@link_group = LinkGroup.new(post_params[:link_group])
-    if @link_group.save
-      redirect_to admin_link_groups_url, notice: t(:successfully_added)
-    else
-      respond_with @link_group
+    respond_to do |format|
+      format.html do
+
+  	    @link_group = LinkGroup.new(post_params[:link_group])
+
+        if @link_group.save
+          redirect_to admin_link_groups_url, notice: t(:successfully_added)
+        else
+          render action: 'new'
+        end
+
+      end
     end
   end
 
    def update
-      if @link_group.update_attributes(post_params[:link_group])
-        redirect_to admin_link_groups_path, notice: t(:successfully_updated)
-      else
-        respond_with @link_group
-      end
+     respond_to do |format|
+       format.html do
+
+          if @link_group.update_attributes(post_params[:link_group])
+            redirect_to admin_link_groups_path, notice: t(:successfully_updated)
+          else
+            rener action: 'edit'
+          end
+
+       end
+     end
     end
 
   def destroy
-    @link_group.destroy
-    redirect_to admin_link_groups_url, notice: t(:successfully_deleted)
+    respond_to do |format|
+      format.html do
+
+        @link_group.destroy
+        redirect_to admin_link_groups_url, notice: t(:successfully_deleted)
+
+      end
+    end
   end
 
   private
