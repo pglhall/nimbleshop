@@ -1,6 +1,6 @@
-if Settings.use_s3
+if Nimbleshop.config.use_s3
 
-  unless bucket_name = Settings.s3.bucket_name
+  unless bucket_name = Nimbleshop.config.s3.bucket_name
     msg = %Q{
       This application's #{Rails.env} environment is configured to use amazon s3. 
       However bucket_name to use is not specified.
@@ -20,8 +20,8 @@ if Settings.use_s3
 
     config.fog_credentials = {
         provider:               'AWS',
-        aws_access_key_id:      Settings.s3.access_key_id,
-        aws_secret_access_key:  Settings.s3.secret_access_key,
+        aws_access_key_id:      Nimbleshop.config.s3.access_key_id,
+        aws_secret_access_key:  Nimbleshop.config.s3.secret_access_key,
         region:                 'us-east-1'
       }
   end

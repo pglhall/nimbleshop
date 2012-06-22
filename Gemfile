@@ -46,7 +46,7 @@ gem 'email_validator', github: "bigbinary/email_validator"
 gem 'strong_parameters', github: 'rails/strong_parameters'
 
 # to make settings more flexible. Without hashr the code would be like this
-#  Settings.s3['bucket_name']  .With hashr it becomes Settings.s3.bucket_name
+#  Nimbleshop.config.s3['bucket_name']  .With hashr it becomes Nimbleshop.config.s3.bucket_name
 #
 #  I can't use open-struct because that does not list all the keys
 #

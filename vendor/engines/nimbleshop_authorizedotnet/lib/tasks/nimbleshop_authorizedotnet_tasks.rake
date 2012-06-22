@@ -7,8 +7,8 @@ namespace :nimbleshop_authorizedotnet do
     else
       NimbleshopAuthorizedotnet::Authorizedotnet.create!(
         {
-          login_id: Settings.authorizedotnet.login_id,
-          transaction_key: Settings.authorizedotnet.transaction_key,
+          login_id: Nimbleshop.config.authorizedotnet.login_id,
+          transaction_key: Nimbleshop.config.authorizedotnet.transaction_key,
           company_name_on_creditcard_statement: 'Nimbleshop LLC',
           name: 'Authorize.net',
           permalink: 'authorizedotnet',

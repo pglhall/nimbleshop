@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
   layout 'email'
 
   default from: lambda { Shop.first.from_email }
-  default_url_options[:host] = Settings.host_for_email
+  default_url_options[:host] = Nimbleshop.config.host_for_email
   default_url_options[:protocol] = 'http'
 
   def order_notification_to_buyer(order_number)

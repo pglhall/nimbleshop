@@ -28,7 +28,7 @@ module Sampledata
                    twitter_handle:  '@nimbleshop',
                    from_email:      'support@nimbleshop.com',
                    tax_percentage: 1.23,
-                   google_analytics_tracking_id: Settings.google_analytics_tracking_id,
+                   google_analytics_tracking_id: Nimbleshop.config.google_analytics_tracking_id,
                    facebook_url:    'http://www.facebook.com/pages/NimbleSHOP/119319381517845')
     end
 

@@ -1,6 +1,6 @@
 # Usage
 #
-# Settings.s3.bucket_name
+# Nimbleshop.config.s3.bucket_name
 #
 common:
   airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>

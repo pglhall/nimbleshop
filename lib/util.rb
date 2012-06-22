@@ -21,10 +21,10 @@ class Util
   # Usage: localhost2public_url ( '/nimbleshop_paypal/notify', 'http' )
   #
   def self.localhost2public_url(url, protocol)
-    return url unless Settings.use_localhost2public_url
+    return url unless Nimbleshop.config.use_localhost2public_url
 
     tunnel = Rails.root.join('config', '.tunnel')
-    return Settings.default_localhost2public_url unless File.exists?(tunnel)
+    return Nimbleshop.config.default_localhost2public_url unless File.exists?(tunnel)
 
     path = []
 
