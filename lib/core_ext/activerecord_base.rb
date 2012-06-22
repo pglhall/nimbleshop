@@ -1,6 +1,11 @@
+# 
+# If a field is nullable and if user hits spacebar a few times and submits
+# the form then ActiveRecord would have the value as empty spaces.
 #
-# empty spaces should be saved as NULL in database
-# before values are saved string values should undergo strip
+# Following fix would remove all leading and trailing white spaces from a string value.
+# And if the value is empty space then it will be set to nil.
+#
+# It would result in value being saved as NULL if user passed only a few white spaces.
 #
 module ActiveRecord
   class Base
