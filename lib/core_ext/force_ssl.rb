@@ -1,7 +1,9 @@
+#
 # Rails's version of force_ssl does not force ssl in development environment.
 #
 # In this monkey patch that constraint has been removed. Notice the '#' before &&.
 # The only code added was that single '#'
+#
 module ActionController
   module ForceSSL
     extend ActiveSupport::Concern
