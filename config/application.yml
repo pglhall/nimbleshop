@@ -6,7 +6,7 @@ common:
   airbrake_api_key: <%= ENV['AIRBRAKE_API_KEY'] %>
   google_analytics_tracking_id: <%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] %>
 
-  # this is used for IPN notification and other places where extenal serivce cannot ping localhost
+  # this is used for IPN notification and other places where external serivce cannot ping localhost
   use_localhost2public_url: true
   default_localhost2public_url: 4a5w.localtunnel.com
 
