@@ -1,5 +1,16 @@
 class Util
 
+  # loads a yaml based configuration file and returns hash
+  def self.config2hash(file)
+    hash = YAML.load(ERB.new(File.read(file)).result)
+
+    common_hash = hash['common'] || {}
+    env_hash = hash[Rails.env.to_s] || {}
+
+    final_hash = common_hash.deep_merge(env_hash)
+    Hashr.new(final_hash)
+  end
+
   # Converts the amount in cents and returns an integer.
   def self.in_cents(amount)
     (BigDecimal(amount.to_s) * 100).round(0).to_i
