@@ -32,14 +32,12 @@ development:
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
-  using_heroku: false
 
 test:
   use_s3: false
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
-  using_heroku: false
   cookie_domain: nimbleshop.net
   use_localhost2public_url: false
   authorize_net:
@@ -51,7 +49,6 @@ staging:
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.net
-  using_heroku: true
   deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
   cache_images: true
 
@@ -60,6 +57,5 @@ production:
   s3:
     bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.com
-  using_heroku: true
   cache_images: true
   use_localhost2public_url: false
