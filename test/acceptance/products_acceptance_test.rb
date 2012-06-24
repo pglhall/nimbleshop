@@ -6,7 +6,7 @@ class ProductAcceptanceTest < ActionDispatch::IntegrationTest
   end
 
   test "show page" do
-    visit "/products/#{@product.permalink}" #product_path(@product)
+    visit nimbleshop_simply.product_path(@product)
     assert page.has_content?('awesome ipad from Apple')
   end
 end
