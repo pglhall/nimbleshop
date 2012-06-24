@@ -25,7 +25,9 @@
 
 <br />
 
-<%= render 'shipping_info' %>
+<% if @order.shipping_method %>
+  <%= render 'shipping_info' %>
+<% end %>
 
 <br />
 
