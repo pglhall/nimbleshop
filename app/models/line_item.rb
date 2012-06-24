@@ -25,7 +25,7 @@ class LineItem < ActiveRecord::Base
     product_price * quantity
   end
 
-  # update quantity count. If count is zero then delete the line_item .
+  # updates quantity count. If count is zero then deletes the line_item .
   def update_quantity(count)
     count = count.to_i
     (count > 0) ? update_attributes(quantity: count) : destroy
