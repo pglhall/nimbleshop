@@ -4,9 +4,11 @@
       <tr>
         <th colspan='3'>
           <div>
+
             <div class='link_group_name'>
               <h3><%= link_group.name %></h3>
             </div>
+
             <div class='link_group_edit'>
               <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
               |
@@ -14,11 +16,13 @@
                 <i class='icon-remove icon-white'></i>
               <% end %>
             </div>
+
             <div style='float:right'>
               <%= link_to new_admin_link_group_navigation_path(link_group), class: 'btn btn-success' do %>
                 <i class='icon-plus'></i> Add new link
               <% end %>
             </div>
+
             <div style='clear:both;'></div>
           </div>
         </th>

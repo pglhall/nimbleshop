@@ -3,12 +3,25 @@
     <thead>
       <tr>
         <th colspan='5'>
-          <h3><%= shipping_zone.name %></h3>
-          <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
-          |
-          <%= link_to [:admin, shipping_zone], data: { confirm: t(:delete_confirmation_for_shipping_zone) }, method: 'delete', class: 'delete', title: 'Delete' do %>
-            <i class='icon-remove icon-white'></i>
-          <% end %>
+          
+          <div class='link_group_name'>
+            <h3><%= shipping_zone.name %></h3>
+          </div>
+
+          <div class='link_group_edit'>
+            <%= link_to [:admin, shipping_zone], data: { confirm: t(:delete_confirmation_for_shipping_zone) }, method: 'delete', class: 'delete', title: 'Delete' do %>
+              <i class='icon-remove icon-white'></i>
+            <% end %>
+          </div>
+
+          <div style='float:right'>
+            <%= link_to new_admin_shipping_zone_shipping_method_path(shipping_zone), class: 'btn btn-success' do %>
+              <i class='icon-plus'></i> Add new shipping method
+            <% end %>
+          </div>
+
+          <div style='clear:both;'></div>
+
         </th>
       </tr>
 
