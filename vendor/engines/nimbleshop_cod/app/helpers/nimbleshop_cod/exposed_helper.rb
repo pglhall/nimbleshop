@@ -8,11 +8,11 @@ module NimbleshopCod
     end
 
     def nimbleshop_cod_small_image
-      image_tag "engines/nimbleshop_cod/cod_small.png", alt: 'cod icon'
+      image_tag 'engines/nimbleshop_cod/cod_small.png', alt: 'cod icon'
     end
 
     def nimbleshop_cod_big_image
-      image_tag "engines/nimbleshop_cod/cod_big.png", alt: 'cod logo'
+      image_tag 'engines/nimbleshop_cod/cod_big.png', alt: 'cod logo'
     end
 
     def nimbleshop_cod_available_payment_options_icons
@@ -21,7 +21,7 @@ module NimbleshopCod
 
     def nimbleshop_cod_payment_form(order)
       return unless NimbleshopCod::Cod.first
-      render partial: '/nimbleshop_cod/payments/new', locals: {order: order}
+      render partial: '/nimbleshop_cod/payments/new', locals: { order: order }
     end
 
     def nimbleshop_cod_crud_form
