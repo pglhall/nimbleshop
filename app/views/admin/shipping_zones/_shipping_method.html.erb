@@ -7,6 +7,6 @@
     |
     <%= link_to t(:delete),
       admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method),
-                                            confirm: t(:delete_confirmation_for_shipping_method), class: 'delete', title: 'Delete', method: 'delete' %>
+                                    data: { confirm: t(:delete_confirmation_for_shipping_method) }, class: 'delete', title: 'Delete', method: 'delete' %>
   </td>
 </tr>

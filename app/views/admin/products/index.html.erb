@@ -23,7 +23,7 @@
         <td>
           <%= link_to 'Edit', edit_admin_product_path(product), title: 'Edit' %>
           |
-          <%= link_to [:admin, product], confirm: t(:delete_confirmation_for_product), method: 'delete', title: 'Delete', class: 'delete' do %>
+          <%= link_to [:admin, product], data: { confirm: t(:delete_confirmation_for_product) }, method: 'delete', title: 'Delete', class: 'delete' do %>
             <%= delete_icon %>
           <% end %>
         </td>

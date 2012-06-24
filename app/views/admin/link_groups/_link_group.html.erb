@@ -10,7 +10,7 @@
             <div class='link_group_edit'>
               <%= link_to t(:edit), edit_admin_link_group_path(link_group) %>
               |
-              <%= link_to [:admin, link_group], class: 'delete', confirm: t(:delete_confirmation_for_link_group), method: 'delete', title: 'Delete' do %>
+              <%= link_to [:admin, link_group], class: 'delete', data: { confirm: t(:delete_confirmation_for_link_group) }, method: 'delete', title: 'Delete' do %>
                 <i class='icon-remove icon-white'></i>
               <% end %>
             </div>
@@ -35,7 +35,7 @@
           <td> <%= nav.product_group.name %> </td>
           <td>&nbsp; </td>
           <td>
-            <%= link_to [:admin, link_group, nav], confirm: t(:delete_confirmation_for_link), class: 'delete', title: 'Delete', method: 'delete' do %>
+            <%= link_to [:admin, link_group, nav], data: { confirm: t(:delete_confirmation_for_link) }, class: 'delete', title: 'Delete', method: 'delete' do %>
               <i class='icon-remove icon-white'></i>
             <% end %>
           </td>

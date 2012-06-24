@@ -6,7 +6,7 @@
           <h3><%= shipping_zone.name %></h3>
           <%= link_to 'Add new shipping method', new_admin_shipping_zone_shipping_method_path(shipping_zone) %>
           |
-          <%= link_to [:admin, shipping_zone], confirm: t(:delete_confirmation_for_shipping_zone), method: 'delete', class: 'delete', title: 'Delete' do %>
+          <%= link_to [:admin, shipping_zone], data: { confirm: t(:delete_confirmation_for_shipping_zone) }, method: 'delete', class: 'delete', title: 'Delete' do %>
             <i class='icon-remove icon-white'></i>
           <% end %>
         </th>
