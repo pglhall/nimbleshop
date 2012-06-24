@@ -33,7 +33,8 @@ module Sampledata
     end
 
     def handle_pictures_for_product(product, dirname)
-      pictures = Dir.glob(Rails.root.join('lib', 'sampledata', 'pictures', dirname, '*'))
+      p = Pathname.new(File.expand_path('../pictures', __FILE__))
+      pictures = Dir.glob(p.join(dirname, '*'))
 
       pictures.sort.each do |filename|
         attach_picture( filename, product)
