@@ -8,7 +8,7 @@ module NimbleshopAuthorizedotnet
       respond_to do |format|
         if @payment_method.update_attributes(post_params[:authorizedotnet])
           format.js  {
-            flash[:notice] = "Authorize.net record was successfully updated"
+            flash[:notice] = 'Authorize.net record was successfully updated'
             render js: "window.location = '/admin/payment_methods'"
           }
         else
@@ -23,7 +23,7 @@ module NimbleshopAuthorizedotnet
       respond_to do |format|
         if @payment_method.destroy
           format.js {
-            flash[:notice] = "Authorize.net record was successfully deleted"
+            flash[:notice] = 'Authorize.net record was successfully deleted'
             render js: "window.location = '/admin/payment_methods'"
           }
         else

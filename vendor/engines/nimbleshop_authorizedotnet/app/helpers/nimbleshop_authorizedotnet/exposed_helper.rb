@@ -8,11 +8,11 @@ module NimbleshopAuthorizedotnet
     end
 
     def nimbleshop_authorizedotnet_small_image
-      image_tag "engines/nimbleshop_authorizedotnet/authorizedotnet_small.png", alt: 'authorizedotnet icon'
+      image_tag 'engines/nimbleshop_authorizedotnet/authorizedotnet_small.png', alt: 'authorizedotnet icon'
     end
 
     def nimbleshop_authorizedotnet_big_image
-      image_tag "engines/nimbleshop_authorizedotnet/authorizedotnet_big.png", alt: 'authorizedotnet logo'
+      image_tag 'engines/nimbleshop_authorizedotnet/authorizedotnet_big.png', alt: 'authorizedotnet logo'
     end
 
     def nimbleshop_authorizedotnet_order_show_extra_info(order)
