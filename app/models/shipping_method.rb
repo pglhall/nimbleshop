@@ -10,8 +10,15 @@ class ShippingMethod < ActiveRecord::Base
 
   validates_numericality_of :lower_price_limit,
                             less_than: :higher_price_limit,
-                            if: lambda { |r| r.country_level? && r.higher_price_limit },
+                            if: lambda { |r| r.country_level? && r.higher_price_limit && (r.higher_price_limit > 0 ) },
+                            message: '^ Maximum order amount must be greater than 0',
                             allow_nil: true
+
+  validates_numericality_of :upper_price_limit,
+                            greater_than: 0,
+                            if: lambda { |r| r.country_level? },
+                            allow_nil: true
+
 
   scope :active, where(active: true)
 
