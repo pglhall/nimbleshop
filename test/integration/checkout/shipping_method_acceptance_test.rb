@@ -8,8 +8,8 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     Capybara.current_driver = :selenium
     create(:product, name: 'Bracelet Set', price: 25)
     create(:product, name: 'Necklace Set', price: 14)
-    create(:country_shipping_method, name: 'Ground Shipping', base_price: 3.99, lower_price_limit: 1, upper_price_limit: 99999)
-    create(:country_shipping_method, name: 'Express Shipping', base_price: 13.99, lower_price_limit: 1, upper_price_limit: 99999)
+    create(:country_shipping_method, name: 'Ground Shipping', base_price: 3.99, minimum_order_amount: 1, maximum_order_amount: 99999)
+    create(:country_shipping_method, name: 'Express Shipping', base_price: 13.99, minimum_order_amount: 1, maximum_order_amount: 99999)
   end
 
   test "shipping method is required" do

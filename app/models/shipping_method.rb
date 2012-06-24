@@ -1,20 +1,20 @@
 class ShippingMethod < ActiveRecord::Base
 
   alias_attribute :shipping_cost,       :shipping_price
-  alias_attribute :higher_price_limit,  :upper_price_limit
+  alias_attribute :higher_price_limit,  :maximum_order_amount
 
   belongs_to :shipping_zone
 
-  validates_presence_of :lower_price_limit, :base_price, if: :country_level?
+  validates_presence_of :minimum_order_amount, :base_price, if: :country_level?
   validates_presence_of :name
 
-  validates_numericality_of :lower_price_limit,
+  validates_numericality_of :minimum_order_amount,
                             less_than: :higher_price_limit,
                             if: lambda { |r| r.country_level? && r.higher_price_limit && (r.higher_price_limit > 0 ) },
                             message: '^ Maximum order amount must be greater than 0',
                             allow_nil: true
 
-  validates_numericality_of :upper_price_limit,
+  validates_numericality_of :maximum_order_amount,
                             greater_than: 0,
                             if: lambda { |r| r.country_level? },
                             allow_nil: true
@@ -23,11 +23,11 @@ class ShippingMethod < ActiveRecord::Base
   scope :active, where(active: true)
 
   scope :atleast, lambda { |r|
-    where('shipping_methods.lower_price_limit <= ?', r)
+    where('shipping_methods.minimum_order_amount <= ?', r)
   }
 
   scope :atmost,  lambda { |r|
-    where('shipping_methods.upper_price_limit is null or shipping_methods.upper_price_limit >= ?', r)
+    where('shipping_methods.maximum_order_amount is null or shipping_methods.maximum_order_amount >= ?', r)
   }
 
   scope :in_price_range,  lambda { |r| atleast(r).atmost(r) }
@@ -103,8 +103,8 @@ class ShippingMethod < ActiveRecord::Base
     shipping_zone.regional_shipping_zones.each do |t|
       options = { shipping_zone: t, 
                   name: name, 
-                  lower_price_limit: lower_price_limit,
-                  upper_price_limit: upper_price_limit }
+                  minimum_order_amount: minimum_order_amount,
+                  maximum_order_amount: maximum_order_amount }
 
       options.merge!(active: false) unless active
       regions.build(options)

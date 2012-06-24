@@ -28,21 +28,21 @@
       </div>
 
       <div class="control-group">
-        <%= f.label :lower_price_limit, 'Minimum order amount', class: 'control-label' %> 
+        <%= f.label :minimum_order_amount, 'Minimum order amount', class: 'control-label' %> 
         <%= link_to '?', '#', 'data-content' => 'If the order amount is below this amount then this shipping method will not be applied.',
                               'data-original-title' => 'Minimum order amount' %>
         <div class="controls">
-          <%= f.text_field :lower_price_limit, class: 'span1', 'data-behavior' => 'price-formatted' %> USD
+          <%= f.text_field :minimum_order_amount, class: 'span1', 'data-behavior' => 'price-formatted' %> USD
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :upper_price_limit, 'Maximum order amount', class: 'control-label' %>
+        <%= f.label :maximum_order_amount, 'Maximum order amount', class: 'control-label' %>
         <%= link_to '?', '#', 'data-content' => 'If the order amount is above this amount then this shipping method will not be applied.',
                               'data-original-title' => 'Maximum order amount' %>
 
         <div class="controls">
-          <%= f.text_field :upper_price_limit, class: 'span1', :'data-behavior' => 'price-formatted', placeholder: '&#8734;'.html_safe %> USD
+          <%= f.text_field :maximum_order_amount, class: 'span1', :'data-behavior' => 'price-formatted', placeholder: '&#8734;'.html_safe %> USD
         </div>
       </div>
 

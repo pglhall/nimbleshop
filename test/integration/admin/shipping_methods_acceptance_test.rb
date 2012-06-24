@@ -12,8 +12,8 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     visit new_admin_shipping_zone_shipping_method_path(shipping_zone)
 
     fill_in "shipping_method_name", with: "Ground Shipping"
-    fill_in "shipping_method_lower_price_limit", with: "10"
-    fill_in "shipping_method_upper_price_limit", with: "30"
+    fill_in "shipping_method_minimum_order_amount", with: "10"
+    fill_in "shipping_method_maximum_order_amount", with: "30"
     fill_in "shipping_method_base_price", with: "10"
     click_button('Submit')
 
@@ -27,7 +27,7 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     shipping_zone = create_shipping_zone("US")
     shipping_method = create(:country_shipping_method, shipping_zone: shipping_zone)
     visit edit_admin_shipping_zone_shipping_method_path(shipping_method.shipping_zone, shipping_method)
-    fill_in "shipping_method_upper_price_limit", with: "40"
+    fill_in "shipping_method_maximum_order_amount", with: "40"
     click_button('Submit')
 
     skip "builda fails but local tests pass" do
