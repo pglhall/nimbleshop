@@ -4,8 +4,7 @@ class Picture < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader
 
-  # TODO activate it but tests will fail
-  #validates_presence_of :picture
+  validates_presence_of :picture
 
   before_save :update_picture_attributes
 
