@@ -4,7 +4,7 @@ class FrontendHelperTest < ActiveRecord::TestCase
 
   def helper
     Class.new(ActionView::Base) do
-      include FrontendHelper
+      include ::ApplicationHelper
     end.new
   end
 

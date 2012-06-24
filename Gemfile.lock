@@ -29,13 +29,6 @@ GIT
     carmen (1.0.0.beta2)
 
 GIT
-  remote: git://github.com/lucasefe/themes_for_rails.git
-  revision: 4022419c0e5ac66e297a751ce167d4172cbbea12
-  specs:
-    themes_for_rails (0.5.1)
-      rails (>= 3.0.0)
-
-GIT
   remote: git://github.com/neerajdotname/push2heroku.git
   revision: a5e7a95979a9f9399b8325662685ea6c9721e037
   specs:
@@ -80,6 +73,11 @@ PATH
   specs:
     nimbleshop_paypalwp (0.0.1)
       activemerchant
+
+PATH
+  remote: vendor/engines/nimbleshop_simply
+  specs:
+    nimbleshop_simply (0.0.1)
 
 PATH
   remote: vendor/engines/nimbleshop_splitable
@@ -367,6 +365,7 @@ DEPENDENCIES
   nimbleshop_cod!
   nimbleshop_google_analytics!
   nimbleshop_paypalwp!
+  nimbleshop_simply!
   nimbleshop_splitable!
   pg
   push2heroku!
@@ -377,7 +376,6 @@ DEPENDENCIES
   sqlite3
   state_machine
   strong_parameters!
-  themes_for_rails!
   thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

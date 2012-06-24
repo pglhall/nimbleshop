@@ -1,5 +1,22 @@
 module ApplicationHelper
 
+    def body_id
+      "#{params[:controller]}-#{params[:action]}".parameterize
+    end
+
+    def display_address(address)
+      return if address.nil?
+      address.full_address_array.map { |i| html_escape(i) }.join('<br />').html_safe
+    end
+
+    def display_page_title
+      if @page_title
+        @page_title.html_safe +  "&mdash;".html_safe +  html_escape(current_shop.name)
+      else
+        Shop.first.name
+      end
+    end
+
   def page_title(title)
     @page_title = title
   end

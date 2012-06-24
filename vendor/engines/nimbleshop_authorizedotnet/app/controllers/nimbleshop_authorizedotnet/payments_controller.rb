@@ -11,7 +11,7 @@ module NimbleshopAuthorizedotnet
       default_action = Shop.first.default_creditcard_action
 
       if processor.send(default_action, creditcard: creditcard)
-        url = main_app.order_path(order)
+        url = nimbleshop_simply.order_path(order)
         @output = "window.location='#{url}'"
       else
         error = processor.errors.first

@@ -7,7 +7,7 @@ gem 'rails', '3.2.6'
 gem 'will_paginate'
 
 # to support various themes
-gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
+#gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
 
 # ruby 1.9 does not parse dates formatted in american style correclty. This gem fixes that.
 gem 'american_date'
@@ -135,5 +135,6 @@ gem 'nimbleshop_paypalwp',         path: 'vendor/engines/nimbleshop_paypalwp'
 gem 'nimbleshop_authorizedotnet',  path: 'vendor/engines/nimbleshop_authorizedotnet'
 gem 'nimbleshop_splitable',        path: 'vendor/engines/nimbleshop_splitable'
 gem 'nimbleshop_cod',              path: 'vendor/engines/nimbleshop_cod'
+gem 'nimbleshop_simply',           path: 'vendor/engines/nimbleshop_simply'
 
 gem 'nimbleshop_google_analytics', github: 'bigbinary/nimbleshop_google_analytics'

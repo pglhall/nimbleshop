@@ -1,0 +1,30 @@
+<table class='table table-bordered' width='100%'>
+  <% current_order.line_items.each do |line_item| %>
+    <tr>
+      <td>
+        <div class='lhs'>
+          <%= truncate(line_item.product_name, length: 75) %>
+          <p>
+            <%= line_item.quantity %> x <%= number_to_currency(line_item.product_price) %> =
+            <strong> <%= number_to_currency(line_item.price) %> </strong>
+          </p>
+        </div>
+        <div class='rhs'>
+          <%= image_tag line_item.picture_small, alt: line_item.product_name %>
+        </div>
+        <div class='clear'></div>
+    </tr>
+  <% end %>
+
+  <%= render 'nimbleshop_simply/shared/shipping_and_tax_info' %>
+
+  <tr>
+    <td>
+      <div class='lhs order-total-amount'>
+        Total:
+        <strong> <%= number_to_currency(current_order.total_amount) %> </strong>
+      </div>
+      <div class='clear'></div>
+    </td>
+  </tr>
+</table>

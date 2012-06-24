@@ -8,7 +8,7 @@ module NimbleshopCod
 
       respond_to do |format|
         format.html do
-          redirect_to main_app.order_path(order)
+          redirect_to nimbleshop_simply.order_path(order)
         end
       end
 
