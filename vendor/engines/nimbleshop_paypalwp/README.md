@@ -1,5 +1,12 @@
-# Paypal WPS extension for nimbleShop
+# nimbleshop_paypalwp extension
 
-This is paypal wps extension for nimbleShop.
+This is Paypal web payments standard ( paypalwp ) extension for [nimbleShop](http://www.nimbleshop.com) .
 
-This extension uses MIT-LICENSE.
+# Documentation
+
+Documentation is available at [http://nimbleshop.org/](http://nimbleshop.org) .
+
+# License
+
+nimbleshop_paypalwp uses [MIT license](http://www.opensource.org/licenses/mit-license.php) .
+

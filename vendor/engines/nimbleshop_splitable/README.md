@@ -1,5 +1,11 @@
-# Splitable extension for nimbleShop
+# nimbleshop_splitable extension
 
-This is Splitable extension for nimbleShop.
+This is Splitable extension for [nimbleShop](http://www.nimbleshop.com) .
 
-This extension uses MIT-LICENSE.
+# Documentation
+
+Documentation is available at [http://nimbleshop.org/](http://nimbleshop.org) .
+
+# License
+
+nimbleshop_splitable uses [MIT license](http://www.opensource.org/licenses/mit-license.php) .

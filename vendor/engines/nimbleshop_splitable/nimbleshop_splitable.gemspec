@@ -1,20 +1,20 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 
 require "nimbleshop_splitable/version"
 
-Gem::Specification.new do |s|
-  s.name        = "nimbleshop_splitable"
-  s.version     = NimbleshopSplitable::VERSION
-  s.authors     = ["Neeraj Singh"]
-  s.email       = ["neeraj@bigbinary.com"]
-  s.homepage    = "http://www.bigbinary.com"
+Gem::Specification.new do |gem|
+  gem.name        = 'nimbleshop_splitable'
+  gem.version     = NimbleshopSplitable::VERSION
+  gem.authors     = ['Neeraj Singh']
+  gem.email       = ['neeraj@bigbinary.com']
+  gem.homepage    = 'http://www.bigbinary.com'
 
-  s.summary     = "Splitable extension for Nimbleshop"
-  s.description = "Splitable extension for Nimbleshop"
+  gem.summary     = 'Splitable extension for Nimbleshop'
+  gem.description = 'Splitable extension for Nimbleshop'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  gem.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
 
-  s.test_files = Dir["test/**/*"]
+  gem.test_files = Dir["test/**/*"]
 
-  s.add_dependency "activemerchant"
+  gem.add_dependency "activemerchant"
 end

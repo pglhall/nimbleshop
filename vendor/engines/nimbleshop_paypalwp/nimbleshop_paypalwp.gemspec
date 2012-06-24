@@ -3,18 +3,18 @@ $:.push File.expand_path("../lib", __FILE__)
 require "nimbleshop_paypalwp/version"
 
 Gem::Specification.new do |s|
-  s.name        = "nimbleshop_paypalwp"
-  s.version     = NimbleshopPaypalwp::VERSION
-  s.authors     = ["Neeraj Singh"]
-  s.email       = ["neeraj@bigbinary.com"]
-  s.homepage    = "http://www.bigbinary.com"
+  gem.name        = "nimbleshop_paypalwp"
+  gem.version     = NimbleshopPaypalwp::VERSION
+  gem.authors     = ["Neeraj Singh"]
+  gem.email       = ["neeraj@bigbinary.com"]
+  gem.homepage    = "http://www.bigbinary.com"
 
-  s.summary     = "Paypal WPS extension for nimbleshop"
-  s.description = "Paypal WPS extension for nimbleshop"
+  gem.summary     = "Paypal WPS extension for nimbleshop"
+  gem.description = "Paypal WPS extension for nimbleshop"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  gem.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
 
-  s.test_files = Dir["test/**/*"]
+  gem.test_files = Dir["test/**/*"]
 
-  s.add_dependency "activemerchant"
+  gem.add_dependency "activemerchant"
 end

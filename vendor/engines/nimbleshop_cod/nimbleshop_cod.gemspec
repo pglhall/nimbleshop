@@ -2,18 +2,18 @@ $:.push File.expand_path("../lib", __FILE__)
 
 require "nimbleshop_cod/version"
 
-Gem::Specification.new do |s|
-  s.name        = "nimbleshop_cod"
-  s.version     = NimbleshopCod::VERSION
-  s.authors     = ["Neeraj Singh"]
-  s.email       = ["neeraj@bigbinary.com"]
-  s.homepage    = "http://www.bigbinary.com"
+Gem::Specification.new do |gem|
+  gem.name        = 'nimbleshop_cod'
+  gem.version     = NimbleshopCod::VERSION
+  gem.authors     = ['Neeraj Singh', 'Megpha']
+  gem.email       = ['neeraj@bigbinary.com']
+  gem.homepage    = 'http://www.bigbinary.com'
 
-  s.summary     = "Cash on delivery extension for Nimbleshop"
-  s.description = "Cash on delivery extension for Nimbleshop"
+  gem.summary     = "Cash on delivery extension for nimbleshop"
+  gem.description = "Cash on delivery extension for nimbleshop"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  gem.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
 
-  s.test_files = Dir["test/**/*"]
+  gem.test_files = Dir["test/**/*"]
 
 end
