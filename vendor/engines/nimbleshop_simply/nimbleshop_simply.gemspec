@@ -1,19 +1,18 @@
 $:.push File.expand_path("../lib", __FILE__)
 
-# Maintain your gem's version:
 require "nimbleshop_simply/version"
 
-# Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
-  s.name        = "nimbleshop_simply"
-  s.version     = NimbleshopSimply::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of NimbleshopSimply."
-  s.description = "TODO: Description of NimbleshopSimply."
+Gem::Specification.new do |gem|
+  gem.name        = "nimbleshop_simply"
+  gem.version     = NimbleshopSimply::VERSION
+  gem.authors     = ['Neeraj Singh', 'Megpha']
+  gem.email       = ['neeraj@bigbinary.com']
+  gem.homepage    = 'http://www.nimbleshop.org'
+  gem.summary     = 'Authorize.net extension for nimbleShop'
+  gem.description = 'Authorize.net extension for nimbleShop'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  gem.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
+
+  gem.test_files = Dir["test/**/*"]
 
 end
