@@ -39,8 +39,10 @@ class LineItem < ActiveRecord::Base
     self.product_price       = product.price
     self.product_permalink   = product.permalink
 
-    %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |size|
-      send("picture_#{size}=", product.picture.picture_url(size.intern))
+    if product.picture
+      %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |size|
+        send("picture_#{size}=", product.picture.picture_url(size.intern))
+      end
     end
   end
 end
