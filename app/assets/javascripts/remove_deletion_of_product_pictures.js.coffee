@@ -2,4 +2,4 @@
 # is handled separately. So here the deletion link is made to hide.
 
 $ ->
-  $('.edit_product .fields').hide()
+  #$('.edit_product .fields').hide()

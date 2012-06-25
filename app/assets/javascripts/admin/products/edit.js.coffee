@@ -1,12 +1,7 @@
 $ ->
 
   # work around the nested form ugliness
-  $(".nested-form")
-    .find(".fields")
-    .hide()
-    .end()
-    .find(".fields:has(.custom-fields)")
-    .show()
+  $("form input:file").parents('.fields').hide()
 
   # deleting a picture
   $(".product_pictures .actions .delete").on "click", ->

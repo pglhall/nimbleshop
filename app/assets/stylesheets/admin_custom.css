@@ -90,3 +90,7 @@ footer .content {
 footer .content a {
   color: gray;
 }
+
+.remove_nested_fields {
+  margin-right: 5px;
+}
