@@ -5,7 +5,7 @@ class ProductGroupTest < ActiveSupport::TestCase
   setup do
     @text = create :text_custom_field
     @date = create :date_custom_field
-    @number = create(:number_custom_field)
+    @number = create :number_custom_field
 
     @p1 = create(:product)
     @p2 = create(:product)
@@ -31,11 +31,9 @@ class ProductGroupTest < ActiveSupport::TestCase
   end
 
   test '.fields' do
-    expected = [{"id"=>"name", "name"=>"Name", "field_type"=>"text"}, 
-                {"id"=>"price", "name"=>"Price", "field_type"=>"number"},
-                {"id"=>1, "name"=>"category", "field_type"=>"text"}]
-
-    assert_equal expected, ProductGroup.fields
+    assert_equal 3, CustomField.count
+    assert_equal ["Name", "Price", "name1", "name2", "name3"], ProductGroup.fields.map { |r| r['name'] }
+    assert_equal ["text", "number", "text", "date", "number"], ProductGroup.fields.map { |r| r['field_type'] }
   end
 
   test "returns products using equality operator" do
