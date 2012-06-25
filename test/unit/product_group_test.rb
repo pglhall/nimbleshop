@@ -1,4 +1,6 @@
-require 'test_helper' do
+require 'test_helper'
+
+class ProductGroupTest < ActiveSupport::TestCase
 
   setup do
     @text = create :text_custom_field
