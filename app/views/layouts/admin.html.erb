@@ -27,69 +27,9 @@
 
   <body id=<%=body_id%>>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <%= admin_topbar( "Admin" ,            main_app.admin_path, 'admin_path') %>
-              <%= admin_topbar('Orders',             main_app.admin_orders_path,          'admin_orders_path') %>
-              <%= admin_topbar('Products',           main_app.admin_products_path,        'admin_products_path') %>
-              <%= admin_topbar('Custom fields',      main_app.admin_custom_fields_path,   'admin_custom_fields_path') %>
-              <%= admin_topbar('Product groups',     main_app.admin_product_groups_path,  'admin_product_groups_path') %>
-              <%= admin_topbar('Link groups',        main_app.admin_link_groups_path,     'admin_link_groups_path') %>
-              <%= admin_topbar('Shipping zones',     main_app.admin_shipping_zones_path,  'admin_shipping_zones_path') %>
-              <%= admin_topbar('Payment methods',    main_app.admin_payment_methods_path, 'admin_payment_methods_path') %>
-              <%= admin_topbar('Shop configuration', main_app.edit_admin_shop_path,       'edit_admin_shop_path') %>
-            </ul>
-            <ul class='nav pull-right'>
-              <li><a href="http://nimbleshop.org/docsindex">Documentation</a></li>
-              <li>
-                <%= link_to 'Go to shop →', main_app.root_url, class: 'go-to-shop' %> 
-              </li>
-            </ul>
-          </div>
+    <%= render 'layouts/top_nav_bar' %>
 
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/container' %>
 
-    <div class="container">
-      <div class="row">
-
-        <div class="span3">
-          <%= render 'layouts/admin_sidebar' %>
-        </div>
-
-        <div class="span9">
-          <div class="row">
-            <div class="span12">
-              <% if flash[:notice] %>
-                <div class='alert alert-success'>
-                  <%= flash[:notice] %>
-                </div>
-              <% end %>
-              <% if flash[:error] %>
-                <div class='alert alert-error'>
-                  <%= flash[:error] %>
-                </div>
-              <% end %>
-              <p>
-                <%= yield %>
-              </p>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-    </div>
-    <%= render '/layouts/admin_footer' %>
   </body>
 </html>
