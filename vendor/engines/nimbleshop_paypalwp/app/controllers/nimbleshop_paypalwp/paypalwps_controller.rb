@@ -24,7 +24,7 @@ module NimbleshopPaypalwp
       respond_to do |format|
         if @payment_method.update_attributes(post_params[:paypalwp])
           format.js  {
-            flash[:notice] = "Paypal record was successfully updated"
+            flash[:notice] = 'Paypal record was successfully updated'
             render js: "window.location = '/admin/payment_methods'"
           }
         else
@@ -39,7 +39,7 @@ module NimbleshopPaypalwp
       respond_to do |format|
         if @payment_method.destroy
           format.js {
-            flash[:notice] = "Paypal record was successfully deleted"
+            flash[:notice] = 'Paypal record was successfully deleted'
             render js: "window.location = '/admin/payment_methods'"
           }
         else

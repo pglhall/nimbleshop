@@ -2,6 +2,7 @@
   record = NimbleshopPaypalwp::Paypalwp.first
   ActiveMerchant::Billing::Base.mode = record.mode.to_sym
 %>
+
 <%= payment_service_for order.id, record.merchant_email,
                              :amount => order.total_amount.round(2),
                              :service => :paypal,
