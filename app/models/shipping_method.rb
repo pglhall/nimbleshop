@@ -45,9 +45,7 @@ class ShippingMethod < ActiveRecord::Base
 
   before_create :create_regional_shipping_methods, if: :country_level?
 
-  # TODO megpha add comment here to explain why every time before saving
-  # all the regions are being set to inactive state
-  before_save   :set_regions_inactive, if: :country_level?
+  before_save   :update_regions_status, if: :country_level?
 
   belongs_to  :parent,  class_name: 'ShippingMethod', foreign_key: 'parent_id'
   has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id', dependent: :destroy
@@ -111,8 +109,7 @@ class ShippingMethod < ActiveRecord::Base
     end
   end
 
-  def set_regions_inactive
-      # TODO does it have to be false. why not use unless
+  def update_regions_status
     if persisted? && active_changed? && active == false
       regions.each { |region| region.update_attributes!(active: false) }
     end
