@@ -61,4 +61,5 @@ class ProductGroup < ActiveRecord::Base
   def self.contains_product(product)
     all.select { | product_group | product_group.contains?(product) }
   end
+
 end

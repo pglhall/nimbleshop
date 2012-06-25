@@ -43,6 +43,7 @@ class ProductGroupTest < ActiveSupport::TestCase
     condition.operator = 'eq'
     condition.value = 'george washington'
     assert_equal [ @p1 ], group.products
+    assert_equal 'name7 is equal to george washington', group.summarize
 
     condition.value = 'george murphy'
     assert_equal [ @p2 ], group.products
@@ -61,6 +62,7 @@ class ProductGroupTest < ActiveSupport::TestCase
 
     condition.value = 'george'
     assert_equal [ @p1, @p2 ], group.products
+    assert_equal "name10 starts with 'george'", group.summarize
 
     condition.value = 'steve'
     assert_equal [ @p3 ], group.products
@@ -79,6 +81,7 @@ class ProductGroupTest < ActiveSupport::TestCase
 
     condition.value = 'murphy'
     assert_equal [ @p2 ], group.products
+    assert_equal "name4 ends with 'murphy'", group.summarize
 
     condition.value = 'jobs'
     assert_equal [ @p3 ], group.products
