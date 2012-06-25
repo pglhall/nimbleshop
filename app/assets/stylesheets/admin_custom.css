@@ -24,13 +24,13 @@
   width: 200px;
 }
 
-.payment-method-engine-well .edit_link{
+.payment-method-engine-well .edit_link {
   float: left;
   margin-top: 10px;
   margin-left: 10px;
 }
 
-.payment-method-engine-well .edit_link .nimbleshop-payment-method-edit{
+.payment-method-engine-well .edit_link .nimbleshop-payment-method-edit {
   margin-left: 0;
   margin-right: 0;
 }
@@ -71,7 +71,7 @@
   margin-top: 6px;
 }
 
-.control-group a{
+.control-group a {
   line-height: 26px;
   float: left;
   text-decoration: none;
@@ -83,3 +83,10 @@
   content: '\0000a0';
 }
 
+footer .content {
+  color: gray;
+  float: right;
+}
+footer .content a {
+  color: gray;
+}
