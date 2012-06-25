@@ -1,11 +1,11 @@
-require 'search/core_field_strategy'
-require 'search/custom_field_strategy'
-require 'search/base_field'
-require 'search/text_field'
-require 'search/number_field'
-require 'search/date_field'
+require 'product_group_search/core_field_strategy'
+require 'product_group_search/custom_field_strategy'
+require 'product_group_search/base_field'
+require 'product_group_search/text_field'
+require 'product_group_search/number_field'
+require 'product_group_search/date_field'
 
-module Search
+module ProductGroupSearch
   extend ActiveSupport::Concern
 
   included do
@@ -59,7 +59,7 @@ module Search
   end
 
   def set_field_handler
-    klass = Search.const_get("#{field_type.classify}Field")
+    klass = ProductGroupSearch.const_get("#{field_type.classify}Field")
     @field_handler = klass.new(self)
   end
 

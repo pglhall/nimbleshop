@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   class TextField < BaseField
     delegate :matches, to: :query_field
 

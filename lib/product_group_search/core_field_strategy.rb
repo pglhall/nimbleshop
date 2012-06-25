@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   module CoreFieldStrategy
     def join(proxy)
       proxy

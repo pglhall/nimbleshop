@@ -4,7 +4,7 @@ class ProductGroup < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_many :product_group_conditions, dependent: :destroy, extend: SearchExtension
+  has_many :product_group_conditions, dependent: :destroy, extend: ProductGroupSearch::Extension
 
   has_many :navigations, dependent:  :destroy
 

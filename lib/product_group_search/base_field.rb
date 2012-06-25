@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   class BaseField
     attr_accessor :condition
     delegate :query_field, :value, to: :condition

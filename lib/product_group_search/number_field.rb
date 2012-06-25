@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   class NumberField < BaseField
     delegate :eq, :lt, :gt, :lteq, :gteq, to: :query_field
 

@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   module CustomFieldStrategy
     def join(proxy)
       proxy.join(target_table).on(join_condition)

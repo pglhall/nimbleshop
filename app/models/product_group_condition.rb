@@ -1,6 +1,6 @@
 class ProductGroupCondition < ActiveRecord::Base
 
-  include Search
+  include ProductGroupSearch
 
   belongs_to :product_group
   validates_presence_of :name, :operator, :value

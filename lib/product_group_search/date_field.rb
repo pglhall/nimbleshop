@@ -1,4 +1,4 @@
-module Search
+module ProductGroupSearch
   class DateField < NumberField
     def coerced_value
       Date.strptime(value.try(:to_s), "%d/%m/%Y")
