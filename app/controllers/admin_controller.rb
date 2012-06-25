@@ -12,10 +12,10 @@ class AdminController < ApplicationController
   end
 
   def restricted_access
-    return if Rails.env.test? || Rails.env.development?
+    return unless Nimbleshop.config.ask_admin_to_login
 
     authenticate_or_request_with_http_basic('staging') { |username, password|
-      username == 'admin@example.com' && password == 'welcome'
+      username == Nimbleshop.config.admin_email && password == Nimbleshop.config.admin_password
     }
   end
 
