@@ -111,12 +111,20 @@ module NimbleshopAuthorizedotnet
     end
 
     def record_transaction(response, operation, additional_options = {})
+      #
+      # Following code invokes response.authorization to get transaction id. Note that this method can be called
+      # after capture or refund. And it feels weird to call +authorization+ when the operation was +capture+.
+      # However this is how ActiveMerchant works. It sets transaction id in +authorization+ key.
+      #
+      # https://github.com/Shopify/active_merchant/blob/master/lib/active_merchant/billing/gateways/authorize_net.rb#L283
+      #
+      transaction_gid = response.authorization
+
       options = { operation:          operation,
                   params:             response.params,
                   success:            response.success?,
                   metadata:           additional_options,
-                  transaction_gid:    response.authorization } # TODO megpha Is the transaction_gid  always response.authorization even for capture operation?
-                                                               # this  method is called after capturing operation too 
+                  transaction_gid:    transaction_gid }
 
       if response.success?
         options.update(amount: order.total_amount_in_cents)
