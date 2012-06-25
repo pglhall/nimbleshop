@@ -15,8 +15,19 @@ class ProductsAcceptanceTest < ActionDispatch::IntegrationTest
 
   test "should create a new product without image" do
     click_button 'Submit'
+    assert_equal 0, Product.last.pictures.size
+    assert_equal 0, page.all('ul.product_pictures li').count
     assert page.has_content?('Successfully added')
     assert page.has_content?('the very wicked name for product')
+  end
+
+  test 'editing a product with picture' do
+    create :picture
+    visit admin_path
+    click_link 'Products'
+    click_link 'Edit'
+    assert_equal 1, Product.last.pictures.size
+    assert_equal 1, page.all('ul.product_pictures li').count
   end
 
   test "should not create product with wrong params" do
@@ -92,4 +103,3 @@ class ProductsAcceptance2Test < ActionDispatch::IntegrationTest
     assert page.has_content?("Edit product")
   end
 end
-
