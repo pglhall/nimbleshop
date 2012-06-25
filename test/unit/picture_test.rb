@@ -1,14 +1,10 @@
 require 'test_helper'
 
 class PictureTest < ActiveSupport::TestCase
-  test "should not save without file" do
-    product = create :product
 
-    assert_no_difference 'Picture.count' do
-      skip 'skipping for the time being' do
-      product.pictures.create
-      end
-    end
+  test 'validity of factory' do
+    create :picture
+    assert_equal 1, Picture.count
   end
 
   test "attaching picture to a product" do
@@ -24,6 +20,4 @@ class PictureTest < ActiveSupport::TestCase
       product.destroy
     end
   end
-
 end
-
