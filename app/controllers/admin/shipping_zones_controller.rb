@@ -38,7 +38,7 @@ class Admin::ShippingZonesController < AdminController
   def destroy
     respond_to do |format|
       format.html do
-        
+
         if @shipping_zone.destroy
           redirect_to admin_shipping_zones_path, notice: t(:successfully_deleted)
         else

@@ -13,6 +13,7 @@ class AdminController < ApplicationController
 
   def restricted_access
     return if Rails.env.test? || Rails.env.development?
+
     authenticate_or_request_with_http_basic('staging') { |username, password|
       username == 'admin@example.com' && password == 'welcome'
     }

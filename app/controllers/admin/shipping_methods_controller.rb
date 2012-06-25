@@ -87,7 +87,7 @@ class Admin::ShippingMethodsController < AdminController
   end
 
   def render_shipping_method(shipping_method)
-    render_to_string(partial: "admin/shipping_methods/shipping_method", locals: { shipping_method: shipping_method })
+    render_to_string(partial: 'admin/shipping_methods/shipping_method', locals: { shipping_method: shipping_method })
   end
 
 end

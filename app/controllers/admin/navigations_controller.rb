@@ -1,5 +1,5 @@
 #
-# This controller is used to add and delete a link to a link group.
+# This controller is used to add and delete a link from a link group.
 #
 class Admin::NavigationsController < AdminController
 
@@ -19,9 +19,9 @@ class Admin::NavigationsController < AdminController
         @navigation = @link_group.navigations.build(params[:navigation])
 
         if @navigation.save
-          redirect_to [:admin, :link_groups], notice: "Successfully added"
+          redirect_to [:admin, :link_groups], notice: t(:successfully_added)
         else
-          render :new, error: "Failed to add"
+          render :new, error: 'Failed to add'
         end
 
       end
@@ -34,7 +34,7 @@ class Admin::NavigationsController < AdminController
 
         @navigation = @link_group.navigations.find_by_id!(params[:id])
         @navigation.destroy
-        redirect_to [:admin, :link_groups], notice: "Successfully deleted"
+        redirect_to [:admin, :link_groups], notice: t(:successfully_deleted)
 
       end
     end
