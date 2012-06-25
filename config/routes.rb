@@ -2,7 +2,7 @@ Nimbleshop::Application.routes.draw do
 
   root to: 'nimbleshop_simply/products#index'
 
-  get "/admin",           to: "admin/main#index"
+  get '/admin',           to: 'admin/main#index'
 
   namespace :admin do
 

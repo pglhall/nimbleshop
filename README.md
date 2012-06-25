@@ -12,4 +12,4 @@ Documentation is available at [http://nimbleshop.org/docsindex](http://nimblesho
 
 # License
 
-nimbleShop uses MIT license.
+nimbleShop uses [MIT license](http://www.opensource.org/licenses/mit-license.php) .
