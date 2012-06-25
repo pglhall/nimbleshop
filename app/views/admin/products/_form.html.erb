@@ -57,7 +57,7 @@
       <% end %>
     </fieldset>
 
-    <%= render 'handle_pictures' %>
+    <%= render 'handle_pictures', f: f  %>
 
     <div class="form-actions">
       <%= f.submit 'Submit', class: 'btn btn-primary', 'data-loading-text' => 'processing ...' %>
