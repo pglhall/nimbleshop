@@ -32,7 +32,7 @@ class ProductGroupTest < ActiveSupport::TestCase
 
   test '.fields' do
     assert_equal 3, CustomField.count
-    assert_equal ["Name", "Price", "name1", "name2", "name3"], ProductGroup.fields.map { |r| r['name'] }
+    assert_equal ["Name", "Price", "#{@text.name}", "#{@date.name}", "#{@number.name}"], ProductGroup.fields.map { |r| r['name'] }
     assert_equal ["text", "number", "text", "date", "number"], ProductGroup.fields.map { |r| r['field_type'] }
   end
 
@@ -43,7 +43,7 @@ class ProductGroupTest < ActiveSupport::TestCase
     condition.operator = 'eq'
     condition.value = 'george washington'
     assert_equal [ @p1 ], group.products
-    assert_equal 'name7 is equal to george washington', group.summarize
+    assert_equal "#{@text.name} is equal to george washington", group.summarize
 
     condition.value = 'george murphy'
     assert_equal [ @p2 ], group.products
@@ -62,7 +62,7 @@ class ProductGroupTest < ActiveSupport::TestCase
 
     condition.value = 'george'
     assert_equal [ @p1, @p2 ], group.products
-    assert_equal "name10 starts with 'george'", group.summarize
+    assert_equal "#{@text.name} starts with 'george'", group.summarize
 
     condition.value = 'steve'
     assert_equal [ @p3 ], group.products
