@@ -1,5 +1,5 @@
 module NimbleshopSplitable
-  class PaymentsController < ::ApplicationController
+  class PaymentsController < ::ActionController::Base
 
     def create
       order       = Order.find_by_id(session[:order_id])
