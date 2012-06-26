@@ -1,42 +1,40 @@
-<div class='row'>
+<div class='span5'>
+  <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
 
-  <div class='span5'>
-    <h2> Shipping status <%= display_shipping_status(@order) %> </h2>
+  <p>
+    <strong> Shipping method: </strong> <%= @order.shipping_method.name %>
+  </p>
 
-    <p>
-      <strong> Shipping method: </strong> <%= @order.shipping_method.name %>
-    </p>
+  <div class='shipment_tracking_info'>
 
-    <div class='shipment_tracking_info'>
+    <% if @order.shipping_pending? %>
+      <%= link_to 'Ship items', '#', class: 'btn btn-success ship-items-link' %>
+    <% elsif @order.shipped? %>
+      <p>
+        Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
+        via <%= shipment_info(@shipment) %>
+      </p>
+    <% end %>
 
-      <% if @order.shipping_pending? %>
-        <%= link_to 'Ship items', '#', class: 'btn btn-success ship-items-link' %>
-      <% elsif @order.shipped? %>
+    <div id='ship_items_action_box' style='display:none;'>
+      <%= form_for([:admin, @order, @shipment], html: {class: 'well form-inline'}) do |f| %>
         <p>
-          Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
-          via <%= shipment_info(@shipment) %>
+          <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, {}, class: 'span2' %>
+          <%= f.text_field :tracking_number, class: 'input-medium', placeholder: 'Tracking number' %>
+          <label class='checkbox'> <%= f.check_box :notify_customer %> Notify customer </label>
+        </p>
+        <p>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+          <%= link_to 'Cancel', '#', id: 'ship_items_cancel' %>
         </p>
       <% end %>
+    </div>
 
-      <div id='ship_items_action_box' style='display:none;'>
-        <%= form_for([:admin, @order, @shipment], html: {class: 'well form-inline'}) do |f| %>
-          <p>
-            <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, {}, class: 'span2' %>
-            <%= f.text_field :tracking_number, class: 'input-medium', placeholder: 'Tracking number' %>
-            <label class='checkbox'> <%= f.check_box :notify_customer %> Notify customer </label>
-          </p>
-          <p>
-            <%= f.submit 'Submit', class: 'btn btn-primary' %>
-            <%= link_to 'Cancel', '#', id: 'ship_items_cancel' %>
-          </p>
-        <% end %>
-      </div>
-
-      <% if @order.shipping_address.present? %>
-        <h4>Shipping address</h4>
-        <p>
-          <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
-        </p>
-      <% end %>
+    <% if @order.shipping_address.present? %>
+      <h4>Shipping address</h4>
+      <p>
+        <%= @order.shipping_address.full_address_array.join('<br />').html_safe %>
+      </p>
+    <% end %>
   </div>
 </div>

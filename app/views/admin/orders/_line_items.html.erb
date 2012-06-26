@@ -1,43 +1,39 @@
-<% if @order.line_items.any? %>
-  <div class='row'>
-    <div class='span10 well'>
-      <table class='table table-striped'>
-        <thead>
-          <tr>
-            <th colspan="2" class="start">Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @order.line_items.each do |line_item| %>
-            <%= render 'line_item', line_item: line_item %>
-          <% end %>
+<div class='row'>
+  <div class='span10 well'>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th colspan="2" class="start">Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.line_items.each do |line_item| %>
+          <%= render 'line_item', line_item: line_item %>
+        <% end %>
 
-          <% if @order.shipping_method %>
-            <tr>
-              <td>&nbsp;</td>
-              <td>
-                Shippping
-              </td>
-              <td> <%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
-              <td>&nbsp;</td>
-              <td><%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
-            </tr>
-          <% end %>
-
+        <% if @order.shipping_method %>
           <tr>
             <td>&nbsp;</td>
-            <td>Total</td>
+            <td>
+              Shippping
+            </td>
+            <td> <%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td> <strong> <%= number_to_currency(@order.total_amount) %> </strong> </td>
+            <td><%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td>Total</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td> <strong> <%= number_to_currency(@order.total_amount) %> </strong> </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-<% else %>
-  This order has no line items.
-<% end %>
+</div>

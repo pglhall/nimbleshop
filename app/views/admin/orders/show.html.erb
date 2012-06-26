@@ -2,7 +2,11 @@
 
 <div class='row'>
   <div class='span10'>
-    <div class='ns-page-title'> <h1> Order #<%= @order.number %> </h1> </div>
+    <div class='ns-page-title'> 
+      <h1>
+        Order #<%= @order.number %> 
+      </h1> 
+    </div>
 
     <div class='new-action'>
       <div style='float:left;'> <%= gravatar_for(@order.email) %> </div>
@@ -15,20 +19,22 @@
 
       <div style='clear:both;'></div>
     </div>
-
   </div>
 </div>
 
-<br />
+<hr />
 
-<%= render 'payment_info' %>
+<div class='row'>
+  <%= render 'payment_info' %>
 
-<br />
+  <% if @order.shipping_method %>
+    <%= render 'shipping_info' %>
+  <% end %>
+</div>
 
-<% if @order.shipping_method %>
-  <%= render 'shipping_info' %>
+
+<% if @order.line_items.any? %>
+  <%= render 'line_items' %>
+<% else %>
+  This order has no line items.
 <% end %>
-
-<br />
-
-<%= render 'line_items' %>
