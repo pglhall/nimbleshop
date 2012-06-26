@@ -9,11 +9,9 @@ module NimbleshopPaypalwp
       processor = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
       order = processor.order
 
+      # Since IPN can send notification multiple times check if the order has already been set to purchased status
       unless order.purchased?
-        # it is required otherwise order.authorize fails
-        processor.order.update_column(:payment_method, NimbleshopPaypalwp::Paypalwp.first)
-
-        # IPN can send notification multiple times
+        processor.order.update_attributes(payment_method: NimbleshopPaypalwp::Paypalwp.first)
         processor.purchase
       end
 
