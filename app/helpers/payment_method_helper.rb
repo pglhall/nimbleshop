@@ -20,7 +20,7 @@ module PaymentMethodHelper
 
   def icon_for_order_payment(order)
     if pm = order.payment_method
-      call_engineized_method(pm,:icon_for_order_payment, order)
+      call_engineized_method(pm, :icon_for_order_payment, order)
     end
   end
 

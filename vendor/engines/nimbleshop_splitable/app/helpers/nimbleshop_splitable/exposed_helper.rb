@@ -1,8 +1,8 @@
 module NimbleshopSplitable
   module ExposedHelper
 
-    def nimbleshop_splitable_small_image
-      image_tag "engines/nimbleshop_splitable/splitable_small.png", alt: 'splitable icon'
+    def nimbleshop_splitable_small_image( options = {} )
+      image_tag "engines/nimbleshop_splitable/splitable_small.png", {alt: 'splitable icon'}.merge(options)
     end
 
     def nimbleshop_splitable_big_image(options = {})
@@ -29,7 +29,7 @@ module NimbleshopSplitable
     end
 
     def nimbleshop_splitable_icon_for_order_payment(order)
-      nimbleshop_splitable_small_image
+      nimbleshop_splitable_small_image height: '10px'
     end
 
   end

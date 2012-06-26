@@ -7,8 +7,8 @@ module NimbleshopCod
       end
     end
 
-    def nimbleshop_cod_small_image
-      image_tag 'engines/nimbleshop_cod/cod_small.png', alt: 'cod icon'
+    def nimbleshop_cod_small_image(options = {} )
+      image_tag 'engines/nimbleshop_cod/cod_small.png', {alt: 'cod icon'}.merge(options)
     end
 
     def nimbleshop_cod_big_image
@@ -30,7 +30,7 @@ module NimbleshopCod
     end
 
     def nimbleshop_cod_icon_for_order_payment(order)
-      nimbleshop_cod_small_image
+      nimbleshop_cod_small_image( height: '13px' )
     end
 
   end

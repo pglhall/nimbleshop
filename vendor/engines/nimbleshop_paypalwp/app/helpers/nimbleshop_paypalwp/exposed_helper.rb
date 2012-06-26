@@ -23,7 +23,7 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_icon_for_order_payment(order)
-      image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon'
+      image_tag "engines/nimbleshop_paypalwp/paypal_small.png", alt: 'paypal icon', height: '10px'
     end
 
     def update_service_with_attributes(service, order)

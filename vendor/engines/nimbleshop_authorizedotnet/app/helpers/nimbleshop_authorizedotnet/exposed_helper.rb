@@ -28,7 +28,7 @@ module NimbleshopAuthorizedotnet
     def nimbleshop_authorizedotnet_icon_for_order_payment(order)
       if payment_transaction = order.payment_transactions.last
         cardtype = payment_transaction.metadata[:cardtype]
-        image_tag("engines/nimbleshop_authorizedotnet/#{cardtype}.png")
+        image_tag("engines/nimbleshop_authorizedotnet/#{cardtype}.png", height: '10px')
       end
     end
 
