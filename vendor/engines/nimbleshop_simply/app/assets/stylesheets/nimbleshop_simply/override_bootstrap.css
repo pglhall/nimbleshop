@@ -1,0 +1,11 @@
+.navbar-inner {
+  background-color: #373d48;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  border-bottom: 1px solid #D8DDE1;
+}
+
+.navbar .nav > li > a:hover {
+  color: #fff;
+}
