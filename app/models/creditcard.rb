@@ -70,9 +70,7 @@ class Creditcard
     amcard = active_merchant_creditcard
 
     unless amcard.valid?
-      amcard.errors.full_messages.each do |message|
-        errors.add(:base, message)
-      end
+      amcard.errors.full_messages.each { |message| errors.add(:base, message) }
     end
 
     amcard.errors.any?
