@@ -20,6 +20,7 @@ common:
   s3:
     access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
     secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] || 'nimbleshop' %>
 
   sendgrid:
     username: <%= ENV['SENDGRID_USERNAME'] %>
@@ -32,27 +33,18 @@ common:
 
 development:
   use_s3: false
-  s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   ask_admin_to_login: false
 
 test:
   use_s3: false
-  s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: localhost:3000
   cookie_domain: nimbleshop.net
   use_localhost2public_url: false
   ask_admin_to_login: false
-  authorize_net:
-    login_id: 56yBAar72
-    transaction_key: 9r3pbH5bnKH29f7d
 
 staging:
   use_s3: true
-  s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.net
   deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
   cache_images: true
@@ -60,8 +52,6 @@ staging:
 
 production:
   use_s3: true
-  s3:
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
   bare_url_with_port: nimbleshop.com
   cache_images: true
   use_localhost2public_url: false
