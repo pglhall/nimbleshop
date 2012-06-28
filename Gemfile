@@ -21,9 +21,6 @@ gem 'activemerchant'
 # for uploading images
 gem 'carrierwave'
 
-# for storing image properties like height, width,size etc. It adds those info for thumbnails too
-gem 'carrierwave-meta'
-
 # for uploading pictures to s3 using carrierwave
 gem 'fog'
 

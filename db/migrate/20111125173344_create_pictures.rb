@@ -1,4 +1,5 @@
 class CreatePictures < ActiveRecord::Migration
+
   def change
     create_table :pictures do |t|
       t.belongs_to :product
@@ -8,34 +9,8 @@ class CreatePictures < ActiveRecord::Migration
       t.string     :file_size
       t.integer    :position,      default: 0
 
-      t.string :picture_width
-      t.string :picture_height
-
-      t.string :picture_tiny_width
-      t.string :picture_tiny_height
-
-      t.string :picture_tiny_plus_width
-      t.string :picture_tiny_plus_height
-
-      t.string :picture_small_width
-      t.string :picture_small_height
-
-      t.string :picture_small_plus_width
-      t.string :picture_small_plus_height
-
-      t.string :picture_medium_width
-      t.string :picture_medium_height
-
-      t.string :picture_medium_plus_width
-      t.string :picture_medium_plus_height
-
-      t.string :picture_large_width
-      t.string :picture_large_height
-
-      t.string :picture_large_plus_width
-      t.string :picture_large_plus_height
-
       t.timestamps
     end
   end
+
 end
