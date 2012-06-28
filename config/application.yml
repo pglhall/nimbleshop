@@ -46,7 +46,7 @@ test:
 staging:
   use_s3: true
   bare_url_with_port: nimbleshop.net
-  deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
+  deliver_email_for_real: <%= ENV['DELIVER_EMAIL_FOR_REAL'] || false %>
   cache_images: true
   ask_admin_to_login: true
 
@@ -56,3 +56,4 @@ production:
   cache_images: true
   use_localhost2public_url: false
   ask_admin_to_login: true
+  deliver_email_for_real: <%= ENV['DELIVER_EMAIL_FOR_REAL'] || true %>

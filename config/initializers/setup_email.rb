@@ -1,5 +1,4 @@
-
-if Rails.env.production? || (Rails.env.staging? && Nimbleshop.config.deliver_email_for_real_in_staging)
+if Nimbleshop.config.deliver_email_for_real
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
@@ -12,7 +11,7 @@ if Rails.env.production? || (Rails.env.staging? && Nimbleshop.config.deliver_ema
     enable_starttls_auto: true
   }
 
-elsif Rails.env.development? || Rails.env.staging?
+else
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
