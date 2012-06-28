@@ -25,7 +25,7 @@ gem 'carrierwave'
 gem 'fog'
 
 # for having nested items. order has billing_address and shipping_address nested
-gem 'nested_form', github: 'ryanb/nested_form'
+gem 'nested_form'
 
 # for creating thumbnails for images
 gem 'mini_magick'
