@@ -47,7 +47,7 @@ gem 'strong_parameters'
 gem 'hashr'
 
 # This gem maintains all the country codes and subregions for some of the countries
-gem 'carmen', github: 'jim/carmen'
+gem 'carmen', '= 1.0.0.beta2'# github: 'jim/carmen'
 
 # for displaying images of a product in facybox manner
 gem 'fancybox-rails'

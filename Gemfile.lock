@@ -23,12 +23,6 @@ GIT
       net-ssh-gateway (>= 1.0.1)
 
 GIT
-  remote: git://github.com/jim/carmen.git
-  revision: 54a7742f8e93d4398089dbea48b4f696913e5652
-  specs:
-    carmen (1.0.0.beta2)
-
-GIT
   remote: git://github.com/neerajdotname/push2heroku.git
   revision: a5e7a95979a9f9399b8325662685ea6c9721e037
   specs:
@@ -119,6 +113,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    carmen (1.0.0.beta2)
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -317,7 +312,7 @@ DEPENDENCIES
   airbrake
   american_date
   capybara
-  carmen!
+  carmen (= 1.0.0.beta2)
   carrierwave
   coffee-rails (~> 3.2.1)
   custom_error_message
