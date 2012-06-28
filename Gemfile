@@ -37,7 +37,7 @@ gem 'mustache'
 gem 'email_validator', github: "bigbinary/email_validator"
 
 # for security
-gem 'strong_parameters', github: 'rails/strong_parameters'
+gem 'strong_parameters'
 
 # to make settings more flexible. Without hashr the code would be like this
 #  Nimbleshop.config.s3['bucket_name']  .With hashr it becomes Nimbleshop.config.s3.bucket_name

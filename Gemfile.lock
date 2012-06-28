@@ -36,15 +36,6 @@ GIT
       hashr (= 0.0.19)
       heroku (= 2.25.0)
 
-GIT
-  remote: git://github.com/rails/strong_parameters.git
-  revision: ec7b957bf113240d8cc3ed2017d9866e83e2edf7
-  specs:
-    strong_parameters (0.1.3)
-      actionpack (>= 3.2.0)
-      activemodel (>= 3.2.0)
-      railties (>= 3.2.0)
-
 PATH
   remote: vendor/engines/nimbleshop_authorizedotnet
   specs:
@@ -286,6 +277,9 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
     state_machine (1.1.2)
+    strong_parameters (0.1.3)
+      actionpack (>= 3.2.0)
+      activemodel (>= 3.2.0)
     subexec (0.2.2)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
@@ -360,7 +354,7 @@ DEPENDENCIES
   selenium-webdriver (~> 2.21)
   sqlite3
   state_machine
-  strong_parameters!
+  strong_parameters
   thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
