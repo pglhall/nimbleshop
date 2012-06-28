@@ -52,7 +52,6 @@ gem 'carmen', '= 1.0.0.beta2'
 # for displaying images of a product in facybox manner
 gem 'fancybox-rails'
 
-
 # for error notification
 gem "airbrake"
 
@@ -68,13 +67,8 @@ gem 'delayed_job_active_record'
 # to see how many background jobs are yet to be processed
 gem "delayed_job_admin"
 
-# heroku cedar stack needs it
+# heroku cedar stack needs it. anyways it is faster than webrick
 gem 'thin'
-
-
-# for postgresql
-gem 'pg'
-
 
 # Gems used only for assets and not required in production environments by default.
 group :assets do
@@ -91,9 +85,11 @@ group :development, :test do
   gem 'localtunnel',  github: 'jalada/localtunnel'
 end
 
-group :test do
-  gem 'sqlite3'
+group :production, :staging do
+  gem 'pg'
+end
 
+group :test do
   gem 'guard-minitest'
   gem 'guard', '= 1.0.3'
 
@@ -121,7 +117,6 @@ group :test do
 
   # vcr uses webmock
   gem 'webmock'
-
 end
 
 
