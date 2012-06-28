@@ -8,7 +8,7 @@ class Picture < ActiveRecord::Base
 
   before_save :update_picture_attributes
 
-  %w(tiny tiny_plus small small_plus medium medium_plus large large_plus carousel).each do |version|
+  %w(tiny tiny_plus small small_plus medium medium_plus large large_plus).each do |version|
     define_method :"#{version}_height" do
       picture.send(version).height
     end

@@ -32,8 +32,7 @@ class PictureUploader < CarrierWave::Uploader::Base
             medium:      [160, 160],
             medium_plus: [240, 240],
             large:       [480, 480],
-            large_plus:  [600, 600],
-            carousel:    [1024, 600]
+            large_plus:  [600, 600]
           }
 
   version :tiny do
@@ -66,10 +65,6 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   version :large_plus do
     process manipulation_type => sizes.fetch(:large_plus)
-  end
-
-  version :carousel do
-    process manipulation_type => sizes.fetch(:carousel)
   end
 
 end
