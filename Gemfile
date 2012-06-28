@@ -6,9 +6,6 @@ gem 'rails', '3.2.6'
 # for pagination
 gem 'will_paginate'
 
-# to support various themes
-#gem 'themes_for_rails', github: 'lucasefe/themes_for_rails'
-
 # ruby 1.9 does not parse dates formatted in american style correclty. This gem fixes that.
 gem 'american_date'
 
