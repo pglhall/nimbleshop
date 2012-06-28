@@ -13,7 +13,7 @@ gem 'will_paginate'
 gem 'american_date'
 
 # to override default error message that comes with validates_presence_of etla.
-gem 'custom_error_message',  github: 'nwise/custom_error_message'
+gem 'custom_error_message'
 
 # to manage states of payment_status and shipping_status
 gem 'state_machine'

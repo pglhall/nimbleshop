@@ -37,12 +37,6 @@ GIT
       heroku (= 2.25.0)
 
 GIT
-  remote: git://github.com/nwise/custom_error_message.git
-  revision: d469cb6daa59aefe57f4bed72141a6632b15d41a
-  specs:
-    custom_error_message (0.1.0)
-
-GIT
   remote: git://github.com/rails/strong_parameters.git
   revision: ec7b957bf113240d8cc3ed2017d9866e83e2edf7
   specs:
@@ -159,6 +153,7 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.6)
     crack (0.3.1)
+    custom_error_message (1.1.1)
     daemons (1.1.8)
     database_cleaner (0.8.0)
     debugger (1.1.4)
@@ -341,7 +336,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-meta
   coffee-rails (~> 3.2.1)
-  custom_error_message!
+  custom_error_message
   database_cleaner
   debugger
   delayed_job_active_record
