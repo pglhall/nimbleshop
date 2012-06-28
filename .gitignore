@@ -16,3 +16,4 @@ config/.tunnel
 config/push2heroku.yml
 config/database.yml
 doc/output
+app/assets/images/engines

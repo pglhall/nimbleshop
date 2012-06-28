@@ -1,7 +1,7 @@
-desc 'load splitable record'
 namespace :nimbleshop_splitable do
-  task :load_record => :environment do
 
+  desc 'load splitable record'
+  task :load_record => :environment do
     if NimbleshopSplitable::Splitable.find_by_permalink('splitable')
       puts "Splitable record already exists"
     else
@@ -16,7 +16,17 @@ namespace :nimbleshop_splitable do
         })
         puts "Splitable record was successfuly created"
     end
-
   end
+
+  desc 'copies images from engine to main rails application'
+  task :copy_images do
+    engine_name = 'nimbleshop_splitable'
+    origin = File.expand_path('../../app/assets/images', File.dirname(__FILE__))
+    destination = Rails.root.join('app', 'assets', 'images', 'engines', engine_name)
+    FileUtils.mkdir_p(destination) if !File.exist?(destination)
+    Dir[File.join(origin, '**/*')].each { |file| FileUtils.cp(file, File.join(destination) ) unless File.directory?(file) }
+  end
+
+
 end
 

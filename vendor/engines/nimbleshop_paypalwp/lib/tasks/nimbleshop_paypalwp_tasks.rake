@@ -1,8 +1,7 @@
-desc 'load paypal record'
-
 namespace :nimbleshop_paypalwp do
-  task :load_record => :environment do
 
+  desc 'load paypal record'
+  task :load_record => :environment do
     if NimbleshopPaypalwp::Paypalwp.find_by_permalink('paypalwp')
       puts "Paypal record already exists"
     else
@@ -15,6 +14,15 @@ namespace :nimbleshop_paypalwp do
         })
         puts 'Paypalwp record was successfuly created'
     end
-
   end
+
+  desc 'copies images from engine to main rails application'
+  task :copy_images do
+    engine_name = 'nimbleshop_paypalwp'
+    origin = File.expand_path('../../app/assets/images', File.dirname(__FILE__))
+    destination = Rails.root.join('app', 'assets', 'images', 'engines', engine_name)
+    FileUtils.mkdir_p(destination) if !File.exist?(destination)
+    Dir[File.join(origin, '**/*')].each { |file| FileUtils.cp(file, File.join(destination) ) unless File.directory?(file) }
+  end
+
 end

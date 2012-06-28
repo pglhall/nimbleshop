@@ -1,5 +1,16 @@
-desc 'load Authorize.net record'
+
 namespace :nimbleshop_authorizedotnet do
+
+  desc 'copies images from engine to main rails application'
+  task :copy_images do
+    engine_name = 'nimbleshop_authorizedotnet'
+    origin = File.expand_path('../../app/assets/images', File.dirname(__FILE__))
+    destination = Rails.root.join('app', 'assets', 'images', 'engines', engine_name)
+    FileUtils.mkdir_p(destination) if !File.exist?(destination)
+    Dir[File.join(origin, '**/*')].each { |file| FileUtils.cp(file, File.join(destination) ) unless File.directory?(file) }
+  end
+
+  desc 'load Authorize.net record'
   task :load_record => :environment do
 
     if NimbleshopAuthorizedotnet::Authorizedotnet.find_by_permalink('authorizedotnet')

@@ -18,13 +18,13 @@ FactoryGirl.define do
       cvv       '123'
     end
 
-    trait :amex do
+    trait :american_express do
       cvv       '1123'
-      cardtype  'amex'
+      cardtype  'american_express'
       number    '370000000000002'
     end
 
     factory :visa_creditcard, traits: [:visa]
-    factory :amex_creditcard, traits: [:amex]
+    factory :american_express_creditcard, traits: [:american_express]
   end
 end

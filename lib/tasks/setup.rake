@@ -14,6 +14,11 @@ task :setup => :environment do
   Rake::Task["nimbleshop_authorizedotnet:load_record"].invoke
   Rake::Task["nimbleshop_cod:load_record"].invoke
 
+  Rake::Task["nimbleshop_splitable:copy_images"].invoke
+  Rake::Task["nimbleshop_paypalwp:copy_images"].invoke
+  Rake::Task["nimbleshop_authorizedotnet:copy_images"].invoke
+  Rake::Task["nimbleshop_cod:copy_images"].invoke
+
   puts ""
   puts '**** shop is ready with sample data ****'
 end
