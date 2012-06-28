@@ -20,8 +20,8 @@ class Creditcard
   validates_numericality_of :number, message: "^Please check the credit card number you entered"
   validates_presence_of :cvv,        message: "^Please enter CVV"
 
-  validate  :validation_of_cardtype,        if: proc { |r| r.errors.empty? }
-  validate  :validation_by_active_merchant, if: proc { |r| r.errors.empty? }
+  validate  :validation_of_cardtype,        if: lambda { |r| r.errors.empty? }
+  validate  :validation_by_active_merchant, if: lambda { |r| r.errors.empty? }
 
   def initialize(attrs = {})
     sanitize_month_and_year(attrs)
