@@ -22,19 +22,13 @@ class ShippingMethod < ActiveRecord::Base
 
   scope :active, where(active: true)
 
-  scope :atleast, lambda { |r|
-    where('shipping_methods.minimum_order_amount <= ?', r)
-  }
+  scope :atleast, lambda { |r| where('shipping_methods.minimum_order_amount <= ?', r) }
 
-  scope :atmost,  lambda { |r|
-    where('shipping_methods.maximum_order_amount is null or shipping_methods.maximum_order_amount >= ?', r)
-  }
+  scope :atmost,  lambda { |r| where('shipping_methods.maximum_order_amount is null or shipping_methods.maximum_order_amount >= ?', r) }
 
   scope :in_price_range,  lambda { |r| atleast(r).atmost(r) }
 
-  scope :in_country, lambda { | code |
-    joins(:shipping_zone).where(shipping_zones: { country_code: code })
-  }
+  scope :in_country, lambda { |country_code| joins(:shipping_zone).where(shipping_zones: { country_code: country_code }) }
 
   def self.in_state(state_code, country_code)
     where({
@@ -50,27 +44,18 @@ class ShippingMethod < ActiveRecord::Base
   belongs_to  :parent,  class_name: 'ShippingMethod', foreign_key: 'parent_id'
   has_many    :regions, class_name: 'ShippingMethod', foreign_key: 'parent_id', dependent: :destroy
 
-  # return shipping methods available to the given address for the given amount
+  # returns shipping methods available for the given address and for the given amount
   def self.available_for(amount, address)
-    if address.state_code
-      in_state(address.state_code, address.country_code)
-    else
-      in_country(address.country_code)
-    end.active.in_price_range(amount)
+    a = address.state_code ? in_state(address.state_code, address.country_code) : in_country(address.country_code)
+    a.active.in_price_range(amount)
   end
 
   def self.available_for_countries(amount)
-    active.in_price_range(amount).includes(:shipping_zone).map do | t |
-      t.shipping_zone.country_code
-    end.uniq
+    active.in_price_range(amount).includes(:shipping_zone).map { |t| t.shipping_zone.country_code }.uniq
   end
 
   def shipping_price
-    if country_level?
-      base_price
-    else
-      parent.base_price + offset
-    end
+    country_level? ? base_price : (parent.base_price + offset)
   end
 
   def country_level?

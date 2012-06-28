@@ -20,10 +20,11 @@ class Picture < ActiveRecord::Base
 
   private
 
-    def update_picture_attributes
-      if picture.present?
-        self.content_type = picture.file.content_type
-        self.file_size = picture.file.size
-      end
+  def update_picture_attributes
+    if picture.present?
+      self.content_type = picture.file.content_type
+      self.file_size = picture.file.size
     end
+  end
+
 end

@@ -2,7 +2,7 @@ class RegionalShippingZone < ShippingZone
 
   validates :state_code, presence: true, uniqueness: { scope: :country_shipping_zone_id }
 
-  validate :code_validity, if: proc { |r| r.state_code && r.country }
+  validate :code_validity, if: lambda { |r| r.state_code && r.country }
 
   before_save :set_name
 
