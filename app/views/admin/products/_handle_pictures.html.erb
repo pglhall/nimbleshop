@@ -1,25 +1,28 @@
 <div class="control-group handle-pictures-umbrella">
   <% unless @product.new_record? %>
-    <label class="control-label">Pictures</label>
-    <div class='controls'>
-      <ul class="thumbnails product_pictures">
-        <% @product.pictures.each do |picture| %>
-          <%= content_tag_for(:li, picture, "data-id" => picture.id) do %>
-            <%= link_to image_tag(picture.picture_url(:medium)), '#', class: 'thumbnail' %>
+    <div class='pictures-list'>
+      <label class="control-label">Pictures</label>
+      <div class='controls'>
+        <ul class="thumbnails product_pictures">
+          <% @product.pictures.each do |picture| %>
+            <%= content_tag_for(:li, picture, "data-id" => picture.id) do %>
+              <%= link_to image_tag(picture.picture_url(:medium)), '#', class: 'thumbnail' %>
 
-            <div class="actions">
-              <%= link_to '#', class: 'move' do %>
-                <i class='icon-move icon-white'></i>
-              <% end %>
-              <%= link_to '#', class: 'delete', "data-action-id" => picture.id do %>
-                <i class='icon-remove icon-white'></i>
-              <% end %>
-            </div>
+              <div class="actions">
+                <%= link_to '#', class: 'move' do %>
+                  <i class='icon-move icon-white'></i>
+                <% end %>
+                <%= link_to '#', class: 'delete', "data-action-id" => picture.id do %>
+                  <i class='icon-remove icon-white'></i>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
     </div>
   <% end %>
+
   <%= f.hidden_field :pictures_order, id: 'product_pictures_order' %>
   <%= f.fields_for :pictures do |picture_form| %>
     <%= picture_form.file_field :picture %>

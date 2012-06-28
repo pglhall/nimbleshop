@@ -98,3 +98,7 @@ footer .content a {
 .handle-pictures-umbrella {
   margin-left: 155px;
 }
+
+.handle-pictures-umbrella .pictures-list {
+  margin-left: -155px;
+}
