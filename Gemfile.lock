@@ -39,6 +39,7 @@ PATH
   specs:
     nimbleshop_paypalwp (0.0.1)
       activemerchant
+      money
       valid_email
 
 PATH
@@ -328,7 +329,6 @@ DEPENDENCIES
   localtunnel!
   mini_magick
   mocha
-  money
   mustache
   nested_form
   nimbleshop_authorizedotnet!

@@ -52,12 +52,6 @@ gem 'fancybox-rails'
 # for error notification
 gem "airbrake"
 
-# TODO this dependecy should be pushed to nimbleshop_paypalwp
-#
-# this gem is needed to handle the instant payment notification from paypal. In particular following
-# ActiveMerchant::Billing::Integrations::Notification::Money class uses it .
-gem 'money'
-
 # for background processing of jobs
 gem 'delayed_job_active_record'
 

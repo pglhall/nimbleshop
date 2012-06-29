@@ -11,6 +11,14 @@ module NimbleshopPaypalwp
 
     private
 
+    def paypal_ipn(raw_post)
+      # ActiveMerchant::Billing::Integrations::Paypal::Notification is a subclass of
+      # ActiveMerchant::Billing::Integrations::Notification
+      #
+      # And ActiveMerchant::Billing::Integrations::Notification dependds on money gem
+      ActiveMerchant::Billing::Integrations::Paypal::Notification.new(raw_post)
+    end
+
     def do_capture(options = {})
       success = amount_match?
       record_transaction('captured', success: success)
@@ -50,9 +58,6 @@ module NimbleshopPaypalwp
       success
     end
 
-    def paypal_ipn(raw_post)
-      ActiveMerchant::Billing::Integrations::Paypal::Notification.new(raw_post)
-    end
 
     def record_transaction(operation, options = {})
       order.payment_transactions.create(options.merge(amount: @paypal_ipn.amount.cents,

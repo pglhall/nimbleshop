@@ -3,6 +3,7 @@ PATH
   specs:
     nimbleshop_paypalwp (0.0.1)
       activemerchant
+      money
       valid_email
 
 GEM

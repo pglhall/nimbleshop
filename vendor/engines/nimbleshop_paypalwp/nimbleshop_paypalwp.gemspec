@@ -18,4 +18,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activemerchant'
   gem.add_dependency 'valid_email'
+  gem.add_dependency 'money'
+  
 end
