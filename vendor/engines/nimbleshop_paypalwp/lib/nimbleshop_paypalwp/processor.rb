@@ -71,11 +71,6 @@ module NimbleshopPaypalwp
       @paypal_ipn.amount.cents == order.total_amount_in_cents
     end
 
-    # TODO megpha where is it being used ??
-    def acknowledge
-      @paypal_ipn.acknowledge
-    end
-
     def purchased_at
       Time.strptime(@paypal_ipn.params['payment_date'], "%H:%M:%S %b %d, %Y %z")
     end
