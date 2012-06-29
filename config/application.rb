@@ -51,13 +51,8 @@ module Nimbleshop
     config.assets.initialize_on_precompile = false
 
     config.assets.precompile += ['admin.css', 'admin.js']
-
-    # FIXME we should do not need to hardcode theme name
-    config.assets.paths << "#{Rails.root}/themes/simply/assets/stylesheets"
-    config.assets.paths << "#{Rails.root}/themes/simply/assets/javascripts"
-    config.assets.paths << "#{Rails.root}/themes/simply/assets/images"
     config.assets.precompile += ['simply.css', 'simply.js']
-
+    config.assets.precompile += ['engines/**/*']
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
