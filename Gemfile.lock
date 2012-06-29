@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/bigbinary/email_validator.git
-  revision: 9bff984da3a7f7dad08f229aa486c7976b9b2107
-  specs:
-    email_validator (0.0.1)
-      activemodel
-
-GIT
   remote: git://github.com/bigbinary/nimbleshop_google_analytics.git
   revision: 1a9998a2371c0f1306abbec03cbe7bfad17ffde3
   specs:
@@ -46,6 +39,7 @@ PATH
   specs:
     nimbleshop_paypalwp (0.0.1)
       activemerchant
+      valid_email
 
 PATH
   remote: vendor/engines/nimbleshop_simply
@@ -296,6 +290,9 @@ GEM
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    valid_email (0.0.4)
+      activemodel
+      mail
     vcr (2.2.0)
     webmock (1.8.7)
       addressable (>= 2.2.7)
@@ -320,7 +317,6 @@ DEPENDENCIES
   debugger
   delayed_job_active_record
   delayed_job_admin
-  email_validator!
   factory_girl_rails
   faker
   fancybox-rails

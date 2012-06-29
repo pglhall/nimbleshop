@@ -17,4 +17,5 @@ Gem::Specification.new do |gem|
   gem.test_files = Dir['test/**/*']
 
   gem.add_dependency 'activemerchant'
+  gem.add_dependency 'valid_email'
 end

@@ -33,9 +33,6 @@ gem 'mini_magick'
 # mustache.js. It is used to generate new product-group-condition
 gem 'mustache'
 
-# for validating email
-gem 'email_validator', github: "bigbinary/email_validator"
-
 # for security
 gem 'strong_parameters'
 

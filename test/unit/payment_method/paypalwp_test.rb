@@ -5,7 +5,7 @@ class PaymentMethodPaypalwpTest < ActiveSupport::TestCase
   test "validations" do
     pm = NimbleshopPaypalwp::Paypalwp.new(name: 'Paypalwp', description: 'this is description')
     refute pm.valid?
-    assert_equal ["Merchant email is invalid"], pm.errors.full_messages.sort
+    assert_equal ["Merchant email can't be blank", "Merchant email is invalid"], pm.errors.full_messages.sort
   end
 
   test "should save the record" do

@@ -5,7 +5,7 @@ module NimbleshopPaypalwp
 
     before_save :set_mode
 
-    validates :merchant_email, email: true, allow_blank: false
+    validates :merchant_email, email: true, presence: true
 
     private
 
