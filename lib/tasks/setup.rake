@@ -5,8 +5,6 @@ task :setup => :environment do
 
   Rake::Task["db:reset"].invoke if Rails.env.development? || Rails.env.test?
 
-  Rake::Task["db:seed"].invoke
-
   Sampledata::Data.new.populate
 
   Rake::Task["nimbleshop_splitable:load_record"].invoke

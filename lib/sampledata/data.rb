@@ -4,6 +4,7 @@ module Sampledata
     attr_accessor :products
 
     def populate
+      load_shipment_carriers
       load_shop
       load_shipping_methods
       load_product_group_for_price
@@ -21,6 +22,10 @@ module Sampledata
     end
 
     private
+
+    def load_shipment_carriers
+      %w(UPS USPS Fedex).each { |carrier| ShipmentCarrier.create!(name: carrier) }
+    end
 
     def load_shop
       Shop.create!( name:           'nimbleShop',
