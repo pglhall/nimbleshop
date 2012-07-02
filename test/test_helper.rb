@@ -6,6 +6,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 
+# DatabaseCleaner recommends to use :transaction strategy since it is faster. However using that strategy
+# causes a lot of errors like this SQLite3::BusyException: database is locked: commit transaction
+# Hence :truncation strategy is used .
 DatabaseCleaner.strategy = :truncation
 Capybara.default_wait_time  = 5
 
