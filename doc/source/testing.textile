@@ -9,7 +9,7 @@ nimbleShop uses testing framework provided by Ruby on Rails. If you are not fami
 In order to run all the tests execute following command
 
 <shell>
-rake
+rake nimbleshop:setup:test
 </shell>
 
 If you are developing nimbleShop and you want to run tests as you make changes then execute following command

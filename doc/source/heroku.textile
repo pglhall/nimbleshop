@@ -4,7 +4,7 @@ endprologue.
 
 h3. Heroku pros and cons
 
-Heroku is a great service to deploy and run Ruby on Rails applications.  
+Heroku is a great service to deploy and run Ruby on Rails applications.
 
 nimbleShop has taken extra steps to ensure that deploying nimbleShop on heroku is smooth. nimbleShop will provide and support step by step guides on deploying nimbleShop applications on heroku.
 

@@ -2,9 +2,14 @@ h2. Payment methods
 
 endprologue.
 
-h3. Support for three payment methods
+h3. Support for payment methods
 
-nimbleShop out of the box supports Authorize.net, PayPal and Splitable .
+nimbleShop out of the box supports following payment methods:
+
+* "Authorize.net":http://nimbleshop.org/authorizedotnet.html
+* "Paypal web payments standard":http://nimbleshop.org/paypalwp.html
+* "Splitable":http://nimbleshop.org/splitable.html
+* "Cash on delivery":http://nimbleshop.org/cod.html
 
 h3. How to accept credit cards online
 
