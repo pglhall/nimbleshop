@@ -11,7 +11,7 @@ module NimbleshopAuthorizedotnet
 
       processor         = NimbleshopAuthorizedotnet::Processor.new(order)
 
-      default_action = Shop.first.default_creditcard_action
+      default_action = Shop.current.default_creditcard_action
 
       if processor.send(default_action, creditcard: creditcard)
         url = nimbleshop_simply.order_path(order)
