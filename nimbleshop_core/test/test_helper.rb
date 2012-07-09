@@ -2,7 +2,7 @@ require 'bundler'
 Bundler.setup(:test)
 
 ENV["RAILS_ENV"] = "test"
-require File.expand_path("../../../myshop_test/config/environment.rb",  __FILE__)
+require File.expand_path("../myshop/config/environment.rb",  __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 

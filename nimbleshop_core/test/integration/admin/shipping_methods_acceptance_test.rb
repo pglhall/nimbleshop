@@ -35,6 +35,8 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # TODO  convert this test into a controller test
+  # TODO write a controller test to enable shipping zone
   test "disbale state shipping zone" do
       Capybara.current_driver = :selenium
 
@@ -46,18 +48,6 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
       find("a[@rel='disable-#{state_zone.id} nofollow']").click
 
       assert page.has_content?('Enable')
-  end
-
-  test "enable state shipping zone" do
-      Capybara.current_driver = :selenium
-
-      shipping_zone = create_shipping_zone("US")
-      regional_shipping_zone = shipping_zone.regional_shipping_zones[0]
-      shipping_method = create(:country_shipping_method, shipping_zone: shipping_zone)
-
-      visit edit_admin_shipping_zone_shipping_method_path(shipping_zone,shipping_method)
-      find("a[@rel='disable-#{regional_shipping_zone.id} nofollow']").click
-      find("a[@rel='enable-#{regional_shipping_zone.id} nofollow']").click
   end
 
 end

@@ -14,9 +14,14 @@ module Nimbleshop
       ensure_no_mass_protection
       mount
       delete_public_index_html
+      delete_test_dir
     end
 
     protected
+
+    def delete_test_dir
+      FileUtils.rm_rf destination_path.join('test')
+    end
 
     def delete_public_index_html
       index_file = destination_path.join('public', 'index.html')

@@ -1,4 +1,4 @@
-- 
+-
   name: Start Here
   documents:
     -
@@ -29,17 +29,30 @@
     -
       name: Deploying on heroku
       url: heroku.html
+
+
+-
+  name: Contributing to nimbleShop
+  documents:
+    -
+      name: Running tests
+      url: testing.html
+    -
+      name: Setting up development environment
+      url: setting_up_development_environment.html
+
 -
   name: Digging Deeper
   documents:
     -
-      name: Store arbitrary data in metadata column 
+      name: Store arbitrary data in metadata column
       url: metadata_column.html
     -
       name: Testing nimbleShop application
       url: testing.html
+
 -
-  name: Extending nimbleShop
+  name: Misc
   documents:
     -
       name: How localtunnel works

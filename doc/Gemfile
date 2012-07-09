@@ -1,0 +1,2 @@
+gem 'RedCloth'
+gem 'rails', '= 3.2.6'

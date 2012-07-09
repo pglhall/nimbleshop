@@ -1,0 +1,51 @@
+# Usage
+#
+# Nimbleshop.config.s3.bucket_name
+#
+common:
+  google_analytics_tracking_id: 
+
+  # this is used for IPN notification and other places where external serivce cannot ping localhost
+  use_localhost2public_url: true
+  default_localhost2public_url: 4a5w.localtunnel.com
+
+  authorizedotnet:
+    login_id: 26Daqx7Jtw7R
+    transaction_key: 66JWf57KKc82W9y6
+
+  s3:
+    access_key_id: 
+    secret_access_key: 
+    bucket_name: 
+
+  sendgrid:
+    username: 
+    password: 
+    domain:   
+
+  mailtrapio:
+    username: nimbleshop
+    password: 7663e1f272637a4b
+
+development:
+  use_s3: false
+  bare_url_with_port: localhost:3000
+
+test:
+  use_s3: false
+  bare_url_with_port: localhost:3000
+  cookie_domain: nimbleshop.net
+  use_localhost2public_url: false
+
+staging:
+  use_s3: true
+  bare_url_with_port: myshop.net
+  #TODO this needs fixing
+  deliver_email_for_real_in_staging: 
+  cache_images: true
+
+production:
+  use_s3: true
+  bare_url_with_port: myshop.com
+  cache_images: true
+  use_localhost2public_url: false

@@ -1,8 +1,10 @@
 .DS_Store
 .bundle
 .sass-cache
-myshop
-myshop_test
 dev/pkg/*
+dev/myshop
 tmp
 doc/output
+Gemfile.lock
+vendor
+nimbleshop_core/test/myshop/public/uploads

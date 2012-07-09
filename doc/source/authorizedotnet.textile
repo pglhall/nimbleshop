@@ -15,7 +15,8 @@ h4. How to get sandbox account
 
 h4. Valid credit card numbers in sandbox
 
-During the test mode actual credit card numbers are declined. This is to prevent one from actually being charged for real when it was just meant for testing. In the test mode use following credit card numbers.
+During the test mode actual credit card numbers are declined. This is to
+prevent users from actually being charged for real when it was just meant for testing. In the test mode use following credit card numbers.
 
 
 |Credit card type|Number|

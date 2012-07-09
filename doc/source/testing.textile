@@ -1,32 +1,26 @@
-h2. Testing nimbleShop applications
+h2. Running tests
 
 endprologue.
 
-h3. Running tests in nimbleShop application
+h3. Running tests
 
 nimbleShop uses testing framework provided by Ruby on Rails. If you are not familiar with testing philosophy of Rails then you should read "this execellent guide":http://guides.rubyonrails.org/testing.html .
 
-In order to run all the tests execute following command
+In order to run all the tests follow the steps given below
 
 <shell>
-rake nimbleshop:setup:test
+git clone git://github.com/nimbleshop/nimbleshop.git
+cd nimbleshop
+cd nimbleshop_core
+rake
 </shell>
-
-If you are developing nimbleShop and you want to run tests as you make changes then execute following command
-
-<shell>
-guard
-</shell>
-
-If you are not familiar with  "guard":https://github.com/guard/guard then watch "this episode":http://railscasts.com/episodes/264-guard of Railscasts to get familiar with it.
-
-When guard starts it waits for user to make changes to the file. If you want guard to execute all the tests then hit <strong>shift + enter</strong> .
 
 h3. How to run a single test
 
 If you want to run tests for one single file then execute following command
 
 <shell>
+cd nimbleshop_core
 bundle exec ruby -I test  test/unit/product_test.rb
 </shell>
 
@@ -42,4 +36,3 @@ nimbleShop uses selenium for acceptance tests. I found that firefox 11 does not 
 * Open firefox and go to preferences > Advanced > Update . Check the radio button "Never check for updates". Close preference panel .
 * Turn internet on .
 * Now run tests for selenium .
-

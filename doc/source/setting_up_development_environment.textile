@@ -1,0 +1,17 @@
+h2. Setting up development environment
+
+endprologue.
+
+nimbleShop github repo has a lot of directories. This guide helps you understand which directory is for what purpose.
+
+h3. Rake task to create myshop
+
+Follow the commands given below to setup a new Rails application called `myshop`.
+
+<shell>
+git clone git://github.com/nimbleshop/nimbleshop.git
+cd nimbleshop
+rake nimbleshop:setup:local
+</shell>
+
+Now `cd dev/myshop` and start the rails server. Use this application to play with `nimbleShop` code and to see how things work. If you have messed up your files then do not worry. Just follow the steps described above to have a clean start again.

@@ -1,8 +1,8 @@
 
 ```
 cd nimbleshop
-gem install RedCloth
 cd doc
+bundle install
 
 rake guides:generate ALL=1
 

@@ -249,6 +249,9 @@ GEM
       railties (>= 3.1)
       therubyracer (~> 0.10.1)
     tzinfo (0.3.33)
+    uglifier (1.2.6)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.3)
     valid_email (0.0.4)
       activemodel
       mail
@@ -264,13 +267,14 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  coffee-rails
+  coffee-rails (~> 3.2.1)
   database_cleaner
   debugger
   factory_girl_rails
   faker
   guard (= 1.0.3)
   guard-minitest
+  jquery-rails
   launchy
   mocha
   nimbleshop_authorizedotnet!
@@ -279,8 +283,9 @@ DEPENDENCIES
   nimbleshop_paypalwp!
   nimbleshop_simply!
   nimbleshop_splitable!
-  sass-rails
+  sass-rails (~> 3.2.3)
   selenium-webdriver (~> 2.21)
   sqlite3
+  uglifier (>= 1.0.3)
   vcr
   webmock

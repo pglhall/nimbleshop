@@ -1,25 +1,21 @@
-h2. Getting Started with nimbleShop
+h2. Build an online shop using nimbleShop
 
 endprologue.
 
-h3. What is nimbleShop?
-
-nimbleShop is a "free and open source":http://en.wikipedia.org/wiki/Free_and_open_source e-commerce framework based on "Ruby on Rails":http://rubyonrails.org/.
-
-h4. nimbleShop only supports ruby 1.9.2+
+h3. nimbleShop only supports ruby 1.9.2+
 
 In order to get started with nimbleShop you need to have
 
 * ruby 1.9.2+
 * rails 3.2.6
 
-h4. Setting up development environment
+h3. Building myshop using nimbleShop
 
 <shell>
 rails new myshop
 </shell>
 
-Open `Gemfile` and add following line
+Open +Gemfile+ and add following line
 
 <shell>
 gem 'nimbleshop'
@@ -34,6 +30,6 @@ bundle exec rake nimbleshop:setup:db
 bundle exec rails server
 </shell>
 
-Now visit "http://localhost:3000":http:localhost:3000 and you should see a store.
+Now visit "http://localhost:3000":http:localhost:3000 and you should see your shop.
 
-Access admin section by visiting "http://localhost:3000/admin":http://localhost:3000/admin .
+Access admin page by visiting "http://localhost:3000/admin":http://localhost:3000/admin .

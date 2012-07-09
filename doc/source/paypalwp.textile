@@ -15,7 +15,7 @@ nimbleShop comes with Paypal settings that you can directly use to test your app
 payment for real in order to test integration with Paypal. Paypal offers +sandbox+ account where we can test the integration
 of our application with Paypal without making payment for real.
 
-However using sandbox involves a few steps. Given below are the steps needed to make payment. 
+However using sandbox involves a few steps. Given below are the steps needed to make payment.
 
 <shell>
 bundle exec rails server
@@ -88,7 +88,7 @@ If you are using Paypal web payment standard then paypal sends an instant paymen
 
 In local development environment when you use +localhost:3000+ then paypal cannot send the Instant Payment notification to +localhost:3000+. You need a public address .
 
-"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server. 
+"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server.
 
 <shell>
 gem install localtunnel+ .
