@@ -1,5 +1,6 @@
 namespace :guides do
 
+  ENV['ALL'] = '1' # always generate all the files
   desc 'Generate guides (for authors), use ONLY=foo to process just "foo.textile"'
   task :generate => 'generate:html'
 
@@ -68,4 +69,4 @@ Examples:
   end
 end
 
-task :default => 'guides:help'
+task :default => 'guides:generate'

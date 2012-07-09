@@ -40,6 +40,9 @@
     -
       name: Setting up development environment
       url: setting_up_development_environment.html
+    -
+      name: Things to keep in mind
+      url: things_to_keep_in_mind.html
 
 -
   name: Digging Deeper
@@ -60,6 +63,3 @@
     -
       name: Tools
       url: tools.html
-    -
-      name: Contributing to nimbleShop
-      url: contributing_to_nimbleshop.html
