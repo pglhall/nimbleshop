@@ -1,6 +1,6 @@
 #
 # This file is responsible for releasing newer version of nimbleshop gems.
-# Here is the order it should be executed.
+# Here is the order in which it should be executed.
 #
 # rake nimbleshop:package_all
 # rake nimbleshop:bundle_all

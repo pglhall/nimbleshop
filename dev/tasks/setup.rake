@@ -1,3 +1,15 @@
+#
+# This file is responsible for creating local rails application for
+# development and testing purpose.
+#
+# Execute: rake nimbleshop:setup:local to have a rails application at
+# dev/myshop . This is your development rails application to test out
+# nimbleShop .
+#
+# Execute rake nimbleshop:setup:test to have a rails application at
+# nimbleshop_core/test/myshop. The tests run against this rails
+# application .
+#
 gem 'railties'
 require 'rails/generators'
 require 'rails/generators/rails/app/app_generator'
@@ -11,7 +23,6 @@ namespace :nimbleshop do
       Rails::Generators::AppGenerator.start ['myshop', '-m', template_path], destination_root: dev_path
 
       puts ""
-      puts "="*60
       puts "myshop is ready"
       puts "cd dev/myshop"
       puts "rails server"
