@@ -1,11 +1,14 @@
 module NimbleshopAuthorizedotnet
+
   class PaymentsController < ::ActionController::Base
 
     def create
-      order             =  Order.find_by_id(session[:order_id])
+      order             =  Order.find_by_id!(session[:order_id])
+
       address_attrs     = order.final_billing_address.to_credit_card_attributes
       creditcard_attrs  = params[:creditcard].merge(address_attrs)
       creditcard        = Creditcard.new(creditcard_attrs)
+
       processor         = NimbleshopAuthorizedotnet::Processor.new(order)
 
       default_action = Shop.first.default_creditcard_action
@@ -28,4 +31,5 @@ module NimbleshopAuthorizedotnet
     end
 
   end
+
 end
