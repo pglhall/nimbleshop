@@ -8,7 +8,7 @@ module Processor
       @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
-    test "when authorization succeeds" do
+    test 'when authorization succeeds' do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -24,7 +24,7 @@ module Processor
       assert       @order.authorized?
     end
 
-    test "authorization fails when credit card number is not entered" do
+    test 'authorization fails when credit card number is not entered' do
       creditcard = build(:creditcard, number: nil)
       assert_equal false, @processor.authorize(creditcard: creditcard)
       assert_equal 'Please enter credit card number', @processor.errors.first
@@ -35,7 +35,7 @@ module Processor
       assert        @order.abandoned?
     end
 
-    test "authorization fails with invalid credit card number" do
+    test 'authorization fails with invalid credit card number' do
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/authorize-failure') do
@@ -64,11 +64,11 @@ module Processor
       @tsx_id = @order.payment_transactions.last.transaction_gid
     end
 
-    test "when capture succeeds" do
+    test 'when capture succeeds' do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/capture-success') do
-        assert_equal true, @processor.capture(transaction_gid: @tsx_id)
+        assert_equal true, @processor.kapture(transaction_gid: @tsx_id)
       end
 
       @order.reload
@@ -78,11 +78,11 @@ module Processor
       assert        @order.purchased?
     end
 
-    test "when capture fails" do
+    test 'when capture fails' do
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/capture-failure') do
-        assert_equal false, @processor.capture(transaction_gid: @tsx_id)
+        assert_equal false, @processor.kapture(transaction_gid: @tsx_id)
         assert_equal 'Capture failed', @processor.errors.first
       end
 
@@ -112,7 +112,7 @@ module Processor
       @transaction = @order.payment_transactions.last
     end
 
-    test "when refund succeeds" do
+    test 'when refund succeeds' do
 
       playcasette('authorize.net/refund-success') do
         assert_equal true, @processor.refund(transaction_gid:   @transaction.transaction_gid,
@@ -128,7 +128,7 @@ module Processor
       assert        @order.refunded?
     end
 
-    test "when refund fails" do
+    test 'when refund fails' do
 
       playcasette('authorize.net/refund-failure') do
         assert_equal false, @processor.refund(transaction_gid: @transaction.transaction_gid, card_number: '1234')
@@ -157,7 +157,7 @@ module Processor
       @tsx_id = @order.payment_transactions.last.transaction_gid
     end
 
-    test "when capture succeeds" do
+    test 'when capture succeeds' do
       playcasette('authorize.net/void-success') do
         assert_equal true, @processor.void(transaction_gid: @tsx_id)
       end
@@ -171,7 +171,7 @@ module Processor
       assert        @order.voided?
     end
 
-    test "when capture fails" do
+    test 'when capture fails' do
       playcasette('authorize.net/void-failure') do
         assert_equal false, @processor.void(transaction_gid: @tsx_id)
       end
@@ -192,7 +192,7 @@ module Processor
       @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
     end
 
-    test "when purchase succeeds" do
+    test 'when purchase succeeds' do
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do
@@ -207,7 +207,7 @@ module Processor
       assert        @order.purchased?
     end
 
-    test "purchase fails when credit card number is not entered " do
+    test 'purchase fails when credit card number is not entered ' do
       creditcard = build(:creditcard, number: nil)
 
       playcasette('authorize.net/purchase-failure') do
@@ -218,7 +218,7 @@ module Processor
       assert       @order.abandoned?
     end
 
-    test "purchase fails when invalid credit card number is entered" do
+    test 'purchase fails when invalid credit card number is entered' do
       creditcard = build(:creditcard, number: 2)
 
       playcasette('authorize.net/purchase-failure') do
