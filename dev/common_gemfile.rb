@@ -26,7 +26,7 @@ group :test do
   # for fake data in testing
   gem 'faker'
 
-  # for capture response from payment gateways like Authorize.net
+  # to gather response from payment gateways like Authorize.net
   gem 'vcr'
 
   # vcr uses webmock
