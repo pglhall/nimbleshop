@@ -7,7 +7,7 @@ class Admin::OrdersController < AdminController
       format.html do
 
         @order = Order.find_by_number!(params[:id])
-        @order.kapture!
+        @order.payment_method.kapture!(@order)
         redirect_to admin_order_path(@order), notice: "Amount was successfully captured"
 
       end

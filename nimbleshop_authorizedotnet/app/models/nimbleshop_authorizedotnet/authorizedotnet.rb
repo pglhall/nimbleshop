@@ -15,6 +15,12 @@ module NimbleshopAuthorizedotnet
       self.ssl == 'enabled'
     end
 
+    def kapture!(order)
+      processor = NimbleshopAuthorizedotnet::Processor.new(order)
+      processor.kapture
+      order.kapture!
+    end
+
     private
 
     def set_mode

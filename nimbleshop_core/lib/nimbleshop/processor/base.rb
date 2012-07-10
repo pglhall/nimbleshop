@@ -4,15 +4,15 @@ module Processor
     extend ActiveModel::Callbacks
 
     define_model_callbacks  :transaction, :authorize,
-                                          :capture,
+                                          :kapture,
                                           :purchase,
                                           :refund,
                                           :void
 
     before_transaction :set_active_merchant_mode
 
-    def capture(options = {})
-      execute(:capture, options)
+    def kapture(options = {})
+      execute(:kapture, options)
     end
 
     def authorize(options = {})

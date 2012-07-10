@@ -65,7 +65,7 @@ module NimbleshopAuthorizedotnet
       end
     end
 
-    def do_capture(options = {})
+    def do_kapture(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
       tsx_id = options[:transaction_gid]
