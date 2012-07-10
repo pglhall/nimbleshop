@@ -8,15 +8,37 @@ h3. Sandbox account
 
 Authorize.net provides "sandbox account":https://developer.authorize.net/testaccount which can be used to test the application before the application goes live. nimbleShop comes with Authorize.net sandbox account credentials so you do not have to get your own sandbox account. However if you want to login at Authorize.net and see the transaction details for yourself then you should get your own sandbox account.
 
-h4. How to get sandbox account
+Follow the instructions given below to get your Authorize.net sandbox account.
 
-* Visit  "Authorize.net development center":https://developer.authorize.net/testaccount to get sandbox account. Select +account type+ as +Card Not Present+.
-* Vist "Admin section for Authorize.net":http://localhost:3000/admin/paymentmethod/authorizedotnet/edit and update +login_id+ and +transaction_key+ with the value obtained from above step.
+h4. Sign up at development center
+
+Visit  "Authorize.net development center":https://developer.authorize.net/testaccount and sign up.
+Make sure to select +account type+ as +Card Not Present+.
+!https://img.skitch.com/20120710-gia14xira6g8snkfgkt5s2dtnr.jpg!
+
+h4. API credentails
+
+After signing up you will see +API Credentials+ which might look  like this.
+
+!https://img.skitch.com/20120710-mb64gbj17xjy6geuk5db73845r.jpg!
+
+h4. Update nimbleShop to use the new Authorize.net credentials
+
+* Visit "Admin tab Payment methods":http://localhost:3000/admin/payments_methods .
+* Click 'Edit' next to 'Authorize.net'.
+* Update +API Login ID+ and +Transaction Key+.
+
+
+h3. Paying using Credit card
+
+Now that +Authorize.net+ has been setup with new +API Credentials+ lets try to checkout something using Authorize.net .
+
+Start the +myshop+ application and add a few items to the cart. Start the checkout process. When you come to payment page then enter credit card number. However do not enter real credit card number. We are still in the test mode. So use the credit card numbers mentioned in the next step.
 
 h4. Valid credit card numbers in sandbox
 
 During the test mode actual credit card numbers are declined. This is to
-prevent users from actually being charged for real when it was just meant for testing. In the test mode use following credit card numbers.
+prevent users from actually being charged when it was just meant for testing. In the test mode use following credit card numbers.
 
 
 |Credit card type|Number|
@@ -30,6 +52,37 @@ prevent users from actually being charged for real when it was just meant for te
 * Expiration date must be set to the present day or later.
 * Security code for American express must be 4 digits. For all others use 3 digits.
 
+h4. Authorized transaction detail at Authorize.net
+
+In the previous step we successfully paid using the credit card number given in the last step.  The default behavior of nimbleShop is to only +Authorize+ the credit card.  If you do not fully understand the difference between +authorize+ and +capture+ then I highly recommend you to "read this ebook":http://ebooks.bigbinary.com/blog/home .
+
+Lets look at this transaction details at Authorize.net .
+
+* Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
+* Click on +Unsettled Transactions+ to see transaction details.
+!https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
+* You should see a transaction record which says "Authorized".
+!https://img.skitch.com/20120710-bkkg67qq3xxtcbc9fn95tr8q6a.jpg!
+
+
+h4. Capturing the transaction
+
+Next step is capturing the transaction.
+
+* Visit "admin section":http://localhost:3000/admin .
+* Click on +Orders+ tab.
+* Click on the first order in the list.
+* Now you should see +Capture payment+ in green. Just click on that and you should see label +PURCHASED+ next to +Payment status+.
+
+That means you have successfully charged the buyer's credit card.
+
 h4. Checking transactions in sandbox account
 
-Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials. Click on +Unsettled Transactions+ to see transaction details.
+Lets verify that the transaction that we just captured is indeeed showing as +captured+ in Authorize.net admin panel.
+
+
+* Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
+* Click on +Unsettled Transactions+ to see transaction details.
+!https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
+* You should see a transaction record which says "Captured".
+!https://img.skitch.com/20120710-eic38ceur6499x831371krtwge.jpg!
