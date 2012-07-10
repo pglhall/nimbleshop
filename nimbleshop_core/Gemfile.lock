@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nimbleshop_core (0.0.2)
+    nimbleshop_core (0.0.3)
       activemerchant (= 1.23.0)
       american_date (= 1.0.0)
       carmen (= 1.0.0.beta2)
@@ -20,39 +20,39 @@ PATH
 PATH
   remote: ../nimbleshop_authorizedotnet
   specs:
-    nimbleshop_authorizedotnet (0.0.2)
+    nimbleshop_authorizedotnet (0.0.3)
       activemerchant
-      nimbleshop_core (= 0.0.2)
+      nimbleshop_core (= 0.0.3)
 
 PATH
   remote: ../nimbleshop_cod
   specs:
-    nimbleshop_cod (0.0.2)
-      nimbleshop_core (= 0.0.2)
+    nimbleshop_cod (0.0.3)
+      nimbleshop_core (= 0.0.3)
 
 PATH
   remote: ../nimbleshop_paypalwp
   specs:
-    nimbleshop_paypalwp (0.0.2)
+    nimbleshop_paypalwp (0.0.3)
       activemerchant
       money
-      nimbleshop_core (= 0.0.2)
+      nimbleshop_core (= 0.0.3)
       valid_email
 
 PATH
   remote: ../nimbleshop_simply
   specs:
-    nimbleshop_simply (0.0.2)
+    nimbleshop_simply (0.0.3)
       fancybox-rails (= 0.1.4)
       jquery-rails (= 2.0.2)
-      nimbleshop_core (= 0.0.2)
+      nimbleshop_core (= 0.0.3)
 
 PATH
   remote: ../nimbleshop_splitable
   specs:
-    nimbleshop_splitable (0.0.2)
+    nimbleshop_splitable (0.0.3)
       activemerchant
-      nimbleshop_core (= 0.0.2)
+      nimbleshop_core (= 0.0.3)
 
 GEM
   remote: http://rubygems.org/
