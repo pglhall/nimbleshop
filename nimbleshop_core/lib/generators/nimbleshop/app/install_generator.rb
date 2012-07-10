@@ -60,11 +60,15 @@ module Nimbleshop
       run 'bundle install'
     end
 
-    def copy_files!
-      template "config/.localtunnel_callback", "#{destination_path}/.localtunnel_callback"
+    def handle_localtunnel_callback_file
+      template "config/localtunnel_callback", "#{destination_path}/.localtunnel_callback"
 
       # make the file executable
       FileUtils.chmod 0755, File.expand_path("#{destination_path}/.localtunnel_callback"), :verbose => true
+    end
+
+    def copy_files!
+      handle_localtunnel_callback_file
 
       template "config/nimbleshop.yml", "#{destination_path}/config/nimbleshop.yml"
 
