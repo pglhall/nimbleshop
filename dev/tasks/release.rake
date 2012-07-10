@@ -43,6 +43,7 @@ all.each do |extension|
     end
 
     task :bundle do
+      ENV['BUNDLE_GEMFILE'] = File.expand_path("../../../#{extension}/Gemfile", __FILE__)
       cmd = "cd #{extension} && bundle install"
       puts cmd
       system cmd
