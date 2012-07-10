@@ -2,8 +2,8 @@ module Nimbleshop
   class Version
     @major = 0
     @minor = 0
-    @tiny  = 1
-    @build = nil
+    @tiny  = 2
+    @build = 'beta1'
 
     class << self
       attr_reader :major, :minor, :tiny, :build
