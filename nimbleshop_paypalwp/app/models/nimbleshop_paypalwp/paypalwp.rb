@@ -18,7 +18,7 @@ module NimbleshopPaypalwp
     # This is needed because https://github.com/nimbleshop/nimbleshop/blob/master/nimbleshop_core/lib/nimbleshop/core_ext/activerecord_base.rb
     # acts only on core attributes and not on store_accessors.
     def strip_attributes
-      self.merchant_email = self.merchant_email.strip
+      self.merchant_email = merchant_email.strip unless merchant_email.nil?
     end
 
   end
