@@ -5,6 +5,7 @@ module Nimbleshop
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/lib/nimbleshop)
+    config.active_record.observers = :order_observer
 
     config.to_prepare do
       Address
