@@ -1,4 +1,4 @@
-# 
+#
 # If a field is nullable and if user hits spacebar a few times and submits
 # the form then ActiveRecord would have the value as empty spaces.
 #
