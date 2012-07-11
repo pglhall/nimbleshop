@@ -14,6 +14,7 @@ h4. Sign up at development center
 
 Visit  "Authorize.net development center":https://developer.authorize.net/testaccount and sign up.
 Make sure to select +account type+ as +Card Not Present+.
+
 !https://img.skitch.com/20120710-gia14xira6g8snkfgkt5s2dtnr.jpg!
 
 h4. API credentails
@@ -27,7 +28,6 @@ h4. Update nimbleShop to use the new Authorize.net credentials
 * Visit "Admin tab Payment methods":http://localhost:3000/admin/payment_methods .
 * Click 'Edit' next to 'Authorize.net'.
 * Update +API Login ID+ and +Transaction Key+.
-
 
 h3. Paying using Credit card
 
@@ -60,8 +60,10 @@ Lets look at this transaction details at Authorize.net .
 
 * Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
 * Click on +Unsettled Transactions+ to see transaction details.
+
 !https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
-* You should see a transaction record which says "Authorized".
+* You should see a transaction record which says +Authorized+.
+
 !https://img.skitch.com/20120710-bkkg67qq3xxtcbc9fn95tr8q6a.jpg!
 
 
@@ -83,6 +85,8 @@ Lets verify that the transaction that we just captured is indeeed showing as +ca
 
 * Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
 * Click on +Unsettled Transactions+ to see transaction details.
+
 !https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
-* You should see a transaction record which says "Captured".
+* You should see a transaction record which says +Captured+ .
+
 !https://img.skitch.com/20120710-eic38ceur6499x831371krtwge.jpg!
