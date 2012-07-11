@@ -1,8 +1,8 @@
-class NimbleshopSimply::ApplicationController < ApplicationController
+class NimbleshopSimply::SimplyController < ApplicationController
 
   layout 'simply'
 
-  helper 'nimbleshop_simply/application'
+  helper 'nimbleshop_simply/simply'
 
   helper_method :current_order, :current_shop
 
@@ -22,7 +22,7 @@ class NimbleshopSimply::ApplicationController < ApplicationController
 
   def current_shop
     @shop ||= Shop.first
-    raise "The database base is empty. Please run bundle exec rake setup first." unless @shop
+    raise 'The database base is empty. Please run bundle exec rake setup first.' unless @shop
     @shop
   end
 

@@ -1,5 +1,5 @@
 module NimbleshopSimply
-  class Checkout::ShippingAddressesController < ApplicationController
+  class Checkout::ShippingAddressesController < SimplyController
 
     before_filter :verify_current_order
 

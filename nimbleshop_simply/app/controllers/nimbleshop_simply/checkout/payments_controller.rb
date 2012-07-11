@@ -1,5 +1,5 @@
 module NimbleshopSimply
-  class Checkout::PaymentsController < ApplicationController
+  class Checkout::PaymentsController < SimplyController
 
     before_filter :verify_current_order
 

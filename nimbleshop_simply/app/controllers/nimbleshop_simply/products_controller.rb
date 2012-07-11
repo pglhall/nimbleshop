@@ -1,10 +1,5 @@
 module NimbleshopSimply
-  class ProductsController < ApplicationController
-
-
-    def no_page_title
-      @do_not_use_page_title = true
-    end
+  class ProductsController < SimplyController
 
     before_filter :no_page_title, only: [:all_prictures, :index]
 
