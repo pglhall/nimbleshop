@@ -6,7 +6,7 @@
 
 # Getting started
 
-Creating an online shop is easy. Just [get started](http://nimbleshop.org/getting_started.html) .
+Getting started is easy. Just [get started](http://nimbleshop.org/getting_started.html) .
 
 # Documentation
 
