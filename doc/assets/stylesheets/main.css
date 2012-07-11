@@ -28,6 +28,8 @@ pre,code,tt {
     font-size: 1em;
     font-family: "Anonymous Pro", "Inconsolata", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
     line-height: 1.5;
+    border: 1px solid #EAEAEA;
+    background-color: #F8F8F8;
 }
 
 abbr, acronym { border-bottom: 1px dotted #666; }
@@ -525,7 +527,7 @@ p, #mainCol ul li {
    font-size: 13px;
 }
 
-#topNav a.brand{ 
+#topNav a.brand{
   background: url(../images/logo.png) no-repeat 0 7px;
   width:100px;
   height: 22px;
@@ -539,3 +541,7 @@ p, #mainCol ul li {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+
+img {
+  border: 1px solid gray;
+}
