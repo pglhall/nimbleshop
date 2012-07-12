@@ -44,6 +44,23 @@ heroku. One for staging and one for prouduction. Then application names would be
 
 First lets get started with deploying the application on `trishil-staging` .
 
+h4. Add to Gemfile
+
+<shell>
+group :production, :staging do
+  gem 'pg'
+  gem 'thin'
+  gem 'fog'
+end
+
+group :development, :test do
+  gem 'push2heroku'
+  gem 'sqlite3'
+end
+</shell>
+
+Notice that in the last line I moved the line +gem 'sqlite3'+ inside the group +:development, :test+. Heroku does not work well with +sqlite3+ gem so ensure that this gem is only present for +development+ and +test+ group.
+
 h4. Create staging branch
 
 <shell>
