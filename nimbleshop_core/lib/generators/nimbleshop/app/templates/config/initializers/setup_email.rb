@@ -1,15 +1,6 @@
-if Nimbleshop.config.deliver_email_for_real
+if Nimbleshop.config.deliver_email
 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    user_name: Nimbleshop.config.sendgrid.username,
-    password: Nimbleshop.config.sendgrid.password,
-    domain: Nimbleshop.config.sendgrid.domain,
-    address: "smtp.sendgrid.net",
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  # Setup how you want email to be delivered
 
 else
 
