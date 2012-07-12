@@ -3,7 +3,7 @@ module Nimbleshop
     @major = 0
     @minor = 0
     @tiny  = 4
-    @build = nil
+    @build = 'beta1'
 
     class << self
       attr_reader :major, :minor, :tiny, :build
