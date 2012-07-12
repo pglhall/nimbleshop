@@ -61,7 +61,7 @@ Lets look at this transaction details at Authorize.net .
 * Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
 * Click on +Unsettled Transactions+ to see transaction details.
 
-!https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
+!https://img.skitch.com/20120712-fshusdqr7xupjxk7khkfcn75ri.jpg!
 * You should see a transaction record which says +Authorized+.
 
 !https://img.skitch.com/20120710-bkkg67qq3xxtcbc9fn95tr8q6a.jpg!
@@ -86,7 +86,7 @@ Lets verify that the transaction that we just captured is indeeed showing as +ca
 * Visit "https://test.authorize.net":https://test.authorize.net and login with valid credentials.
 * Click on +Unsettled Transactions+ to see transaction details.
 
-!https://img.skitch.com/20120710-8i7x5u2bnhrnp5dn765skqth9s.jpg!
+!https://img.skitch.com/20120712-fshusdqr7xupjxk7khkfcn75ri.jpg!
 * You should see a transaction record which says +Captured+ .
 
 !https://img.skitch.com/20120710-eic38ceur6499x831371krtwge.jpg!

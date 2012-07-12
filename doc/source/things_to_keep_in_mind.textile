@@ -4,9 +4,9 @@ endprologue.
 
 h3. Contributing to Documentation
 
-Documentation for nimbleShop is under +doc+ directory in the github repo. Follow [the README](https://github.com/nimbleshop/nimbleshop/tree/master/doc) instructions to build the documtation.
+Documentation for nimbleShop is under +doc+ directory in the github repo. Follow "the README":https://github.com/nimbleshop/nimbleshop/tree/master/doc to build the documentation.
 
-nimbleShop uses [Travis ci](http://travis-ci.org/) to run tests anytime a commit is made. However documentation changes do not require tests to be run again. To help Tavis team keep the cost low you are encourage to add  [ci skip] to your documentation commit message to skip running tests for that commit.
+nimbleShop uses "Travis ci":http://travis-ci.org as continuous integration (CI) server. However documentation changes do not require tests to be run. To help Tavis team keep the cost low you are encourage to add  [ci skip] to your documentation commit message to skip running tests for that commit.
 
 h3.  How to contribute
 
@@ -14,4 +14,4 @@ You are encouraged to "read this":http://www.igvita.com/2011/12/19/dont-push-you
 
 h3. Reporting Security Issues
 
-Please do not report security vulnerabilities at GitHub issues. Please send an email to hello.nimbleshop@gmail.com .
+Please do not report security vulnerabilities at GitHub issues. Please send an email to +hello.nimbleshop@gmail.com+ .

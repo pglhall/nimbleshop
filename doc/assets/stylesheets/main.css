@@ -25,11 +25,12 @@ dd { margin-left: 1.5em;}
 
 pre,code { margin: 1.5em 0; overflow: auto; color: #222;}
 pre,code,tt {
-    font-size: 1em;
+    font-size: 0.9em;
     font-family: "Anonymous Pro", "Inconsolata", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
     line-height: 1.5;
-    border: 1px solid #EAEAEA;
-    background-color: #F8F8F8;
+    border: 1px solid #ededed;
+    background-color: #f7f7f7;
+    padding: 0 2px;
 }
 
 abbr, acronym { border-bottom: 1px dotted #666; }
@@ -543,5 +544,20 @@ p, #mainCol ul li {
 
 
 img {
-  border: 1px solid gray;
+  border: 1px solid #e7e7e7;
+  padding: 2px;
+}
+
+body {
+  background: #f3f3f3;
+}
+
+#container .wrapper {
+  background: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#subCol {
+  margin-top: 44px;
 }

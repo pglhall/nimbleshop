@@ -32,7 +32,7 @@
 
 
 -
-  name: Contributing to nimbleShop
+  name: nimbleShop internals
   documents:
     -
       name: Running tests
@@ -41,7 +41,7 @@
       name: Setting up development environment
       url: setting_up_development_environment.html
     -
-      name: Things to keep in mind
+      name: Contributing to nimbleShop
       url: things_to_keep_in_mind.html
 
 -

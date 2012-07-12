@@ -99,12 +99,15 @@ Now lets go and buy something. At the payment page select +Paypal+ radio button.
 You will be taken to a page. Enter the buyer email address. I am going to enter +buyer_1341965839_per@mailinator.com+ and password +welcome1+. Hit Submit.
 
 In the next page select the checkbox and click +Agree and Continue+.
+
 !https://img.skitch.com/20120711-xjx48pfukmwi77aq5ymci5rufj.jpg!
 
 In the next page click on 'Pay Now'.
+
 !https://img.skitch.com/20120711-dwf4f7wyun415ydkdytasjyd2e.jpg!
 
 If everything goes fine then you should see this page
+
 !https://img.skitch.com/20120711-c5tb5w1gnfrq77m9kicn3p2hax.jpg!
 
 
@@ -113,20 +116,20 @@ h3. Verify payment at papal account page
 Now lets confirm the payment by visiting the account page at paypal.
 
 Come back to the and the page should look like this
+
 !https://img.skitch.com/20120711-jpymjnqs3y4ffcyy9tpaawq1ww.jpg!
 
 Click on 'Enter Sandbox Test Site'. That should open a popup  Here you should see a transaction record for the amount you paid. This is what I see.
+
 !https://img.skitch.com/20120711-fh7na2td2dm6m53kc33rsqqgu9.jpg!
 
+h4. How localtunnel works
 
-h4. Misc
+"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server. It is sponsored by "twilio":http://www.twilio.com .
+
+In the root directory of nimbleshop there is a file called +localtunnel_callback+. This is an executable file. When +localtunnel+ gems connects to central server and gets a unique domain name then it invokes the executable file +.localtunnel_callback+ with the url name. The executable writes the dns name to +config/.tunnel+ file.  nimbleshop reads +config/.tunnel+ in development mode to construct paypal notification url.
+
+h4. Paypaal order management integration guide
 
 Here is the "Paypal order management integration guide":https://cms.paypal.com/cms_content/en_US/files/developer/PP_OrderMgmt_IntegrationGuide.pdf .
 
-"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server.
-
-In the root directory of nimbleshop there is a file called +localtunner_callback+. localtunnel gem executes localtunnel_callback with the current host name after creating the tunnel.
-
-localtunnel_callback writes the host into +config/.tunnel+ .
-
-nimbleshop reads +config/.tunnel+ in development mode to construct paypal notification url.
