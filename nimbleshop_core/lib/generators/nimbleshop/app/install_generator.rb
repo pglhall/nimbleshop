@@ -60,17 +60,9 @@ module Nimbleshop
       run 'bundle install'
     end
 
-    def handle_localtunnel_callback_file
-      template "config/localtunnel_callback", "#{destination_path}/.localtunnel_callback"
-
-      # make the file executable
-      FileUtils.chmod 0755, File.expand_path("#{destination_path}/.localtunnel_callback"), :verbose => true
-    end
-
     def copy_files!
       handle_localtunnel_callback_file
-
-      template "config/nimbleshop.yml", "#{destination_path}/config/nimbleshop.yml"
+      handle_nimbleshop_yml_file
 
       template "config/initializers/cache_images.rb", "#{destination_path}/config/initializers/cache_images.rb"
       template "config/initializers/carrierwave.rb",  "#{destination_path}/config/initializers/carrierwave.rb"
@@ -81,6 +73,20 @@ module Nimbleshop
     # Helper method to quickly convert destination_root to a Pathname for easy file path manipulation
     def destination_path
       @destination_path ||= Pathname.new(self.destination_root)
+    end
+
+    # do not use template method to copy the file. template method actually executes the code
+    #  <%= ENV['S3_ACCESS_KEY_ID'] %> inside nimbleshop.yml rather than copying that code
+    def handle_nimbleshop_yml_file
+      from = File.expand_path('../templates/config/nimbleshop.yml', __FILE__)
+      FileUtils.cp from,  "#{destination_path}/config/nimbleshop.yml"
+    end
+
+    def handle_localtunnel_callback_file
+      template "config/localtunnel_callback", "#{destination_path}/.localtunnel_callback"
+
+      # make the file executable
+      FileUtils.chmod 0755, File.expand_path("#{destination_path}/.localtunnel_callback"), :verbose => true
     end
 
   end
