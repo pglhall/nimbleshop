@@ -4,6 +4,7 @@
 #
 common:
   google_analytics_tracking_id: <%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] %>
+  deliver_email: false
 
   # this is used for IPN notification and other places where external serivce cannot ping localhost
   use_localhost2public_url: true
@@ -35,7 +36,6 @@ test:
 staging:
   use_s3: true
   bare_url_with_port: nimbleshop.net
-  #TODO this needs fixing
   deliver_email: <%= ENV['DELIVER_EMAIL'] %>
   cache_images: true
 
@@ -44,3 +44,4 @@ production:
   bare_url_with_port: nimbleshop.net
   cache_images: true
   use_localhost2public_url: false
+  deliver_email: <%= ENV['DELIVER_EMAIL'] %>
