@@ -4,7 +4,7 @@ class Mailer < ActionMailer::Base
 
   layout 'email'
 
-  default from: lambda { Shop.first.from_email }
+  default from: lambda { Shop.current.from_email }
   default_url_options[:host] = Nimbleshop.config.bare_url_with_port
   default_url_options[:protocol] = 'http'
 
@@ -12,7 +12,7 @@ class Mailer < ActionMailer::Base
     subject = "Order confirmation for order ##{order_number}"
     @order = Order.find_by_number!(order_number)
 
-    @shop = Shop.first
+    @shop = Shop.current
     @payment_date = @order.created_at.to_s(:long) || @order.purchased_at.to_s(:long)
 
     mail_options = {to: @order.email, subject: subject}

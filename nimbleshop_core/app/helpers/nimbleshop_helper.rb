@@ -13,7 +13,7 @@ module NimbleshopHelper
       if @page_title
         @page_title.html_safe +  "&mdash;".html_safe +  html_escape(current_shop.name)
       else
-        Shop.first.name
+        Shop.current.name
       end
     end
 

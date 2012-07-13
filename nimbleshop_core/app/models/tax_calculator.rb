@@ -13,6 +13,6 @@ class TaxCalculator
   private
 
   def tax_percentage
-    Shop.first.tax_percentage
+    Shop.current.tax_percentage
   end
 end
