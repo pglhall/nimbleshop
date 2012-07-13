@@ -13,6 +13,7 @@ notifications:
 branches:
   only:
     - master
+    - test
 rvm:
   - 1.9.2
   - 1.9.3
