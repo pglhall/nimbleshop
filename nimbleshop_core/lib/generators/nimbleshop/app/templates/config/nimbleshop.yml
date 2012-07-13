@@ -36,7 +36,7 @@ staging:
   use_s3: true
   bare_url_with_port: nimbleshop.net
   #TODO this needs fixing
-  deliver_email_for_real_in_staging: <%= ENV['DELIVER_EMAIL_FOR_REAL_IN_STAGING'] %>
+  deliver_email: <%= ENV['DELIVER_EMAIL'] %>
   cache_images: true
 
 production:
