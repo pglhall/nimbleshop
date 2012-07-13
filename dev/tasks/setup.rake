@@ -17,6 +17,7 @@ require 'rails/generators/rails/app/app_generator'
 namespace :nimbleshop do
   namespace :setup do
 
+    desc 'setups a myshop for local development'
     task :local do
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
       dev_path = File.expand_path('../../../dev', __FILE__)
@@ -28,11 +29,19 @@ namespace :nimbleshop do
       puts "rails server"
     end
 
+    desc 'setups a myshop for testing'
     task :test do
       FileUtils.rm_rf File.expand_path('../../../nimbleshop_core/test/myshop', __FILE__)
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
       test_path = File.expand_path('../../../nimbleshop_core/test', __FILE__)
       Rails::Generators::AppGenerator.start ['myshop', '-m', template_path], destination_root: test_path
+    end
+
+    desc 'deletes all generated files and directories'
+    task :clean do
+      FileUtils.rm_rf File.expand_path('../../../nimbleshop_core/test/myshop', __FILE__)
+      FileUtils.rm_rf File.expand_path('../../../dev/myshop', __FILE__)
+      FileUtils.rm_rf File.expand_path('../../../dev/pkg', __FILE__)
     end
 
   end
