@@ -69,6 +69,14 @@ namespace :nimbleshop do
   task :bundle_all => engines.map { |e| "#{e}:bundle" }
 
   desc 'Releases nimbleshop and other extensions as a gem'
-  task :release_all => all.map { |e| "#{e}:release" }
+  task :release_all => (all.map { |e| "#{e}:release" } << "nimbleshop:tag_the_release")
+
+  desc 'Tag the release'
+  task :tag_the_release do
+    cmd = "git tag -a v#{version} -m 'version  #{version} '"
+    sh cmd
+    cmd = "git push --tags"
+    sh cmd
+  end
 
 end
