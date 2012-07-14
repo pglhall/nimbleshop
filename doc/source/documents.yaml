@@ -41,6 +41,9 @@
       name: Setting up development environment
       url: setting_up_development_environment.html
     -
+      name: Sending email
+      url: sending_email.html
+    -
       name: Contributing to nimbleShop
       url: things_to_keep_in_mind.html
 

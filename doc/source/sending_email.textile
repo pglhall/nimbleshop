@@ -1,0 +1,31 @@
+h2. Sending email
+
+endprologue.
+
+h3. Notification to buyer and seller
+
+When a buyer buys an item then buyer is sent an email detailing the purchase details. Seller is also notified that purchase has been made.
+
+Sending email is a time consuming process and hence it is best to handle sending email through a background processing job. +nimbleShop+ comes with "delayed job":https://github.com/collectiveidea/delayed_job which handles background job processing. So the emails are not sent out immmediately. Rather emails are written to the database. And you need to execute following command to actually deliver the email.
+
+<shell>
+rake jobs:work
+</shell>
+
+h3. mailtrap for testing out email
+
+When the application is still being developed you do not want emails to go out for real. But you will want to preview the email. Open +config/nimbleshop.yml+ and you will see a key named +deliver_email+ . The default value of this key is +false+ in +development+ and +test+.  Change the value to suit your needs.
+
+In order to make it easy to preview emails +nimbleShop+ uses "mailtrap.io":http://mailtrap.io  You can signup for your own account but nimbleShop comes with a valid +mailtrap+ account. Login at "mailtrap.io":http://mailtrap.io with email +bot.nimbleshop@gmail.com+ and password +64arecKhX23giAfw+ . If you are not able to login then that means someone has changed then password. In that case signup at +mailtrap.io+, create a new inbox and enter the +mailtrap+ credentials at +config/nimbleshop.yml+ .
+
+Now start the rails application. Buy something. I usually just click on +cash on delivery+ to make a quick buy. Then execute following command
+
+<shell>
+rake jobs:work
+</shell>
+
+You should see two emails at +mailtrap.io+ .
+
+h3. Configuring setup_email
+
+If you want to send the email for real then you can plug in your email service provider related code at +config/initializers/setup_email.rb+ .
