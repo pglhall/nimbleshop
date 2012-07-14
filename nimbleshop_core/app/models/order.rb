@@ -123,6 +123,12 @@ class Order < ActiveRecord::Base
     billing_address_same_as_shipping
   end
 
+  # If billing address is same as shipping then order.billing_address returns nil.
+  # order.real_billing_address will always return a billing address.
+  def real_billing_address
+    shipping_address.use_for_billing ? shipping_address : billing_address
+  end
+
   def line_item_for(product_id)
     line_items.find_by_product_id(product_id)
   end
