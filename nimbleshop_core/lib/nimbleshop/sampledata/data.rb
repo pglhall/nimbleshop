@@ -124,11 +124,14 @@ module Sampledata
       desc = %q{
         Chronograph sport watch from Guess
 
-        Chronograph: Stopwatch function, 24 Hour/Intl. time
-        43/43/13 
+        Stopwatch function, 24 Hour/International time
+
         Brushed + Polished Ionic Black case
+
         Red + Black dial
-        Brushed + Polished Ionic Black Steel bracelet 
+
+        Brushed + Polished Ionic Black Steel bracelet
+
         100 M/330 FT Water resistant
       }
       product = Product.create!( title: "chronograph sport watch from Guess", price: 219, description: desc)
@@ -139,13 +142,11 @@ module Sampledata
     def load_turquoise_bracelet
       print '.'
       desc = %q{
-        Simple, modern, stylish, easy to wear bracelet ! 
-
-        For a scale reference please see the photos with the bracelet worn.
+        Simple, modern, stylish, easy to wear bracelet !
 
         For a custom color bracelet send me a message and I will see what colors are available for your bracelet.
 
-        The strap of the bracelet can also be customized in any color you would like. 
+        The strap of the bracelet can also be customized in any color you would like.
 
         All items come to you beautifully packaged and ready for gift giving.
 
@@ -200,9 +201,9 @@ module Sampledata
     def load_shoes
       print '.'
       desc = %q{
-        People of India love color. Everything they use from top to bottom is colorful.
+        The shoes that you see in picture are called 'jutti' in India.
 
-        Lets talk about shoes. Making good looking shoes is an art they have perfected over centuries. Making a shoe takes the whole village. And the whole village participates in the business of making and selling quality colorful shoes.
+        They are usually made of fine leather and are delicately embroidered with threads or beads. Juttis are slip-on in style and are characterized by rising high in the back and covering the toes with a round heavily-embroidered upper shoe and leaving the top of the foot nearly bare.
       }
       product = Product.create!( title: "Colorful shoes", price: 191, description: desc)
       handle_pictures_for_product(product, "product7")
@@ -232,10 +233,11 @@ module Sampledata
     def load_iphone_cover
       print '.'
       desc = %q{
-        This is a hard case is for your iPhone 4. Fits both AT&T & Verizon models of the iPhone 4. The case has a wood like appearance. 
-        It is not actual wood. It will protect it from scractches while also bringing it to life with some color! 
+        This is a hard case is for your iPhone 4. Fits both AT&T & Verizon models of the iPhone 4.
 
-        It does not interfere with any buttons. It is available in many different colors. If you have a specific color in my then contact me.
+        The case has a wood like appearance. It is not actual wood. It will protect it from scractches while also bringing it to life with some color!
+
+        It does not interfere with any buttons. It is available in many different colors. If you have a specific color in mind then contact me.
       }
       product = Product.create!( title: "Hard wood case for iphone", price: 7.95, description: desc)
       handle_pictures_for_product(product, "product9")
