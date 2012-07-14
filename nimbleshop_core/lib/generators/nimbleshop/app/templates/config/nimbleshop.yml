@@ -21,7 +21,7 @@ common:
 
   mailtrapio:
     username: <%= ENV['MAILTRAPIO_USERNAME'] || 'nimbleshop' %>
-    password: <%= ENV['MAILTRAPIO_PASSWORD'] || '7663e1f272637a4b' %>
+    password: <%= ENV['MAILTRAPIO_PASSWORD'] || 'f42c2934fbc2e229' %>
 
 development:
   use_s3: false
