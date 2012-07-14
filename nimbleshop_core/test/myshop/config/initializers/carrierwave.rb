@@ -2,9 +2,8 @@ if Nimbleshop.config.use_s3
 
   unless bucket_name = Nimbleshop.config.s3.bucket_name
     msg = %Q{
-      This application's #{Rails.env} environment is configured to use amazon s3. 
-      However bucket_name to use is not specified at config/application.yml .
-      Please check guide( link here) on how to configure application to use S3.
+      This application's #{Rails.env} environment is configured to use amazon s3.
+      However bucket_name to use is not specified at config/nimbleshop.yml .
     }
 
     raise msg
