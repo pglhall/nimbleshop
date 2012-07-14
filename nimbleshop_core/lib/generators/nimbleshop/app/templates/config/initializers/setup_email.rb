@@ -6,8 +6,8 @@ else
 
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    user_name:      Nimbleshop.config.mailtrapio.username || "nimbleshop",
-    password:       Nimbleshop.config.mailtrapio.password || "7663e1f272637a4b",
+    user_name:      Nimbleshop.config.mailtrapio.username,
+    password:       Nimbleshop.config.mailtrapio.password,
     address:        "mailtrap.io",
     port:           2525,
     authentication: :plain }
