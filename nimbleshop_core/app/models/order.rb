@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
 
+  include PaymentTransitions
+
   # to allow extensions to store any type of information
   store :metadata
 

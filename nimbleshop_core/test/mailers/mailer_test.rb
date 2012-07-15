@@ -5,7 +5,7 @@ class MailerTest < ActiveSupport::TestCase
   test "sends out order notification" do
     order = create(:order_with_line_items)
 
-    mail = Mailer.order_notification_to_buyer(order.number)
+    mail = NimbleshopSimply::Mailer.order_notification_to_buyer(order.number)
 
     assert_equal "Order confirmation for order ##{order.number}", mail.subject
     assert_equal ['john@nimbleshop.com'], mail.to
@@ -15,7 +15,7 @@ class MailerTest < ActiveSupport::TestCase
   test "sends out shipment notification" do
     order = create(:order_paid_using_authorizedotnet)
 
-    mail = Mailer.shipment_notification_to_buyer(order.number)
+    mail = NimbleshopSimply::Mailer.shipment_notification_to_buyer(order.number)
 
     assert_equal "Items for order ##{order.number} have been shipped", mail.subject
     assert_equal ['john@nimbleshop.com'], mail.to
