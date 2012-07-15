@@ -1,0 +1,11 @@
+h2. Extensions
+
+endprologue.
+
+h3. What is extension
+
+h3. How to create a new extension
+
+<shell>
+  rails plugin new nimbleshop_onepage --full --mountable
+</shell>
