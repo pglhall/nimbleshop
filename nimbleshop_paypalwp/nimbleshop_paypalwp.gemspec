@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
 
   gem.name        = 'nimbleshop_paypalwp'
   gem.version     = version
-  gem.authors     = ['Neeraj Singh']
+  gem.authors     = ['Neeraj Singh', 'megpha']
   gem.email       = ['neeraj@bigbinary.com']
   gem.homepage    = 'http://nimbleShop.org'
 

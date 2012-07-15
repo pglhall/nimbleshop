@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
 
   gem.name        = 'nimbleshop_simply'
   gem.version     = version
-  gem.authors     = ['Neeraj Singh', 'Megpha']
+  gem.authors     = ['Neeraj Singh', 'megpha']
   gem.email       = ['neeraj@bigbinary.com']
   gem.homepage    = 'http://nimbleshop.org'
   gem.summary     = 'simply theme for nimbleShop'

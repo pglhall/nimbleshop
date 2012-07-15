@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
 
   gem.name        = 'nimbleshop_authorizedotnet'
   gem.version     = version
-  gem.authors     = ['Neeraj Singh']
+  gem.authors     = ['Neeraj Singh', 'megpha']
   gem.email       = ['neeraj@BigBinary.com']
   gem.homepage    = 'http://nimbleShop.org'
 
