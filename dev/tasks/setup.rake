@@ -19,6 +19,7 @@ namespace :nimbleshop do
 
     desc 'setups a myshop for local development'
     task :local do
+      FileUtils.rm_rf File.expand_path('../../../dev/myshop', __FILE__)
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
       dev_path = File.expand_path('../../../dev', __FILE__)
       Rails::Generators::AppGenerator.start ['myshop', '-m', template_path], destination_root: dev_path

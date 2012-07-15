@@ -1,0 +1,31 @@
+Here is receipt for your purchase at <%= @shop.name %> . When items are shipped you will get an email with tracking number.
+
+Payment date: <%= @payment_date %>
+
+Shipping address:
+<% @order.shipping_address.full_address_array.each do |line| %>
+<%= line %>
+<% end %>
+
+<% unless @order.shipping_address.use_for_billing %>
+Billing address :
+<% @order.billing_address.full_address_array.each do |line| %>
+<%= line %>
+<% end %>
+<% end %>
+
+Items purchased:
+
+<% @order.line_items.each do |line_item| %>
+Name: <%= truncate(sanitize(line_item.product_name), length: 90) %>
+Item price: <%= number_to_currency(line_item.product_price) %>
+Item quantity: <%= line_item.quantity %>
+Item total price: <%= number_to_currency(line_item.price) %>
+<%# the below empty line is intentional %>
+
+<% end %>
+
+Shipping method: <%= @order.shipping_method.name %>
+Shipping cost: <%= number_to_currency(@order.shipping_method.shipping_cost) %>
+
+Total amount: <%= number_to_currency(@order.total_amount) %>
