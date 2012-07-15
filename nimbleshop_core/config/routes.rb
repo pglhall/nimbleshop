@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   get '/admin',           to: 'admin/main#index'
 
+  # Ideally it should only be included in development mode
+  get "/reset",           to: "carts#reset"
+
   namespace :admin do
 
     resource  :shop,            only: [:update, :edit]
@@ -42,7 +45,7 @@ Rails.application.routes.draw do
     end
 
     resources :link_groups do
-      resources :navigations, only: [:create, :new, :destroy] 
+      resources :navigations, only: [:create, :new, :destroy]
     end
 
   end
