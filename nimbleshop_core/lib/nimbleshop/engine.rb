@@ -6,9 +6,11 @@ module Nimbleshop
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/lib/nimbleshop)
 
-    config.to_prepare do
-      Address
-      ShippingZone
+    initializer 'nimbleshop_core.config_to_prepare' do |app|
+      app.config.to_prepare do
+        Address
+        ShippingZone
+      end
     end
 
     initializer 'nimbleshop_core.action_controller' do |app|
