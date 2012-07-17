@@ -8,7 +8,6 @@ PATH
   remote: ../nimbleshop_cod
   specs:
     nimbleshop_cod (0.0.6.beta1)
-      nimbleshop_core (= 0.0.6.beta1)
 
 PATH
   remote: ../nimbleshop_core
@@ -35,7 +34,6 @@ PATH
     nimbleshop_paypalwp (0.0.6.beta1)
       activemerchant
       money
-      nimbleshop_core (= 0.0.6.beta1)
       valid_email
 
 PATH
@@ -44,14 +42,12 @@ PATH
     nimbleshop_simply (0.0.6.beta1)
       fancybox-rails (= 0.1.4)
       jquery-rails (= 2.0.2)
-      nimbleshop_core (= 0.0.6.beta1)
 
 PATH
   remote: ../nimbleshop_splitable
   specs:
     nimbleshop_splitable (0.0.6.beta1)
       activemerchant
-      nimbleshop_core (= 0.0.6.beta1)
 
 GEM
   remote: http://rubygems.org/
