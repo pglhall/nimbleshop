@@ -9,6 +9,12 @@ require 'active_record/fixtures'
 require 'factory_girl'
 Dir["#{File.dirname(__FILE__)}/../../nimbleshop_core/test/factories/**"].each { |f| require File.expand_path(f) }
 
+VCR.configure do | c |
+  c.ignore_hosts '127.0.0.1', 'localhost'
+  c.cassette_library_dir = 'test/vcr_cassettes'
+  c.hook_into :webmock # or :fakeweb
+end
+
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
   self.use_transactional_fixtures = false
@@ -20,4 +26,7 @@ class ActiveSupport::TestCase
     DatabaseCleaner.clean
   end
 
+  def playcasette(casette)
+    VCR.use_cassette(casette)  { yield }
+  end
 end
