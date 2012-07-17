@@ -53,15 +53,15 @@ module NimbleshopPaypalwp
     end
 
     def nimbleshop_paypalwp_notify_url
-      Util.localhost2public_url( '/nimbleshop_paypalwp/paypalwp/notify', nimbleshop_paypalwp_protocol )
+      Nimbleshop::Util.localhost2public_url( '/nimbleshop_paypalwp/paypalwp/notify', nimbleshop_paypalwp_protocol )
     end
 
     def nimbleshop_paypalwp_return_url(order)
-      Util.localhost2public_url( order_path(id: order.number), nimbleshop_paypalwp_protocol )
+      Nimbleshop::Util.localhost2public_url( order_path(id: order.number), nimbleshop_paypalwp_protocol )
     end
 
     def nimbleshop_paypalwp_cancel_url(order)
-      Util.localhost2public_url( new_checkout_payment_path, nimbleshop_paypalwp_protocol )
+      Nimbleshop::Util.localhost2public_url( new_checkout_payment_path, nimbleshop_paypalwp_protocol )
     end
 
     def nimbleshop_paypalwp_protocol

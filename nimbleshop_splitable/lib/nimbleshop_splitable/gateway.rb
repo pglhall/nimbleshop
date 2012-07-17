@@ -13,7 +13,7 @@ module NimbleshopSplitable
     end
 
     def api_notify_url(request)
-      Util.localhost2public_url( '/nimbleshop_splitable/splitable/notify', 'http' )
+      Nimbleshop::Util.localhost2public_url( '/nimbleshop_splitable/splitable/notify', 'http' )
     end
 
     def create(order, request)
@@ -43,8 +43,8 @@ module NimbleshopSplitable
     def add_order_data(params, order)
       params[:total_amount] = order.total_amount_in_cents
       params[:invoice]      = order.number
-      params[:shipping]     = Util.in_cents(ShippingCostCalculator.new(order).shipping_cost)
-      params[:tax]          = Util.in_cents(TaxCalculator.new(order).tax)
+      params[:shipping]     = Nimbleshop::Util.in_cents(ShippingCostCalculator.new(order).shipping_cost)
+      params[:tax]          = Nimbleshop::Util.in_cents(TaxCalculator.new(order).tax)
       params[:description]  = 'See Splitable integrates nicely with nimbleShop'
     end
 

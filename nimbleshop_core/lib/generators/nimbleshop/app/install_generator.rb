@@ -64,6 +64,7 @@ module Nimbleshop
       handle_localtunnel_callback_file
       handle_nimbleshop_yml_file
 
+      template "config/initializers/001_load_nimbleshop_config.rb", "#{destination_path}/config/initializers/001_load_nimbleshop_config.rb"
       template "config/initializers/cache_images.rb", "#{destination_path}/config/initializers/cache_images.rb"
       template "config/initializers/carrierwave.rb",  "#{destination_path}/config/initializers/carrierwave.rb"
       template "config/initializers/delayed_job.rb",  "#{destination_path}/config/initializers/delayed_job.rb"

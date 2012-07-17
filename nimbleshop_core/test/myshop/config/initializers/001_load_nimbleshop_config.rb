@@ -1,5 +1,5 @@
 # TODO why rescue
-Settings = Util.config2hash(Rails.root.join('config', 'nimbleshop.yml')) rescue nil
+Settings = Nimbleshop::Util.config2hash(Rails.root.join('config', 'nimbleshop.yml'))
 
 module Nimbleshop
   extend self

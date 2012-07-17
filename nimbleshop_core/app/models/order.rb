@@ -105,7 +105,7 @@ class Order < ActiveRecord::Base
   end
 
   def total_amount_in_cents
-    Util.in_cents(total_amount)
+    Nimbleshop::Util.in_cents(total_amount)
   end
 
   def to_param

@@ -1,4 +1,6 @@
 require 'nimbleshop/engine'
+
+require 'nimbleshop/nimbleshop/util'
 require 'generators/nimbleshop/app/install_generator'
 
 # Why do we need to require all the gems individually ?
@@ -21,3 +23,4 @@ require 'strong_parameters'
 require 'valid_email'
 require 'custom_error_message'
 require 'american_date'
+
