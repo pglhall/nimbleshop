@@ -5,6 +5,7 @@
 common:
   google_analytics_tracking_id: <%= ENV['GOOGLE_ANALYTICS_TRACKING_ID'] %>
   deliver_email: false
+  mailer: NimbleshopSimply::Mailer
 
   # this is used for IPN notification and other places where external serivce cannot ping localhost
   use_localhost2public_url: true
