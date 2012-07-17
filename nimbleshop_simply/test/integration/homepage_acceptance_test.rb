@@ -6,8 +6,6 @@ class HomepageAcceptanceTest < ActionDispatch::IntegrationTest
     assert_equal 1, Shop.count
     visit root_path
 
-    assert_equal 1, Shop.count
-
     assert page.has_content?('powered by')
     assert page.has_content?('Shop by category')
   end

@@ -2,7 +2,7 @@ require "test_helper"
 
 class CartAcceptanceTest < ActionDispatch::IntegrationTest
 
-  include ::ShippingMethodSpecHelper
+  include ::ShippingMethodTestHelper
   include ::CheckoutTestHelper
 
   setup do
@@ -83,7 +83,7 @@ end
 
 class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
 
-  include ::ShippingMethodSpecHelper
+  include ::ShippingMethodTestHelper
   include ::CheckoutTestHelper
 
   setup do

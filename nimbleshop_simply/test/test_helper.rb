@@ -2,7 +2,7 @@ require 'bundler'
 Bundler.setup(:test)
 
 ENV["RAILS_ENV"] = "test"
-require File.expand_path("../myshop/config/environment.rb",  __FILE__)
+require File.expand_path("../../../nimbleshop_core/test/myshop/config/environment.rb",  __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 
@@ -10,7 +10,7 @@ require 'capybara/rails'
 # causes a lot of errors like this SQLite3::BusyException: database is locked: commit transaction
 # Hence :truncation strategy is used .
 require 'factory_girl'
-Dir["#{File.dirname(__FILE__)}/factories/**"].each { |f| require File.expand_path(f) }
+Dir["#{File.dirname(__FILE__)}/../../nimbleshop_core/test/factories/**"].each { |f| require File.expand_path(f) }
 
 require 'active_record/fixtures'
 
@@ -28,7 +28,7 @@ class ActiveSupport::TestCase
   self.use_transactional_fixtures = false
   setup do
     DatabaseCleaner.start
-    ActiveRecord::Fixtures.create_fixtures("#{File.dirname(__FILE__)}/fixtures", ['shops', 'link_groups', 'payment_methods'])
+    ActiveRecord::Fixtures.create_fixtures("#{File.dirname(__FILE__)}/../../nimbleshop_core/test/fixtures", ['shops', 'link_groups', 'payment_methods'])
   end
   teardown do
     DatabaseCleaner.clean
@@ -44,7 +44,7 @@ class ActionDispatch::IntegrationTest
   self.use_transactional_fixtures = false
   setup do
     DatabaseCleaner.start
-    ActiveRecord::Fixtures.create_fixtures("#{File.dirname(__FILE__)}/fixtures", ['shops', 'link_groups', 'payment_methods'])
+    ActiveRecord::Fixtures.create_fixtures("#{File.dirname(__FILE__)}/../../nimbleshop_core/test/fixtures", ['shops', 'link_groups', 'payment_methods'])
   end
 
   teardown do
@@ -54,15 +54,7 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-
-
 # Require files in support dir.
-Dir["#{File.dirname(__FILE__)}/support/**"].each do |f|
+Dir["#{File.dirname(__FILE__)}/../../nimbleshop_core/test/support/**"].each do |f|
   require File.expand_path(f) unless File.directory? f
-end
-
-module RegionalShippingMethodTestHelper
-  def create_regional_shipping_method
-    create(:country_shipping_method, name: 'Ground', base_price: 3.99, minimum_order_amount: 1, maximum_order_amount: 99999).regions[0]
-  end
 end

@@ -2,7 +2,7 @@ Dir[File.expand_path('../dev/tasks/**/*', __FILE__)].each do |task|
   load task
 end
 
-engines = %w(nimbleshop_core nimbleshop_authorizedotnet nimbleshop_splitable nimbleshop_paypalwp)
+engines = %w(nimbleshop_core nimbleshop_authorizedotnet nimbleshop_splitable nimbleshop_paypalwp nimbleshop_simply)
 
 desc 'Run all tests by default'
 task :default => %w(test)

@@ -2,7 +2,7 @@ require "test_helper"
 
 class PaypalAcceptanceTest < ActionDispatch::IntegrationTest
 
-  include ::ShippingMethodSpecHelper
+  include ::ShippingMethodTestHelper
   include ::CheckoutTestHelper
 
   setup do
