@@ -16,7 +16,7 @@ class AdminController < ::ApplicationController
   def restricted_access
     return unless Nimbleshop.config.ask_admin_to_login
 
-    authenticate_or_request_with_http_basic('staging') { |username, password|
+    authenticate_or_request_with_http_basic('nimbleshop') { |username, password|
       username == Nimbleshop.config.admin_email && password == Nimbleshop.config.admin_password
     }
   end
