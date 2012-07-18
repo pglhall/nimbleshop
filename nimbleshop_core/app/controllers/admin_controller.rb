@@ -21,10 +21,6 @@ class AdminController < ::ApplicationController
     }
   end
 
-  def delayed_job_admin_authentication
-    return true if Rails.env.development? || Rails.env.test?
-  end
-
   def no_page_title
     @do_not_use_page_title = true
   end
