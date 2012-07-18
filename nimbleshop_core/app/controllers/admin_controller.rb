@@ -26,11 +26,8 @@ class AdminController < ::ApplicationController
   end
 
   def current_shop
-    @shop ||= begin
-                Shop.current
-                msg = 'The database base is empty. Please run bundle exec rake nimbleshop:setup .'
-                raise msg unless @shop
-              end
+    @shop ||= Shop.current
+    raise "The database base is empty. Please run bundle exec rake setup first." unless @shop
     @shop
   end
 
