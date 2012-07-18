@@ -54,7 +54,6 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-# Require files in support dir.
 Dir["#{File.dirname(__FILE__)}/../../nimbleshop_core/test/support/**"].each do |f|
   require File.expand_path(f) unless File.directory? f
 end
