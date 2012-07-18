@@ -17,4 +17,3 @@ task :default => %w(test)
     fail("Errors in #{errors.join(', ')}") unless errors.empty?
   end
 end
-
