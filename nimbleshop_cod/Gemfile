@@ -1,3 +1,0 @@
-eval(File.read(Pathname.new(File.dirname(__FILE__)).join('..', 'dev', 'common_gemfile.rb').to_s))
-
-gemspec

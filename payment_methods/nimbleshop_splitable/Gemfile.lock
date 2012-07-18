@@ -16,7 +16,15 @@ PATH
     nimbleshop_cod (0.0.6.beta1)
 
 PATH
-  remote: ../nimbleshop_core
+  remote: ../nimbleshop_paypalwp
+  specs:
+    nimbleshop_paypalwp (0.0.6.beta1)
+      activemerchant
+      money
+      valid_email
+
+PATH
+  remote: ./../../nimbleshop_core
   specs:
     nimbleshop_core (0.0.6.beta1)
       activemerchant (= 1.23.0)
@@ -35,15 +43,7 @@ PATH
       valid_email (= 0.0.4)
 
 PATH
-  remote: ../nimbleshop_paypalwp
-  specs:
-    nimbleshop_paypalwp (0.0.6.beta1)
-      activemerchant
-      money
-      valid_email
-
-PATH
-  remote: ../nimbleshop_simply
+  remote: ./../../themes/nimbleshop_simply
   specs:
     nimbleshop_simply (0.0.6.beta1)
       fancybox-rails (= 0.1.4)

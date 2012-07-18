@@ -1,13 +1,6 @@
 PATH
   remote: .
   specs:
-    nimbleshop_simply (0.0.6.beta1)
-      fancybox-rails (= 0.1.4)
-      jquery-rails (= 2.0.2)
-
-PATH
-  remote: ../nimbleshop_authorizedotnet
-  specs:
     nimbleshop_authorizedotnet (0.0.6.beta1)
       activemerchant
 
@@ -17,7 +10,21 @@ PATH
     nimbleshop_cod (0.0.6.beta1)
 
 PATH
-  remote: ../nimbleshop_core
+  remote: ../nimbleshop_paypalwp
+  specs:
+    nimbleshop_paypalwp (0.0.6.beta1)
+      activemerchant
+      money
+      valid_email
+
+PATH
+  remote: ../nimbleshop_splitable
+  specs:
+    nimbleshop_splitable (0.0.6.beta1)
+      activemerchant
+
+PATH
+  remote: ./../../nimbleshop_core
   specs:
     nimbleshop_core (0.0.6.beta1)
       activemerchant (= 1.23.0)
@@ -36,18 +43,11 @@ PATH
       valid_email (= 0.0.4)
 
 PATH
-  remote: ../nimbleshop_paypalwp
+  remote: ./../../themes/nimbleshop_simply
   specs:
-    nimbleshop_paypalwp (0.0.6.beta1)
-      activemerchant
-      money
-      valid_email
-
-PATH
-  remote: ../nimbleshop_splitable
-  specs:
-    nimbleshop_splitable (0.0.6.beta1)
-      activemerchant
+    nimbleshop_simply (0.0.6.beta1)
+      fancybox-rails (= 0.1.4)
+      jquery-rails (= 2.0.2)
 
 GEM
   remote: http://rubygems.org/
@@ -260,6 +260,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant
   capybara
   coffee-rails (~> 3.2.1)
   database_cleaner

@@ -1,6 +1,6 @@
 # Encoding: UTF-8
 
-$:.push File.expand_path('../../nimbleshop_core/lib', __FILE__)
+$:.push File.expand_path('../../../nimbleshop_core/lib', __FILE__)
 require 'nimbleshop/version'
 version = Nimbleshop::Version.to_s
 
