@@ -15,11 +15,13 @@
 //= require utils/formatPrice
 //= require loading_state_for_buttons
 
-//= require payment_method
-//= require product-group-condition
-//= require shipit
+//= require admin/payment_method
+//= require admin/product-group-condition
+//= require admin/shipit
 //= require admin/shipping_methods/edit
 //= require admin/products/edit
-//= require fadeout_success
+//= require admin/utils/fadeout_success
 //= require autoresize
+
+//comes from twitter-bootstrap
 //= require show_help_on_hover
