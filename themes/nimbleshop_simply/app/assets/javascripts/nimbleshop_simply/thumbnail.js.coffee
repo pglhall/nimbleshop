@@ -1,14 +1,8 @@
-# This JavaScript file adds the feature by which
-# mouse enter on thumbnail displays the image
-
-$("img.thumb").live "mouseenter", ->
-  $this = $(this)
-  item_index = $(".thumb").index($this) + 1
-  $(".thumbnails li:nth-child(" + item_index + ")").show().siblings().hide()
-  false
+# mouse enter on thumbnail displays the image on the product show page
 
 $ ->
-  $(".fancybox").fancybox
-    openEffect: "none"
-    closeEffect: "none"
-    cyclic: true
+  $("img.thumb").on "mouseenter", ->
+    $this = $(this)
+    itemIndex = $(".thumb").index($this) + 1
+    $(".thumbnails li:nth-child(" + itemIndex + ")").show().siblings().hide()
+    false

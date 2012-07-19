@@ -5,7 +5,7 @@
 //= require accounting
 
 /* bootstrap must be after jquery-ujs */
-//= require twitter/bootstrap 
+//= require twitter/bootstrap
 
 // loaded using fancybox-rails gem
 //= require fancybox
@@ -19,3 +19,4 @@
 //= require nimbleshop_simply/remove_item_from_cart
 //= require nimbleshop_simply/load_states
 //= require nimbleshop_simply/order
+//= require nimbleshop_simply/enable_fancybox

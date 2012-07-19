@@ -1,11 +1,17 @@
-window.App = window.App || {}
+window.NimbleshopSimply = {} if typeof(NimbleshopSimply) == 'undefined'
 
-App.toggleBillingAddress = ->
-  if $("#order_shipping_address_attributes_use_for_billing").is(':checked')
-    $('#billing_well').hide()
-  else
-    $('#billing_well').show()
+NimbleshopSimply.toggleBillingAddress = class ToggleBillingAddress
+  constructor: ->
+    @handleToggleCheckBox()
+    $("#order_shipping_address_attributes_use_for_billing").on 'click', =>
+      this.handleToggleCheckBox()
+
+  handleToggleCheckBox: ->
+    if $("#order_shipping_address_attributes_use_for_billing").is(':checked')
+      $('#billing_well').hide()
+    else
+      $('#billing_well').show()
+
 
 $ ->
-  $("#order_shipping_address_attributes_use_for_billing").bind 'click', App.toggleBillingAddress
-  App.toggleBillingAddress()
+  new NimbleshopSimply.toggleBillingAddress

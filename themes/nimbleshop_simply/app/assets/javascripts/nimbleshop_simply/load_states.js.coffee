@@ -10,13 +10,13 @@ class window.App.toggleStates
 			@stateNameField(country).val('').parents('.control-group').show()
 			@stateCodeField(country).val('').parents('.control-group').hide()
 
-	hasRegions: ($element) -> 
+	hasRegions: ($element) ->
 		window.countryStateCodes[$element.val()].length > 0
 
-	stateNameField: ($element) ->  
+	stateNameField: ($element) ->
 		$element.parents("div.well").find("[name$='[state_name]']")
 
-	stateCodeField: ($element) ->  
+	stateCodeField: ($element) ->
 		$element.parents("div.well").find("[name$='[state_code]']")
 
 	createOption: (state) ->
