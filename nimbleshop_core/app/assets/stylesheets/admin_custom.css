@@ -11,8 +11,8 @@
 }
 
 .payment-method-engine-well {
-  border: 1px solid #999;
-  background-color: #eee;
+  border: 1px solid #dfdfdf;
+  background-color: #fbfbfb;
   padding: 10px;
 }
 
@@ -36,13 +36,13 @@
 }
 
 .nimbleshop-payment-method-edit {
-  float:left; 
+  float:left;
   margin-left:10px;
   margin-right:10px;
 }
 
 .nimbleshop-payment-method-delete {
-  float:left; 
+  float:left;
   margin-left:6px;
   margin-right:10px;
 }
