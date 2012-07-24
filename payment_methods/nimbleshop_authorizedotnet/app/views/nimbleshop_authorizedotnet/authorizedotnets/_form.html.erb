@@ -21,7 +21,9 @@
       </div>
 
       <div class='control-group'>
-        <%= f.label :company_name_on_creditcard_statement, nil, class: 'control-label' %>
+        <%= f.label :business_name, nil, class: 'control-label' %>
+        <%= link_to '?', '#', 'data-content' => 'Please enter the name of the company as it would appear in the credit card statement. If are not sure what name would appear in the credit card statements then consult your merchant account provider.',
+                          'data-original-title' => 'Business name' %>
         <div class='controls'>
           <%= f.text_field :business_name, class: 'span6' %>
         </div>
