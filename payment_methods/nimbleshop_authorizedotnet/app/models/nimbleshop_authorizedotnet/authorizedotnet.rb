@@ -1,11 +1,11 @@
 module NimbleshopAuthorizedotnet
   class Authorizedotnet < PaymentMethod
 
-    store_accessor :metadata, :login_id, :transaction_key, :company_name_on_creditcard_statement, :mode, :ssl
+    store_accessor :metadata, :login_id, :transaction_key, :business_name, :mode, :ssl
 
     before_save :set_mode, :set_ssl
 
-    validates_presence_of :login_id, :transaction_key, :company_name_on_creditcard_statement
+    validates_presence_of :login_id, :transaction_key, :business_name
 
     def credentials
       { login: login_id, password: transaction_key }

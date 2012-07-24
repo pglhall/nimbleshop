@@ -1,5 +1,5 @@
---- 
-payment_methods_001: 
+---
+payment_methods_001:
   id: "1"
   name: Splitable
   description: <p> Splitable helps split the cost of product with friends and family.  </p> <p> <a href="http://splitable.com"> more information </a> </p>
@@ -13,7 +13,7 @@ payment_methods_001:
     :api_key: edb5fd7b39652986\n"
   created_at: 2012-04-05 01:42:00.092168
   updated_at: 2012-04-05 01:42:00.095526
-payment_methods_002: 
+payment_methods_002:
   id: "2"
   name: Paypal website payments standard
   description: <p> Paypal website payments standard is a payment solution provided by paypal which allows merchant to accept credit card and paypal payments.  There is no monthly fee and no setup fee by paypal for this account.  </p> <p> <a href='https://merchant.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=merchant/wp_standard&nav=2.1.0'> more information </a> </p>
@@ -24,7 +24,7 @@ payment_methods_002:
     :merchant_email: seller_1323037155_biz@bigbinary.com\n"
   created_at: 2012-04-05 01:42:00.13064
   updated_at: 2012-04-05 01:42:00.133581
-payment_methods_003: 
+payment_methods_003:
   id: "3"
   name: Authorize.net
   description: <p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>
@@ -34,6 +34,6 @@ payment_methods_003:
     :login_id: 26Daqx7Jtw7R\n\
     :mode: test\n\
     :transaction_key: 66JWf57KKc82W9y6\n\
-    :company_name_on_creditcard_statement: Nimbleshop LLC\n"
+    :business_name: Nimbleshop LLC\n"
   created_at: 2012-04-05 01:42:00.113269
   updated_at: 2012-04-05 01:42:00.117875

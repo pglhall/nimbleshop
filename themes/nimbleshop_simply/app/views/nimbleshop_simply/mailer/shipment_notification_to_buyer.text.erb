@@ -30,5 +30,5 @@ Item total price: <%= number_to_currency(line_item.price) %>
 <% end %>
 
 <% if @order.payment_method.permalink == 'authorize-net' %>
-Your credit card has been charged <%= number_to_currency(@order.total_amount) %> .This charge will appear on your credit card statement as "<%= @order.payment_method.company_name_on_creditcard_statement%>".
+Your credit card has been charged <%= number_to_currency(@order.total_amount) %> .This charge will appear on your credit card statement as "<%= @order.payment_method.business_name %>".
 <% end %>

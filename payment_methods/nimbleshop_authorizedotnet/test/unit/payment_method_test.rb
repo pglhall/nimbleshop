@@ -13,7 +13,7 @@ class PaymentMethodAuthorizeNetTest < ActiveSupport::TestCase
     pm = NimbleshopAuthorizedotnet::Authorizedotnet.new(name: 'Authorize.net', description: 'this is description')
     pm.login_id = 'FWERSDEED093d'
     pm.transaction_key = 'SDFSDFSFSF423433SDFSFSSFSFSF334'
-    pm.company_name_on_creditcard_statement = 'BigBinary LLC'
+    pm.business_name = 'BigBinary LLC'
     assert pm.save
     assert_match /authorize-net/, pm.permalink
   end

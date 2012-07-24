@@ -20,7 +20,7 @@ namespace :nimbleshop_authorizedotnet do
         {
           login_id: Nimbleshop.config.authorizedotnet.login_id,
           transaction_key: Nimbleshop.config.authorizedotnet.transaction_key,
-          company_name_on_creditcard_statement: 'Nimbleshop LLC',
+          business_name: 'Nimbleshop LLC',
           name: 'Authorize.net',
           permalink: 'authorizedotnet',
           description: %Q[<p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>]
