@@ -1,11 +1,26 @@
 .navbar-inner {
-  background-color: #373d48;
+  background-color: #fff;
+  background-color: #fafafa;
+  background-color: #f2f2f2;
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
-  border-bottom: 1px solid #D8DDE1;
+  background-image:none;
+  min-height: 45px;
 }
 
 .navbar .nav > li > a:hover {
+  text-shadow: none;
+  text-decoration: underline;
+  color: #000;
+}
+
+.navbar .nav > li > a {
+  text-shadow: none;
+}
+
+#site-name {
+  height: 25px;
+  background: #00adef;
   color: #fff;
 }
