@@ -1,4 +1,4 @@
-class CreateCreditcardTransactions < ActiveRecord::Migration
+class CreatePaymentTransactions < ActiveRecord::Migration
   def change
     create_table :payment_transactions do |t|
       t.belongs_to  :order,           null: false
