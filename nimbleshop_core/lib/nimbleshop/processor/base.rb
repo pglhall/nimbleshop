@@ -1,4 +1,11 @@
-module Processor
+module Processor #:nodoc:
+  # = Processor
+  #
+  # Processor class is responsible for payment processing transactions using gateway. This is an abstract
+  # class in the sense that implementations of processors should sublass Processor class.
+  #
+  # It defines five methods: authorize, kapture, purchase, void and refund .
+  # These methods in turn invoke methods do_authorize, do_kapture, do_purchase, do_void, do_refund.
   class Base
 
     extend ActiveModel::Callbacks
@@ -41,7 +48,7 @@ module Processor
       end
     end
 
-    # this method can be overriden by individual payment method
+    # this method can be overriden by individual payment processor
     def set_active_merchant_mode
       mode = Rails.env.production? ? :production : :test
       ActiveMerchant::Billing::Base.mode = mode
