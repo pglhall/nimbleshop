@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.authors           = ['Neeraj Singh', 'megpha']
   gem.email             = 'neeraj@BigBinary.com'
   gem.homepage          = 'http://nimbleShop.org'
+  gem.required_ruby_version = '>= 1.9.2'
 
   gem.summary           = 'Core extension for nimbleShop'
   gem.description       = 'Provides core e-commerce support to nimbleShop'
