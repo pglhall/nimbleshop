@@ -112,10 +112,6 @@ class Order < ActiveRecord::Base
     number
   end
 
-  def final_billing_address
-    (shipping_address && !shipping_address.use_for_billing) ? billing_address : shipping_address
-  end
-
   def initialize_addresses
     shipping_address || build_shipping_address(country_code: "US", use_for_billing: true)
     billing_address || build_billing_address(country_code: "US", use_for_billing: false)
@@ -130,6 +126,7 @@ class Order < ActiveRecord::Base
   def real_billing_address
     shipping_address.use_for_billing ? shipping_address : billing_address
   end
+  alias_method :final_billing_address, :real_billing_address
 
   def line_item_for(product_id)
     line_items.find_by_product_id(product_id)
