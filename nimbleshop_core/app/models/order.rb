@@ -121,10 +121,10 @@ class Order < ActiveRecord::Base
     billing_address_same_as_shipping
   end
 
-  # If billing address is same as shipping then order.billing_address returns nil.
-  # order.real_billing_address will always return a billing address.
+  # If billing_address is same as shipping_address then order.billing_address returns nil .
+  # order.real_billing_address will always returns a valid address
   def real_billing_address
-    shipping_address.use_for_billing ? shipping_address : billing_address
+    (shipping_address && !shipping_address.use_for_billing) ? billing_address : shipping_address
   end
   alias_method :final_billing_address, :real_billing_address
 
