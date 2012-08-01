@@ -38,7 +38,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'mini_magick', '= 3.4'
 
   # to handle payments
-  gem.add_dependency 'activemerchant', '= 1.23.0'
+  gem.add_dependency 'activemerchant', '= 1.26.0'
 
   # This gem maintains all the country codes and subregions for some of the countries
   gem.add_dependency 'carmen', '= 1.0.0.beta2'
