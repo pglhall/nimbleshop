@@ -1,5 +1,9 @@
 module NimbleshopPaypalwp
-  class PaypalwpsController < ::Admin::PaymentMethodsController
+
+  # this line makes it possible to use this gem without nimbleshop_core
+  klass = defined?(::Admin::PaymentMethodsController) ? ::Admin::PaymentMethodsController : ActionController::Base
+
+  class PaypalwpsController < klass
 
     protect_from_forgery except: :notify
 

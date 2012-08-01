@@ -1,6 +1,9 @@
 module NimbleshopAuthorizedotnet
 
-  class AuthorizedotnetsController < ::Admin::PaymentMethodsController
+  # this line makes it possible to use this gem without nimbleshop_core
+  klass = defined?(::Admin::PaymentMethodsController) ? ::Admin::PaymentMethodsController : ActionController::Base
+
+  class AuthorizedotnetsController < klass
 
     before_filter :load_payment_method
 
