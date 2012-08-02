@@ -100,7 +100,7 @@ module NimbleshopAuthorizedotnet
       if response.success?
         order.kapture
       else
-        @errors << "Capture failed"
+        @errors << "Capture request failed"
         false
       end
     end
