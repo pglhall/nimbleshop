@@ -12,7 +12,7 @@ module NimbleshopAuthorizedotnet
 
     private
 
-    def set_active_merchant_mode
+    def set_active_merchant_mode # :nodoc:
       ActiveMerchant::Billing::Base.mode = payment_method.mode.to_sym
     end
 
@@ -158,7 +158,7 @@ module NimbleshopAuthorizedotnet
 
     end
 
-    def record_transaction(response, operation, additional_options = {})
+    def record_transaction(response, operation, additional_options = {}) # :nodoc:
       #
       # Following code invokes response.authorization to get transaction id. Note that this method can be called
       # after capture or refund. And it feels weird to call +authorization+ when the operation was +capture+.
@@ -181,8 +181,9 @@ module NimbleshopAuthorizedotnet
       order.payment_transactions.create(options)
     end
 
-    def valid_card?(creditcard)
+    def valid_card?(creditcard) # :nodoc:
       creditcard && creditcard.valid?
     end
+
   end
 end
