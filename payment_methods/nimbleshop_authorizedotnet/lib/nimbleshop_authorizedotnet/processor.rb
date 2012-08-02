@@ -122,8 +122,11 @@ module NimbleshopAuthorizedotnet
       response = gateway.void(transaction_gid, {})
       record_transaction(response, 'voided')
 
-      response.success?.tap do |success|
-        order.void if success
+      if response.success?
+        order.void
+      else
+        @errors << "Void operation failed"
+        false
       end
     end
 
