@@ -149,8 +149,11 @@ module NimbleshopAuthorizedotnet
       response = gateway.refund(order.total_amount_in_cents, transaction_gid, card_number: card_number)
       record_transaction(response, 'refunded')
 
-      response.success?.tap do |success|
-        order.refund if success
+      if response.success?
+        order.refund
+      else
+        @errors << "Refund failed"
+        false
       end
 
     end
