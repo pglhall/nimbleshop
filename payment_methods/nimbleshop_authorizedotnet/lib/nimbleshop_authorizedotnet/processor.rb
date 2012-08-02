@@ -130,6 +130,15 @@ module NimbleshopAuthorizedotnet
       end
     end
 
+    # Refunds the given transaction.
+    #
+    # === Options
+    #
+    # * <tt>:transaction_gid</tt> -- transaction_gid is the transaction id returned by the gateway. This is a required field.
+    #
+    # This method returns false if refund fails. Error messages are in <tt>errors</tt> array.
+    # If refund succeeds then <tt>order.refund</tt> is invoked.
+    #
     def do_refund(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid, :card_number)
