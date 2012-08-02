@@ -44,6 +44,9 @@
       name: Sending email
       url: sending_email.html
     -
+      name: Payment status state machine
+      url: payment_status_state_machine.html
+    -
       name: Contributing to nimbleShop
       url: things_to_keep_in_mind.html
 
