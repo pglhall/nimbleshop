@@ -9,7 +9,8 @@ module NimbleshopAuthorizedotnet
       creditcard_attrs  = params[:creditcard].merge(address_attrs)
       creditcard        = Creditcard.new(creditcard_attrs)
 
-      processor         = NimbleshopAuthorizedotnet::Processor.new(order)
+      payment_method    = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      processor         = NimbleshopAuthorizedotnet::Processor.new({order: order, payment_method: payment_method})
 
       default_action = Shop.current.default_creditcard_action
 

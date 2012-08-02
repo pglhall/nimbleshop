@@ -1,16 +1,13 @@
 module NimbleshopAuthorizedotnet
   class Processor < Processor::Base
 
-    attr_reader :order, :payment_method, :errors
+    attr_reader :order, :payment_method, :errors, :gateway
 
-    def gateway
-      ::NimbleshopAuthorizedotnet::Gateway.instance
-    end
-
-    def initialize(order)
+    def initialize(options)
       @errors = []
-      @order = order
-      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      @order = options.fetch(:order)
+      @payment_method = options.fetch(:payment_method)
+      @gateway = ::NimbleshopAuthorizedotnet::Gateway.instance(payment_method)
     end
 
     private

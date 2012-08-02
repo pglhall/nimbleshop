@@ -3,9 +3,10 @@ require 'test_helper'
 module Processor
   class NimbleshopAuthorizeNetAuthorizeTest < ActiveRecord::TestCase
     setup do
+      payment_method     = NimbleshopAuthorizedotnet::Authorizedotnet.first
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(order: @order, payment_method: payment_method)
     end
 
     test 'when authorization succeeds' do
@@ -52,9 +53,10 @@ module Processor
 
   class AuthorizeNetCaptureTest < ActiveRecord::TestCase
     setup do
-      @order     = create(:order, payment_method: NimbleshopAuthorizedotnet::Authorizedotnet.first)
+      payment_method     = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      @order     = create(:order, payment_method: payment_method)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(order: @order, payment_method: payment_method)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -98,9 +100,10 @@ module Processor
 
   class AuthorizeNetRefundTest < ActiveRecord::TestCase
     setup do
+      payment_method     = NimbleshopAuthorizedotnet::Authorizedotnet.first
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(order: @order, payment_method: payment_method)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/purchase-success') do
@@ -145,9 +148,10 @@ module Processor
 
   class AuthorizeNetVoidTest < ActiveRecord::TestCase
     setup do
+      payment_method     = NimbleshopAuthorizedotnet::Authorizedotnet.first
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(order: @order, payment_method: payment_method)
       creditcard = build(:creditcard)
 
       playcasette('authorize.net/authorize-success') do
@@ -187,9 +191,10 @@ module Processor
 
   class AuthorizeNetPurchaseTest < ActiveRecord::TestCase
     setup do
+      payment_method     = NimbleshopAuthorizedotnet::Authorizedotnet.first
       @order = create(:order)
       @order.stubs(:total_amount).returns(100.48)
-      @processor = NimbleshopAuthorizedotnet::Processor.new(@order)
+      @processor = NimbleshopAuthorizedotnet::Processor.new(order: @order, payment_method: payment_method)
     end
 
     test 'when purchase succeeds' do
