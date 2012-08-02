@@ -16,6 +16,15 @@ module NimbleshopAuthorizedotnet
       ActiveMerchant::Billing::Base.mode = payment_method.mode.to_sym
     end
 
+    # Creates authorization for the order amount.
+    #
+    # === Options
+    #
+    # * <tt>:creditcard</tt> -- Credit card to be charged. This is a required field.
+    #
+    # This method returns false if authorization fails. Error messages are in <tt>errors</tt> array.
+    # If authorization succeeds then <tt>order.authorize</tt> is invoked.
+    #
     def do_authorize(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:creditcard)
@@ -39,6 +48,15 @@ module NimbleshopAuthorizedotnet
       end
     end
 
+    # Creates purchase for the order amount.
+    #
+    # === Options
+    #
+    # * <tt>:creditcard</tt> -- Credit card to be charged. This is a required field.
+    #
+    # This method returns false if purchase fails. Error messages are in <tt>errors</tt> array.
+    # If purchase succeeds then <tt>order.purchase</tt> is invoked.
+    #
     def do_purchase(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:creditcard)
@@ -62,6 +80,15 @@ module NimbleshopAuthorizedotnet
       end
     end
 
+    # Captures the previously authorized transaction.
+    #
+    # === Options
+    #
+    # * <tt>:transaction_gid</tt> -- transaction_gid is the transaction id returned by the gateway. This is a required field.
+    #
+    # This method returns false if capture fails. Error messages are in <tt>errors</tt> array.
+    # If purchase succeeds then <tt>order.kapture</tt> is invoked.
+    #
     def do_kapture(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
