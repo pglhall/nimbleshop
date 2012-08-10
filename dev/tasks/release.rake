@@ -14,14 +14,15 @@ pkg_dir = File.expand_path('../../pkg', __FILE__)
 version = Nimbleshop::Version
 
 class Gemm
-  attr_accessor :extension_name, :gem_filename, :gemspec, :pkg_dir, :version
+  attr_accessor :extension_name, :gem_filename, :gemspec, :pkg_dir, :version, :extension_dir
 
-  def initialize(extension, pkg_dir, version)
+  def initialize(extension, pkg_dir, version, extension_dir)
     @extension_name = extension
     @gem_filename = "pkg/#{extension}-#{version}.gem"
     @gemspec = "#{extension_name}.gemspec"
     @pkg_dir = pkg_dir
     @version = version
+    @extension_dir = extension_dir
   end
 
   def clean
@@ -31,7 +32,7 @@ class Gemm
 
   def build
     cmd = ''
-    cmd << "cd #{extension_name} && " if extension_name != 'nimbleshop'
+    cmd << "cd #{extension_dir} && " if extension_name != 'nimbleshop'
     cmd << "gem build #{gemspec} && "
     cmd << "mv #{extension_name}-#{version}.gem #{pkg_dir}/"
     puts cmd
@@ -45,8 +46,8 @@ class Gemm
   end
 
   def bundle
-    ENV['BUNDLE_GEMFILE'] = File.expand_path("../../../#{extension}/Gemfile", __FILE__)
-    cmd = "cd #{extension} && bundle install"
+    ENV['BUNDLE_GEMFILE'] = File.expand_path("../../../#{extension_dir}/Gemfile", __FILE__)
+    cmd = "cd #{extension_dir} && bundle install"
     puts cmd
     system cmd
   end
@@ -60,10 +61,11 @@ end
 
 engines = %w(core simply authorizedotnet paypalwp splitable cod).map { |i| "nimbleshop_#{i}" }
 all = engines + ['nimbleshop']
+
 main = ['nimbleshop_core', 'nimbleshop']
-all.each do |extension|
+main.each do |extension|
   namespace extension do
-    gem = Gemm.new(extension, pkg_dir, version)
+    gem = Gemm.new(extension, pkg_dir, version, extension)
     task :clean do
       gem.clean
     end
@@ -83,6 +85,56 @@ all.each do |extension|
     task :release => [:package, :release_gem]
   end
 end
+
+
+themes = ['nimbleshop_simply']
+themes.each do |extension|
+  namespace extension do
+    gem = Gemm.new(extension, pkg_dir, version, "themes/#{extension}")
+    task :clean do
+      gem.clean
+    end
+    task :build do
+      gem.build
+    end
+    task :install do
+      gem.install
+    end
+    task :bundle do
+      gem.bundle
+    end
+    task :release_gem do
+      gem.release_gem
+    end
+    task :package => [:clean, :build, :install]
+    task :release => [:package, :release_gem]
+  end
+end
+
+payment_methods = ['nimbleshop_authorizedotnet', 'nimbleshop_paypalwp', 'nimbleshop_cod', 'nimbleshop_splitable']
+payment_methods.each do |extension|
+  namespace extension do
+    gem = Gemm.new(extension, pkg_dir, version, "payment_methods/#{extension}")
+    task :clean do
+      gem.clean
+    end
+    task :build do
+      gem.build
+    end
+    task :install do
+      gem.install
+    end
+    task :bundle do
+      gem.bundle
+    end
+    task :release_gem do
+      gem.release_gem
+    end
+    task :package => [:clean, :build, :install]
+    task :release => [:package, :release_gem]
+  end
+end
+
 
 namespace :nimbleshop do
 
