@@ -12,49 +12,73 @@ require File.expand_path('../../../nimbleshop_core/lib/nimbleshop/version', __FI
 
 pkg_dir = File.expand_path('../../pkg', __FILE__)
 version = Nimbleshop::Version
+
+class Gemm
+  attr_accessor :extension_name, :gem_filename, :gemspec, :pkg_dir, :version
+
+  def initialize(extension, pkg_dir, version)
+    @extension_name = extension
+    @gem_filename = "pkg/#{extension}-#{version}.gem"
+    @gemspec = "#{extension_name}.gemspec"
+    @pkg_dir = pkg_dir
+    @version = version
+  end
+
+  def clean
+    mkdir_p pkg_dir unless File.exists? pkg_dir
+    rm_f gem_filename
+  end
+
+  def build
+    cmd = ''
+    cmd << "cd #{extension_name} && " if extension_name != 'nimbleshop'
+    cmd << "gem build #{gemspec} && "
+    cmd << "mv #{extension_name}-#{version}.gem #{pkg_dir}/"
+    puts cmd
+    system cmd
+  end
+
+  def install
+    cmd = "cd #{pkg_dir} && gem install #{extension_name}-#{version}.gem"
+    puts cmd
+    system cmd
+  end
+
+  def bundle
+    ENV['BUNDLE_GEMFILE'] = File.expand_path("../../../#{extension}/Gemfile", __FILE__)
+    cmd = "cd #{extension} && bundle install"
+    puts cmd
+    system cmd
+  end
+
+  def release_gem
+    cmd = "cd #{pkg_dir} && gem push #{extension_name}-#{version}.gem"
+    puts cmd
+    system cmd
+  end
+end
+
 engines = %w(core simply authorizedotnet paypalwp splitable cod).map { |i| "nimbleshop_#{i}" }
 all = engines + ['nimbleshop']
-
+main = ['nimbleshop_core', 'nimbleshop']
 all.each do |extension|
-
   namespace extension do
-    extension_name = extension
-    gem_filename = "pkg/#{extension}-#{version}.gem"
-    gemspec = "#{extension_name}.gemspec"
-
+    gem = Gemm.new(extension, pkg_dir, version)
     task :clean do
-      mkdir_p pkg_dir unless File.exists? pkg_dir
-      rm_f gem_filename
+      gem.clean
     end
-
     task :build do
-      cmd = ''
-      cmd << "cd #{extension} && " if extension != 'nimbleshop'
-      cmd << "gem build #{gemspec} && "
-      cmd << "mv #{extension_name}-#{version}.gem #{pkg_dir}/"
-      puts cmd
-      system cmd
+      gem.build
     end
-
     task :install do
-      cmd = "cd #{pkg_dir} && gem install #{extension_name}-#{version}.gem"
-      puts cmd
-      system cmd
+      gem.install
     end
-
     task :bundle do
-      ENV['BUNDLE_GEMFILE'] = File.expand_path("../../../#{extension}/Gemfile", __FILE__)
-      cmd = "cd #{extension} && bundle install"
-      puts cmd
-      system cmd
+      gem.bundle
     end
-
     task :release_gem do
-      cmd = "cd #{pkg_dir} && gem push #{extension_name}-#{version}.gem"
-      puts cmd
-      system cmd
+      gem.release_gem
     end
-
     task :package => [:clean, :build, :install]
     task :release => [:package, :release_gem]
   end
