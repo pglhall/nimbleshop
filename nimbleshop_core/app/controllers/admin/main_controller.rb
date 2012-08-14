@@ -6,4 +6,10 @@ class Admin::MainController < AdminController
     render
   end
 
+  # this is mostly used for development purpose
+  def reset
+    reset_session
+    redirect_to root_url
+  end
+
 end

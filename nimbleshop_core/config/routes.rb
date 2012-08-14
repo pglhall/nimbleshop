@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/admin',           to: 'admin/main#index'
 
   # Ideally it should only be included in development mode
-  get "/reset",           to: "carts#reset"
+  get "/reset",           to: "admin/main#reset"
 
   namespace :admin do
 

@@ -3,12 +3,6 @@ module NimbleshopSimply
 
     respond_to :html
 
-    # this is mostly used for development purpose
-    def reset
-      reset_session
-      redirect_to root_url
-    end
-
     def show
       @line_items = current_order.blank? ? [] : current_order.line_items(include: :product).order('id')
       respond_with @line_items
