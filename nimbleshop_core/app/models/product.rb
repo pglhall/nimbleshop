@@ -10,10 +10,9 @@ class Product < ActiveRecord::Base
 
   has_many :pictures, order: 'pictures.position'
 
-  has_many :custom_field_answers, dependent: :destroy
-
   accepts_nested_attributes_for :pictures, allow_destroy: true, reject_if: proc { |r| r[:picture].blank? }
 
+  has_many                      :custom_field_answers, dependent: :destroy
   accepts_nested_attributes_for :custom_field_answers, allow_destroy: true
 
   after_initialize :initialize_status
