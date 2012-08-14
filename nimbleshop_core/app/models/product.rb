@@ -29,16 +29,18 @@ class Product < ActiveRecord::Base
     pictures.first
   end
 
-  # path is full path to the picture.
+  # Attaches picture to a product. This method is used only in development and test.
   #
-  # Rails.root.join('db', 'original_pictures', filename )
+  # === Arguments
   #
-  # This method is used only in development and test to attach a picture.
-  def attach_picture(filename, path)
+  # * <tt>:filename_with_extension</tt>
+  # * <tt>:path</tt> -- full path to the file. Something like Rails.root.join('db', 'original_pictures', filename )
+  #
+  def attach_picture(filename_with_extension, path)
     img = File.open(path) {|i| i.read}
     encoded_img = Base64.encode64 img
     io = FilelessIO.new(Base64.decode64(encoded_img))
-    io.original_filename = filename
+    io.original_filename = filename_with_extension
     p = Picture.new(product: self, picture: io)
     p.save
   end
