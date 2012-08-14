@@ -1,6 +1,6 @@
-window.App = window.App || {}
+window.NimbleshopSimply = window.NimbleshopSimply || {}
 
-class window.App.toggleStates
+class NimbleshopSimply.manageStates
 
 	stateCodeField: ($country) ->
 		$country.parents("div.well").find("[name$='[state_code]']")

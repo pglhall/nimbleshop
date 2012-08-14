@@ -1,2 +1,2 @@
 $ ->
-	new window.App.toggleStates()
+	new window.NimbleshopSimply.manageStates()
