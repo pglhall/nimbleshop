@@ -11,7 +11,7 @@ module NimbleshopHelper
 
     def display_page_title
       if @page_title
-        @page_title.html_safe +  "&mdash;".html_safe +  html_escape(current_shop.name)
+        @page_title.html_safe +  " &mdash; ".html_safe +  html_escape(current_shop.name)
       else
         Shop.current.name
       end
