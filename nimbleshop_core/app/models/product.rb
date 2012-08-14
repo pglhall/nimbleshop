@@ -54,18 +54,17 @@ class Product < ActiveRecord::Base
     CustomField.all.each { |f| find_or_build_answer_for_field(f) }
   end
 
-
   def pictures_order=(value)
     return if value.empty?
     ordered_pictures = ActiveSupport::JSON.decode(value)
     current_pictures = pictures
 
-    ordered_pictures.each{|position, picture_id|
+    ordered_pictures.each do |position, picture_id|
       if picture_id.present?
         pic = current_pictures.find { |x| x.id == picture_id.to_i }
         pic.update_column(:position, position) if pic
       end
-    }
+    end
   end
 
   def initialize_status
