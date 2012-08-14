@@ -1,5 +1,5 @@
 # This migration comes from nimbleshop_core (originally 20111107035350)
-class CreateCreditcardTransactions < ActiveRecord::Migration
+class CreatePaymentTransactions < ActiveRecord::Migration
   def change
     create_table :payment_transactions do |t|
       t.belongs_to  :order,           null: false
