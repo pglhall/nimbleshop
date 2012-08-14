@@ -56,13 +56,6 @@
     </div>
 
     <div class='control-group'>
-      <%= shipping_form.label :state_name, class: 'control-label' %>
-      <div class='controls'>
-        <%= shipping_form.text_field :state_name, class: 'input-xlarge' %>
-      </div>
-    </div>
-
-    <div class='control-group'>
       <%= shipping_form.label :zipcode, class: 'control-label' %>
       <div class='controls'>
         <%= shipping_form.text_field :zipcode, class: 'input-xlarge' %>
@@ -72,7 +65,7 @@
     <div class='control-group'>
       <div class='controls'>
         <label class='checkbox'>
-          <%= shipping_form.check_box :use_for_billing %> 
+          <%= shipping_form.check_box :use_for_billing %>
           Use this address as billing address too
         </label>
       </div>
