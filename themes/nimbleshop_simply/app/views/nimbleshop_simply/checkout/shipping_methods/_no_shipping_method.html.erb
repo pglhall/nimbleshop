@@ -1,4 +1,5 @@
-<div class="well" style="margin-top:20px;text-align: center;">
-  <h4>  unable to complete your order (no shipping method available)</h4>
-  <%= link_to "Edit Shipping Address", [:edit, current_order]%>
-</div>
+<h4> No shipping method is available for the shipping address you have chosen</h4>
+<br />
+<p>
+  <%= link_to "Change shipping address", new_checkout_shipping_address_path %>
+</p>

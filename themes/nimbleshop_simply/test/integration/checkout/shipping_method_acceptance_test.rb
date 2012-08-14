@@ -27,6 +27,19 @@ class ShippingMethodAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Please select a shipping method')
   end
 
+  test 'no shipping method available message' do
+    visit root_path
+    add_item_to_cart('Bracelet Set')
+    click_link 'Checkout'
+
+    enter_valid_email_address
+    enter_valid_shipping_address
+    ShippingMethod.delete_all
+    click_button 'Submit'
+
+    assert page.has_content?('No shipping method is available for the shipping address you have chosen')
+  end
+
   test "ability to change shipping method" do
     visit root_path
     add_item_to_cart('Bracelet Set')
