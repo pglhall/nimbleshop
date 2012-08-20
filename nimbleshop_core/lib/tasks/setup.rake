@@ -11,8 +11,10 @@ namespace :nimbleshop do
 
       Rake::Task["db:seed"].invoke
 
+      puts "Loading sample data ..."
       Sampledata::Data.new.populate
 
+      puts "Loading paymen records ..."
       Rake::Task["nimbleshop_splitable:load_record"].invoke
       Rake::Task["nimbleshop_paypalwp:load_record"].invoke
       Rake::Task["nimbleshop_authorizedotnet:load_record"].invoke
