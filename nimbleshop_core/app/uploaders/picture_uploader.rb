@@ -1,3 +1,7 @@
+unless require 'mini_magick'
+  raise "require 'mini_magick' failed. Looks like mini_magick is not properly installed in your system"
+end
+
 # encoding: utf-8
 
 class PictureUploader < CarrierWave::Uploader::Base
