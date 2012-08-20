@@ -42,7 +42,7 @@ class Product < ActiveRecord::Base
     io = FilelessIO.new(Base64.decode64(encoded_img))
     io.original_filename = filename_with_extension
     p = Picture.new(product: self, picture: io)
-    p.save
+    p.save!
   end
 
   def find_or_build_answer_for_field(field)
