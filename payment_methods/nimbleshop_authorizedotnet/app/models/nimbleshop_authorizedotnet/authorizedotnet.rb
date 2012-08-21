@@ -15,8 +15,9 @@ module NimbleshopAuthorizedotnet
       self.ssl == 'enabled'
     end
 
-    def kapture!(order)
-      processor = NimbleshopAuthorizedotnet::Processor.new(order: order, payment_method: self)
+    def kapture!(order, processor_klass = nil)
+      processor_klass ||= NimbleshopAuthorizedotnet::Processor
+      processor = processor_klass.new(order: order, payment_method: self)
       processor.kapture
       order.kapture!
     end
