@@ -89,11 +89,12 @@ module Sampledata
 
     def load_shipping_methods
       sz = CountryShippingZone.create!(country_code: 'US')
-      ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id,
-                             minimum_order_amount: 0, maximum_order_amount: 999999)
+      ShippingMethod.create!(name: 'Ground shipping', base_price: 10, shipping_zone_id: sz.id, minimum_order_amount: 0, maximum_order_amount: 999999)
+      ShippingMethod.create!(name: 'Express shipping', base_price: 30, shipping_zone_id: sz.id, minimum_order_amount: 10, maximum_order_amount: 999999)
 
-      ShippingMethod.create!(name: 'Express shipping', base_price: 30, shipping_zone_id: sz.id,
-                             minimum_order_amount: 10, maximum_order_amount: 999999)
+      sz = CountryShippingZone.create!(country_code: 'CA')
+      ShippingMethod.create!(name: 'Ground shipping', base_price: 11, shipping_zone_id: sz.id, minimum_order_amount: 0, maximum_order_amount: 999999)
+      ShippingMethod.create!(name: 'Express shipping', base_price: 31, shipping_zone_id: sz.id, minimum_order_amount: 10, maximum_order_amount: 999999)
     end
 
     def load_tajmahal
