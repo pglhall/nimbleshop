@@ -8,6 +8,7 @@ module NimbleshopSimply
     def new
       @page_sub_title = 'All payments are secure and encrypted. We never store your credit card information.'
       @creditcard = Creditcard.new
+      @show_shipping_and_tax_info = true
       render text: 'No payment method has been setup. Please setup atleast one payment method.' if PaymentMethod.count == 0
     end
 
