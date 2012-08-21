@@ -16,7 +16,7 @@ module NimbleshopAuthorizedotnet
     end
 
     def kapture!(order)
-      processor = NimbleshopAuthorizedotnet::Processor.new(order)
+      processor = NimbleshopAuthorizedotnet::Processor.new(order: order, payment_method: self)
       processor.kapture
       order.kapture!
     end

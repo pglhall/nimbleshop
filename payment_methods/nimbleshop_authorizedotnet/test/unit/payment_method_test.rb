@@ -19,3 +19,19 @@ class PaymentMethodAuthorizeNetTest < ActiveSupport::TestCase
   end
 
 end
+
+
+class PaymentMethodAuthorizeNetKaptureTest < ActiveSupport::TestCase
+  setup do
+    NimbleshopAuthorizedotnet::Processor.class_eval do
+      def kapture; end
+    end
+  end
+
+  test '#kapture!' do
+    order = create :order_paid_using_authorizedotnet
+    adnt = NimbleshopAuthorizedotnet::Authorizedotnet.new(name: 'Authorize.net', description: 'this is description')
+    adnt.kapture!(order)
+    assert_equal 'purchased', order.payment_status
+  end
+end
