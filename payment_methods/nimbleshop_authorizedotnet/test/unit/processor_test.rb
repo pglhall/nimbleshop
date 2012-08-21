@@ -77,6 +77,8 @@ module Processor
       transaction = @order.payment_transactions.last
       assert_equal  'captured', transaction.operation
       assert_equal  true, transaction.success
+      assert_equal "XXXX-XXXX-XXXX-0027", transaction.metadata[:card_number]
+      assert_equal 'visa', transaction.metadata[:cardtype]
       assert        @order.purchased?
     end
 

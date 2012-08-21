@@ -95,7 +95,10 @@ module NimbleshopAuthorizedotnet
       tsx_id = options[:transaction_gid]
 
       response = gateway.capture(order.total_amount_in_cents, tsx_id, {})
-      record_transaction(response, 'captured')
+
+      pt = PaymentTransaction.find_by_transaction_gid! tsx_id
+      #record_transaction(response, 'captured')
+      record_transaction(response, 'captured', card_number: pt.metadata[:card_number], cardtype: pt.metadata[:cardtype])
 
       if response.success?
         order.kapture
