@@ -59,7 +59,7 @@ class Creditcard
   end
 
   def validation_of_cardtype
-    if cardtype = ActiveMerchant::Billing::CreditCard.type?(number)
+    if cardtype = ActiveMerchant::Billing::CreditCard.brand?(number)
       self.cardtype = cardtype
     else
       errors.add(:base, 'Please check credit card number. It does not seem right.')
