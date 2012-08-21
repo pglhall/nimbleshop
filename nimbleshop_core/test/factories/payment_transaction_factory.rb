@@ -30,13 +30,18 @@ FactoryGirl.define do
           card_code: "P" }
       end
       metadata do
-        { card_number: 'XXXX-XXXX-XXXX-0027', cardtype: 'visaa' }
+        { card_number: 'XXXX-XXXX-XXXX-0027', cardtype: 'visa' }
       end
     end
 
     factory :payment_transaction_with_splitable,         traits: [ :splitable ]
     factory :payment_transaction_with_paypalwp,          traits: [ :paypalwp ]
-    factory :payment_transaction_with_authorizedotnet,   traits: [ :authorizedotnet ]
+
+    factory :payment_transaction_with_authorizedotnet,   traits: [ :authorizedotnet ] do |pt|
+      pt.after(:create) do |pt2|
+        pt2.order.update_column(:payment_status, 'authorized')
+      end
+    end
 
   end
 end
