@@ -111,3 +111,26 @@ class CartWithOrderExpiredAcceptanceTest < ActionDispatch::IntegrationTest
     assert page.has_content?('powered by')
   end
 end
+
+class CartWithOrderAlreadyAuthorizedAcceptanceTest < ActionDispatch::IntegrationTest
+  include ::ShippingMethodTestHelper
+  include ::CheckoutTestHelper
+
+  setup do
+    create(:product, name: 'Bracelet Set', price: 25)
+    create(:product, name: 'Necklace Set', price: 14)
+    create(:country_shipping_method)
+  end
+
+  test 'on cart page' do
+    visit root_path
+    add_item_to_cart('Bracelet Set')
+    assert_equal 1, Order.last.line_items.size
+    old_order_id = Order.last.id
+    Order.last.update_column(:payment_status, 'authorized')
+    add_item_to_cart('Bracelet Set')
+    assert_equal 1, Order.last.line_items.size
+    refute old_order_id == Order.last.id
+  end
+
+end
