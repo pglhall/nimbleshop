@@ -10,7 +10,7 @@ Getting started is easy. Just [get started](http://nimbleshop.org/getting_starte
 
 # Documentation
 
-Documentation is available at [http://nimbleshop.org/docsindex](http://nimbleshop.org/docsindex) .
+Documentation is available at [http://nimbleshop.org/docs](http://nimbleshop.org/docs) .
 
 # License
 
