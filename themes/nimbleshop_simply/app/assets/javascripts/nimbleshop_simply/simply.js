@@ -4,10 +4,10 @@
 //= require jquery-ujs
 //= require accounting
 
-/* bootstrap must be after jquery-ujs */
+// bootstrap must be after jquery-ujs
 //= require twitter/bootstrap
 
-// loaded using fancybox-rails gem
+// fancybox is loaded using fancybox-rails gem
 //= require fancybox
 
 //= require utils/formatNumber
