@@ -4,13 +4,14 @@ FactoryGirl.define do
     number        '4007000000027'
     cardtype      'visa'
 
-    first_name  { Faker::Name.first_name  } 
-    last_name   { Faker::Name.last_name   } 
-    address1    { Faker::Address.street_address } 
-    zipcode     { Faker::Address.zip_code } 
+    first_name  { Faker::Name.first_name  }
+    last_name   { Faker::Name.last_name   }
+    address1    { Faker::Address.street_address }
+    zipcode     { Faker::Address.zip_code }
     month         5
     year          2015
     state         'Florida'
+    perform_validations true
 
     trait :visa do
       cardtype  'visa'

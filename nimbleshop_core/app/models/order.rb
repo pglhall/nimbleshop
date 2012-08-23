@@ -52,14 +52,18 @@ class Order < ActiveRecord::Base
     state all - [ :abandoned ] do
       validates :payment_method, presence: true
     end
+
+   after_transition on: :purchase,  do: :after_purchase
+   after_transition on: :authorize, do: :after_authorize
+   after_transition on: :pending,   do: :after_pending
   end
 
   state_machine :shipping_status, initial: :nothing_to_ship do
-    after_transition on: :shipped, do: :after_shipped
-
     event(:shipping_pending) { transition nothing_to_ship: :shipping_pending }
     event(:shipped)          { transition shipping_pending: :shipped         }
     event(:cancel_shipment)  { transition shipping_pending: :nothing_to_ship }
+
+    after_transition on: :shipped, do: :after_shipped
   end
 
   def mark_as_purchased!

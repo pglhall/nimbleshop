@@ -1,0 +1,47 @@
+<style>
+  #stripe-sandboxhelp li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+</style>
+
+<% if !Rails.env.production? && NimbleshopStripe::Stripe.first  %>
+  <div id='stripe-sandboxhelp' class='modal hide fade'>
+
+    <div class='modal-header'>
+      <%= link_to 'x', '#', class: 'close', 'data-dismiss' => 'modal' %>
+      <h3>Valid credit card numbers in Stripe Test mode</h3>
+    </div>
+    <div class="modal-body">
+      <p> The application is running Stripe in <strong>Test</strong> mode. You cannot make real payment. Here are the valid credit card numbers in test mode. </p>
+
+      <ul>
+        <li> Visa: 4242424242424242 </li>
+        <li> Visa: 4012888888881881 </li>
+        <li> Mastercard: 5555555555554444 </li>
+        <li> Mastercard: 5105105105105100 </li>
+        <li> American Express: 378282246310005 </li>
+        <li> American Express: 371449635398431 </li>
+        <li> Discover: 6011111111111117 </li>
+        <li> Discover: 6011000990139424 </li>
+        <li> JCB: 3530111333300000 </li>
+        <li> JCB: 3566002020360505 </li>
+        <li> Diners Club: 30569309025904 </li>
+        <li> Diners Club: 38520000023237 </li>
+      </ul>
+      <br />
+      <ul>
+        <li> Expiration date must be set to the present day or later. </li>
+        <li> Security code for American express must be any 4 digits. For all others use any 3 digits. </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <p>
+        <%= link_to 'More information', '' %> .
+        <small>
+          This message never appears when Stripe is running in live mode .
+        </small>
+      </p>
+    </div>
+  </div>
+<% end %>

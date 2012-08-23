@@ -15,36 +15,41 @@ module Order::PaymentTransitions
   # condition that we are seeing in after_pending .
   #
 
-  def after_purchase(order, transition)
-    mailer = Nimbleshop.config.mailer.constantize
-    mailer.delay.order_notification_to_buyer(order.number)
-    AdminMailer.delay.new_order_notification(order.number)
+  def after_purchase(transition)
+    self.mark_as_purchased!
 
-    order.mark_as_purchased!
-    order.shipping_pending
-    ActiveSupport::Notifications.instrument("order.purchased", { order_number: order.number } )
+    # do not use bang version because the order might already bbe in shipping_pending state. That is possible
+    # if user used splitable in which case the order is put in shipping_pending state in pending state.
+    self.shipping_pending
+
+    ActiveSupport::Notifications.instrument("order.purchased", { order_number: number } )
+
+    mailer = Nimbleshop.config.mailer.constantize
+    mailer.delay.order_notification_to_buyer(number)
+    AdminMailer.delay.new_order_notification(number)
   end
 
-  def after_authorize(order, transition)
+  def after_authorize(transition)
     mailer = Nimbleshop.config.mailer.constantize
-    mailer.delay.order_notification_to_buyer(order.number)
-    AdminMailer.delay.new_order_notification(order.number)
+    mailer.delay.order_notification_to_buyer(number)
+    AdminMailer.delay.new_order_notification(number)
 
-    order.mark_as_purchased!
-    order.shipping_pending
+    mark_as_purchased!
+    shipping_pending!
   end
 
   def after_kapture(order, transition)
   end
 
-  def after_pending(order, transition)
-    if order.payment_method.is_a? NimbleshopCod::Cod
+  def after_pending(transition)
+    if payment_method.is_a? NimbleshopCod::Cod
       mailer = Nimbleshop.config.mailer.constantize
-      mailer.order_notification_to_buyer(order.number).deliver
-      AdminMailer.delay.new_order_notification(order.number)
+      mailer.order_notification_to_buyer(number).deliver
+      AdminMailer.delay.new_order_notification(number)
     end
 
-    order.shipping_pending
+    mark_as_purchased!
+    shipping_pending!
   end
 
   def after_void(order, transition)

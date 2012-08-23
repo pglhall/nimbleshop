@@ -20,11 +20,21 @@
             <td>
               Shippping
             </td>
-            <td> <%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td><%= number_to_currency(@order.shipping_method.shipping_cost) %> </td>
           </tr>
         <% end %>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td>
+              Tax
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><%= number_to_currency(@order.tax) %> </td>
+          </tr>
 
         <tr>
           <td>&nbsp;</td>

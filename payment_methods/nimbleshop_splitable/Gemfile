@@ -2,10 +2,14 @@ eval(File.read(Pathname.new(File.dirname(__FILE__)).join('..', '..',  'dev', 'co
 
 gemspec
 
+gem 'nimbleshop_core',             path: './../../nimbleshop_core'
 gem 'nimbleshop_simply',           path: './../../themes/nimbleshop_simply'
+
+gem 'nimbleshop_authorizedotnet',  path: './../../payment_methods/nimbleshop_authorizedotnet'
 gem 'nimbleshop_paypalwp',         path: './../../payment_methods/nimbleshop_paypalwp'
 gem 'nimbleshop_cod',              path: './../../payment_methods/nimbleshop_cod'
-gem 'nimbleshop_core',             path: './../../nimbleshop_core'
-gem 'nimbleshop_authorizedotnet',  path: './../../payment_methods/nimbleshop_authorizedotnet'
+gem 'nimbleshop_stripe',           path: './../../payment_methods/nimbleshop_stripe'
 
 gem 'activemerchant'
+
+gem 'debugger'

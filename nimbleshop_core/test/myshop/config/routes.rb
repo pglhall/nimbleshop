@@ -6,6 +6,7 @@ Myshop::Application.routes.draw do
           mount NimbleshopPaypalwp::Engine,        :at => '/nimbleshop_paypalwp'
           mount NimbleshopSplitable::Engine,       :at => '/nimbleshop_splitable'
           mount NimbleshopCod::Engine,             :at => '/nimbleshop_cod'
+          mount NimbleshopStripe::Engine,          :at => '/nimbleshop_stripe'
           # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -44,4 +44,5 @@ gem 'nimbleshop_authorizedotnet', path: "/Users/nsingh/dev/nimbleshop_inc/nimble
 gem 'nimbleshop_paypalwp',        path: "/Users/nsingh/dev/nimbleshop_inc/nimbleshop/payment_methods/nimbleshop_paypalwp"
 gem 'nimbleshop_splitable',       path: "/Users/nsingh/dev/nimbleshop_inc/nimbleshop/payment_methods/nimbleshop_splitable"
 gem 'nimbleshop_cod',             path: "/Users/nsingh/dev/nimbleshop_inc/nimbleshop/payment_methods/nimbleshop_cod"
+gem 'nimbleshop_stripe',          path: "/Users/nsingh/dev/nimbleshop_inc/nimbleshop/payment_methods/nimbleshop_stripe"
 

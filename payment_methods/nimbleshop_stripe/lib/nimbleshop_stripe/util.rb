@@ -1,3 +1,4 @@
+raise 'do not use this class'
 module NimbleshopAuthorizedotnet
   module Util
     extend self

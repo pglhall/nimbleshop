@@ -60,7 +60,6 @@ module Processor
       options = callback_params(@order)
       processor = NimbleshopSplitable::Processor.new(invoice: options[:invoice])
 
-
       processor.acknowledge(options)
       transaction = @order.payment_transactions.last
 

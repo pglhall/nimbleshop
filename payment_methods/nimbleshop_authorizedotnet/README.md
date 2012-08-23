@@ -34,4 +34,4 @@ Documentation is available at [http://nimbleshop.org/authorizedotnet.html](http:
 
 # License
 
-nimbleshop_authorizedotnet uses [MIT license](http://www.opensource.org/licenses/mit-license.php) .
+This gem uses [MIT license](http://www.opensource.org/licenses/mit-license.php) .

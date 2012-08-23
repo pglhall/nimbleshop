@@ -29,6 +29,11 @@ class OrderTest < ActiveSupport::TestCase
     @product2 = create :product, price: 30
   end
 
+  test 'default factory created order has initialized payment status and shipping status' do
+    assert_equal 'abandoned', @order.payment_status
+    assert_equal 'nothing_to_ship', @order.shipping_status
+  end
+
   test "factory" do
     order = create :order_paid_using_authorizedotnet
     assert_equal 1, order.payment_transactions.size
@@ -67,4 +72,38 @@ class OrderTest < ActiveSupport::TestCase
     @order.shipping_address = create(:shipping_address)
     assert_equal 1, @order.available_shipping_methods.size
   end
+
+  test '#purchase!' do
+    refute @order.purchased_at
+    payment_method = ::NimbleshopStripe::Stripe.first
+    assert payment_method
+    @order.update_attributes!(payment_method: payment_method)
+    @order.purchase!
+    assert_equal 'shipping_pending', @order.shipping_status
+    assert_equal 'purchased', @order.payment_status
+    assert @order.purchased_at
+  end
+
+  test '#authorize!' do
+    refute @order.purchased_at
+    payment_method = ::NimbleshopAuthorizedotnet::Authorizedotnet.first
+    assert payment_method
+    @order.update_attributes!(payment_method: payment_method)
+    @order.authorize!
+    assert_equal 'shipping_pending', @order.shipping_status
+    assert_equal 'authorized', @order.payment_status
+    assert @order.purchased_at
+  end
+
+  test '#pending!' do
+    refute @order.purchased_at
+    payment_method = ::NimbleshopCod::Cod.first
+    assert payment_method
+    @order.update_attributes!(payment_method: payment_method)
+    @order.pending!
+    assert_equal 'shipping_pending', @order.shipping_status
+    assert_equal 'pending', @order.payment_status
+    assert @order.purchased_at
+  end
+
 end

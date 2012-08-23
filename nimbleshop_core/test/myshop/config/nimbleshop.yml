@@ -12,13 +12,17 @@ common:
   default_localhost2public_url: 4a5w.localtunnel.com
 
   authorizedotnet:
-    login_id: <%= ENV['AUTHORIZE_NET_LOGIN_ID'] || '26Daqx7Jtw7R' %>
+    login_id:        <%= ENV['AUTHORIZE_NET_LOGIN_ID'] || '26Daqx7Jtw7R' %>
     transaction_key: <%= ENV['AUTHORIZE_NET_TRANSACTION_KEY'] || '66JWf57KKc82W9y6' %>
 
+  stripe:
+    publishable_key: <%= ENV['STRIPE_PUBLISHABLE_KEY'] || 'pk_09SbnVVDVtzcvflsBiNFToX5TO3f6' %>
+    secret_key:      <%= ENV['STRIPE_SECRET_KEY']      || 'sk_09SbpItoIMWYU8okpS23rnxIzgyW7' %>
+
   s3:
-    access_key_id: <%= ENV['S3_ACCESS_KEY_ID'] %>
+    access_key_id:     <%= ENV['S3_ACCESS_KEY_ID'] %>
     secret_access_key: <%= ENV['S3_SECRET_ACCESS_KEY'] %>
-    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
+    bucket_name:       <%= ENV['S3_BUCKET_NAME'] %>
 
   mailtrapio:
     username: <%= ENV['MAILTRAPIO_USERNAME'] || 'nimbleshop' %>

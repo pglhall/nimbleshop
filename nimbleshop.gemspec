@@ -27,5 +27,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nimbleshop_paypalwp',        "= #{version}"
   gem.add_dependency 'nimbleshop_splitable',       "= #{version}"
   gem.add_dependency 'nimbleshop_cod',             "= #{version}"
+  gem.add_dependency 'nimbleshop_stripe',          "= #{version}"
 
 end
