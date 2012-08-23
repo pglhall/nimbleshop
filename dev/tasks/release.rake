@@ -111,7 +111,7 @@ themes.each do |extension|
   end
 end
 
-payment_methods = ['nimbleshop_authorizedotnet', 'nimbleshop_paypalwp', 'nimbleshop_cod', 'nimbleshop_splitable']
+payment_methods = ['nimbleshop_stripe', 'nimbleshop_authorizedotnet', 'nimbleshop_paypalwp', 'nimbleshop_cod', 'nimbleshop_splitable']
 payment_methods.each do |extension|
   namespace extension do
     gem = Gemm.new(extension, pkg_dir, version, "payment_methods/#{extension}")
