@@ -20,5 +20,3 @@ class NimbleshopSimply.manageStates
 
 	constructor:  ->
 		($ "select[name$='[country_code]']").bind('change', @handler)
-		#for country in  ($ "select[name$='[country_code]']")
-			#$(country).triggerHandler 'change'
