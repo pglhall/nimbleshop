@@ -59,7 +59,7 @@ class Gemm
   end
 end
 
-engines = %w(core simply authorizedotnet paypalwp splitable cod).map { |i| "nimbleshop_#{i}" }
+engines = %w(core simply stripe authorizedotnet paypalwp splitable cod).map { |i| "nimbleshop_#{i}" }
 all = engines + ['nimbleshop']
 
 main = ['nimbleshop_core', 'nimbleshop']
