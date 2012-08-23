@@ -6,6 +6,7 @@ h3. Support for payment methods
 
 nimbleShop out of the box supports following payment methods:
 
+* "Stripe":http://nimbleshop.org/stripe.html
 * "Authorize.net":http://nimbleshop.org/authorizedotnet.html
 * "Paypal web payments standard":http://nimbleshop.org/paypalwp.html
 * "Splitable":http://nimbleshop.org/splitable.html
