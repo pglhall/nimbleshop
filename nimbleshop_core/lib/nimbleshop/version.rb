@@ -2,7 +2,7 @@ module Nimbleshop
   class Version
     @major = 0
     @minor = 0
-    @tiny  = 8
+    @tiny  = 9
     @build = nil
 
     class << self
