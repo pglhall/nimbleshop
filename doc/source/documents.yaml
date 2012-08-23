@@ -14,6 +14,9 @@
       name: Authorize.net
       url: authorizedotnet.html
     -
+      name: Stripe
+      url: stripe.html
+    -
       name: Paypal web payments standard
       url: paypalwp.html
     -
