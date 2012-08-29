@@ -13,7 +13,7 @@ Nimbleshop.managePicture = class ManagePicture
     @makePictureSortable()
 
   deletePicture: ->
-    $(".product_pictures .actions .delete").on "click", ->
+    $('[data-behavior~=delete-product-picture]').on 'click', ->
       $("#delete_picture_" + $(this).attr("data-action-id")).trigger "click"
       $(this).parent().parent().hide "fast"
       false

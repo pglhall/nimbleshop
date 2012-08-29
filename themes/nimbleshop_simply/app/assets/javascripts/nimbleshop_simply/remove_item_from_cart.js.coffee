@@ -1,5 +1,5 @@
 $ ->
-  $("a.remove-item").on "click", ->
+  $('[data-behavior~=remove-item-from-cart]').on 'click', ->
     $this = $(this)
     permalink = $this.data("permalink")
     $("#updates_" + permalink).val 0

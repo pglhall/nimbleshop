@@ -3,7 +3,7 @@ window.NimbleshopSimply = window.NimbleshopSimply || {}
 class NimbleshopSimply.manageStates
 
 	stateCodeField: ($country) ->
-		$country.parents("div.well").find("[name$='[state_code]']")
+		$country.parents('[data-behavior~=well]').find("[name$='[state_code]']")
 
 	createOption: (state) ->
 		($ "<option />", text: state[0], value: state[1])

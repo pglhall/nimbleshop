@@ -10,7 +10,7 @@
         <%= link_to line_item.product_name, line_item.product, title: line_item.product_name %>
       </strong>
       <br />
-      <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id %>
+      <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id, 'data-behavior' => 'remove-item-from-cart' %>
     </div>
 
     <div class="span2">

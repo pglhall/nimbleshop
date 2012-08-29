@@ -10,7 +10,6 @@
           <%= link_to(image_tag(picture.picture_url(:large), alt: @product.name), picture.picture_url(:large_plus),
                                                                                     class: 'thumbnail fancybox',
                                                                                     rel:   'gallery1') %>
-
         </li>
       <% end %>
     </ul>
@@ -24,7 +23,7 @@
               <% if picture.blank? %>
                 &nbsp;
               <% else %>
-                <%= image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb thumbnail' %>
+                <%= image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb thumbnail', 'data-behavior' => 'product-image-thumbnail' %>
               <% end %>
             </td>
           <% end %>

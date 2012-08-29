@@ -1,10 +1,10 @@
 $ ->
-  $("a.ship-items-link").on 'click', ->
+  $('[data-behavior~=ship-items]').on 'click', ->
     $(this).hide()
-    $("#ship_items_action_box").show()
+    $('[data-behavior~=ship-items-box]').show()
     false
 
-  $("#ship_items_cancel").on "click", ->
-    $("a.ship-items-link").show()
-    $("#ship_items_action_box").hide()
+  $('[data-behavior~=ship-items-cancel]').on 'click', ->
+    $('[data-behavior~=ship-items]').show()
+    $('[data-behavior~=ship-items-box]').hide()
     false

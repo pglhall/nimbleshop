@@ -8,7 +8,7 @@
   <div class='shipment_tracking_info'>
 
     <% if @order.shipping_pending? %>
-      <%= link_to 'Ship items', '#', class: 'btn btn-success ship-items-link' %>
+      <%= link_to 'Ship items', '#', class: 'btn btn-success', 'data-behavior' => 'ship-items' %>
     <% elsif @order.shipped? %>
       <p>
         Shipped on <%= @shipment.created_at.to_s(:long) %> <br/>
@@ -16,7 +16,7 @@
       </p>
     <% end %>
 
-    <div id='ship_items_action_box' style='display:none;'>
+    <div id='ship_items_action_box' style='display:none;' data-behavior='ship-items-box'>
       <%= form_for([:admin, @order, @shipment], html: {class: 'well form-inline'}) do |f| %>
         <p>
           <%= f.select :shipment_carrier_id, ShipmentCarrier.all.collect {|p| [p.name, p.id] }, {}, class: 'span2' %>
@@ -25,7 +25,7 @@
         </p>
         <p>
           <%= f.submit 'Submit', class: 'btn btn-primary' %>
-          <%= link_to 'Cancel', '#', id: 'ship_items_cancel' %>
+          <%= link_to 'Cancel', '#', id: 'ship_items_cancel', 'data-behavior' => 'ship-items-cancel' %>
         </p>
       <% end %>
     </div>
