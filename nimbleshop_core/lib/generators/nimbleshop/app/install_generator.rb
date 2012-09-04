@@ -55,6 +55,7 @@ module Nimbleshop
       puts 'coping migration files'
       run 'bundle exec rake railties:install:migrations'
       run 'bundle exec rake db:create db:migrate'
+      run 'bundle exec rake db:test:prepare'
     end
 
     def bundle!

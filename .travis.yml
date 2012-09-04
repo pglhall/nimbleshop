@@ -2,6 +2,7 @@ language: ruby
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - "bundle exec rake nimbleshop:setup:test_app"
 env:
   - DB=sqlite
   - DB=mysql

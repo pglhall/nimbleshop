@@ -4,10 +4,15 @@ require 'rake/testtask'
 require 'rdoc/task'
 
 desc 'Default: run tests'
-task :default => ['nimbleshop_paypalwp:test']
-task :test => ['nimbleshop_paypalwp:test']
+task :default => [:test]
+task :test => ['nimbleshop_paypalwp:ensure_test_app_exists', 'nimbleshop_paypalwp:test']
 
 namespace :nimbleshop_paypalwp do
+
+  task :ensure_test_app_exists do
+    p = File.expand_path('../../../nimbleshop_core/test/myshop', __FILE__)
+    abort 'Test app is missing. First execute "rake nimbleshop:setup:test_app"' unless File.directory?(p)
+  end
 
   desc 'Run nimbleshop_paypalwp tests.'
   Rake::TestTask.new(:test) do |t|

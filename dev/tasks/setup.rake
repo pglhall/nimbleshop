@@ -31,7 +31,7 @@ namespace :nimbleshop do
     end
 
     desc 'sets up a myshop for testing'
-    task :test do
+    task :test_app do
       FileUtils.rm_rf File.expand_path('../../../nimbleshop_core/test/myshop', __FILE__)
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
       test_path = File.expand_path('../../../nimbleshop_core/test', __FILE__)
