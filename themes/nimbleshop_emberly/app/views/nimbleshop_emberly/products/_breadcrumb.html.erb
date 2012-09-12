@@ -1,0 +1,11 @@
+<% if params[:controller] == 'product_groups' %>
+  <ul class="breadcrumb" style='margin-left:70px;'>
+    <li>
+      <%= link_to 'Home', root_path, class: 'divider' %>
+      <span class="divider">/</span>
+    </li>
+    <li>
+      <%= link_to @product_group.name, '', class: 'divider' %>
+    </li>
+  </ul>
+<% end %>

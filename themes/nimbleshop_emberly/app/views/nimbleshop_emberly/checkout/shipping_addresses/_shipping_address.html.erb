@@ -1,0 +1,75 @@
+<div class='well' data-behavior='well'>
+
+  <%= f.fields_for :shipping_address do |shipping_form| %>
+
+    <h3>Shipping address</h3>
+
+    <br />
+
+    <div class='control-group'>
+      <%= shipping_form.label :first_name, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :first_name, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :last_name, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :last_name, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :address1, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :address1, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :address2, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :address2, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :city, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :city, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :country_code, 'Country', class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.select :country_code, options_for_countries(countries), class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :state_code, 'State/Province', class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.select :state_code, options_for_country(shipping_form.object.country_code), class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <%= shipping_form.label :zipcode, class: 'control-label' %>
+      <div class='controls'>
+        <%= shipping_form.text_field :zipcode, class: 'input-xlarge' %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+      <div class='controls'>
+        <label class='checkbox'>
+          <%= shipping_form.check_box :use_for_billing %>
+          Use this address as billing address too
+        </label>
+      </div>
+    </div>
+
+  <% end %>
+</div>

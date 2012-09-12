@@ -1,0 +1,259 @@
+h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#complete p.button {
+  margin: 10px 0 10px 0;
+}
+
+.thumbnails .product .price {
+  color: #999;
+}
+
+#site-name {
+  font-weight: bold;
+}
+
+a#site-name:hover {
+  text-decoration: underline;
+}
+
+.navbar .navbar-text a:hover {
+  color: #08c;
+}
+
+#product-description-content p {
+  font-size: 14px;
+  color: #818181;
+  line-height: 22px;
+}
+
+
+table#product-thumbnails a {
+  margin: 6px;
+}
+
+#products-show {
+  h2#product-price {
+    font-family: 'Arial';
+    margin-bottom: 10px;
+  }
+
+  h4#product-description {
+    margin-top: 12px;
+    maring-bottom: 3px;
+  }
+}
+
+
+table tr td .lhs {
+  float:left;
+  width:150px;
+}
+table tr td .rhs {
+  float:right;
+  width: 50px;
+}
+
+
+#products-index table tr td, #product_groups-show table tr td {
+  vertical-align: top;
+
+  ul.thumbnails a.thumbnail {
+    border: 0;
+  }
+
+  ul.thumbnails p.product {
+    margin-left: 18px;
+  }
+
+  li.product_info {
+    border:1px solid #ddd;
+  }
+
+}
+
+
+.powered_by {
+  color: #ccc;
+  font-style: italic;
+
+  a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 110%;
+  }
+
+  a:hover {
+    color: #888;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}
+
+/*#products-index .thumbnails > li{*/
+	/*margin-right: 30px;*/
+/*}*/
+
+/*Thumbnails on main page
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+.thumbnail_container{
+	width: 200px;
+	margin: 0 auto;
+	border: 1px solid rgb(221, 221, 221);
+	max-width: 100%;
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+}
+
+.thumbnail_container:hover {
+  border: 1px solid rgb(0, 136, 204);
+}
+
+.thumbnail_container .price{
+  color: #999;
+}
+
+.thumbnail_container .price, .thumbnail_container .product_name{
+  margin-left: 20px;
+}
+
+.thumbnail_container > a{
+  display: block;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  padding: 5px 5px 2px;
+  margin-bottom: 5px;
+}
+
+.delete{
+	/*display: inline-block;*/
+	/*text-indent: -9999px;*/
+	/*width: 10px;*/
+	/*height: 11px;*/
+	/*background: url("/assets/trash.gif") no-repeat transparent;*/
+	/*vertical-align: middle;*/
+  font-size: 9px;
+  color: #999;
+}
+
+a.delete:hover {
+  color: #999;
+  font-size: 9px;
+}
+
+.total{
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+
+.total h4 {
+	font-size: 16px;
+}
+
+/*Sidebar style
+----------------------------------------------------------------------------------------------------------------------*/
+
+.sidebar_block{
+  border-radius: 5px;
+	border: 1px solid #DDDDDD;
+	padding: 10px;
+	background-color: #fafafa;
+	margin-bottom: 20px;
+}
+
+.sidebar_block h3{
+	font-weight: normal;
+	margin-bottom: 5px;
+	font-size: 16px;
+}
+
+.sidebar_block ul{
+	margin-left: 10px;
+}
+
+.sidebar_block li{
+	margin-bottom: 3px;
+}
+
+/*Cart
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+#cartform {
+
+  .cart_header{
+    font-weight: bold;
+  }
+
+  .quantity-field{
+    width: 25px;
+  }
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 1px;
+    border-color:	#DDDDDD -moz-use-text-color #FFFFFF;
+  }
+
+  .product_pictures img{
+    width: 60px;
+    height: 60px;
+  }
+
+}
+
+#checkout-payments-new h1:before {
+  content: " ";
+  background: url("/assets/lock.png") no-repeat scroll 0 0 transparent;
+  width: 18px;
+  height: 24px;
+  display: inline-block;
+  margin-right: -4px;
+}
+
+
+.item_pics li {
+	margin-left: 0;
+	max-width: 100%;
+}
+
+/*Modal
+----------------------------------------------------------------------------------------------------------------------*/
+.modal_images {
+	overflow: hidden;
+}
+
+/* make the credit card form look nice */
+.nimbleshop_authorizedotnet_umbrella {
+  margin-left: -140px;
+}
+
+#checkout {
+  background: #64b216;
+}
+
+#cart-empty {
+  margin-top: 20px;
+}
+
+img.thumbnail:hover {
+  border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+#products-index li.product_info, #product_groups-show li.product_info {
+  border: 1px solid #ddd;
+}
+
+#products-index li.product_info:hover, #product_groups-show li.product_info:hover {
+  border-color: #08c;
+}

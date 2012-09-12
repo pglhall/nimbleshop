@@ -1,0 +1,24 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <%= link_to current_shop.name, main_app.root_path, class: 'brand', id: 'site-name' %>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><%= link_to 'All products', main_app.root_path, title: 'browse' %></li>
+          <li><%= link_to 'About us', about_us_path, title: 'about us' %></li>
+          <li><%= link_to 'Contact us', contact_us_path, title: 'contact us' %></li>
+        </ul>
+          <%= link_to cart_path, id: 'cart', title: 'cart', class: 'navbar-text pull-right cart_link' do %>
+            <span><%= pluralize(items_count_in_cart, '') %></span>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

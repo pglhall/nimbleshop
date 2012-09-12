@@ -1,0 +1,24 @@
+# Encoding: UTF-8
+
+$:.push File.expand_path('../../nimbleshop_core/lib', __FILE__)
+require 'nimbleshop/version'
+version = Nimbleshop::Version.to_s
+
+Gem::Specification.new do |gem|
+
+  gem.name        = 'nimbleshop_emberly'
+  gem.version     = version
+  gem.authors     = ['Neeraj Singh', 'megpha']
+  gem.email       = ['neeraj@bigbinary.com']
+  gem.homepage    = 'http://nimbleshop.org'
+  gem.summary     = 'ember theme for nimbleShop'
+  gem.description = 'Provides ember theme to nimbleShop'
+
+  gem.files = Dir['{app,config,db,lib}/**/*'] + ['README.md']
+
+  gem.test_files = Dir['test/**/*']
+
+  gem.add_dependency 'jquery-rails',    '= 2.1.1'
+  gem.add_dependency 'fancybox-rails',  '= 0.1.4'
+  gem.add_dependency 'ember-rails',     '= 0.7.0'
+end

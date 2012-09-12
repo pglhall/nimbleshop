@@ -1,0 +1,38 @@
+
+<div class="span12">
+  <div class="single_item row">
+    <div class="span2 product_pictures">
+      <%= link_to(image_tag(line_item.picture_small, alt: line_item.product_name), line_item.product, title: line_item.product_name) %>
+    </div>
+
+    <div class="span4 description">
+      <strong class="item_name">
+        <%= link_to line_item.product_name, line_item.product, title: line_item.product_name %>
+      </strong>
+      <br />
+      <%= link_to 'Remove', '#', title: 'Remove', class: 'delete remove-item', 'data-permalink' => line_item.product_id, 'data-behavior' => 'remove-item-from-cart' %>
+    </div>
+
+    <div class="span2">
+      <h4 class="visible-phone"> Item Price </h4>
+      <%= number_to_currency(line_item.product_price) %>
+    </div>
+
+    <div class="span2">
+      <h4 class="visible-phone"> Quantity </h4>
+      <%= text_field_tag "updates[#{line_item.product_id}]", line_item.quantity, style: 'width:20px;',  id: "updates_#{line_item.product_id}",
+                                                                                                        class: "quantity-field",
+                                                                                                        'data-behavior' => 'number-formatted' %>
+    </div>
+    <div class="span2">
+      <h4 class="visible-phone"> Total price </h4>
+      <strong><%= number_to_currency(line_item.price) %></strong>
+    </div>
+    <div class="span2 remove">
+    </div>
+  </div>
+</div>
+
+<div class='span12'>&nbsp;</div>
+
+<hr class='span12' />

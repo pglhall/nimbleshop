@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'nimbleshop_simply/products#index'
+  root to: 'nimbleshop_emberly/products#index'
 
   get '/admin',           to: 'admin/main#index'
 
@@ -54,6 +54,6 @@ Rails.application.routes.draw do
   mount NimbleshopPaypalwp::Engine,        at: '/nimbleshop_paypalwp'
   mount NimbleshopSplitable::Engine,       at: '/nimbleshop_splitable'
   mount NimbleshopCod::Engine,             at: '/nimbleshop_cod'
-  mount NimbleshopSimply::Engine,          at: '/'
+  mount NimbleshopEmberly::Engine,         at: '/'
 
 end

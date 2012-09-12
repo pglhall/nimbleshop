@@ -1,0 +1,34 @@
+Hi <%= @order.final_billing_address.name%> ,
+
+All items regarding order #<%= @order.number %> have been shipped.
+
+<% if @shipment.tracking_number.present? %>
+Items have been shipped using <%= @order.shipments.first.shipment_carrier.name %> and the tracking number is <%= @order.shipments.first.tracking_number %>. Use the URL given below to track your shipment.
+
+<%= @shipment.tracking_url %>
+
+Sometimes it takes upto 12 hours for a tracking number to show up in the system.
+
+<% else %>
+Items have been shipped using <%= @shipment.shipment_carrier.name %> .
+<% end %>
+
+
+Items are being shipped to the following address:
+
+<% @order.shipping_address.full_address_array.each do |line| %>
+<%= line %>
+<% end %>
+
+Here are the contents of the shipment.
+
+<% @order.line_items.each do |line_item| %>
+Name: <%= truncate(sanitize(line_item.name), length: 90) %>
+Item price: <%= number_to_currency(line_item.product_price) %>
+Item quantity: <%= line_item.quantity %>
+Item total price: <%= number_to_currency(line_item.price) %>
+<% end %>
+
+<% if @order.payment_method.permalink == 'authorize-net' %>
+Your credit card has been charged <%= number_to_currency(@order.total_amount) %> .This charge will appear on your credit card statement as "<%= @order.payment_method.business_name %>".
+<% end %>

@@ -1,0 +1,9 @@
+<li class="nav-header">
+	<%= link_group.name %>
+</li>
+
+<% link_group.navigations.each do |nav| %>
+  <li>
+    <%= link_to nav.product_group.name, nav.product_group, title: nav.product_group.name %>
+  </li>
+<% end %>

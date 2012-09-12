@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> <%= display_page_title %> </title>
+
+    <% if current_shop.description.present? %>
+      <meta name="description" content="<%= current_shop.description %>">
+    <% end %>
+
+    <% if current_shop.author_name.present? %>
+      <meta name="author" content="<%= current_shop.author_name %>">
+    <% end %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag 'nimbleshop_simply/simply' %>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <!--
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+    -->
+    <%= csrf_meta_tag %>
+    <%= javascript_include_tag 'nimbleshop_simply/simply' %>
+    <%=  yield :js %>
+  </head>
+
+  <body id=<%=body_id%>>
+
+    <%= render 'layouts/top_bar' %>
+
+    <div class="container">
+      <div class="content">
+
+        <h1>
+          <%= @page_title unless @do_not_use_page_title %>
+          <% if @page_sub_title %>
+            <small> <%= @page_sub_title %> </small>
+          <% end %>
+        </h1>
+
+        <div class="row">
+          <div class="span12">
+            <%= yield %>
+          </div>
+        </div>
+
+      </div><!-- end of content -->
+
+      <%= render 'layouts/footer' %>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

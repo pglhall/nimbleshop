@@ -1,0 +1,13 @@
+<div class="thumbnail_container">
+
+  <%= link_to product_main_picture(product, :medium_plus), product, title: 'picture'  %>
+  
+   <div class="price">
+     <%= number_to_currency(product.price) %>
+   </div>
+
+   <div class="product_name">
+     <%= link_to truncate(product.name, length: 50), product, title: product.name  %>
+   </div>
+
+</div>

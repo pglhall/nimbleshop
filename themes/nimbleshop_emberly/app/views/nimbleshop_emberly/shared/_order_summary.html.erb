@@ -1,0 +1,18 @@
+<div class='span4 offset1' style='margin-top:5px;'>
+  <div class='well' id='order-summary'>
+    <h3>
+      Order summary
+      <small>
+        <%= link_to 'change', cart_path, id: 'edit_cart', title: 'edit cart', class: 'light-link' %>
+      </small>
+    </h3>
+
+    <br />
+
+    <%= render 'nimbleshop_simply/shared/order_summary_line_items' %>
+    <%= render 'nimbleshop_simply/shared/order_summary_shipping_address' %>
+    <%= render 'nimbleshop_simply/shared/order_summary_shipping_method' %>
+
+  </div>
+
+</div>

@@ -1,0 +1,61 @@
+<br/>
+
+<div class='row'>
+
+  <div class='span6'>
+    <ul class="thumbnails unstyled item_pics">
+
+      <% @product.pictures.each_with_index do |picture, indx| %>
+        <li style="<%= 'display:none' if indx != 0 %>">
+          <%= link_to(image_tag(picture.picture_url(:large), alt: @product.name), picture.picture_url(:large_plus),
+                                                                                    class: 'thumbnail fancybox',
+                                                                                    rel:   'gallery1') %>
+        </li>
+      <% end %>
+    </ul>
+
+    <br/>
+    <table id='product-thumbnails'>
+      <% @product.pictures.in_groups_of(5) do |group| %>
+        <tr>
+          <% group.each do |picture| %>
+            <td>
+              <% if picture.blank? %>
+                &nbsp;
+              <% else %>
+                <%= image_tag picture.picture_url(:small), alt: @product.name, class: 'thumb thumbnail', 'data-behavior' => 'product-image-thumbnail' %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+
+    <br />
+    <%= link_to 'Continue shopping ...', main_app.root_url, title: 'Homepage' %>
+  </div>
+
+  <div class='span6'>
+
+    <h2 id='product-price'><%= number_to_currency(@product.price) %></h2>
+
+    <%= form_tag('/cart/add', method: 'post') do %>
+
+      <%= hidden_field_tag :permalink, @product.permalink %>
+
+      <div id="buy" class="clear">
+        <span class="cart_button">
+          <%= submit_tag 'Add to cart', class: '', id: 'add-to-cart', 'data-loading-text' => 'adding..' %>
+        </span>
+      </div>
+    <% end %>
+
+
+    <h4 id='product-description'>Description</h4>
+
+    <div id='product-description-content'>
+      <%= simple_format(@product.description) %>
+    </div>
+  </div>
+
+</div>

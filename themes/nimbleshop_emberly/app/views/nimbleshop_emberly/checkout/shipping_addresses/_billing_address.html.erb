@@ -1,0 +1,69 @@
+<div class='well' id='billing_well' data-behavior='well' >
+
+  <%= f.fields_for :billing_address do |billing_form| %>
+
+    <h3>Billing address</h3>
+
+    <br />
+
+    <fieldset>
+      <div class='control-group'>
+        <%= billing_form.label :first_name, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :first_name, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :last_name, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :last_name, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :address1, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :address1, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :address2, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :address2, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :city, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :city, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :country_code, 'Country', class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.select :country_code, options_for_countries(countries), class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group state-code'>
+        <%= billing_form.label :state_code, class: 'control-label' %>
+        <div class='controls'>
+			<%= billing_form.select :state_code, options_for_country(billing_form.object.country_code), class: 'input-xlarge' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= billing_form.label :zipcode, class: 'control-label' %>
+        <div class='controls'>
+          <%= billing_form.text_field :zipcode, class: 'input-xlarge' %>
+        </div>
+      </div>
+
+    	<%= billing_form.hidden_field :use_for_billing, value: 'false' %>
+    </fieldset>
+  <% end %>
+</div>

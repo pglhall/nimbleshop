@@ -1,0 +1,33 @@
+<% if current_order.errors.keys.include?(:email) %>
+
+  <div class="alert alert-error">
+    <ul>
+      <li>Email <%= current_order.errors.messages.values_at(:email).flatten.first %></li>
+    </ul>
+  </div>
+
+<% elsif current_order.shipping_address.errors.any? %>
+
+  <div class="alert alert-error">
+    <p> Shipping address error ! </p>
+    <ul>
+      <% current_order.shipping_address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% elsif current_order.billing_address.errors.any? %>
+
+  <div class="alert alert-error">
+    <p> Billing address error ! </p>
+    <ul>
+      <% current_order.billing_address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>
+
+<br />
