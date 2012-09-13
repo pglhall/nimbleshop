@@ -20,5 +20,4 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'jquery-rails',    '= 2.1.1'
   gem.add_dependency 'fancybox-rails',  '= 0.1.4'
-  gem.add_dependency 'ember-rails',     '= 0.7.0'
 end

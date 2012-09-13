@@ -12,12 +12,12 @@
 //
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require handlebars
-//= require ember
-//= require ember-data
+//= require ./vendor/handlebars
+//= require ./vendor/ember
+//= require ./vendor/ember-data
 //= require_self
-//= require nimbleshop
+//= require ./nimbleshop
 Nimbleshop = Ember.Application.create({
   rootElement: '.container'
 });
-//= require_tree .
+//= require ./store
