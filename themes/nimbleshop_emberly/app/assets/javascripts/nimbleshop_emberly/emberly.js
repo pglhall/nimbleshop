@@ -12,9 +12,6 @@
 //
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require ./vendor/handlebars
-//= require ./vendor/ember
-//= require ./vendor/ember-data
 //= require_self
 //= require ./nimbleshop
 Nimbleshop = Ember.Application.create({

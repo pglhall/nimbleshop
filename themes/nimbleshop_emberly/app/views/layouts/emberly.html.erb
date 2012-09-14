@@ -38,31 +38,9 @@
     <%=  yield :js %>
   </head>
 
-  <body id=<%=body_id%>>
-
-    <%= render 'layouts/top_bar' %>
-
-    <div class="container">
-      <div class="content">
-
-        <h1>
-          <%= @page_title unless @do_not_use_page_title %>
-          <% if @page_sub_title %>
-            <small> <%= @page_sub_title %> </small>
-          <% end %>
-        </h1>
-
-        <div class="row">
-          <div class="span12">
-            <%= yield %>
-          </div>
-        </div>
-
-      </div><!-- end of content -->
-
-      <%= render 'layouts/footer' %>
-
-    </div> <!-- /container -->
-
+  <body>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>
