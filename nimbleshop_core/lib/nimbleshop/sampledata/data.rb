@@ -240,7 +240,7 @@ module Sampledata
 
         It does not interfere with any buttons. It is available in many different colors. If you have a specific color in mind then contact me.
       }
-      product = Product.create!( title: "Hard wood case for iphone", price: 7.95, description: desc)
+      product = Product.create!( title: "Hard wood case for iphone", price: 3.00, description: desc)
       handle_pictures_for_product(product, "product9")
       product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
     end
