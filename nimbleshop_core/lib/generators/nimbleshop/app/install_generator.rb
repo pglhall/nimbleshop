@@ -63,7 +63,6 @@ module Nimbleshop
     end
 
     def copy_files!
-      handle_localtunnel_callback_file
       handle_nimbleshop_yml_file
 
       template "config/initializers/001_load_nimbleshop_config.rb", "#{destination_path}/config/initializers/001_load_nimbleshop_config.rb"
@@ -83,13 +82,6 @@ module Nimbleshop
     def handle_nimbleshop_yml_file
       from = File.expand_path('../templates/config/nimbleshop.yml', __FILE__)
       FileUtils.cp from,  "#{destination_path}/config/nimbleshop.yml"
-    end
-
-    def handle_localtunnel_callback_file
-      template "config/localtunnel_callback", "#{destination_path}/.localtunnel_callback"
-
-      # make the file executable
-      FileUtils.chmod 0755, File.expand_path("#{destination_path}/.localtunnel_callback"), :verbose => true
     end
 
   end

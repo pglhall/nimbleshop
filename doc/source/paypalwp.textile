@@ -48,41 +48,9 @@ After the seller account has been created the page will look like this
 
 Again even though I entered seller email address as +seller@mailinator.com+ the email address was changed to +seller_1341966113_biz@mailinator.com+. That is okay and do not worry about it.
 
-h3. Using localtunnel gem
+h3. Use showoff
 
-When payment is made to paypal then paypal makes an +Instant payment notification(IPN)+ . In order for paypal to make this IPN paypal needs a way to reach to our development server. Since paypal can't make a call to +localhost:3000+ we are going to use +localtunnel+ to get a url for our local server.
-
-To get started first follow instructions "to get started with nimbleShop":http://nimbleshop-website-master-neer.herokuapp.com/getting_started.html .
-
-Open the +Gemfile+ of application and add following lines at the bottom.
-
-<shell>
-group :development, :test do
-  gem 'localtunnel',  github: 'jalada/localtunnel'
-end
-</shell>
-
-Next start rails server.
-
-<shell>
-bundle install
-bundle exec rails server
-</shell>
-
-Open another terminal. Go to the +myshop+ project directory and
-execute following command:
-
-<shell>
-bundle exec rake nimbleshop:localtunnel
-</shell>
-
-Sometimes you might get message following message.
-
-<shell>
-[Error] Unable to register tunnel. Perhaps service is down?
-</shell>
-
-It means localtunnel is not working and you will not be able to test Instant Payment Notification ( IPN ). However you can still test making payment part .
+Get the public url and paste it at right place.
 
 h3. Configure nimbleShop to use seller email
 
@@ -122,12 +90,6 @@ Come back to the and the page should look like this
 Click on 'Enter Sandbox Test Site'. That should open a popup  Here you should see a transaction record for the amount you paid. This is what I see.
 
 !https://img.skitch.com/20120711-fh7na2td2dm6m53kc33rsqqgu9.jpg!
-
-h4. How localtunnel works
-
-"localtunnel":http://progrium.com/localtunnel is an excellent tool that gives a publicly reachable url to your localhost server. It is sponsored by "twilio":http://www.twilio.com .
-
-In the root directory of nimbleshop there is a file called +localtunnel_callback+. This is an executable file. When +localtunnel+ gems connects to central server and gets a unique domain name then it invokes the executable file +.localtunnel_callback+ with the url name. The executable writes the dns name to +config/.tunnel+ file.  nimbleshop reads +config/.tunnel+ in development mode to construct paypal notification url.
 
 h4. Paypaal order management integration guide
 

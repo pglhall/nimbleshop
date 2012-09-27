@@ -67,8 +67,8 @@
   name: Misc
   documents:
     -
-      name: How localtunnel works
-      url: how_localtunnel_works.html
+      name: Showoff to expose localhost to public url
+      url: showoff_for_localhost_to_public_url.html
     -
       name: Tools
       url: tools.html

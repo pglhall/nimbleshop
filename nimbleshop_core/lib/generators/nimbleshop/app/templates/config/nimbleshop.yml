@@ -9,7 +9,7 @@ common:
 
   # this is used for IPN notification and other places where external serivce cannot ping localhost
   use_localhost2public_url: true
-  default_localhost2public_url: 4a5w.localtunnel.com
+  localhost2public_url: https://neeraj.showoff.io
 
   authorizedotnet:
     login_id:        <%= ENV['AUTHORIZE_NET_LOGIN_ID'] || '26Daqx7Jtw7R' %>

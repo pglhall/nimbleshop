@@ -23,18 +23,13 @@ module Nimbleshop
     # Usage: localhost2public_url ( '/nimbleshop_paypal/notify', 'http' )
     #
     def self.localhost2public_url(url, protocol)
-      return url unless Nimbleshop.config.use_localhost2public_url
-
-      tunnel = Rails.root.join('config', '.tunnel')
-      return Nimbleshop.config.default_localhost2public_url unless File.exists?(tunnel)
-
-      path = []
-
-      host = File.open(tunnel, "r").gets.sub("\n", "")
-      path << "#{protocol}://#{host}"
-
-      path << url
-      path.join('')
+      if Nimbleshop.config.use_localhost2public_url
+        public_url = Nimbleshop.config.localhost2public_url
+        raise "localhost2public_url value is #{public_url}. It must start with http" unless public_url =~ /^http/
+        public_url + url
+      else
+        url
+      end
     end
 
     # returns an array like this

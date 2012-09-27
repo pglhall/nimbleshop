@@ -39,6 +39,8 @@ module NimbleshopPaypalwp
       service.notify_url         nimbleshop_paypalwp_notify_url
       service.return_url         nimbleshop_paypalwp_return_url(order)
       service.cancel_return_url  nimbleshop_paypalwp_cancel_url(order)
+
+      Rails.logger.debug service.inspect
     end
 
     def nimbleshop_paypalwp_crud_form
