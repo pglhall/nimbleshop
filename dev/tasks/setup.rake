@@ -17,7 +17,7 @@ require 'rails/generators/rails/app/app_generator'
 namespace :nimbleshop do
   namespace :setup do
 
-    desc 'sets up myshop for local development'
+    desc 'sets up a shop for local development'
     task :local do
       FileUtils.rm_rf File.expand_path('../../../dev/myshop', __FILE__)
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
@@ -30,7 +30,7 @@ namespace :nimbleshop do
       puts "rails server"
     end
 
-    desc 'sets up a myshop for testing'
+    desc 'sets up a shop for testing'
     task :test_app do
       FileUtils.rm_rf File.expand_path('../../../nimbleshop_core/test/myshop', __FILE__)
       template_path = File.expand_path('../../templates/installer.rb', __FILE__)
