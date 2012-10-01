@@ -5,7 +5,8 @@ require 'rdoc/task'
 
 desc 'Default: run tests'
 task :default => [:test]
-task :test => ['nimbleshop_cod:ensure_test_app_exists','nimbleshop_cod:test']
+
+task :test => ['nimbleshop_cod:ensure_test_app_exists', 'nimbleshop_cod:test']
 
 namespace :nimbleshop_cod do
 

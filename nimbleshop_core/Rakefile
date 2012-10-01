@@ -5,14 +5,14 @@ require 'rdoc/task'
 
 desc 'Default: run tests'
 task :default => [:test]
-task :test => ['nimbleshop_core:test_full']
+
+task :test => ['nimbleshop_core:ensure_test_app_present', 'nimbleshop_core:test']
 
 namespace :nimbleshop_core do
 
-  task :test_full do
+  task :ensure_test_app_present do
     p = File.expand_path('../test/myshop', __FILE__)
     abort 'Test app is missing. First execute "rake nimbleshop:setup:test_app"' unless File.directory?(p)
-    Rake::Task["nimbleshop_core:test"].invoke
   end
 
   desc 'Run nimbleshop_core tests.'
