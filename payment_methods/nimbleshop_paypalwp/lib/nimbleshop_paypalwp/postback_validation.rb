@@ -36,7 +36,7 @@ class PostbackValidation
 
   def postback_verified
     # postback verification is only supported in live
-    return true if payment_method.test_mode?
+    return true #if payment_method.test_mode?
 
     hash = { cmd: '_notify-validate' }.merge(params)
     uri = URI('https://www.paypal.com/cgi-bin/webscr')
