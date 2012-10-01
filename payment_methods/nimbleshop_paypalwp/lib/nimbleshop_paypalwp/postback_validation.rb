@@ -28,6 +28,7 @@ class PostbackValidation
       true
     else
       Rails.logger.info "Paypal postback validation failed. order was #{order.inspect}. params was #{params.inspect}"
+      false
     end
   end
 
