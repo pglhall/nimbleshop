@@ -14,14 +14,7 @@ module NimbleshopPaypalwp
       order = processor.order
 
       # order is already in purchased state. Seems like IPN is sending duplicate notification
-      render nothing: true if order.purchased?
-
-      if PostbackValidation.new(params, order).valid?
-        processor.order.update_attributes(payment_method: NimbleshopPaypalwp::Paypalwp.first)
-        processor.purchase
-      else
-        Rails.logger.info "IPN notification is not valid. Params is #{params.inspect}"
-      end
+      processor.purchase unless order.purchased?
 
       render nothing: true
     end

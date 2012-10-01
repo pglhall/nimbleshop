@@ -47,7 +47,7 @@ module NimbleshopPaypalwp
     end
 
     def do_purchase(options = {})
-      if success = amount_match?
+      if success = ipn_from_paypal?
         record_transaction('purchased', success: success)
         order.update_attributes(purchased_at: @paypal_ipn.received_at, payment_method: payment_method)
         order.purchase
@@ -62,6 +62,14 @@ module NimbleshopPaypalwp
                                                       transaction_gid: @paypal_ipn.transaction_id,
                                                       operation: operation))
 
+    end
+
+    def ipn_from_paypal?
+      amount_match? && @paypal_ipn.complete? && business_email_match?
+    end
+
+    def business_email_match?
+      @paypal_ipn.account ==  payment_method.merchant_email
     end
 
     def amount_match?
