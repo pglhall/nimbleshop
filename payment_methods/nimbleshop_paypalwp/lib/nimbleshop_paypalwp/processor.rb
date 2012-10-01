@@ -1,23 +1,15 @@
 module NimbleshopPaypalwp
   class Processor < Processor::Base
 
-    attr_reader :order, :payment_method
+    attr_reader :order, :payment_method, :notify
 
     def initialize(options = {})
-      @paypal_ipn = paypal_ipn(options[:raw_post])
-      @order = Order.find_by_number!(@paypal_ipn.invoice)
+      @notify = ActiveMerchant::Billing::Integrations::Paypal::Notification.new(options[:raw_post])
+      @order = Order.find_by_number!(notify.invoice)
       @payment_method = NimbleshopPaypalwp::Paypalwp.first
     end
 
     private
-
-    def paypal_ipn(raw_post)
-      # ActiveMerchant::Billing::Integrations::Paypal::Notification is a subclass of
-      # ActiveMerchant::Billing::Integrations::Notification
-      #
-      # And ActiveMerchant::Billing::Integrations::Notification dependds on money gem
-      ActiveMerchant::Billing::Integrations::Paypal::Notification.new(raw_post)
-    end
 
     def do_capture(options = {})
       success = amount_match?
@@ -49,7 +41,7 @@ module NimbleshopPaypalwp
     def do_purchase(options = {})
       if success = ipn_from_paypal?
         record_transaction('purchased', success: success)
-        order.update_attributes(purchased_at: @paypal_ipn.received_at, payment_method: payment_method)
+        order.update_attributes(purchased_at: notify.received_at, payment_method: payment_method)
         order.purchase
       end
 
@@ -57,27 +49,27 @@ module NimbleshopPaypalwp
     end
 
     def record_transaction(operation, options = {})
-      order.payment_transactions.create(options.merge(amount: @paypal_ipn.amount.cents,
-                                                      params: { ipn: @paypal_ipn.raw },
-                                                      transaction_gid: @paypal_ipn.transaction_id,
+      order.payment_transactions.create(options.merge(amount: notify.amount.cents,
+                                                      params: { ipn: notify.raw },
+                                                      transaction_gid: notify.transaction_id,
                                                       operation: operation))
 
     end
 
     def ipn_from_paypal?
-      amount_match? && @paypal_ipn.complete? && business_email_match?
+      amount_match? && notify.complete? && business_email_match?
     end
 
     def business_email_match?
-      @paypal_ipn.account ==  payment_method.merchant_email
+      notify.account ==  payment_method.merchant_email
     end
 
     def amount_match?
-      @paypal_ipn.amount.cents == order.total_amount_in_cents
+      notify.amount.cents == order.total_amount_in_cents
     end
 
     def purchased_at
-      Time.strptime(@paypal_ipn.params['payment_date'], "%H:%M:%S %b %d, %Y %z")
+      Time.strptime(notify.params['payment_date'], "%H:%M:%S %b %d, %Y %z")
     end
   end
 end
