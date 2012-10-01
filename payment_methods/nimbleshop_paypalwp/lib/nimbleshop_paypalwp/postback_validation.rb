@@ -42,6 +42,7 @@ class PostbackValidation
       true
     else
       Rails.logger.info "payment_status_verified failed. payment_status is #{params[:payment_status]}. It should be 'Completed'"
+      false
     end
   end
 
@@ -50,6 +51,7 @@ class PostbackValidation
       true
     else
       Rails.logger.info "params[:business] is #{params[:business]} . It should be #{payment_method.merchant_email}. "
+      false
     end
   end
 
@@ -59,6 +61,7 @@ class PostbackValidation
       true
     else
       Rails.logger.info "params[:mc_gross] is #{params[:mc_gross]} and  order total amount is #{order_total_amount}"
+      false
     end
   end
 
