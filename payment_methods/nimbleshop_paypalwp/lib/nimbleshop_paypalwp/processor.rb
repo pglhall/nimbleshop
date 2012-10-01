@@ -47,17 +47,14 @@ module NimbleshopPaypalwp
     end
 
     def do_purchase(options = {})
-      success = amount_match?
-      record_transaction('purchased', success: success)
-
-      if success
+      if success = amount_match?
+        record_transaction('purchased', success: success)
         order.update_attributes(purchased_at: @paypal_ipn.received_at, payment_method: payment_method)
         order.purchase
       end
 
       success
     end
-
 
     def record_transaction(operation, options = {})
       order.payment_transactions.create(options.merge(amount: @paypal_ipn.amount.cents,
