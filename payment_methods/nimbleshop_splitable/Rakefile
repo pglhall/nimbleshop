@@ -5,6 +5,7 @@ require 'rdoc/task'
 
 desc 'Default: run tests'
 task :default => [:test]
+
 task :test => ['nimbleshop_splitable:ensure_test_app_exists', 'nimbleshop_splitable:test']
 
 namespace :nimbleshop_splitable do
