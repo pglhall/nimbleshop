@@ -1,6 +1,6 @@
 module NimbleshopPaypalwp
 
-  # this line makes it possible to use this gem without nimbleshop_core
+  # Following line makes it possible to use this gem without nimbleshop_core
   klass = defined?(::Admin::PaymentMethodsController) ? ::Admin::PaymentMethodsController : ActionController::Base
 
   class PaypalwpsController < klass
@@ -13,10 +13,14 @@ module NimbleshopPaypalwp
       processor = NimbleshopPaypalwp::Processor.new(raw_post: request.raw_post)
       order = processor.order
 
-      # Since IPN can send notification multiple times check if the order has already been set to purchased status
-      unless order.purchased?
+      # order is already in purchased state. Seems like IPN is sending duplicate notification
+      render nothing: true if order.purchased?
+
+      if PostbackValidation.new(params, order).valid?
         processor.order.update_attributes(payment_method: NimbleshopPaypalwp::Paypalwp.first)
         processor.purchase
+      else
+        Rails.logger.info "IPN notification is not valid. Params is #{params.inspect}"
       end
 
       render nothing: true
