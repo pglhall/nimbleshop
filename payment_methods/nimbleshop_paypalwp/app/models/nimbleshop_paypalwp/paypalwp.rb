@@ -9,6 +9,10 @@ module NimbleshopPaypalwp
 
     before_validation :strip_attributes
 
+    def test_mode?
+      self.mode == 'test'
+    end
+
     private
 
     def set_mode

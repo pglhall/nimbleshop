@@ -35,7 +35,20 @@ class PostbackValidation
   private
 
   def postback_verified
-    true
+    # postback verification is only supported in live
+    return true if payment_method.test_mode?
+
+    hash = { cmd: '_notify-validate' }.merge(params)
+    uri = URI('https://www.paypal.com/cgi-bin/webscr')
+    res = Net::HTTP.post_form(uri, hash)
+    body = res.body
+
+    if body =~ 'VERIFIED'
+      true
+    else
+      Rails.logger.info "postback verification failed. body is #{body.inspect} "
+      false
+    end
   end
 
   def payment_status_verified
