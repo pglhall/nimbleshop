@@ -12,10 +12,8 @@ module NimbleshopPaypalwp
     private
 
     def do_capture(options = {})
-      success = amount_match?
-      record_transaction('captured', success: success)
-
-      if success
+      if success = ipn_from_paypal?
+        record_transaction('captured', success: success)
         order.update_attributes(purchased_at: purchased_at, payment_method: payment_method)
         order.kapture
       end
@@ -24,10 +22,8 @@ module NimbleshopPaypalwp
     end
 
     def do_authorize(options = {})
-      success = amount_match?
-      record_transaction('authorized', success: success)
-
-      if success
+      if success = ipn_from_paypal?
+        record_transaction('authorized', success: success)
         order.update_attributes(purchased_at: purchased_at, payment_method: payment_method)
         order.authorize
       end
@@ -53,11 +49,10 @@ module NimbleshopPaypalwp
                                                       params: { ipn: notify.raw },
                                                       transaction_gid: notify.transaction_id,
                                                       operation: operation))
-
     end
 
     def ipn_from_paypal?
-      amount_match? && notify.complete? && business_email_match?
+      amount_match? && notify.complete? && business_email_match? && notify.acknowledge
     end
 
     def business_email_match?
