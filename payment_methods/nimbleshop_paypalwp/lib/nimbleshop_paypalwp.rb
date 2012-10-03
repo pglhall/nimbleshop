@@ -7,5 +7,4 @@ require "money"
 
 module NimbleshopPaypalwp
   autoload :Processor, 'nimbleshop_paypalwp/processor'
-  autoload :PostbackValidation, 'nimbleshop_paypalwp/postback_validation'
 end

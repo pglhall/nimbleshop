@@ -14,27 +14,28 @@ module Processor
       @order = create(:order)
     end
 
-    test "when authorization succeeds" do
-      processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, @order.total_amount))
-      playcasette('paypal/authorize-success') do
-        assert_equal true, processor.authorize
-      end
+    #test "when authorization succeeds" do
+      #processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, @order.total_amount))
+      #playcasette('paypal/authorize-success') do
+        #assert_equal true, processor.authorize
+      #end
 
-      @order.reload
+      #@order.reload
 
-      transaction = @order.payment_transactions.last
-      assert_equal 'authorized', transaction.operation
-      assert_equal true, transaction.success
-      assert_equal true, @order.authorized?
-      assert_equal "April 01, 2012 at 08:46 pm", @order.purchased_at.to_s(:long)
-      assert_equal NimbleshopPaypalwp::Paypalwp.first, @order.payment_method
-      assert_equal transaction.amount, @order.total_amount_in_cents
+      #transaction = @order.payment_transactions.last
+      #assert_equal 'authorized', transaction.operation
+      #assert_equal true, transaction.success
+      #assert_equal true, @order.authorized?
+      #assert_equal "April 01, 2012 at 08:46 pm", @order.purchased_at.to_s(:long)
+      #assert_equal NimbleshopPaypalwp::Paypalwp.first, @order.payment_method
+      #assert_equal transaction.amount, @order.total_amount_in_cents
+    #end
+
+    #test "when authorization fails" do
+      #processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, 10.48))
+      #assert_equal false, processor.authorize
+      #assert_nil @order.payment_method
     end
 
-    test "when authorization fails" do
-      processor = NimbleshopPaypalwp::Processor.new(raw_post: raw_post(@order.number, 10.48))
-      assert_equal false, processor.authorize
-      assert_nil @order.payment_method
-    end
-  end
+  #end
 end

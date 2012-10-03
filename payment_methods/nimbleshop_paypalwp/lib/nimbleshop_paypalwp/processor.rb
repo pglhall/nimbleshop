@@ -52,7 +52,11 @@ module NimbleshopPaypalwp
     end
 
     def ipn_from_paypal?
-      amount_match? && notify.complete? && business_email_match? && notify.acknowledge
+      amount_match? && notify.complete? && business_email_match? && notify_acknowledge
+    end
+
+    def notify_acknowledge
+      Rails.env.test? ? true : notify.acknowledge
     end
 
     def business_email_match?
