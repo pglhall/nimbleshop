@@ -48,9 +48,16 @@ After the seller account has been created the page will look like this
 
 Again even though I entered seller email address as +seller@mailinator.com+ the email address was changed to +seller_1341966113_biz@mailinator.com+. That is okay and do not worry about it.
 
-h3. Use showoff
+h3. Use forward
 
-Get the public url and paste it at right place.
+Paypal sends a callback and Paypal can't send callback to
++localhost:3000+ . So you need a way to expose your application that is
+running on local port +3000+ to have a public name. You can use any tool
+you want. I prefer to use "https://forwardhq.com/":https://forwardhq.com
+.
+
+Once you have the url then open config/nimbleshop.yml and replace the
+value for the key localhost2public_url .
 
 h3. Configure nimbleShop to use seller email
 
