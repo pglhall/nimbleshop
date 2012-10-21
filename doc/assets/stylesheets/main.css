@@ -546,6 +546,7 @@ p, #mainCol ul li {
 img {
   border: 1px solid #e7e7e7;
   padding: 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px,rgba(75, 176, 255, 0.3) 0 0 15px,rgba(75, 176, 255, 0.7) 0 0 3px;
 }
 
 body {
