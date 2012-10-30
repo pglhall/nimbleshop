@@ -38,14 +38,8 @@ module NimbleshopStripe
       token = options[:token]
 
       response = gateway.purchase(order.total_amount_in_cents, token)
-      token_response = ::Stripe::Token.retrieve(token)
 
-      record_transaction(response, 'purchased',
-                                    fingerprint: token_response.card.fingerprint,
-                                    livemode: token_response.livemode,
-                                    card_number: "XXXX-XXXX-XXXX-#{token_response.card.last4}",
-                                    cardtype: token_response.card.type.downcase,
-                                    transaction_gid: token_response.id)
+      ::Nimbleshop::PaymentTransactionRecorder.new(payment_transaction_recorder_hash(response, token)).record
 
       if response.success?
         order.update_attributes(payment_method: payment_method)
@@ -55,6 +49,18 @@ module NimbleshopStripe
         @errors << 'Credit card was declined. Please try again!'
         return false
       end
+    end
+
+    def payment_transaction_recorder_hash(response, token)
+      token_response = ::Stripe::Token.retrieve(token)
+
+      {  response: response,
+         operation: :purchased,
+         transaction_gid: token_response.id,
+         metadata: {  fingerprint: token_response.card.fingerprint,
+                      livemode: token_response.livemode,
+                      card_number: "XXXX-XXXX-XXXX-#{token_response.card.last4}",
+                      cardtype: token_response.card.type.downcase }}
     end
 
     # Voids the previously authorized transaction.
@@ -72,7 +78,7 @@ module NimbleshopStripe
       transaction_gid = options[:transaction_gid]
 
       response = gateway.void(transaction_gid, {})
-      record_transaction(response, 'voided')
+      ::Nimbleshop::PaymentTransactionRecorder.new(response: response, operation: :voided, order: order).record
 
       if response.success?
         order.void
@@ -99,7 +105,7 @@ module NimbleshopStripe
       card_number = options[:card_number]
 
       response = gateway.refund(order.total_amount_in_cents, transaction_gid, card_number: card_number)
-      record_transaction(response, 'refunded')
+      ::Nimbleshop::PaymentTransactionRecorder.new(response: response, operation: :refunded, order: order).record
 
       if response.success?
         order.refund
@@ -108,26 +114,6 @@ module NimbleshopStripe
         false
       end
 
-    end
-
-    def record_transaction(response, operation, additional_options = {}) # :nodoc:
-      transaction_gid = additional_options.fetch(:transaction_gid)
-
-      options = { operation:          'capture',
-                  params:             response.params,
-                  success:            true,
-                  metadata:           additional_options,
-                  transaction_gid:    transaction_gid }
-
-      if response.success?
-        options.update(amount: order.total_amount_in_cents)
-      end
-
-      order.payment_transactions.create(options)
-    end
-
-    def valid_card?(creditcard) # :nodoc:
-      true
     end
 
   end

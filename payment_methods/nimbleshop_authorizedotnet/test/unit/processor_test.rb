@@ -177,7 +177,7 @@ module Processor
       assert        @order.voided?
     end
 
-    test 'when capture fails' do
+    test 'when void fails' do
       playcasette('authorize.net/void-failure') do
         assert_equal false, @processor.void(transaction_gid: @tsx_id)
       end
