@@ -118,12 +118,7 @@ module NimbleshopAuthorizedotnet
                                                               metadata: { card_number: pt.metadata[:card_number], cardtype: pt.metadata[:cardtype]})
       recorder.record
 
-
-      if response.success?
-        order.kapture
-      else
-        @errors << "Capture request failed"
-      end
+      response.success? ? order.kapture : ( @errors << "Capture operation failed" )
 
       response.success?
     end
